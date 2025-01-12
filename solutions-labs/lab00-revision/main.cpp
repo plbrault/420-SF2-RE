@@ -7,6 +7,27 @@ using namespace std;
 int main() {
     locale::global(locale{ "" });
 
-    afficherMenu();
-    demanderChoix();
+    int choix;
+
+    do {
+        afficherMenu();
+        choix = demanderChoix();
+
+        switch (choix) {
+            case 1:
+                cout << "Afficher la liste" << endl;
+                break;
+            case 2:
+                cout << "Ajouter une tâche" << endl;
+                break;
+            case 3:
+                cout << "Marquer une tâche comme faite" << endl;
+                break;
+            case 4:
+                cout << "Échanger deux tâches" << endl;
+                break;
+        }
+    } while (choix != 5);
+
+    cout << "Au revoir!" << endl;
 }
