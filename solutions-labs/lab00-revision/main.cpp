@@ -8,14 +8,17 @@ int main() {
     locale::global(locale{ "" });
 
     int choix;
+    string taches[100];
+    int nombreTaches = 0;
 
     do {
         afficherMenu();
         choix = demanderChoix();
 
+        cout << endl;
         switch (choix) {
             case 1:
-                cout << "Afficher la liste" << endl;
+                afficherListe(taches, nombreTaches);
                 break;
             case 2:
                 cout << "Ajouter une tâche" << endl;
@@ -27,6 +30,7 @@ int main() {
                 cout << "Échanger deux tâches" << endl;
                 break;
         }
+        cout << endl;
     } while (choix != 5);
 
     cout << "Au revoir!" << endl;
