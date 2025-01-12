@@ -9,6 +9,7 @@ int main() {
 
     int choix;
     string taches[100];
+    bool tacheCompletee[100] = {false};
     int nombreTaches = 0;
 
     do {
@@ -18,7 +19,7 @@ int main() {
         cout << endl;
         switch (choix) {
             case 1:
-                afficherListe(taches, nombreTaches);
+                afficherListe(taches, tacheCompletee, nombreTaches);
                 break;
             case 2:
                 ajouterTache(taches, nombreTaches);

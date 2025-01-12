@@ -28,12 +28,18 @@ int demanderChoix() {
     return choix;
 }
 
-void afficherListe(string taches[], int nombreTaches) {
+void afficherListe(string taches[], bool tacheCompletee[], int nombreTaches) {
     if (nombreTaches == 0) {
         cout << "La liste est vide." << endl;
     } else {
         for (int i = 0; i < nombreTaches; i++) {
-            cout << i + 1 << ". " << taches[i] << endl;
+            cout << i + 1 << ". ";
+            if (tacheCompletee[i]) {
+                cout << "[X] ";
+            } else {
+                cout << "[ ] ";
+            }
+            cout << taches[i] << endl;
         }
     }
 }
