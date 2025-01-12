@@ -21,7 +21,7 @@ int main() {
                 afficherListe(taches, nombreTaches);
                 break;
             case 2:
-                cout << "Ajouter une tâche" << endl;
+                ajouterTache(taches, nombreTaches);
                 break;
             case 3:
                 cout << "Marquer une tâche comme faite" << endl;

@@ -37,3 +37,18 @@ void afficherListe(string taches[], int nombreTaches) {
         }
     }
 }
+
+void ajouterTache(string taches[], int& nombreTaches) {
+    string tache;
+
+    if (nombreTaches == 100) {
+        cout << "La liste est pleine." << endl;
+    } else {
+        cout << "Entrez la tâche à ajouter : ";
+        cin.ignore();
+        getline(cin, tache);
+
+        taches[nombreTaches] = tache;
+        nombreTaches++;
+    }
+}
