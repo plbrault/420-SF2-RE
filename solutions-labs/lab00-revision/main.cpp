@@ -28,7 +28,7 @@ int main() {
                 marquerFaite(taches, tacheCompletee, nombreTaches);
                 break;
             case 4:
-                cout << "Échanger deux tâches" << endl;
+                echangerTaches(taches, tacheCompletee, nombreTaches);
                 break;
         }
         cout << endl;

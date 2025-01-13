@@ -59,23 +59,64 @@ void ajouterTache(string taches[], int& nombreTaches) {
     }
 }
 
+int demanderNumeroTache(std::string texte, int nombreTaches) {
+    int numeroTache;
+
+    do {
+        cout << texte;
+        cin >> numeroTache;
+        if (numeroTache < 1 || numeroTache > nombreTaches) {
+            cout << "Le numéro entré est invalide." << endl;
+        }
+    } while (numeroTache < 1 || numeroTache > nombreTaches);
+
+    return numeroTache;
+}
+
+
 void marquerFaite(std::string taches[], bool tacheCompletee[], int nombreTaches) {
     int numeroTache;
 
     afficherListe(taches, tacheCompletee, nombreTaches);
 
     if (nombreTaches > 0) {
-        do {
-            cout << "Entrez le numéro de la tâche à marquer comme faite (0 pour annuler) : ";
-            cin >> numeroTache;
-            if (numeroTache >= 1 && numeroTache <= nombreTaches) {
-                tacheCompletee[numeroTache - 1] = true;
-            } else if (numeroTache != 0) {
-                cout << "Le numéro de la tâche est invalide." << endl;
-            }
-        } while (numeroTache < 0 || numeroTache > nombreTaches);
-    } else {
-        cout << "La liste est vide." << endl;
+        numeroTache = demanderNumeroTache(
+    "Entrez le numéro de la tâche à marquer comme faite : ",
+            nombreTaches
+        );
+        tacheCompletee[numeroTache - 1] = true;
     }
 }
 
+void echangerTaches(std::string taches[], bool tacheCompletee[], int nombreTaches) {
+    int numeroTache;
+
+    int numeroTache1, numeroTache2;
+    string tacheTemp;
+    bool completeeTemp;
+
+    if (nombreTaches >= 2) {
+        afficherListe(taches, tacheCompletee, nombreTaches);
+
+        numeroTache1 = demanderNumeroTache(
+            "Entrez le numéro de la première tâche à échanger : ",
+            nombreTaches
+        );
+        numeroTache2 = demanderNumeroTache(
+            "Entrez le numéro de la deuxième tâche à échanger : ",
+            nombreTaches
+        );
+
+        tacheTemp = taches[numeroTache1 - 1];
+        taches[numeroTache1 - 1] = taches[numeroTache2 - 1];
+        taches[numeroTache2 - 1] = tacheTemp;
+
+        completeeTemp = tacheCompletee[numeroTache1 - 1];
+        tacheCompletee[numeroTache1 - 1] = tacheCompletee[numeroTache2 - 1];
+        tacheCompletee[numeroTache2 - 1] = completeeTemp;
+
+        cout << "Échange complété." << endl;
+    } else {
+        cout << "La liste comporte moins de deux tâches." << endl;
+    }
+}
