@@ -10,7 +10,8 @@ void afficherMenu() {
         << "2. Ajouter une tâche" << endl
         << "3. Marquer une tâche comme faite" << endl
         << "4. Échanger deux tâches" << endl
-        << "5. Quitter" << endl;
+        << "5. Supprimer une tâche" << endl
+        << "6. Quitter" << endl;
 }
 
 int demanderChoix(int max) {
@@ -44,7 +45,7 @@ void afficherListe(string taches[], bool tacheCompletee[], int nombreTaches) {
     }
 }
 
-void ajouterTache(string taches[], int& nombreTaches) {
+void ajouterTache(string taches[], int nombreTaches) {
     string tache;
 
     if (nombreTaches == 100) {
@@ -54,12 +55,11 @@ void ajouterTache(string taches[], int& nombreTaches) {
         cin.ignore();
         getline(cin, tache);
 
-        taches[nombreTaches] = tache;
-        nombreTaches++;
+        taches[nombreTaches - 1] = tache;
     }
 }
 
-int demanderNumeroTache(string texte, int nombreTaches) {
+int demanderNumeroTache(std::string texte, int nombreTaches) {
     int numeroTache;
 
     do {
@@ -74,7 +74,7 @@ int demanderNumeroTache(string texte, int nombreTaches) {
 }
 
 
-void marquerFaite(string taches[], bool tacheCompletee[], int nombreTaches) {
+void marquerFaite(std::string taches[], bool tacheCompletee[], int nombreTaches) {
     int numeroTache;
 
     afficherListe(taches, tacheCompletee, nombreTaches);
@@ -88,7 +88,7 @@ void marquerFaite(string taches[], bool tacheCompletee[], int nombreTaches) {
     }
 }
 
-void echangerTaches(string taches[], bool tacheCompletee[], int nombreTaches) {
+void echangerTaches(std::string taches[], bool tacheCompletee[], int nombreTaches) {
     int numeroTache;
 
     int numeroTache1, numeroTache2;
@@ -120,3 +120,25 @@ void echangerTaches(string taches[], bool tacheCompletee[], int nombreTaches) {
         cout << "La liste comporte moins de deux tâches." << endl;
     }
 }
+
+void supprimerTache(std::string taches[], bool tacheCompletee[], int &nombreTaches) {
+    int numeroTache;
+
+    afficherListe(taches, tacheCompletee, nombreTaches);
+
+    if (nombreTaches > 0) {
+        numeroTache = demanderNumeroTache(
+            "Entrez le numéro de la tâche à supprimer :",
+            nombreTaches
+        );
+
+        nombreTaches--;
+        for (int i = numeroTache - 1; i < nombreTaches; i++) {
+            taches[i] = taches[i + 1];
+            tacheCompletee[i] = tacheCompletee[i + 1];
+        }
+
+        cout << "Suppression complétée." << endl;
+    }
+}
+
