@@ -8,9 +8,12 @@ int main() {
     locale::global(locale{ "" });
 
     int choix;
-    string taches[100];
-    bool tacheCompletee[100] = {false};
+    string *taches = nullptr;
+    bool *tacheCompletee = nullptr;
     int nombreTaches = 0;
+
+    taches = new string[100];
+    tacheCompletee = new bool[100] { false };
 
     do {
         afficherMenu();
@@ -36,4 +39,6 @@ int main() {
         cout << endl;
     } while (choix != 5);
 
+    delete[] taches;
+    delete[] tacheCompletee;
 }
