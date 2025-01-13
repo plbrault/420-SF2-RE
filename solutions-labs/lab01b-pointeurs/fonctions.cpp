@@ -44,7 +44,7 @@ void afficherListe(string taches[], bool tacheCompletee[], int nombreTaches) {
     }
 }
 
-void ajouterTache(string taches[], int& nombreTaches) {
+void ajouterTache(string taches[], int nombreTaches) {
     string tache;
 
     if (nombreTaches == 100) {
@@ -54,8 +54,7 @@ void ajouterTache(string taches[], int& nombreTaches) {
         cin.ignore();
         getline(cin, tache);
 
-        taches[nombreTaches] = tache;
-        nombreTaches++;
+        taches[nombreTaches - 1] = tache;
     }
 }
 
