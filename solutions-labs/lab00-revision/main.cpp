@@ -30,9 +30,10 @@ int main() {
             case 4:
                 echangerTaches(taches, tacheCompletee, nombreTaches);
                 break;
+            default:
+                cout << "Au revoir!" << endl;
         }
         cout << endl;
     } while (choix != 5);
 
-    cout << "Au revoir!" << endl;
 }
