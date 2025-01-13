@@ -59,7 +59,7 @@ void ajouterTache(string taches[], int& nombreTaches) {
     }
 }
 
-int demanderNumeroTache(std::string texte, int nombreTaches) {
+int demanderNumeroTache(string texte, int nombreTaches) {
     int numeroTache;
 
     do {
@@ -74,7 +74,7 @@ int demanderNumeroTache(std::string texte, int nombreTaches) {
 }
 
 
-void marquerFaite(std::string taches[], bool tacheCompletee[], int nombreTaches) {
+void marquerFaite(string taches[], bool tacheCompletee[], int nombreTaches) {
     int numeroTache;
 
     afficherListe(taches, tacheCompletee, nombreTaches);
@@ -88,7 +88,7 @@ void marquerFaite(std::string taches[], bool tacheCompletee[], int nombreTaches)
     }
 }
 
-void echangerTaches(std::string taches[], bool tacheCompletee[], int nombreTaches) {
+void echangerTaches(string taches[], bool tacheCompletee[], int nombreTaches) {
     int numeroTache;
 
     int numeroTache1, numeroTache2;
