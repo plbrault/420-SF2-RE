@@ -13,17 +13,17 @@ void afficherMenu() {
         << "5. Quitter" << endl;
 }
 
-int demanderChoix() {
+int demanderChoix(int max) {
     int choix;
 
     do {
         cout << "Entrez votre choix : ";
         cin >> choix;
 
-        if (choix < 1 || choix > 5) {
-            cout << "Le choix doit être un chiffre entre 1 et 5." << endl;
+        if (choix < 1 || choix > max) {
+            cout << "Le choix doit être un chiffre entre 1 et " << max << "." << endl;
         }
-    } while (choix < 1 || choix > 5);
+    } while (choix < 1 || choix > max);
 
     return choix;
 }

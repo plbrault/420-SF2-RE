@@ -15,7 +15,7 @@ int main() {
 
     do {
         afficherMenu();
-        choix = demanderChoix();
+        choix = demanderChoix(5);
 
         cout << endl;
         switch (choix) {
