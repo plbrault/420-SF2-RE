@@ -8,8 +8,9 @@ int main() {
     locale::global(locale{ "" });
 
     int choix;
-    string *taches = nullptr;
-    bool *tacheCompletee = nullptr;
+    int tailleTableau = 10;
+    string *taches = new string[tailleTableau];
+    bool *tacheCompletee = new bool[tailleTableau];
     int nombreTaches = 0;
 
     do {
@@ -22,18 +23,16 @@ int main() {
                 afficherListe(taches, tacheCompletee, nombreTaches);
                 break;
             case 2:
-                if (nombreTaches == 0) {
-                    nombreTaches = 1;
-                    taches = new string[1];
-                    tacheCompletee = new bool[1] {false};
-                } else {
+                nombreTaches++;
+
+                if (nombreTaches > tailleTableau) {
+                    tailleTableau *= 2;
+
                     string* tachesTemp = taches;
                     bool* tacheCompleteeTemp = tacheCompletee;
 
-                    nombreTaches++;
-
-                    taches = new string[nombreTaches];
-                    tacheCompletee = new bool[nombreTaches] {false};
+                    taches = new string[tailleTableau];
+                    tacheCompletee = new bool[tailleTableau] {false};
 
                     for (int i = 0; i < nombreTaches - 1; i++) {
                         taches[i] = tachesTemp[i];
