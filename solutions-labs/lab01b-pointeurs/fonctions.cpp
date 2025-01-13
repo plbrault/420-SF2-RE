@@ -10,7 +10,8 @@ void afficherMenu() {
         << "2. Ajouter une tâche" << endl
         << "3. Marquer une tâche comme faite" << endl
         << "4. Échanger deux tâches" << endl
-        << "5. Quitter" << endl;
+        << "5. Supprimer une tâche" << endl
+        << "6. Quitter" << endl;
 }
 
 int demanderChoix(int max) {
@@ -119,3 +120,25 @@ void echangerTaches(std::string taches[], bool tacheCompletee[], int nombreTache
         cout << "La liste comporte moins de deux tâches." << endl;
     }
 }
+
+void supprimerTache(std::string taches[], bool tacheCompletee[], int &nombreTaches) {
+    int numeroTache;
+
+    afficherListe(taches, tacheCompletee, nombreTaches);
+
+    if (nombreTaches > 0) {
+        numeroTache = demanderNumeroTache(
+            "Entrez le numéro de la tâche à supprimer :",
+            nombreTaches
+        );
+
+        nombreTaches--;
+        for (int i = numeroTache - 1; i < nombreTaches; i++) {
+            taches[i] = taches[i + 1];
+            tacheCompletee[i] = tacheCompletee[i + 1];
+        }
+
+        cout << "Suppression complétée." << endl;
+    }
+}
+
