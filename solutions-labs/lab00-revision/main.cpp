@@ -25,7 +25,7 @@ int main() {
                 ajouterTache(taches, nombreTaches);
                 break;
             case 3:
-                cout << "Marquer une tâche comme faite" << endl;
+                marquerFaite(taches, tacheCompletee, nombreTaches);
                 break;
             case 4:
                 cout << "Échanger deux tâches" << endl;

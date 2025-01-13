@@ -58,3 +58,24 @@ void ajouterTache(string taches[], int& nombreTaches) {
         nombreTaches++;
     }
 }
+
+void marquerFaite(std::string taches[], bool tacheCompletee[], int nombreTaches) {
+    int numeroTache;
+
+    afficherListe(taches, tacheCompletee, nombreTaches);
+
+    if (nombreTaches > 0) {
+        do {
+            cout << "Entrez le numéro de la tâche à marquer comme faite (0 pour annuler) : ";
+            cin >> numeroTache;
+            if (numeroTache >= 1 && numeroTache <= nombreTaches) {
+                tacheCompletee[numeroTache - 1] = true;
+            } else if (numeroTache != 0) {
+                cout << "Le numéro de la tâche est invalide." << endl;
+            }
+        } while (numeroTache < 0 || numeroTache > nombreTaches);
+    } else {
+        cout << "La liste est vide." << endl;
+    }
+}
+
