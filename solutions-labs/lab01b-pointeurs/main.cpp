@@ -12,9 +12,6 @@ int main() {
     bool *tacheCompletee = nullptr;
     int nombreTaches = 0;
 
-    taches = new string[100];
-    tacheCompletee = new bool[100] { false };
-
     do {
         afficherMenu();
         choix = demanderChoix();
