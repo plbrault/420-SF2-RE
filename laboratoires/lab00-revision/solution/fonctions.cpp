@@ -81,6 +81,7 @@ void marquerFaite(string taches[], bool tacheCompletee[], int nombreTaches) {
     int numeroTache;
 
     afficherListe(taches, tacheCompletee, nombreTaches);
+    cout << endl;
 
     if (nombreTaches > 0) {
         numeroTache = demanderNumeroTache(
@@ -100,6 +101,7 @@ void echangerTaches(string taches[], bool tacheCompletee[], int nombreTaches) {
 
     if (nombreTaches >= 2) {
         afficherListe(taches, tacheCompletee, nombreTaches);
+        cout << endl;
 
         numeroTache1 = demanderNumeroTache(
             "Entrez le numéro de la première tâche à échanger : ",
