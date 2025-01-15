@@ -93,6 +93,7 @@ Entrez votre choix : 3
 
 1. [ ] Faire le laboratoire 0
 2. [ ] Faire valider mon laboratoire
+
 Entrez le numéro de la tâche à marquer comme faite : 1
 
 Liste de tâches
@@ -122,6 +123,7 @@ Entrez votre choix : 4
 
 1. [X] Faire le laboratoire 0
 2. [ ] Faire valider mon laboratoire
+
 Entrez le numéro de la première tâche à échanger : 1
 Entrez le numéro de la deuxième tâche à échanger : 2
 Échange complété.
@@ -361,3 +363,109 @@ Vous pouvez maintenant ajouter la structure de base de la fonction `main`. Celle
 Assurez-vous que votre code fonctionne correctement avant de continuer.
 
 ### Étape 4
+
+Il vous faut maintenant ajouter au `main` les variables dont vous aurez besoin pour gérer la liste de tâches. Ces variables sont les suivantes:
+
+* Un tableau de chaînes de caractères (string) de 100 éléments, nommé `taches`, qui contiendra les description des tâches.
+* Un tableau de booléens de 100 éléments initialisés à `false`, nommé `tacheCompletee`, qui permettra d'indiquer si une tâche est marquée comme complétée ou non.
+* Un nombre entier initialisé à 0, nommé `nombreTaches`, indiquant le nombre de tâches ayant été ajoutées jusqu'à maintenant.
+
+### Étape 5
+
+Vous devez maintenant implémenter les fonctions `afficherListe` et `ajouterTache`.
+
+La fonction `afficherListe` doit:
+
+* Afficher « La liste est vide. » si le nombre de tâches est de 0.
+* Autrement, afficher la liste de tâches au format suivant:
+
+```
+1. [x] Compléter le laboratoire 0
+2. [ ] Faire valider le laboratoire 0 par l'enseignant
+3. [ ] Dormir
+```
+
+* La présence d'un `x` à l'intérieur du `[ ]` à côté d'une tâche indique que celle-ci a été complétée.
+
+La fonction `ajouterTache` doit:
+
+* S'assurer que la liste n'est pas pleine et afficher un message d'erreur le cas échéant.
+* Demander à l'utilisateur de saisir une tâche.
+* Ajouter la tâche saisie au tableau de tâches.
+* Incrémenter `nombreTaches`.
+
+Ajoutez les appels de ces deux fonctions aux endroits appropriés dans le `main`. Testez votre code rigoureusement.
+
+### Étape 6
+
+Vous devez maintenant implémenter les fonctions `demanderNumeroTache` et `marquerFaite`.
+
+La fonction `demanderNumeroTache` est utilisée par la fonction `marquerFaite`.
+
+* Elle demande une saisie au clavier en affichant d'abord le texte reçu en paramètre (ex: `"Entrez le numéro de la tâche à marquer comme faite:"`).
+* Elle valide la saisie et s'assure qu'il s'agit d'un numéro de tâche valide, c'est-à-dire un numéro entre 1 et le nombre de tâches. Si la saisie est invalide, elle en demande une nouvelle.
+* Elle retourne le numéro saisi.
+
+Voici un exemple d'exécution de la fonction `demanderNumeroTache` en supposant que la liste de tâches contient 50 tâches:
+
+```
+Entrez le numéro de la tâche à marquer comme faite : -1
+Le numéro saisi est invalide.
+Entrez le numéro de la tâche à marquer comme faite : 51
+Le numéro saisi est invalide.
+Entrez le numéro de la tâche à marquer comme faite : 22
+```
+
+La fonction `marquerFaite` doit, pour sa part:
+
+* Afficher la liste des tâches en appelant la fonction appropriée.
+* Si la liste contient au moins une tâche, utiliser la fonction `demanderNumeroTache` pour demander à l'utilisateur d'entrer le numéro de la tâche faite.
+* Changer la valeur appropriée du tableau `tacheCompletee` pour `true`.
+
+Appelez l'appel de la fonction `marquerFaite` à l'endroit approprié du `main`. Testez votre code rigoureusement.
+
+### Étape 7
+
+Implémentez maintenant la fonction `echangerTaches`. Cette fonction doit:
+
+* Demander deux numéros de tâche à l'utilisateur (vous pouvez réutiliser une fonction que vous avez déjà codée pour cela!).
+* Échanger ces deux tâches dans le tableau `taches`.
+* Échanger les valeurs correspondantes dans le tableau `tacheCompletee`.
+
+La fonction doit d'abord s'assurer que la liste comporte au moins deux tâches, et afficher un message d'erreur si ce n'est pas le cas.
+
+Appelez la fonction à l'endroit approprié dans le `main`. Testez votre code rigoureusement.
+
+### Étape 8
+
+Implémentez la fonction `sauvegarderListe`. Cette fonction doit enregistrer les tâches dans le fichier `taches.txt`. Chaque tâche doit utiliser deux lignes dans le fichier:
+
+1. Une ligne pour la description de la tâche.
+2. Une ligne pour l'état de la tâche, soit complétée (1) ou non complétée (0).
+
+Par exemple, si la liste de tâches ressemble présentement à ceci:
+
+```
+1. [ ] Compléter le laboratoire 0
+2. [x] Faire valider le laboratoire 0 par l'enseignant
+3. [ ] Dormir
+```
+
+Le contenu du fichier après sauvegarde ressemblera à cela:
+
+```
+Compléter le laboratoire 0
+0
+Faire valider le laboratoire 0 par l'enseignant
+1
+Dormir
+0
+```
+
+Appelez la fonction à l'endroit approprié dans le `main`. Testez votre code vigoureusement et vérifiez que le contenu du fichier est correct.
+
+### Étape 9
+
+Implémentez la fonction `chargerListe`. Cette fonction doit lire le fichier `taches.txt` créé par la fonction de sauvegarde, puis écraser le contenu des variables `taches`, `tacheCompletee` avec celui du fichier. N'oubliez pas de mettre à jour la variable `nombreTaches`!
+
+Cette étape complète le programme. Validez que tout fonctionne correctement.
