@@ -14,7 +14,7 @@ int main() {
 
     do {
         afficherMenu();
-        choix = demanderChoix(5);
+        choix = demanderChoix(7);
 
         cout << endl;
         switch (choix) {
@@ -30,10 +30,15 @@ int main() {
             case 4:
                 echangerTaches(taches, tacheCompletee, nombreTaches);
                 break;
+            case 5:
+                sauvegarderListe(taches, tacheCompletee, nombreTaches);
+                break;
+            case 6:
+                chargerListe(taches, tacheCompletee, nombreTaches);
+                break;
             default:
                 cout << "Au revoir!" << endl;
         }
         cout << endl;
-    } while (choix != 5);
-
+    } while (choix != 7);
 }
