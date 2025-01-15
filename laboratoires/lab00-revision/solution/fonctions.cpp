@@ -157,4 +157,6 @@ void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches
         tacheCompletee[nombreTaches] = ligne == "1";
         nombreTaches++;
     }
+
+    cout << "La liste de tâches a été chargée." << endl;
 }
