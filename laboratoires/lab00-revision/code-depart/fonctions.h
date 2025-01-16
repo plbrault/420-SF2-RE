@@ -1,5 +1,7 @@
 #pragma once
 
+// Attention: Vous ne devez PAS modifier ce fichier!
+
 void afficherMenu();
 int demanderChoix(int max);
 void afficherListe(std::string taches[], bool tacheCompletee[], int nombreTaches);
