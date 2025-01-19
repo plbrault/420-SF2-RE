@@ -46,3 +46,6 @@ CMakeLists.txt
 cmake-build-debug
 
 *.pdf
+
+# vscode
+.vscode/
