@@ -1,11 +1,17 @@
 #pragma once
 
-void afficherMenu();
-int demanderChoix(int max);
-void afficherListe(std::string taches[], bool tacheCompletee[], int nombreTaches);
-void ajouterTache(std::string taches[], int& nombreTaches);
-int demanderNumeroTache(std::string texte, int nombreTaches);
-void marquerFaite(std::string taches[], bool tacheCompletee[], int nombreTaches);
-void echangerTaches(std::string taches[], bool tacheCompletee[], int nombreTaches);
-void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTaches);
-void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches);
+#include "menu.h"
+#include "personne.h"
+#include "tache.h"
+
+Menu construireMenuPrincipal(void);
+void afficherMenu(Menu &);
+int demanderChoix(Menu &menu);
+void afficherListe(Personne &);
+void ajouterTache(Personne &);
+int demanderNumeroTache(std::string, Personne &);
+void marquerFaite(Personne &);
+void echangerTaches(Personne &);
+void sauvegarderListe(Personne &);
+void chargerListe(Personne &);
+void supprimerTache(Personne &);

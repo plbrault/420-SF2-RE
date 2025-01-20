@@ -15,9 +15,11 @@ public:
 
     Tache(std::string &);
 
+    Tache(std::string &, bool);
+
     std::string obtenirDescription(void);
 
-    void donnerDescription(std::string &);
+    void donnerDescription(const std::string &);
 
     bool estFait(void);
 

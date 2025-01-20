@@ -49,3 +49,5 @@ cmake-build-debug
 
 # vscode
 .vscode/
+makefile
+bin/

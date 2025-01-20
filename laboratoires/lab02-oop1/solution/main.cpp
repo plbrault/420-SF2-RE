@@ -2,12 +2,11 @@
 #include <stdint.h>
 #include <string>
 
+#include "fonctions.h"
 #include "personne.h"
 
 int main() {
     std::locale::global(std::locale{ "" });
-
-    int choix;
 
     std::string prenom;
     std::cout << "Quel est ton prénom ? ";
@@ -20,9 +19,44 @@ int main() {
     Personne toi(prenom, nom);
     std::cout << "Bonjour a toi, " << toi.obtenirNomComplet() << std::endl;
 
-    do {
+    Menu menuPrincipale = construireMenuPrincipal();
 
-    } while(choix != 7);
+    int choix;
+
+    do {
+        afficherMenu(menuPrincipale);
+        choix = demanderChoix(menuPrincipale);
+
+        std::cout << std::endl;
+        switch (choix) {
+        case 1: 
+            afficherListe(toi);
+            break;
+        
+        case 2: 
+            ajouterTache(toi);
+            break;
+        
+        case 3: 
+            marquerFaite(toi);
+            break;
+        
+        case 4: 
+            echangerTaches(toi);
+            break;
+        
+        case 5: 
+            supprimerTache(toi);
+            break;
+
+        case 6:
+            std::cout << "Au revoir!" << std::endl;
+            break;
+        
+        default: 
+            std::cout << "Une erreur inconnue c'est produite. Veuillez recommencer!" << std::endl;
+        }
+    } while(choix != menuPrincipale.valeurMaximale());
 
     return 0;
 

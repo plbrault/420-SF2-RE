@@ -13,11 +13,16 @@ Tache::Tache(std::string &description) {
     this->marquerNonFait();
 }
 
+Tache::Tache(std::string &description, bool estFait) {
+    this->donnerDescription(description);
+    this->fait = estFait;
+}
+
 std::string Tache::obtenirDescription(void) {
     return this->description;
 }
 
-void Tache::donnerDescription(std::string &description) {
+void Tache::donnerDescription(const std::string &description) {
     this->description = description;
 }
 

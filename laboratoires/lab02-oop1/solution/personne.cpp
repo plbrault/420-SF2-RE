@@ -24,19 +24,25 @@ Personne::~Personne(void) {
 
 std::string Personne::obtenirNomComplet(void) {
     std::ostringstream flux;
+
     flux << this->prenom << " " << this->nom;
-    for (uint8_t i = 0; i < this->quantite; i++) {
-        flux << this->listeDeTaches[i].obtenirChaine(i + 1) << std::endl;
-    }
+
     return flux.str();
+}
+
+int Personne::obtenirNombreTache(void) {
+    return this->quantite;
 }
 
 std::string Personne::obtenirChaine(void) {
     std::ostringstream flux;
-    flux << "Liste des tâches à " << this->obtenirNomComplet() << std::endl;
+
+    flux << "\nListe des tâches à " << this->obtenirNomComplet() << std::endl;
+
     for (uint8_t i = 0; i < this->quantite; i++) {
         flux << this->listeDeTaches[i].obtenirChaine(i + 1) << std::endl;
     }
+
     return flux.str();
 }
 
@@ -76,10 +82,21 @@ bool Personne::annuleTacheCompletee(int index) {
  * Autres fonctions publiques
  * ========================================================================= */
 
-bool Personne::ajouterTache(std::string &description) {
+bool Personne::ajouterTache(const std::string &description) {
     bool resultat = true;
     this->listeDeTaches[this->quantite].donnerDescription(description);
     this->quantite++;
+
+    if (this->quantite == taille) {
+        resultat = this->aggrandirListeTaches();
+    }
+
+    return resultat;
+}
+
+bool Personne::ajouterTache(Tache &tache) {
+    bool resultat = true;
+    this->listeDeTaches[this->quantite] = tache;
 
     if (this->quantite == taille) {
         resultat = this->aggrandirListeTaches();
@@ -118,6 +135,25 @@ bool Personne::aggrandirListeTaches(void) {
         }
         delete[] this->listeDeTaches;
         this->listeDeTaches = listeTachesTampon;
+        resultat = true;
+    }
+
+    return resultat;
+}
+
+bool Personne::echangerTache(int premier, int second) {
+    bool resultat = false;
+
+    // Les index reçus partent à 1 et non à 0
+    premier--;
+    second--;
+
+    if (premier >= 0 && premier < this->quantite 
+            && second >= 0 && second < this->quantite
+            && premier != second) {
+        Tache temporaire = this->listeDeTaches[premier];
+        this->listeDeTaches[premier] = this->listeDeTaches[second];
+        this->listeDeTaches[second] = temporaire;
         resultat = true;
     }
 

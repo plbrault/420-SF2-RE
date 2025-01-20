@@ -38,6 +38,8 @@ public:
 
     bool validerSelection(int);
 
+    int valeurMaximale(void);
+
     bool ajouterOption(const std::string &); 
 
 };

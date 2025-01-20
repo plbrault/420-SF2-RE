@@ -51,6 +51,10 @@ std::string Menu::obtenirChaine(void) {
     return flux.str();
 }
 
+std::string Menu::obtenirQuestion(void) {
+    return this->question;
+}
+
 void Menu::changerQuestion(const std::string &question) {
     this->question = question;
 }
@@ -74,14 +78,19 @@ bool Menu::validerSelection(int index) {
     // On reçoit un index débuttant à 1 au lieu de 0
     index--;
 
-    quantite = this->quantite;
+    int qt = this->valeurMaximale();
 
-    // Une option de plus si on peut quitter
+    return index < qt;
+}
+
+int Menu::valeurMaximale(void) {
+    int resultat = this->quantite;
+    
     if (peutQuitter) {
-        quantite++;
+        resultat++;
     }
 
-    return index < quantite;
+    return resultat;
 }
 
 /** ===========================================================================

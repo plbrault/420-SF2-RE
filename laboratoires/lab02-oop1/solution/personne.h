@@ -28,7 +28,11 @@ public:
 
     std::string obtenirNomComplet(void);
 
-    bool ajouterTache(std::string &);
+    int obtenirNombreTache(void);
+
+    bool ajouterTache(const std::string &);
+    
+    bool ajouterTache(Tache &);
 
     bool supprimerTache(int);
 
@@ -39,6 +43,8 @@ public:
     bool completeTache(int);
 
     bool annuleTacheCompletee(int);
+
+    bool echangerTache(int, int);
 
 };
 
