@@ -12,17 +12,11 @@ Menu::Menu(const std::string &titre, const std::string &question, bool peutQuitt
 
     this->peutQuitter = peutQuitter;
     this->quantite = 0;
-    this->taille = TAILLE_LISTE_OPTION_INCREMENT;
-    this->options = new std::string[this->taille];
 
     this->selection = -1;
 }
 
 Menu::Menu(const std::string &titre, const std::string &question) : Menu::Menu(titre, question, false) { }
-
-Menu::~Menu(void) {
-    delete[] this->options;
-}
 
 /** ===========================================================================
  * Accesseur et mutateur
@@ -43,7 +37,7 @@ std::string Menu::obtenirChaine(void) {
 
     uint8_t i = 0;
 
-    for (0; i < this->quantite; i++) {
+    for (; i < this->quantite; i++) {
         flux << (i + 1) << " " << this->options[i] << std::endl;
     }
 
@@ -65,13 +59,15 @@ void Menu::changerQuestion(const std::string &question) {
  * Autres fonctions publiques
  * ========================================================================= */
 
-void Menu::ajouterOption(const std::string &option) {
-    this->options[this->quantite] = option;
-    this->quantite++;
+bool Menu::ajouterOption(const std::string &option) {
+    bool resultat = this->quantite < TAILLE_LISTE_OPTION_MAXIMAL;
 
-    if (this->quantite == taille) {
-        this->aggrandirListeOptions();
+    if (resultat) {
+        this->options[this->quantite] = option;
+        this->quantite++;
     }
+    
+    return resultat;
 }
 
 bool Menu::validerSelection(int index) {
@@ -91,20 +87,3 @@ bool Menu::validerSelection(int index) {
 /** ===========================================================================
  * Méthodes privées
  * ========================================================================= */
-
-bool Menu::aggrandirListeOptions(void) {
-    bool resultat = false;
-
-    if (this->taille < TAILLE_LISTE_OPTION_MAXIMAL) {
-        this->taille += TAILLE_LISTE_OPTION_INCREMENT;
-        std::string *optionsTampon = new std::string[this->taille];
-        for (uint8_t i = 0; i < this->quantite; i++) {
-            optionsTampon[i] = this->options[i];
-        }
-        delete[] this->options;
-        this->options = optionsTampon;
-        resultat = true;
-    }
-
-    return resultat;
-}

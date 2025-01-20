@@ -22,7 +22,7 @@ int main() {
 
     do {
 
-    } while(choix != 'q');
+    } while(choix != 7);
 
     return 0;
 

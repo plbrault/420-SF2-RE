@@ -3,7 +3,7 @@
 
 #include "menu.h"
 
-int main(int argc, char** argv) {
+int main() {
 
     Menu menuPrincipal("Menu principal", "Votre choix ?", true);
 

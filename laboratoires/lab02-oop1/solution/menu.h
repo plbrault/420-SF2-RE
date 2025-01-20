@@ -4,7 +4,6 @@
 #include <stdint.h>
 #include <string>
 
-#define TAILLE_LISTE_OPTION_INCREMENT 6
 #define TAILLE_LISTE_OPTION_MAXIMAL 18
 
 class Menu {
@@ -14,8 +13,7 @@ private:
 
     std::string titre;
     std::string question;
-    std::string *options;
-    uint8_t taille;
+    std::string options[TAILLE_LISTE_OPTION_MAXIMAL];
     uint8_t quantite;
 
     int selection;
@@ -27,8 +25,6 @@ public:
     Menu(const std::string &, const std::string &);
 
     Menu(const std::string &, const std::string &, bool);
-
-    ~Menu(void);
 
     std::string obtenirChaine(void);
 
@@ -42,7 +38,7 @@ public:
 
     bool validerSelection(int);
 
-    void ajouterOption(const std::string &); 
+    bool ajouterOption(const std::string &); 
 
 };
 
