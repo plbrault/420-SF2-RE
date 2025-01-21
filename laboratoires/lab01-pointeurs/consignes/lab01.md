@@ -75,12 +75,56 @@ Affichez ensuite, successivement:
 Vous devriez obtenir un résultat semblable à celui-ci (avec une adresse différente):
 
 ```
-Adresse de nombre: 0x7ffcf8c186f8
+Adresse de nombre: 0x7ffd8efcf318
 Valeur de nombre: 42
-Adresse pointée par pointeurNombre: 0x7ffcf8c18700
+Adresse pointée par pointeurNombre: 0x7ffd8efcf318
 Valeur pointée par pointeurNombre: 42
 ```
 
 Validez que l'adresse pointée par `pointeurNombre` est la même que l'adresse de `nombre`. Autrement, il y a forcément une erreur dans votre code!
 
 Si vous observez l'exécution de votre programme complet, vous constaterez que l'adresse de `nombre` n'a pas changé depuis l'étape 1. C'est normal, car changer la valeur d'une variable ne change pas son adresse.
+
+### Étape 4
+
+Ajoutez la ligne de code suivante:
+
+```
+cout << "&pointeurNombre = " << &pointeurNombre << endl;
+```
+
+Exécutez votre code. Vous devriez obtenir une adresse différente que celle affichée précédemment. C'est parce que cette fois-ci, vous n'affichez pas l'adresse **pointée par** le pointeur, vous affichez plutôt l'adresse de la case mémoire qui **contient** le pointeur. En effet, un pointeur est lui-même stocké en mémoire, et a donc lui-même une adresse. On peut même créer un pointeur de pointeur! Cela est utile dans certains cas, mais nous ne le ferons pas dans le cours.
+
+Ça va, pas trop mal à la tête?
+
+### Étape 5
+
+Déclarez maintenant un nouveau pointeur, cette fois-ci de type `string`, que vous appellerez `pointeurString`. N'oubliez pas d'initialiser votre pointeur à `nullptr`.
+
+Suite à cette déclaration, utilisez l'opérateur `new` pour allouer une nouvelle chaîne de caractère qui sera référée par votre pointeur.
+
+Dans la chaîne de caractères, insérez la valeur `"Bonjour le monde!"`.
+
+Faites afficher la valeur de la chaîne de caractères à l'écran. 
+
+Désallouez ensuite la mémoire allouée à votre pointeur.
+
+Testez votre code (il devrait afficher « Bonjour le monde! »).
+
+Suite à votre désallocation de mémoire, essayez d'afficher à nouveau la valeur pointée par `pointeurString`. Cela ne fonctionnera pas, car le pointeur pointe maintenant sur de la mémoire désallouée! Retirez donc cette ligne de code et réinitialisez le pointeur à `nullptr` à la place.
+
+### Étape 6
+
+Dans de nouveaux fichiers `fonctions.h` et `fonctions.cpp`, créez une fonction `afficherValeurPointeur` de type de retour `void`.
+
+Cette fonction doit:
+
+* Prendre un pointeur de `string` en paramètre
+* Si le pointeur est nul, afficher « Le pointeur est nul. »
+* Sinon, afficher la valeur du pointeur.
+
+Appelez la nouvelle fonction dans votre `main` en lui passant `pointeurString` dans son état actuel. Cela devrait afficher « Le pointeur est nul. ».
+
+Allouez ensuite une nouvelle chaîne de caractères à `pointeurString`, à laquelle vous donnerez la valeur `"Hello World!"`. Appelez de nouveau la fonction `afficherValeurPointeur` avec le pointeur en paramètre. Cela devrait afficher « Hello World! ».
+
+Désallouez la mémoire du pointeur et réinitialisez-le à `nullptr`.
