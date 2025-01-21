@@ -51,4 +51,43 @@ int main() {
     pointeurString = new string;
     *pointeurString = "Hello World!";
     afficherValeurPointeur(pointeurString);
+
+    // Étape 7
+
+    string  *prenom = new string,
+            *nom = new string;
+
+    cout << "Votre prénom: ";
+    cin >> *prenom;
+
+    cout << "Votre nom: ";
+    cin >> *nom;
+
+    cout << "Votre nom complet est " << *prenom << " " << *nom << "." << endl;
+
+    delete prenom;
+    delete nom;
+    prenom = nullptr;
+    nom = nullptr;
+
+    // Étape 8
+
+    char* caractere1 = new char, *caractere2 = new char;
+
+    *caractere1 = 'A';
+    *caractere2 = 'B';
+
+    cout << "caractere1: " << *caractere1 << endl
+        << "caractere2: " << *caractere2 << endl;
+
+    char* temp = caractere1;
+    caractere1 = caractere2;
+    caractere2 = temp;
+
+    cout << "caractere1: " << *caractere1 << endl
+        << "caractere2: " << *caractere2 << endl;
+
+    delete caractere1;
+    delete caractere2;
+    caractere1 = caractere2 = nullptr;
 }

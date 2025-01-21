@@ -6,10 +6,11 @@ Mettre en pratique les notions en lien avec les pointeurs et les tableaux dynami
 
 ## Parties
 
-Ce laboratoire est divisé en deux parties:
+Ce laboratoire est divisé en trois parties:
 
-* Laboratoire 01-A: Introduction aux pointeurs
-* Laboratoire 01-B: Intégration dans la liste de tâches
+* Laboratoire 01-A: Manipulation de pointeurs
+* Laboratoire 01-B: Manipulation de tableaux dynamiques
+* Laboratoire 01-C: Intégration d'un tableau dynamique dans la liste de tâches
 
 ## Laboratoire 01-A
 
@@ -128,3 +129,29 @@ Appelez la nouvelle fonction dans votre `main` en lui passant `pointeurString` d
 Allouez ensuite une nouvelle chaîne de caractères à `pointeurString`, à laquelle vous donnerez la valeur `"Hello World!"`. Appelez de nouveau la fonction `afficherValeurPointeur` avec le pointeur en paramètre. Cela devrait afficher « Hello World! ».
 
 Désallouez la mémoire du pointeur et réinitialisez-le à `nullptr`.
+
+### Étape 7
+
+Déclarez deux nouveaux pointeurs de type `string`, que vous nommerez `prenom` et `nom`.
+
+Ajoutez le code nécessaire pour demander à l'utilisateur son prénom et son nom, les stocker à l'aide des pointeurs, puis afficher le nom complet à l'écran. N'oubliez pas ensuite de désallouer la mémoire.
+
+Exemple d'exécution:
+
+```
+Votre prénom: Lisa
+Votre nom: Simpson
+Votre nom complet est Lisa Simpson.
+```
+
+### Étape 8
+
+Créez maintenant deux pointeurs de caractères (`char`), que vous nommerez `caractere1` et `caractere2`.
+
+Ajoutez le code nécessaire pour que le premier caractère soit `'A'` et que le deuxième soit `'B'`. Faites afficher les deux caractères à l'écran.
+
+Échangez ensuite **les adresses** vers lesquelles pointent les deux pointeurs, puis faites afficher les valeurs de nouveau. Elles devraient maintenant être inversées.
+
+N'oubliez pas de désallouer la mémoire.
+
+**⚠️ Faites valider votre Laboratoire 01-A avant de passer au Laboratoire 01-B.**
