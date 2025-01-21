@@ -3,20 +3,27 @@
 using namespace std;
 
 int main() {
-    // Étape 2
+    locale::global(locale{ "" });
+
+    // Étape 1
 
     int nombre;
 
     cout << "L'adresse de la variable \"nombre\" est: " << &nombre << endl;
 
-    // Étape 3
+    // Étape 2
 
     int *pointeurNombre = nullptr;
 
     cout << "pointeurNombre contient l'adresse: " << pointeurNombre << endl;
-}
 
-// TIP See CLion help at <a
-// href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>.
-//  Also, you can try interactive lessons for CLion by selecting
-//  'Help | Learn IDE Features' from the main menu.
+    // Étape 3
+
+    nombre = 42;
+    pointeurNombre = &nombre;
+
+    cout << "Adresse de nombre: " << &nombre << endl
+        << "Valeur de nombre: " << nombre << endl
+        << "Adresse pointée par pointeurNombre: " << &pointeurNombre << endl
+        << "Valeur pointée par pointeurNombre: " << *pointeurNombre << endl;
+}
