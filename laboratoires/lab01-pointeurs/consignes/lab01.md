@@ -309,3 +309,20 @@ Si un de ces cas ne fonctionne pas correctement, modifiez votre code en conséqu
 **⚠️ Faites valider cette partie du laboratoire par l'enseignant.**
 
 ## Laboratoire 01-C
+
+Dans cette partie, vous allez repartir du code de votre laboratoire 0. Vous allez ensuite l'adapter pour que la taille de la liste de tâches soit dynamique.
+
+Commencez donc par copier votre projet du laboratoire 0. Utilisez la nouvelle copie pour réaliser les étapes suivantes.
+
+### Étape 1
+
+Dans votre fonction `main`, remplacez la déclaration de vos tableaux `taches` et `tacheCompletee` par celles de pointeurs initialisés à `nullptr`. Les types de données respectifs (`int` et `bool`) doivent demeurer les mêmes.
+
+Vous devez ensuite ajouter du code **au-dessus de l'appel** de la fonction `ajouterTache` dans votre `case 2` (et non PAS dans le corps de la fonction). Ce code doit:
+
+1. Incrémenter `nombreTaches`
+2. Agrandir les tableaux `taches` et `tacheCompletee` de 1
+
+Pour ce faire, inspirez-vous de ce que vous avez fait dans le laboratoire 01-B. N'oubliez pas de prendre en compte le cas où les pointeurs contiennent `nullptr`!
+
+Modifiez ensuite votre fonction `ajouterTache` afin que celle-ci ne modifie plus la valeur de `nombreTaches` (puisque vous le faites maintenant dans le `main`), ainsi que pour retirer la limite de 100 tâches (nous n'en avons plus besoin puisque le tableau s'agrandit chaque fois que nous ajoutons une tâche!).

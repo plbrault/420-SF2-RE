@@ -51,15 +51,11 @@ void afficherListe(string taches[], bool tacheCompletee[], int nombreTaches) {
 void ajouterTache(string taches[], int nombreTaches) {
     string tache;
 
-    if (nombreTaches == 100) {
-        cout << "La liste est pleine." << endl;
-    } else {
-        cout << "Entrez la tâche à ajouter : ";
-        cin.ignore();
-        getline(cin, tache);
+    cout << "Entrez la tâche à ajouter : ";
+    cin.ignore();
+    getline(cin, tache);
 
-        taches[nombreTaches - 1] = tache;
-    }
+    taches[nombreTaches - 1] = tache;
 }
 
 int demanderNumeroTache(string texte, int nombreTaches) {
