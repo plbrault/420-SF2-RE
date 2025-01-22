@@ -42,7 +42,7 @@ Exécutez votre code. Vous devriez obtenir le résultat suivant:
 pointeurNombre contient l'adresse: 0
 ```
 
-Cela s'explique par le fait que `nullptr` correspond à l'adresse mémoire 0. Celle-ci n'est pas une véritable adresse, car les adresses mémoire commencent à 1. L'adresse 0 indique que le pointeur ne pointe sur rien.
+Cela s'explique par le fait que `nullptr` correspond à l'adresse mémoire 0. Celle-ci n'est pas accessible aux programmes autres que le système d'exploitation, et est donc utilisée en C++ pour représenter un pointeur nul (donc qui ne pointe sur rien). L'adresse 0 indique que le pointeur ne pointe sur rien.
 
 Retirez l'initialisation de votre pointeur à `nullptr` et ré-exécutez votre programme pour voir ce qui se passe. Vous constaterez que votre pointeur contient maintenant une adresse aléatoire. On veut éviter cela, car cette adresse pourrait correspondre à une donnée existante en mémoire. Pour des raisons de sécurité, on doit **toujours** initialiser nos pointeurs.
 
