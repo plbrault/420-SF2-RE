@@ -337,7 +337,7 @@ Nous allons maintenant ajouter une amélioration à notre programme pour le rend
 
 Présentement, notre programme ré-alloue le tableau chaque fois que nous ajoutons une tâche. Cela sera coûteux à la longue, puisque la réallocation implique chaque fois de ré-itérer sur tout l'ancien tableau afin de copier ses éléments vers le nouveau. Imaginez si le tableau avait 1 milliard d'éléments!
 
-En programmation, il faut souvent faire un compromis entre la mémoire et le temps. Ici, nous avons un programme qui minimse l'utilisation de la mémoire: on a un tableau contenant toujours exactement le nombre d'éléments dont nous avons besoin. Cette façon de faire est cependant coûteuse en temps, vu la nécessité de recopier tout le tableau chaque fois qu'on ajoute un élément. Le compromis que nous allons faire consiste à utiliser un peu plus de mémoire que nécessaire, afin de limiter les opérations de copie du tableau à une fois de temps en temps.
+En programmation, il faut souvent faire un compromis entre la mémoire et le temps. Ici, nous avons un programme qui minimise l'utilisation de la mémoire: on a un tableau contenant toujours exactement le nombre d'éléments dont nous avons besoin. Cette façon de faire est cependant coûteuse en temps, vu la nécessité de recopier tout le tableau chaque fois qu'on ajoute un élément. Le compromis que nous allons faire consiste à utiliser un peu plus de mémoire que nécessaire, afin de limiter les opérations de copie du tableau à une fois de temps en temps.
 
 Voici l'approche que nous utiliserons:
 
