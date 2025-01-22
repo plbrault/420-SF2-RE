@@ -1,9 +1,31 @@
 #include <iostream>
+
+#include "fonctions.h"
+#include "task.h"
+
+int main () {
+    std::locale::global(std::locale{ "" });
+
+    Task premier("Comprendre les classes", false);
+    Task seconde("Comprendre les constructeurs", false);
+    Task troisieme("Comprendre les pointeurs", true);
+
+    afficherTache(premier);
+    afficherTache(seconde);
+    afficherTache(troisieme);
+
+    return 0;
+}
+
+
+/*
+#include <iostream>
 #include <stdint.h>
 #include <string>
 
 #include "fonctions.h"
 #include "personne.h"
+
 
 int main() {
     std::locale::global(std::locale{ "" });
@@ -61,3 +83,4 @@ int main() {
     return 0;
 
 }
+*/

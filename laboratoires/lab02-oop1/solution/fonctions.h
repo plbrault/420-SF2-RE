@@ -2,7 +2,7 @@
 
 #include "menu.h"
 #include "personne.h"
-#include "tache.h"
+#include "task.h"
 
 Menu construireMenuPrincipal(void);
 void afficherMenu(Menu &);
@@ -15,3 +15,5 @@ void echangerTaches(Personne &);
 void sauvegarderListe(Personne &);
 void chargerListe(Personne &);
 void supprimerTache(Personne &);
+
+void afficherTache(Task &);
