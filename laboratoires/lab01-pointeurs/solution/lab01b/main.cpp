@@ -2,64 +2,50 @@
 #include "fonctions.h"
 
 using namespace std;
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 int main() {
-    locale::global(locale{ "" });
+	float* nombres = nullptr;
+	int nombreValeurs;
 
-    int choix;
-    int tailleTableau = 10;
-    string *taches = new string[tailleTableau];
-    bool *tacheCompletee = new bool[tailleTableau];
-    int nombreTaches = 0;
+	cout << "Combien de nombres voulez-vous entrer? ";
+	cin >> nombreValeurs;
 
-    do {
-        afficherMenu();
-        choix = demanderChoix(6);
+	if (nombreValeurs > 0) {
+		nombres = new float[nombreValeurs];
+		demanderNombres(nombres, 0, nombreValeurs - 1);
+		afficherMoyenne(nombreValeurs, calculerMoyenne(nombres, nombreValeurs));
+	}
 
-        cout << endl;
-        switch (choix) {
-            case 1:
-                afficherListe(taches, tacheCompletee, nombreTaches);
-                break;
-            case 2:
-                nombreTaches++;
+	cout << "Voulez-vous ajouter d'autres nombres? (o/n) ";
+	char reponse;
+	cin >> reponse;
+	if (toupper(reponse) == 'O') {
+		int nombreNouvellesValeurs;
 
-                if (nombreTaches > tailleTableau) {
-                    tailleTableau *= 2;
+		cout << "Combien de nouveaux nombres voulez-vous ajouter? ";
+		cin >> nombreNouvellesValeurs;
 
-                    string* tachesTemp = taches;
-                    bool* tacheCompleteeTemp = tacheCompletee;
+		if (nombreNouvellesValeurs > 0) {
+			float* nouveauTableau = new float[nombreValeurs + nombreNouvellesValeurs];
+			for (int i = 0; i < nombreValeurs; i++) {
+				nouveauTableau[i] = nombres[i];
+			}
+			delete[] nombres;
+			nombres = nouveauTableau;
 
-                    taches = new string[tailleTableau];
-                    tacheCompletee = new bool[tailleTableau] {false};
+			demanderNombres(nombres, nombreValeurs, nombreValeurs + nombreNouvellesValeurs - 1);
+			nombreValeurs = nombreValeurs + nombreNouvellesValeurs;
+			afficherMoyenne(nombreValeurs, calculerMoyenne(nombres, nombreValeurs));
+		}
+	}
 
-                    for (int i = 0; i < nombreTaches - 1; i++) {
-                        taches[i] = tachesTemp[i];
-                        tacheCompletee[i] = tacheCompleteeTemp[i];
-                    }
+	delete[] nombres;
 
-                    delete[] tachesTemp;
-                    delete[] tacheCompleteeTemp;
-                }
+	// Allocation d'un tableau de 5 éléments
+	int* monTableau = new int[5];
 
-                ajouterTache(taches, nombreTaches);
-                break;
-            case 3:
-                marquerFaite(taches, tacheCompletee, nombreTaches);
-                break;
-            case 4:
-                echangerTaches(taches, tacheCompletee, nombreTaches);
-                break;
-            case 5:
-                supprimerTache(taches, tacheCompletee, nombreTaches);
-                break;
-            default:
-                cout << "Au revoir!" << endl;
-        }
-        cout << endl;
-    } while (choix != 6);
-
-    delete[] taches;
-    delete[] tacheCompletee;
+	// Insertion de données dans monTableau
+	for (int i = 0; i < 5; i++) {
+		monTableau[i] = i * i;
+	}
 }

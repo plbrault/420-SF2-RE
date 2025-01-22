@@ -44,5 +44,6 @@ x86
 .idea
 CMakeLists.txt
 cmake-build-debug
+*vcxproj*
 
 *.pdf
