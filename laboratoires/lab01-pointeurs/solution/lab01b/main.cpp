@@ -17,7 +17,9 @@ int main() {
 	}
 
 	cout << "Voulez-vous ajouter d'autres nombres? (o/n) ";
-	if (repondOui()) {
+	char reponse;
+	cin >> reponse;
+	if (toupper(reponse) == 'O') {
 		int nombreNouvellesValeurs;
 
 		cout << "Combien de nouveaux nombres voulez-vous ajouter? ";
@@ -25,7 +27,9 @@ int main() {
 
 		if (nombreNouvellesValeurs > 0) {
 			float* nouveauTableau = new float[nombreValeurs + nombreNouvellesValeurs];
-			copierTableau(nombres, nombreValeurs, nouveauTableau);
+			for (int i = 0; i < nombreValeurs; i++) {
+				nouveauTableau[i] = nombres[i];
+			}
 			delete[] nombres;
 			nombres = nouveauTableau;
 
@@ -36,4 +40,12 @@ int main() {
 	}
 
 	delete[] nombres;
+
+	// Allocation d'un tableau de 5 éléments
+	int* monTableau = new int[5];
+
+	// Insertion de données dans monTableau
+	for (int i = 0; i < 5; i++) {
+		monTableau[i] = i * i;
+	}
 }

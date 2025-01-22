@@ -14,7 +14,7 @@ Ce laboratoire est divisé en trois parties:
 
 ## Laboratoire 01-A
 
-Cette partie a pour but de vous faire explorer les notions d'adresse mémoire, de pointeur et de tableau dynamique. Commencez le laboratoire dans un nouveau projet contenant un `main` vide.
+Cette partie a pour but de vous faire explorer les notions d'adresse mémoire, de pointeur et de tableau dynamique. Commencez par créer un nouveau projet avec une fonction `main` vide.
 
 ### Étape 1
 
@@ -154,6 +154,156 @@ Ajoutez le code nécessaire pour que le premier caractère soit `'A'` et que le 
 
 N'oubliez pas de désallouer la mémoire.
 
-**⚠️ Faites valider votre Laboratoire 01-A avant de passer au Laboratoire 01-B.**
+**⚠️ Faites valider cette partie du laboratoire par l'enseignant.**
 
 ## Laboratoire 01-B
+
+Cette partie vous permettra de vous familiariser avec la manipulation d'un tableau alloué dynamiquement.
+
+Le programme à créer permettra à l'utilisateur d'insérer des nombres dans un tableau alloué dynamiquement, puis calculera la moyenne de ces nombres. Il permettra ensuite à l'utilisateur d'agrandir le tableau en y ajoutant des valeurs supplémentaires, avant de calculer la moyenne à nouveau.
+
+Voici un exemple d'exécution du programme attendu:
+
+```
+Combien de nombres voulez-vous entrer? 5
+Entrez le nombre #1: 20
+Entrez le nombre #2: 17.54
+Entrez le nombre #3: 12
+Entrez le nombre #4: 13
+Entrez le nombre #5: 9
+La moyenne des 5 nombres est 14.308.
+Voulez-vous ajouter d'autres nombres? (o/n) o
+Combien de nouveaux nombres voulez-vous ajouter? 3
+Entrez le nombre #6: 101.28
+Entrez le nombre #7: 17.11
+Entrez le nombre #8: 1024
+La moyenne des 8 nombres est 151.741.
+```
+
+Référez-vous au document « **Les pointeurs** » disponible sur Moodle pour réaliser les étapes ci-dessous.
+Commencez avec un nouveau projet contenant une fonction `main` vide.
+
+### Étape 1
+
+En vous basant sur l'exemple d'exécution, ajoutez le code nécessaire pour demander à l'utilisateur combien de nombres il souhaite entrer. Stockez sa réponse dans un `int`.
+
+Si le nombre saisi est supérieur à 0, utilisez un pointeur pour allouer dynamiquement un tableau contenant le nombre de valeurs demandé.
+
+Ajoutez ensuite le code nécessaire pour demander des nombres à l'utilisateur et les stocker dans le tableau. Vous pouvez pour cela créer une fonction `demanderNombres`. Puisqu'un tableau est en réalité un pointeur, votre fonction peut soit prendre en paramètre un pointeur de float (`float *nombres`) ou un tableau de float (`float nombres[]`). Dans les deux cas, vous serez en mesure de passer votre pointeur à votre fonction, et le résultat sera le même.
+
+Testez votre code avant de continuer. À la fin de cette étape, l'exécution de votre programme devrait ressembler à ceci:
+
+```
+Combien de nombres voulez-vous entrer? 3
+Entrez le nombre #1: 14
+Entrez le nombre #2: 108
+Entrez le nombre #3: 32
+```
+
+### Étape 2
+
+Ajoutez le code nécessaire pour calculer la moyenne des valeurs du tableau et l'afficher à l'écran. Pour cela, vous pourriez par exemple créer des fonctions `calculerMoyenne` et `afficherMoyenne`.
+
+Voici à quoi devrait ressembler l'exécution de votre programme après cette étape:
+
+```
+Combien de nombres voulez-vous entrer? 3
+Entrez le nombre #1: 14
+Entrez le nombre #2: 108
+Entrez le nombre #3: 32
+La moyenne des 3 nombres est 51.3333.
+```
+
+### Étape 3
+
+On veut maintenant demander à l'utilisateur s'il souhaite ajouter de nouvelles valeurs. S'il répond oui, il faudra agrandir le tableau.
+
+On ne peut cependant pas directement changer la taille d'un tableau, même alloué dynamiquement. Il faudra donc plutôt suivre les étapes suivantes:
+
+1. Allouer un nouveau tableau avec la taille mise à jour, dans un nouveau pointeur
+2. Copier les éléments de l'ancien tableau vers le nouveau tableau
+3. Désallouer le tableau d'origine avec `delete[]`
+4. Faire pointer le pointeur d'origine vers la même adresse que le nouveau pointeur
+
+Voici un exemple de code effectuant ces opérations avec un tableau d'entiers:
+
+```c++
+// Allocation d'un tableau de 5 éléments
+int* monTableau = new int[5];
+
+// Insertion de données dans monTableau
+for (int i = 0; i < 5; i++) {
+    monTableau[i] = i * i;
+}
+
+// Allocation du nouveau tableau de 10 éléments
+int* nouveauTableau = new int[10];
+
+// Copie des éléments de l'ancien tableau dans le nouveau tableau
+for (int i = 0; i < 5; i++) {
+    nouveauTableau[i] = monTableau[i];
+}
+
+// Désallocation de l'ancien tableau
+delete[] monTableau;
+
+// Mise à jour de l'adresse pointée par monTableau
+monTableau = nouveauTableau;
+
+// Réinitialisation du pointeur nouveauTableau (nous n'en avons plus besoin)
+nouveauTableau = nullptr;
+/* Ici, nous effaçons l'adresse stockée dans nouveauTableau, mais 
+cela ne désalloue pas la mémoire. Le tableau stocké dans celle-ci
+est toujours accessible via le pointeur monTableau. */
+```
+
+Inspirez-vous de ce code pour demander à l'utilisateur s'il souhaite ajouter de nouvelles valeurs au tableau, et, le cas échéant, agrandir le tableau du nombre demandé. **Faites l'ajout de ce code directement dans le `main`** (ne créez pas de nouvelle fonction pour cette étape).
+
+Voici à quoi devrait ressembler l'exécution de votre programme à la fin de cette étape:
+
+```
+Combien de nombres voulez-vous entrer? 2
+Entrez le nombre #1: 8
+Entrez le nombre #2: 14
+La moyenne des 2 nombres est 11.
+Voulez-vous ajouter d'autres nombres? (o/n) o
+Combien de nouveaux nombres voulez-vous ajouter? 3
+Entrez le nombre #3: 10
+Entrez le nombre #4: 15
+Entrez le nombre #5: 25.74
+```
+
+### Étape 4
+
+Ajoutez finalement le code nécessaire pour recalculer la moyenne sur le tableau complet et l'afficher à l'écran.
+
+Voici à quoi devrait ressembler l'exécution de votre programme à la fin de cette étape:
+
+```
+Combien de nombres voulez-vous entrer? 4
+Entrez le nombre #1: 10
+Entrez le nombre #2: 20
+Entrez le nombre #3: 30
+Entrez le nombre #4: 40
+La moyenne des 4 nombres est 25.
+Voulez-vous ajouter d'autres nombres? (o/n) o
+Combien de nouveaux nombres voulez-vous ajouter? 5
+Entrez le nombre #5: 50
+Entrez le nombre #6: 60
+Entrez le nombre #7: 70
+Entrez le nombre #8: 80
+Entrez le nombre #9: 90
+La moyenne des 9 nombres est 50.
+```
+
+### Étape 5
+
+Testez les cas limites suivants:
+
+1) Entrer 0 valeurs, puis agrandir le tableau de 0 valeurs
+2) Entrer 0 valeurs, puis agrandir le tableau de plusieurs valeurs
+3) Entrer plusieurs valeurs, puis agrandir le tableau de 0 valeurs
+
+Si un de ces cas ne fonctionne pas correctement, modifiez votre code en conséquence.
+
+**⚠️ Faites valider cette partie du laboratoire par l'enseignant.**
