@@ -124,10 +124,11 @@ void supprimerTache(std::string taches[], bool tacheCompletee[], int &nombreTach
     int numeroTache;
 
     afficherListe(taches, tacheCompletee, nombreTaches);
+    cout << endl;
 
     if (nombreTaches > 0) {
         numeroTache = demanderNumeroTache(
-            "Entrez le numéro de la tâche à supprimer :",
+            "Entrez le numéro de la tâche à supprimer : ",
             nombreTaches
         );
 

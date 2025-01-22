@@ -326,3 +326,78 @@ Vous devez ensuite ajouter du code **au-dessus de l'appel** de la fonction `ajou
 Pour ce faire, inspirez-vous de ce que vous avez fait dans le laboratoire 01-B. N'oubliez pas de prendre en compte le cas où les pointeurs contiennent `nullptr`!
 
 Modifiez ensuite votre fonction `ajouterTache` afin que celle-ci ne modifie plus la valeur de `nombreTaches` (puisque vous le faites maintenant dans le `main`), ainsi que pour retirer la limite de 100 tâches (nous n'en avons plus besoin puisque le tableau s'agrandit chaque fois que nous ajoutons une tâche!).
+
+Testez votre programme au complet. Normalement, tout devrait maintenant fonctionner comme avant. Félicitations, vous avez déjà une version fonctionnelle de votre liste de tâches avec un tableau dynamique!
+
+### Étape 2
+
+Nous allons maintenant ajouter une amélioration à notre programme pour le rendre plus efficace.
+
+Présentement, notre programme ré-alloue le tableau chaque fois que nous ajoutons une tâche. Cela sera coûteux à la longue, puisque la réallocation implique chaque fois de ré-itérer sur tout l'ancien tableau afin de copier ses éléments vers le nouveau. Imaginez si le tableau avait 1 milliard d'éléments!
+
+En programmation, il faut souvent faire un compromis entre la mémoire et le temps. Ici, nous avons un programme qui minimse l'utilisation de la mémoire: on a un tableau contenant toujours exactement le nombre d'éléments dont nous avons besoin. Cette façon de faire est cependant coûteuse en temps, vu la nécessité de recopier tout le tableau chaque fois qu'on ajoute un élément. Le compromis que nous allons faire consiste à utiliser un peu plus de mémoire que nécessaire, afin de limiter les opérations de copie du tableau à une fois de temps en temps.
+
+Voici l'approche que nous utiliserons:
+
+1) Au lieu d'initialiser les deux pointeurs à `nullptr`, nous allouerons immédiatement deux tableaux de 10 éléments.
+2) Chaque fois que l'ajout d'une nouvelle tâche sera demandé, nous vérifierons d'abord s'il reste de la place dans les tableaux. **Si et seulement si** ce n'est pas le cas, nous doublerons la taille des tableaux. On passera donc de 10 à 20 éléments, puis de 20 à 40, puis de 40 à 80, et ainsi de suite.
+
+Ainsi, les opérations d'allocation et de copie des tableaux ne seront nécessaires que lors de l'ajoue d'une onzième tâche, puis d'une vingt-et-unième, puis d'une quarante-et-unième, etc. Notre code sera beaucoup plus efficace de cette manière, même s'il utilisera davantage de mémoire.
+
+Apportez les modifications nécessaires à votre code. Vous aurez besoin d'une nouvelle variable `tailleTableau` dont la valeur différera de `nombreTaches`.
+
+Une fois les modifications apportées, testez le programme rigoureusement. Il devrait continuer de fonctionner comme avant.
+
+### Étape 3
+
+Vous allez finalement ajouter une nouvelle option « Supprimer une tâche » au programme. Celle-ci doit permettre de retirer une tâche au choix de la liste. Voici un exemple d'exécution de cette option:
+
+```
+Liste de tâches
+================================
+1. Afficher la liste
+2. Ajouter une tâche
+3. Marquer une tâche comme faite
+4. Échanger deux tâches
+5. Supprimer une tâche
+6. Sauvegarder les tâches
+7. Charger les tâches
+8. Quitter
+Entrez votre choix : 5
+
+1. [ ] Faire le laboratoire 01-A
+2. [ ] Faire le laboratoire 01-B
+3. [ ] Faire le laboratoire 01-C
+
+Entrez le numéro de la tâche à supprimer : 2
+Suppression complétée.
+
+Liste de tâches
+================================
+1. Afficher la liste
+2. Ajouter une tâche
+3. Marquer une tâche comme faite
+4. Échanger deux tâches
+5. Supprimer une tâche
+6. Sauvegarder les tâches
+7. Charger les tâches
+8. Quitter
+Entrez votre choix : 1
+
+1. [ ] Faire le laboratoire 01-A
+2. [ ] Faire le laboratoire 01-C
+```
+
+Pensez à comment vous pourriez vous y prendre pour réaliser la suppression. **Indice: vous n'avez pas à allouer de nouveau tableau!**
+
+Voici le prototype de la fonction que vous devez ajouter pour cette option:
+
+```
+void supprimerTache(std::string taches[], bool tacheCompletee[], int &nombreTaches);
+```
+
+Une fois la nouvelle option implémentée, testez-la rigoureusement.
+
+Félicitations, vous avez complété le laboratoire!
+
+**⚠️ Faites valider cette partie du laboratoire par l'enseignant.**
