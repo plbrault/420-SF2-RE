@@ -155,3 +155,5 @@ Ajoutez le code nécessaire pour que le premier caractère soit `'A'` et que le 
 N'oubliez pas de désallouer la mémoire.
 
 **⚠️ Faites valider votre Laboratoire 01-A avant de passer au Laboratoire 01-B.**
+
+## Laboratoire 01-B
