@@ -279,9 +279,7 @@ void afficherMenu() {
 }
 
 int demanderChoix(int max) {
-    int choix;
-
-    return choix;
+    return 0;
 }
 
 void afficherListe(string taches[], bool tacheCompletee[], int nombreTaches) {
@@ -291,8 +289,8 @@ void ajouterTache(string taches[], int& nombreTaches) {
 }
 
 int demanderNumeroTache(string texte, int nombreTaches) {
+    return 0;
 }
-
 
 void marquerFaite(string taches[], bool tacheCompletee[], int nombreTaches) {
 }
@@ -305,6 +303,7 @@ void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTac
 
 void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches) {
 }
+
 ```
 
 Prenez connaissance de ce code avant de poursuivre.
