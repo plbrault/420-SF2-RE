@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "fonctions.h"
 
 using namespace std;
@@ -11,7 +12,9 @@ void afficherMenu() {
         << "3. Marquer une tâche comme faite" << endl
         << "4. Échanger deux tâches" << endl
         << "5. Supprimer une tâche" << endl
-        << "6. Quitter" << endl;
+        << "6. Sauvegarder les tâches" << endl
+        << "7. Charger les tâches" << endl
+        << "8. Quitter" << endl;
 }
 
 int demanderChoix(int max) {
@@ -59,7 +62,7 @@ void ajouterTache(string taches[], int nombreTaches) {
     }
 }
 
-int demanderNumeroTache(std::string texte, int nombreTaches) {
+int demanderNumeroTache(string texte, int nombreTaches) {
     int numeroTache;
 
     do {
@@ -74,7 +77,7 @@ int demanderNumeroTache(std::string texte, int nombreTaches) {
 }
 
 
-void marquerFaite(std::string taches[], bool tacheCompletee[], int nombreTaches) {
+void marquerFaite(string taches[], bool tacheCompletee[], int nombreTaches) {
     int numeroTache;
 
     afficherListe(taches, tacheCompletee, nombreTaches);
@@ -88,7 +91,7 @@ void marquerFaite(std::string taches[], bool tacheCompletee[], int nombreTaches)
     }
 }
 
-void echangerTaches(std::string taches[], bool tacheCompletee[], int nombreTaches) {
+void echangerTaches(string taches[], bool tacheCompletee[], int nombreTaches) {
     int numeroTache;
 
     int numeroTache1, numeroTache2;
@@ -142,3 +145,39 @@ void supprimerTache(std::string taches[], bool tacheCompletee[], int &nombreTach
     }
 }
 
+void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTaches) {
+    ofstream fichier("taches.txt");
+    if (!fichier.is_open()) {
+        cout << "Le fichier taches.txt n'a pas pu être ouvert." << endl;
+        return;
+    }
+
+    for (int i = 0; i < nombreTaches; i++) {
+        fichier << taches[i] << endl;
+        fichier << tacheCompletee[i] << endl;
+    };
+
+    fichier.close();
+
+    cout << "La liste de tâches a été sauvegardée." << endl;
+}
+
+void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches) {
+    ifstream fichier("taches.txt");
+    if (!fichier.is_open()) {
+        cout << "Le fichier taches.txt n'a pas pu être ouvert." << endl;
+        return;
+    }
+
+    nombreTaches = 0;
+
+    string ligne;
+    while (getline(fichier, ligne)) {
+        taches[nombreTaches] = ligne;
+        getline(fichier, ligne);
+        tacheCompletee[nombreTaches] = ligne == "1";
+        nombreTaches++;
+    }
+
+    cout << "La liste de tâches a été chargée." << endl;
+}

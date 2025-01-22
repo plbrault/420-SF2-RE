@@ -307,3 +307,5 @@ Testez les cas limites suivants:
 Si un de ces cas ne fonctionne pas correctement, modifiez votre code en conséquence.
 
 **⚠️ Faites valider cette partie du laboratoire par l'enseignant.**
+
+## Laboratoire 01-C

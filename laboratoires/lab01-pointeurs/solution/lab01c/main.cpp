@@ -2,8 +2,7 @@
 #include "fonctions.h"
 
 using namespace std;
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 int main() {
     locale::global(locale{ "" });
 
@@ -15,7 +14,7 @@ int main() {
 
     do {
         afficherMenu();
-        choix = demanderChoix(6);
+        choix = demanderChoix(8);
 
         cout << endl;
         switch (choix) {
@@ -53,6 +52,12 @@ int main() {
                 break;
             case 5:
                 supprimerTache(taches, tacheCompletee, nombreTaches);
+                break;
+            case 6:
+                sauvegarderListe(taches, tacheCompletee, nombreTaches);
+                break;
+            case 7:
+                chargerListe(taches, tacheCompletee, nombreTaches);
                 break;
             default:
                 cout << "Au revoir!" << endl;
