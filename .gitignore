@@ -46,4 +46,7 @@ CMakeLists.txt
 cmake-build-debug
 *vcxproj*
 
+# Exported Markdown
 *.pdf
+*.html
+
