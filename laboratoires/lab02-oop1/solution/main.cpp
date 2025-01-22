@@ -6,13 +6,11 @@
 int main () {
     std::locale::global(std::locale{ "" });
 
-    Task premier("Comprendre les classes", false);
-    Task seconde("Comprendre les constructeurs", false);
-    Task troisieme("Comprendre les pointeurs", true);
+    Task maTache;
+    maTache._description = "Compléter le laboratoire 2";
+    maTache._fait = false;
 
-    afficherTache(premier);
-    afficherTache(seconde);
-    afficherTache(troisieme);
+    std::cout << maTache.obtenirChaine(1) << std::endl;
 
     return 0;
 }

@@ -156,6 +156,6 @@ void supprimerTache(Personne &toi) {
     }
 }
 
-void afficherTache(Task &tache) {
-    std::cout << "[" << (tache.fait ? 'X' : ' ') << "] " << tache.description << std::endl;
-}
+// void afficherTache(Task &tache) {
+//     std::cout << "[" << (tache.fait ? 'X' : ' ') << "] " << tache.description << std::endl;
+// }

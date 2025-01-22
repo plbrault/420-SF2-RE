@@ -16,4 +16,4 @@ void sauvegarderListe(Personne &);
 void chargerListe(Personne &);
 void supprimerTache(Personne &);
 
-void afficherTache(Task &);
+// void afficherTache(Task &);

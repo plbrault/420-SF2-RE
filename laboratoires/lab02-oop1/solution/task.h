@@ -4,11 +4,18 @@
 #include <string>
 
 class Task {
-public:
-    std::string description;
-    bool fait;
+private:
+    std::string _description;
+    bool _fait;
 
+public:
+
+    Task();
     Task(const std::string &, bool);
+
+    void marquerFait();
+    void demarquerFait();
+    std::string obtenirChaine(int);
 };
 
 #endif
