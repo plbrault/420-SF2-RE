@@ -102,7 +102,7 @@ Exécutez votre code. Vous devriez obtenir une adresse différente que celle aff
 
 Déclarez maintenant un nouveau pointeur, cette fois-ci de type `string`, que vous appellerez `pointeurString`. N'oubliez pas d'initialiser votre pointeur à `nullptr`.
 
-Suite à cette déclaration, utilisez l'opérateur `new` pour allouer une nouvelle chaîne de caractère qui sera référée par votre pointeur.
+Suite à cette déclaration, utilisez l'opérateur `new` pour allouer une nouvelle chaîne de caractères qui sera référée par votre pointeur.
 
 Dans la chaîne de caractères, insérez la valeur `"Bonjour le monde!"`.
 
@@ -120,11 +120,11 @@ Dans de nouveaux fichiers `fonctions.h` et `fonctions.cpp`, créez une fonction 
 
 Cette fonction doit:
 
-* Prendre un pointeur de `string` en paramètre
-* Si le pointeur est nul, afficher « Le pointeur est nul. »
+* Prendre un pointeur de `string` en paramètre.
+* Si le pointeur est nul, afficher « Le pointeur est nul ».
 * Sinon, afficher la valeur du pointeur.
 
-Appelez la nouvelle fonction dans votre `main` en lui passant `pointeurString` dans son état actuel. Cela devrait afficher « Le pointeur est nul. ».
+Appelez la nouvelle fonction dans votre `main` en lui passant `pointeurString` dans son état actuel. Cela devrait afficher « Le pointeur est nul ».
 
 Allouez ensuite une nouvelle chaîne de caractères à `pointeurString`, à laquelle vous donnerez la valeur `"Hello World!"`. Appelez de nouveau la fonction `afficherValeurPointeur` avec le pointeur en paramètre. Cela devrait afficher « Hello World! ».
 
@@ -154,7 +154,7 @@ Ajoutez le code nécessaire pour que le premier caractère soit `'A'` et que le 
 
 N'oubliez pas de désallouer la mémoire.
 
-**⚠️ Faites valider cette partie du laboratoire par l'enseignant.**
+**⚠️ Faites valider votre laboratoire 01-A par l'enseignant.**
 
 ## Laboratoire 01-B
 
@@ -239,7 +239,7 @@ for (int i = 0; i < 5; i++) {
 // Allocation du nouveau tableau de 10 éléments
 int* nouveauTableau = new int[10];
 
-// Copie des éléments de l'ancien tableau dans le nouveau tableau
+// Copie des éléments de l'ancien tableau vers le nouveau tableau
 for (int i = 0; i < 5; i++) {
     nouveauTableau[i] = monTableau[i];
 }
@@ -306,7 +306,7 @@ Testez les cas limites suivants:
 
 Si un de ces cas ne fonctionne pas correctement, modifiez votre code en conséquence.
 
-**⚠️ Faites valider cette partie du laboratoire par l'enseignant.**
+**⚠️ Faites valider votre laboratoire 01-B par l'enseignant.**
 
 ## Laboratoire 01-C
 
@@ -325,7 +325,9 @@ Vous devez ensuite ajouter du code **au-dessus de l'appel** de la fonction `ajou
 
 Pour ce faire, inspirez-vous de ce que vous avez fait dans le laboratoire 01-B. N'oubliez pas de prendre en compte le cas où les pointeurs contiennent `nullptr`!
 
-Modifiez ensuite votre fonction `ajouterTache` afin que celle-ci ne modifie plus la valeur de `nombreTaches` (puisque vous le faites maintenant dans le `main`), ainsi que pour retirer la limite de 100 tâches (nous n'en avons plus besoin puisque le tableau s'agrandit chaque fois que nous ajoutons une tâche!).
+Modifiez ensuite votre fonction `ajouterTache` afin que celle-ci ne modifie plus la valeur de `nombreTaches` (puisque vous le faites maintenant dans le `main`), ainsi que pour retirer la limite de 100 tâches (nous n'en avons plus besoin puisque le tableau s'agrandit chaque fois que nous ajoutons une tâche).
+
+**N'oubliez pas de désallouer les deux tableaux à la fin du `main`.**
 
 Testez votre programme au complet. Normalement, tout devrait maintenant fonctionner comme avant. Félicitations, vous avez déjà une version fonctionnelle de votre liste de tâches avec un tableau dynamique!
 
@@ -400,4 +402,4 @@ Une fois la nouvelle option implémentée, testez-la rigoureusement.
 
 Félicitations, vous avez complété le laboratoire!
 
-**⚠️ Faites valider cette partie du laboratoire par l'enseignant.**
+**⚠️ Faites valider votre laboratoire 01-C par l'enseignant.**
