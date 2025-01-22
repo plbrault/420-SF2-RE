@@ -74,10 +74,154 @@ int main () {
     std::locale::global(std::locale{ "" });
 
     Tache maTache;
-    maTache.description = "Compléter le laboratoire 2"
+    maTache.description = "Compléter le laboratoire 2";
     maTache.fait = false;
 
     std::cout << "[" << (maTache.fait ? 'X' : ' ') << "] " << maTache.description << std::endl;
 
     return 0;
 }
+```
+
+Ici, `maTache` est un **objet** de la classe `Tache`, et elle peut être conceptualisé comme une variable qui contient des variables liées entre elles. On peut également faire un tableau. Ce tableau aura l'avantage de remplacer nos deux tableaux `taches` et `tacheCompletee`.
+
+```cpp
+#include <iostream>
+
+#include "tache.h"
+
+int main () {
+    std::locale::global(std::locale{ "" });
+
+    Tache taches[100];
+
+    int quantite = 0;
+    bool terminee = false;
+
+    std::string description;
+    std::string reponseFait;
+
+    do {
+        std::cout << "Décrire votre tâche : ";
+        std::getline(std::cin, taches[quantite].description);
+        std::cout << std::endl;
+        std::cout << "Est-ce terminée ? [O|N] ";
+        std::getline(std::cin, reponseFait);
+        taches[quantite].fait = reponseFait.compare("O") == 0;
+
+        std::cout << "Voulez vous continuez ? [O|N] ";
+        std::getline(std::cin, reponseFait);
+        terminee = reponseFait.compare("O") != 0;
+        quantite++;
+
+    } while(quantite < 100 && !terminee);
+
+    for (int i = 0; i < quantite; i++) {
+        std::cout << "[" << (taches[i].fait ? 'X' : ' ') << "] " << taches[i].description << std::endl;
+    }
+
+    return 0;
+}
+```
+
+Ainsi nous pourrions changer le laboratoire #1 avec ces prototypes :
+
+```cpp
+void afficherListe(Tache taches[], int nombreTaches);
+void ajouterTache(Tache taches[], int nombreTaches);
+int demanderNumeroTache(std::string texte, int nombreTaches);
+void marquerFaite(Tache taches[], int nombreTaches);
+void echangerTaches(Tache taches[], int nombreTaches);
+void supprimerTache(Tache taches[], int& nombreTaches);
+```
+
+Quelles sont les avantages ? On réduit le nombre de paramètres à passé, un seul tableau au lieu de deux. Si on veut ajouter des attibuts a notre classe tache, **nous n'avons pas besoins de changer nos prototypes**.
+
+## Peut-on créer une tâche d'un coup ?
+
+Donc regardons encore comment nous avons instancier notre classe et initialiser ses attributs :
+
+```cpp
+    Tache maTache;
+    maTache.description = "Compléter le laboratoire 2";
+    maTache.fait = false;
+```
+
+C'est agréable, mais si nous avons plusieurs attributs, ça pourrait être un peu fatiguant de faire toutes les assignations une par une. Heureusement pour nous, il existe le concept de **constructeur** qui nous permet de constuire à l'initialisation notre objet.
+
+On retourne dans notre fichier `tache.h` et on ajoute notre constructeur :
+
+```cpp
+#ifndef TACHE_H
+#define TACHE_H
+
+#include <string>
+
+class Tache {
+public:
+    std::string description;
+    bool fait;
+
+    Tache(std::string description, bool fait);
+};
+
+#endif
+```
+
+Le constructeur **doit** toujours être le même nom que la classe. Il s'agit d'une fonction spéciale qui est appeler lors de l'instantiation d'un objet de notre classe. Toutefois dans notre en-tête `.h` nous n'avons que définit le constructeur, nous avons besoins d'écrire le code pour initialiser notre objet. Il faut donc créer une fichier `tache.cpp` avec le code suivant :
+
+```cpp
+#include "tache.h"
+
+Tache::Tache(std::string description, bool fait) {
+    this->description = description;
+    this->fait = fait;
+}
+
+```
+
+Nous allons donc parler du concept derrière `this` et de son importance dans le concept de la programmation orienté objet. Comme nous l'avons déjà dit, la classe est une description : si je n'instancie aucun objet de cette classe dans mon code, ce code ne sera jamais exécuté. Mais si j'instancie deux instances, comment faire la distinction entre les deux ? Voici un exemple :
+
+```cpp
+int main () {
+    std::locale::global(std::locale{ "" });
+
+    Tache premier("Comprendre les classes", false);
+    Tache seconde("Comprendre les constructeurs", false);
+
+    return 0;
+}
+```
+
+En plus de voir comment initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premier` et `seconde`) sont dans deux espaces mémoires distinctes, et qu'ils ont leurs propres instance de `description` et `fait`. Toutefois, on ne peut pas connaitre d'avance le nom de toute les instances de notre classes. C++ nous offre donc `this`, qui un pointeur vers l'instance en cours. Donc quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder au attributs `description` et `fait` de celui-ci !
+
+Pour vous convaincre que `this` est un pointeur, on peut réécrire notre constructeur de cette façon :
+
+```cpp
+```cpp
+#include "tache.h"
+
+Tache::Tache(std::string description, bool fait) {
+    *this.description = description;
+    *this.fait = fait;
+}
+
+```
+
+Ici, on utilise le déréférencement (`*this`) et on obtient donc un objet de l'instance `Tache`. On peut donc utiliser le `.` au lieu du `->`.
+
+Voici un *schéma de classe* qui représente notre `Tache` :
+
+```plantuml
+@startuml
+class Tache {
+    std::string description
+    bool fait
+
+    Tache(std::string description, bool fait)
+}
+@enduml
+```
+
+Vous remarquerez que le constructeur est placé dans une autre section que cette contenant les attributs. Sachez également que tous les éléments présents dans une classe, que se soit des attributs, des constructeurs, ou autres éléments à venir, sont des **membres** de la classe.
+
