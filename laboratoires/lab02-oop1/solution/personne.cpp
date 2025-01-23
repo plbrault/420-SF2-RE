@@ -29,20 +29,6 @@ void Personne::ajouterTache(Tache &tache) {
     }
 }
 
-void Personne::_agrandirTableauTache() {
-    if (this->_taches != nullptr) {
-        this->_taille += TAILLE_LISTE_TACHE_INC;
-        Tache *tampon = new Tache[this->_taille];
-
-        for (size_t i = 0; i < this->_quantite; i++) {
-            tampon[i] = this->_taches[i];
-        }
-
-        this->_taches = tampon;
-        tampon = nullptr;
-    }
-}
-
 Tache *Personne::obtenirTache(size_t index) {
     index--;
 
@@ -83,4 +69,43 @@ std::string Personne::obtenirChaine() {
     }
     
     return flux.str();
+}
+
+size_t Personne::obtenirNombreTache() {
+    return this->_quantite;
+}
+
+void Personne::echangerTache(size_t premier, size_t seconde) {
+    premier--;
+    seconde--;
+
+    Tache temp = this->_taches[premier];
+    this->_taches[premier] = this->_taches[seconde];
+    this->_taches[seconde] = temp;
+}
+
+void Personne::supprimerTache(size_t index) {
+    index--;
+
+    if (index < this->_quantite) {
+        for (size_t i = index; i < this->_quantite - 1; i++) {
+            this->_taches[i] = this->_taches[i + 1];
+        }
+    }
+
+    this->_quantite--;
+}
+
+void Personne::_agrandirTableauTache() {
+    if (this->_taches != nullptr) {
+        this->_taille += TAILLE_LISTE_TACHE_INC;
+        Tache *tampon = new Tache[this->_taille];
+
+        for (size_t i = 0; i < this->_quantite; i++) {
+            tampon[i] = this->_taches[i];
+        }
+
+        this->_taches = tampon;
+        tampon = nullptr;
+    }
 }

@@ -8,7 +8,7 @@ void afficherMenu(Menu &);
 int demanderChoix(Menu &menu);
 void afficherListe(Personne &);
 void ajouterTache(Personne &);
-int demanderNumeroTache(std::string, Personne &);
+size_t demanderNumeroTache(std::string, Personne &);
 void marquerFaite(Personne &);
 void echangerTaches(Personne &);
 void sauvegarderListe(Personne &);

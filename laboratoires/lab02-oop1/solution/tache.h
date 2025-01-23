@@ -20,6 +20,7 @@ public:
     void changerDescription(const std::string &);
     std::string obtenirDescription();
     std::string obtenirChaine(int index);
+    bool estFait();
 };
 
 #endif

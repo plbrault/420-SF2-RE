@@ -28,6 +28,9 @@ public:
     void changerNom(const std::string &);
     std::string obtenirNomComplet();
     std::string obtenirChaine();
+    size_t obtenirNombreTache();
+    void echangerTache(size_t, size_t);
+    void supprimerTache(size_t);
 };
 
 #endif

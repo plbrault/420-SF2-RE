@@ -35,3 +35,7 @@ std::string Tache::obtenirChaine(int index) {
 
     return flux.str();
 }
+
+bool Tache::estFait() {
+    return this->_fait;
+}

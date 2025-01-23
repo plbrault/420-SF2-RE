@@ -1,178 +1,158 @@
 #include <iostream>
 #include <fstream>
 #include "fonctions.h"
-#include "menu.h"
 
-using namespace std;
+Menu construireMenuPrincipal(void) {
+    Menu menuPrincipal("Menu principal", "Votre choix ?", true);
 
+    menuPrincipal.ajouterOption("Afficher la liste");
+    menuPrincipal.ajouterOption("Ajouter une tâche");
+    menuPrincipal.ajouterOption("Marquer une tâche comme faite");
+    menuPrincipal.ajouterOption("Échanger deux tâches");
+    menuPrincipal.ajouterOption("Supprimer une tâche");
 
-Menu construireMenuPrincipal() {
-    Menu menuPrincipale("Menu principale", "Quelle est votre choix : ", true);
-
-    menuPrincipale.ajouterOption("Afficher la liste");
-    menuPrincipale.ajouterOption("Ajouter une tâche");
-    menuPrincipale.ajouterOption("Marquer une tâche comme faite");
-    menuPrincipale.ajouterOption("Échanger deux tâches");
-    menuPrincipale.ajouterOption("Supprimer une tâches");
-    menuPrincipale.ajouterOption("Sauvegarder la liste de tâches");
-    menuPrincipale.ajouterOption("Charger la liste de tâches");
-
-    return menuPrincipale;
+    return menuPrincipal;
 }
 
-void afficherMenu() {
-    cout << "Liste de tâches" << endl
-        << "================================" << endl
-        << "1. Afficher la liste" << endl
-        << "2. Ajouter une tâche" << endl
-        << "3. Marquer une tâche comme faite" << endl
-        << "4. Échanger deux tâches" << endl
-        << "5. Sauvegarder la liste de tâches" << endl
-        << "6. Charger la liste de tâches" << endl
-        << "7. Quitter" << endl;
+void afficherMenu(Menu &menu) {
+    std::cout << menu.obtenirChaine();
 }
 
-int demanderChoix(int max) {
+int demanderChoix(Menu &menu) {
     int choix;
 
-    do {
-        cout << "Entrez votre choix : ";
-        cin >> choix;
+    bool valide = false;
 
-        if (choix < 1 || choix > max) {
-            cout << "Le choix doit être un chiffre entre 1 et " << max << "." << endl;
+    do {
+        std::cin >> choix;
+        valide = menu.validerSelection(choix);
+        if (!valide) {
+            std::cout << "Le choix doit être un chiffre entre 1 et " 
+                        << menu.valeurMaximale() 
+                        << "." << std::endl;
         }
-    } while (choix < 1 || choix > max);
+    } while (!valide);
 
     return choix;
 }
 
-void afficherListe(string taches[], bool tacheCompletee[], int nombreTaches) {
-    if (nombreTaches == 0) {
-        cout << "La liste est vide." << endl;
+void afficherListe(Personne &toi) {
+    if(toi.obtenirNombreTache() == 0) {
+        std::cout << "La liste est vide." << std::endl;
     } else {
-        for (int i = 0; i < nombreTaches; i++) {
-            cout << i + 1 << ". ";
-            if (tacheCompletee[i]) {
-                cout << "[X] ";
-            } else {
-                cout << "[ ] ";
-            }
-            cout << taches[i] << endl;
-        }
+        std::cout << toi.obtenirChaine() << std::endl;
     }
 }
 
-void ajouterTache(string taches[], int& nombreTaches) {
-    string tache;
+void ajouterTache(Personne &toi) {
+    std::string tache;
 
-    if (nombreTaches == 100) {
-        cout << "La liste est pleine." << endl;
+    if (toi.obtenirNombreTache() == 100) {
+        std::cout << "La liste est pleine." << std::endl;
     } else {
-        cout << "Entrez la tâche à ajouter : ";
-        cin.ignore();
-        getline(cin, tache);
+        std::cout << "Entrez la tâche à ajouter : ";
+        std::cin.ignore();
+        std::getline(std::cin, tache);
 
-        taches[nombreTaches] = tache;
-        nombreTaches++;
+        Tache t(tache, false);
+        toi.ajouterTache(t);
     }
 }
 
-int demanderNumeroTache(string texte, int nombreTaches) {
-    int numeroTache;
+size_t demanderNumeroTache(std::string etiquette, Personne &toi) {
+    size_t numeroTache;
+
+    bool valide = false;
 
     do {
-        cout << texte;
-        cin >> numeroTache;
-        if (numeroTache < 1 || numeroTache > nombreTaches) {
-            cout << "Le numéro entré est invalide." << endl;
+        std::cout << etiquette;
+        std::cin >> numeroTache;
+        valide = numeroTache >= 1 && numeroTache <= toi.obtenirNombreTache();
+        if (!valide) {
+            std::cout << "Le numéro entré est invalide." << std::endl;
         }
-    } while (numeroTache < 1 || numeroTache > nombreTaches);
+    } while (!valide);
 
     return numeroTache;
 }
 
 
-void marquerFaite(string taches[], bool tacheCompletee[], int nombreTaches) {
-    int numeroTache;
+void marquerFaite(Personne &toi) {
+    std::cout << std::endl;
 
-    afficherListe(taches, tacheCompletee, nombreTaches);
-    cout << endl;
+    afficherListe(toi);
 
-    if (nombreTaches > 0) {
-        numeroTache = demanderNumeroTache(
-    "Entrez le numéro de la tâche à marquer comme faite : ",
-            nombreTaches
-        );
-        tacheCompletee[numeroTache - 1] = true;
+    if (toi.obtenirNombreTache() > 0) {
+        int numeroTache = demanderNumeroTache("Entrez le numéro de la tâche à marquer comme faite : ", toi);
+        toi.obtenirTache(numeroTache)->marquerFait();
     }
 }
 
-void echangerTaches(string taches[], bool tacheCompletee[], int nombreTaches) {
+void echangerTaches(Personne &toi) {
     int numeroTache1, numeroTache2;
-    string tacheTemp;
-    bool completeeTemp;
+    std::string tacheTemp;
 
-    if (nombreTaches >= 2) {
-        afficherListe(taches, tacheCompletee, nombreTaches);
-        cout << endl;
+    if (toi.obtenirNombreTache() >= 2) {
+        afficherListe(toi);
+        std::cout << std::endl;
 
-        numeroTache1 = demanderNumeroTache(
-            "Entrez le numéro de la première tâche à échanger : ",
-            nombreTaches
-        );
-        numeroTache2 = demanderNumeroTache(
-            "Entrez le numéro de la deuxième tâche à échanger : ",
-            nombreTaches
-        );
+        numeroTache1 = demanderNumeroTache("Entrez le numéro de la première tâche à échanger : ", toi);
+        numeroTache2 = demanderNumeroTache("Entrez le numéro de la deuxième tâche à échanger : ", toi);
 
-        tacheTemp = taches[numeroTache1 - 1];
-        taches[numeroTache1 - 1] = taches[numeroTache2 - 1];
-        taches[numeroTache2 - 1] = tacheTemp;
+        toi.echangerTache(numeroTache1, numeroTache2);
 
-        completeeTemp = tacheCompletee[numeroTache1 - 1];
-        tacheCompletee[numeroTache1 - 1] = tacheCompletee[numeroTache2 - 1];
-        tacheCompletee[numeroTache2 - 1] = completeeTemp;
-
-        cout << "Échange complété." << endl;
+        std::cout << "Échange complété." << std::endl;
     } else {
-        cout << "La liste comporte moins de deux tâches." << endl;
+        std::cout << "La liste comporte moins de deux tâches." << std::endl;
     }
 }
 
-void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTaches) {
-    ofstream fichier("taches.txt");
+void sauvegarderListe(Personne &toi) {
+    std::ofstream fichier("taches.txt");
+
     if (!fichier.is_open()) {
-        cout << "Le fichier taches.txt n'a pas pu être ouvert." << endl;
+        std::cout << "Le fichier taches.txt n'a pas pu être ouvert." << std::endl;
         return;
     }
 
-    for (int i = 0; i < nombreTaches; i++) {
-        fichier << taches[i] << endl;
-        fichier << tacheCompletee[i] << endl;
-    };
+    for (size_t i = 0; i < toi.obtenirNombreTache(); i++) {
+        Tache tacheCourante = *(toi.obtenirTache(i));
+        fichier << tacheCourante.obtenirDescription() << std::endl;
+        fichier << tacheCourante.estFait() << std::endl;
+    }
 
     fichier.close();
 
-    cout << "La liste de tâches a été sauvegardée." << endl;
+    std::cout << "La liste de tâches a été sauvegardée." << std::endl;
 }
 
-void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches) {
-    ifstream fichier("taches.txt");
+void chargerListe(Personne &toi) {
+    std::ifstream fichier("taches.txt");
+
     if (!fichier.is_open()) {
-        cout << "Le fichier taches.txt n'a pas pu être ouvert." << endl;
+        std::cout << "Le fichier taches.txt n'a pas pu être ouvert." << std::endl;
         return;
     }
 
-    nombreTaches = 0;
-
-    string ligne;
+    std::string ligne;
+    
     while (getline(fichier, ligne)) {
-        taches[nombreTaches] = ligne;
+        std::string description = ligne;
         getline(fichier, ligne);
-        tacheCompletee[nombreTaches] = ligne == "1";
-        nombreTaches++;
+        bool estFait = ligne == "1";
+        Tache nouvelleTache(description, estFait);
+        toi.ajouterTache(nouvelleTache);
     }
 
-    cout << "La liste de tâches a été chargée." << endl;
+    std::cout << "La liste de tâches a été chargée." << std::endl;
+}
+
+void supprimerTache(Personne &toi) {
+    afficherListe(toi);
+
+    if (toi.obtenirNombreTache() > 0) {
+        int numeroTache = demanderNumeroTache("Entrez le numéro de la tâche à supprimer : ", toi);
+
+        toi.supprimerTache(numeroTache);
+    }
 }
