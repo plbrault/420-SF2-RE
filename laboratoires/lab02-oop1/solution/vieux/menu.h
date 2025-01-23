@@ -18,8 +18,6 @@ private:
 
     int selection;
 
-    bool aggrandirListeOptions(void);
-
 public:
 
     Menu(const std::string &, const std::string &);

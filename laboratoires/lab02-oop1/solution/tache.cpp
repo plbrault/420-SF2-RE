@@ -2,44 +2,36 @@
 
 #include <sstream>
 
-Tache::Tache(void) {
-    std::string empty = std::string("");
-    this->donnerDescription(empty);
-    this->marquerNonFait();
+Tache::Tache(std::string description, bool fait) {
+    this->_description = description;
+    this->_fait = fait;
 }
 
-Tache::Tache(std::string &description) {
-    this->donnerDescription(description);
-    this->marquerNonFait();
+void Tache::marquerFait() {
+    this->_fait = true;
 }
 
-Tache::Tache(std::string &description, bool estFait) {
-    this->donnerDescription(description);
-    this->fait = estFait;
+void Tache::demarquerFait() {
+    this->_fait = false;
 }
 
-std::string Tache::obtenirDescription(void) {
-    return this->description;
+
+void Tache::changerDescription(const std::string &description) {
+    if (description.length() < DESCRIPTION_CARACTERE_LIMITE) {
+        this->_description = description;
+    } else {
+        this->_description = description.substr(0, DESCRIPTION_CARACTERE_LIMITE);
+    }
 }
 
-void Tache::donnerDescription(const std::string &description) {
-    this->description = description;
-}
-
-bool Tache::estFait(void) {
-    return this->fait;
-}
-
-void Tache::marquerFait(void) {
-    this->fait = true;
-}
-
-void Tache::marquerNonFait(void) {
-    this->fait = false;
+std::string Tache::obtenirDescription() {
+    return this->_description;
 }
 
 std::string Tache::obtenirChaine(int index) {
     std::ostringstream flux;
-    flux << index << " [" << (this->fait ? 'x' : ' ') << "] " << description;
+
+    flux << index << " [" << (this->_fait ? 'X' : ' ') << "] " << this->_description;
+
     return flux.str();
 }

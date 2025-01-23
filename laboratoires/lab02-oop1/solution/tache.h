@@ -3,32 +3,23 @@
 
 #include <string>
 
+#define DESCRIPTION_CARACTERE_LIMITE 32
+
+#include <string>
+
 class Tache {
 private:
-
-    std::string description;
-    bool fait;
-
+    std::string _description;
+    bool _fait;
 public:
+    Tache() : Tache("", false) { };
+    Tache(std::string description, bool fait);
 
-    Tache(void);
-
-    Tache(std::string &);
-
-    Tache(std::string &, bool);
-
-    std::string obtenirDescription(void);
-
-    void donnerDescription(const std::string &);
-
-    bool estFait(void);
-
-    void marquerFait(void);
-
-    void marquerNonFait(void);
-
-    std::string obtenirChaine(int);
-
+    void marquerFait();
+    void demarquerFait();
+    void changerDescription(const std::string &);
+    std::string obtenirDescription();
+    std::string obtenirChaine(int index);
 };
 
 #endif

@@ -1,52 +1,25 @@
-#ifndef PERSONNE_H
-#define PERSONNE_H
+#ifndef __PERSONNE_H
+#define __PERSONNE_H
 
 #include <string>
-#include <stdint.h>
 
 #include "tache.h"
 
-#define TAILLE_LISTE_TACHE_INCREMENT 10
-#define TAILLE_LISTE_TACHE_MAXIMAL 100
+#define TAILLE_LISTE_TACHE_INC 10
 
 class Personne {
 private:
-
-    std::string prenom;
-    std::string nom;
-    Tache *listeDeTaches;
-    uint8_t taille;
-    uint8_t quantite;
-
-    bool aggrandirListeTaches(void);
+    std::string _prenom;
+    std::string _nom;
+    
+    size_t _quantite;
+    size_t _taille;
+    Tache *_taches;
 
 public:
-
-    Personne(std::string &, std::string &);
-
-    ~Personne(void);
-
-    std::string obtenirNomComplet(void);
-
-    int obtenirNombreTache(void);
-
-    bool ajouterTache(const std::string &);
-    
-    bool ajouterTache(Tache &);
-
-    bool supprimerTache(int);
-
-    std::string obtenirChaine(void);
-
-    Tache *obtenirTache(int);
-
-    bool completeTache(int);
-
-    bool annuleTacheCompletee(int);
-
-    bool echangerTache(int, int);
+    Personne();
+    Personne(const std::string &, const std::string &);
 
 };
-
 
 #endif

@@ -5,22 +5,22 @@
 Task::Task() : Task::Task("", false) { }
 
 Task::Task(const std::string &description, bool fait) {
-    this->description = description;
-    this->fait = fait;
+    this->_description = description;
+    this->_fait = fait;
 }
 
 void Task::marquerFait() {
-    this->fait = true;
+    this->_fait = true;
 }
 
 void Task::demarquerFait() {
-    this->fait = false;
+    this->_fait = false;
 }
 
 std::string Task::obtenirChaine(int index) {
     std::ostringstream flux;
 
-    flux << index << " [" << (this->fait ? 'X' : ' ') << "] " << this->description;
+    flux << index << " [" << (this->_fait ? 'X' : ' ') << "] " << this->description;
 
     return flux.str();
 }
