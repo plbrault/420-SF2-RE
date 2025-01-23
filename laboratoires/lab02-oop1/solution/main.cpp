@@ -1,65 +1,64 @@
 #include <iostream>
+#include <stdint.h>
+#include <string>
 
-#include "tache.h"
+#include "fonctions.h"
+#include "personne.h"
 
-#define TACHE_QUANTITE_DEPART 10
 
 int main() {
     std::locale::global(std::locale{ "" });
 
-    size_t mySize = 3;
+    std::string prenom;
+    std::cout << "Quel est ton prénom ? ";
+    std::cin >> prenom;
 
-    int taille = TACHE_QUANTITE_DEPART;
-    int quantite = 0;
-    Tache *taches = new Tache[taille];
+    std::string nom;
+    std::cout << "Quel est ton nom ? ";
+    std::cin >> nom;
 
-    bool termine = false;
-    std::string ligne;
+    Personne toi(prenom, nom);
+    std::cout << "Bonjour a toi, " << toi.obtenirNomComplet() << std::endl;
 
-    char selection;
+    Menu menuPrincipale = construireMenuPrincipal();
 
-    std::cout << "Saisissez vos tâches" << std::endl;
+    int choix;
+
     do {
-        std::cout << "Tâche numero " << (quantite + 1) << " : ";
+        afficherMenu(menuPrincipale);
+        choix = demanderChoix(menuPrincipale);
 
-        std::getline(std::cin, ligne);
-        taches[quantite].changerDescription(ligne);
-
-        quantite++;
-
-        if (quantite == taille) {
-            taille *= 2;
-            Tache* tampon = new Tache[taille];
-            for (int i = 0; i < quantite; i++) {
-                tampon[i] = taches[i];
-            }
-            taches = tampon;
-            tampon = nullptr;
-        }
-
-        std::cout << "Avez-vous d'autres tâches ? [O|N] ";
-        std::cin >> selection;
-        termine = !(toupper(selection) == 'O');
-        std::cin.ignore();
-    } while(!termine);
-
-    for (int i = 0; i < quantite; i++) {
-        std::cout << "Avez-vous complétez la tâches suivantes : " << std::endl;
-        std::cout << "\"    " << taches[i].obtenirDescription() << "\"" << std::endl;
-        std::cout << " [O|N] : ";
-        std::cin >> selection;
-        if (toupper(selection) == 'O') {
-            taches[i].marquerFait();
-        }
         std::cout << std::endl;
-    }
+        switch (choix) {
+        case 1: 
+            afficherListe(toi);
+            break;
+        
+        case 2: 
+            ajouterTache(toi);
+            break;
+        
+        case 3: 
+            marquerFaite(toi);
+            break;
+        
+        case 4: 
+            echangerTaches(toi);
+            break;
+        
+        case 5: 
+            supprimerTache(toi);
+            break;
 
-    std::cout << std::endl << "Votre liste de tâches actuelles" << std::endl;
-    for (int i = 0; i < quantite; i++) {
-        std::cout << taches[i].obtenirChaine(i + 1) << std::endl;
-    }
-
-    delete [] taches;
+        case 6:
+            std::cout << "Au revoir!" << std::endl;
+            break;
+        
+        default: 
+            std::cout << "Une erreur inconnue c'est produite. Veuillez recommencer!" << std::endl;
+        }
+    } while(choix != menuPrincipale.valeurMaximale());
 
     return 0;
+
 }
