@@ -11,6 +11,6 @@ void ajouterTache(Personne &);
 size_t demanderNumeroTache(std::string, Personne &);
 void marquerFaite(Personne &);
 void echangerTaches(Personne &);
-void sauvegarderListe(Personne &);
-void chargerListe(Personne &);
+void sauvegarderPersonne(Personne &);
+void chargerPersonne(Personne &);
 void supprimerTache(Personne &);

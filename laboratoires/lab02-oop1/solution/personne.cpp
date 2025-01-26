@@ -19,7 +19,7 @@ Personne::~Personne() {
     }
 }
 
-void Personne::ajouterTache(Tache &tache) {
+void Personne::ajouterTache(const Tache &tache) {
     this->_taches[this->_quantite] = tache;
     
     this->_quantite++;
@@ -50,11 +50,7 @@ void Personne::changerNom(const std::string &nom) {
 std::string Personne::obtenirNomComplet() {
     std::ostringstream flux;
 
-    flux << this->_prenom << " " << this->_nom << std::endl;
-
-    for (size_t i = 0; i < this->_quantite; i++) {
-        flux << this->_taches[i].obtenirChaine(i + 1) << std::endl;
-    }
+    flux << this->_prenom << " " << this->_nom;
     
     return flux.str();
 }

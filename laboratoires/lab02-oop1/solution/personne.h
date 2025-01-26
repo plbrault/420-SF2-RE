@@ -22,7 +22,7 @@ public:
     Personne(const std::string &, const std::string &);
     ~Personne();
 
-    void ajouterTache(Tache &);
+    void ajouterTache(const Tache &);
     Tache *obtenirTache(size_t);
     void changerPrenom(const std::string &);
     void changerNom(const std::string &);

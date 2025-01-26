@@ -9,7 +9,9 @@ Menu construireMenuPrincipal(void) {
     menuPrincipal.ajouterOption("Ajouter une tâche");
     menuPrincipal.ajouterOption("Marquer une tâche comme faite");
     menuPrincipal.ajouterOption("Échanger deux tâches");
-    menuPrincipal.ajouterOption("Supprimer une tâche");
+    menuPrincipal.ajouterOption("Supprimer une tâche");;
+    menuPrincipal.ajouterOption("Sauvegarder les tâches");;
+    menuPrincipal.ajouterOption("Charger les tâches");
 
     return menuPrincipal;
 }
@@ -24,6 +26,10 @@ int demanderChoix(Menu &menu) {
     bool valide = false;
 
     do {
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore();
+        }
         std::cin >> choix;
         valide = menu.validerSelection(choix);
         if (!valide) {
@@ -107,46 +113,6 @@ void echangerTaches(Personne &toi) {
     }
 }
 
-void sauvegarderListe(Personne &toi) {
-    std::ofstream fichier("taches.txt");
-
-    if (!fichier.is_open()) {
-        std::cout << "Le fichier taches.txt n'a pas pu être ouvert." << std::endl;
-        return;
-    }
-
-    for (size_t i = 0; i < toi.obtenirNombreTache(); i++) {
-        Tache tacheCourante = *(toi.obtenirTache(i));
-        fichier << tacheCourante.obtenirDescription() << std::endl;
-        fichier << tacheCourante.estFait() << std::endl;
-    }
-
-    fichier.close();
-
-    std::cout << "La liste de tâches a été sauvegardée." << std::endl;
-}
-
-void chargerListe(Personne &toi) {
-    std::ifstream fichier("taches.txt");
-
-    if (!fichier.is_open()) {
-        std::cout << "Le fichier taches.txt n'a pas pu être ouvert." << std::endl;
-        return;
-    }
-
-    std::string ligne;
-    
-    while (getline(fichier, ligne)) {
-        std::string description = ligne;
-        getline(fichier, ligne);
-        bool estFait = ligne == "1";
-        Tache nouvelleTache(description, estFait);
-        toi.ajouterTache(nouvelleTache);
-    }
-
-    std::cout << "La liste de tâches a été chargée." << std::endl;
-}
-
 void supprimerTache(Personne &toi) {
     afficherListe(toi);
 
@@ -155,4 +121,40 @@ void supprimerTache(Personne &toi) {
 
         toi.supprimerTache(numeroTache);
     }
+}
+
+void sauvegarderPersonne(Personne &toi) {
+    std::ofstream fichier("taches.txt");
+    if (!fichier.is_open()) {
+        std::cout << "Le fichier taches.txt n'a pas pu être ouvert." << std::endl;
+        return;
+    }
+
+    for (size_t i = 0; i < toi.obtenirNombreTache(); i++) {
+        fichier << toi.obtenirTache(i + 1)->obtenirDescription() << std::endl;
+        fichier << toi.obtenirTache(i + 1)->estFait() << std::endl;
+    };
+
+    fichier.close();
+
+    std::cout << "La liste de tâches a été sauvegardée." << std::endl;
+}
+
+void chargerPersonne(Personne &toi) {
+    std::ifstream fichier("taches.txt");
+    if (!fichier.is_open()) {
+        std::cout << "Le fichier taches.txt n'a pas pu être ouvert." << std::endl;
+        return;
+    }
+
+    std::string description;
+    std::string estFaitStr;
+    bool estFait;
+    while (std::getline(fichier, description)) {
+        std::getline(fichier, estFaitStr);
+        estFait = estFaitStr == "1";
+        toi.ajouterTache(Tache(description, estFait));
+    }
+
+    std::cout << "La liste de tâches a été chargée." << std::endl;
 }

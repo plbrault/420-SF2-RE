@@ -26,6 +26,11 @@ int main() {
 
     do {
         afficherMenu(menuPrincipale);
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore();
+        }
         choix = demanderChoix(menuPrincipale);
 
         std::cout << std::endl;
@@ -49,8 +54,16 @@ int main() {
         case 5: 
             supprimerTache(toi);
             break;
+        
+        case 6: 
+            sauvegarderPersonne(toi);
+            break;
+        
+        case 7: 
+            chargerPersonne(toi);
+            break;
 
-        case 6:
+        case 8:
             std::cout << "Au revoir!" << std::endl;
             break;
         
