@@ -2,8 +2,6 @@
 
 #include <sstream>
 
-Personne::Personne() : Personne::Personne("", "") { }
-
 Personne::Personne(const std::string &prenom, const std::string &nom) {
     this->_prenom = prenom;
     this->_nom = nom;

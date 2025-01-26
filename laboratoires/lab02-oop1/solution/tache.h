@@ -11,16 +11,19 @@ class Tache {
 private:
     std::string _description;
     bool _fait;
+    
 public:
     Tache() : Tache("", false) { };
     Tache(std::string description, bool fait);
 
     void marquerFait();
     void demarquerFait();
+    bool estFait();
+
     void changerDescription(const std::string &);
     std::string obtenirDescription();
+
     std::string obtenirChaine(int index);
-    bool estFait();
 };
 
 #endif

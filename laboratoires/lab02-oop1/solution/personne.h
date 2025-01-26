@@ -22,15 +22,19 @@ public:
     Personne(const std::string &, const std::string &);
     ~Personne();
 
-    void ajouterTache(const Tache &);
-    Tache *obtenirTache(size_t);
     void changerPrenom(const std::string &);
     void changerNom(const std::string &);
     std::string obtenirNomComplet();
-    std::string obtenirChaine();
+
+    void ajouterTache(const Tache &);
+    Tache *obtenirTache(size_t);
+    
     size_t obtenirNombreTache();
+
     void echangerTache(size_t, size_t);
     void supprimerTache(size_t);
+    
+    std::string obtenirChaine();
 };
 
 #endif

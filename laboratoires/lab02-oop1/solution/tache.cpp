@@ -15,7 +15,6 @@ void Tache::demarquerFait() {
     this->_fait = false;
 }
 
-
 void Tache::changerDescription(const std::string &description) {
     if (description.length() < DESCRIPTION_CARACTERE_LIMITE) {
         this->_description = description;
