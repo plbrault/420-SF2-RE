@@ -6,7 +6,7 @@ Débuter l'intégration des concepts de base de la programmation orientée objet
 
 ## Pourquoi les classes ?
 
-Si nous regardons les deux derniers laboratoires, nous avons codé une petite application qui gère une liste de tâches. Une tâche est définie par sa description et par sa complétion (est-ce que la tâche a été complétée ou non). On pourrait donc dire qu'une tâche possède deux variables : `description` et `fait`. Si nous voulons gérer plus d'une tâche, nous allons donc utiliser deux tableau : `taches` qui contient les description et `tacheCompletee` qui contient la completion. Regardons ensemble les prototypes de nos fonction du laboratoire #1 :
+Si nous regardons les deux derniers laboratoires, nous avons codé une petite application qui gère une liste de tâches. Une tâche est définie par sa description et par sa complétion (est-ce que la tâche a été complétée ou non). On pourrait donc dire qu'une tâche possède deux variables : `description` et `estCompletee`. Si nous voulons gérer plus d'une tâche, nous allons donc utiliser deux tableau : `taches` qui contient les description et `tacheCompletee` qui contient la completion. Regardons ensemble les prototypes de nos fonction du laboratoire #1 :
 
 ```cpp
 void afficherMenu();
@@ -21,7 +21,7 @@ void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTac
 void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches);
 ```
 
-Le fait d'avoir deux tableaux à gérer alourdit déjà considérablement les paramètres de nos fonctions. Imaginez maintenant si on voulait qu'une tâche ait en plus une date de création, une date limite, un titre (plus cours que la description) et un niveau (bas, moyen, important). Voici à quoi ressembleraient nos prototypes:
+Le fait d'avoir deux tableaux à gérer alourdit déjà considérablement les paramètres de nos fonctions. Imaginez maintenant si on voulait qu'une tâche ait en plus une date de création, une date limite, un titre (plus cours que la description) et une priorité (bas, moyen, important). Voici à quoi ressembleraient nos prototypes:
 
 ```cpp
 void afficherListe(std::string taches[], bool tacheCompletee[], std::string dateCree[], std::string dateLimite[], std::string titre[], int niveau[], int nombreTaches);
@@ -31,9 +31,7 @@ Cela commence à faire beaucoup !
 
 > NOTE - On devrait essayer de limiter le nombre de paramètres à 4 dans un prototype, si possible.
 
-Cette méthodologie de gérer une *tâche* peut probablement être accomplie avec deux ou trois *attributs*, mais elle ne sera pas *scalable*
-
-> *Scalable/Scale*: Imaginons un système informatique qui est présentement en mesure de fournir 1000 requête par seconde, et qui soudainement reçoit 10000 requête par seconde. Ce système sera *scalable* si les ressources humaines nécessaires pour garder le système fonctionnel est significativement inférieur à la demande. Donc ici, si une compagnie a bien gérer cette aspect en employant un employé de plus que d'ordinaire *préalablement* à la hausse de demande, et que le système à répondu sans interruption, on dira que le système est *scalable*. Même concept peut s'appliquer à une méthodologie : plus on va ajouter de tableau pour gérer les attributs d'une tâche, et considérant qu'une application peut gérer plus qu'une *entité* - par exemple, `Tache` et `Personne` - et qu'en plus les fonctionnalités vont s'ajouter, le nombre de personne pour programmer le tout *à la même vitesse* devra augmenter.
+Cette méthodologie de gérer une *tâche* peut probablement être accomplie avec deux ou trois *attributs*, mais elle ne sera pas facile à maintenir.
 
 Existe-t-il une méthode plus adéquate pour gérer cette situation? Eh oui, il s'agit bien entendu de la **Programmation orientée objet**!
 
@@ -46,8 +44,8 @@ Nous savons qu'une `Tache` se définit par sa `description` et par sa `completio
 ```plantuml
 @startuml
 class Tache {
-    std::string description
-    bool fait
+    std::string _description
+    bool _estCompletee
 }
 @enduml
 ```
@@ -62,8 +60,8 @@ En C++, on peut décrire cette entité à l'aide d'une **classe**. Créez un fic
 
 class Tache {
 public:
-    std::string description;
-    bool fait;
+    std::string _description;
+    bool _estCompletee;
 };
 
 #endif
@@ -84,10 +82,10 @@ int main () {
     std::locale::global(std::locale{ "" });
 
     Tache maTache;
-    maTache.description = "Compléter le laboratoire 2";
-    maTache.fait = false;
+    maTache._description = "Compléter le laboratoire 2";
+    maTache._estCompletee = false;
 
-    std::cout << "[" << (maTache.fait ? 'X' : ' ') << "] " << maTache.description << std::endl;
+    std::cout << "[" << (maTache._estCompletee ? 'X' : ' ') << "] " << maTache._description << std::endl;
 
     return 0;
 }
@@ -111,25 +109,29 @@ int main () {
     bool terminee = false;
 
     std::string description;
-    std::string reponseFait;
+    char reponseTerminer;
+    char reponseFait;
 
     do {
         std::cout << "Décrivez votre tâche : ";
-        std::getline(std::cin, taches[quantite].description);
+        std::getline(std::cin, taches[quantite]._description);
         std::cout << std::endl;
+
         std::cout << "Est-elle complétée ? [O|N] ";
-        std::getline(std::cin, reponseFait);
-        taches[quantite].fait = reponseFait.compare("O") == 0;
+        std::cin >> reponseFait;
+        std::cin.ignore();
+        taches[quantite]._estCompletee = toupper(reponseFait) == 'O';
 
         std::cout << "Voulez vous continuez ? [O|N] ";
-        std::getline(std::cin, reponseFait);
-        terminee = reponseFait.compare("O") != 0;
+        std::cin >> reponseTerminer;
+        std::cin.ignore();
+        terminee = toupper(reponseTerminer) != 'O';
         quantite++;
 
     } while(quantite < 100 && !terminee);
 
     for (int i = 0; i < quantite; i++) {
-        std::cout << "[" << (taches[i].fait ? 'X' : ' ') << "] " << taches[i].description << std::endl;
+        std::cout << "[" << (taches[i]._estCompletee ? 'X' : ' ') << "] " << taches[i]._description << std::endl;
     }
 
     return 0;
@@ -161,13 +163,13 @@ Regardons comment nous avons instancié notre classe et initialisé les attribut
 
 ```cpp
     Tache maTache;
-    maTache.description = "Compléter le laboratoire 2";
-    maTache.fait = false;
+    maTache._description = "Compléter le laboratoire 2";
+    maTache._estCompletee = false;
 ```
 
 C'est agréable, mais si nous ajoutions plusieurs autres attributs, il pourrait devenir un peu fastidieux de faire toutes les assignations une par une. Heureusement pour nous, il existe le concept de **constructeur** qui nous permet d'initialiser nos attributs à la déclaration de l'objet
 
-Retournons dans notre fichier `tache.h` et ajoutons-y deux constructeurs : un constructeur par défaut et un constructeur qui, dans notre présent cas, recevra les paramètres `description` et `fait`.
+Retournons dans notre fichier `tache.h` et ajoutons-y deux constructeurs : un constructeur par défaut et un constructeur qui, dans notre présent cas, recevra les paramètres `_description` et `_estCompletee`.
 
 ```cpp
 #ifndef TACHE_H
@@ -177,11 +179,11 @@ Retournons dans notre fichier `tache.h` et ajoutons-y deux constructeurs : un co
 
 class Tache {
 public:
-    std::string description;
-    bool fait;
+    std::string _description;
+    bool _estCompletee;
 
     Tache();
-    Tache(std::string description, bool fait);
+    Tache(std::string description, bool estCompletee);
 };
 
 #endif
@@ -195,15 +197,14 @@ Créez un fichier `tache.cpp` avec le code suivant :
 #include "tache.h"
 
 Tache::Tache() {
-    this->description = "";
-    this->fait = false;
+    this->_description = "";
+    this->_fait = false;
 }
 
-Tache::Tache(std::string description, bool fait) {
-    this->description = description;
-    this->fait = fait;
+Tache::Tache(std::string description, bool estCompletee) {
+    this->_description = description;
+    this->_fait = fait;
 }
-
 ```
 
 > Concept : `this` - Comme nous l'avons déjà dit, la classe est une description : si je n'instancie pas d'objet de cette classe dans mon code, ce code ne sera jamais exécuté. Mais si j'instancie deux instances, comment faire la distinction entre les deux ? Voici un exemple :
@@ -211,21 +212,21 @@ Tache::Tache(std::string description, bool fait) {
 > int main () {
 >     std::locale::global(std::locale{ "" });
 > 
->     Tache premier("Comprendre les classes", false);
+>     Tache premiere("Comprendre les classes", false);
 >     Tache seconde("Comprendre les constructeurs", false);
 > 
 >     return 0;
 > }
 > ```
-> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premier` et `seconde`) est dans un espace mémoire distinct, et qu'ils a ses propres valeurs de `description` et `fait`. Toutefois, on ne peut pas connaître d'avance le nom de toutes les instances de notre classe. C++ nous offre donc `this`, qui est **un pointeur** vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder aux attributs `description` et `fait` de celui-ci!
+> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premiere` et `seconde`) est dans un espace mémoire distinct, et qu'ils a ses propres valeurs de `_description` et `_estCompletee`. Toutefois, on ne peut pas connaître d'avance le nom de toutes les instances de notre classe. C++ nous offre donc `this`, qui est **un pointeur** vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder aux attributs `_description` et `_estCompletee` de celui-ci!
 
 > Pour vous convaincre que `this` est un pointeur, sachez qu'on peut réécrire notre constructeur de cette façon :
 > ```cpp
 > #include "tache.h"
 > 
-> Tache::Tache(std::string description, bool fait) {
->     *this.description = description;
->     *this.fait = fait;
+> Tache::Tache(std::string description, bool estCompletee) {
+>     *this._description = description;
+>     *this._fait = fait;
 > }
 > 
 > ```
@@ -236,11 +237,11 @@ Voici un *schéma de classe* qui représente notre `Tache` :
 ```plantuml
 @startuml
 class Tache {
-    std::string description
-    bool fait
+    std::string _description
+    bool _estCompletee
 
     Tache();
-    Tache(std::string description, bool fait)
+    Tache(std::string description, bool estCompletee)
 }
 @enduml
 ```
@@ -256,7 +257,7 @@ Pour comprendre ce qu'est une **méthode**, il faut se poser la question suivant
 * changer la description (et valider que la longueur est au maximum 32 caractères) ;
 * afficher la tâche à l'utilisateur (selon notre modèle `numéro [X] description`).
 
-Comme ce sont des actions que l'on peut faire sur une tâche, on va vouloir créer des fonctions dans la classe : on les appelle les **méthodes**. Nous allons donc représenter chacune des ces *actions* par une *fonction de classe*.
+Comme ce sont des actions que l'on peut faire sur une tâche, on va vouloir créer des fonctions dans la classe : on les appelle les **méthodes**. Nous allons donc représenter chacune des ces *actions* par une **méthodes**.
 
 Modifiez le code de votre fichier `tache.h` de cette façon:
 
@@ -270,10 +271,10 @@ Modifiez le code de votre fichier `tache.h` de cette façon:
 
 class Tache {
 public:
-    std::string description;
-    bool fait;
+    std::string _description;
+    bool _estCompletee;
     Tache() : Tache("", false) { };
-    Tache(std::string description, bool fait);
+    Tache(std::string description, bool estCompletee);
 
     void marquerFait();
     void demarquerFait();
@@ -284,18 +285,18 @@ public:
 #endif
 ```
 
-> Remarquez que notre constructeur par défaut utilise maintenant le second constructeur, ce qui réduit le code et le potentiel d'erreurs.
+> Remarquez que notre constructeur par défaut utilise maintenant le second constructeur, ce qui réduit le code et le potentiel d'erreurs. Nous avons également définit une constante, `DESCRIPTION_CARACTERE_LIMITE` que nous allons utiliser pour limiter le nombre de caractères dans `_description`.
 
 Donc notre classe `Tache` ce conceptualise comme ceci :
 
 ```plantuml
 @startuml
 class Tache {
-    std::string description
-    bool fait
+    std::string _description
+    bool _estCompletee
 
     Tache();
-    Tache(std::string description, bool fait)
+    Tache(std::string description, bool estCompletee)
 
     void marquerFait()
     void demarquerFait()
@@ -313,33 +314,33 @@ On doit maintenant implémenter nos méthodes dans le fichier `tache.cpp`. Rempl
 
 #include <sstream>
 
-Tache::Tache(std::string description, bool fait) {
-    this->description = description;
-    this->fait = fait;
+Tache::Tache(std::string description, bool estCompletee) {
+    this->_description = description;
+    this->_fait = fait;
 }
 
 void Tache::marquerFait() {
-    this->fait = true;
+    this->_fait = true;
 }
 
 void Tache::demarquerFait() {
-    this->fait = false;
+    this->_fait = false;
 }
 
 
 void Tache::changerDescription(const std::string &description) {
     // On s'assure que la chaine ne sera pas trop longue
     if (description.length() < DESCRIPTION_CARACTERE_LIMITE) {
-        this->description = description;
+        this->_description = description;
     } else {
-        this->description = description.substr(0, DESCRIPTION_CARACTERE_LIMITE);
+        this->_description = description.substr(0, DESCRIPTION_CARACTERE_LIMITE);
     }
 }
 
 std::string Tache::obtenirChaine(int index) {
     std::ostringstream flux;
 
-    flux << index << " [" << (this->fait ? 'X' : ' ') << "] " << this->description;
+    flux << index << " [" << (this->_fait ? 'X' : ' ') << "] " << this->_description;
 
     return flux.str();
 }
@@ -360,7 +361,7 @@ int main () {
 
     std::string description;
     std::string reponseFait;
-    bool fait;
+    bool estCompletee;
 
     do {
         std::cout << "Décrivez votre tâche : ";
@@ -396,7 +397,7 @@ Donc alors qu'avant nous avions des fonctions qui recevait un ou des objets en p
 
 ### On veut protéger nos données
 
-Parlons maintenant du mot clé `public` que nous avons laisser un peu à lui-même et qui fait que tout ce qui se trouve en-dessous est accessible dans tous le code. Il s'agit d'un problème si on veut s'assurer que les programmeurs utilise la bonne méthode pour mettre à jour `description` et ne pas mettre plus de 32 caractères à l'intérieur. Nous avons besoins d'une manière pour cacher, ou rendre *privée*, nos attributs.
+Parlons maintenant du mot clé `public` que nous avons laisser un peu à lui-même et qui fait que tout ce qui se trouve en-dessous est accessible dans tous le code. Il s'agit d'un problème si on veut s'assurer que les programmeurs utilise la bonne méthode pour mettre à jour `_description` et ne pas mettre plus de 32 caractères à l'intérieur. Nous avons besoins d'une manière pour cacher, ou rendre *privée*, nos attributs.
 
 C++ nous offre un mot clé pour cela, `private`, qui nous permet de cacher (**encapsuler**) nos attributs pour que seules les méthodes publiques puissent les manipuler, et ainsi s'assurer que nos *validations* soient toujours prise en compte. Regardons maintenant à quoi ressemble notre fichier `tache.h`.
 
@@ -406,7 +407,7 @@ private:
     std::string _description;
     bool _fait;
 public:
-    Tache(std::string description, bool fait);
+    Tache(std::string description, bool estCompletee);
 
     void marquerFait();
     void demarquerFait();
@@ -426,7 +427,7 @@ Regardons maintenant notre nouveau `tache.cpp`:
 
 #include <sstream>
 
-Tache::Tache(std::string description, bool fait) {
+Tache::Tache(std::string description, bool estCompletee) {
     this->_description = description;
     this->_fait = fait;
 }
@@ -457,7 +458,7 @@ std::string Tache::obtenirChaine(int index) {
 
 ```
 
-**Rien a changé**, à l'exception de la *refactorisation* de notre code avec les nouveaux noms d'attributs, ces méthodes ont accès a nos attributs privées. Regardons ce qui ce passe dans notre fonction `main` quand on veut compiler le code suivant :
+**Rien a changé**, ces méthodes ont accès a nos attributs privées. Regardons ce qui ce passe dans notre fonction `main` quand on veut compiler le code suivant :
 
 ```cpp
 #include <iostream>
@@ -471,7 +472,7 @@ int main () {
     maTache._description = "Compléter le laboratoire 2";
     maTache._fait = false;
 
-    std::cout << "[" << (maTache.fait ? 'X' : ' ') << "] " << maTache.description << std::endl;
+    std::cout << "[" << (maTache._fait ? 'X' : ' ') << "] " << maTache._description << std::endl;
 
     return 0;
 }
@@ -492,7 +493,7 @@ class Tache {
     - std::string _description
     - bool _fait
 
-    + Tache(std::string description, bool fait)
+    + Tache(std::string description, bool estCompletee)
 
     + void marquerFait()
     + void demarquerFait()
@@ -519,7 +520,7 @@ class Tache {
     - bool _fait
 
     + Tache()
-    + Tache(std::string description, bool fait)
+    + Tache(std::string description, bool estCompletee)
 
     + void marquerFait()
     + void demarquerFait()
