@@ -2,11 +2,11 @@
 
 ## Objectif
 
-Débuter l'intégration du concept de base de la programmation orientée objet en créant nos premières classes et les utiliser dans notre code comme objet.
+Débuter l'intégration des concepts de base de la programmation orientée objet en créant nos premières classes pour ensuite les utiliser dans notre code.
 
 ## Pourquoi les classes ?
 
-Si nous regardons les deux derniers laboratoires, nous avons fait une petite application qui gère une liste de tâches. Une tâche est défini par sa description et par sa complétion (ou non). On pourrait donc dire qu'une tâche possède deux variables : `description` et `fait`. Si nous voulons gérer plus d'une tâche, nous allons donc utiliser deux tableau : `taches` qui contient les description et `tacheCompletee` qui contient la completion. Regardons ensemble les prototypes de nos fonction du laboratoire #1 :
+Si nous regardons les deux derniers laboratoires, nous avons codé une petite application qui gère une liste de tâches. Une tâche est définie par sa description et par sa complétion (est-ce que la tâche a été complétée ou non). On pourrait donc dire qu'une tâche possède deux variables : `description` et `fait`. Si nous voulons gérer plus d'une tâche, nous allons donc utiliser deux tableau : `taches` qui contient les description et `tacheCompletee` qui contient la completion. Regardons ensemble les prototypes de nos fonction du laboratoire #1 :
 
 ```cpp
 void afficherMenu();
@@ -21,7 +21,7 @@ void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTac
 void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches);
 ```
 
-On voit que la gestion des tâches à travers nos fonctions alourdie considérablement nos paramètres. Mais on peut facilement concevoir qu'une tâche ait une date de création, une date limite, un titre (plus cours que la description), un niveau (bas, moyen, important), il n'y a pas de limite au nombre d'*attributs* que l'on peut imaginer. À quoi ressemblerait nos prototypes et combien de tableaux serait-il nécessaires :
+Le fait d'avoir deux tableaux à gérer alourdit déjà considérablement les paramètres de nos fonctions. Imaginez maintenant si on voulait qu'une tâche ait en plus une date de création, une date limite, un titre (plus cours que la description) et un niveau (bas, moyen, important). Voici à quoi ressembleraient nos prototypes:
 
 ```cpp
 void afficherListe(std::string taches[], bool tacheCompletee[], std::string dateCree[], std::string dateLimite[], std::string titre[], int niveau[], int nombreTaches);
@@ -35,11 +35,13 @@ Cette méthodologie de gérer une *tâche* peut probablement être accomplie ave
 
 > *Scalable/Scale*: Imaginons un système informatique qui est présentement en mesure de fournir 1000 requête par seconde, et qui soudainement reçoit 10000 requête par seconde. Ce système sera *scalable* si les ressources humaines nécessaires pour garder le système fonctionnel est significativement inférieur à la demande. Donc ici, si une compagnie a bien gérer cette aspect en employant un employé de plus que d'ordinaire *préalablement* à la hausse de demande, et que le système à répondu sans interruption, on dira que le système est *scalable*. Même concept peut s'appliquer à une méthodologie : plus on va ajouter de tableau pour gérer les attributs d'une tâche, et considérant qu'une application peut gérer plus qu'une *entité* - par exemple, `Tache` et `Personne` - et qu'en plus les fonctionnalités vont s'ajouter, le nombre de personne pour programmer le tout *à la même vitesse* devra augmenter.
 
-Existe-t-il une méthode plus adéquate pour gérer ce genre de situation ? La méthode de **Programmation Orientée Objet**.
+Existe-t-il une méthode plus adéquate pour gérer cette situation? Eh oui, il s'agit bien entendu de la **Programmation orientée objet**!
 
 ## Création d'une classe `Tache`
 
-Nous savons qu'une `Tache` se définit par sa `description` et par sa `completion`. On pourrait donc représenter graphiquement cette **entité** tel que :
+Créez un nouveau projet contenant seulement un `main` vide. Suivez ensuite les étapes suivantes pour créer et utiliser votre première classe dans ce projet.
+
+Nous savons qu'une `Tache` se définit par sa `description` et par sa `completion`. On pourrait donc représenter graphiquement cette **entité** de cette façon:
 
 ```plantuml
 @startuml
@@ -50,7 +52,7 @@ class Tache {
 @enduml
 ```
 
-En C++, on peut décrire cette structure dans une classe. On va créer un fichier `tache.h` et créer la définition de notre classe.
+En C++, on peut décrire cette entité à l'aide d'une **classe**. Créez un fichier `tache.h` et ajoutez-y la définition de la classe:
 
 ```cpp
 #ifndef TACHE_H
@@ -67,11 +69,11 @@ public:
 #endif
 ```
 
-> Ignorer pour l'instant les lignes 1, 2 et la dernière lignes, elles font a peu près la même chose que `#pragma once`. Notre classe commence à la ligne 6 et ce termine avant le `#endif`. Remarquer que la définition d'une classe doit avoir un `;`.
+> Ignorez pour l'instant les lignes 1, 2 et la dernière ligne, elles font à peu près la même chose que `#pragma once`. Notre classe commence à la ligne 6 et se termine avant le `#endif`. Remarquez que la définition d'une classe doit se terminer par un `;`.
 
-Nous avons deux variables qui représente notre tâche. Dans le contexte d'une classe, une variable se nomme **un attribut**. Pour l'instant, le terme `public` signifie que l'on peut manipuler les attributs définie en-dessous.
+Nous avons deux variables qui représentent notre tâche. Dans le contexte d'une classe, une variable se nomme **un attribut**. Pour l'instant, le terme `public` signifie que l'on peut manipuler les attributs définis en-dessous.
 
-Utilisons notre classe tel que décrit dans ce `main` :
+Utilisez maintenant votre nouvelle classe dans le `main` :
 
 ```cpp
 #include <iostream>
@@ -91,7 +93,9 @@ int main () {
 }
 ```
 
-Ici, `maTache` est un **objet** de la classe `Tache`, et elle peut être conceptualisé comme une variable qui contient des variables liées entre elles. On peut également faire un tableau d'objet de la classe `Tache`. Ce tableau aura l'avantage de remplacer nos deux tableaux `taches` et `tacheCompletee`.
+Ici, `maTache` est un **objet** qui est une **instance** de la classe `Tache`, et il peut être conceptualisé comme une variable qui contient des variables liées entre elles.
+
+On peut également créer un tableau d'objets de la classe `Tache`. Ce tableau aura l'avantage de remplacer les deux tableaux `taches` et `tacheCompletee`. Modifiez votre `main` de cette façon:
 
 ```cpp
 #include <iostream>
@@ -110,10 +114,10 @@ int main () {
     std::string reponseFait;
 
     do {
-        std::cout << "Décrire votre tâche : ";
+        std::cout << "Décrivez votre tâche : ";
         std::getline(std::cin, taches[quantite].description);
         std::cout << std::endl;
-        std::cout << "Est-ce terminée ? [O|N] ";
+        std::cout << "Est-elle complétée ? [O|N] ";
         std::getline(std::cin, reponseFait);
         taches[quantite].estCompletee = reponseFait.compare("O") == 0;
 
@@ -132,7 +136,7 @@ int main () {
 }
 ```
 
-Ainsi nous pourrions changer le laboratoire #1 avec ces prototypes :
+Ainsi, nous pourrions remplacer les prototypes de fonctions du laboratoire 1 avec ceux-ci :
 
 ```cpp
 void afficherMenu();
@@ -146,11 +150,14 @@ void sauvegarderListe(Tache taches[], int nombreTaches);
 void chargerListe(Tache taches[], int& nombreTaches);
 ```
 
-Quelles sont les avantages ? On réduit le nombre de paramètres à passer, un seul tableau au lieu de deux. Si on veut ajouter des attibuts a notre classe tache, **nous n'avons pas besoins de changer nos prototypes**.
+Dans le contexte du laboratoire 1, on peut voir deux avantages à utiliser les objets:
 
-### Peut-on créer une tâche d'un coup ?
+- On peut utiliser un seul tableau au lieu de deux.
+- Si on doit ajouter plus tard d'autres attibuts à notre classe `Tache`, **nous n'aurons pas besoin de changer nos prototypes**.
 
-Regardons comment nous avons instancié notre classe et initialisé ses attributs :
+### Peut-on créer une tâche d'un seul coup ?
+
+Regardons comment nous avons instancié notre classe et initialisé les attributs de notre objet :
 
 ```cpp
     Tache maTache;
@@ -158,9 +165,9 @@ Regardons comment nous avons instancié notre classe et initialisé ses attribut
     maTache.estCompletee = false;
 ```
 
-C'est agréable, mais si nous avons plusieurs attributs, ça pourrait être un peu fastidieux de faire toutes les assignations une par une. Heureusement pour nous, il existe le concept de **constructeur** qui nous permet de constuire à l'initialisation notre objet.
+C'est agréable, mais si nous ajoutions plusieurs autres attributs, il pourrait devenir un peu fastidieux de faire toutes les assignations une par une. Heureusement pour nous, il existe le concept de **constructeur** qui nous permet d'initialiser nos attributs à la déclaration de l'objet
 
-On retourne dans notre fichier `tache.h` et on ajoute deux constructeurs : un constructeurs par défaut et un constructeur qui, dans notre présent cas, recevra une `description` et un `estCompletee`.
+Retournons dans notre fichier `tache.h` et ajoutons-y deux constructeurs : un constructeur par défaut et un constructeur qui, dans notre présent cas, recevra les paramètres `description` et `estCompletee`.
 
 ```cpp
 #ifndef TACHE_H
@@ -180,7 +187,9 @@ public:
 #endif
 ```
 
-Un constructeur **doit** toujours être le même nom que la classe. Il s'agit d'une fonction spéciale qui est appeler lors de l'instantiation d'un objet de notre classe. Dans notre cas, nous avons deux constructeurs : un constructeur par défaut (sans paramètre) et un constructeur qui nous permet d'initialiser tous les attributs de notre instance. Toutefois dans notre en-tête `.h` nous n'avons que définit les constructeurs, nous avons besoins de les implémenter (c'est-à-dire, écrire le code de nos constructeur) pour initialiser notre objet. Il faut donc créer une fichier `tache.cpp` avec le code suivant :
+Un constructeur **doit** toujours avoir le même nom que la classe. Il s'agit d'une méthode spéciale qui est appelée lors de l'instanciation d'un objet de notre classe. Dans notre cas, nous avons deux constructeurs : un constructeur par défaut (sans paramètre) et un constructeur qui nous permet d'initialiser tous les attributs de notre instance. Toutefois, dans notre fichier d'en-tête `.h`, nous avons seulement ajouté les prototypes des constructeurs. Il nous reste maintenant à les implémenter (c'est-à-dire, écrire le code de nos constructeurs) pour initialiser notre objet. 
+
+Créez un fichier `tache.cpp` avec le code suivant :
 
 ```cpp
 #include "tache.h"
@@ -208,8 +217,9 @@ Tache::Tache(std::string description, bool estCompletee) {
 >     return 0;
 > }
 > ```
-> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premier` et `seconde`) sont dans deux espaces mémoires distinctes, et qu'ils ont leurs propres instance de `description` et `estCompletee`. Toutefois, on ne peut pas connaitre d'avance le nom de toute les instances de notre classes. C++ nous offre donc `this`, qui est un pointeur vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder au attributs `description` et `estCompletee` de celui-ci !
-> Pour vous convaincre que `this` est un pointeur, on peut réécrire notre constructeur de cette façon :
+> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premier` et `seconde`) est dans un espace mémoire distinct, et qu'ils a ses propres valeurs de `description` et `estComplette`. Toutefois, on ne peut pas connaître d'avance le nom de toutes les instances de notre classe. C++ nous offre donc `this`, qui est **un pointeur** vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder aux attributs `description` et `estCompletee` de celui-ci!
+
+> Pour vous convaincre que `this` est un pointeur, sachez qu'on peut réécrire notre constructeur de cette façon :
 > ```cpp
 > #include "tache.h"
 > 
@@ -237,16 +247,18 @@ class Tache {
 
 ### Les méthodes
 
-Donc, maintenant que nous avons une classe qui contient des attributs (variables) liés entre elle - une sorte de contenant qui définit une **entité** -, qu'est-ce que la **Programmation Orienté Objet** nous offres pour nous aider ? L'une d'entre elle est le concept de **méthode**.
+Donc, maintenant que nous avons une classe qui contient des attributs (variables) liés entre eux - une sorte de contenant qui définit une **entité** -, qu'est-ce que la **Programmation orientée objet** nous offre pour nous aider ? Elle nous offre entre autres le concept de **méthode**.
 
-Pour comprendre ce qu'est une **méthode**, il faut ce poser la question suivante : quelles sont les actions que je veux poser sur une instance de ma classe considérant ces attributs ? Par exemple, un objet de classe `Tache` pourrait avoir les actions suivantes :
+Pour comprendre ce qu'est une **méthode**, il faut se poser la question suivante : quelles sont les actions que je veux poser sur une instance de ma classe considérant ses attributs ? Par exemple, un objet de classe `Tache` pourrait posséder les actions suivantes :
 
-* marquer comme complété (*check*) ;
-* démarquer comme complété (*uncheck*) ;
+* marquer comme complétée (*check*) ;
+* démarquer comme complétée (*uncheck*) ;
 * changer la description (et valider que la longueur est au maximum 32 caractères) ;
 * afficher la tâche à l'utilisateur (selon notre modèle `numéro [X] description`).
 
-Comme ce sont des actions que l'on peut faire sur une tâche, on va vouloir créer des fonctions dans la classe : on les appels les **méthodes**. Nous allons donc représenter chacune des ses *actions* par une *fonction de classe* tel que :
+Comme ce sont des actions que l'on peut faire sur une tâche, on va vouloir créer des fonctions dans la classe : on les appelle les **méthodes**. Nous allons donc représenter chacune des ces *actions* par une *fonction de classe*.
+
+Modifiez le code de votre fichier `tache.h` de cette façon:
 
 ```cpp
 #ifndef TACHE_H
@@ -272,7 +284,7 @@ public:
 #endif
 ```
 
-> Remarquer que mon constructeur par défaut utilise le second constructeur, ce qui réduit le code et le potentiel d'erreur.
+> Remarquez que notre constructeur par défaut utilise maintenant le second constructeur, ce qui réduit le code et le potentiel d'erreurs.
 
 Donc notre classe `Tache` ce conceptualise comme ceci :
 
@@ -293,7 +305,7 @@ class Tache {
 @enduml
 ```
 
-Donc on doit maintenant implémenter nos méthodes dans le fichier `tache.cpp`.
+On doit maintenant implémenter nos méthodes dans le fichier `tache.cpp`. Remplacez le contenu de ce fichier par celui-ci:
 
 
 ```cpp
@@ -333,7 +345,7 @@ std::string Tache::obtenirChaine(int index) {
 
 ```
 
-On peut donc reprendre le code avec le tableau de 100 tâches et le modifier de cette façon.
+Modifiez ensuite le contenu de votre `main` de cette façon.
 
 ```cpp
 int main () {
@@ -350,10 +362,10 @@ int main () {
     bool estCompletee;
 
     do {
-        std::cout << "Décrire votre tâche : ";
+        std::cout << "Décrivez votre tâche : ";
         std::getline(std::cin, description);
         std::cout << std::endl;
-        std::cout << "Est-ce terminée ? [O|N] ";
+        std::cout << "Est-elle complétée ? [O|N] ";
         std::getline(std::cin, reponseFait);
         estCompletee = reponseFait.compare("O") == 0;
 
