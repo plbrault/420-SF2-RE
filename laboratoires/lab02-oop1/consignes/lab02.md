@@ -346,7 +346,7 @@ std::string Tache::obtenirChaine(int index) {
 
 ```
 
-On peut donc reprendre le code avec le tableau de 100 tâches et le modifier de cette façon.
+Modifiez ensuite le contenu de votre `main` de cette façon.
 
 ```cpp
 int main () {
@@ -363,10 +363,10 @@ int main () {
     bool fait;
 
     do {
-        std::cout << "Décrire votre tâche : ";
+        std::cout << "Décrivez votre tâche : ";
         std::getline(std::cin, description);
         std::cout << std::endl;
-        std::cout << "Est-ce terminée ? [O|N] ";
+        std::cout << "Est-elle complétée ? [O|N] ";
         std::getline(std::cin, reponseFait);
         fait = reponseFait.compare("O") == 0;
 
