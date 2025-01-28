@@ -45,7 +45,7 @@ Nous savons qu'une `Tache` se définit par sa `description` et par sa `completio
 @startuml
 class Tache {
     std::string description
-    bool fait
+    bool estCompletee
 }
 @enduml
 ```
@@ -61,7 +61,7 @@ En C++, on peut décrire cette structure dans une classe. On va créer un fichie
 class Tache {
 public:
     std::string description;
-    bool fait;
+    bool estCompletee;
 };
 
 #endif
@@ -83,9 +83,9 @@ int main () {
 
     Tache maTache;
     maTache.description = "Compléter le laboratoire 2";
-    maTache.fait = false;
+    maTache.estCompletee = false;
 
-    std::cout << "[" << (maTache.fait ? 'X' : ' ') << "] " << maTache.description << std::endl;
+    std::cout << "[" << (maTache.estCompletee ? 'X' : ' ') << "] " << maTache.description << std::endl;
 
     return 0;
 }
@@ -115,7 +115,7 @@ int main () {
         std::cout << std::endl;
         std::cout << "Est-ce terminée ? [O|N] ";
         std::getline(std::cin, reponseFait);
-        taches[quantite].fait = reponseFait.compare("O") == 0;
+        taches[quantite].estCompletee = reponseFait.compare("O") == 0;
 
         std::cout << "Voulez vous continuez ? [O|N] ";
         std::getline(std::cin, reponseFait);
@@ -125,7 +125,7 @@ int main () {
     } while(quantite < 100 && !terminee);
 
     for (int i = 0; i < quantite; i++) {
-        std::cout << "[" << (taches[i].fait ? 'X' : ' ') << "] " << taches[i].description << std::endl;
+        std::cout << "[" << (taches[i].estCompletee ? 'X' : ' ') << "] " << taches[i].description << std::endl;
     }
 
     return 0;
@@ -155,12 +155,12 @@ Regardons comment nous avons instancié notre classe et initialisé ses attribut
 ```cpp
     Tache maTache;
     maTache.description = "Compléter le laboratoire 2";
-    maTache.fait = false;
+    maTache.estCompletee = false;
 ```
 
 C'est agréable, mais si nous avons plusieurs attributs, ça pourrait être un peu fastidieux de faire toutes les assignations une par une. Heureusement pour nous, il existe le concept de **constructeur** qui nous permet de constuire à l'initialisation notre objet.
 
-On retourne dans notre fichier `tache.h` et on ajoute deux constructeurs : un constructeurs par défaut et un constructeur qui, dans notre présent cas, recevra une `description` et un `fait`.
+On retourne dans notre fichier `tache.h` et on ajoute deux constructeurs : un constructeurs par défaut et un constructeur qui, dans notre présent cas, recevra une `description` et un `estCompletee`.
 
 ```cpp
 #ifndef TACHE_H
@@ -171,10 +171,10 @@ On retourne dans notre fichier `tache.h` et on ajoute deux constructeurs : un co
 class Tache {
 public:
     std::string description;
-    bool fait;
+    bool estCompletee;
 
     Tache();
-    Tache(std::string description, bool fait);
+    Tache(std::string description, bool estCompletee);
 };
 
 #endif
@@ -187,12 +187,12 @@ Un constructeur **doit** toujours être le même nom que la classe. Il s'agit d'
 
 Tache::Tache() {
     this->description = "";
-    this->fait = false;
+    this->estCompletee = false;
 }
 
-Tache::Tache(std::string description, bool fait) {
+Tache::Tache(std::string description, bool estCompletee) {
     this->description = description;
-    this->fait = fait;
+    this->estCompletee = estCompletee;
 }
 
 ```
@@ -208,14 +208,14 @@ Tache::Tache(std::string description, bool fait) {
 >     return 0;
 > }
 > ```
-> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premier` et `seconde`) sont dans deux espaces mémoires distinctes, et qu'ils ont leurs propres instance de `description` et `fait`. Toutefois, on ne peut pas connaitre d'avance le nom de toute les instances de notre classes. C++ nous offre donc `this`, qui est un pointeur vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder au attributs `description` et `fait` de celui-ci !
+> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premier` et `seconde`) sont dans deux espaces mémoires distinctes, et qu'ils ont leurs propres instance de `description` et `estCompletee`. Toutefois, on ne peut pas connaitre d'avance le nom de toute les instances de notre classes. C++ nous offre donc `this`, qui est un pointeur vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder au attributs `description` et `estCompletee` de celui-ci !
 > Pour vous convaincre que `this` est un pointeur, on peut réécrire notre constructeur de cette façon :
 > ```cpp
 > #include "tache.h"
 > 
-> Tache::Tache(std::string description, bool fait) {
+> Tache::Tache(std::string description, bool estCompletee) {
 >     *this.description = description;
->     *this.fait = fait;
+>     *this.estCompletee = estCompletee;
 > }
 > 
 > ```
@@ -227,10 +227,10 @@ Voici un *schéma de classe* qui représente notre `Tache` :
 @startuml
 class Tache {
     std::string description
-    bool fait
+    bool estCompletee
 
     Tache();
-    Tache(std::string description, bool fait)
+    Tache(std::string description, bool estCompletee)
 }
 @enduml
 ```
@@ -259,9 +259,9 @@ Comme ce sont des actions que l'on peut faire sur une tâche, on va vouloir cré
 class Tache {
 public:
     std::string description;
-    bool fait;
+    bool estCompletee;
     Tache() : Tache("", false) { };
-    Tache(std::string description, bool fait);
+    Tache(std::string description, bool estCompletee);
 
     void marquerFait();
     void demarquerFait();
@@ -280,14 +280,14 @@ Donc notre classe `Tache` ce conceptualise comme ceci :
 @startuml
 class Tache {
     std::string description
-    bool fait
+    bool estCompletee
 
     Tache();
-    Tache(std::string description, bool fait)
+    Tache(std::string description, bool estCompletee)
 
     void marquerFait()
     void demarquerFait()
-    void changerDescription(const std::string &)
+    void changerDescription(const std::string &description)
     std::string obtenirChaine(int index)
 }
 @enduml
@@ -301,19 +301,18 @@ Donc on doit maintenant implémenter nos méthodes dans le fichier `tache.cpp`.
 
 #include <sstream>
 
-Tache::Tache(std::string description, bool fait) {
+Tache::Tache(std::string description, bool estCompletee) {
     this->description = description;
-    this->fait = fait;
+    this->estCompletee = estCompletee;
 }
 
 void Tache::marquerFait() {
-    this->fait = true;
+    this->estCompletee = true;
 }
 
 void Tache::demarquerFait() {
-    this->fait = false;
+    this->estCompletee = false;
 }
-
 
 void Tache::changerDescription(const std::string &description) {
     // On s'assure que la chaine ne sera pas trop longue
@@ -327,7 +326,7 @@ void Tache::changerDescription(const std::string &description) {
 std::string Tache::obtenirChaine(int index) {
     std::ostringstream flux;
 
-    flux << index << " [" << (this->fait ? 'X' : ' ') << "] " << this->description;
+    flux << index << " [" << (this->estCompletee ? 'X' : ' ') << "] " << this->description;
 
     return flux.str();
 }
@@ -348,7 +347,7 @@ int main () {
 
     std::string description;
     std::string reponseFait;
-    bool fait;
+    bool estCompletee;
 
     do {
         std::cout << "Décrire votre tâche : ";
@@ -356,9 +355,9 @@ int main () {
         std::cout << std::endl;
         std::cout << "Est-ce terminée ? [O|N] ";
         std::getline(std::cin, reponseFait);
-        fait = reponseFait.compare("O") == 0;
+        estCompletee = reponseFait.compare("O") == 0;
 
-        Tache courante(description, fait);
+        Tache courante(description, estCompletee);
         taches[quantite] = courante;
 
         std::cout << "Voulez vous continuez ? [O|N] ";
@@ -392,9 +391,9 @@ C++ nous offre un mot clé pour cela, `private`, qui nous permet de cacher (**en
 class Tache {
 private:
     std::string _description;
-    bool _fait;
+    bool _estCompletee;
 public:
-    Tache(std::string description, bool fait);
+    Tache(std::string description, bool estCompletee);
 
     void marquerFait();
     void demarquerFait();
@@ -414,17 +413,17 @@ Regardons maintenant notre nouveau `tache.cpp`:
 
 #include <sstream>
 
-Tache::Tache(std::string description, bool fait) {
+Tache::Tache(std::string description, bool estCompletee) {
     this->_description = description;
-    this->_fait = fait;
+    this->_estCompletee = estCompletee;
 }
 
 void Tache::marquerFait() {
-    this->_fait = true;
+    this->_estCompletee = true;
 }
 
 void Tache::demarquerFait() {
-    this->_fait = false;
+    this->_estCompletee = false;
 }
 
 void Tache::changerDescription(const std::string &description) {
@@ -438,7 +437,7 @@ void Tache::changerDescription(const std::string &description) {
 std::string Tache::obtenirChaine(int index) {
     std::ostringstream flux;
 
-    flux << index << " [" << (this->_fait ? 'X' : ' ') << "] " << this->_description;
+    flux << index << " [" << (this->_estCompletee ? 'X' : ' ') << "] " << this->_description;
 
     return flux.str();
 }
@@ -457,9 +456,9 @@ int main () {
 
     Task maTache;
     maTache._description = "Compléter le laboratoire 2";
-    maTache._fait = false;
+    maTache._estCompletee = false;
 
-    std::cout << "[" << (maTache.fait ? 'X' : ' ') << "] " << maTache.description << std::endl;
+    std::cout << "[" << (maTache._estCompletee ? 'X' : ' ') << "] " << maTache._description << std::endl;
 
     return 0;
 }
@@ -478,13 +477,13 @@ Il y a de bonne chance que votre IDE ne vous permette même pas de compiler ce c
 @startuml
 class Tache {
     - std::string _description
-    - bool _fait
+    - bool _estCompletee
 
     + Tache(std::string description, bool fait)
 
     + void marquerFait()
     + void demarquerFait()
-    + void changerDescription(const std::string &)
+    + void changerDescription(const std::string &description)
     + std::string obtenirChaine(int index)
 }
 @enduml
@@ -504,15 +503,15 @@ Personne *-- Tache
 
 class Tache {
     - std::string _description
-    - bool _fait
+    - bool _estCompletee
 
     + Tache()
-    + Tache(std::string description, bool fait)
+    + Tache(std::string description, bool estCompletee)
 
     + void marquerFait()
     + void demarquerFait()
     + bool estFait()
-    + void changerDescription(const std::string &)
+    + void changerDescription(const std::string &description)
     + std::string obtenirDescription()
     + std::string obtenirChaine(int index)
 }
