@@ -21,7 +21,7 @@ void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTac
 void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches);
 ```
 
-On voit que la gestion des tâches à travers nos fonctions alourdie considérablement nos paramètres. Mais on peut facilement concevoir qu'une tâche ait une date de création, une date limite, un titre (plus cours que la description), un niveau (bas, moyen, important), il n'y a pas de limite au nombre d'*attributs* que l'on peut imaginer. À quoi ressemblerait nos prototypes et combien de tableaux serait-il nécessaires :
+Le fait d'avoir deux tableaux à gérer alourdit déjà considérablement les paramètres de nos fonctions. Imaginez maintenant si on voulait qu'une tâche ait en plus une date de création, une date limite, un titre (plus cours que la description) et un niveau (bas, moyen, important). Voici à quoi ressembleraient nos prototypes:
 
 ```cpp
 void afficherListe(std::string taches[], bool tacheCompletee[], std::string dateCree[], std::string dateLimite[], std::string titre[], int niveau[], int nombreTaches);
