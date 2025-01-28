@@ -284,7 +284,7 @@ public:
 #endif
 ```
 
-> Remarquer que mon constructeur par défaut utilise le second constructeur, ce qui réduit le code et le potentiel d'erreur.
+> Remarquez que notre constructeur par défaut utilise maintenant le second constructeur, ce qui réduit le code et le potentiel d'erreurs.
 
 Donc notre classe `Tache` ce conceptualise comme ceci :
 
@@ -305,7 +305,7 @@ class Tache {
 @enduml
 ```
 
-Donc on doit maintenant implémenter nos méthodes dans le fichier `tache.cpp`.
+On doit maintenant implémenter nos méthodes dans le fichier `tache.cpp`. Remplacez le contenu de ce fichier par celui-ci:
 
 
 ```cpp
