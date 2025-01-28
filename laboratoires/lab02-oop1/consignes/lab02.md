@@ -50,7 +50,7 @@ class Tache {
 @enduml
 ```
 
-En C++, on peut décrire cette structure dans une classe. On va créer un fichier `tache.h` et créer la définition de notre classe.
+En C++, on peut décrire cette entité à l'aide d'une **classe**. On va créer un fichier `tache.h` et créer la définition de notre classe.
 
 ```cpp
 #ifndef TACHE_H
@@ -67,11 +67,11 @@ public:
 #endif
 ```
 
-> Ignorer pour l'instant les lignes 1, 2 et la dernière lignes, elles font a peu près la même chose que `#pragma once`. Notre classe commence à la ligne 6 et ce termine avant le `#endif`. Remarquer que la définition d'une classe doit avoir un `;`.
+> Ignorez pour l'instant les lignes 1, 2 et la dernière ligne, elles font à peu près la même chose que `#pragma once`. Notre classe commence à la ligne 6 et se termine avant le `#endif`. Remarquez que la définition d'une classe doit se terminer par un `;`.
 
-Nous avons deux variables qui représente notre tâche. Dans le contexte d'une classe, une variable se nomme **un attribut**. Pour l'instant, le terme `public` signifie que l'on peut manipuler les attributs définie en-dessous.
+Nous avons deux variables qui représentent notre tâche. Dans le contexte d'une classe, une variable se nomme **un attribut**. Pour l'instant, le terme `public` signifie que l'on peut manipuler les attributs définis en-dessous.
 
-Utilisons notre classe tel que décrit dans ce `main` :
+Utilisons maintenant notre classe dans ce `main` :
 
 ```cpp
 #include <iostream>
