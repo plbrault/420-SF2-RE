@@ -155,9 +155,9 @@ Dans le contexte du laboratoire 1, on peut voir deux avantages à utiliser les o
 - On peut utiliser un seul tableau au lieu de deux.
 - Si on doit ajouter plus tard d'autres attibuts à notre classe `Tache`, **nous n'aurons pas besoin de changer nos prototypes**.
 
-### Peut-on créer une tâche d'un coup ?
+### Peut-on créer une tâche d'un seul coup ?
 
-Regardons comment nous avons instancié notre classe et initialisé ses attributs :
+Regardons comment nous avons instancié notre classe et initialisé les attributs de notre objet :
 
 ```cpp
     Tache maTache;
@@ -165,9 +165,9 @@ Regardons comment nous avons instancié notre classe et initialisé ses attribut
     maTache.fait = false;
 ```
 
-C'est agréable, mais si nous avons plusieurs attributs, ça pourrait être un peu fastidieux de faire toutes les assignations une par une. Heureusement pour nous, il existe le concept de **constructeur** qui nous permet de constuire à l'initialisation notre objet.
+C'est agréable, mais si nous ajoutions plusieurs autres attributs, il pourrait devenir un peu fastidieux de faire toutes les assignations une par une. Heureusement pour nous, il existe le concept de **constructeur** qui nous permet d'initialiser nos attributs à la déclaration de l'objet
 
-On retourne dans notre fichier `tache.h` et on ajoute deux constructeurs : un constructeurs par défaut et un constructeur qui, dans notre présent cas, recevra une `description` et un `fait`.
+Retournons dans notre fichier `tache.h` et ajoutons-y deux constructeurs : un constructeur par défaut et un constructeur qui, dans notre présent cas, recevra les paramètres `description` et `fait`.
 
 ```cpp
 #ifndef TACHE_H
@@ -187,7 +187,9 @@ public:
 #endif
 ```
 
-Un constructeur **doit** toujours être le même nom que la classe. Il s'agit d'une fonction spéciale qui est appeler lors de l'instantiation d'un objet de notre classe. Dans notre cas, nous avons deux constructeurs : un constructeur par défaut (sans paramètre) et un constructeur qui nous permet d'initialiser tous les attributs de notre instance. Toutefois dans notre en-tête `.h` nous n'avons que définit les constructeurs, nous avons besoins de les implémenter (c'est-à-dire, écrire le code de nos constructeur) pour initialiser notre objet. Il faut donc créer une fichier `tache.cpp` avec le code suivant :
+Un constructeur **doit** toujours avoir le même nom que la classe. Il s'agit d'une méthode spéciale qui est appelée lors de l'instanciation d'un objet de notre classe. Dans notre cas, nous avons deux constructeurs : un constructeur par défaut (sans paramètre) et un constructeur qui nous permet d'initialiser tous les attributs de notre instance. Toutefois, dans notre fichier d'en-tête `.h`, nous avons seulement ajouté les prototypes des constructeurs. Il nous reste maintenant à les implémenter (c'est-à-dire, écrire le code de nos constructeurs) pour initialiser notre objet. 
+
+Créez un fichier `tache.cpp` avec le code suivant :
 
 ```cpp
 #include "tache.h"
