@@ -256,7 +256,9 @@ Pour comprendre ce qu'est une **méthode**, il faut se poser la question suivant
 * changer la description (et valider que la longueur est au maximum 32 caractères) ;
 * afficher la tâche à l'utilisateur (selon notre modèle `numéro [X] description`).
 
-Comme ce sont des actions que l'on peut faire sur une tâche, on va vouloir créer des fonctions dans la classe : on les appelle les **méthodes**. Nous allons donc représenter chacune des ces *actions* par une *fonction de classe* telle que :
+Comme ce sont des actions que l'on peut faire sur une tâche, on va vouloir créer des fonctions dans la classe : on les appelle les **méthodes**. Nous allons donc représenter chacune des ces *actions* par une *fonction de classe*.
+
+Modifiez le code de votre fichier `tache.h` de cette façon:
 
 ```cpp
 #ifndef TACHE_H
