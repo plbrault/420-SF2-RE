@@ -52,7 +52,7 @@ class Tache {
 @enduml
 ```
 
-En C++, on peut décrire cette entité à l'aide d'une **classe**. On va créer un fichier `tache.h` et créer la définition de notre classe.
+En C++, on peut décrire cette entité à l'aide d'une **classe**. Créez un fichier `tache.h` et ajoutez-y la définition de la classe:
 
 ```cpp
 #ifndef TACHE_H
@@ -73,7 +73,7 @@ public:
 
 Nous avons deux variables qui représentent notre tâche. Dans le contexte d'une classe, une variable se nomme **un attribut**. Pour l'instant, le terme `public` signifie que l'on peut manipuler les attributs définis en-dessous.
 
-Utilisons maintenant notre classe dans ce `main` :
+Utilisez maintenant votre nouvelle classe dans le `main` :
 
 ```cpp
 #include <iostream>
@@ -93,7 +93,9 @@ int main () {
 }
 ```
 
-Ici, `maTache` est un **objet** de la classe `Tache`, et elle peut être conceptualisé comme une variable qui contient des variables liées entre elles. On peut également faire un tableau d'objet de la classe `Tache`. Ce tableau aura l'avantage de remplacer nos deux tableaux `taches` et `tacheCompletee`.
+Ici, `maTache` est un **objet** qui est une **instance** de la classe `Tache`, et il peut être conceptualisé comme une variable qui contient des variables liées entre elles.
+
+On peut également créer un tableau d'objets de la classe `Tache`. Ce tableau aura l'avantage de remplacer les deux tableaux `taches` et `tacheCompletee`. Modifiez votre `main` de cette façon:
 
 ```cpp
 #include <iostream>
@@ -112,10 +114,10 @@ int main () {
     std::string reponseFait;
 
     do {
-        std::cout << "Décrire votre tâche : ";
+        std::cout << "Décrivez votre tâche : ";
         std::getline(std::cin, taches[quantite].description);
         std::cout << std::endl;
-        std::cout << "Est-ce terminée ? [O|N] ";
+        std::cout << "Est-elle complétée ? [O|N] ";
         std::getline(std::cin, reponseFait);
         taches[quantite].fait = reponseFait.compare("O") == 0;
 
@@ -134,7 +136,7 @@ int main () {
 }
 ```
 
-Ainsi nous pourrions changer le laboratoire #1 avec ces prototypes :
+Ainsi, nous pourrions remplacer les prototypes de fonctions du laboratoire 1 avec ceux-ci :
 
 ```cpp
 void afficherMenu();
@@ -148,7 +150,10 @@ void sauvegarderListe(Tache taches[], int nombreTaches);
 void chargerListe(Tache taches[], int& nombreTaches);
 ```
 
-Quelles sont les avantages ? On réduit le nombre de paramètres à passer, un seul tableau au lieu de deux. Si on veut ajouter des attibuts a notre classe tache, **nous n'avons pas besoins de changer nos prototypes**.
+Dans le contexte du laboratoire 1, on peut voir deux avantages à utiliser les objets:
+
+- On peut utiliser un seul tableau au lieu de deux.
+- Si on doit ajouter plus tard d'autres attibuts à notre classe `Tache`, **nous n'aurons pas besoin de changer nos prototypes**.
 
 ### Peut-on créer une tâche d'un coup ?
 
