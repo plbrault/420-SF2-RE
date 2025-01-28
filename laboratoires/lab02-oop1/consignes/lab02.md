@@ -39,6 +39,8 @@ Existe-t-il une méthode plus adéquate pour gérer cette situation? Eh oui, il 
 
 ## Création d'une classe `Tache`
 
+Créez un nouveau projet contenant seulement un `main` vide. Suivez ensuite les étapes suivantes pour créer et utiliser votre première classe dans ce projet.
+
 Nous savons qu'une `Tache` se définit par sa `description` et par sa `completion`. On pourrait donc représenter graphiquement cette **entité** de cette façon:
 
 ```plantuml
