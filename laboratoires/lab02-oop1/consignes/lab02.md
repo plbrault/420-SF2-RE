@@ -217,8 +217,9 @@ Tache::Tache(std::string description, bool fait) {
 >     return 0;
 > }
 > ```
-> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premier` et `seconde`) sont dans deux espaces mémoires distinctes, et qu'ils ont leurs propres instance de `description` et `fait`. Toutefois, on ne peut pas connaitre d'avance le nom de toute les instances de notre classes. C++ nous offre donc `this`, qui est un pointeur vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder au attributs `description` et `fait` de celui-ci !
-> Pour vous convaincre que `this` est un pointeur, on peut réécrire notre constructeur de cette façon :
+> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premier` et `seconde`) est dans un espace mémoire distinct, et qu'ils a ses propres valeurs de `description` et `fait`. Toutefois, on ne peut pas connaître d'avance le nom de toutes les instances de notre classe. C++ nous offre donc `this`, qui est **un pointeur** vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder aux attributs `description` et `fait` de celui-ci!
+
+> Pour vous convaincre que `this` est un pointeur, sachez qu'on peut réécrire notre constructeur de cette façon :
 > ```cpp
 > #include "tache.h"
 > 
@@ -246,16 +247,16 @@ class Tache {
 
 ### Les méthodes
 
-Donc, maintenant que nous avons une classe qui contient des attributs (variables) liés entre elle - une sorte de contenant qui définit une **entité** -, qu'est-ce que la **Programmation Orienté Objet** nous offres pour nous aider ? L'une d'entre elle est le concept de **méthode**.
+Donc, maintenant que nous avons une classe qui contient des attributs (variables) liés entre eux - une sorte de contenant qui définit une **entité** -, qu'est-ce que la **Programmation orientée objet** nous offre pour nous aider ? Elle nous offre entre autres le concept de **méthode**.
 
-Pour comprendre ce qu'est une **méthode**, il faut ce poser la question suivante : quelles sont les actions que je veux poser sur une instance de ma classe considérant ces attributs ? Par exemple, un objet de classe `Tache` pourrait avoir les actions suivantes :
+Pour comprendre ce qu'est une **méthode**, il faut se poser la question suivante : quelles sont les actions que je veux poser sur une instance de ma classe considérant ses attributs ? Par exemple, un objet de classe `Tache` pourrait posséder les actions suivantes :
 
-* marquer comme complété (*check*) ;
-* démarquer comme complété (*uncheck*) ;
+* marquer comme complétée (*check*) ;
+* démarquer comme complétée (*uncheck*) ;
 * changer la description (et valider que la longueur est au maximum 32 caractères) ;
 * afficher la tâche à l'utilisateur (selon notre modèle `numéro [X] description`).
 
-Comme ce sont des actions que l'on peut faire sur une tâche, on va vouloir créer des fonctions dans la classe : on les appels les **méthodes**. Nous allons donc représenter chacune des ses *actions* par une *fonction de classe* tel que :
+Comme ce sont des actions que l'on peut faire sur une tâche, on va vouloir créer des fonctions dans la classe : on les appelle les **méthodes**. Nous allons donc représenter chacune des ces *actions* par une *fonction de classe* telle que :
 
 ```cpp
 #ifndef TACHE_H
