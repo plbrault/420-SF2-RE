@@ -41,7 +41,7 @@ Existe-t-il une méthode plus adéquate pour gérer cette situation? Eh oui, il 
 
 Créez un nouveau projet contenant seulement un `main` vide. Suivez ensuite les étapes suivantes pour créer et utiliser votre première classe dans ce projet.
 
-Nous savons qu'une `Tache` se définit par sa `description` et par sa `completion`. On pourrait donc représenter graphiquement cette **entité** de cette façon:
+Nous savons qu'une `Tache` se définit par sa `description` et par sa complétion (`estCompletee`). On pourrait donc représenter graphiquement cette **entité** de cette façon:
 
 ```plantuml
 @startuml
@@ -136,7 +136,7 @@ int main () {
 }
 ```
 
-Ainsi, nous pourrions remplacer les prototypes de fonctions du laboratoire 1 avec ceux-ci :
+Ainsi, nous pourrions remplacer les prototypes de fonctions du laboratoire 1 avec ceux-ci (**Ne le faites pas, il s'agit d'un exemple**) :
 
 ```cpp
 void afficherMenu();
