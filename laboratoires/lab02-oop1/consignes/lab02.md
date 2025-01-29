@@ -31,7 +31,7 @@ Cela commence à faire beaucoup !
 
 > NOTE - On devrait essayer de limiter le nombre de paramètres à 4 dans un prototype, si possible.
 
-À mesure que les besoins de l'application évolueront, on risque de se retrouver avec encore plus de paramètres. Le code deviendra donc de plus en plus difficile à maintenir si on doit ajouter à chaque fois un nouveau tableau à toutes nos méthodes.
+À mesure que les besoins de l'application évolueront, on risque de se retrouver avec encore plus de variables. Le code deviendra donc de plus en plus difficile à maintenir si on doit ajouter à chaque fois un nouveau tableau à toutes nos méthodes.
 
 Existe-t-il une méthode plus adéquate pour gérer cette situation? Eh oui, il s'agit bien entendu de la **Programmation orientée objet**!
 
@@ -209,13 +209,13 @@ Tache::Tache(std::string description, bool estCompletee) {
 > int main () {
 >     std::locale::global(std::locale{ "" });
 > 
->     Tache premier("Comprendre les classes", false);
+>     Tache premiere("Comprendre les classes", false);
 >     Tache seconde("Comprendre les constructeurs", false);
 > 
 >     return 0;
 > }
 > ```
-> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premier` et `seconde`) est dans un espace mémoire distinct, et qu'ils a ses propres valeurs de `description` et `estComplette`. Toutefois, on ne peut pas connaître d'avance le nom de toutes les instances de notre classe. C++ nous offre donc `this`, qui est **un pointeur** vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder aux attributs `description` et `estCompletee` de celui-ci!
+> En plus d'initialiser notre tâche d'un coup, il faut comprendre que chacun des objets (`premiere` et `seconde`) est dans un espace mémoire distinct, et qu'il a ses propres valeurs de `description` et `estComplette`. Toutefois, on ne peut pas connaître d'avance le nom de toutes les instances de notre classe. C++ nous offre donc `this`, qui est **un pointeur** vers l'instance en cours. Donc, quand je suis dans le constructeur de `seconde`, `this` pointe à la même case mémoire que `seconde` et peut donc accéder aux attributs `description` et `estCompletee` de celui-ci!
 
 > Pour vous convaincre que `this` est un pointeur, sachez qu'on peut réécrire notre constructeur de cette façon :
 > ```cpp
