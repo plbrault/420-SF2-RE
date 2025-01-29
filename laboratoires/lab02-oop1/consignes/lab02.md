@@ -31,9 +31,7 @@ Cela commence à faire beaucoup !
 
 > NOTE - On devrait essayer de limiter le nombre de paramètres à 4 dans un prototype, si possible.
 
-Cette méthodologie de gérer une *tâche* peut probablement être accomplie avec deux ou trois *attributs*, mais elle ne sera pas *scalable*
-
-> *Scalable/Scale*: Imaginons un système informatique qui est présentement en mesure de fournir 1000 requête par seconde, et qui soudainement reçoit 10000 requête par seconde. Ce système sera *scalable* si les ressources humaines nécessaires pour garder le système fonctionnel est significativement inférieur à la demande. Donc ici, si une compagnie a bien gérer cette aspect en employant un employé de plus que d'ordinaire *préalablement* à la hausse de demande, et que le système à répondu sans interruption, on dira que le système est *scalable*. Même concept peut s'appliquer à une méthodologie : plus on va ajouter de tableau pour gérer les attributs d'une tâche, et considérant qu'une application peut gérer plus qu'une *entité* - par exemple, `Tache` et `Personne` - et qu'en plus les fonctionnalités vont s'ajouter, le nombre de personne pour programmer le tout *à la même vitesse* devra augmenter.
+À mesure que les besoins de l'application évolueront, on risque de se retrouver avec encore plus de paramètres. Le code deviendra donc de plus en plus difficile à maintenir si on doit ajouter à chaque fois un nouveau tableau à toutes nos méthodes.
 
 Existe-t-il une méthode plus adéquate pour gérer cette situation? Eh oui, il s'agit bien entendu de la **Programmation orientée objet**!
 
