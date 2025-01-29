@@ -231,7 +231,7 @@ Tache::Tache(std::string description, bool estCompletee) {
 > ```
 > Ici, on utilise le déréférencement (`*this`) et on obtient donc un objet de l'instance `Tache`. On peut donc utiliser le `.` au lieu de `->`.
 
-Voici un *schéma de classe* qui représente notre `Tache` :
+Voici un *diagramme de classe* qui représente notre `Tache` :
 
 ```plantuml
 @startuml
@@ -489,7 +489,7 @@ main.cpp:10:13: error: ‘std::string Tache::_description’ is private within t
    10 |     maTache._description = "Compléter le laboratoire 2";
 ```
 
-Il y a de bonne chance que votre IDE ne vous permette même pas de compiler ce code. Voici à quoi `Tache` ressemble dans un schéma de classe en tenant compte des modificateurs d'accès `private` et `public`.
+Il y a de bonne chance que votre IDE ne vous permette même pas de compiler ce code. Voici à quoi `Tache` ressemble dans un diagramme de classe en tenant compte des modificateurs d'accès `private` et `public`.
 
 ```plantuml
 @startuml
@@ -513,7 +513,7 @@ Félicitations, vous avez maintenant une classe `Tache` solide qui cache ses att
 
 Nous voulons maintenant ajouter à notre programme le concept d'une personne qui possède un prénom, un nom et une liste de tâches à réaliser. Puisque nous ne savons pas combien de tâches notre personne aura, nous allons utiliser un tableau dynamique à l'aide d'un pointeur. Nous allons voir que cela va apporter son lot de défis dus à l'allocation de mémoire (`new`) et la désallocation de mémoire (`delete`).
 
-Voici un schéma de classe qui représente notre `Personne`.
+Voici un diagramme de classe qui représente notre `Personne`.
 
 ```plantuml
 @startuml
@@ -573,16 +573,16 @@ Dans cette étape, il faut créer une classe `Personne` avec seulement :
 * les attributs `_nom` et `_prenom`
 * les deux constructeurs
 * les méthodes `changerPrenom`, `changerNom`, `obtenirNomComplet` et `obtenirChaine`
-  * **Référez-vous au schéma de la classe pour connaître les types de retour et les paramètres attendus pour ces méthodes.**
+  * **Référez-vous au diagramme de la classe pour connaître les types de retour et les paramètres attendus pour ces méthodes.**
   * `obtenirChaine` doit retourner la chaîne « *Liste de tâches de `prénom nom` :* », sans saut de ligne.
 
 Tester votre classe dans le `main`.
 
 ### Étape 2 - Le destructeur
 
-Nous avons vu dans le laboratoire #1 que les pointeurs sont importants mais un peu dangereux. Si on ne fait pas attention, on peut essayer d'accéder a de la mémoire qui n'est pas valide, ou pire encore perdre l'accès a une zone mémoire complète. Lorsqu'on mélange les classes et les pointeurs, le potentiel d'erreur similaire augmente rapidement. En d'autres mots, il faut être très consciencieux concernant les pointeurs dans une classe.
+Nous avons vu dans le laboratoire #1 que les pointeurs sont importants mais un peu dangereux. Si on ne fait pas attention, on peut essayer d'accéder à de la mémoire qui n'est pas valide, ou pire encore perdre l'accès a une zone mémoire complète. Lorsqu'on mélange les classes et les pointeurs, le potentiel d'erreur similaires augmente rapidement. En d'autres mots, il faut être très consciencieux concernant les pointeurs dans une classe.
 
-Reprenons notre classe et ajoutons notre attribut privé `_taches`. On se rend rapidement compte que nous allons avoir besoins d'instancier cet attribut. Il semble évident que les constructeurs seront l'endroit logique pour cette tâche.
+Reprenons notre classe et ajoutons notre attribut privé `_taches`. On se rend rapidement compte que nous allons avoir besoin d'instancier cet attribut. Il semble évident que les constructeurs seront l'endroit logique pour cette tâche.
 
 Notre fichier `personne.h`:
 ```cpp
@@ -649,7 +649,11 @@ On remarque que le destructeur porte le même nom que la classe, préfixé d'un 
 
 ### Étape 3 - Gérer les tâches
 
-Implémentez maintenant la méthode `ajouterTache` afin de pouvoir avoir des tâches à une `Personne`. Pour l'instant, assurez-vous que vous êtes en mesure d'en ajouter le nombre défini par `#TAILLE_LISTE_TACHE_INC`. Assurez-vous de tester votre code avant de passer à l'étape suivante.
+Implémentez maintenant la méthode `ajouterTache` afin de pouvoir ajouter des tâches à une `Personne`. Pour l'instant, assurez-vous que vous êtes en mesure d'en ajouter le nombre défini par `#TAILLE_LISTE_TACHE_INC`.
+
+**N'oubliez pas de vous référer au diagramme pour connaître la signature de la méthode. Cela est vrai pour les étapes subséquentes également.**
+
+Assurez-vous de bien tester votre code avant de passer à l'étape suivante.
 
 ### Étape 4 - Agrandir la liste des tâches
 
@@ -677,7 +681,7 @@ Assurez-vous de tester votre code avant et faire valider par l'enseignant. Une t
 
 ## Création d'une classe menu
 
-Voici un schéma présentant un défi pour la création d'une classe `Menu` qui sera utiliser en continuation au laboratoire #1.
+Voici un diagramme présentant un défi pour la création d'une classe `Menu` qui sera utiliser en continuation au laboratoire #1.
 
 ```plantuml
 @startuml
