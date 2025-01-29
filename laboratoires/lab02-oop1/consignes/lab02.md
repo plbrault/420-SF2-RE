@@ -573,7 +573,7 @@ Dans cette étape, il faut créer une classe `Personne` avec seulement :
 * les attributs `_nom` et `_prenom`
 * les deux constructeurs
 * les méthodes `changerPrenom`, `changerNom`, `obtenirNomComplet` et `obtenirChaine`
-  * **Référez-vous au schéma de la classe pour connaître les types de retour et les paramètres de ces méthodes.**
+  * **Référez-vous au schéma de la classe pour connaître les types de retour et les paramètres attendus pour ces méthodes.**
   * `obtenirChaine` doit retourner la chaîne « *Liste de tâches de `prénom nom` :* », sans saut de ligne.
 
 Tester votre classe dans le `main`.
