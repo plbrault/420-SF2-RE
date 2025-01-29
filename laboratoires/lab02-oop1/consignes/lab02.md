@@ -475,7 +475,7 @@ Regardons ce qui se passe dans notre fonction `main` quand on veut compiler le c
 ```cpp
 #include <iostream>
 
-#include "task.h"
+#include "tache.h"
 
 int main () {
     std::locale::global(std::locale{ "" });
@@ -490,7 +490,7 @@ int main () {
 }
 ```
 
-Si nous essayons de compiler ceci, nous obtiendrons l'erreur :
+Si vous essayez de compiler ce code, vous obtiendrez probablement une erreur, parce que 
 
 ```bash
 main.cpp:10:13: error: ‘std::string Tache::_description’ is private within this context
@@ -600,7 +600,7 @@ Notre fichier `personne.h`:
 #include <string>
 #include <stddef.h>
 
-#include "Tache.h"
+#include "tache.h"
 
 #define TAILLE_LISTE_TACHE_INC 10
 
