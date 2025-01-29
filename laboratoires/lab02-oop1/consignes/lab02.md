@@ -21,10 +21,10 @@ void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTac
 void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches);
 ```
 
-Le fait d'avoir deux tableaux à gérer alourdit déjà considérablement les paramètres de nos fonctions. Imaginez maintenant si on voulait qu'une tâche ait en plus une date de création, une date limite, un titre (plus cours que la description) et un niveau (bas, moyen, important). Voici à quoi ressembleraient nos prototypes:
+Le fait d'avoir deux tableaux à gérer alourdit déjà considérablement les paramètres de nos fonctions. Imaginez maintenant si on voulait qu'une tâche ait en plus une date de création, une date limite, un titre (plus cours que la description) et une priorité (basse, moyenne, haute). Voici à quoi ressembleraient nos prototypes:
 
 ```cpp
-void afficherListe(std::string taches[], bool tacheCompletee[], std::string dateCree[], std::string dateLimite[], std::string titre[], int niveau[], int nombreTaches);
+void afficherListe(std::string taches[], bool tacheCompletee[], std::string dateCree[], std::string dateLimite[], std::string titre[], int priorite[], int nombreTaches);
 ```
 
 Cela commence à faire beaucoup !
