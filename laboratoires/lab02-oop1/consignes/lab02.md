@@ -6,7 +6,7 @@ Débuter l'intégration des concepts de base de la programmation orientée objet
 
 ## Pourquoi les classes ?
 
-Si nous regardons les deux derniers laboratoires, nous avons codé une petite application qui gère une liste de tâches. Une tâche est définie par sa description et par sa complétion (est-ce que la tâche a été complétée ou non). On pourrait donc dire qu'une tâche possède deux variables : `description` et `fait`. Si nous voulons gérer plus d'une tâche, nous allons donc utiliser deux tableau : `taches` qui contient les description et `tacheCompletee` qui contient la completion. Regardons ensemble les prototypes de nos fonction du laboratoire #1 :
+Si nous regardons les deux derniers laboratoires, nous avons codé une petite application qui gère une liste de tâches. Une tâche est définie par sa description et par sa complétion (est-ce que la tâche a été complétée ou non). On pourrait donc dire qu'une tâche possède deux variables : `description` et `estCompletee`. Si nous voulons gérer plus d'une tâche, nous allons donc utiliser deux tableau : `taches` qui contient les description et `tacheCompletee` qui contient la completion. Regardons ensemble les prototypes de nos fonction du laboratoire #1 :
 
 ```cpp
 void afficherMenu();
