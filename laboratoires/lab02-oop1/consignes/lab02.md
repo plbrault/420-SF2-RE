@@ -490,14 +490,9 @@ int main () {
 }
 ```
 
-Si vous essayez de compiler ce code, vous obtiendrez probablement une erreur, parce que 
+Si vous essayez de compiler ce code, vous obtiendrez probablement une erreur, parce que le `main` tente d'accéder à (et même modifier) des membres privés de la classe `Tache`. Cela est interdit.
 
-```bash
-main.cpp:10:13: error: ‘std::string Tache::_description’ is private within this context
-   10 |     maTache._description = "Compléter le laboratoire 2";
-```
-
-Il y a de bonne chance que votre IDE ne vous permette même pas de compiler ce code. Voici à quoi `Tache` ressemble dans un diagramme de classe en tenant compte des modificateurs d'accès `private` et `public`.
+Voici à quoi `Tache` ressemble dans un diagramme de classe en tenant compte des modificateurs d'accès `private` et `public`.
 
 ```plantuml
 @startuml
