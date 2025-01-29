@@ -251,8 +251,8 @@ Donc, maintenant que nous avons une classe qui contient des attributs (variables
 
 Pour comprendre ce qu'est une **méthode**, il faut se poser la question suivante : quelles sont les actions que je veux poser sur une instance de ma classe considérant ses attributs ? Par exemple, un objet de classe `Tache` pourrait posséder les actions suivantes :
 
-* marquer comme complétée (*check*) ;
-* démarquer comme complétée (*uncheck*) ;
+* marquer comme complétée (« cocher ») ;
+* démarquer comme complétée (« décocher ») ;
 * changer la description (et valider que la longueur est au maximum 32 caractères) ;
 * afficher la tâche à l'utilisateur (selon notre modèle `numéro [X] description`).
 
