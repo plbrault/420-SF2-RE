@@ -72,7 +72,7 @@ int main() {
 
     // Étape 8
 
-    char* caractere1 = new char, *caractere2 = new char;
+    char *caractere1 = new char, *caractere2 = new char;
 
     *caractere1 = 'A';
     *caractere2 = 'B';

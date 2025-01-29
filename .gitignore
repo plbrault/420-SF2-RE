@@ -45,10 +45,10 @@ x86
 CMakeLists.txt
 cmake-build-debug
 *vcxproj*
-
-*.pdf
-
-# vscode
 .vscode/
 makefile
 bin/
+
+# Exported Markdown
+*.pdf
+*.html
