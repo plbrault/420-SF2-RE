@@ -372,7 +372,7 @@ int main () {
         Tache courante(description, estCompletee);
         taches[quantite] = courante;
 
-        std::cout << "Voulez vous continuez ? [O|N] ";
+        std::cout << "Voulez vous continuer ? [O|N] ";
         std::getline(std::cin, reponseFait);
         terminee = reponseFait.compare("O") != 0;
         quantite++;
@@ -395,9 +395,11 @@ Donc alors qu'avant nous avions des fonctions qui recevait un ou des objets en p
 
 ### On veut protéger nos données
 
-Parlons maintenant du mot clé `public` que nous avons laisser un peu à lui-même et qui fait que tout ce qui se trouve en-dessous est accessible dans tous le code. Il s'agit d'un problème si on veut s'assurer que les programmeurs utilise la bonne méthode pour mettre à jour `description` et ne pas mettre plus de 32 caractères à l'intérieur. Nous avons besoins d'une manière pour cacher, ou rendre *privée*, nos attributs.
+Parlons maintenant du mot clé `public` que nous avons laissé un peu à lui-même et qui fait que tout ce qui se trouve en-dessous est accessible dans tout le code. Il s'agit d'un problème si on veut s'assurer que les programmeurs utilisent la bonne méthode pour mettre à jour `description` et ne pas mettre plus de 32 caractères à l'intérieur. Nous avons besoin d'une manière pour cacher, ou rendre *privée*, nos attributs.
 
-C++ nous offre un mot clé pour cela, `private`, qui nous permet de cacher (**encapsuler**) nos attributs pour que seules les méthodes publiques puissent les manipuler, et ainsi s'assurer que nos *validations* soient toujours prise en compte. Regardons maintenant à quoi ressemble notre fichier `tache.h`.
+C++ nous offre un mot clé pour cela, `private`, qui nous permet de cacher (**encapsuler**) nos attributs pour que seules les méthodes publiques puissent les manipuler, et ainsi s'assurer que nos *validations* soient toujours prise en compte.
+
+Modifiez donc le fichier `tache.h` de cette façon:
 
 ```cpp
 class Tache {
