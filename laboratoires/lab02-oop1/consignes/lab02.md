@@ -420,7 +420,7 @@ public:
 
 > Le mot-clé `private` va cacher les attributs et seules les méthodes de la classe pourront y accéder et les modifier. Notez que dans le manuel utilisé pour le cours, les attributs privés ont un préfixe `m_` alors qu'ici, nous utilisons uniquement le `_`. Sachez qu'il s'agit d'une convention et qu'elle peut différer d'un projet à l'autre, d'un cours à l'autre ou d'une entreprise à l'autre. Nous pourrions également ne rien mettre comme préfix. On vous demande cependant, dans le cadre du cours, de suivre la nomenclature décrite dans les standards de programmation sur la page *Moodle*.
 
-Regardons maintenant notre nouveau `tache.cpp`:
+Changez maintenant le contenu de votre fichier `tache.cpp` par celui-ci:
 
 ```cpp
 #include "tache.h"
@@ -458,7 +458,11 @@ std::string Tache::obtenirChaine(int index) {
 
 ```
 
-**Rien a changé**, à l'exception de la *refactorisation* de notre code avec les nouveaux noms d'attributs, ces méthodes ont accès a nos attributs privées. Regardons ce qui ce passe dans notre fonction `main` quand on veut compiler le code suivant :
+**Rien n'a changé**, à l'exception de la *refactorisation* de notre code avec les nouveaux noms d'attributs. Puisque nos méthodes ont accès a nos attributs privés, rien d'autre ne change.
+
+> Le terme « refactorisation » désigne une modification du code qui ne change pas son comportement externe.
+
+Regardons ce qui se passe dans notre fonction `main` quand on veut compiler le code suivant :
 
 ```cpp
 #include <iostream>
@@ -478,7 +482,7 @@ int main () {
 }
 ```
 
-Si nous essayons de compiler ceci, nous allons l'erreur :
+Si nous essayons de compiler ceci, nous obtiendrons l'erreur :
 
 ```bash
 main.cpp:10:13: error: ‘std::string Tache::_description’ is private within this context
@@ -503,7 +507,7 @@ class Tache {
 @enduml
 ```
 
-Félicitation, nous avons maintenant une classe `Tache` solide qui cache ses attributs afin de gérer et valider le contenue qu'on lui assigne - donc **encapsuler** nos attributs. Nous sommes en mesure de créer une tâche vide, mais également de créer une tâche en spécifiant chaque attributs, et nous avons 4 méthodes qui manipule nos attributs ou les utilises.
+Félicitations, vous avez maintenant une classe `Tache` solide qui cache ses attributs afin de gérer et valider le contenu qu'on leur assigne - on dit que la classe **encapsule** ses attributs. Nous sommes en mesure de créer une tâche vide, mais également de créer une tâche en spécifiant la valeur de chaque attribut, et nous avons 4 méthodes qui manipulent nos attributs ou les utilisent.
 
 ## Création d'une classe Personne
 
