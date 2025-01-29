@@ -286,7 +286,7 @@ public:
 
 > Remarquez que notre constructeur par défaut utilise maintenant le second constructeur, ce qui réduit le code et le potentiel d'erreurs.
 
-Donc notre classe `Tache` ce conceptualise comme ceci :
+Donc notre classe `Tache` se conceptualise comme ceci :
 
 ```plantuml
 @startuml
