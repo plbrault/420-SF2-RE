@@ -43,7 +43,7 @@ int demanderChoix(Menu &menu) {
 }
 
 void afficherListe(Personne &toi) {
-    if(toi.obtenirNombreTache() == 0) {
+    if(toi.obtenirNombreTaches() == 0) {
         std::cout << "La liste est vide." << std::endl;
     } else {
         std::cout << toi.obtenirChaine() << std::endl;
@@ -53,7 +53,7 @@ void afficherListe(Personne &toi) {
 void ajouterTache(Personne &toi) {
     std::string tache;
 
-    if (toi.obtenirNombreTache() == 100) {
+    if (toi.obtenirNombreTaches() == 100) {
         std::cout << "La liste est pleine." << std::endl;
     } else {
         std::cout << "Entrez la tâche à ajouter : ";
@@ -73,7 +73,7 @@ size_t demanderNumeroTache(std::string etiquette, Personne &toi) {
     do {
         std::cout << etiquette;
         std::cin >> numeroTache;
-        valide = numeroTache >= 1 && numeroTache <= toi.obtenirNombreTache();
+        valide = numeroTache >= 1 && numeroTache <= toi.obtenirNombreTaches();
         if (!valide) {
             std::cout << "Le numéro entré est invalide." << std::endl;
         }
@@ -88,9 +88,9 @@ void marquerFaite(Personne &toi) {
 
     afficherListe(toi);
 
-    if (toi.obtenirNombreTache() > 0) {
+    if (toi.obtenirNombreTaches() > 0) {
         int numeroTache = demanderNumeroTache("Entrez le numéro de la tâche à marquer comme faite : ", toi);
-        toi.obtenirTache(numeroTache)->marquerFait();
+        toi.obtenirTache(numeroTache)->marquerCompletee();
     }
 }
 
@@ -98,7 +98,7 @@ void echangerTaches(Personne &toi) {
     int numeroTache1, numeroTache2;
     std::string tacheTemp;
 
-    if (toi.obtenirNombreTache() >= 2) {
+    if (toi.obtenirNombreTaches() >= 2) {
         afficherListe(toi);
         std::cout << std::endl;
 
@@ -116,7 +116,7 @@ void echangerTaches(Personne &toi) {
 void supprimerTache(Personne &toi) {
     afficherListe(toi);
 
-    if (toi.obtenirNombreTache() > 0) {
+    if (toi.obtenirNombreTaches() > 0) {
         int numeroTache = demanderNumeroTache("Entrez le numéro de la tâche à supprimer : ", toi);
 
         toi.supprimerTache(numeroTache);
@@ -130,7 +130,7 @@ void sauvegarderPersonne(Personne &toi) {
         return;
     }
 
-    for (size_t i = 0; i < toi.obtenirNombreTache(); i++) {
+    for (size_t i = 0; i < toi.obtenirNombreTaches(); i++) {
         fichier << toi.obtenirTache(i + 1)->obtenirDescription() << std::endl;
         fichier << toi.obtenirTache(i + 1)->estFait() << std::endl;
     };

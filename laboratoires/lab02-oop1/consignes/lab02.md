@@ -250,7 +250,7 @@ Donc, maintenant que nous avons une classe qui contient des attributs (variables
 Pour comprendre ce qu'est une **méthode**, il faut se poser la question suivante : quelles sont les actions que je veux poser sur une instance de ma classe considérant ses attributs ? Par exemple, un objet de classe `Tache` pourrait posséder les actions suivantes :
 
 * marquer comme complétée (« cocher ») ;
-* démarquer comme complétée (« décocher ») ;
+* marquer comme non complétée (« décocher ») ;
 * changer la description (et valider que la longueur est au maximum 32 caractères) ;
 * afficher la tâche à l'utilisateur (selon notre modèle `numéro [X] description`).
 
@@ -278,10 +278,10 @@ public:
     Tache() : Tache("", false) { };
     Tache(std::string description, bool estCompletee);
 
-    void marquerFait();
-    void demarquerFait();
+    void marquerCompletee();
+    void marquerNonCompletee();
     void changerDescription(const std::string &);
-    std::string obtenirChaine(int index);
+    std::string obtenirChaine(int indiceTache);
 };
 
 #endif
@@ -300,10 +300,10 @@ class Tache {
     Tache();
     Tache(std::string description, bool estCompletee)
 
-    void marquerFait()
-    void demarquerFait()
+    void marquerCompletee()
+    void marquerNonCompletee()
     void changerDescription(const std::string &description)
-    std::string obtenirChaine(int index)
+    std::string obtenirChaine(int indiceTache)
 }
 @enduml
 ```
@@ -321,11 +321,11 @@ Tache::Tache(std::string description, bool estCompletee) {
     this->estCompletee = estCompletee;
 }
 
-void Tache::marquerFait() {
+void Tache::marquerCompletee() {
     this->estCompletee = true;
 }
 
-void Tache::demarquerFait() {
+void Tache::marquerNonCompletee() {
     this->estCompletee = false;
 }
 
@@ -338,7 +338,7 @@ void Tache::changerDescription(const std::string &description) {
     }
 }
 
-std::string Tache::obtenirChaine(int index) {
+std::string Tache::obtenirChaine(int indiceTache) {
     /*
     Un `ostringstream` permet de construire une chaîne de caractères en concaténant
     des données qui peuvent être de différents types. Il s'utilise de façon similaire
@@ -346,7 +346,7 @@ std::string Tache::obtenirChaine(int index) {
     */
     std::ostringstream flux;
 
-    flux << index << " [" << (this->estCompletee ? 'X' : ' ') << "] " << this->description;
+    flux << indiceTache << " [" << (this->estCompletee ? 'X' : ' ') << "] " << this->description;
 
     return flux.str();
 }
@@ -417,10 +417,10 @@ private:
 public:
     Tache(std::string description, bool estCompletee);
 
-    void marquerFait();
-    void demarquerFait();
+    void marquerCompletee();
+    void marquerNonCompletee();
     void changerDescription(const std::string &)
-    std::string obtenirChaine(int index);
+    std::string obtenirChaine(int indiceTache);
 };
 
 #endif
@@ -440,11 +440,11 @@ Tache::Tache(std::string description, bool estCompletee) {
     this->_estCompletee = estCompletee;
 }
 
-void Tache::marquerFait() {
+void Tache::marquerCompletee() {
     this->_estCompletee = true;
 }
 
-void Tache::demarquerFait() {
+void Tache::marquerNonCompletee() {
     this->_estCompletee = false;
 }
 
@@ -456,10 +456,10 @@ void Tache::changerDescription(const std::string &description) {
     }
 }
 
-std::string Tache::obtenirChaine(int index) {
+std::string Tache::obtenirChaine(int indiceTache) {
     std::ostringstream flux;
 
-    flux << index << " [" << (this->_estCompletee ? 'X' : ' ') << "] " << this->_description;
+    flux << indiceTache << " [" << (this->_estCompletee ? 'X' : ' ') << "] " << this->_description;
 
     return flux.str();
 }
@@ -502,10 +502,10 @@ class Tache {
 
     + Tache(std::string description, bool fait)
 
-    + void marquerFait()
-    + void demarquerFait()
+    + void marquerCompletee()
+    + void marquerNonCompletee()
     + void changerDescription(const std::string &description)
-    + std::string obtenirChaine(int index)
+    + std::string obtenirChaine(int indiceTache)
 }
 @enduml
 ```
@@ -529,12 +529,12 @@ class Tache {
     + Tache()
     + Tache(std::string description, bool estCompletee)
 
-    + void marquerFait()
-    + void demarquerFait()
+    + void marquerCompletee()
+    + void marquerNonCompletee()
     + bool estFait()
     + void changerDescription(const std::string &description)
     + std::string obtenirDescription()
-    + std::string obtenirChaine(int index)
+    + std::string obtenirChaine(int indiceTache)
 }
 
 class Personne {
@@ -553,16 +553,16 @@ class Personne {
     + void changerNom(const std::string &nom);
 
     + void ajouterTache(const Tache &tache)
-    + Tache *obtenirTache(size_t index)
+    + Tache *obtenirTache(size_t indiceTache)
     
     + size_t obtenirNombreTache();
 
     + void echangerTache(size_t tacheA, size_t tacheB);
-    + void supprimerTache(size_t index);
+    + void supprimerTache(size_t indiceTache);
 
     + std::string obtenirChaine()
 
-    - agrandirTableauTache();
+    - _agrandirTableauTaches();
 }
 @enduml
 ```
@@ -605,8 +605,8 @@ private:
     std::string _nom;
     Tache *_taches;
     
-    size_t _taille;
-    size_t _quantite;
+    size_t _capaciteTableauTaches;
+    size_t _quantiteTaches;
     
 public:
     Personne() : Personne("", "") { }
@@ -626,8 +626,8 @@ Personne::Personne(std::string prenom, std::string nom) {
     this->_prenom = prenom;
     this->_nom = nom;
     
-    this->_quantite = 0;
-    this->_taille = TAILLE_LISTE_TACHE_INC;
+    this->_quantiteTaches = 0;
+    this->_capaciteTableauTaches = TAILLE_LISTE_TACHE_INC;
     this->_taches = new Tache[this->_taille];
 }
 ```
@@ -668,7 +668,7 @@ Implémentez la méthode `agrandirTableauTache` selon la règle suivante : chaqu
 
 Implémentez la méthode `obtenirTache` qui permet de recevoir une tâche selon son indice. Si l'indice spécifié n'est pas valide, cette méthode doit retourner `nullptr`, sinon elle retourne un pointeur à la `Tache` spécifiée. 
 
-Assurez-vous de tester votre code avant de passer à l'étape suivante. Une technique a prendre est d'essayer, dans votre `main`, d'appeler `marquerFait` dans votre instance reçue.
+Assurez-vous de tester votre code avant de passer à l'étape suivante. Une technique a prendre est d'essayer, dans votre `main`, d'appeler `marquerCompletee` dans votre instance reçue.
 
 ### Étape 6 - Obtenir la chaine
 
@@ -697,12 +697,12 @@ class Menu {
     - bool _peutQuitter
 
     - std::string _options[18]
-    - size_t _quantite
+    - size_t _quantiteOptions
 
     + Menu(const std::string &titre, const std::string &question)
     + Menu(const std::string &titre, const std::string &question, bool peutQuitter)
-    + void ajouterMenuItem(const std::string &menuItem)
-    + bool validerSelection(int index)
+    + void ajouterOption(const std::string &option)
+    + bool validerSelection(int indiceOption)
     + int obtenirSelection()
     + int valeurMaximale(void)
     + std::string obtenirChaine()
@@ -712,10 +712,10 @@ class Menu {
 
 ### Étape 1 - Implémenter la classe `Menu`
 
-* Les constructeurs doivent initialiser `_titre`, `_question` et `_peutQuitter` selon les paramètres reçus (le premier constructeur considère `_peutQuitter` à `false`). Réfléchissez à `_selection` et `_quantite`.
-* `ajouterMenuItem` doit ajouter un item au menu et ne doit pas dépasser 18 (ce n'est pas un un tableau dynamique)
-* `validerSelection` doit regarder l'`index` reçu et s'assurer que c'est une option valide. Retourne `true` si valide, `false` sinon. N'oubliez-pas que la taille du tableau ne sera pas la bonne valeur si `_peutQuitter` est `true`.
-* `obtenirSelection` retourne `-1` si pas de sélection valide, sinon retourne le dernier `index` reçu par `validerSelection`.
+* Les constructeurs doivent initialiser `_titre`, `_question` et `_peutQuitter` selon les paramètres reçus (le premier constructeur considère `_peutQuitter` à `false`). Réfléchissez à `_selection` et `_quantiteOptions`.
+* `ajouterOption` doit ajouter une option au menu et ne doit pas dépasser 18 (ce n'est pas un un tableau dynamique)
+* `validerSelection` doit regarder l'`indiceOption` reçu et s'assurer que c'est une option valide. Retourne `true` si valide, `false` sinon. N'oubliez-pas que la taille du tableau ne sera pas la bonne valeur si `_peutQuitter` est `true`.
+* `obtenirSelection` retourne `-1` si pas de sélection valide, sinon retourne le dernier `indiceOption` reçu par `validerSelection`.
 * `valeurMaximale` retourne la valeur maximal d'options possible.
 * `obtenirChaine` reproduit le menu avec le titre, les items avec numéro, ainsi que la question **sans saut de ligne à la fin**.
 

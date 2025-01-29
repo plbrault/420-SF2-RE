@@ -12,8 +12,8 @@ private:
     std::string _prenom;
     std::string _nom;
     
-    size_t _quantite;
-    size_t _taille;
+    size_t _quantiteTaches;
+    size_t _capaciteTableauTaches;
     Tache *_taches;
 
     void _agrandirTableauTache();
@@ -29,7 +29,7 @@ public:
     void ajouterTache(const Tache &);
     Tache *obtenirTache(size_t);
     
-    size_t obtenirNombreTache();
+    size_t obtenirNombreTaches();
 
     void echangerTache(size_t, size_t);
     void supprimerTache(size_t);

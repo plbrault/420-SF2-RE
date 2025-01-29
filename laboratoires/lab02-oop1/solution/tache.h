@@ -10,20 +10,20 @@
 class Tache {
 private:
     std::string _description;
-    bool _fait;
+    bool _estCompletee;
     
 public:
     Tache() : Tache("", false) { };
     Tache(std::string description, bool fait);
 
-    void marquerFait();
-    void demarquerFait();
+    void marquerCompletee();
+    void marquerNonCompletee();
     bool estFait();
 
     void changerDescription(const std::string &);
     std::string obtenirDescription();
 
-    std::string obtenirChaine(int index);
+    std::string obtenirChaine(int indiceTache);
 };
 
 #endif

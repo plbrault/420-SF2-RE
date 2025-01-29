@@ -4,15 +4,15 @@
 
 Tache::Tache(std::string description, bool fait) {
     this->_description = description;
-    this->_fait = fait;
+    this->_estCompletee = fait;
 }
 
-void Tache::marquerFait() {
-    this->_fait = true;
+void Tache::marquerCompletee() {
+    this->_estCompletee = true;
 }
 
-void Tache::demarquerFait() {
-    this->_fait = false;
+void Tache::marquerNonCompletee() {
+    this->_estCompletee = false;
 }
 
 void Tache::changerDescription(const std::string &description) {
@@ -27,14 +27,14 @@ std::string Tache::obtenirDescription() {
     return this->_description;
 }
 
-std::string Tache::obtenirChaine(int index) {
+std::string Tache::obtenirChaine(int indiceTache) {
     std::ostringstream flux;
 
-    flux << index << " [" << (this->_fait ? 'X' : ' ') << "] " << this->_description;
+    flux << indiceTache << " [" << (this->_estCompletee ? 'X' : ' ') << "] " << this->_description;
 
     return flux.str();
 }
 
 bool Tache::estFait() {
-    return this->_fait;
+    return this->_estCompletee;
 }
