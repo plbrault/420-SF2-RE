@@ -509,7 +509,7 @@ class Tache {
 
 Félicitations, vous avez maintenant une classe `Tache` solide qui cache ses attributs afin de gérer et valider le contenu qu'on leur assigne - on dit que la classe **encapsule** ses attributs. Nous sommes en mesure de créer une tâche vide, mais également de créer une tâche en spécifiant la valeur de chaque attribut, et nous avons 4 méthodes qui manipulent nos attributs ou les utilisent.
 
-## Création d'une classe Personne
+## Création d'une classe `Personne`
 
 Donc maintenant, nous voulons avoir le concept d'une personne qui possède un prénom, un nom et une liste de tâche à faire. Vu qu'on ne sait pas combien de tâches notre personne aura, on va donc utiliser un tableau dynamique à l'aide d'un pointeur. Nous allons voir que cela va apporter son lots de défi par la nature allocation de mémoire (`new`) et désallocation de mémoire (`delete`).
 
