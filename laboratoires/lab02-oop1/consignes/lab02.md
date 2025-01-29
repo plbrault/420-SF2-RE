@@ -511,7 +511,7 @@ Félicitations, vous avez maintenant une classe `Tache` solide qui cache ses att
 
 ## Création d'une classe `Personne`
 
-Donc maintenant, nous voulons avoir le concept d'une personne qui possède un prénom, un nom et une liste de tâche à faire. Vu qu'on ne sait pas combien de tâches notre personne aura, on va donc utiliser un tableau dynamique à l'aide d'un pointeur. Nous allons voir que cela va apporter son lots de défi par la nature allocation de mémoire (`new`) et désallocation de mémoire (`delete`).
+Nous voulons maintenant ajouter à notre programme le concept d'une personne qui possède un prénom, un nom et une liste de tâches à réaliser. Puisque nous ne savons pas combien de tâches notre personne aura, nous allons utiliser un tableau dynamique à l'aide d'un pointeur. Nous allons voir que cela va apporter son lot de défis dus à l'allocation de mémoire (`new`) et la désallocation de mémoire (`delete`).
 
 Voici un schéma de classe qui représente notre `Personne`.
 
@@ -564,7 +564,7 @@ class Personne {
 @enduml
 ```
 
-Donc on voit notre classe `Tache` liée à notre classe `Personne`. Le losange noir signifie que la relation entre les deux est une de composition : on dit que la `Personne` est composée (au moins) d'une `Tache`. Pour ceux qui on l'oeil du Lynx, vous remarquerez qu'un drôle de "constructeur" avec une `~` a été ajouté. On va regarder tout ça de près.
+On voit que notre classe `Tache` est maintenant liée à une nouvelle classe `Personne`. Le losange noir signifie que la relation entre les deux en est une de **composition** : on dit que la `Personne` est composée (au moins) d'une `Tache`. Pour ceux qui on l'oeil du Lynx, vous remarquerez qu'un drôle de "constructeur" avec une `~` a été ajouté. On va regarder tout ça de près.
 
 ### Étape 1 - Créer la classe Personne
 
@@ -573,15 +573,16 @@ Dans cette étape, il faut créer une classe `Personne` avec seulement :
 * les attributs `_nom` et `_prenom`
 * les deux constructeurs
 * les méthodes `changerPrenom`, `changerNom`, `obtenirNomComplet` et `obtenirChaine`
-  * `obtenirChaine` doit retourner *Liste de tâches de `prénom nom` :*, sans saut de ligne.
+  * **Référez-vous au schéma de la classe pour connaître les types de retour et les paramètres de ces méthodes.**
+  * `obtenirChaine` doit retourner la chaîne « *Liste de tâches de `prénom nom` :* », sans saut de ligne.
 
 Tester votre classe dans le `main`.
 
 ### Étape 2 - Le destructeur
 
-Nous avons vu au laboratoire #1 que les pointeurs sont important mais un peu dangereux. Si on ne fait pas attention, on peut essayer d'accéder a de la mémoire qui n'est pas valide, ou pire encore perdre l'accès a une zone mémoire complète. Lorsqu'on mélange les classes et les pointeurs, le potentiel d'erreur similaire augmente rapidement. En d'autres mots, il faut être très consciencieux concernant les pointeurs dans une classe.
+Nous avons vu dans le laboratoire #1 que les pointeurs sont importants mais un peu dangereux. Si on ne fait pas attention, on peut essayer d'accéder a de la mémoire qui n'est pas valide, ou pire encore perdre l'accès a une zone mémoire complète. Lorsqu'on mélange les classes et les pointeurs, le potentiel d'erreur similaire augmente rapidement. En d'autres mots, il faut être très consciencieux concernant les pointeurs dans une classe.
 
-Reprenons notre classe et ajoutons notre attributs privées `_taches`. On se rend rapidement compte que nous allons avoir besoins d'instancier cet attribut. Il semble évident que les constructeurs seront l'endroit logique pour cette tâche.
+Reprenons notre classe et ajoutons notre attribut privé `_taches`. On se rend rapidement compte que nous allons avoir besoins d'instancier cet attribut. Il semble évident que les constructeurs seront l'endroit logique pour cette tâche.
 
 Notre fichier `personne.h`:
 ```cpp
@@ -628,11 +629,13 @@ Personne::Personne(std::string prenom, std::string nom) {
 }
 ```
 
-Maintenant, nous arrivons a une situation ambigue : a quel moment allons-nous pouvoir désaloué notre mémoire ? C++ nous offre une solution, en plus d'avoir la possitilité de faire un constructeur, on peut également faire des destructeurs. Ceux-ci sont appeler automatiquement lorsque la fonction dans laquelle l'instance de notre objet ce trouve. Voici notre destructeur pour notre classe `Personne`:
+Maintenant, nous arrivons à une situation ambigüe : à quel moment allons-nous pouvoir désallouer notre mémoire ?
 
-Dans notre `.h`, dans la partie `public`, on ajoute : `~Personne()`.
+C++ nous offre une solution: en plus d'avoir la possitilité de créer des constructeurs, on peut aussi ajouter un **destructeur** à notre classe. Celui-ci est appelé automatiquement à la destruction de l'objet (soit à la fin de sa portée en allocation statique, ou lors du `delete` avec l'allocation dynamique).
 
-Dans notre `.cpp`, on ajoute :
+Pour ajouter un destructeur, ajoutez d'abord un prototype `~Personne()`, sans type de retour, dans la partie `public` de votre fichier `.h`.
+
+Dans votre fichier `.cpp`, ajoutez l'implémentation du destructeur, comme ceci:
 
 ```cpp
 Personne::~Personne() {
@@ -642,15 +645,15 @@ Personne::~Personne() {
 }
 ```
 
-On remarque que le destructeur porte le même nom que la classe avec un tilde (`~`). Le destructeur n'aura jamais de paramètres et devrait généralement s'acquiter de tâches de libérations de ressource, tel désalouer un pointeur, fermer un fichier, etc.
+On remarque que le destructeur porte le même nom que la classe, préfixé d'un tilde (`~`). Le destructeur ne prendra jamais de paramètres et devra généralement s'acquiter de tâches de libération de ressources, telles que désallouer un pointeur, fermer un fichier, etc.
 
 ### Étape 3 - Gérer les tâches
 
-Implémenter la méthode `ajouterTache` afin de pouvoir avoir des tâches à notre `Personne`. Pour l'instant, s'assurer que nous sommes en mesure d'en ajouter le nombre définit par `#TAILLE_LISTE_TACHE_INC`. Assurez-vous de tester votre code avant de passer à l'étape suivante.
+Implémentez maintenant la méthode `ajouterTache` afin de pouvoir avoir des tâches à une `Personne`. Pour l'instant, assurez-vous que vous êtes en mesure d'en ajouter le nombre défini par `#TAILLE_LISTE_TACHE_INC`. Assurez-vous de tester votre code avant de passer à l'étape suivante.
 
 ### Étape 4 - Agrandir la liste des tâches
 
-Implémenter la méthode `agrandirTableauTache` selon la règle suivante : chaque agrandissement ce fait par incrément `#TAILLE_LISTE_TACHE_INC`. Utiliser cette méthode pour qu'`ajouterTache` l'utilise adéquatement. Assurez-vous de tester votre code avant de passer à l'étape suivante.
+Implémentez la méthode `agrandirTableauTache` selon la règle suivante : chaque agrandissement se fait par incrément de `#TAILLE_LISTE_TACHE_INC`. Utilisez cette méthode pour qu'`ajouterTache` l'utilise adéquatement. Assurez-vous de tester votre code avant de passer à l'étape suivante.
 
 > Pourquoi avons-nous mis cette méthode *privée* ?
 
