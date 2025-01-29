@@ -339,6 +339,11 @@ void Tache::changerDescription(const std::string &description) {
 }
 
 std::string Tache::obtenirChaine(int index) {
+    /*
+    Un `ostringstream` permet de construire une chaîne de caractères en concaténant
+    des données qui peuvent être de différents types. Il s'utilise de façon similaire
+    à l'objet `cout`. On obtient la chaîne de caractères finale avec la méthode `str()`.
+    */
     std::ostringstream flux;
 
     flux << index << " [" << (this->estCompletee ? 'X' : ' ') << "] " << this->description;
