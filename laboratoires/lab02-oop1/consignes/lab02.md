@@ -663,11 +663,13 @@ Implémentez la méthode `agrandirTableauTache` selon la règle suivante : chaqu
 
 ### Étape 5 - Obtenir la `Tache`
 
-Implémenter la méthode `obtenirTache` qui permet de recevoir une tâche selon son index. Si l'index spécifié n'est pas valide, cette méthode doit retourner `nullptr`, sinon elle retourne un pointeur à la `Tache` spécifiée. Assurez-vous de tester votre code avant de passer à l'étape suivante. Une technique a prendre est d'essayer, dans votre `main`, d'appeler `marquerFait` dans votre instance reçu.
+Implémentez la méthode `obtenirTache` qui permet de recevoir une tâche selon son indice. Si l'indice spécifié n'est pas valide, cette méthode doit retourner `nullptr`, sinon elle retourne un pointeur à la `Tache` spécifiée. 
+
+Assurez-vous de tester votre code avant de passer à l'étape suivante. Une technique a prendre est d'essayer, dans votre `main`, d'appeler `marquerFait` dans votre instance reçue.
 
 ### Étape 6 - Obtenir la chaine
 
-Implémenter la méthode `obtenirChaine` qui affichera la `Personne` suivant ce modèle : 
+Implémentez la méthode `obtenirChaine` qui affichera la `Personne` suivant ce modèle : 
 
 ```
 Tâches de André Jacques
@@ -677,11 +679,11 @@ Tâches de André Jacques
 3 [ ] Faire la vaiselle
 ```
 
-Assurez-vous de tester votre code avant et faire valider par l'enseignant. Une technique a prendre est d'essayer, dans votre `main`, d'appeler `marquerFait` dans votre instance reçu.
+Assurez-vous de tester votre code avant de le faire valider par l'enseignant.
 
-## Création d'une classe menu
+## Création d'une classe `Menu`
 
-Voici un diagramme présentant un défi pour la création d'une classe `Menu` qui sera utiliser en continuation au laboratoire #1.
+Voici un diagramme présentant un défi pour la création d'une classe `Menu` qui sera utilisée en continuation au laboratoire #1.
 
 ```plantuml
 @startuml
@@ -707,16 +709,16 @@ class Menu {
 
 ### Étape 1 - Implémenter la classe `Menu`
 
-* Les constructeurs doivent initialiser `_titre`, `_question` et `_peutQuitter` selon les paramètres reçu (le premier constructeur considère `_peutQuitter` a `false`). Réfléchissez à `_selection` et `_quantite`.
+* Les constructeurs doivent initialiser `_titre`, `_question` et `_peutQuitter` selon les paramètres reçus (le premier constructeur considère `_peutQuitter` à `false`). Réfléchissez à `_selection` et `_quantite`.
 * `ajouterMenuItem` doit ajouter un item au menu et ne doit pas dépasser 18 (ce n'est pas un un tableau dynamique)
 * `validerSelection` doit regarder l'`index` reçu et s'assurer que c'est une option valide. Retourne `true` si valide, `false` sinon. N'oubliez-pas que la taille du tableau ne sera pas la bonne valeur si `_peutQuitter` est `true`.
 * `obtenirSelection` retourne `-1` si pas de sélection valide, sinon retourne le dernier `index` reçu par `validerSelection`.
 * `valeurMaximale` retourne la valeur maximal d'options possible.
-* `obtenirChaine` reproduire le menu avec le titre, les items avec numéro, ainsi que la question **sans saut de ligne**.
+* `obtenirChaine` reproduit le menu avec le titre, les items avec numéro, ainsi que la question **sans saut de ligne à la fin**.
 
 ### Étape 2 - Modifier le laboratoire #1
 
-Changer toutes les fonctions de tel sorte que les prototypes dans `fonctions.h` soient :
+Reprenez vos fonctions du laboratoire 1, puis changez-les de telle sorte que les prototypes dans `fonctions.h` soient :
 
 ```cpp
 Menu construireMenuPrincipal(void);
@@ -732,4 +734,4 @@ void chargerListe(Personne &);
 void supprimerTache(Personne &);
 ```
 
-Remarquer qu'une nouvelle fonction, `construireMenuPrincipal()`, doit être implémenter. Celle-ci doit créer un objet `Menu` avec le même menu qu'au laboratoire #1.
+Remarquez qu'une nouvelle fonction, `construireMenuPrincipal()`, doit être implémentée. Celle-ci doit créer un objet `Menu` avec le même menu qu'au laboratoire #1.
