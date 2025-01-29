@@ -109,19 +109,19 @@ int main () {
     bool terminee = false;
 
     std::string description;
-    std::string reponseFait;
+    std::string reponseCompletee;
 
     do {
         std::cout << "Décrivez votre tâche : ";
         std::getline(std::cin, taches[quantite].description);
         std::cout << std::endl;
         std::cout << "Est-elle complétée ? [O|N] ";
-        std::getline(std::cin, reponseFait);
-        taches[quantite].estCompletee = reponseFait.compare("O") == 0;
+        std::getline(std::cin, reponseCompletee);
+        taches[quantite].estCompletee = reponseCompletee.compare("O") == 0;
 
         std::cout << "Voulez vous continuez ? [O|N] ";
-        std::getline(std::cin, reponseFait);
-        terminee = reponseFait.compare("O") != 0;
+        std::getline(std::cin, reponseCompletee);
+        terminee = reponseCompletee.compare("O") != 0;
         quantite++;
 
     } while(quantite < 100 && !terminee);
@@ -366,7 +366,7 @@ int main () {
     bool terminee = false;
 
     std::string description;
-    std::string reponseFait;
+    std::string reponseCompletee;
     bool estCompletee;
 
     do {
@@ -374,15 +374,15 @@ int main () {
         std::getline(std::cin, description);
         std::cout << std::endl;
         std::cout << "Est-elle complétée ? [O|N] ";
-        std::getline(std::cin, reponseFait);
-        estCompletee = reponseFait.compare("O") == 0;
+        std::getline(std::cin, reponseCompletee);
+        estCompletee = reponseCompletee.compare("O") == 0;
 
         Tache courante(description, estCompletee);
         taches[quantite] = courante;
 
         std::cout << "Voulez vous continuer ? [O|N] ";
-        std::getline(std::cin, reponseFait);
-        terminee = reponseFait.compare("O") != 0;
+        std::getline(std::cin, reponseCompletee);
+        terminee = reponseCompletee.compare("O") != 0;
         quantite++;
 
     } while(quantite < 100 && !terminee);
