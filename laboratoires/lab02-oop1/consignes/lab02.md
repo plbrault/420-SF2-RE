@@ -490,7 +490,7 @@ int main () {
 }
 ```
 
-Si vous essayez de compiler ce code, vous obtiendrez probablement une erreur, parce que le `main` tente d'accéder à (et même modifier) des membres privés de la classe `Tache`. Cela est interdit.
+Si vous essayez de compiler ce code, vous obtiendrez sans doute une erreur, parce que le `main` tente d'accéder à (et même modifier) des membres privés de la classe `Tache`. Cela est interdit.
 
 Voici à quoi `Tache` ressemble dans un diagramme de classe en tenant compte des modificateurs d'accès `private` et `public`.
 
