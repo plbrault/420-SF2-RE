@@ -264,6 +264,11 @@ Modifiez le code de votre fichier `tache.h` de cette façon:
 
 #include <string>
 
+/* 
+   On ajoute une constante ici pour définir le nombre de caractères maximal
+   d'une description de tâche. Cette constante sera accessible dans le
+   fichier .cpp.
+*/
 #define DESCRIPTION_CARACTERE_LIMITE 32
 
 class Tache {
