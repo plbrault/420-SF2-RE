@@ -395,9 +395,9 @@ Donc alors qu'avant nous avions des fonctions qui recevait un ou des objets en p
 
 ### On veut protéger nos données
 
-Parlons maintenant du mot clé `public` que nous avons laissé un peu à lui-même et qui fait que tout ce qui se trouve en-dessous est accessible dans tout le code. Il s'agit d'un problème si on veut s'assurer que les programmeurs utilisent la bonne méthode pour mettre à jour `description` et ne pas mettre plus de 32 caractères à l'intérieur. Nous avons besoin d'une manière pour cacher, ou rendre *privée*, nos attributs.
+Parlons maintenant du mot clé `public` que nous avons laissé un peu à lui-même et qui fait que tout ce qui se trouve en-dessous est accessible dans tout le code. Il s'agit d'un problème si on veut s'assurer que les programmeurs utilisent la bonne méthode pour mettre à jour `description` et ne pas mettre plus de 32 caractères à l'intérieur. Nous avons besoin d'une manière pour cacher, ou rendre *privés*, nos attributs.
 
-C++ nous offre un mot clé pour cela, `private`, qui nous permet de cacher (**encapsuler**) nos attributs pour que seules les méthodes publiques puissent les manipuler, et ainsi s'assurer que nos *validations* soient toujours prise en compte.
+C++ nous offre un mot-clé pour cela, `private`, qui nous permet de cacher (**encapsuler**) nos attributs pour que seules les méthodes publiques puissent les manipuler, et ainsi s'assurer que nos *validations* soient toujours prise en compte.
 
 Modifiez donc le fichier `tache.h` de cette façon:
 
@@ -418,7 +418,7 @@ public:
 #endif
 ```
 
-> Le mot clé `private` va cacher les variables et seul les méthodes de la classe pourront les modifier. Notez que dans le livre, les attributs privées ont un préfixe `m_` alors qu'ici, nous utilisons uniquement le `_`. Sachez qu'il s'agit d'une convention et qu'elle peut différer d'un projet à l'autre, d'une entreprise à l'autre. Nous pourrions également rien mettre comme préfix. On vous demande cependant, dans le cadre du cours, de suivre la nomenclature décrite dans le standard de programmation sur la page *Moodle*.
+> Le mot-clé `private` va cacher les attributs et seules les méthodes de la classe pourront y accéder et les modifier. Notez que dans le manuel utilisé pour le cours, les attributs privés ont un préfixe `m_` alors qu'ici, nous utilisons uniquement le `_`. Sachez qu'il s'agit d'une convention et qu'elle peut différer d'un projet à l'autre, d'un cours à l'autre ou d'une entreprise à l'autre. Nous pourrions également ne rien mettre comme préfix. On vous demande cependant, dans le cadre du cours, de suivre la nomenclature décrite dans les standards de programmation sur la page *Moodle*.
 
 Regardons maintenant notre nouveau `tache.cpp`:
 
