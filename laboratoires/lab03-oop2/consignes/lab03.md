@@ -10,7 +10,7 @@ Nous allons développer une série de classes qui a pour but d'aider à la repr�
 
 > Dans le cadre du cours, nous n'allons pas créer de manière formelle la libraire, toutefois *Visual Studio* permet la création de projet de type librarie (bibliothèque) alors que d'autres IDE nécessite probablement la configuration adéquate du projet. Cela ne sera pas obligatoire dans le présent cours.
 
-L'objectif est de créer l'ensemble de ces classes-ci.
+L'objectif est de créer l'ensemble de ces classes-ci pour le chapitre 3, 4 et 5.
 
 ```plantuml
 @startuml
@@ -115,7 +115,7 @@ class Hexahedron {
 
 ### Classe Point
 
-La classe `Point` doit permettre la création d'un point sur *N-dimension*. Chaque point *P* est décrit tel que :
+La classe `Point` doit permettre la création d'un point sur *N-dimension*. Chaque point `P` est décrit tel que :
 
 $$
 \begin{equation}
@@ -236,45 +236,41 @@ La stabilité de votre application C++ va grandement en dépendre.
 
 Voici les lignes directrices concernant l'implémentation de la classe `Triangle`.
 
-* Vos constructeurs doivent s'assurer d'instantier 
+* Vos constructeurs doivent s'assurer d'alouer 3 instances de Point
+* Vos constructeurs doivent s'assurer que les Point sont seulement en 2D
+* Assurez de désaloué vos pointeur dans le destructeurs
+* Assurez vous que le constructeur de copie ne fasse pas de *shalow copy*
+* Assurez vous que l'opérateur d'assignation ne fasse pas de *shalow copy*
+* Calculer l'aire de votre triangle
 
----
-
-À venir
-
-**Équation de l'aire d'un triangle avec trois points**
-
-Trois points en 2 dimensions définit :
+Soit trois points `P_0`, `P_1` et `P_2` définit comme ceci :
 
 $$
     P_0 = (x_{00}, x_{01}) \\
     P_1 = (x_{10}, x_{11}) \\
     P_2 = (x_{20}, x_{21})
 $$
+
+L'aire de notre triangle ce calcul selon l'expression suivante :
 
 $$
 A = 0.5 (|x_{00}(x_{11} - x_{21}) + x_{10}(x_{21} - x_{01}) + x_{20}(x_{01} - x_{11})|)
 $$
 
-Si *A* est égale à 0, ce n'est pas un triangle valide.
+> Observation : si la parenthèse est 0, l'aire est 0.
 
-**Équations pour définir si un point est à l'intérieur d'un triangle**
+> Note : Si l'aire est 0, le triangle n'est pas valide.
 
-Trois points en 2 dimensions définit :
+* Tester si le triangle est valide ou non
+* Tester si un point est à l'intérieur du Triangle
+
+Soit trois points `P_0`, `P_1` et `P_2` tel que définit précédement et un point `p` définit :
 
 $$
-    P_0 = (x_{00}, x_{01}) \\
-    P_1 = (x_{10}, x_{11}) \\
-    P_2 = (x_{20}, x_{21})
+p = (x_0, x_1)
 $$
 
-et un Point supplémentaire à valider :
-
-$$ 
-p = (x_0, x_1) 
-$$
-
-Ont doit faire trois produit croisée tel que :
+On doit faire le produit croisée des toutes les combinaisons de vecteurs créer par P_0 et P_1 sur P_0 et p, P_1 et P_2 sur sur P_1 et p, etc.
 
 $$ 
 C_0(P_0, P_1, p) = (x_{10} - x_{00})(x_1 - x_{01}) - (x_{11} - x_{01})(x_0 - x_{00})
@@ -282,17 +278,13 @@ C_1(P_1, P_2, p) = (x_{20} - x_{10})(x_1 - x_{11}) - (x_{21} - x_{11})(x_0 - x_{
 C_2(P_2, P_0, p) = (x_{00} - x_{20})(x_1 - x_{21}) - (x_{01} - x_{21})(x_0 - x_{20})
 $$ 
 
-Puis on s'assure que le signe de chaque C_x est le même.
+> Observation : Il est tout à fait possible de ce créer une méthode privée pour ce calcul.
 
-**Équations pour définir si un triangle est un triangle rectangle**
+Une fois les produits croisés complétés, il faut s'assurer qu'ils ont tous le même signe (tous négatif ou tous positif) pour que le point soit à l'intérieur.
 
-$$
-    P_0 = (x_{00}, x_{01}) \\
-    P_1 = (x_{10}, x_{11}) \\
-    P_2 = (x_{20}, x_{21})
-$$
+* Tester si le triangle est un triangle rectangle
 
-On définit les vecteurs suivants :
+On prends la définition de trois points `P_0`, `P_1` et `P_2` mentionné précédemment. On définit des vecteurs `A`, `B` et `C` suivant :
 
 $$
     \vec{A} = (x_{10} - x_{00}, x_{11} - x_{01}) \\
@@ -300,12 +292,13 @@ $$
     \vec{C} = (x_{00} - x_{20}, x_{01} - x_{21})
 $$
 
-Puis on fait les *dot product* suivant :
+> Observation : Nous pourrions probablement avoir une méthode quelque part pour ça ? Où ? Que retourne-t-elle ?
+
+Par la suite on veut faire le produit croisée `AC`, `BC` et `AB` tel que :
 
 $$
-    \vec{A} \dot \vec{C} = (x_{10} - x_{00})(x_{00} - x_{20}) + (x_{11} - x_{01})(x_{01} - x_{21}) \\
-    \vec{A} \dot \vec{B} = (x_{10} - x_{00})(x_{20} - x_{10}) + (x_{11} - x_{01})(x_{21} - x_{11}) \\
-    \vec{B} \dot \vec{C} = (x_{20} - x_{10})(x_{00} - x_{20}) + (x_{21} - x_{11})(x_{01} - x_{21})
+    \vec{A} \cdot \vec{C} = (x_{10} - x_{00})(x_{00} - x_{20}) + (x_{11} - x_{01})(x_{01} - x_{21}) \\
+    \vec{A} \cdot \vec{B} = (x_{10} - x_{00})(x_{20} - x_{10}) + (x_{11} - x_{01})(x_{21} - x_{11}) \\
+    \vec{B} \cdot \vec{C} = (x_{20} - x_{10})(x_{00} - x_{20}) + (x_{21} - x_{11})(x_{01} - x_{21})
 $$
 
-Si un de ces *dot products* est égale à 0, on a un triangle rectangle.

@@ -54,16 +54,13 @@ bool Triangle::estValide() const {
 }
 
 double Triangle::getAire() const {
-    double x00 = this->_points[0].getCoordonnee(0);
-    double x10 = this->_points[1].getCoordonnee(0);
-    double x20 = this->_points[2].getCoordonnee(0);
+    double resultat = abs(
+        this->_points[0].getCoordonnee(0) * (this->_points[1].getCoordonnee(1) - this->_points[2].getCoordonnee(1)) + 
+        this->_points[1].getCoordonnee(0) * (this->_points[2].getCoordonnee(1) - this->_points[0].getCoordonnee(1)) + 
+        this->_points[2].getCoordonnee(0) * (this->_points[0].getCoordonnee(1) - this->_points[1].getCoordonnee(1))
+    );
 
-    double x01 = this->_points[0].getCoordonnee(1);
-    double x11 = this->_points[1].getCoordonnee(1);
-    double x21 = this->_points[2].getCoordonnee(1);
-
-    double resultat = abs(x00 * (x11 - x21) + x10 * (x21 - x01) + x20 * (x01 - x11));
-    if (resultat < EPSILON) {
+    if (abs(resultat) < EPSILON) {
         return 0.0;
     }
 
@@ -74,21 +71,19 @@ bool Triangle::estInterieur(const Point &point) const {
     if (!this->estValide()) {
         return false;
     }
-    
-    double x00 = this->_points[0].getCoordonnee(0);
-    double x10 = this->_points[1].getCoordonnee(0);
-    double x20 = this->_points[2].getCoordonnee(0);
 
-    double x01 = this->_points[0].getCoordonnee(1);
-    double x11 = this->_points[1].getCoordonnee(1);
-    double x21 = this->_points[2].getCoordonnee(1);
-
-    double x0 = point.getCoordonnee(0);
-    double x1 = point.getCoordonnee(1);
-
-    double c0 = (x10 - x00) * (x1 - x01) - (x11 - x01) * (x0 - x00);
-    double c1 = (x20 - x10) * (x1 - x11) - (x21 - x11) * (x0 - x10);
-    double c2 = (x00 - x20) * (x1 - x21) - (x01 - x21) * (x0 - x20);
+    double c0 = (this->_points[1].getCoordonnee(0) - this->_points[0].getCoordonnee(0)) 
+                * (point.getCoordonnee(1) - this->_points[0].getCoordonnee(1)) 
+                - (this->_points[1].getCoordonnee(1) - this->_points[0].getCoordonnee(1)) 
+                * (point.getCoordonnee(0) - this->_points[0].getCoordonnee(0));
+    double c1 = (this->_points[2].getCoordonnee(0) - this->_points[1].getCoordonnee(0)) 
+                * (point.getCoordonnee(1) - this->_points[1].getCoordonnee(1)) 
+                - (this->_points[2].getCoordonnee(1) - this->_points[1].getCoordonnee(1)) 
+                * (point.getCoordonnee(0) - this->_points[1].getCoordonnee(0));
+    double c2 = (this->_points[0].getCoordonnee(0) - this->_points[2].getCoordonnee(0)) 
+                * (point.getCoordonnee(1) - this->_points[2].getCoordonnee(1)) 
+                - (this->_points[0].getCoordonnee(1) - this->_points[2].getCoordonnee(1)) 
+                * (point.getCoordonnee(0) - this->_points[2].getCoordonnee(0));
 
     return ((c0 > 0.0 && c1 > 0.0 && c2 > 0.0) || (c0 < 0.0 && c1 < 0.0 && c2 < 0.0));
 }
@@ -99,17 +94,18 @@ bool Triangle::estRectangle() const {
         return false;
     }
 
-    double x00 = this->_points[0].getCoordonnee(0);
-    double x10 = this->_points[1].getCoordonnee(0);
-    double x20 = this->_points[2].getCoordonnee(0);
-
-    double x01 = this->_points[0].getCoordonnee(1);
-    double x11 = this->_points[1].getCoordonnee(1);
-    double x21 = this->_points[2].getCoordonnee(1);
-
-    double vAC = (x10 - x00) * (x00 - x20) + (x11 - x01) * (x01 - x21);
-    double vAB = (x10 - x00) * (x20 - x10) + (x11 - x01) * (x21 - x11);
-    double vBC = (x20 - x10) * (x00 - x20) + (x21 - x11) * (x01 - x21);
+    double vAC = (this->_points[1].getCoordonnee(0) - this->_points[0].getCoordonnee(0)) 
+                    * (this->_points[0].getCoordonnee(0) - this->_points[2].getCoordonnee(0)) 
+                    + (this->_points[1].getCoordonnee(1) - this->_points[0].getCoordonnee(1)) 
+                    * (this->_points[0].getCoordonnee(1) - this->_points[2].getCoordonnee(1));
+    double vAB = (this->_points[1].getCoordonnee(0) - this->_points[0].getCoordonnee(0)) 
+                    * (this->_points[2].getCoordonnee(0) - this->_points[1].getCoordonnee(0)) 
+                    + (this->_points[1].getCoordonnee(1) - this->_points[0].getCoordonnee(1)) 
+                    * (this->_points[2].getCoordonnee(1) - this->_points[1].getCoordonnee(1));
+    double vBC = (this->_points[2].getCoordonnee(0) - this->_points[1].getCoordonnee(0)) 
+                    * (this->_points[0].getCoordonnee(0) - this->_points[2].getCoordonnee(0)) 
+                    + (this->_points[2].getCoordonnee(1) - this->_points[1].getCoordonnee(1)) 
+                    * (this->_points[0].getCoordonnee(1) - this->_points[2].getCoordonnee(1));
 
     return (abs(vAC) <= EPSILON || abs(vAB) <= EPSILON || abs(vBC) <= EPSILON);
 }
