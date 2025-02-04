@@ -10,7 +10,7 @@ Nous allons développer une série de classes qui a pour but d'aider à la repr�
 
 > Dans le cadre du cours, nous n'allons pas créer de manière formelle la libraire, toutefois *Visual Studio* permet la création de projet de type librarie (bibliothèque) alors que d'autres IDE nécessite probablement la configuration adéquate du projet. Cela ne sera pas obligatoire dans le présent cours.
 
-L'objectif est de créer l'ensemble de ces classes-ci pour le chapitre 3, 4 et 5.
+L'objectif est de créer l'ensemble de ces classes-ci pour le chapitre 3, 4 et 5, c'est-à-dire que nous allons développer ses classes dans le prochain mois. Pour le présent laboratoire, on se concentre sur `Point` et sur `Triangle`.
 
 ```plantuml
 @startuml
@@ -302,3 +302,51 @@ $$
     \vec{B} \cdot \vec{C} = (x_{20} - x_{10})(x_{00} - x_{20}) + (x_{21} - x_{11})(x_{01} - x_{21})
 $$
 
+## La table périodique des éléments
+
+Implémentez les classes présentées ci-dessous. En plus des membres définit ici, vous devez également fournir **les accesseurs et mutateurs pour chaque attributs privées**. De plus, assurez-vous de respecter **les obligations** qu'un pointeur requiert dans une classe. N'oubliez pas du requis pour être en mesure de créer un tableau d'objets d'une instance donnée.
+
+```plantuml
+Element *-- Isotope
+
+@startuml
+class Isotope {
+    - std::string _nom
+    - uint8_t _nbNeutron
+    - double _occurence
+    - bool _stable
+    - double _demiVie
+    - double _masse
+
+    + Isotope(std::string nom, uint8_t nbNeutron, double occurence, double masse)
+    + Isotope(std::string nom, uint8_t nbNeutron, double occurence, double demiVie, double masse)
+}
+
+class Element {
+    - uint8_t _nbParticuleChargee
+    - uint8_t _nbTrou
+    - std::string _groupe
+    - std::string _symbole
+    - Isotope *_isotopes
+
+    + Element(std::string symbole, uint8_t nbParticuleChargee, uint8_t nbTrou, std::string groupe)
+    + void ajouterIsotope(const Isotope &)
+
+    + bool aIsotopeStable()
+}
+
+@enduml
+```
+
+Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premiers éléments en vous assurant d'y inscrire les valeurs appropriées, et assurez-vous d'avoir au minimum un isotope par élément. Puis, générer la sortie suivante :
+
+```
+---------------
+| He       18 |
+| Helium      |
+|             |
+| 9         2 |
+---------------
+```
+
+He est le symbol, 18 est le groupe, Helium est le nom, 9 est le nombre d'isotope, et 2 le nombre de particules chargée (2 protons, 2 électrons).
