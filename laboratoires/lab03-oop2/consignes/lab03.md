@@ -43,7 +43,7 @@ class Point {
 }
 
 class Triangle {
-    - Point *_pointA
+    - Point *_points
     
     - Triangle()
     - Triangle(Point a, Point b, Point c)
@@ -72,7 +72,7 @@ class Cercle {
 }
 
 class Quadrilatere {
-    - Point *_pointA
+    - Point *_points
     
     + Quadrilatere()
     + Quadrilatere(Point a, Point b, Point c, Point d)
