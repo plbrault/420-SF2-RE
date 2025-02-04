@@ -15,4 +15,8 @@ int main() {
 
 	// Déposer 200$ dans le compte épargne
 	compteEpargne.deposer(200);
+
+	// Ce code ne compile pas car l'attribut "_solde" est privé
+	float soldeTotal = compteCheques._solde + compteEpargne._solde;
+	cout << "Solde total: " << soldeTotal;
 }
