@@ -37,7 +37,7 @@ class Point {
     + void setCoordonnee(size_t dimension, double valeur)
 
     + double getCoordonnee(size_t dimension) const
-    + double getDistance() const
+    + double getDistance(const Point &point) const
 
     + std::string toString() const
 }
@@ -47,17 +47,18 @@ class Triangle {
     
     - Triangle()
     - Triangle(Point a, Point b, Point c)
-    + Triangle(const Triangle &point)
+    + Triangle(const Triangle &triangle)
     + ~PoiTrianglent()
 
-    + Triangle &operator=(cont Triangle &point)
+    + Triangle &operator=(cont Triangle &triangle)
 
     + double getAire() const
     + double estInterieur(Point point) const
+    + bool estValide() const
 
     + bool estTriangleRectangle() const
     + bool estIsocele() const
-    + bool estEquilaterale() const
+    + bool estEquilateral() const
 }
 
 class Cercle {
@@ -79,8 +80,9 @@ class Quadrilatere {
 
     + double getAire() const
     + double estInterieur(Point point) const
+    + bool estValide() const
 
-    + bool estCarree() const
+    + bool estCarre() const
     + bool estRectangle() const
 }
 
@@ -105,6 +107,7 @@ class Hexahedron {
     + double getAire() const
     + double getVolume() const
     + double estInterieur(Point point) const
+    + bool estValide() const
 
     + bool estCube() const
     + bool estPrismeRectangulaire() const
@@ -337,6 +340,8 @@ class Element {
 
 @enduml
 ```
+
+> Prenez note que `uint8_t` est un type de données fournit par la librairie <cstdint> qui permet de s'assurer de la taille en bit de notre entier. `u`spécifie `unsigned` (non signée), `int` signifie entier et le 8 définit combien de bit nous avons et `t` pour `type`. 8 bit nous permet de représenter 256 valeurs de 0 à 255. Il existe `uint16_t`, `uint32_t` et `uint64_t`. Il y a les versions sans le `u`, comme `int8_t` pour les versions signée. 8 bit signé couvre une page de -128 à 127.
 
 Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premiers éléments en vous assurant d'y inscrire les valeurs appropriées, et assurez-vous d'avoir au minimum un isotope par élément. Puis, générer la sortie suivante :
 
