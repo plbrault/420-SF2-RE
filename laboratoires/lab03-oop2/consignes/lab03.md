@@ -307,11 +307,13 @@ $$
 A = 0.5 (|x_{00}(x_{11} - x_{21}) + x_{10}(x_{21} - x_{01}) + x_{20}(x_{01} - x_{11})|)
 $$
 
-> Observation : si la parenthèse est 0, l'aire est 0.
+#### Méthode `estValide`
 
-> Note : Si l'aire est 0, le triangle n'est pas valide.
+La méthode `estValide` doit retourner `true` si le triangle est valide, et `false` s'il est invalide.
 
-* Tester si le triangle est valide ou non
+> Observation : dans la formule de calcul de l'aire, si l'expression entre parenthèses vaut 0, l'aire est 0.
+
+> Si l'aire est 0, le triangle est invalide.
 
 #### Méthode `estInterieur`
 
