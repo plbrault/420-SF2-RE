@@ -182,7 +182,7 @@ Retestez les mêmes étapes du scénario 1.
 
 ### Scénario 2 - Assigner un Point à un Point
 
-1. Dans votre `main`, instantiez un objet de la classe Point (`ancientPoint`) avec la valeur `3` comme nombre de dimensions.
+1. Dans votre `main`, instanciez un objet de la classe `Point` (`ancientPoint`) avec la valeur `3` comme nombre de dimensions.
 2. Changez les valeurs de chaque dimension pour des valeurs différentes et non-nulles.
 3. Instanciez un nouveau Point `nouveauPoint` avec 2 dimensions.
 3. Changez les valeurs de chaque dimension pour des valeurs différentes et non-nulles.
