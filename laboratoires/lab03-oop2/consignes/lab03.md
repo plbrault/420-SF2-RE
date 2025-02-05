@@ -242,7 +242,7 @@ Voici les lignes directrices concernant l'implémentation de la classe `Triangle
 * Assurez-vous de désallouer vos pointeurs dans le destructeur
 * Assurez-vous que le constructeur de copie ne fasse pas de *shallow copy*
 * Assurez-vous que l'opérateur d'assignation ne fasse pas de *shallow copy*
-* Calculez l'aire de votre triangle
+* Calculez l'aire de votre triangle dans `getAire`
 
 Soit trois points `P_0`, `P_1` et `P_2` définis comme ceci :
 
@@ -265,13 +265,13 @@ $$
 * Tester si le triangle est valide ou non
 * Tester si un point est à l'intérieur du Triangle
 
-Soit trois points `P_0`, `P_1` et `P_2` tel que définit précédement et un point `p` définit :
+Soit trois points `P_0`, `P_1` et `P_2` tels que définis précédement et un point `p` défini :
 
 $$
 p = (x_0, x_1)
 $$
 
-On doit faire le produit croisée des toutes les combinaisons de vecteurs créer par P_0 et P_1 sur P_0 et p, P_1 et P_2 sur sur P_1 et p, etc.
+On doit faire le produit croisé des toutes les combinaisons de vecteurs créées par P_0 et P_1 sur P_0 et p, P_1 et P_2 sur sur P_1 et p, etc.
 
 $$ 
 C_0(P_0, P_1, p) = (x_{10} - x_{00})(x_1 - x_{01}) - (x_{11} - x_{01})(x_0 - x_{00})
