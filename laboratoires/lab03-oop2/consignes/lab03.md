@@ -40,7 +40,7 @@ class Element {
 @enduml
 ```
 
-> Prenez note que `uint8_t` est un type de données fournit par la librairie <cstdint> qui permet de s'assurer de la taille en bit de notre entier. `u`spécifie `unsigned` (non signée), `int` signifie entier et le 8 définit combien de bit nous avons et `t` pour `type`. 8 bit nous permet de représenter 256 valeurs de 0 à 255. Il existe `uint16_t`, `uint32_t` et `uint64_t`. Il y a les versions sans le `u`, comme `int8_t` pour les versions signée. 8 bit signé couvre une page de -128 à 127.
+> Prenez note que `uint8_t` est un type de données fournit par la librairie `<cstdint>` qui permet de s'assurer de la taille en bit de notre entier. `u`spécifie `unsigned` (non signée), `int` signifie entier et le 8 définit combien de bit nous avons et `t` pour `type`. 8 bit nous permet de représenter 256 valeurs de 0 à 255. Il existe `uint16_t`, `uint32_t` et `uint64_t`. Il y a les versions sans le `u`, comme `int8_t` pour les versions signée. 8 bit signé couvre une page de -128 à 127.
 
 Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premiers éléments en vous assurant d'y inscrire les valeurs appropriées, et assurez-vous d'avoir au minimum un isotope par élément. Puis, générer la sortie suivante :
 
@@ -55,7 +55,7 @@ Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premie
 
 `He` est le symbol, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotope, et `2` le nombre de particules chargée (2 protons, 2 électrons).
 
-## Partie 2 - Le plan cartésien à N dimension
+## Partie 2 - Le plan cartésien à *n-1 dimensions*
 
 Nous allons développer une série de classes ayant pour but d'aider à la représentation informatique de points (classe `Point`) et de formes (classe `Forme`). On appelle un ensemble de fonctions et/ou de classes sans exécutable une librairie.
 
@@ -169,19 +169,11 @@ class Hexahedron {
 
 ### Classe Point
 
-La classe `Point` doit permettre la création d'un point sur *N-dimension*. Chaque point `P` est décrit tel que :
+La classe `Point` doit permettre la création d'un point sur *n-dimension*. Chaque point `P` est décrit tel que :
 
 $$
 \begin{equation}
-    P = \{{x_i} | x_i \in \mathbb{R}^N, i \in {0, 1, \dots N}\}
-\end{equation}
-$$
-
-En d'autres mots, 
-
-$$
-\begin{equation}
-    P = (x_0, x_1, \dots, x_N)
+    P = (x_0, x_1, \dots, x_{n-1})
 \end{equation}
 $$
 
@@ -194,19 +186,19 @@ Voici les directives pour l'implémentation de votre classe `Point` :
 * **ne pas créer** le constructeur avec un `Point` comme paramètre.
 * **ne pas créer** la méthode `operator=`.
 * faire les accesseurs `getCoordonnee` et `getDistance`.
-* une méthode `toString` doit retourner `(x_0, x_1, ..., x_N)` sans saut de ligne.
+* une méthode `toString` doit retourner `(x_0, x_1, ..., x_n)` sans saut de ligne.
 
 Pour le calcul de la distance, prenons deux instances `Point` définies tel que
 
 $$
-    P_0 = (x_{00}, x_{01}, \dots, x_{0N}) \\
-    P_1 = (x_{10}, x_{11}, \dots, x_{1N})
+    P_0 = (x_{00}, x_{01}, \dots, x_{0n-1}) \\
+    P_1 = (x_{10}, x_{11}, \dots, x_{1n-1})
 $$
 
 On calcule la distance selon :
 
 $$
-    D = \sqrt{\sum_{i=0}^N(x_{1i} - x_{0i})^2}
+    D = \sqrt{\sum_{i=0}^{n-1}(x_{1i} - x_{0i})^2}
 $$
 
 
@@ -334,8 +326,8 @@ $$
 On doit faire le produit croisé de toutes les combinaisons de vecteurs créées par P_0 et P_1 sur P_0 et p, P_1 et P_2 sur sur P_1 et p, etc.
 
 $$ 
-C_0(P_0, P_1, p) = (x_{10} - x_{00})(x_1 - x_{01}) - (x_{11} - x_{01})(x_0 - x_{00})
-C_1(P_1, P_2, p) = (x_{20} - x_{10})(x_1 - x_{11}) - (x_{21} - x_{11})(x_0 - x_{10})
+C_0(P_0, P_1, p) = (x_{10} - x_{00})(x_1 - x_{01}) - (x_{11} - x_{01})(x_0 - x_{00}) \\
+C_1(P_1, P_2, p) = (x_{20} - x_{10})(x_1 - x_{11}) - (x_{21} - x_{11})(x_0 - x_{10}) \\
 C_2(P_2, P_0, p) = (x_{00} - x_{20})(x_1 - x_{21}) - (x_{01} - x_{21})(x_0 - x_{20})
 $$ 
 
@@ -348,19 +340,19 @@ Une fois les produits croisés complétés, il faut s'assurer qu'ils ont tous le
 Prenons la définition de trois points `P_0`, `P_1` et `P_2` mentionnée précédemment. On définit des vecteurs `A`, `B` et `C` suivants :
 
 $$
-    \vec{A} = (x_{10} - x_{00}, x_{11} - x_{01}) \\
-    \vec{B} = (x_{20} - x_{10}, x_{21} - x_{11}) \\
-    \vec{C} = (x_{00} - x_{20}, x_{01} - x_{21})
+    \vec{u} = \overrightarrow{P_0P_1} = (x_{10} - x_{00}, x_{11} - x_{01}) \\
+    \vec{v} = \overrightarrow{P_1P_2} = (x_{20} - x_{10}, x_{21} - x_{11}) \\
+    \vec{w} = \overrightarrow{P_2P_0} = (x_{00} - x_{20}, x_{01} - x_{21})
 $$
 
 > Observation : Nous pourrions probablement avoir une méthode quelque part pour ça ? Où ? Que retourne-t-elle ?
 
-Par la suite on veut faire le produit croisée `AC`, `BC` et `AB` tel que :
+Par la suite on veut faire le produit croisée suivant :
 
 $$
-    \vec{A} \cdot \vec{C} = (x_{10} - x_{00})(x_{00} - x_{20}) + (x_{11} - x_{01})(x_{01} - x_{21}) \\
-    \vec{A} \cdot \vec{B} = (x_{10} - x_{00})(x_{20} - x_{10}) + (x_{11} - x_{01})(x_{21} - x_{11}) \\
-    \vec{B} \cdot \vec{C} = (x_{20} - x_{10})(x_{00} - x_{20}) + (x_{21} - x_{11})(x_{01} - x_{21})
+    \vec{u} \cdot \vec{w} = (x_{10} - x_{00})(x_{00} - x_{20}) + (x_{11} - x_{01})(x_{01} - x_{21}) \\
+    \vec{u} \cdot \vec{v} = (x_{10} - x_{00})(x_{20} - x_{10}) + (x_{11} - x_{01})(x_{21} - x_{11}) \\
+    \vec{v} \cdot \vec{w} = (x_{20} - x_{10})(x_{00} - x_{20}) + (x_{21} - x_{11})(x_{01} - x_{21})
 $$
 
 ## Partie 3 - Retour sur la table périodique des éléments
