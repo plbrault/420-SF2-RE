@@ -133,23 +133,23 @@ $$
 
 Voici les directives pour l'implémentation de votre classe `Point` :
 
-* définir le nombre de dimension à la construction.
-  * le constructeur par défaut défini le nombre de dimension à 2.
-  * chaque dimension est initialisé à 0.0.
+* définir le nombre de dimensions à la construction.
+  * le constructeur par défaut définit le nombre de dimensions à 2.
+  * chaque dimension est initialisée à la valeur `0.0`.
 * configurer chaque valeur scalaire par dimension via `setDimension`.
-* **ne pas faire** le constructeur avec un `Point` comme paramètre
-* **ne pas faire** la ligne avec `operator=`
-* faire les accesseurs `getCoordonnee` et `getDistance`
-* méthode `toString` doit retourner `(x_0, x_1, ..., x_N)` sans saut de ligne.
+* **ne pas créer** le constructeur avec un `Point` comme paramètre.
+* **ne pas créer** la méthode `operator=`.
+* faire les accesseurs `getCoordonnee` et `getDistance`.
+* une méthode `toString` doit retourner `(x_0, x_1, ..., x_N)` sans saut de ligne.
 
-Pour le calcul de la distance, nous avons deux instances `Point` définit tel que
+Pour le calcul de la distance, prenons deux instances `Point` définies tel que
 
 $$
     P_0 = (x_{00}, x_{01}, \dots, x_{0N}) \\
     P_1 = (x_{10}, x_{11}, \dots, x_{1N})
 $$
 
-On calcul la distance selon :
+On calcule la distance selon :
 
 $$
     D = \sqrt{\sum_{i=0}^N(x_{1i} - x_{0i})^2}
