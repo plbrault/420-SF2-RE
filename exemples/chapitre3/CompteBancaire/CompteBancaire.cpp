@@ -22,3 +22,7 @@ bool CompteBancaire::retirer(float montant) {
 
 	return true;
 }
+
+float CompteBancaire::getSolde() const {
+	return _solde;
+}

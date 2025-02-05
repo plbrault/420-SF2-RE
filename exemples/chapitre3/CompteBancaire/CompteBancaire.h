@@ -11,4 +11,5 @@ public:
 	CompteBancaire();
 	void deposer(float montant);
 	bool retirer(float montant);
+	float getSolde() const;
 };
