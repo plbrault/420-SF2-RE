@@ -10,7 +10,7 @@ Nous allons développer une série de classes ayant pour but d'aider à la repr�
 
 > Dans le cadre du cours, nous n'allons pas créer de manière formelle la libraire, toutefois *Visual Studio* permet la création de projet de type librarie (bibliothèque) alors que d'autres IDE nécessitent la configuration adéquate du projet. Cela ne sera pas obligatoire dans le présent cours.
 
-L'objectif est de créer l'ensemble de ces classes-ci pour le chapitre 3, 4 et 5, c'est-à-dire que nous allons développer ses classes dans le prochain mois. Pour le présent laboratoire, on se concentre sur `Point` et sur `Triangle`.
+L'objectif est d'implémenter l'ensemble de ces classes au cours des laboratoires 3, 4 et 5, c'est-à-dire tout au long du prochain mois. Pour le présent laboratoire, on se concentre sur `Point` et sur `Triangle`.
 
 ```plantuml
 @startuml
