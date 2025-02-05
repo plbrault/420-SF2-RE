@@ -23,6 +23,14 @@ bool CompteBancaire::retirer(float montant) {
 	return true;
 }
 
+string CompteBancaire::getNom() const {
+	return _nom;
+}
+
 float CompteBancaire::getSolde() const {
 	return _solde;
+}
+
+void CompteBancaire::setNom(string nom) {
+	_nom = nom;
 }

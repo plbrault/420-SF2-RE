@@ -7,6 +7,9 @@ int main() {
 	CompteBancaire compteCheques;
 	CompteBancaire compteEpargne;
 
+	compteCheques.setNom("Compte chèques");
+	compteEpargne.setNom("Compte épargne");
+
 	// Déposer 1500$ dans le compte chèques
 	compteCheques.deposer(1500);
 
