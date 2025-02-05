@@ -99,7 +99,7 @@ class Triangle {
     - Triangle()
     - Triangle(Point a, Point b, Point c)
     + Triangle(const Triangle &triangle)
-    + ~PoiTrianglent()
+    + ~Triangle()
 
     + Triangle &operator=(cont Triangle &triangle)
 
@@ -354,6 +354,8 @@ $$
     \vec{u} \cdot \vec{v} = (x_{10} - x_{00})(x_{20} - x_{10}) + (x_{11} - x_{01})(x_{21} - x_{11}) \\
     \vec{v} \cdot \vec{w} = (x_{20} - x_{10})(x_{00} - x_{20}) + (x_{21} - x_{11})(x_{01} - x_{21})
 $$
+
+Si un des produits croisés précédents retourne `0`, alors on a un angle droit.
 
 ## Partie 3 - Retour sur la table périodique des éléments
 
