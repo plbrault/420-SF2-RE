@@ -158,7 +158,7 @@ $$
 
 ### Scénario 1 - Instancier un Point avec un Point
 
-1. Dans votre `main`, instanciez un objet de la classe Point nommé `ancienPoint` avec la valeur `3` comme nombre de dimensions.
+1. Dans votre `main`, instanciez un objet de la classe `Point` nommé `ancienPoint` avec la valeur `3` comme nombre de dimensions.
 2. Changez les valeurs de chaque dimension pour des valeurs différentes et non-nulles.
 3. Instanciez un nouveau Point de cette façon: `Point nouveauPoint(ancienPoint);`.
 4. Modifiez la première dimension de votre `nouveauPoint` avec une valeur différente.
