@@ -359,7 +359,7 @@ $$
     \vec{v} \cdot \vec{w} = (x_{20} - x_{10})(x_{00} - x_{20}) + (x_{21} - x_{11})(x_{01} - x_{21})
 $$
 
-## Partie 3 - Retour sur la table périodique des éléments
+## Partie 3 - Retour au tableau périodique des éléments
 
 Retournez dans votre projet de la partie 1 contenant les classes `Isotope` et `Element`.
 
