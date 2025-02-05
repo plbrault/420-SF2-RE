@@ -2,13 +2,13 @@
 
 ## Objectif
 
-Approfondir les notions de POO avec les concepts d'accesseurs et mutateurs, constructeur de copie et opérateur d'assignation. Nous allons également comprendre les concepts d'agrégations et de compositions.
+Approfondir les notions de programmation orientée objet avec les concepts d'accesseurs et mutateurs, constructeur de copie et opérateur d'assignation. Nous allons également explorer les concepts d'agrégation et de composition.
 
-## Le plan cartésien à N dimension
+## Le plan cartésien à N dimensions
 
-Nous allons développer une série de classes qui a pour but d'aider à la représentation informatique de `Point` et de `Forme`. On appelle un ensemble de fonction et/ou de classe sans exécutable une librairie.
+Nous allons développer une série de classes ayant pour but d'aider à la représentation informatique de points (classe `Point`) et de formes (classe `Forme`). On appelle un ensemble de fonctions et/ou de classes sans exécutable une librairie.
 
-> Dans le cadre du cours, nous n'allons pas créer de manière formelle la libraire, toutefois *Visual Studio* permet la création de projet de type librarie (bibliothèque) alors que d'autres IDE nécessite probablement la configuration adéquate du projet. Cela ne sera pas obligatoire dans le présent cours.
+> Dans le cadre du cours, nous n'allons pas créer de manière formelle la libraire, toutefois *Visual Studio* permet la création de projet de type librarie (bibliothèque) alors que d'autres IDE nécessitent la configuration adéquate du projet. Cela ne sera pas obligatoire dans le présent cours.
 
 L'objectif est de créer l'ensemble de ces classes-ci pour le chapitre 3, 4 et 5, c'est-à-dire que nous allons développer ses classes dans le prochain mois. Pour le présent laboratoire, on se concentre sur `Point` et sur `Triangle`.
 
