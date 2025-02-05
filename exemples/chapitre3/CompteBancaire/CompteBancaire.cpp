@@ -7,6 +7,10 @@ CompteBancaire::CompteBancaire() {
 	_fichierOperations.open("operations.txt");
 }
 
+CompteBancaire::~CompteBancaire() {
+	_fichierOperations.close();
+}
+
 void CompteBancaire::deposer(float montant) {
 	_solde += montant;
 	_fichierOperations << "Dépôt de " << montant << endl;
