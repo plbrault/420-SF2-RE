@@ -347,9 +347,9 @@ $$
     \vec{w} = \overrightarrow{P_2P_0} = (x_{00} - x_{20}, x_{01} - x_{21})
 $$
 
-> Observation : Nous pourrions probablement avoir une méthode quelque part pour ça ? Où ? Que retourne-t-elle ?
+> Observation : Nous pourrions probablement ajouter une méthode quelque part pour ça ? Où ? Que retournerait-elle ?
 
-Par la suite on veut faire le produit croisée suivant :
+Par la suite on veut faire le produit croisé suivant :
 
 $$
     \vec{u} \cdot \vec{w} = (x_{10} - x_{00})(x_{00} - x_{20}) + (x_{11} - x_{01})(x_{01} - x_{21}) \\
