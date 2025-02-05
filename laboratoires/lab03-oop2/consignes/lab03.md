@@ -2,9 +2,60 @@
 
 ## Objectif
 
-Approfondir les notions de POO avec les concepts d'accesseurs et mutateurs, constructeur de copie et opérateur d'assignation. Nous allons également comprendre les concepts d'agrégations et de compositions.
+Approfondir les notions de POO avec les concepts d'accesseurs et mutateurs, constructeur de copie et opérateur d'assignation. Nous allons également comprendre les concepts d'agrégations et de compositions. On vous encourage a faire valider chacune des parties.
 
-## Le plan cartésien à N dimension
+## Partie 1 - La table périodique des éléments
+
+Implémentez les classes présentées ci-dessous. En plus des membres définit ici, vous devez également fournir **les accesseurs et mutateurs pour chaque attributs privées**. N'oubliez pas du requis pour être en mesure de créer un tableau d'objets d'une instance donnée.
+
+```plantuml
+Element *-- Isotope
+
+@startuml
+class Isotope {
+    - std::string _nom
+    - uint8_t _nbNeutron
+    - double _occurence
+    - bool _stable
+    - double _demiVie
+    - double _masse
+
+    + Isotope(std::string nom, uint8_t nbNeutron, double occurence, double masse)
+    + Isotope(std::string nom, uint8_t nbNeutron, double occurence, double demiVie, double masse)
+}
+
+class Element {
+    - uint8_t _nbParticuleChargee
+    - uint8_t _nbTrou
+    - std::string _groupe
+    - std::string _symbole
+    - Isotope *_isotopes
+
+    + Element(std::string symbole, uint8_t nbParticuleChargee, uint8_t nbTrou, std::string groupe)
+    + void ajouterIsotope(const Isotope &)
+
+    + bool aIsotopeStable()
+}
+
+@enduml
+```
+
+> Prenez note que `uint8_t` est un type de données fournit par la librairie <cstdint> qui permet de s'assurer de la taille en bit de notre entier. `u`spécifie `unsigned` (non signée), `int` signifie entier et le 8 définit combien de bit nous avons et `t` pour `type`. 8 bit nous permet de représenter 256 valeurs de 0 à 255. Il existe `uint16_t`, `uint32_t` et `uint64_t`. Il y a les versions sans le `u`, comme `int8_t` pour les versions signée. 8 bit signé couvre une page de -128 à 127.
+
+Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premiers éléments en vous assurant d'y inscrire les valeurs appropriées, et assurez-vous d'avoir au minimum un isotope par élément. Puis, générer la sortie suivante :
+
+```
+---------------
+| He       18 |
+| Helium      |
+|             |
+| 9         2 |
+---------------
+```
+
+`He` est le symbol, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotope, et `2` le nombre de particules chargée (2 protons, 2 électrons).
+
+## Partie 2 - Le plan cartésien à N dimension
 
 Nous allons développer une série de classes qui a pour but d'aider à la représentation informatique de `Point` et de `Forme`. On appelle un ensemble de fonction et/ou de classe sans exécutable une librairie.
 
@@ -159,7 +210,7 @@ $$
 $$
 
 
-### Scénario 1 - Instantier un Point avec un Point
+#### Scénario 1 - Instantier un Point avec un Point
 
 1. Dans votre `main`, instantier un objet de la classe Point (`ancientPoint`) avec 3 comme nombre de dimensions.
 2. Changer les valeurs de chaque dimension pour des valeurs différentes et non-nulle.
@@ -183,7 +234,7 @@ Point::Point(const Point &point) {
 
 Retester les mêmes étapes du scénario 1
 
-### Scénario 2 - Assigner un Point à un Point
+#### Scénario 2 - Assigner un Point à un Point
 
 1. Dans votre `main`, instantier un objet de la classe Point (`ancientPoint`) avec 3 comme nombre de dimensions.
 2. Changer les valeurs de chaque dimension pour des valeurs différentes et non-nulle.
@@ -233,9 +284,9 @@ Vous avez maintenant l'ensemble de tous les outils requis pour gérer efficaceme
 
 La stabilité de votre application C++ va grandement en dépendre.
 
-## Forme à deux dimension
+### Forme à deux dimension
 
-### Triangle
+#### Triangle
 
 Voici les lignes directrices concernant l'implémentation de la classe `Triangle`.
 
@@ -305,53 +356,6 @@ $$
     \vec{B} \cdot \vec{C} = (x_{20} - x_{10})(x_{00} - x_{20}) + (x_{21} - x_{11})(x_{01} - x_{21})
 $$
 
-## La table périodique des éléments
+## Partie 3 - Retour sur la table périodique des éléments
 
-Implémentez les classes présentées ci-dessous. En plus des membres définit ici, vous devez également fournir **les accesseurs et mutateurs pour chaque attributs privées**. De plus, assurez-vous de respecter **les obligations** qu'un pointeur requiert dans une classe. N'oubliez pas du requis pour être en mesure de créer un tableau d'objets d'une instance donnée.
-
-```plantuml
-Element *-- Isotope
-
-@startuml
-class Isotope {
-    - std::string _nom
-    - uint8_t _nbNeutron
-    - double _occurence
-    - bool _stable
-    - double _demiVie
-    - double _masse
-
-    + Isotope(std::string nom, uint8_t nbNeutron, double occurence, double masse)
-    + Isotope(std::string nom, uint8_t nbNeutron, double occurence, double demiVie, double masse)
-}
-
-class Element {
-    - uint8_t _nbParticuleChargee
-    - uint8_t _nbTrou
-    - std::string _groupe
-    - std::string _symbole
-    - Isotope *_isotopes
-
-    + Element(std::string symbole, uint8_t nbParticuleChargee, uint8_t nbTrou, std::string groupe)
-    + void ajouterIsotope(const Isotope &)
-
-    + bool aIsotopeStable()
-}
-
-@enduml
-```
-
-> Prenez note que `uint8_t` est un type de données fournit par la librairie <cstdint> qui permet de s'assurer de la taille en bit de notre entier. `u`spécifie `unsigned` (non signée), `int` signifie entier et le 8 définit combien de bit nous avons et `t` pour `type`. 8 bit nous permet de représenter 256 valeurs de 0 à 255. Il existe `uint16_t`, `uint32_t` et `uint64_t`. Il y a les versions sans le `u`, comme `int8_t` pour les versions signée. 8 bit signé couvre une page de -128 à 127.
-
-Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premiers éléments en vous assurant d'y inscrire les valeurs appropriées, et assurez-vous d'avoir au minimum un isotope par élément. Puis, générer la sortie suivante :
-
-```
----------------
-| He       18 |
-| Helium      |
-|             |
-| 9         2 |
----------------
-```
-
-He est le symbol, 18 est le groupe, Helium est le nom, 9 est le nombre d'isotope, et 2 le nombre de particules chargée (2 protons, 2 électrons).
+Maintenant que vous avez vu les requis nécessaire à suivre lorsqu'une classe à un pointeur, assurez-vous de respecter les obligations qu'un pointeur requiert dans une classe.
