@@ -239,12 +239,12 @@ Voici les lignes directrices concernant l'implémentation de la classe `Triangle
 
 * Vos constructeurs doivent s'assurer d'allouer 3 instances de `Point`
 * Vos constructeurs doivent s'assurer que les Point sont seulement en 2D
-* Assurez de désaloué vos pointeur dans le destructeurs
-* Assurez vous que le constructeur de copie ne fasse pas de *shalow copy*
-* Assurez vous que l'opérateur d'assignation ne fasse pas de *shalow copy*
-* Calculer l'aire de votre triangle
+* Assurez-vous de désallouer vos pointeurs dans le destructeur
+* Assurez-vous que le constructeur de copie ne fasse pas de *shallow copy*
+* Assurez-vous que l'opérateur d'assignation ne fasse pas de *shallow copy*
+* Calculez l'aire de votre triangle
 
-Soit trois points `P_0`, `P_1` et `P_2` définit comme ceci :
+Soit trois points `P_0`, `P_1` et `P_2` définis comme ceci :
 
 $$
     P_0 = (x_{00}, x_{01}) \\
@@ -252,7 +252,7 @@ $$
     P_2 = (x_{20}, x_{21})
 $$
 
-L'aire de notre triangle ce calcul selon l'expression suivante :
+L'aire de notre triangle se calcule selon l'expression suivante :
 
 $$
 A = 0.5 (|x_{00}(x_{11} - x_{21}) + x_{10}(x_{21} - x_{01}) + x_{20}(x_{01} - x_{11})|)
