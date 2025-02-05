@@ -156,65 +156,66 @@ $$
 $$
 
 
-### Scénario 1 - Instantier un Point avec un Point
+### Scénario 1 - Instancier un Point avec un Point
 
-1. Dans votre `main`, instantier un objet de la classe Point (`ancientPoint`) avec 3 comme nombre de dimensions.
-2. Changer les valeurs de chaque dimension pour des valeurs différentes et non-nulle.
-3. Instantier un nouveau Point tel que `Point nouveauPoint(ancientPoint);`.
-4. Modifier la première dimension de votre `nouveauPoint` avec une valeur différente
-5. Afficher les points `ancientPoint` et `nouveauPoint` dans votre `main`.
+1. Dans votre `main`, instanciez un objet de la classe Point nommé `ancienPoint` avec la valeur `3` comme nombre de dimensions.
+2. Changez les valeurs de chaque dimension pour des valeurs différentes et non-nulles.
+3. Instanciez un nouveau Point de cette façon: `Point nouveauPoint(ancienPoint);`.
+4. Modifiez la première dimension de votre `nouveauPoint` avec une valeur différente.
+5. Affichez les points `ancienPoint` et `nouveauPoint` dans votre `main`.
 
 Avons-nous un problème ?
 
-Nous n'avons pas défini de constructeur de copie. Celui-ci est définit par défaut et fait un *shalow copy* de notre objet, c'est-à-dire qu'il copie chaque attributs, même les pointeurs et leurs internes. On doit donc définir un constructeur de copie.
+Nous n'avons pas défini de constructeur de copie. Celui-ci est défini par défaut et fait un *shallow copy* de notre objet, c'est-à-dire qu'il copie la valeur de chaque attribut, même les adresses référées par les pointeurs. On doit donc définir un constructeur de copie.
 
 ```
 Point::Point(const Point &point) {
-    // On mets les _nbDimension de this et point égaux
+    // On copie le nomre de dimensions de `point` vers `this`
 
-    // On aloue _nbDimensions cases pour _coordonnee
+    // On aloue un tableau de _nbDimensions emplacements pour _coordonnee
 
-    // On copie les coordonnees de point dans this
+    // On copie les coordonnées de `point` vers `this`
 }
 ```
 
-Retester les mêmes étapes du scénario 1
+Retestez les mêmes étapes du scénario 1.
 
 ### Scénario 2 - Assigner un Point à un Point
 
-1. Dans votre `main`, instantier un objet de la classe Point (`ancientPoint`) avec 3 comme nombre de dimensions.
-2. Changer les valeurs de chaque dimension pour des valeurs différentes et non-nulle.
-3. Instantier un nouveau Point `nouveauPoint` avec 2 dimensions.
-3. Changer les valeurs de `nouveauPoint` - doit avoir tous des valeurs différentes
-3. Assigner `nouveauPoint` a `ancienPoint`
-4. Modifier la première dimension de votre `nouveauPoint` avec une valeur différente
-5. Afficher les points `ancientPoint` et `nouveauPoint` dans votre `main`.
+1. Dans votre `main`, instantiez un objet de la classe Point (`ancientPoint`) avec la valeur `3` comme nombre de dimensions.
+2. Changez les valeurs de chaque dimension pour des valeurs différentes et non-nulles.
+3. Instanciez un nouveau Point `nouveauPoint` avec 2 dimensions.
+3. Changez les valeurs de chaque dimension pour des valeurs différentes et non-nulles.
+3. Assignez `nouveauPoint` à `ancienPoint`.
+    * `ancienPoint = nouveauPoint`
+4. Modifiez la première dimension de votre `nouveauPoint` avec une valeur différente.
+5. Affichez les points `ancienPoint` et `nouveauPoint` dans votre `main`.
 
 Avons-nous un problème ?
 
-L'assignation s'effectue via l'opérateur d'assignation `=`. Lorsque nous ne définissons pas son comportement, C++ en définie un par défaut. Cela pose problème car il va, de manière *stupide*, copier l'adresse du pointeur. Nos deux classes possède le même pointeur de dimensions. Pour définir le bon comportement, nous devons faire :
+L'assignation s'effectue via l'opérateur d'assignation `=`. Lorsque nous ne définissons pas son comportement, C++ en définit un par défaut. Cela pose problème car il va, de manière *stupide*, copier l'adresse du pointeur. Nos deux objets possèdent le même pointeur de dimensions. Pour définir le bon comportement, nous devons faire :
 
 ```
 Point &Point::&operator=(const Point &point) {
-    // Si les this et point pointe a la même place, retourner *this
+    // Si `this` et `point` pointent à la même adresse:
+    
+        // retourner *this
 
-    // Si les nbDimension de this et point sont égaux
+    // Si les nbDimension de `this` et `point` sont égaux:
 
-    // alors on copie les coordonne de point dans this
+        // alors on copie les coordonnées de `point` dans `this`
 
-    // sinon
+    // sinon:
 
-    // on doit désalouer les coordonner de this
+        // on doit désallouer les coordonnées de `this`
 
-    // assigner le nombre de dimension de point à this
+        // assigner le nombre de dimensions de `point` à `this`
 
-    // alouer un nouveau tableau de double avec la bonne quantité de case
+        // alouer un nouveau tableau de double avec la bonne quantité d'emplacements
 
-    // copier les coordonner de point dans this
+        // copier les coordonnées de `point` dans `this`
 
-    // fin si
-
-    // retourner this
+    // retourner `this`
 }
 ```
 
@@ -222,7 +223,7 @@ Retester les mêmes étapes du scénario 2.
 
 > Question ? Pourquoi l'`operator=` retourne une référence à lui-même ?
 
-Vous avez maintenant l'ensemble de tous les outils requis pour gérer efficacement une classe qui utilise des pointeurs. En effet, pour chaque classe avec des pointeurs, vous devez **obligatoirement** définir :
+Vous avez maintenant l'ensemble des outils requis pour gérer efficacement une classe qui utilise des pointeurs. En effet, pour chaque classe avec des pointeurs, il faut **obligatoirement** définir :
 
 * Un constructeur de copie ;
 * L'opérateur d'assignation ;
@@ -230,13 +231,13 @@ Vous avez maintenant l'ensemble de tous les outils requis pour gérer efficaceme
 
 La stabilité de votre application C++ va grandement en dépendre.
 
-## Forme à deux dimension
+## Forme à deux dimensions
 
 ### Triangle
 
 Voici les lignes directrices concernant l'implémentation de la classe `Triangle`.
 
-* Vos constructeurs doivent s'assurer d'alouer 3 instances de Point
+* Vos constructeurs doivent s'assurer d'allouer 3 instances de `Point`
 * Vos constructeurs doivent s'assurer que les Point sont seulement en 2D
 * Assurez de désaloué vos pointeur dans le destructeurs
 * Assurez vous que le constructeur de copie ne fasse pas de *shalow copy*
