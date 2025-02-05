@@ -269,7 +269,7 @@ $$
 
 #### Méthode `estInterieur`
 
-La méthode `estInterieur` doit tester si si un point est à l'intérieur du Triangle.
+La méthode `estInterieur` doit tester si le point reçu en paramètre est à l'intérieur du Triangle.
 
 Soit trois points `P_0`, `P_1` et `P_2` tels que définis précédement et un point `p` défini :
 
@@ -289,9 +289,9 @@ $$
 
 Une fois les produits croisés complétés, il faut s'assurer qu'ils ont tous le même signe (tous négatif ou tous positif) pour que le point soit à l'intérieur.
 
-* Tester si le triangle est un triangle rectangle
+#### Méthode `estTriangleRectangle`
 
-On prends la définition de trois points `P_0`, `P_1` et `P_2` mentionné précédemment. On définit des vecteurs `A`, `B` et `C` suivant :
+Prenons la définition de trois points `P_0`, `P_1` et `P_2` mentionnée précédemment. On définit des vecteurs `A`, `B` et `C` suivants :
 
 $$
     \vec{A} = (x_{10} - x_{00}, x_{11} - x_{01}) \\
@@ -311,7 +311,7 @@ $$
 
 ## La table périodique des éléments
 
-Implémentez les classes présentées ci-dessous. En plus des membres définit ici, vous devez également fournir **les accesseurs et mutateurs pour chaque attributs privées**. De plus, assurez-vous de respecter **les obligations** qu'un pointeur requiert dans une classe. N'oubliez pas du requis pour être en mesure de créer un tableau d'objets d'une instance donnée.
+Implémentez les classes présentées ci-dessous. En plus des membres définis ici, vous devez également fournir **les accesseurs et mutateurs pour chaque attribut privé**. De plus, assurez-vous de respecter **les obligations** qu'un pointeur requiert dans une classe. N'oubliez pas du requis pour être en mesure de créer un tableau d'objets d'une instance donnée.
 
 ```plantuml
 Element *-- Isotope
@@ -356,4 +356,4 @@ Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premie
 ---------------
 ```
 
-He est le symbol, 18 est le groupe, Helium est le nom, 9 est le nombre d'isotope, et 2 le nombre de particules chargée (2 protons, 2 électrons).
+`He` est le symbol, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotopes, et `2` le nombre de particules chargées (2 protons, 2 électrons).
