@@ -242,9 +242,10 @@ Voici les lignes directrices concernant l'implémentation de la classe `Triangle
 * Assurez-vous de désallouer vos pointeurs dans le destructeur
 * Assurez-vous que le constructeur de copie ne fasse pas de *shallow copy*
 * Assurez-vous que l'opérateur d'assignation ne fasse pas de *shallow copy*
-* Calculez l'aire de votre triangle dans `getAire`
 
-#### Calcul de l'aire
+#### Méthode `getAire`
+
+La méthode `getAire` doit calculer puis retourner l'aire du triangle.
 
 Soit trois points `P_0`, `P_1` et `P_2` définis comme ceci :
 
