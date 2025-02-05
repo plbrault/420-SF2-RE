@@ -6,7 +6,7 @@ Approfondir les notions de Programmation orientée objet avec les concepts d'acc
 
 ## Partie 1 - Le tableau périodique des éléments
 
-Implémentez les classes présentées ci-dessous. En plus des membres définis ici, vous devez également fournir **les accesseurs et mutateurs pour chaque attribut privé**. N'oubliez pas le requis pour être en mesure de créer un tableau d'objets d'une instance donnée.
+Dans un nouveau projet, implémentez les classes présentées ci-dessous. En plus des membres définis ici, vous devez également fournir **les accesseurs et mutateurs pour chaque attribut privé**. N'oubliez pas le requis pour être en mesure de créer un tableau d'objets d'une instance donnée.
 
 ```plantuml
 Element *-- Isotope
@@ -56,6 +56,8 @@ Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premie
 `He` est le symbol, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotopes, et `2` le nombre de particules chargées (2 protons, 2 électrons).
 
 ## Partie 2 - Le plan cartésien à *n-1 dimensions*
+
+Créez un nouveau projet pour cette partie.
 
 Nous allons développer une série de classes ayant pour but d'aider à la représentation informatique de points (classe `Point`) et de formes (classe `Forme`). On appelle un ensemble de fonctions et/ou de classes sans exécutable une librairie.
 
@@ -359,4 +361,6 @@ $$
 
 ## Partie 3 - Retour sur la table périodique des éléments
 
-Maintenant que vous avez vu les requis nécessaire à suivre lorsqu'une classe à un pointeur, assurez-vous de respecter les obligations qu'un pointeur requiert dans une classe.
+Retournez dans votre projet de la partie 1 contenant les classes `Isotope` et `Element`.
+
+Maintenant que vous avez vu ce qu'il faut impérativement ajouter à une classe lorsqu'elle possède un pointeur, apportez les modifications nécessaires aux classes de ce projet.
