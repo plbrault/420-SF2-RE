@@ -6,9 +6,8 @@
 class CompteBancaire {
 private:
 	std::ofstream _fichierOperations;
+	float _solde;
 public:
-	float solde;
-
 	CompteBancaire();
 	void deposer(float montant);
 	bool retirer(float montant);
