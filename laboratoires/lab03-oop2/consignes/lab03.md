@@ -266,7 +266,10 @@ $$
 > Note : Si l'aire est 0, le triangle n'est pas valide.
 
 * Tester si le triangle est valide ou non
-* Tester si un point est à l'intérieur du Triangle
+
+#### Méthode `estInterieur`
+
+La méthode `estInterieur` doit tester si si un point est à l'intérieur du Triangle.
 
 Soit trois points `P_0`, `P_1` et `P_2` tels que définis précédement et un point `p` défini :
 
@@ -282,7 +285,7 @@ C_1(P_1, P_2, p) = (x_{20} - x_{10})(x_1 - x_{11}) - (x_{21} - x_{11})(x_0 - x_{
 C_2(P_2, P_0, p) = (x_{00} - x_{20})(x_1 - x_{21}) - (x_{01} - x_{21})(x_0 - x_{20})
 $$ 
 
-> Observation : Il est tout à fait possible de ce créer une méthode privée pour ce calcul.
+> Observation : Il est tout à fait possible de se créer une méthode privée pour ce calcul.
 
 Une fois les produits croisés complétés, il faut s'assurer qu'ils ont tous le même signe (tous négatif ou tous positif) pour que le point soit à l'intérieur.
 
