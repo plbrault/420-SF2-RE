@@ -244,6 +244,8 @@ Voici les lignes directrices concernant l'implémentation de la classe `Triangle
 * Assurez-vous que l'opérateur d'assignation ne fasse pas de *shallow copy*
 * Calculez l'aire de votre triangle dans `getAire`
 
+#### Calcul de l'aire
+
 Soit trois points `P_0`, `P_1` et `P_2` définis comme ceci :
 
 $$
@@ -271,7 +273,7 @@ $$
 p = (x_0, x_1)
 $$
 
-On doit faire le produit croisé des toutes les combinaisons de vecteurs créées par P_0 et P_1 sur P_0 et p, P_1 et P_2 sur sur P_1 et p, etc.
+On doit faire le produit croisé de toutes les combinaisons de vecteurs créées par P_0 et P_1 sur P_0 et p, P_1 et P_2 sur sur P_1 et p, etc.
 
 $$ 
 C_0(P_0, P_1, p) = (x_{10} - x_{00})(x_1 - x_{01}) - (x_{11} - x_{01})(x_0 - x_{00})
