@@ -2,11 +2,11 @@
 
 ## Objectif
 
-Approfondir les notions de POO avec les concepts d'accesseurs et mutateurs, constructeur de copie et opérateur d'assignation. Nous allons également comprendre les concepts d'agrégations et de compositions. On vous encourage a faire valider chacune des parties.
+Approfondir les notions de Programmation orientée objet avec les concepts d'accesseurs et mutateurs, constructeur de copie et opérateur d'assignation. Nous allons également comprendre les concepts d'agrégation et de composition. On vous encourage a faire valider chacune des parties.
 
-## Partie 1 - La table périodique des éléments
+## Partie 1 - Le tableau périodique des éléments
 
-Implémentez les classes présentées ci-dessous. En plus des membres définit ici, vous devez également fournir **les accesseurs et mutateurs pour chaque attributs privées**. N'oubliez pas du requis pour être en mesure de créer un tableau d'objets d'une instance donnée.
+Implémentez les classes présentées ci-dessous. En plus des membres définis ici, vous devez également fournir **les accesseurs et mutateurs pour chaque attribut privé**. N'oubliez pas le requis pour être en mesure de créer un tableau d'objets d'une instance donnée.
 
 ```plantuml
 Element *-- Isotope
@@ -40,7 +40,7 @@ class Element {
 @enduml
 ```
 
-> Prenez note que `uint8_t` est un type de données fournit par la librairie `<cstdint>` qui permet de s'assurer de la taille en bit de notre entier. `u`spécifie `unsigned` (non signée), `int` signifie entier et le 8 définit combien de bit nous avons et `t` pour `type`. 8 bit nous permet de représenter 256 valeurs de 0 à 255. Il existe `uint16_t`, `uint32_t` et `uint64_t`. Il y a les versions sans le `u`, comme `int8_t` pour les versions signée. 8 bit signé couvre une page de -128 à 127.
+> Prenez note que `uint8_t` est un type de donnée fourni par la librairie `<cstdint>` qui permet de s'assurer de la taille en bits de notre entier. `u`spécifie `unsigned` (non signé), `int` signifie « entier », le 8 définit combien de bits nous avons, et `t` signifie `type`. Un `uint8` nous permet donc de représenter une valeur entre 0 et 255. Il existe aussi `uint16_t`, `uint32_t` et `uint64_t` ainsi que leurs versions signées, donc sans le `u`, comme `int8_t`, qui couvre la plage de -128 à 127.
 
 Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premiers éléments en vous assurant d'y inscrire les valeurs appropriées, et assurez-vous d'avoir au minimum un isotope par élément. Puis, générer la sortie suivante :
 
@@ -53,7 +53,7 @@ Dans votre fonction `main`, instanciez un tableau d'éléments pour les 6 premie
 ---------------
 ```
 
-`He` est le symbol, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotope, et `2` le nombre de particules chargée (2 protons, 2 électrons).
+`He` est le symbol, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotopes, et `2` le nombre de particules chargées (2 protons, 2 électrons).
 
 ## Partie 2 - Le plan cartésien à *n-1 dimensions*
 
@@ -202,7 +202,7 @@ $$
 $$
 
 
-#### Scénario 1 - Instantier un Point avec un Point
+#### Scénario 1 - Instancier un Point avec un Point
 
 1. Dans votre `main`, instanciez un objet de la classe `Point` nommé `ancienPoint` avec la valeur `3` comme nombre de dimensions.
 2. Changez les valeurs de chaque dimension pour des valeurs différentes et non-nulles.
@@ -210,7 +210,7 @@ $$
 4. Modifiez la première dimension de votre `nouveauPoint` avec une valeur différente.
 5. Affichez les points `ancienPoint` et `nouveauPoint` dans votre `main`.
 
-Avons-nous un problème ?
+Exécutez votre code. Voyez-vous un problème?
 
 Nous n'avons pas défini de constructeur de copie. Celui-ci est défini par défaut et fait un *shallow copy* de notre objet, c'est-à-dire qu'il copie la valeur de chaque attribut, même les adresses référées par les pointeurs. On doit donc définir un constructeur de copie.
 
@@ -228,7 +228,7 @@ Retestez les mêmes étapes du scénario 1.
 
 #### Scénario 2 - Assigner un Point à un Point
 
-1. Dans votre `main`, instanciez un objet de la classe `Point` (`ancientPoint`) avec la valeur `3` comme nombre de dimensions.
+1. Dans votre `main`, instanciez un objet de la classe `Point` nommé `ancienPoint` avec la valeur `3` comme nombre de dimensions.
 2. Changez les valeurs de chaque dimension pour des valeurs différentes et non-nulles.
 3. Instanciez un nouveau Point `nouveauPoint` avec 2 dimensions.
 3. Changez les valeurs de chaque dimension pour des valeurs différentes et non-nulles.
@@ -237,7 +237,7 @@ Retestez les mêmes étapes du scénario 1.
 4. Modifiez la première dimension de votre `nouveauPoint` avec une valeur différente.
 5. Affichez les points `ancienPoint` et `nouveauPoint` dans votre `main`.
 
-Avons-nous un problème ?
+Exécutez votre code. Voyez-vous un problème ?
 
 L'assignation s'effectue via l'opérateur d'assignation `=`. Lorsque nous ne définissons pas son comportement, C++ en définit un par défaut. Cela pose problème car il va, de manière *stupide*, copier l'adresse du pointeur. Nos deux objets possèdent le même pointeur de dimensions. Pour définir le bon comportement, nous devons faire :
 
@@ -277,14 +277,14 @@ Vous avez maintenant l'ensemble des outils requis pour gérer efficacement une c
 
 La stabilité de votre application C++ va grandement en dépendre.
 
-### Forme à deux dimension
+### Forme à deux dimensions
 
 #### Triangle
 
 Voici les lignes directrices concernant l'implémentation de la classe `Triangle`.
 
 * Vos constructeurs doivent s'assurer d'allouer 3 instances de `Point`
-* Vos constructeurs doivent s'assurer que les Point sont seulement en 2D
+* Vos constructeurs doivent s'assurer que les `Point` sont seulement en 2D
 * Assurez-vous de désallouer vos pointeurs dans le destructeur
 * Assurez-vous que le constructeur de copie ne fasse pas de *shallow copy*
 * Assurez-vous que l'opérateur d'assignation ne fasse pas de *shallow copy*
