@@ -99,9 +99,25 @@ Point &Point::operator+=(const Point &point) {
     return *this;
 }
 
+Point &Point::operator-=(const Point &point) {
+    if (this->_nbDimensions == point._nbDimensions) {
+        for (size_t i = 0; i < this->_nbDimensions; i++) {
+            this->_coordonnee[i] -= point._coordonnee[i];
+        }
+    }
+
+    return *this;
+}
+
 const Point Point::operator+(const Point &point) {
     Point resultat = *this;
     resultat += point;
+    return resultat;
+}
+
+const Point Point::operator-(const Point &point) {
+    Point resultat = *this;
+    resultat -= point;
     return resultat;
 }
 
@@ -135,3 +151,4 @@ std::ostream &operator<<(std::ostream &os, const Point &point) {
 
     return os;
 }
+
