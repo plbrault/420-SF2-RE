@@ -2,7 +2,6 @@
 
 #include <cmath>
 #include <sstream>
-#include <stdexcept>
 
 Point::Point() : Point(2) { } 
 
@@ -61,6 +60,14 @@ void Point::setCoordonnee(size_t dimension, double valeur) {
     }
 }
 
+double Point::getCoordonnee(size_t dimension) const {
+    if (dimension < this->_nbDimensions) {
+        return this->_coordonnee[dimension];
+    } else {
+        return NAN;
+    }
+}
+
 size_t Point::getDimension() const {
     return this->_nbDimensions;
 }
@@ -81,56 +88,6 @@ double Point::getDistance(const Point &point) const {
     }
 }
 
-Point &Point::operator+=(const Point &point) {
-    if (this->_nbDimensions == point._nbDimensions) {
-        for (size_t i = 0; i < this->_nbDimensions; i++) {
-            this->_coordonnee[i] += point._coordonnee[i];
-        }
-    }
-
-    return *this;
-}
-
-Point &Point::operator-=(const Point &point) {
-    if (this->_nbDimensions == point._nbDimensions) {
-        for (size_t i = 0; i < this->_nbDimensions; i++) {
-            this->_coordonnee[i] -= point._coordonnee[i];
-        }
-    }
-
-    return *this;
-}
-
-const Point Point::operator+(const Point &point) {
-    Point resultat = *this;
-    resultat += point;
-    return resultat;
-}
-
-const Point Point::operator-(const Point &point) {
-    Point resultat = *this;
-    resultat -= point;
-    return resultat;
-}
-
-double Point::operator*(Point &point) {
-    double resultat = 0.0;
-
-    for (size_t i = 0; i < this->_nbDimensions; i++) {
-        resultat += ((*this)[i] * point[i]);
-    }
-
-    return resultat;
-}
-
-double &Point::operator[](size_t index) {
-    if (index <= this->_nbDimensions) {
-        return this->_coordonnee[index];
-    } else {
-        throw std::out_of_range("Out of range");
-    }
-}
-
 std::string Point::toString() const {
     std::stringstream flux;
 
@@ -147,10 +104,3 @@ std::string Point::toString() const {
 
     return flux.str();
 }
-
-std::ostream &operator<<(std::ostream &os, const Point &point) {
-    os << point.toString();
-
-    return os;
-}
-
