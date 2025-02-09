@@ -1,7 +1,19 @@
 #include <iostream>
 #include <iomanip>
 
+#include "point.h"
+#include "triangle.h"
+#include "quadrilatere.h"
+
 int main () {
+
+    size_t testing = 0;
+    testing--;
+    size_t value4 = testing % 4;
+    size_t value3 = testing % 3;
+    std::cout << "Testing " << testing << " is value4 " << value4 << "." << std::endl;
+    std::cout << "Testing " << testing << " is value3 " << value3 << "." << std::endl;
+
     Point a(3), b(3), c(3);
     Point wow(4);
 
@@ -81,6 +93,17 @@ int main () {
     std::cout << "Le triangle t2 est un " << (t2.estValide() ? "valide" : "invalide") 
                 << " triangle. Il est un triangle " << (t2.estRectangle() ? "rectangle" : "non rectangle")
                 << " ayant une aire de " << t2.getAire() << " m." << std::endl;
+
+    Point recA, recB, recC, recD;
+
+    recB[0] = 1.0;
+    recC[1] = 1.0;
+    recD[0] = 1.0;
+    recD[1] = 1.0;
+
+    Quadrilatere carree(recA, recB, recC, recD);
+    
+    std::cout << carree.getAire() << " m2 d'aide pour le quadrilatere" << std::endl;
 
     return 0;
 }

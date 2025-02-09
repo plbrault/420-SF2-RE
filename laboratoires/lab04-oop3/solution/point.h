@@ -16,18 +16,19 @@ public:
 
     Point &operator=(const Point &);
 
-    void setCoordonnee(size_t, double);
-
-    size_t getDimension() const;
-    double getDistance(const Point &) const;
-
     Point &operator+=(const Point &);
     Point &operator-=(const Point &);
     const Point operator+(const Point &);
     const Point operator-(const Point &);
+
     double operator*(Point &);
     double &operator[](size_t);
-    std::string Point::toString() const;
+    const double &operator[](size_t) const;
+
+    size_t getDimension() const;
+    double getDistance(const Point &) const;
+    std::string toString() const;
+
     friend std::ostream &operator<<(std::ostream&, const Point &);
 };
 

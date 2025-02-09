@@ -4,6 +4,10 @@
 #include <sstream>
 #include <stdexcept>
 
+/* ========================================================================= */
+/*     Constructeurs & Destructeur                                           */
+/* ========================================================================= */
+
 Point::Point() : Point(2) { } 
 
 Point::Point(size_t nbDimension) {
@@ -12,7 +16,7 @@ Point::Point(size_t nbDimension) {
         this->_coordonnee = new double[this->_nbDimensions];
         
         for (size_t i = 0; i < this->_nbDimensions; i++) {
-            this->_coordonnee[i] = 0.0;
+            (*this)[i] = 0.0;
         }
     }
 }
@@ -22,7 +26,7 @@ Point::Point(const Point &point) {
     this->_coordonnee = new double[this->_nbDimensions];
 
     for (size_t i = 0; i < this->_nbDimensions; i++) {
-        this->_coordonnee[i] = point._coordonnee[i];
+        (*this)[i] = point[i];
     }
 }
 
@@ -32,6 +36,10 @@ Point::~Point() {
     }
 }
 
+/* ========================================================================= */
+/*     Surcharges d'opérateurs                                               */
+/* ========================================================================= */
+
 Point &Point::operator=(const Point &point) {
     if (this == &point) {
         return *this;
@@ -39,7 +47,7 @@ Point &Point::operator=(const Point &point) {
 
     if (this->_nbDimensions == point._nbDimensions) {
         for (size_t i = 0; i < this->_nbDimensions; i++) {
-            this->_coordonnee[i] = point._coordonnee[i];
+            (*this)[i] = point[i];
         }
     } else {
         delete [] this->_coordonnee;
@@ -48,43 +56,17 @@ Point &Point::operator=(const Point &point) {
         this->_coordonnee = new double[this->_nbDimensions];
 
         for (size_t i = 0; i < this->_nbDimensions; i++) {
-            this->_coordonnee[i] = point._coordonnee[i];
+            (*this)[i] = point[i];
         }
     }
 
     return *this;
 }
 
-void Point::setCoordonnee(size_t dimension, double valeur) {
-    if (dimension < this->_nbDimensions) {
-        this->_coordonnee[dimension] = valeur;
-    }
-}
-
-size_t Point::getDimension() const {
-    return this->_nbDimensions;
-}
-
-double Point::getDistance(const Point &point) const {
-    if (this->_nbDimensions == point._nbDimensions) {
-        double resultat = 0.0;
-
-        for (size_t i = 0; i < this->_nbDimensions; i++) {
-            resultat += pow(point._coordonnee[i] - this->_coordonnee[i], 2);
-        }
-
-        resultat = sqrt(resultat);
-
-        return resultat;
-    } else {
-        return NAN;
-    }
-}
-
 Point &Point::operator+=(const Point &point) {
     if (this->_nbDimensions == point._nbDimensions) {
         for (size_t i = 0; i < this->_nbDimensions; i++) {
-            this->_coordonnee[i] += point._coordonnee[i];
+            (*this)[i] += point[i];
         }
     }
 
@@ -94,7 +76,7 @@ Point &Point::operator+=(const Point &point) {
 Point &Point::operator-=(const Point &point) {
     if (this->_nbDimensions == point._nbDimensions) {
         for (size_t i = 0; i < this->_nbDimensions; i++) {
-            this->_coordonnee[i] -= point._coordonnee[i];
+            (*this)[i] -= point[i];
         }
     }
 
@@ -124,10 +106,42 @@ double Point::operator*(Point &point) {
 }
 
 double &Point::operator[](size_t index) {
-    if (index <= this->_nbDimensions) {
+    if (index < this->_nbDimensions) {
         return this->_coordonnee[index];
     } else {
         throw std::out_of_range("Out of range");
+    }
+}
+
+const double &Point::operator[](size_t index) const {
+    if (index < this->_nbDimensions) {
+        return this->_coordonnee[index];
+    } else {
+        throw std::out_of_range("Out of range");
+    }
+}
+
+/* ========================================================================= */
+/*     Accesseurs et mutateurs                                               */
+/* ========================================================================= */
+
+size_t Point::getDimension() const {
+    return this->_nbDimensions;
+}
+
+double Point::getDistance(const Point &point) const {
+    if (this->_nbDimensions == point._nbDimensions) {
+        double resultat = 0.0;
+
+        for (size_t i = 0; i < this->_nbDimensions; i++) {
+            resultat += pow(point[i] - (*this)[i], 2);
+        }
+
+        resultat = sqrt(resultat);
+
+        return resultat;
+    } else {
+        return NAN;
     }
 }
 
@@ -137,7 +151,7 @@ std::string Point::toString() const {
     flux << "(";
 
     for (size_t i = 0; i < this->_nbDimensions; i++) {
-        flux << this->_coordonnee[i];
+        flux << (*this)[i];
         if (i != this->_nbDimensions - 1) {
             flux << ", ";
         }
@@ -148,9 +162,12 @@ std::string Point::toString() const {
     return flux.str();
 }
 
+/* ========================================================================= */
+/*     Fonctions amies                                                       */
+/* ========================================================================= */
+
 std::ostream &operator<<(std::ostream &os, const Point &point) {
     os << point.toString();
 
     return os;
 }
-

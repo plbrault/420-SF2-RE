@@ -5,6 +5,8 @@
 
 #include "point.h"
 
+#define TRIANGLE_NB_POINT 3
+
 class Triangle {
 private:
     Point *_points;
@@ -16,9 +18,11 @@ public:
     ~Triangle();
 
     Triangle &operator=(const Triangle &);
+    Point &operator[](size_t);
+    const Point &operator[](size_t) const;
 
     double getAire() const;
-    bool estInterieur(const Point &) const;
+    bool estInterieur(Point &);
 
     bool estValide() const;
     bool estRectangle() const;
