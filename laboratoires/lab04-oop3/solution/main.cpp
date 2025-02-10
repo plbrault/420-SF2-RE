@@ -96,9 +96,13 @@ int main () {
 
     Point recA, recB, recC, recD;
 
+    recA[0] = 0.0;
+    recA[1] = 0.0;
     recB[0] = 1.0;
+    recB[1] = 0.0;
+    recC[0] = 1.0;
     recC[1] = 1.0;
-    recD[0] = 1.0;
+    recD[0] = 0.0;
     recD[1] = 1.0;
 
     Quadrilatere carree(recA, recB, recC, recD);
