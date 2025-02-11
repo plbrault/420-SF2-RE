@@ -26,7 +26,7 @@ Point::Point(const Point &point) {
     this->_coordonnee = new double[this->_nbDimensions];
 
     for (size_t i = 0; i < this->_nbDimensions; i++) {
-        (*this)[i] = point[i];
+        (*this)[i] = point._coordonnee[i];
     }
 }
 
@@ -125,6 +125,11 @@ const double &Point::operator[](size_t index) const {
 /*     Accesseurs et mutateurs                                               */
 /* ========================================================================= */
 
+int Point::testConstant() const {
+    int a = (int)(*this)[0];
+    return a;
+}
+
 size_t Point::getDimension() const {
     return this->_nbDimensions;
 }
@@ -151,7 +156,7 @@ std::string Point::toString() const {
     flux << "(";
 
     for (size_t i = 0; i < this->_nbDimensions; i++) {
-        flux << (*this)[i];
+        flux << this->_coordonnee[i];
         if (i != this->_nbDimensions - 1) {
             flux << ", ";
         }

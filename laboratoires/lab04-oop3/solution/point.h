@@ -25,6 +25,7 @@ public:
     double &operator[](size_t);
     const double &operator[](size_t) const;
 
+    int testConstant() const;
     size_t getDimension() const;
     double getDistance(const Point &) const;
     std::string toString() const;

@@ -1,4 +1,23 @@
 #include <iostream>
+
+#include "point.h"
+#include "triangle.h"
+
+int main () {
+    Point a, b;
+    a[0] = 5.45;
+    a[1] = 3.22;
+
+    Point c(a);
+
+    std::cout << a.toString() << std::endl;
+    std::cout << b.toString() << std::endl;
+    std::cout << c.toString() << std::endl;
+
+    return 0;
+}
+
+/*#include <iostream>
 #include <iomanip>
 
 #include "point.h"
@@ -79,6 +98,12 @@ int main () {
     interieur[1] = 0.2;
     exterieur[0] = 0.8;
     exterieur[1] = 0.8;
+
+    try {
+        exterieur[6] = 1.77;
+    } catch (const std::out_of_range &ex) {
+        std::cout << "Erreur gérée : " << ex.what() << std::endl;
+    }
     
     bool devrait = t1.estInterieur(interieur);
     bool devraitPas = t1.estInterieur(exterieur);
@@ -109,5 +134,4 @@ int main () {
     
     std::cout << carree.getAire() << " m2 d'aide pour le quadrilatere" << std::endl;
 
-    return 0;
-}
+}*/
