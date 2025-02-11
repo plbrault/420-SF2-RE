@@ -1,11 +1,13 @@
 #include "Produit.h"
 
+using namespace std;
+
 Produit::Produit(const std::string &description, float prix) {
     _description = description;
     _prix = prix;
 }
 
-std::string Produit::getDescription() const {
+const string& Produit::getDescription() const {
     return _description;
 }
 

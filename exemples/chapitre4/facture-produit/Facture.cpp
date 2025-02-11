@@ -35,7 +35,7 @@ void Facture::ajouterLigne(const Produit &produit, int quantite) {
     _nombreLignes++;
 }
 
-LigneFacture Facture::getLigne(int index) const {
+const LigneFacture& Facture::getLigne(int index) const {
     return _lignes[index];
 }
 

@@ -15,6 +15,6 @@ public:
 
     int getNombreLignes() const;
     void ajouterLigne(const Produit &produit, int quantite);
-    LigneFacture getLigne(int index) const;
+    const LigneFacture& getLigne(int index) const;
     float getTotal() const;
 };

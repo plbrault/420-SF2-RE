@@ -10,7 +10,7 @@ public:
     Produit(): Produit("", 0.0) {};
     Produit(const std::string &description, float prix);
 
-    std::string getDescription() const;
+    const std::string& getDescription() const;
     void setDescription(const std::string &description);
 
     float getPrix() const;

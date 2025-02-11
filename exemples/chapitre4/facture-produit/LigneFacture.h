@@ -10,7 +10,7 @@ public:
     LigneFacture(): LigneFacture(Produit(), 0) {};
     LigneFacture(const Produit& produit, int quantite);
 
-    Produit getProduit() const;
+    const Produit& getProduit() const;
     void setProduit(const Produit& produit);
 
     int getQuantite() const;

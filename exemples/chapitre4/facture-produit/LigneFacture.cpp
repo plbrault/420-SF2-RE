@@ -8,7 +8,7 @@ LigneFacture::LigneFacture(const Produit &produit, int quantite) {
     _quantite = quantite;
 }
 
-Produit LigneFacture::getProduit() const {
+const Produit& LigneFacture::getProduit() const {
     return _produit;
 }
 
