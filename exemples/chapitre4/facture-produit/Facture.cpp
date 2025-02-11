@@ -26,7 +26,7 @@ int Facture::getNombreLignes() const {
     return _nombreLignes;
 }
 
-void Facture::ajouterLigne(Produit produit, int quantite) {
+void Facture::ajouterLigne(const Produit &produit, int quantite) {
     if (_nombreLignes == _tailleTableau) {
         agrandirTableau();
     }

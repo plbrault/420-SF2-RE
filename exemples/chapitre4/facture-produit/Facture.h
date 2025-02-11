@@ -14,7 +14,7 @@ public:
     ~Facture();
 
     int getNombreLignes() const;
-    void ajouterLigne(Produit produit, int quantite);
+    void ajouterLigne(const Produit &produit, int quantite);
     LigneFacture getLigne(int index) const;
     float getTotal() const;
 };

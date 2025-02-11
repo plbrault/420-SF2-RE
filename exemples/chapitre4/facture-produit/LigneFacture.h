@@ -8,10 +8,10 @@ private:
     int _quantite;
 public:
     LigneFacture(): LigneFacture(Produit(), 0) {};
-    LigneFacture(Produit produit, int quantite);
+    LigneFacture(const Produit& produit, int quantite);
 
     Produit getProduit() const;
-    void setProduit(Produit produit);
+    void setProduit(const Produit& produit);
 
     int getQuantite() const;
     void setQuantite(int quantite);

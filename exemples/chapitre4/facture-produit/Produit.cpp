@@ -1,6 +1,6 @@
 #include "Produit.h"
 
-Produit::Produit(std::string description, float prix) {
+Produit::Produit(const std::string &description, float prix) {
     _description = description;
     _prix = prix;
 }
@@ -9,7 +9,7 @@ std::string Produit::getDescription() const {
     return _description;
 }
 
-void Produit::setDescription(std::string description) {
+void Produit::setDescription(const std::string &description) {
     _description = description;
 }
 

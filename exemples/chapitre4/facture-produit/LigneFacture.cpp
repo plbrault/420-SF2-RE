@@ -3,7 +3,7 @@
 
 using namespace std;
 
-LigneFacture::LigneFacture(Produit produit, int quantite) {
+LigneFacture::LigneFacture(const Produit &produit, int quantite) {
     _produit = produit;
     _quantite = quantite;
 }
@@ -12,7 +12,7 @@ Produit LigneFacture::getProduit() const {
     return _produit;
 }
 
-void LigneFacture::setProduit(Produit produit) {
+void LigneFacture::setProduit(const Produit &produit) {
     _produit = produit;
 }
 

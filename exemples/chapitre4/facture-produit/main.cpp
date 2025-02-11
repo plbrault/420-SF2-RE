@@ -5,23 +5,23 @@ using namespace std;
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 int main() {
+    Produit produit1, produit2;
     Facture facture;
 
-    Produit produit1("Bananes", 5.0);
-    Produit produit2("Pommes", 3.0);
+    produit1.setDescription("Hamburger");
+    produit1.setPrix(5.99);
+
+    produit2.setDescription("Hot dog");
+    produit2.setPrix(3.99);
 
     facture.ajouterLigne(produit1, 2);
     facture.ajouterLigne(produit2, 3);
 
     for (int i = 0; i < facture.getNombreLignes(); i++) {
-        LigneFacture ligne = facture.getLigne(i);
-        ligne.afficher();
+        facture.getLigne(i).afficher();
         cout << endl;
     }
-
-    std::cout << "Total: " << facture.getTotal() << std::endl;
-
-    return 0;
+    cout << "TOTAL: " << facture.getTotal();
 }
 
 // TIP See CLion help at <a
