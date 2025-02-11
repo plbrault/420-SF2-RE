@@ -4,6 +4,109 @@
 
 Approfondir les notions de POO avec les concepts de surcharges d'opérateur, fonctions amies et référence constante.
 
+## Note sur les valeurs à virgule flottante (`float` et `double`)
+
+Les nombres à virgules flottantes poses un risque lorsque utilisés de manière inadéquate. Deux problèmes importants doivent être mitiger en tout temps.
+
+### Problème numéro 1 - Erreur d'arrondi en virgule flottante : 
+
+Dans votre `main`, écrire le code suivant : 
+
+```cpp
+    int main() {
+        double a = 0.1;
+        double b = 0.2;
+        double c = a + b;
+
+        if (c == 0.3) {
+            std::cout << "Yeah";
+        } else {
+            std::cout << "Doh";
+        }
+
+        std::cout << std::endl;
+    }
+```
+
+Étrangement notre sortie est `Doh`, ce qui ne fait pas de sens mathématiquement. Mais lorsqu'on sait que la précision d'un nombre, qu'ils soit 32 bit (`float`) ou 64 bit (`double`), il y aura toujours des imprécisions. Une méthode est d'utilisé une valeur proche de 0 (par exemple, 1e-9) et s'assurer que la différence entre notre réponse et la valeur que l'on veut soit inférieur à cette valeur. Ainsi, on peut réécrire : 
+
+```cpp
+    #define EPSILON 1e-9
+
+    int main() {
+        double a = 0.1;
+        double b = 0.2;
+        double c = a + b;
+
+        if (abs(0.3 - c) < EPSILON) {
+            std::cout << "Yeah";
+        } else {
+            std::cout << "Doh";
+        }
+
+        std::cout << std::endl;
+    }
+```
+
+Maintenant tout fonctionne.
+
+### Problème numéro 2 - Perte de significance
+
+Les valeurs d'un nombre à virgule flottante ne sont pas toujours comparable lors que l'ordre de grandeur change. Par exemple, le soleil se trouve à une distance de 150000000000 m de distance de la terre. Disons que nous avons un vaiseau qui quite la terre et mets à jour à chaque miliseconde (milimètre) (0.001 m) la distance restantes :
+
+```cpp
+    int main () {
+        double distance = 1.5e11;
+        double decrement = 1e-3;
+
+        std::cout << std::scientific << std::setprecision(10);
+        std::cout << "Avant de partir : " << distance << " meters" << std::endl;
+
+        for (int i = 0; i < 10000000000u; i++) {  
+            distance -= decrement;
+        }
+        
+        std::cout << "Après 10000000000 ms : " << distance << " meters" << std::endl;
+
+        return 0;
+    }
+```
+
+Si vous êtes patient a attendre les ~20 secondes nécessaire pour exécuter ce code, vous verrez que les deux valeurs sont exactement pareil. Il a plusieurs méthodes pour gérer cette situation, mais la plus simple à mon humble opinion est d'utiliser cette technique.
+
+```cpp
+
+    double valeurMinimalePossible(double x) {
+        return std::nextafter(x, x + x) - x;
+    }
+
+    int main () {    
+        double distance = 1.5e11;
+        double valeurMinimale = valeurMinimalePossible(distance);
+        double decrement = 1e-3;
+
+        std::cout << std::scientific << std::setprecision(10);
+        std::cout << "Avant de partir : " << distance << " meters" << std::endl;
+
+        double accumulator = 0.0;
+        for (uint64_t i = 0; i < 10000000000lu; i++) {  
+            accumulator += decrement;
+            
+            if (accumulator > valeurMinimale) {
+                distance -= accumulator;
+                accumulator = 0.0;
+            }
+        }
+        
+        std::cout << "Après 10000000000 ms : " << distance << " meters" << std::endl;
+
+        return 0;
+    }
+
+```
+
+Vous devriez avoir un résultat différents après la boucle. Nous n'allons pas aborder le fonctionnement en détail dans le cadre du cours de la fonction `nextafter`.
+
 ## Le plan cartésien à N dimension
 
 Nous allons continuer notre série de classes qui a pour but d'aider à la représentation informatique de `Point` et de `Forme`. Nous allons apporter des modifications à `Point`, `Triangle` et implémenter `Quadrilatere`.
@@ -17,7 +120,6 @@ Quadrilatere o-- Point
 Sphere o-- Point
 Hexahedron o-- Point
 Hexahedron <-- Quadrilatere
-
 
 class Point {
     - double *_dimensions
@@ -348,14 +450,14 @@ Ici, on peut conceptualiser que nous avons fait :
 ```cpp
     // ...
     // code C++ non valide
-    std::cout.operator<<(maChaine.operator<<(".").operator<<(std::endl));
+    std::cout.operator<<(maChaine.operator<<(".".operator<<(std::endl)));
 ```
 
 Cela devient plus compliquer quand nous avons différents types de données, comme par exemple des entiers, des nombres à virgules flotante, etc: cela requiert que cette opérateur puisse recevoir n'importe qu'elle type de données, incluant nos classes. Et un problème survient.
 
-L'objet `std::cout` est une instance de la classe `std::ostream`. Notre problème est que nous ne pouvons pas modifier cette classe : elle est fournie par la librarie standard, et elle diffère selon notre système d'opération. On ne peux donc pas ajouter dans cette classe notre opérateur qui reçoit un `Point`. Calmez-vous, nous avons une solution : les fonctions amies.
+L'objet `std::cout` est une instance de la classe `std::ostream`. Notre problème est que nous ne pouvons pas modifier cette classe : elle est fournie par la librarie standard, et elle diffère selon notre système d'exploitation. On ne peux donc pas ajouter dans cette classe notre opérateur qui reçoit un `Point`. Calmez-vous, nous avons une solution : les fonctions amies.
 
-Une fonction amie est une fonction (pas une méthode de notre classe `Point`) que notre classe va permettre l'accès a nos membres privées. On la définit dans notre classe pour que le compilateur soit en mesure de trouver cette fonction et accéder à nos membres privées.
+Une fonction amie est une fonction (**pas une méthode**) que notre classe va permettre l'accès a nos membres privées. On la définit dans notre classe pour que le compilateur soit en mesure de trouver cette fonction et accéder à nos membres privées.
 
 ```cpp
 class Point {
@@ -369,5 +471,159 @@ public:
 };
 ```
 
-Ici, on réalise que nous avons deux paramètres. Le premier correspond à notre instance `std::ostream` (tel `std::cout`) et le second est notre point. On peut donc conceptualiser 
+Ici, on réalise que nous avons deux paramètres. Le premier correspond à notre instance `std::ostream` (tel `std::cout`) et le second est notre point. Reprenons ce code-ci :
+
+```cpp
+    // ...
+    std::cout << maChaine << "." << std::endl;
+```
+
+Avec les fonctions amies, nous avons quelques chose qui ressemble plus à :
+
+```cpp
+    // ...
+    // code C++ non-valide
+    operator<<(operator<<(operator<<(std::cout, maChaine), "."), std::endl);
+```
+
+Ainsi il est possible de surcharger l'opérateur `<<` en utilisant les fonctions amies.
+
+> Il est possible de faire la même chose sans utiliser une fonction amie. Laquelle ?
+
+Pour notre point, nous pouvons simplement copier le contenue de `toString()` à l'intérieur, en remplaçant le `flux` par notre paramètre `std::ostream`.
+
+#### Exemple
+
+Ici, nous avons un extrait du code dans le `main` qui ressemblait à ceci : 
+
+```cpp
+    Point a(3), b(3), c(3);
+    Point wow(4);
+
+    a.setCoordonnee(0, 2.5);
+    a.setCoordonnee(1, 2.8);
+    a.setCoordonnee(2, 2.95);
+
+    b.setCoordonnee(0, 3.5);
+    b.setCoordonnee(1, 3.8);
+    b.setCoordonnee(2, 3.98);
+
+    c.setCoordonnee(0, 4.5);
+    c.setCoordonnee(1, 4.8);
+    c.setCoordonnee(2, 4.98);
+
+    wow.setCoordonnee(0, 0.5);
+    wow.setCoordonnee(1, 0.8);
+    wow.setCoordonnee(2, 0.98);
+    wow.setCoordonnee(3, 1.16);
+
+    std::cout << "a: " << a.toString() << std::endl;
+    std::cout << "b: " << b.toString() << std::endl;
+    std::cout << "c: " << c.toString() << std::endl;
+    std::cout << "wow: " << wow.toString() << std::endl;
+```
+
+que l'on peut remplacer par ceci : 
+
+```cpp
+    Point a(3), b(3), c(3);
+    Point wow(4);
+
+    a[0] = 2.5;
+    a[1] = 2.8;
+    a[2] = 2.95;
+
+    b[0] = 3.5;
+    b[1] = 3.8;
+    b[2] = 3.98;
+
+    c[0] = 4.5;
+    c[1] = 4.8;
+    c[2] = 4.98;
+
+    wow[0] = 0.5;
+    wow[1] = 0.8;
+    wow[2] = 0.98;
+    wow[3] = 1.16;
+
+    std::cout << "a: " << a << std::endl;
+    std::cout << "b: " << b << std::endl;
+    std::cout << "c: " << c << std::endl;
+    std::cout << "wow: " << wow << std::endl;
+```
+
+Voici donc notre classe après l'ajout de nos opérateurs.
+
+```plantuml
+@startuml
+class Point {
+    - double *_coordonnees
+    - size_t _nbDimensions
+
+    + Point()
+    + Point(size_t nbDimensions)
+    + Point(const Point &point)
+    + ~Point()
+
+    + Point &operator=(const Point &point)
+    
+    + Point &operator+=(const Point &point);
+    + Point &operator-=(const Point &point);
+    + const Point operator+(const Point &point);
+    + const Point operator-(const Point &point);
+
+    + double operator*(Point &point);
+    + double &operator[](size_t indice);
+    + const double &operator[](size_t indice) const;
+    
+    + void setCoordonnee(size_t indice, double valeur);
+    + double getCoordonnee(size_t indice) const
+
+    + size_t getDimension() const;
+    
+    + std::string toString() const;
+
+    + double getDistance(const Point &);
+}
+@enduml
+```
+
+### Classe Triangle
+
+* Modifier `Triangle` pour utiliser l'opérateur `[]` de point.
+* Ajouter l'opérateur `[]` pour la classe Triangle qui retournera le bon point sélectionner. N'oubliez pas que cela requiert souvent de ne pas être *DRY*.
+
+### Classe Quadrilatere
+
+* Implémenter la classe quadrilatère suivant le schéma suivant :
+
+```plantuml
+@startuml
+class Quadrilatere {
+    - Point *_points;
+
+    + Quadrilatere();
+    + Quadrilatere(const Point &a, const Point &b, const Point &c, const Point &d);
+    + Quadrilatere(const Quadrilatere &quad);
+    + ~Quadrilatere();
+
+    + Quadrilatere &operator=(const Quadrilatere &);
+    + Point &operator[](size_t);
+    + const Point &operator[](size_t) const;
+
+    + double getAire() const;
+    + bool estValide() const;
+}
+@enduml
+```
+
+Équation pour calculer l'aire (peu importe le nombre de point). Cette algorithme est l'algorithme du lacet (*showlace*) et permet de calculer l'air de n'importe quel forme avec un nombre arbitraire de point en autant qu'il n'y a pas de croisement. Nous n'allons pas gérer les croisements.
+
+Soit un nombre de Point 2D arbitraire `k` :
+
+$$
+    A = \frac{1}{2} \sum_{i = 0}^{k - 1}{y_i(x_{i-1} - x_{i+1})}
+$$
+
+ou $(x_i, y_i)$ représente $(P_{i0}, P_{i1})$. Pour l'instant, si l'air est égale à 0, alors la figure est invalide (mais ce n'est pas vraiment le cas).
 

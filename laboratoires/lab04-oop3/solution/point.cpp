@@ -125,11 +125,6 @@ const double &Point::operator[](size_t index) const {
 /*     Accesseurs et mutateurs                                               */
 /* ========================================================================= */
 
-int Point::testConstant() const {
-    int a = (int)(*this)[0];
-    return a;
-}
-
 size_t Point::getDimension() const {
     return this->_nbDimensions;
 }

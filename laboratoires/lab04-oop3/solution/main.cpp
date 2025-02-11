@@ -1,18 +1,46 @@
 #include <iostream>
+#include <iomanip>
+#include <cmath>
 
 #include "point.h"
 #include "triangle.h"
 
+
+#define EPSILON 1e-9
+
+double valeurMinimalePossible(double x) {
+    return std::nextafter(x, x + x) - x;
+}
+
 int main () {
-    Point a, b;
-    a[0] = 5.45;
-    a[1] = 3.22;
+    // Point a, b;
+    // a[0] = 5.45;
+    // a[1] = 3.22;
 
-    Point c(a);
+    // Point c(a);
 
-    std::cout << a.toString() << std::endl;
-    std::cout << b.toString() << std::endl;
-    std::cout << c.toString() << std::endl;
+    // std::cout << a.toString() << std::endl;
+    // std::cout << b.toString() << std::endl;
+    // std::cout << c.toString() << std::endl;
+
+    double distance = 1.5e11;
+    double valeurMinimale = valeurMinimalePossible(distance);
+    double decrement = 1e-3;
+
+    std::cout << std::scientific << std::setprecision(10);
+    std::cout << "Avant de partir : " << distance << " meters" << std::endl;
+
+    double accumulator = 0.0;
+    for (uint64_t i = 0; i < 10000000000lu; i++) {  
+        accumulator += decrement;
+        
+        if (accumulator > valeurMinimale) {
+            distance -= accumulator;
+            accumulator = 0.0;
+        }
+    }
+    
+    std::cout << "Après 10000000000 ms : " << distance << " meters" << std::endl;
 
     return 0;
 }
