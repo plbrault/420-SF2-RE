@@ -5,47 +5,7 @@
 #include "point.h"
 #include "triangle.h"
 
-
-#define EPSILON 1e-9
-
-double valeurMinimalePossible(double x) {
-    return std::nextafter(x, x + x) - x;
-}
-
-int main () {
-    // Point a, b;
-    // a[0] = 5.45;
-    // a[1] = 3.22;
-
-    // Point c(a);
-
-    // std::cout << a.toString() << std::endl;
-    // std::cout << b.toString() << std::endl;
-    // std::cout << c.toString() << std::endl;
-
-    double distance = 1.5e11;
-    double valeurMinimale = valeurMinimalePossible(distance);
-    double decrement = 1e-3;
-
-    std::cout << std::scientific << std::setprecision(10);
-    std::cout << "Avant de partir : " << distance << " meters" << std::endl;
-
-    double accumulator = 0.0;
-    for (uint64_t i = 0; i < 10000000000lu; i++) {  
-        accumulator += decrement;
-        
-        if (accumulator > valeurMinimale) {
-            distance -= accumulator;
-            accumulator = 0.0;
-        }
-    }
-    
-    std::cout << "Après 10000000000 ms : " << distance << " meters" << std::endl;
-
-    return 0;
-}
-
-/*#include <iostream>
+#include <iostream>
 #include <iomanip>
 
 #include "point.h"
@@ -53,14 +13,6 @@ int main () {
 #include "quadrilatere.h"
 
 int main () {
-
-    size_t testing = 0;
-    testing--;
-    size_t value4 = testing % 4;
-    size_t value3 = testing % 3;
-    std::cout << "Testing " << testing << " is value4 " << value4 << "." << std::endl;
-    std::cout << "Testing " << testing << " is value3 " << value3 << "." << std::endl;
-
     Point a(3), b(3), c(3);
     Point wow(4);
 
@@ -162,4 +114,4 @@ int main () {
     
     std::cout << carree.getAire() << " m2 d'aide pour le quadrilatere" << std::endl;
 
-}*/
+}

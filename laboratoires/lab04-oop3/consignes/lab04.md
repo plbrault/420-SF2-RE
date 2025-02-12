@@ -52,17 +52,17 @@ Maintenant tout fonctionne.
 
 ### Problème numéro 2 - Perte de significance
 
-Les valeurs d'un nombre à virgule flottante ne sont pas toujours comparable lors que l'ordre de grandeur change. Par exemple, le soleil se trouve à une distance de 150000000000 m de distance de la terre. Disons que nous avons un vaiseau qui quite la terre et mets à jour à chaque miliseconde (milimètre) (0.001 m) la distance restantes :
+Les valeurs d'un nombre à virgule flottante ne sont pas toujours comparable lors que l'ordre de grandeur change. Par exemple, imaginons que nous voulons atteindre un objet à 150 000 000 000 000 m de distance de la terre. Disons que nous avons un vaiseau qui quite la terre et mets à jour à chaque miliseconde (milimètre) (0.001 m) la distance restantes :
 
 ```cpp
     int main () {
-        double distance = 1.5e11;
+        double distance = 1.5e14;
         double decrement = 1e-3;
 
         std::cout << std::scientific << std::setprecision(10);
         std::cout << "Avant de partir : " << distance << " meters" << std::endl;
 
-        for (int i = 0; i < 10000000000u; i++) {  
+        for (int i = 0; i < 10000000000lu; i++) {  
             distance -= decrement;
         }
         
@@ -81,7 +81,7 @@ Si vous êtes patient a attendre les ~20 secondes nécessaire pour exécuter ce 
     }
 
     int main () {    
-        double distance = 1.5e11;
+        double distance = 1.5e14;
         double valeurMinimale = valeurMinimalePossible(distance);
         double decrement = 1e-3;
 
@@ -282,7 +282,7 @@ Pour y parvenir, nous devons surcharger l'opérateur `[]`, comme ceci :
 >
 > Important d'ajouter un message pertinent à l'erreur.
 
-Dans votre `main`, copier ce code qu'y servira pour tester notre code.
+Dans votre `main`, copier ce code qu'y servira pour tester notre class `Point`.
 
 ```cpp
 #include <iostream>
@@ -332,7 +332,7 @@ Tout devrait fonctionner. Toutefois, nous aurons un problème avec les méthodes
     return a;
 ```
 
-Maintenant, essayer de compiler. Votre IDE ne devrait pas être contente car la méthode constante s'attends à ce qu'on ne fasse rien qui pourrait changer l'état de notre objet, mais le compilateur ne peut pas être certain que l'opérateur `[]` ne vas pas faire un changement (n'est pas assez intelligent).
+Maintenant, essayer de compiler. Votre IDE ne devrait pas être content car la méthode constante s'attends à ce qu'on ne fasse rien qui pourrait changer l'état de notre objet, mais le compilateur ne peut pas être certain que l'opérateur `[]` ne vas pas faire un changement (n'est pas assez intelligent).
 
 Comment s'y prend-t-on ? Nous allons devoir **ignorer** le concept **DRY** (*Don't repeat yourself*) et répéter du code :
 

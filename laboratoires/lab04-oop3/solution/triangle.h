@@ -21,13 +21,13 @@ public:
 
     Triangle &operator=(const Triangle &);
     Point &operator[](size_t);
-    // const Point &operator[](size_t) const;
+    const Point &operator[](size_t) const;
 
-    // double getAire() const;
-    // bool estInterieur(Point &);
+    double getAire() const;
+    bool estInterieur(Point &);
 
-    // bool estValide() const;
-    // bool estRectangle() const;
+    bool estValide() const;
+    bool estRectangle() const;
 };
 
 #endif
