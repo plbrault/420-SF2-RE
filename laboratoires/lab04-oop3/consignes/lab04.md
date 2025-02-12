@@ -54,7 +54,7 @@ Maintenant tout fonctionne.
 
 ### Problème numéro 2 - Perte d'importance (*significance*)
 
-Les valeurs d'un nombre à virgule flottante ne sont pas toujours comparables lorsque l'ordre de grandeur change. Par exemple, imaginons que nous voulons atteindre un objet à 150 000 000 000 000 m de distance de la terre. Disons que nous avons un vaiseau qui se déplace vers cet objet à une vitesse d'un mètre par seconde et met à jour la distance restante toutes les milisecondes (déplacement de 1 mm soit 0.001 m):
+Les valeurs d'un nombre à virgule flottante ne sont pas toujours comparables lorsque l'**ordre de grandeur** change. Par exemple, imaginons que nous voulons atteindre un objet à 150 000 000 000 000 m de distance de la terre. Disons que nous avons un vaiseau qui se déplace vers cet objet à une vitesse d'un mètre par seconde et met à jour la distance restante toutes les milisecondes (déplacement de 1 mm soit 0.001 m):
 
 ```cpp
     int main () {
@@ -82,6 +82,9 @@ Si vous patientez le temps des ~20 secondes nécessaires pour exécuter ce code,
 
 ```cpp
 
+    // Retourne la plus petite valeur possible pouvant être
+    // additionnée ou soustraite à x pour que la valeur
+    // de celui-ci change
     double valeurMinimalePossible(double x) {
         return std::nextafter(x, x + x) - x;
     }
@@ -113,9 +116,9 @@ Si vous patientez le temps des ~20 secondes nécessaires pour exécuter ce code,
 
 Vous devriez avoir un résultat différent après la boucle. Nous n'allons pas aborder le fonctionnement en détail  de la fonction `nextafter` dans le cadre du cours.
 
-## Le plan cartésien à N dimension
+## Le plan cartésien à N dimensions
 
-Nous allons continuer notre série de classes qui a pour but d'aider à la représentation informatique de `Point` et de `Forme`. Nous allons apporter des modifications à `Point`, `Triangle` et implémenter `Quadrilatere`.
+Nous allons continuer à implémenter notre série de classes qui a pour but d'aider à la représentation informatique de `Point` et de `Forme`. Nous allons apporter des modifications à `Point`, `Triangle` et implémenter `Quadrilatere`.
 
 ```plantuml
 @startuml
