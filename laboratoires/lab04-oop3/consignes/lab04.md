@@ -397,7 +397,7 @@ Point &Point::operator+=(const Point &point) {
 }
 
 const Point Point::operator+(const Point &point) {
-    // Instancie un nouveau point (nommé resultat) qui sera égale à this
+    // Instancie un nouveau point (nommé resultat) qui sera égal à this
     // resultat += point
     // retourne le résultat
 }
@@ -406,17 +406,17 @@ const Point Point::operator+(const Point &point) {
 
 #### Implémenter l'opérateur de produit scalaire
 
-Nous allons utiliser l'opérateur `*` pour représenter l'opération d'un produit scalaires, c'est-à-dire :
+Nous allons utiliser l'opérateur `*` pour représenter l'opération d'un produit scalaire, c'est-à-dire :
 
 $$
     P_0 \cdot P_1 = \sum_{i=0}^{n-1}{x_{0i}x_{1i}}
 $$
 
-Implémenter cette surcharge d'opérateur, en vous assurant du bon type de données de retour.
+Implémentez cette surcharge d'opérateur, en vous assurant du bon type de donnée de retour.
 
 #### Les fonctions amies et l'opérateur `<<`
 
-Depuis le début de l'introduction de la surcharge d'opérateur, nous avons toujours eu des opérateurs qui avait le même type de chaque côté. Par exemple :
+Depuis l'introduction de la surcharge d'opérateur, nous avons toujours eu des opérateurs dont les deux opérandes étaient du même type. Par exemple :
 
 ```cpp
     Point &operator=(const Point &);
@@ -444,8 +444,7 @@ nous pouvons imaginer quelque chose comme ceci :
 ```cpp
     Point a, b;
     // ...
-    // Code C++ non valide
-    Point c.operator=(a.operator+(b));
+    Point c.operator=(a.operator+(b)); // Code C++ non valide
 ```
 
 Ainsi, `a` sera le `this` lors du `+` et `c` le `this` lors du `=`. Maintenant, regardons ensemble un exemple d'utilisation d'un `cout` avec l'opérateur `<<`
@@ -463,11 +462,11 @@ Ici, on peut conceptualiser que nous avons fait :
     std::cout.operator<<(maChaine.operator<<(".".operator<<(std::endl)));
 ```
 
-Cela devient plus compliquer quand nous avons différents types de données, comme par exemple des entiers, des nombres à virgules flotante, etc: cela requiert que cette opérateur puisse recevoir n'importe qu'elle type de données, incluant nos classes. Et un problème survient.
+Cela devient plus compliqué quand nous avons différents types de données, comme par exemple des entiers, des nombres à virgules flotante, etc: cela requiert que cet opérateur puisse recevoir n'importe quel type de donnée, incluant nos classes. Et un problème survient.
 
-L'objet `std::cout` est une instance de la classe `std::ostream`. Notre problème est que nous ne pouvons pas modifier cette classe : elle est fournie par la librarie standard, et elle diffère selon notre système d'exploitation. On ne peux donc pas ajouter dans cette classe notre opérateur qui reçoit un `Point`. Calmez-vous, nous avons une solution : les fonctions amies.
+L'objet `std::cout` est une instance de la classe `std::ostream`. Notre problème est que nous ne pouvons pas modifier cette classe : elle est fournie par la librarie standard, et elle diffère selon notre système d'exploitation. On ne peux donc pas ajouter dans cette classe notre opérateur qui reçoit un `Point`. Pas de panique, nous avons une solution : les fonctions amies.
 
-Une fonction amie est une fonction (**pas une méthode**) que notre classe va permettre l'accès a nos membres privées. On la définit dans notre classe pour que le compilateur soit en mesure de trouver cette fonction et accéder à nos membres privées.
+Une fonction amie est une fonction (**pas une méthode**) à laquelle notre classe va permettre l'accès a ses membres privés. On la définit dans notre classe pour que le compilateur soit en mesure de trouver cette fonction et accéder à nos membres privés.
 
 ```cpp
 class Point {
@@ -498,7 +497,7 @@ Avec les fonctions amies, nous avons quelques chose qui ressemble plus à :
 
 Ainsi il est possible de surcharger l'opérateur `<<` en utilisant les fonctions amies.
 
-> Il est possible de faire la même chose sans utiliser une fonction amie. Laquelle ?
+> Il est possible de faire la même chose sans utiliser une fonction amie. Comment ?
 
 Pour notre point, nous pouvons simplement copier le contenue de `toString()` à l'intérieur, en remplaçant le `flux` par notre paramètre `std::ostream`.
 
