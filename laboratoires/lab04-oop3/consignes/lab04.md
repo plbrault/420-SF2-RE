@@ -495,11 +495,17 @@ Avec les fonctions amies, nous avons quelques chose qui ressemble plus à :
     operator<<(operator<<(operator<<(std::cout, maChaine), "."), std::endl);
 ```
 
-Ainsi il est possible de surcharger l'opérateur `<<` en utilisant les fonctions amies.
+Ainsi il est possible de surcharger l'opérateur `<<` du `Point` en utilisant les fonctions amies. Pour ce faire, implémentez la fonction suivante après l'avoir ajoutée comme fonction amie de la classe Point:
+
+```cpp
+std::ostream &operator<<(std::ostream &sortie, const Point &point) {
+    // Faire la même chose que dans la méthode `toString()` de Point,
+    // en remplaçant le `flux` par notre paramètre `sortie`
+    // et `this` par le paramètre `point`
+}
+```
 
 > Il est possible de faire la même chose sans utiliser une fonction amie. Comment ?
-
-Pour notre point, nous pouvons simplement copier le contenue de `toString()` à l'intérieur, en remplaçant le `flux` par notre paramètre `std::ostream`.
 
 #### Exemple
 
