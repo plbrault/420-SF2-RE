@@ -388,7 +388,7 @@ Voici un exemple d'algorithme pour le `+=` et un pour le `+` suivant cette astuc
 ```cpp
 
 Point &Point::operator+=(const Point &point) {
-    // Si les nombres de dimensions sont les mêmes alors
+    // Si les deux points ont le même nombre de dimensions alors
     //    Pour chaque dimension
     //      Coordonnée i de this += coordonnée i de point
     //    Fin pour
