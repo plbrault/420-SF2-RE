@@ -2,15 +2,17 @@
 
 ## Objectif
 
-Approfondir les notions de POO avec les concepts de surcharges d'opérateur, fonctions amies et référence constante.
+Approfondir les notions de POO avec les concepts de surcharge d'opérateur, fonction amie et référence constante.
 
 ## Note sur les valeurs à virgule flottante (`float` et `double`)
 
-Les nombres à virgules flottantes poses un risque lorsque utilisés de manière inadéquate. Deux problèmes importants doivent être mitiger en tout temps.
+Les nombres à virgule flottante posent un risque lorsque utilisés de manière inadéquate. Deux problèmes importants doivent être considérés en tout temps.
 
 ### Problème numéro 1 - Erreur d'arrondi en virgule flottante : 
 
-Dans votre `main`, écrire le code suivant : 
+Tentons une petite expérience dans un nouveau projet Visual Studio.
+
+Exécutez le code suivant:
 
 ```cpp
     int main() {
@@ -28,7 +30,7 @@ Dans votre `main`, écrire le code suivant :
     }
 ```
 
-Étrangement notre sortie est `Doh`, ce qui ne fait pas de sens mathématiquement. Mais lorsqu'on sait que la précision d'un nombre, qu'ils soit 32 bit (`float`) ou 64 bit (`double`), il y aura toujours des imprécisions. Une méthode est d'utilisé une valeur proche de 0 (par exemple, 1e-9) et s'assurer que la différence entre notre réponse et la valeur que l'on veut soit inférieur à cette valeur. Ainsi, on peut réécrire : 
+Étrangement, notre résultat est "Doh", ce qui n'a pas de sens mathématiquement. Cependant, il est important de comprendre qu'en raison de la représentation en mémoire des nombres à virgule, qu'ils soient sur 32 bits (float) ou sur 64 bits (double), il y aura toujours des imprécisions. Une solution possible consiste à utiliser une valeur proche de 0 (par exemple, `1e-9`) et à s'assurer que la différence entre notre réponse et la valeur souhaitée soit inférieure à cette valeur. Ainsi, nous pouvons réécrire :
 
 ```cpp
     #define EPSILON 1e-9
@@ -50,9 +52,9 @@ Dans votre `main`, écrire le code suivant :
 
 Maintenant tout fonctionne.
 
-### Problème numéro 2 - Perte de significance
+### Problème numéro 2 - Perte d'importance (*significance*)
 
-Les valeurs d'un nombre à virgule flottante ne sont pas toujours comparable lors que l'ordre de grandeur change. Par exemple, imaginons que nous voulons atteindre un objet à 150 000 000 000 000 m de distance de la terre. Disons que nous avons un vaiseau qui quite la terre et mets à jour à chaque miliseconde (milimètre) (0.001 m) la distance restantes :
+Les valeurs d'un nombre à virgule flottante ne sont pas toujours comparables lorsque l'ordre de grandeur change. Par exemple, imaginons que nous voulons atteindre un objet à 150 000 000 000 000 m de distance de la terre. Disons que nous avons un vaiseau qui se déplace vers cet objet à une vitesse d'un mètre par seconde et met à jour la distance restante toutes les milisecondes (déplacement de 1 mm soit 0.001 m):
 
 ```cpp
     int main () {
@@ -72,7 +74,11 @@ Les valeurs d'un nombre à virgule flottante ne sont pas toujours comparable lor
     }
 ```
 
-Si vous êtes patient a attendre les ~20 secondes nécessaire pour exécuter ce code, vous verrez que les deux valeurs sont exactement pareil. Il a plusieurs méthodes pour gérer cette situation, mais la plus simple à mon humble opinion est d'utiliser cette technique.
+> Note: Pour cet exemple et pour d'autres exemples dans les laboratoires, il vous arrivera parfois d'obtenir une erreur à la compilation disant qu'une fonction (ou autre) est introuvable (`std::setprecision` dans ce cas-ci). À vous de faire appel à votre ami Internet pour trouver quelle bibliothèque inclure pour avoir accès à cette fonction!
+
+> Note 2: **« Dans quelle librairie C++ se trouve la fonction std::setprecision ? »** est une bonne question à poser à une intelligence artificielle générative (ex: ChatGPT).
+
+Si vous patientez le temps des ~20 secondes nécessaires pour exécuter ce code, vous verrez que les deux valeurs (distance de départ et distance de fin) sont identiques. Il y a plusieurs méthodes pour gérer cette situation. Une méthode simple est celle-ci:
 
 ```cpp
 
@@ -105,7 +111,7 @@ Si vous êtes patient a attendre les ~20 secondes nécessaire pour exécuter ce 
 
 ```
 
-Vous devriez avoir un résultat différents après la boucle. Nous n'allons pas aborder le fonctionnement en détail dans le cadre du cours de la fonction `nextafter`.
+Vous devriez avoir un résultat différent après la boucle. Nous n'allons pas aborder le fonctionnement en détail  de la fonction `nextafter` dans le cadre du cours.
 
 ## Le plan cartésien à N dimension
 
@@ -626,4 +632,3 @@ $$
 $$
 
 ou $(x_i, y_i)$ représente $(P_{i0}, P_{i1})$. Pour l'instant, si l'air est égale à 0, alors la figure est invalide (mais ce n'est pas vraiment le cas).
-
