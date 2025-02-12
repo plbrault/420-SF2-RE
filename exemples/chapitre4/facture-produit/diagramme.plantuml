@@ -1,0 +1,41 @@
+@startuml
+class Produit {
+    - std::string _description
+    - float _prix
+    + Produit()
+    + Produit(std::string description, float prix)
+    + std::string getDescription() const
+    + void setDescription(std::string description)
+    + float getPrix() const
+    + void setPrix(float prix)
+}
+
+class LigneFacture {
+    - Produit _produit
+    - int _quantite
+    + LigneFacture()
+    + LigneFacture(Produit produit, int quantite)
+    + Produit getProduit() const
+    + void setProduit(Produit produit)
+    + int getQuantite() const
+    + void setQuantite(int quantite)
+    + void afficher() const
+}
+
+class Facture {
+    - LigneFacture *_lignes
+    - int _nombreLignes
+    - int _tailleTableau
+    + Facture()
+    + ~Facture()
+    + int getNombreLignes() const
+    + void ajouterLigne(Produit produit, int quantite)
+    + LigneFacture getLigne(int index) const
+    + float getTotal() const
+}
+
+' Relations
+LigneFacture "1" -- "1" Produit : contient >
+Facture "1" -- "*" LigneFacture : contient >
+@enduml
+
