@@ -292,7 +292,7 @@ Pour y parvenir, nous devons surcharger l'opérateur `[]`, comme ceci :
 >
 > Il est important d'ajouter un message pertinent à l'erreur.
 
-Dans votre `main`, copier ce code qu'y servira pour tester notre class `Point`.
+Dans votre `main`, copiez ce code qui servira à tester votre classe `Point`.
 
 ```cpp
 #include <iostream>
@@ -310,7 +310,7 @@ int main () {
 }
 ```
 
-Que ce passe-t-il si nous ajoutons cette ligne :
+Que se passe-t-il si nous ajoutons cette ligne?
 
 ```cpp
 #include <iostream>
@@ -331,10 +331,10 @@ int main () {
 }
 ```
 
-Tout devrait fonctionner. Toutefois, nous aurons un problème avec les méthodes constantes. En effet, notre opérateur permet l'obtention et la modification d'un référence à notre `double`, et ainsi nous ne pourrions pas utiliser cette méthode tel quelle.
+Tout devrait fonctionner. Toutefois, nous aurons un problème avec les méthodes constantes. En effet, notre opérateur permet l'obtention et la modification d'une référence à notre `double`, et ainsi nous ne pourrions pas utiliser cette méthode telle quelle.
 
-1. Ajouter une méthode constante nommé `testConstant` qui retourne un int
-2. À l'intérieur de cette méthode, ajouter le code suivant :
+1. Ajoutez une méthode **constante** nommée `testConstant` qui retourne un `int`
+2. À l'intérieur de cette méthode, ajoutez le code suivant :
 
 ```cpp
     // contenue de votre méthode testContant
@@ -342,9 +342,9 @@ Tout devrait fonctionner. Toutefois, nous aurons un problème avec les méthodes
     return a;
 ```
 
-Maintenant, essayer de compiler. Votre IDE ne devrait pas être content car la méthode constante s'attends à ce qu'on ne fasse rien qui pourrait changer l'état de notre objet, mais le compilateur ne peut pas être certain que l'opérateur `[]` ne vas pas faire un changement (n'est pas assez intelligent).
+Maintenant, essayer de compiler. Votre IDE ne devrait pas être content car la méthode constante s'attend à ce qu'on ne fasse rien qui pourrait changer l'état de notre objet, mais le compilateur ne peut pas être certain que l'opérateur `[]`, non constant, ne vas pas faire un changement (n'est pas assez intelligent).
 
-Comment s'y prend-t-on ? Nous allons devoir **ignorer** le concept **DRY** (*Don't repeat yourself*) et répéter du code :
+Comment règle-t-on ce problème ? Nous allons devoir **ignorer** le concept **DRY** (*Don't repeat yourself*) et répéter du code :
 
 ```cpp
     double &operator[](size_t indice) {
@@ -364,11 +364,11 @@ Comment s'y prend-t-on ? Nous allons devoir **ignorer** le concept **DRY** (*Don
     }
 ```
 
-La surcharge d'opérateur est un outil puissant qui donne accès a une panoplie de règle pré-établis, par exemple la priorité d'opération avec les opérateurs arithmétiques, et des *shortcut* pour les opérateur `[]` et `<<`, toutefois il faut prendre le temps de bien réfléchir à la pertinence et aux effets possible d'utiliser ses outils. Dans le présent cas, un point à *N-dimension* bénéficie grandement de ces opérateurs, ce ne sera pas toujours le cas.
+La surcharge d'opérateur est un outil puissant qui donne accès à une panoplie de règles pré-établies, par exemple la priorité d'opération avec les opérateurs arithmétiques, et des raccourcis pour les opérateurs `[]` et `<<`, toutefois il faut prendre le temps de bien réfléchir à la pertinence et aux effets possibles d'utiliser ces outils. Dans le cas présent, un point à *N-dimension* bénéficie grandement de ces opérateurs, ce ne sera pas toujours le cas.
 
 #### Implémenter l'addition et la soustraction
 
-L'addition de deux points retourne un point dont chaque coordonnée ont été additionné entre elle, tel que :
+L'addition de deux points retourne un point dont les coordonnées ont été additionnées, tel que :
 
 $$
     P_0 = (x_{00}, x_{01}, \dots, x_{0n-1}) \\
@@ -381,16 +381,16 @@ $$
     p = P_0 + P_1 = \left(\sum_{i=0}^{n-1}{x_{i0}}, \sum_{i=0}^{n-1}{x_{i1}}, \dots, \sum_{i=1}^{n-1}{x_{in-1}}\right)
 $$
 
-> Astuce - implémentez le `+=` en premier, puis faire le `+` qui utilise le `+=` de manière efficace. Faire également `-=` et `-`.
+> Astuce: implémentez le `+=` en premier, puis faites le `+` qui utilise le `+=` de manière efficace, tel que vu dans les diapositives. Implémentez également `-=` et `-`.
 
 Voici un exemple d'algorithme pour le `+=` et un pour le `+` suivant cette astuce :
 
 ```cpp
 
 Point &Point::operator+=(const Point &point) {
-    // Si les dimensions sont les mêmes alors
+    // Si les nombres de dimensions sont les mêmes alors
     //    Pour chaque dimension
-    //      Coordonné i de this += coordonné i de point
+    //      Coordonnée i de this += coordonnée i de point
     //    Fin pour
     // Fin si
     // On retourne la référence de this
