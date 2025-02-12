@@ -8,7 +8,7 @@ private:
     int _nombreLignes;
     int _tailleTableau;
 
-    void agrandirTableau();
+    void _agrandirTableau();
 public:
     Facture();
     ~Facture();

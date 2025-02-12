@@ -10,7 +10,7 @@ Facture::~Facture() {
     delete[] _lignes;
 }
 
-void Facture::agrandirTableau() {
+void Facture::_agrandirTableau() {
     _tailleTableau *= 2;
     LigneFacture *nouveauTableau = new LigneFacture[_tailleTableau];
 
@@ -28,7 +28,7 @@ int Facture::getNombreLignes() const {
 
 void Facture::ajouterLigne(const Produit &produit, int quantite) {
     if (_nombreLignes == _tailleTableau) {
-        agrandirTableau();
+        _agrandirTableau();
     }
 
     _lignes[_nombreLignes] = LigneFacture(produit, quantite);
