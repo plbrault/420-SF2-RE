@@ -118,7 +118,7 @@ Vous devriez avoir un résultat différent après la boucle. Nous n'allons pas a
 
 ## Le plan cartésien à N dimensions
 
-Nous allons continuer à implémenter notre série de classes qui a pour but d'aider à la représentation informatique de `Point` et de `Forme`. Nous allons apporter des modifications à `Point`, `Triangle` et implémenter `Quadrilatere`.
+Nous allons continuer à implémenter notre série de classes qui a pour but d'aider à la représentation informatique de points et de formes. Nous allons apporter des modifications à `Point` et `Triangle`, et implémenter `Quadrilatere`.
 
 ```plantuml
 @startuml
@@ -222,7 +222,7 @@ class Hexahedron {
 
 ### Classe Point
 
-Notre classe point devrait ressembler à ceci :
+Notre classe `Point` devrait ressembler à ceci :
 
 ```plantuml
 @startuml
@@ -249,9 +249,9 @@ class Point {
 @enduml
 ```
 
-#### Notre première surchage d'opérateur (si on néglige l'opérateur d'assignation)
+#### Notre première surchage d'opérateur (si on ignore l'opérateur d'assignation)
 
-En ce moment, à chaque fois que l'on veut changer une coordonnée de notre `Point`, nous devons faire :
+En ce moment, chaque fois que l'on veut changer une coordonnée de notre `Point`, nous devons faire :
 
 ```cpp
     Point monPoint;
@@ -259,7 +259,7 @@ En ce moment, à chaque fois que l'on veut changer une coordonnée de notre `Poi
     monPoint.setCoordonnee(1, 2.17);
 ```
 
-Serait-il agréable de pouvoir faire ceci :
+Serait-il agréable de pouvoir faire plutôt ceci?
 
 ```cpp
     Point monPoint;
@@ -279,17 +279,18 @@ Pour y parvenir, nous devons surcharger l'opérateur `[]`, comme ceci :
     }
 ```
 
-> On profite de cette occasion pour introduire le concept d'`Exception`. Il existe plusieurs types d'exception et elles sont définies dans `<stdexcept>`. Pour l'instant, lorsqu'on est dans une situation d'erreur, nous allons `throw` notre exception et notre application va se terminer à ce moment. Voici une liste non-exhaustive des exceptions disponibles
+> On profite de cette occasion pour introduire le concept d'`Exception`. Il existe plusieurs types d'exceptions et elles sont définies dans `<stdexcept>`. Pour l'instant, lorsqu'on est dans une situation d'erreur, nous allons `throw` notre exception et notre application va se terminer à ce moment. Voici une liste non-exhaustive des exceptions disponibles:
+
 > * `logic_error` est utilisé lors de la détection d'une erreur de logique
-> * `invalid_argumet` est utilisé lorsqu'un paramètre n'est pas valide
+> * `invalid_argument` est utilisé lorsqu'un paramètre n'est pas valide
 > * `length_error` est utilisé dans un contexte d'erreur de longueur
 > * `out_of_range` est utilisé si une valeur est en dehors de la plage permise
-> * `runtime_errer` est utilisé lorsqu'un erreur est survenue durant l'exécution du programme
-> * `range_error` est utilisé pour tout autre type d'erreur lié à une plage de valeur
+> * `runtime_errer` est utilisé lorsqu'une erreur est survenue durant l'exécution du programme
+> * `range_error` est utilisé pour tout autre type d'erreur lié à une plage de valeurs
 > * `overflow_error` est utilisé si une variable a dépassé sa valeur maximale
 > * `underflow_error` est utilisé si une variable a dépassé sa valeur minimale (en soustraction)
 >
-> Important d'ajouter un message pertinent à l'erreur.
+> Il est important d'ajouter un message pertinent à l'erreur.
 
 Dans votre `main`, copier ce code qu'y servira pour tester notre class `Point`.
 
