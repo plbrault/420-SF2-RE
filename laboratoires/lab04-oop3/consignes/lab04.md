@@ -500,16 +500,16 @@ Ainsi il est possible de surcharger l'opérateur `<<` du `Point` en utilisant le
 ```cpp
 std::ostream &operator<<(std::ostream &sortie, const Point &point) {
     // Faire la même chose que dans la méthode `toString()` de Point,
-    // en remplaçant le `flux` par notre paramètre `sortie`
+    // en remplaçant le `flux` par le paramètre `sortie`
     // et `this` par le paramètre `point`
 }
 ```
 
 > Il est possible de faire la même chose sans utiliser une fonction amie. Comment ?
 
-#### Exemple
+#### Exemple d'utilisation
 
-Ici, nous avons un extrait du code dans le `main` qui ressemblait à ceci : 
+Ici, nous avons un extrait du code dans le `main` qui ressemblait à ceci:
 
 ```cpp
     Point a(3), b(3), c(3);
@@ -538,7 +538,7 @@ Ici, nous avons un extrait du code dans le `main` qui ressemblait à ceci :
     std::cout << "wow: " << wow.toString() << std::endl;
 ```
 
-que l'on peut remplacer par ceci : 
+On peut maintenant le réécrire ainsi:
 
 ```cpp
     Point a(3), b(3), c(3);
@@ -605,12 +605,12 @@ class Point {
 
 ### Classe Triangle
 
-* Modifier `Triangle` pour utiliser l'opérateur `[]` de point.
-* Ajouter l'opérateur `[]` pour la classe Triangle qui retournera le bon point sélectionner. N'oubliez pas que cela requiert souvent de ne pas être *DRY*.
+* Modifiez les méthodes de `Triangle` pour utiliser l'opérateur `[]` de point.
+* Ajoutez l'opérateur `[]` pour la classe Triangle qui retournera le bon point. N'oubliez pas que cela requiert souvent de ne pas respecter le principe *Don't Repeat Yourself (DRY)*.
 
 ### Classe Quadrilatere
 
-* Implémenter la classe quadrilatère suivant le schéma suivant :
+* Implémentez maintenant la classe `Quadrilatère` suivant le diagramme suivant :
 
 ```plantuml
 @startuml
@@ -632,12 +632,12 @@ class Quadrilatere {
 @enduml
 ```
 
-Équation pour calculer l'aire (peu importe le nombre de point). Cette algorithme est l'algorithme du lacet (*showlace*) et permet de calculer l'air de n'importe quel forme avec un nombre arbitraire de point en autant qu'il n'y a pas de croisement. Nous n'allons pas gérer les croisements.
+Voici l'équation pour calculer l'aire (peu importe le nombre de points). Cet algorithme est l'algorithme du lacet (*showlace*) et permet de calculer l'aire de n'importe quelle forme avec un nombre arbitraire de points en autant qu'il n'y a pas de croisement. Nous n'allons pas gérer les croisements.
 
-Soit un nombre de Point 2D arbitraire `k` :
+Soit un nombre de points 2D arbitraire `k` :
 
 $$
     A = \frac{1}{2} \sum_{i = 0}^{k - 1}{y_i(x_{i-1} - x_{i+1})}
 $$
 
-ou $(x_i, y_i)$ représente $(P_{i0}, P_{i1})$. Pour l'instant, si l'air est égale à 0, alors la figure est invalide (mais ce n'est pas vraiment le cas).
+où $(x_i, y_i)$ représente $(P_{i0}, P_{i1})$. Pour l'instant, si l'aire est égal à 0, alors la figure est invalide (mais ce n'est pas vraiment le cas).
