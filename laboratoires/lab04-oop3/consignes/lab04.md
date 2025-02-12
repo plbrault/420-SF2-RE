@@ -392,6 +392,8 @@ Point &Point::operator+=(const Point &point) {
     //    Pour chaque dimension
     //      Coordonnée i de this += coordonnée i de point
     //    Fin pour
+    // Sinon
+    //    Lancer une exception
     // Fin si
     // On retourne la référence de this
 }
