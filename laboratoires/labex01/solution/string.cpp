@@ -5,26 +5,12 @@
 namespace sim {
 
     String::String(const char *c_str) {
-        size_t count = 0;
-
-        while (c_str[count] != '\0') {
-            count++;
-        }
-        this->_length = count;
-        count++;
-
+        this->_count(c_str);
         this->_copy(c_str);
     }
 
     String::String(const String &str) {
-        size_t count = 0;
-
-        while (str[count] != '\0') {
-            count++;
-        }
-        this->_length = count;
-        count++;
-
+        this->_length = str.getLength();
         this->_copy(str._str);
     }
 
@@ -32,7 +18,7 @@ namespace sim {
         this->_length = repetition;
 
         if (this->_length == 0) {
-            this->_str = new char;
+            this->_str = new char('\0');
         } else {
             this->_str = new char[this->_length + 1];
 
@@ -79,7 +65,11 @@ namespace sim {
         }
     }
 
-    const String &String::operator+(const String &str) {
+    String &String::operator+=(const String &str) {
+        if (this == &str) {
+            return *this;
+        }
+
         size_t oldLength = this->_length;
 
         size_t newLength = this->_length + str._length + 1;
@@ -93,6 +83,35 @@ namespace sim {
 
         for (size_t i = oldLength; i < newLength; i++) {
             temp[i] = str[i - oldLength];
+        }
+
+        this->_delete();
+        this->_str = temp;
+        temp = nullptr;
+        return *this;
+    }
+
+    String &String::operator+=(const char *c_str) {
+        size_t oldLength = this->_length;
+
+        size_t count = 0;
+
+        while (c_str[count] != '\0') {
+            count++;
+        }
+        count++;
+
+        size_t newLength = this->_length + count;
+        char *temp = new char[newLength];
+
+        for (size_t i = 0; i < oldLength; i++) {
+            temp[i] = this->_str[i];
+        }
+
+        this->_length = newLength;
+
+        for (size_t i = oldLength; i < newLength; i++) {
+            temp[i] = c_str[i - oldLength];
         }
 
         this->_delete();
@@ -126,6 +145,15 @@ namespace sim {
             }
             this->_str[this->_length] = '\0';
         }
+    }
+
+    void String::_count(const char *c_str) {
+        size_t count = 0;
+
+        while (c_str[count] != '\0') {
+            count++;
+        }
+        this->_length = count;
     }
 
     std::ostream &operator<<(std::ostream &os, const String &str) {

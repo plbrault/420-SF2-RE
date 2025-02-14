@@ -12,8 +12,13 @@ int main () {
     std::cout << anotherString << std::endl << copyString << std::endl << dashes << std::endl;
 
     sim::String testAdd = anotherString + dashes;
+    sim::String testAddLiteral = anotherString + " avons du plaisir";
+    sim::String testLiteral = "Beaucoup!";
+
 
     std::cout << testAdd << std::endl;
+    std::cout << testAddLiteral << std::endl;
+    std::cout << testLiteral << std::endl;
 
     return 0;
 }

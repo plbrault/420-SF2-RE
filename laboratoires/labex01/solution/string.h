@@ -13,6 +13,7 @@ private:
 
     void _delete();
     void _copy(const char *);
+    void _count(const char *);
 
 public:
     String() : String("") { };
@@ -26,7 +27,10 @@ public:
     char &operator[](size_t);
     const char &operator[](size_t) const;
     
+    String &operator+=(const String &);
     const String &operator+(const String &);
+    String &operator+=(const char *);
+    const String &operator+(const char *);
     
     size_t getLength() const;
 
