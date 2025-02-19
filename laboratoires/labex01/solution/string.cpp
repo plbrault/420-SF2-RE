@@ -91,6 +91,12 @@ namespace sim {
         return *this;
     }
 
+    String String::operator+(const String &str) {
+        String result = *this;
+        result += str;
+        return result;
+    }
+
     String &String::operator+=(const char *c_str) {
         size_t oldLength = this->_length;
 
@@ -118,6 +124,12 @@ namespace sim {
         this->_str = temp;
         temp = nullptr;
         return *this;
+    }
+
+    String String::operator+(const char * c_str) {
+        String result = *this;
+        result += c_str;
+        return result;
     }
 
     size_t String::getLength() const {
