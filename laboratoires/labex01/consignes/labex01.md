@@ -133,9 +133,4 @@ Implémentez l'opérateur d'égalité. Vous pouvez commencer par tester si les `
 
 ## Étape 9 - (Extra) Amélioration du code
 
-Il y a de bonnes chances que votre code ait plusieurs composantes utilisant les mêmes bouts de code, par exemple la gestion de la désallocation (règle #2). En plus de cette dernière, vous devriez être en mesure d'en identifier deux autres. Laboratoire de préparation d'examen
-
-Durant votre parcours en *SIM*, vous avez eu la chance de programmer en **C++** et utiliser la classe `std::string`. Sans le savoir, vous utilisiez la *POO* avec des objets d'instance `std::string`, les construisaient (constructeur), les concaténaient (`+`), les assignaient (`=`), les affichaient (`<<`), etc. Vous vous doutez bien que la classe `std::string` utilise un tableau de charactère (`char`) et doit suivre les mêmes règles que nous avons vue en classe.
-
-Pour votre préparation à l'examen, on vous demande de faire une classe `String` dans votre propre `namespace` que l'on nomera `sim`. Cette classe devra offrir quelques éléments de base important calqué du comportement de `std::string`. On peut enfin avoir une idée de son fonctionnement interne.
-
+Il y a de bonnes chances que votre code ait plusieurs composantes utilisant les mêmes bouts de code, par exemple la gestion de la désallocation (règle #2). En plus de cette dernière, vous devriez être en mesure d'en identifier deux autres.
