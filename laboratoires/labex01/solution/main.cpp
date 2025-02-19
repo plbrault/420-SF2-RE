@@ -15,7 +15,6 @@ int main () {
     sim::String testAddLiteral = anotherString + " avons du plaisir";
     sim::String testLiteral = "Beaucoup!";
 
-
     std::cout << testAdd << std::endl;
     std::cout << testAddLiteral << std::endl;
     std::cout << testLiteral << std::endl;

@@ -102,6 +102,15 @@ int main () {
 }
 ```
 
+On s'attends a la sortie suivante :
+
+```
+Chaine vide :
+Ma chaine : Bien le bonjour SIM.
+Ma chaine : Bien le bonjour SIM.
+Ma chaine : ---------------
+```
+
 ## Étape 4 - Ajout du membre manquant lors de la manipulation de pointeur dans une classe
 
 Nous savons que l'élaboration d'une classe qui possède un pointeur à l'intérieur requiert minimalement trois éléments : la définition d'un *constructeur de copie* et d'un *destructeur*. Quel est le troisième membre manquant ? N'oubliez-pas de respecter la règle #4.
@@ -116,8 +125,12 @@ Nous aimerions être en mesure de regarder les charactères une à une. Pour ce 
 
 ## Étape 7 - Concaténation de chaine
 
-Une des actions les plus triviales est de concaténer deux chaines ensembles, par exemple un `prénom` et un `nom`. Il faut surcharger les opérateurs `+=` et `+` en tenant compte des règles #2 et #3.
+Une des actions les plus triviales est de concaténer deux chaines ensembles, par exemple un `prénom` et un `nom`. Il faut surcharger les opérateurs `+=` et `+` en tenant compte des règles #2 et #4.
 
-## Étape 8 - (Avancé) Amélioration du code
+## Étape 8 - (Extra) L'opérateur d'égalité
+
+Implémentez l'opérateur d'égalité. Vous pouvez commencer par tester si les `_lenght` sont les mêmes, puis si ce n'est pas le cas faire le nécessaire pour s'assurer que chaque caractère sont identique. Une fois l'opérateur d'égalité fait, il est trivial de faire l'opérateur d'inégalité.
+
+## Étape 9 - (Extra) Amélioration du code
 
 Il y a de bonne chance que votre code ait plusieurs composantes utilisant les mêmes bout de code, par exemple la gestion de la désallocation (règle #2). En plus de cette dernière, vous devriez être en mesure d'en identifier deux autres.
