@@ -2,11 +2,11 @@
 
 Durant votre parcours en *SIM*, vous avez eu la chance de programmer en **C++** et d'utiliser la classe `std::string`. Sans le savoir, vous utilisiez la *POO* avec des objets d'instance `std::string`, les construisiez (constructeur), les concaténiez (`+`), les assigniez (`=`), les affichiez (`<<`), etc. Vous vous doutez bien que la classe `std::string` utilise un tableau de caractères (`char`) et doit suivre les mêmes règles que nous avons vues en classe.
 
-Pour votre préparation à l'examen, on vous demande de faire une classe `String` dans votre propre `namespace` que l'on nommera `sim`. Cette classe devra offrir quelques éléments de base importants calqués sur le comportement de `std::string`. On peut enfin avoir une idée de son fonctionnement interne.
+Pour votre préparation à l'examen, on vous demande de faire une classe `String` dans votre propre `namespace` que vous nommerez `sim`. Cette classe devra offrir quelques éléments de base importants calqués sur le comportement de `std::string`. On pourra enfin avoir une idée de son fonctionnement interne.
 
 ## Étape 1 : Créer son propre `namespace`
 
-Cette étape est raisonnablement triviale, il faut simplement entourer, dans notre `string.h` et `string.cpp`, nos déclarations de classes et implémentations de nos différentes méthodes et fonctions amies. Voici un exemple.
+Cette étape est raisonnablement triviale, il faut simplement entourer, dans votre `string.h` et `string.cpp`, vos déclarations de classes et implémentations de vos différentes méthodes et fonctions amies. Voici un exemple.
 
 ```cpp
 // Fichier maclasse.h
@@ -35,13 +35,13 @@ namespace sim {
 }
 ```
 
-Et voilà, si vous utilisez `using namespace std` dans votre code, vous pouvez toujours faire référence à notre classe à nous en instanciant notre objet avec `sim::String maString;`.
+Et voilà, si vous utilisez `using namespace std` dans votre code, vous pouvez toujours faire référence à votre classe à vous en instanciant votre objet avec `sim::String maString;`.
 
-## Étape 2 - Règles à suivre pour notre classe
+## Étape 2 - Règles à suivre pour la classe
 
-Voici une liste de règles à garder en mémoire lors de l'élaboration de notre classe `String`. Nous allons y référer tout au long du laboratoire, il est donc important de vous y familiariser.
+Voici une liste de règles à garder en tête lors de l'élaboration de notre classe `String`. Nous allons y référer tout au long du laboratoire.
 
-1. Une chaîne de caractères doit se terminer par le caractère nul (`'\0'`). Cela signifie que, pour la chaîne `"Allo"`, notre tableau de caractères doit avoir 5 cases : `['A', 'l', 'l', 'o', '\0']`.
+1. Une chaîne de caractères doit se terminer par le caractère nul (`'\0'`). Cela signifie que, pour la chaîne `"Allo"`, votre tableau de caractères doit avoir 5 cases : `['A', 'l', 'l', 'o', '\0']`.
 1. On ne va pas gérer de capacité. Cela signifie que la majorité des interactions nécessitent de créer un nouveau tableau et de détruire l'ancien.
 1. On ne peut pas changer un caractère individuellement. Cela implique de réfléchir aux accès de chaque caractère.
 1. On doit supporter les `char *` et les `sim::String`. Cela signifie que plusieurs membres (constructeur, surcharge d'opérateur) devront être doublés.
@@ -70,7 +70,7 @@ class sim::String {
 @enduml
 ```
 
-L'objectif est de s'assurer que nos constructeurs fonctionnent adéquatement avant de passer à autre chose. Nous pouvons tester de cette manière :
+L'objectif est de s'assurer que vos constructeurs et votre surcharge d'opérateur `<<` fonctionnent correctement avant de passer à autre chose. Vous pouvez tester votre classe de cette manière :
 
 ```cpp
 // main.cpp
@@ -111,9 +111,9 @@ Ma chaine : Bien le bonjour SIM.
 Ma chaine : ---------------
 ```
 
-## Étape 4 - Ajout du membre manquant lors de la manipulation de pointeur dans une classe
+## Étape 4 - Ajout du membre manquant lors de la manipulation de pointeurs dans une classe
 
-Nous savons que l'élaboration d'une classe qui possède un pointeur à l'intérieur requiert minimalement trois éléments : la définition d'un *constructeur de copie* et d'un *destructeur*. Quel est le troisième membre manquant ? N'oubliez pas de respecter la règle #4.
+Nous savons que l'élaboration d'une classe qui possède un pointeur parmi ses membres requiert minimalement trois éléments : la définition d'un *constructeur de copie* et d'un *destructeur*. Quel est le troisième membre manquant ? N'oubliez pas de respecter la règle #4.
 
 ## Étape 5 - Rendre l'attribut `_length` accessible en lecture seulement.
 
@@ -123,7 +123,7 @@ Il est très pertinent, dans une application utilisant des chaînes, d'avoir bes
 
 Nous aimerions être en mesure de regarder les caractères un à un. Pour ce faire, il faut surcharger l'opérateur `operator[]` de manière adéquate tout en respectant la règle #3.
 
-## Étape 7 - Concaténation de chaîne
+## Étape 7 - Concaténation de chaînes
 
 Une des actions les plus triviales est de concaténer deux chaînes ensemble, par exemple un `prénom` et un `nom`. Il faut surcharger les opérateurs `+=` et `+` en tenant compte des règles #2 et #4.
 
