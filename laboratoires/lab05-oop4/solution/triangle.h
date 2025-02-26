@@ -12,7 +12,7 @@ class Triangle : public Forme2D {
 private:
 
 public:
-    Triangle(): Forme2D(3) { }
+    Triangle(): Forme2D(TRIANGLE_NB_POINT) { }
     Triangle(const Point &, const Point &, const Point &);
     ~Triangle() { }
 

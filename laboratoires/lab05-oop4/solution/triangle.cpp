@@ -9,7 +9,7 @@
 /*     Constructeurs & Destructeur                                           */
 /* ========================================================================= */
 
-Triangle::Triangle(const Point &a, const Point &b, const Point &c) : Forme2D(3) {
+Triangle::Triangle(const Point &a, const Point &b, const Point &c) : Forme2D(TRIANGLE_NB_POINT) {
     if (this->_checkPoint(a) && this->_checkPoint(b) && this->_checkPoint(c)) {
         this->_points[0] = a;
         this->_points[1] = b;

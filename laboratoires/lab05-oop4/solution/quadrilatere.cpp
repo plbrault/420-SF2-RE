@@ -9,8 +9,8 @@
 /*     Constructeurs & Destructeur                                           */
 /* ========================================================================= */
 
-Quadrilatere::Quadrilatere(const Point &a, const Point &b, const Point &c, const Point &d) : Forme2D(4) {
-    if (this->_checkPoint(a) || this->_checkPoint(b) || this->_checkPoint(c) || this->_checkPoint(d)) {
+Quadrilatere::Quadrilatere(const Point &a, const Point &b, const Point &c, const Point &d) : Forme2D(QUADRILATERE_NB_POINT) {
+    if (this->_checkPoint(a) && this->_checkPoint(b) && this->_checkPoint(c) && this->_checkPoint(d)) {
         this->_points[0] = a;
         this->_points[1] = b;
         this->_points[2] = c;
