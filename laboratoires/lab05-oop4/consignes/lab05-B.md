@@ -27,11 +27,18 @@ Forme2D &Forme2D::operator=(const Forme2D &forme) {
 Nous pourrions avoir dans notre `main` :
 
 ```cpp
+
+void assigner(Forme2D &cible, const Forme2D &source) {
+    cible = source;
+}
+
 int main() {
     Triangle a;
     Quadrilatere b;
 
-    a = b;
+    assigner(a, b);
+
+    std::cout << "Nombre de points : " << a.getNbPoint() << std::endl;
 
     return 0;
 }
@@ -39,4 +46,4 @@ int main() {
 
 Ce code compilera sans problème. Toutefois, sémantiquement notre instance `a`, qui est un `Triangle`, contient 4 points et une nombre de points à 4. Cela pourra occasionné des problèmes logiques car `Triangle` n'a pas accès au méthodes `estCarré` et `estRectangle`.
 
-Une des solution sera d'utiliser une méthode abstraite. Il s'agit d'une méthode dans une classe mère qui ne sera pas implémenter : toutes les classes filles doivent absolument l'implémenter
+Plusieurs approchent sont possible, mais nous allons utiliser le concept de fonction virtuelle pure.
