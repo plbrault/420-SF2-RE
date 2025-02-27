@@ -1,4 +1,4 @@
-# Laboratoire 05
+# Laboratoire 05-A
 
 ## Objectif
 
@@ -151,6 +151,8 @@ class Quadrilatere {
 
 On peut déjà remarquer la puissance de l'héritage a ce point. Nos classe `Triangle` et `Quadrilatere` on seulement besoins de définir que quelques membres. Les classes sont tellement simplifié qu'elle n'ont même pas d'attributs.
 
+> Note : Vous avez probablement remarqué que l'attribut `_points` a une icone différentes qu'à l'habitude. Le losange signifie que l'attribut est protégé, (`protected`). En effet, un membre `private` ne peut pas être atteint par une classe fille.
+
 Donc pour créer notre classe mère `Forme2D`, ce n'est pas différent de nos classes habituelle.
 
 ```cpp
@@ -160,7 +162,7 @@ Donc pour créer notre classe mère `Forme2D`, ce n'est pas différent de nos cl
 #include "Point.h"
 
 class Forme2D {
-private:
+protected:
     Point *_point;
 public:
     // ...
