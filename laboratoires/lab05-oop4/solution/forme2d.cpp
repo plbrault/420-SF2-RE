@@ -27,10 +27,6 @@ Forme2D &Forme2D::operator=(const Forme2D &forme) {
         return *this;
     }
 
-    if (this->_nbPoints != forme._nbPoints) {
-        throw std::invalid_argument("Pas le même type de forme.");
-    }
-
     for (size_t i = 0; i < this->_nbPoints; i++) {
         this->_points[i] = forme._points[i];
     }
