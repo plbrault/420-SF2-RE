@@ -290,11 +290,11 @@ int main() {
 }
 ```
 
-Nous allons approfondir la puissance du concept de polymorphisme avec la notion de **fonctions virtuelles pures** dans la partie B du présent laboratoire.
+Nous allons approfondir la puissance du concept de polymorphisme avec la notion de **méthodes virtuelles pures** dans la partie B du présent laboratoire.
 
 ## Attraper une exception
 
-Nous introduisons le concept d'intercepter (ou attraper) une exception. On se souvient que `throw` permet d'arrêter l'exécution avec un message plus facile à lire. Toutefois, nos applications que nous utilisons aujourd'hui n'arrête pas constamment chaque fois qu'une personne rentre une mauvaise information. C++ nous offre une structure de contrôle, `try-catch`, qui permet d'intercepter une erreur et agir dessus. Voici une méthode qui lance une exception :
+Nous introduisons le concept d'intercepter (ou attraper) une exception. On se souvient que `throw` permet d'arrêter l'exécution avec un message plus facile à lire. Toutefois, les applications que nous utilisons aujourd'hui n'arrêtent pas constamment chaque fois qu'une personne saisit une mauvaise information. C++ nous offre une structure de contrôle, `try-catch`, qui permet d'intercepter une erreur et agir dessus. Voici une méthode qui lance une exception :
 
 ```cpp
 Point &Forme2D::operator[](size_t index) {
@@ -319,11 +319,11 @@ Nous pouvons attraper cette exception de cette manière :
     }
 ```
 
-Cette structure va exécuter le code à l'intérieur du `try`, et si une des instructions à l'intérieur lance une exception, elle sera attrapé selon le type qui a été lancé. Dnas notre exemple, `monTriangle[6] = 1.77;` peut lancer `out_of_range` et sera attraper dans le `catch` associé. Cette exception est placé dans la variable `ex` qui pourra être utilisé pour afficher le message que nous avons mis lors de son lancement.
+Cette structure va exécuter le code à l'intérieur du `try`, et si une des instructions à l'intérieur lance une exception, elle sera attrapée selon le type qui a été lancé. Dnas notre exemple, `monTriangle[6] = 1.77;` peut lancer une exception `out_of_range` qui sera attrapée dans le `catch` associé. Cette exception est placée dans la variable `ex` qui pourra être utilisée pour afficher le message que nous avons mis lors de son lancement.
 
-Dans notre exemple, on peut assumer qu'une autre instruction (dans les `...`) pourrait lancer un `invalid_argument` et sera géré par ce `catch`.
+Dans notre exemple, on peut assumer qu'une autre instruction (dans les `...`) pourrait lancer un `invalid_argument` qui serait géré par ce `catch`.
 
-> Note : Si vous pouvez éviter d'utiliser un `try` sera toujours plus performant que d'utilier le `try`. En effet, tester si l'indice demandé (`6`) est plus petit que le nombre de points serait préférable car un `if` sera 100 à 1000 fois plus rapide que la gestion d'un `try` dans le cas d'une erreur.
+> Note : Si vous pouvez éviter d'utiliser un `try`, ce sera toujours plus performant que d'utilier le `try`. En effet, tester si l'indice demandé (`6`) est plus petit que le nombre de points serait préférable car un `if` sera 100 à 1000 fois plus rapide que la gestion d'un `try` dans le cas d'une erreur.
 
 ## Tâche
 
