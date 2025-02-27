@@ -268,18 +268,21 @@ int main() {
 }
 ```
 
-Maintenant, notre code peut utiliser le type générique et bénéficier du fait que `getAire()` est disponible à ce niveau. Nous allons cependant avoir notre problème que notre classe `Forme2D` n'a pas de constructeur par défaut. Il faudra alors le définir pour l'instant.
+Maintenant, notre code peut utiliser le type générique et bénéficier du fait que `getAire()` est disponible à ce niveau. Nous allons cependant avoir notre problème que notre classe `Forme2D` n'a pas de constructeur par défaut. On va donc créer un tableau de pointeur de `Forme2D`.
 
 ```cpp
 
 int main() {
-    Forme2D mesFormes[20];
+    Forme2D *mesFormes[20];
     size_t nombreFormes = 0;
+    mesFormes[0] = new Triangle(...)
+    mesFormes[1] = new Quadrilatere(...)
     // ... Remplir le tableau de formes
 
     double aireTotal = 0.0;
     for (size_t i = 0; i < nombreFormes; i++) {
-        aireTotal += mesFormes[i];
+        aireTotal += mesFormes[i]->getAire();
+        delete mesFormes[i];
     }
     std::cout << "Aire total : " << aireTotal << " m2" << std::endl;
 
@@ -288,6 +291,39 @@ int main() {
 ```
 
 Nous allons approfondir la puissance du concept de polymorphisme avec la notion de **fonctions virtuelles pures**.
+
+## Attraper une exception
+
+Nous introduisons le concept d'intercepter (ou attraper) une exception. On se souvient que `throw` permet d'arrêter l'exécution avec un message plus facile à lire. Toutefois, nos applications que nous utilisons aujourd'hui n'arrête pas constamment chaque fois qu'une personne rentre une mauvaise information. C++ nous offre une structure de contrôle, `try-catch`, qui permet d'intercepter une erreur et agir dessus. Voici une méthode qui lance une exception :
+
+```cpp
+Point &Forme2D::operator[](size_t index) {
+    if (index < this->_nbPoints) {
+        return this->_points[index];
+    } else {
+        throw std::out_of_range("Out of range");
+    }
+}
+```
+
+Nous pouvons attraper cette exception de cette manière :
+
+```cpp
+    try {
+        monTriangle[6] = 1.77;
+        // ...
+    } catch (const std::out_of_range &ex) {
+        std::cout << "Erreur d'accès : " << ex.what() << std::endl;
+    } catch (const std::invalid_argument &ex) {
+        std::cout << "Erreur d'argument : " << ex.what() << std::endl;
+    }
+```
+
+Cette structure va exécuter le code à l'intérieur du `try`, et si une des instructions à l'intérieur lance une exception, elle sera attrapé selon le type qui a été lancé. Dnas notre exemple, `monTriangle[6] = 1.77;` peut lancer `out_of_range` et sera attraper dans le `catch` associé. Cette exception est placé dans la variable `ex` qui pourra être utilisé pour afficher le message que nous avons mis lors de son lancement.
+
+Dans notre exemple, on peut assumer qu'une autre instruction (dans les `...`) pourrait lancer un `invalid_argument` et sera géré par ce `catch`.
+
+> Note : Si vous pouvez éviter d'utiliser un `try` sera toujours plus performant que d'utilier le `try`. En effet, tester si l'indice demandé (`6`) est plus petit que le nombre de points serait préférable car un `if` sera 100 à 1000 fois plus rapide que la gestion d'un `try` dans le cas d'une erreur.
 
 ## Tâche
 

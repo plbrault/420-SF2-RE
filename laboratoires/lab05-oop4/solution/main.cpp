@@ -12,6 +12,10 @@
 #include "triangle.h"
 #include "quadrilatere.h"
 
+void assigner(Forme2D &cible, const Forme2D &source) {
+    cible = source;
+}
+
 int main () {
     Point a(3), b(3), c(3);
     Point wow(4);
@@ -112,6 +116,12 @@ int main () {
 
     Quadrilatere carree(recA, recB, recC, recD);
     
-    std::cout << carree.getAire() << " m2 d'aide pour le quadrilatere" << std::endl;
+    std::cout << carree.getAire() << " m2 d'aire pour le quadrilatere" << std::endl;
 
+    Triangle trouble(recC, recB, recA);
+    assigner(trouble, carree);
+
+    std::cout << "Le triangle trouble à " << trouble.getNbPoints() << " points!!!" << std::endl;
+
+    return 0;
 }

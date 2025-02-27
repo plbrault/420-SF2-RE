@@ -22,6 +22,7 @@ public:
 
     double getAire() const;
     bool estValide() const;
+    size_t getNbPoints() const;
 };
 
 #endif
