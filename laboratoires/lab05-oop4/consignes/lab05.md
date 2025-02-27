@@ -239,8 +239,6 @@ Forme2D::Forme2D(const Forme2D &forme2d) : Forme2D(forme2d._nbPoints) {
 }
 ```
 
-Nous aurons toutefois un problème. Comme `Triangle` et `Quadrilatere` sont tous deux des `Forme2D`, une personne sournoise pourrait instancier un `Triangle` et lui passer un `Quadrilatere`, et aucune erreur ne serait détectée par le compilateur. Nous allons voir à la deuxième partie du chapitre 5 comment on peut régler ce problème avec les **méthodes virtuelles pures**.
-
 ## Polymorphisme
 
 Au laboratoire 4, comment aurions-nous été en mesure d'avoir un ensemble de `Triangle` et `Quadrilatere` et d'en calculer l'aire totale ? Nous aurions été contraints de créer deux tableaux, un pour les `Triangle` et un pour les `Quadrilatere`.
@@ -275,21 +273,57 @@ Maintenant, notre code peut utiliser le type générique et bénéficier du fait
 ```cpp
 
 int main() {
-    Forme2D mesFormes[20];
+    Forme2D *mesFormes[20];
     size_t nombreFormes = 0;
+    mesFormes[0] = new Triangle(...)
+    mesFormes[1] = new Quadrilatere(...)
     // ... Remplir le tableau de formes
 
-    double aireTotale = 0.0;
+    double aireTotal = 0.0;
     for (size_t i = 0; i < nombreFormes; i++) {
-        aireTotal += mesFormes[i];
+        aireTotal += mesFormes[i]->getAire();
+        delete mesFormes[i];
     }
-    std::cout << "Aire totale : " << aireTotal << " m2" << std::endl;
+    std::cout << "Aire total : " << aireTotal << " m2" << std::endl;
 
     return 0;
 }
 ```
 
-Dans la partie B, nous allons approfondir la puissance du concept de polymorphisme avec la notion de **méthodes virtuelles pures**.
+Nous allons approfondir la puissance du concept de polymorphisme avec la notion de **méthodes virtuelles pures** dans la partie B du présent laboratoire.
+
+## Attraper une exception
+
+Nous introduisons le concept d'intercepter (ou attraper) une exception. On se souvient que `throw` permet d'arrêter l'exécution avec un message plus facile à lire. Toutefois, les applications que nous utilisons aujourd'hui n'arrêtent pas constamment chaque fois qu'une personne saisit une mauvaise information. C++ nous offre une structure de contrôle, `try-catch`, qui permet d'intercepter une erreur et agir dessus. Voici une méthode qui lance une exception :
+
+```cpp
+Point &Forme2D::operator[](size_t index) {
+    if (index < this->_nbPoints) {
+        return this->_points[index];
+    } else {
+        throw std::out_of_range("Out of range");
+    }
+}
+```
+
+Nous pouvons attraper cette exception de cette manière :
+
+```cpp
+    try {
+        monTriangle[6] = 1.77;
+        // ...
+    } catch (const std::out_of_range &ex) {
+        std::cout << "Erreur d'accès : " << ex.what() << std::endl;
+    } catch (const std::invalid_argument &ex) {
+        std::cout << "Erreur d'argument : " << ex.what() << std::endl;
+    }
+```
+
+Cette structure va exécuter le code à l'intérieur du `try`, et si une des instructions à l'intérieur lance une exception, elle sera attrapée selon le type qui a été lancé. Dnas notre exemple, `monTriangle[6] = 1.77;` peut lancer une exception `out_of_range` qui sera attrapée dans le `catch` associé. Cette exception est placée dans la variable `ex` qui pourra être utilisée pour afficher le message que nous avons mis lors de son lancement.
+
+Dans notre exemple, on peut assumer qu'une autre instruction (dans les `...`) pourrait lancer un `invalid_argument` qui serait géré par ce `catch`.
+
+> Note : Si vous pouvez éviter d'utiliser un `try`, ce sera toujours plus performant que d'utilier le `try`. En effet, tester si l'indice demandé (`6`) est plus petit que le nombre de points serait préférable car un `if` sera 100 à 1000 fois plus rapide que la gestion d'un `try` dans le cas d'une erreur.
 
 ## Tâche
 
