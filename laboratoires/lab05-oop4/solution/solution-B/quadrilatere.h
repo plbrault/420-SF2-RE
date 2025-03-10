@@ -12,9 +12,11 @@ class Quadrilatere : public Forme2D {
 private:
 
 public:
-    Quadrilatere(): Forme2D(QUADRILATERE_NB_POINT) { }
+    Quadrilatere(): Forme2D() { }
     Quadrilatere(const Point &, const Point &, const Point &, const Point &);
     ~Quadrilatere() { }
+
+    size_t getNbPoints() const;
 };
 
 #endif

@@ -12,12 +12,14 @@ class Triangle : public Forme2D {
 private:
 
 public:
-    Triangle(): Forme2D(TRIANGLE_NB_POINT) { }
+    Triangle(): Forme2D() { }
+    Triangle(const Triangle &);
     Triangle(const Point &, const Point &, const Point &);
-    ~Triangle() { }
 
     bool estInterieur(Point &);
     bool estRectangle() const;
+
+    size_t getNbPoints() const;
 };
 
 #endif

@@ -4,42 +4,36 @@
 
 #include "cartesien.h"
 
-Forme2D::Forme2D(size_t nbPoints) {
-    this->_nbPoints = nbPoints;
-    this->_points = new Point[this->_nbPoints];
-}
-
-Forme2D::Forme2D(const Forme2D &forme2d) : Forme2D(forme2d._nbPoints) {
-    for (size_t i = 0; i < this->_nbPoints; i++) {
-        this->_points[i] = forme2d._points[i];
-    }
+Forme2D::Forme2D() { 
+    this->_points = nullptr;
 }
 
 Forme2D::~Forme2D() {
-    if (this->_points == nullptr) {
-        delete [] this->_points;
-        this->_points = nullptr;
-    }
+    delete [] this->_points;
 }
 
-Forme2D &Forme2D::operator=(const Forme2D &forme) {
-    if (this == &forme) {
+Forme2D &Forme2D::operator=(const Forme2D &forme2d) {
+    if (this == &forme2d) {
         return *this;
     }
 
-    if (this->_nbPoints != forme._nbPoints) {
-        throw std::invalid_argument("Pas le même type de forme.");
+    if (this->getNbPoints() != forme2d.getNbPoints()){
+        throw std::invalid_argument("Pas la même forme 2d.");
     }
 
-    for (size_t i = 0; i < this->_nbPoints; i++) {
-        this->_points[i] = forme._points[i];
+
+    delete[] this->_points;
+    this->_points = new Point[this->getNbPoints()];
+
+    for (size_t i = 0; i < this->getNbPoints(); i++) {
+        this->_points[i] = forme2d._points[i];
     }
 
     return *this;
 }
 
 Point &Forme2D::operator[](size_t index) {
-    if (index < this->_nbPoints) {
+    if (index < this->getNbPoints()) {
         return this->_points[index];
     } else {
         throw std::out_of_range("Out of range");
@@ -47,7 +41,7 @@ Point &Forme2D::operator[](size_t index) {
 }
 
 const Point &Forme2D::operator[](size_t index) const {
-    if (index < this->_nbPoints) {
+    if (index < this->getNbPoints()) {
         return this->_points[index];
     } else {
         throw std::out_of_range("Out of range");
@@ -62,9 +56,9 @@ double Forme2D::getAire() const {
 
     double resultat = 0.0;
 
-    for (size_t i = 0; i < this->_nbPoints; i++) {
-        resultat += (*this)[i][0] * ((*this)[(i + 1) % this->_nbPoints][1] 
-                    - (*this)[(i - 1) == MAX_SIZE_T ? this->_nbPoints - 1 : (i - 1)][1]);
+    for (size_t i = 0; i < this->getNbPoints(); i++) {
+        resultat += (*this)[i][0] * ((*this)[(i + 1) % this->getNbPoints()][1] 
+                    - (*this)[(i - 1) == MAX_SIZE_T ? this->getNbPoints() - 1 : (i - 1)][1]);
     }
 
     resultat = abs(resultat);
@@ -82,4 +76,8 @@ double Forme2D::getAire() const {
 
 bool Forme2D::_checkPoint(const Point &point) {
     return point.getDimension() == 2;
+}
+
+void Forme2D::initialize() {
+    this->_points = new Point[this->getNbPoints()];
 }

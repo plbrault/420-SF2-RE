@@ -9,7 +9,18 @@
 /*     Constructeurs & Destructeur                                           */
 /* ========================================================================= */
 
-Triangle::Triangle(const Point &a, const Point &b, const Point &c) : Forme2D(TRIANGLE_NB_POINT) {
+Triangle::Triangle(const Triangle &triangle) : Forme2D() {
+    this->initialize();
+
+    for (size_t i = 0; i < this->getNbPoints(); i++) {
+        this->_points[i] = triangle._points[i];
+    }
+}
+
+Triangle::Triangle(const Point &a, const Point &b, const Point &c) : Forme2D() {
+    if (this->_points == nullptr) {
+        this->initialize();
+    }
     if (this->_checkPoint(a) && this->_checkPoint(b) && this->_checkPoint(c)) {
         this->_points[0] = a;
         this->_points[1] = b;
@@ -65,4 +76,8 @@ bool Triangle::estRectangle() const {
                     + ((*this)[2][1] - (*this)[1][1]) * ((*this)[0][1] - (*this)[2][1]);
 
     return (abs(vAC) <= EPSILON || abs(vAB) <= EPSILON || abs(vBC) <= EPSILON);
+}
+
+size_t Triangle::getNbPoints() const {
+    return TRIANGLE_NB_POINT;
 }

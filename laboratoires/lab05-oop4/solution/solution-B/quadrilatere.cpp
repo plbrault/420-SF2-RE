@@ -9,7 +9,9 @@
 /*     Constructeurs & Destructeur                                           */
 /* ========================================================================= */
 
-Quadrilatere::Quadrilatere(const Point &a, const Point &b, const Point &c, const Point &d) : Forme2D(QUADRILATERE_NB_POINT) {
+Quadrilatere::Quadrilatere(const Point &a, const Point &b, const Point &c, const Point &d) : Forme2D() {
+    this->initialize();
+
     if (this->_checkPoint(a) && this->_checkPoint(b) && this->_checkPoint(c) && this->_checkPoint(d)) {
         this->_points[0] = a;
         this->_points[1] = b;
@@ -31,3 +33,6 @@ Quadrilatere::Quadrilatere(const Point &a, const Point &b, const Point &c, const
 /* ========================================================================= */
 /*     Méthodes                                                              */
 /* ========================================================================= */
+size_t Quadrilatere::getNbPoints() const {
+    return QUADRILATERE_NB_POINT;
+}
