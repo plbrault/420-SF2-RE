@@ -98,7 +98,7 @@ class Player {
 
 La méthode `plays` sans paramètre, définie dans la classe `Athlete`, doit incrémenter le nombre de parties jouées par l'athlète, tandis que les méthodes `plays` définies dans les classes filles doivent mettre à jour les autres attributs en fonction des paramètres reçus **en plus d'appeler la méthode parente**.
 
-Vous devez implémenter cette solution et exécuter le code suivant avec succès (à mettre dans votre `main`). N'oubliez pas de mettre les bon *include* et de définir les méthodes ou les fonctions manquantes.
+Vous devez implémenter votre solution de manière à pouvoir exécuter le code suivant avec succès (à mettre dans votre `main`). N'oubliez pas de mettre les bons *include* et de définir les méthodes ou les fonctions manquantes.
 
 
 ```cpp
