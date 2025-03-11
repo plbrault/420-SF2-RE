@@ -29,7 +29,7 @@ public:
     uint16_t getShotAgainst() const;
     double getGoalShotRatio() const;
 
-    uint8_t scores() const;
+    uint8_t scores() const override;
 
     friend std::ostream &operator<<(std::ostream &, const Goaltender &);
 };

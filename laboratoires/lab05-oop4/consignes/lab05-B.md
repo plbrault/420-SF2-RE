@@ -28,20 +28,20 @@ Goaltender <|-- Athlete
 Player <|-- Athlete
 
 class Athlete {
-    - std::string _firstname;
-    - std::string _lastname;
+    - std::string _firstName;
+    - std::string _lastName;
     - uint16_t _matchPlayed;
 
     + Athlete();
-    + Athlete(const std::string &firstname, const std::string &lastname);
+    + Athlete(const std::string &firstName, const std::string &lastName);
 
-    + std::string getFullname() const;
-    + std::string getFirstname() const;
-    + std::string getLastname() const;
+    + std::string getFastName() const;
+    + std::string getFirstName() const;
+    + std::string getLastName() const;
     + uint16_t getMatchPlayed() const;
 
-    + void setFirstname(const std::string &firstname);
-    + void setLastname(const std::string &lastname);
+    + void setFirstName(const std::string &firstName);
+    + void setLastName(const std::string &lastName);
 
     + <<surchargeable>> void plays();
     + <<abstraite>> uint8_t scores() const;

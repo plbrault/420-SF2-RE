@@ -25,7 +25,7 @@ public:
     double getAccuracy() const;
     uint16_t getBreakaways() const;
 
-    uint8_t scores() const;
+    uint8_t scores() const override;
 
     friend std::ostream &operator<<(std::ostream &, const Player &);
 
