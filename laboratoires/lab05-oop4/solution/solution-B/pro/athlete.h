@@ -15,7 +15,6 @@ private:
 public:
     Athlete();
     Athlete(const std::string &, const std::string &);
-    virtual ~Athlete() = default;
 
     std::string getFullname() const;
     std::string getFirstname() const;

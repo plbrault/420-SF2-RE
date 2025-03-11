@@ -4,163 +4,148 @@
 
 On poursuit notre quête d'héritage et de polymophisme en ajoutant les concepts surcharge de méthode et méthode abstraite.
 
-## Problème avec `Forme2D`
+## Parlons Hockey
 
-Récapitulons la situation. Nous avons deux classes filles `Triangle` et `Quadrilatere` qui hérite de `Forme2D`. Prenons le code suivant :
+Nous avons des athlètes professionelles jouant au hockey. Ces athlètes peuvent être soit un joueur ou un gardien de but. Chaque athlètes joue des parties, on un nom et un prénom, et obtiennent un *scores* qui représente leurs importances dans leurs jeux.
 
-```cpp
-Forme2D &Forme2D::operator=(const Forme2D &forme) {
-    if (this == &forme) {
-        return *this;
-    }
+Voici un diagramme de classe démontrant notre application:
 
-    delete this->_points;
-    this->_nbPoints = forme._nbPoints;
-    for (size_t i = 0; i < this->_nbPoints) {
-        this->_points[i] = forme._points[i];
-    }
+```plantuml
+@startuml
+Goaltender <|-- Athlete
+Player <|-- Athlete
 
-    return *this;
+class Athlete {
+    - std::string _firstname;
+    - std::string _lastname;
+    - uint16_t _matchPlayed;
+
+    + Athlete();
+    + Athlete(const std::string &firstname, const std::string &lastname);
+
+    + std::string getFullname() const;
+    + std::string getFirstname() const;
+    + std::string getLastname() const;
+    + uint16_t getMatchPlayed() const;
+
+    + void setFirstname(const std::string &firstname);
+    + void setLastname(const std::string &lastname);
+
+    + <<surchargeable>> void plays();
+    + <<abstraite>> uint8_t scores() const;
 }
+
+class Goaltender {
+    - uint16_t _wins;
+    - uint16_t _losses;
+    - uint16_t _otLosses;
+    - uint16_t _goalAgainst;
+    - uint16_t _shotAgainst;
+
+    + Goaltender();
+    + Goaltender(const std::string &, const std::string &);
+
+    + <<surcharge>> void plays(bool, bool, uint16_t, uint16_t);
+
+    + uint16_t getWins() const;
+    + uint16_t getLosses() const;
+    + uint16_t getOTLosses() const;
+    + uint16_t getAllLosses() const;
+    + double getWinLossRatio() const;
+    + uint16_t getGoalAgainst() const;
+    + uint16_t getShotAgainst() const;
+    + double getGoalShotRatio() const;
+
+    + uint8_t scores() const;
+}
+
+class Player {
+    - std::string _position;
+    - uint16_t _goals;
+    - uint16_t _passes;
+    - uint16_t _shots;
+    - uint16_t _breakaways;
+
+    + Player();
+    + Player(const std::string &, const std::string &, const std::string &);
+
+    + <<surcharge>> void plays(uint16_t, uint16_t, uint16_t, uint16_t);
+
+    + uint16_t getGoals() const;
+    + uint16_t getPasses() const;
+    + uint16_t getPoints() const;
+    + uint16_t getShots() const;
+    + double getAccuracy() const;
+    + uint16_t getBreakaways() const;
+
+    + uint8_t scores() const;
+}
+
+@enduml
 ```
 
-Nous pourrions avoir dans notre `main` :
+Vous devez implémenter cette solution et exécuter le code suivant avec succès (à mettre dans votre `main`). N'oubliez pas de mettre les bon *include* et de définir les méthodes ou les fonctions manquantes.
+
 
 ```cpp
+int main () {
+    Goaltender price("Carey", "Price");
+    price.plays(true, false, 1, 26);
+    price.plays(true, false, 0, 22);
+    price.plays(true, true, 2, 19);
+    price.plays(false, false, 4, 25);
+    price.plays(true, false, 0, 27);
+    price.plays(true, false, 3, 26);
+    price.plays(false, true, 3, 41);
+    price.plays(true, false, 1, 16);
+    price.plays(true, false, 2, 31);
+    price.plays(true, false, 4, 32);
 
-void assigner(Forme2D &cible, const Forme2D &source) {
-    cible = source;
-}
 
-int main() {
-    Triangle a;
-    Quadrilatere b;
+    std::cout << std::setw(24) << "Nom"
+    << std::setw(8) << std::right << "Partie"
+    << std::setw(8) << std::right << "Vict."
+    << std::setw(8) << std::right << "Déf."
+    << std::setw(8) << std::right << "Pro."
+    << std::setw(8) << std::right << "V/P"
+    << std::setw(8) << std::right << "BC"
+    << std::setw(8) << std::right << "TC"
+    << std::setw(8) << std::right << "B/T"
+    << std::setw(8) << std::right << "Scores" << std::endl;
+    std::cout << price << std::endl;
 
-    assigner(a, b);
 
-    std::cout << "Nombre de points : " << a.getNbPoint() << std::endl;
+    Player crosby("Center", "Sydney", "Crosby");
+    crosby.plays(1, 0, 6, 1);
+    crosby.plays(0, 3, 4, 0);
+    crosby.plays(1, 1, 3, 0);
+    crosby.plays(0, 1, 7, 0);
+    crosby.plays(0, 0, 4, 2);
+    crosby.plays(3, 0, 8, 0);
+    crosby.plays(0, 0, 1, 0);
+    crosby.plays(0, 2, 2, 0);
+    crosby.plays(1, 1, 4, 0);
+    crosby.plays(0, 0, 1, 0);
+    std::cout << std::setw(24) << "Nom"
+    << std::setw(8) << std::right << "Partie"
+    << std::setw(8) << std::right << "But"
+    << std::setw(8) << std::right << "Passe"
+    << std::setw(8) << std::right << "Pts"
+    << std::setw(8) << std::right << "Tir"
+    << std::setw(8) << std::right << "Pré."
+    << std::setw(8) << std::right << "Échap."
+    << std::setw(8) << std::right << "Scores" << std::endl;
+    std::cout << crosby << std::endl;
 
     return 0;
 }
 ```
 
-Ce code compilera sans problème. Toutefois, sémantiquement notre instance `a`, qui est un `Triangle`, contient 4 points et une nombre de points à 4. Cela pourra occasionné des problèmes logiques car `Triangle` n'a pas accès au méthodes `estCarré` et `estRectangle`.
+La sortie devrait ressembler a ceci:
 
-Plusieurs approchent sont possible, mais nous allons utiliser le concept de méthode virtuelle pure.
-
-## Méthode virtuelle pure, ou méthode **abstraite**
-
-Le concept de méthode **abstraite** peut-être un peu complexe à comprendre, alors nous allons nous poser quelques questions.
-
-Nous allons reprendre la classe `Forme2D` et ignorer les attributs pour l'instant.
-
-```plantuml
-@startuml
-class Forme2D {
-    + Forme2D(size_t nbPoint)
-    + Forme2D(const Forme2D &forme2D)
-    + ~Forme2D()
-
-    + Forme2D &operator=(const Forme2D &forme)
-
-    + const Point &operator[](size_t indice) const
-    + Point operator[](size_t indice)
-
-    + double getAire() const
-    + double estValide() const
-}
-@enduml
 ```
-
-Nous savons ici que l'ensemble des membres présentés dans cette classe seront commune à toutes les classes filles. Lorsqu'une méthode est particulière à une classe fille, nous allons mettre la méthode dans la classe fille.
-
-```plantuml
-@startuml
-Triangle <|-- Forme2D
-
-class Forme2D {
-    + Forme2D(size_t nbPoint)
-    + Forme2D(const Forme2D &forme2D)
-    + ~Forme2D()
-
-    + Forme2D &operator=(const Forme2D &forme)
-
-    + const Point &operator[](size_t indice) const
-    + Point operator[](size_t indice)
-
-    + double getAire() const
-    + double estValide() const
-}
-
-class Triangle {
-    
-    + Triangle()
-    + Triangle(Point a, Point b, Point c)
-
-    + bool estTriangleRectangle() const
-    + bool estIsocele() const
-    + bool estEquilaterale() const
-}
-@enduml
+                     Nom  Partie   Vict.   Déf.    Pro.     V/P      BC      TC     B/T  Scores
+             Carey Price      10       8       1       1   0.800      20     265   0.925      60
+                     Nom  Partie     But   Passe     Pts     Tir   Pré. Échap.  Scores
+           Sydney Crosby      10       6       8      14      40   0.150       3      27
 ```
-
-On voit que `estTriangleRectangle`, `estIsocele` et `estEquilaterale` sont uniquement pertinent dans la classe `Triangle`.
-
-Donc on peut dire :
-
-* une méthode dans une classe mère sera partagé par toutes les classes filles qui en hérite;
-* une méthode va dans la classe fille quand cette méthode.
-
-Mais nous avons été chanceux, car `getAire` peut se calculer pour n'importe quelle nombre arbitraire de points en utilisant l'algorithme du *shoelace*, ce qui rend cette méthode parfaite pour la classe mère.
-
-Maintenant, nous aimerions forcer les classes filles a définir une méthode nommé `getNbPoints`. L'objectif est de ne pas avoir d'attribut `nbPoints`.
-
-```plantuml
-@startuml
-Triangle <|-- Forme2D
-
-class Forme2D {
-    + Forme2D(size_t nbPoint)
-    + Forme2D(const Forme2D &forme2D)
-    + ~Forme2D()
-
-    + Forme2D &operator=(const Forme2D &forme)
-
-    + const Point &operator[](size_t indice) const
-    + Point operator[](size_t indice)
-
-    + double getAire() const
-    + double estValide() const
-
-    + <<abstract>> size_t getNbPoints() const
-}
-
-class Triangle {
-    + Triangle()
-    + Triangle(Point a, Point b, Point c)
-
-    + bool estTriangleRectangle() const
-    + bool estIsocele() const
-    + bool estEquilaterale() const
-
-    + size_t getNbPoints() const
-}
-@enduml
-```
-
-Pour définir `getNbPoints` dans `Forme2D`, il faut décrire ceci dans le fichier `Forme2D.h`:
-
-```cpp
-
-class Forme2D {
-private:
-    // ...
-public:
-    // ...
-    virtual size_t getNbPoints() const = 0;
-};
-```
-
-À partir de ce moment, il est important de savoir qu'il ne nous sera plus possible d'instancier une instance de `Forme2D` directement car la classe devient elle-même abstraite, c'est-à-dire quelle contients une ou des méthodes qui ne sont pas implémenté. Pour être en mesure d'instancier une `Forme2D`, on devra le faire via une class fille. Voici un exemple pour `Triangle`.
-
-Voici le fichier `Triangle.cpp` :
