@@ -27,9 +27,9 @@ Forme2D &Forme2D::operator=(const Forme2D &forme) {
         return *this;
     }
 
-    delete[] this->_points;
-    this->_nbPoints = forme._nbPoints;
-    this->_points = new Point[this->_nbPoints];
+    if (this->getNombrePointRequis() != forme.getNombrePointRequis()) {
+        throw std::invalid_argument("Pas la même forme.");
+    }
 
     for (size_t i = 0; i < this->_nbPoints; i++) {
         this->_points[i] = forme._points[i];
@@ -76,10 +76,6 @@ double Forme2D::getAire() const {
     return 0.5 * resultat;
 }
 
-size_t Forme2D::getNbPoints() const {
-    return this->_nbPoints;
-}
-
 /* ========================================================================= */
 /*     Méthodes privées                                                      */
 /* ========================================================================= */
@@ -87,3 +83,4 @@ size_t Forme2D::getNbPoints() const {
 bool Forme2D::_checkPoint(const Point &point) {
     return point.getDimension() == 2;
 }
+

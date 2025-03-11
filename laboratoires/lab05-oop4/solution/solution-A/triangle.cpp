@@ -66,3 +66,11 @@ bool Triangle::estRectangle() const {
 
     return (abs(vAC) <= EPSILON || abs(vAB) <= EPSILON || abs(vBC) <= EPSILON);
 }
+
+/* ========================================================================= */
+/*     Méthodes virtuelles                                                   */
+/* ========================================================================= */
+
+size_t Triangle::getNombrePointRequis() const {
+    return TRIANGLE_NB_POINT;
+}

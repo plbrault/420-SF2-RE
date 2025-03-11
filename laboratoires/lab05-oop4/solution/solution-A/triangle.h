@@ -18,6 +18,8 @@ public:
 
     bool estInterieur(Point &);
     bool estRectangle() const;
+
+    size_t getNombrePointRequis() const;
 };
 
 #endif

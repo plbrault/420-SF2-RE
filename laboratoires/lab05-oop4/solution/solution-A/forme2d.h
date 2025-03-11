@@ -7,14 +7,13 @@ class Forme2D {
 private:
 protected:
     Point *_points;
-    size_t _nbPoints;
 
     bool _checkPoint(const Point &);
 
 public:
     Forme2D(size_t);
     Forme2D(const Forme2D &);
-    virtual ~Forme2D();
+    ~Forme2D();
 
     Forme2D &operator=(const Forme2D &);
     Point &operator[](size_t);
@@ -22,7 +21,8 @@ public:
 
     double getAire() const;
     bool estValide() const;
-    size_t getNbPoints() const;
+
+    virtual size_t getNombrePointRequis() const = 0;
 };
 
 #endif

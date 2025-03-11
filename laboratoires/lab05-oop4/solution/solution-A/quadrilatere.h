@@ -15,6 +15,8 @@ public:
     Quadrilatere(): Forme2D(QUADRILATERE_NB_POINT) { }
     Quadrilatere(const Point &, const Point &, const Point &, const Point &);
     ~Quadrilatere() { }
+
+    size_t getNombrePointRequis() const;
 };
 
 #endif
