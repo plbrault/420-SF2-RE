@@ -8,6 +8,18 @@ On poursuit notre quête d'héritage et de polymophisme en ajoutant les concepts
 
 Nous avons des athlètes professionelles jouant au hockey. Ces athlètes peuvent être soit un joueur ou un gardien de but. Chaque athlètes joue des parties, on un nom et un prénom, et obtiennent un *scores* qui représente leurs importances dans leurs jeux.
 
+Pour un gardien, le score ce calcul suivant l'équation suivant, ou $W$ est le nombre de victoire, $L$ est le nombre de défaite, $O_t$ et le nombre de défaite en prolongation, $S_a$ et le nombre de tir reçu, $G_a$ est le nombre de but accordé.
+
+$$
+S_g = (W - L) \times 5 + O_t + \frac{(S_a - G_a)}{10}
+$$
+
+Pour un joueur, considérant que $G$ est le nombre de but, $A$ est le nombre de passe, $S$ le nombre de tir et $B$ le nombre d'échappé:
+
+$$
+S_p = G \times 2 + A + B + \frac{S}{10}
+$$
+
 Voici un diagramme de classe démontrant notre application:
 
 ```plantuml
