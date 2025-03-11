@@ -2,11 +2,11 @@
 
 ## Objectif
 
-On poursuit notre quête d'héritage et de polymophisme en ajoutant les concepts surcharge de méthode et méthode abstraite.
+On poursuit notre quête d'héritage et de polymophisme en ajoutant les concepts de surcharge de méthode et de méthode abstraite.
 
 ## Parlons Hockey
 
-Nous avons des athlètes professionelles jouant au hockey. Ces athlètes peuvent être soit un joueur ou un gardien de but. Chaque athlètes joue des parties, on un nom et un prénom, et obtiennent un *scores* qui représente leurs importances dans leurs jeux.
+Nous avons des athlètes professionnels jouant au hockey. Ces athlètes peuvent être soit un joueur ou un gardien de but. Chaque athlète joue des parties, a un nom et un prénom, et obtient un *scores* qui représente son importance dans le jeu.
 
 Pour un gardien, le score ce calcul suivant l'équation suivant, ou $W$ est le nombre de victoire, $L$ est le nombre de défaite, $O_t$ et le nombre de défaite en prolongation, $S_a$ et le nombre de tir reçu, $G_a$ est le nombre de but accordé.
 
@@ -153,7 +153,7 @@ int main () {
 }
 ```
 
-La sortie devrait ressembler a ceci:
+La sortie devrait ressembler à ceci:
 
 ```
                      Nom  Partie   Vict.   Déf.    Pro.     V/P      BC      TC     B/T  Scores
