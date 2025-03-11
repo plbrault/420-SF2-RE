@@ -4,7 +4,7 @@
 
 Goaltender::Goaltender() : Goaltender("", "") { }
 
-Goaltender::Goaltender(const std::string &firstname, const std::string &lastname) : Athlete(firstname, lastname) {
+Goaltender::Goaltender(const std::string &firstName, const std::string &lastName) : Athlete(firstName, lastName) {
     this->_wins = 0;
     this->_losses = 0;
     this->_otLosses = 0;
@@ -64,7 +64,7 @@ uint8_t Goaltender::scores() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Goaltender &goaltender) {
-    os << std::setw(24) << goaltender.getFullname()
+    os << std::setw(24) << goaltender.getFullName()
         << std::setw(8) << std::right << goaltender.getMatchPlayed()
         << std::setw(8) << std::right << goaltender.getWins()
         << std::setw(8) << std::right << goaltender.getLosses()

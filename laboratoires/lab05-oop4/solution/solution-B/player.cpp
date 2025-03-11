@@ -4,7 +4,7 @@
 
 Player::Player() : Player("", "", "") { }
 
-Player::Player(const std::string &position, const std::string &firstname, const std::string &lastname): Athlete(firstname, lastname) {
+Player::Player(const std::string &position, const std::string &firstName, const std::string &lastName): Athlete(firstName, lastName) {
     this->_position = position;
 
     this->_goals = 0;
@@ -51,7 +51,7 @@ uint8_t Player::scores() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Player &player) {
-    os << std::setw(24) << player.getFullname()
+    os << std::setw(24) << player.getFullName()
         << std::setw(8) << std::right << player.getMatchPlayed()
         << std::setw(8) << std::right << player.getGoals()
         << std::setw(8) << std::right << player.getPasses()
