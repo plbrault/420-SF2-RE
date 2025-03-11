@@ -13,6 +13,10 @@ Forme2D::~Forme2D() {
 }
 
 Forme2D &Forme2D::operator=(const Forme2D &forme2d) {
+    if (this->_points == nullptr) {
+        this->initialize();
+    }
+
     if (this == &forme2d) {
         return *this;
     }
@@ -33,6 +37,10 @@ Forme2D &Forme2D::operator=(const Forme2D &forme2d) {
 }
 
 Point &Forme2D::operator[](size_t index) {
+    if (this->_points == nullptr) {
+        this->initialize();
+    }
+
     if (index < this->getNbPoints()) {
         return this->_points[index];
     } else {
@@ -41,6 +49,10 @@ Point &Forme2D::operator[](size_t index) {
 }
 
 const Point &Forme2D::operator[](size_t index) const {
+    if (this->_points == nullptr) {
+        throw std::runtime_error("Forme n'est pas bien initialisé");
+    }
+
     if (index < this->getNbPoints()) {
         return this->_points[index];
     } else {
@@ -49,10 +61,16 @@ const Point &Forme2D::operator[](size_t index) const {
 }
 
 bool Forme2D::estValide() const {
+    if (this->_points == nullptr) {
+        throw std::runtime_error("Forme n'est pas bien initialisé");
+    }
     return this->getAire() != 0.0;
 }
 
 double Forme2D::getAire() const {
+    if (this->_points == nullptr) {
+        throw std::runtime_error("Forme n'est pas bien initialisé");
+    }
 
     double resultat = 0.0;
 
