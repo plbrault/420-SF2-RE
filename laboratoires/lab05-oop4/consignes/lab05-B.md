@@ -158,7 +158,7 @@ int main () {
 La sortie devrait ressembler à ceci:
 
 ```
-                     Nom  Partie   Vict.   Déf.    Pro.     V/P      BC      TC     B/T  Scores
+                     Nom  Parties   Vict.   Déf.    Pro.     V/P      BC      TC     B/T  Scores
              Carey Price      10       8       1       1   0.800      20     265   0.925      60
                      Nom  Partie     But   Passe     Pts     Tir   Pré. Échap.  Scores
            Sydney Crosby      10       6       8      14      40   0.150       3      27
