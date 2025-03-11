@@ -8,19 +8,19 @@ On poursuit notre quête d'héritage et de polymophisme en ajoutant les concepts
 
 Nous avons des athlètes professionnels jouant au hockey. Ces athlètes peuvent être soit un joueur ou un gardien de but. Chaque athlète joue des parties, a un nom et un prénom, et obtient un *scores* qui représente son importance dans le jeu.
 
-Pour un gardien, le score ce calcul suivant l'équation suivant, ou $W$ est le nombre de victoire, $L$ est le nombre de défaite, $O_t$ et le nombre de défaite en prolongation, $S_a$ et le nombre de tir reçu, $G_a$ est le nombre de but accordé.
+Pour un gardien, le score se calcule suivant l'équation suivante, où $W$ est le nombre de victoire, $L$ est le nombre de défaites, $O_t$ et le nombre de défaites en prolongation, $S_a$ est le nombre de tirs reçus, $G_a$ est le nombre de buts accordés.
 
 $$
 S_g = (W - L) \times 5 + O_t + \frac{(S_a - G_a)}{10}
 $$
 
-Pour un joueur, considérant que $G$ est le nombre de but, $A$ est le nombre de passe, $S$ le nombre de tir et $B$ le nombre d'échappé:
+Pour un joueur, considérant que $G$ est le nombre de buts, $A$ est le nombre de passes, $S$ le nombre de tir et $B$ le nombre d'échappées:
 
 $$
 S_p = G \times 2 + A + B + \frac{S}{10}
 $$
 
-Voici un diagramme de classe démontrant notre application:
+Voici un diagramme de classes représentant notre application:
 
 ```plantuml
 @startuml
