@@ -13,5 +13,5 @@ void Felin::manger() {
 
 void Felin::dormir() {
     std::cout << "ZZZzzzZZZzzz" << std::endl;
-    _sommeil++;
+    _sommeil--;
 }

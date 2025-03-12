@@ -5,15 +5,17 @@
 
 using namespace std;
 
+void dormirF(Felin& felin) {
+    felin.dormir();
+}
+
+void dormirC(Chat& chat) {
+    chat.dormir();
+}
+
 int main() {
     Chat felix;
-    Lion simba;
 
-    felix.faireUnSon();
-    felix.dormir();
-    felix.faireUnSon();
-
-    simba.faireUnSon();
-    simba.dormir();
-    simba.faireUnSon();
+    dormirF(felix); // Affiche ZZZzzzMiaouuuuuuuZZZzzz
+    dormirC(felix); // Affiche ZZZzzzMiaouuuuuuuZZZzzz
 }
