@@ -1,6 +1,12 @@
 #include <iostream>
+#include "CSVParser.h"
+
+using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    CSVParser parser;
+
+    cout << "Data format: " << parser.getDataFormat() << endl;
+
     return 0;
 }

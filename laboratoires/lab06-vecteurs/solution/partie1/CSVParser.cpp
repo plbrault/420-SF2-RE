@@ -4,17 +4,38 @@
 
 using namespace std;
 
-void CSVParser::parse(istream& in, char delimiter, bool hasColumnNames) {
+CSVParser::CSVParser(char delimiter, bool readColumnNames) : Parser("csv") {
+    setDelimiter(delimiter);
+    setReadsColumnNames(readColumnNames);
+}
+
+char CSVParser::getDelimiter() const {
+    return _delimiter;
+}
+
+void CSVParser::setDelimiter(char delimiter) {
+    _delimiter = delimiter;
+}
+
+bool CSVParser::readsColumnNames() const {
+    return _readsColumnNames;
+}
+
+void CSVParser::setReadsColumnNames(bool readsColumnNames) {
+    _readsColumnNames = readsColumnNames;
+}
+
+void CSVParser::parse(istream& in) {
     _data.clear();
     _columnNames.clear();
 
     string line;
-    if (hasColumnNames) {
+    if (_readsColumnNames) {
         getline(in, line);
-        _columnNames = split(line, delimiter);
+        _columnNames = split(line, _delimiter);
     }
     while (getline(in, line)) {
-        _data.push_back(split(line, delimiter));
+        _data.push_back(split(line, _delimiter));
     }
 }
 
