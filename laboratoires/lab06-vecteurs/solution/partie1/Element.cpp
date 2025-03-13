@@ -124,7 +124,7 @@ std::ostream &operator<<(std::ostream &flux, const Element &element) {
     return flux;
 }
 
-std::string Element::getNom() const {
+const std::string& Element::getNom() const {
     return this->_nom;
 }
 

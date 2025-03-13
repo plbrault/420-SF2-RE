@@ -6,6 +6,8 @@ using namespace std;
 
 int main() {
     int choix;
+    string recherche;
+    const Element* resultatRecherche;
     Menu menu("Menu", "Choisir une option:", true);
     TableauPeriodique tableauPeriodique;
 
@@ -13,6 +15,7 @@ int main() {
     menu.ajouterOption("Afficher les elements");
     menu.ajouterOption("Trier les éléments par nom");
     menu.ajouterOption("Trier les éléments par numéro atomique");
+    menu.ajouterOption("Rechercher un élément");
 
     do {
         cout << menu.obtenirChaine();
@@ -32,6 +35,17 @@ int main() {
                     break;
                 case 4:
                     tableauPeriodique.trierParNumeroAtomique();
+                    break;
+                case 5:
+                    cout << "Entrez le nom de l'élément recherché: ";
+                    cin >> recherche;
+                    resultatRecherche = tableauPeriodique.getElementParNom(recherche);
+                    if (resultatRecherche != nullptr) {
+                        cout << *resultatRecherche << endl;
+                    } else {
+                        cout << "Élément non trouvé." << endl;
+                    }
+                    break;
             }
         }
     } while (choix != menu.valeurMaximale());

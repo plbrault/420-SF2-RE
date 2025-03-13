@@ -16,6 +16,7 @@ public:
     void afficher(std::ostream& sortie);
     void trierParNom();
     void trierParNumeroAtomique();
+    const Element* getElementParNom(const std::string& nom) const;
 };
 
 std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodique);

@@ -67,3 +67,29 @@ void TableauPeriodique::trierParNumeroAtomique() {
     }
     _estTrieParNom = false;
 }
+
+const Element* TableauPeriodique::getElementParNom(const std::string& nom) const {
+    if (_estTrieParNom) {
+        // Recherche dichotomique
+        size_t debut = 0;
+        size_t fin = _elements.size() - 1;
+        while (debut <= fin) {
+            size_t milieu = (debut + fin) / 2;
+            if (_elements[milieu].getNom() == nom) {
+                return &_elements[milieu];
+            } else if (_elements[milieu].getNom() < nom) {
+                debut = milieu + 1;
+            } else {
+                fin = milieu - 1;
+            }
+        }
+    } else {
+        // Recherche linéaire
+        for (const Element& element : _elements) {
+            if (element.getNom() == nom) {
+                return &element;
+            }
+        }
+    }
+    return nullptr;
+}
