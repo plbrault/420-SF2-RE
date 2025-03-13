@@ -10,7 +10,9 @@ int main() {
     TableauPeriodique tableauPeriodique;
 
     menu.ajouterOption("Charger le tableau périodique");
-    menu.ajouterOption("Afficher les elements du tableau périodique");
+    menu.ajouterOption("Afficher les elements");
+    menu.ajouterOption("Trier les éléments par nom");
+    menu.ajouterOption("Trier les éléments par numéro atomique");
 
     do {
         cout << menu.obtenirChaine();
@@ -25,6 +27,11 @@ int main() {
                 case 2:
                     cout << tableauPeriodique;
                     break;
+                case 3:
+                    tableauPeriodique.trierParNom();
+                    break;
+                case 4:
+                    tableauPeriodique.trierParNumeroAtomique();
             }
         }
     } while (choix != menu.valeurMaximale());

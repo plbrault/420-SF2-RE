@@ -1,0 +1,119 @@
+Nom,Symbole,Numero atomique,Groupe,Nombre de trous
+Hydrogene,H,1,Alcalins,0
+Helium,He,2,Gaz nobles,0
+Lithium,Li,3,Alcalins,1
+Beryllium,Be,4,Alcalino-terreux,2
+Bore,B,5,Autres metaux,3
+Carbone,C,6,Non-metaux,4
+Azote,N,7,Non-metaux,3
+Oxygene,O,8,Non-metaux,2
+Fluor,F,9,Halogenes,1
+Neon,Ne,10,Gaz nobles,0
+Sodium,Na,11,Alcalins,1
+Magnesium,Mg,12,Alcalino-terreux,2
+Aluminium,Al,13,Autres metaux,3
+Silicium,Si,14,Non-metaux,4
+Phosphore,P,15,Non-metaux,3
+Soufre,S,16,Non-metaux,2
+Chlore,Cl,17,Halogenes,1
+Argon,Ar,18,Gaz nobles,0
+Potassium,K,19,Alcalins,1
+Calcium,Ca,20,Alcalino-terreux,2
+Scandium,Sc,21,Terres rares,3
+Titane,Ti,22,Transition,4
+Vanadium,V,23,Transition,5
+Chrome,Cr,24,Transition,6
+Manganese,Mn,25,Transition,5
+Fer,Fe,26,Transition,4
+Cobalt,Co,27,Transition,3
+Nickel,Ni,28,Transition,2
+Cuivre,Cu,29,Transition,1
+Zinc,Zn,30,Transition,0
+Gallium,Ga,31,Autres metaux,3
+Germanium,Ge,32,Non-metaux,4
+Arsenic,As,33,Non-metaux,3
+Selemium,Se,34,Non-metaux,2
+Brome,Br,35,Halogenes,1
+Krypton,Kr,36,Gaz nobles,0
+Rubidium,Rb,37,Alcalins,1
+Strontium,Sr,38,Alcalino-terreux,2
+Yttrium,Y,39,Terres rares,3
+Zirconium,Zr,40,Transition,4
+Niobium,Nb,41,Transition,5
+Molybdene,Mo,42,Transition,6
+Technetium,Tc,43,Transition,5
+Ruthenium,Ru,44,Transition,4
+Rhodium,Rh,45,Transition,3
+Palladium,Pd,46,Transition,2
+Argent,Ag,47,Transition,1
+Cadmium,Cd,48,Transition,0
+Indium,In,49,Autres metaux,3
+Etain,Sn,50,Autres metaux,4
+Antimoine,Sb,51,Autres metaux,3
+Tellure,Te,52,Non-metaux,2
+Iode,I,53,Halogenes,1
+Xenon,Xe,54,Gaz nobles,0
+Cesium,Cs,55,Alcalins,1
+Baryum,Ba,56,Alcalino-terreux,2
+Lanthane,La,57,Terres rares,3
+Cerium,Ce,58,Terres rares,4
+Praseodyme,Pr,59,Terres rares,3
+Neodyme,Nd,60,Terres rares,3
+Promethium,Pm,61,Terres rares,3
+Samarium,Sm,62,Terres rares,3
+Europium,Eu,63,Terres rares,3
+Gadolinium,Gd,64,Terres rares,3
+Terbium,Tb,65,Terres rares,3
+Dysprosium,Dy,66,Terres rares,3
+Holmium,Ho,67,Terres rares,3
+Erbium,Er,68,Terres rares,3
+Thulium,Tm,69,Terres rares,3
+Ytterbium,Yb,70,Terres rares,3
+Lutecium,Lu,71,Terres rares,3
+Hafnium,Hf,72,Transition,4
+Tantale,Ta,73,Transition,5
+Tungstene,W,74,Transition,6
+Rhenium,Re,75,Transition,5
+Osmium,Os,76,Transition,4
+IrIridium,Ir,77,Transition,3
+Platine,Pt,78,Transition,2
+Or,Au,79,Transition,1
+Mercure,Hg,80,Transition,0
+Thallium,Tl,81,Autres metaux,3
+Plomb,Pb,82,Autres metaux,4
+Bismuth,Bi,83,Autres metaux,3
+Polonium,Po,84,Non-metaux,2
+Astate,At,85,Halogenes,1
+Radon,Rn,86,Gaz nobles,0
+Francium,Fr,87,Alcalins,1
+Radium,Ra,88,Alcalino-terreux,2
+Actinium,Ac,89,Actinides,3
+Thorium,Th,90,Actinides,4
+Protactinium,Pa,91,Actinides,5
+Uranium,U,92,Actinides,6
+Neptunium,Np,93,Actinides,5
+Plutonium,Pu,94,Actinides,4
+Americium,Am,95,Actinides,3
+Curium,Cm,96,Actinides,2
+Berkelium,Bk,97,Actinides,1
+Californium,Cf,98,Actinides,0
+Einsteinium,Es,99,Actinides,3
+Fermium,Fm,100,Actinides,4
+Mendelevium,Md,101,Actinides,3
+Nobelium,No,102,Actinides,2
+Lawrencium,Lr,103,Actinides,3
+Rutherfordium,Rf,104,Transuraniens,4
+Dubnium,Db,105,Transuraniens,5
+Seaborgium,Sg,106,Transuraniens,6
+Bohrium,Bh,107,Transuraniens,5
+Hassium,Hs,108,Transuraniens,4
+Meitnerium,Mt,109,Transuraniens,3
+Darmstadtium,Ds,110,Transuraniens,2
+Roentgenium,Rg,111,Transuraniens,1
+Copernicium,Cn,112,Transuraniens,0
+Nihonium,Nh,113,Transuraniens,3
+Flerovium,Fl,114,Transuraniens,4
+Moscovium,Mc,115,Transuraniens,3
+Livermorium,Lv,116,Transuraniens,2
+Tennessine,Ts,117,Halogenes,1
+Oganesson,Og,118,Gaz nobles,0

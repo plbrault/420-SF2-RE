@@ -123,3 +123,11 @@ std::ostream &operator<<(std::ostream &flux, const Element &element) {
     flux << element.toString();
     return flux;
 }
+
+std::string Element::getNom() const {
+    return this->_nom;
+}
+
+uint8_t Element::getNombreParticulesChargees() const {
+    return this->_nbParticuleChargee;
+}

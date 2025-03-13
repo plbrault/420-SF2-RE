@@ -31,6 +31,9 @@ public:
     size_t nbIsotope() const;
     bool aIsotopeStable() const;
 
+    std::string getNom() const;
+    uint8_t getNombreParticulesChargees() const;
+
     std::string toString() const;
 };
 
