@@ -4,7 +4,7 @@
 
 using namespace std;
 
-CSVParser::CSVParser(char delimiter, bool readColumnNames) : Parser("csv") {
+CSVParser::CSVParser(char delimiter, bool readColumnNames) {
     setDelimiter(delimiter);
     setReadsColumnNames(readColumnNames);
 }
