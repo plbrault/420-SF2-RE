@@ -5,6 +5,7 @@
 using namespace std;
 
 TableauPeriodique::TableauPeriodique() {
+    _parser.setDelimiter(';');
     _estTrieParNom = false;
 }
 
