@@ -16,8 +16,6 @@ private:
     std::string _options[TAILLE_LISTE_OPTION_MAXIMAL];
     uint8_t _quantite;
 
-    int _selection;
-
 public:
 
     Menu(const std::string &, const std::string &);
@@ -31,8 +29,6 @@ public:
     std::string obtenirQuestion(void);
 
     void changerQuestion(const std::string &);
-
-    int obtenirSelection(void);
 
     bool validerSelection(int);
 

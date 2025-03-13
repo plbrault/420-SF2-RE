@@ -12,8 +12,6 @@ Menu::Menu(const std::string &titre, const std::string &question, bool peutQuitt
 
     this->_peutQuitter = peutQuitter;
     this->_quantite = 0;
-
-    this->_selection = -1;
 }
 
 Menu::Menu(const std::string &titre, const std::string &question) : Menu::Menu(titre, question, false) { }
@@ -24,10 +22,6 @@ Menu::Menu(const std::string &titre, const std::string &question) : Menu::Menu(t
 
 std::string Menu::obtenirTitre(void) {
     return this->_titre;
-}
-
-int Menu::obtenirSelection(void) {
-    return this->_selection;
 }
 
 std::string Menu::obtenirChaine(void) {

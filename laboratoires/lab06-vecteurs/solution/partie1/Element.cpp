@@ -118,3 +118,8 @@ void Element::_agrandirTableauIsotope() {
         temp = nullptr;
     }
 }
+
+std::ostream &operator<<(std::ostream &flux, const Element &element) {
+    flux << element.toString();
+    return flux;
+}
