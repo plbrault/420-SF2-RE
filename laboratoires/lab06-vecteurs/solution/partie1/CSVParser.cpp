@@ -54,7 +54,16 @@ const vector<string>& CSVParser::getRow(size_t index) const {
     return _data[index];
 }
 
-const string& CSVParser::getCell(size_t row, size_t column) const {
+int CSVParser::getColumnIndex(const string& columnName) const {
+    for (size_t i = 0; i < _columnNames.size(); i++) {
+        if (_columnNames[i] == columnName) {
+            return i;
+        }
+    }
+    throw invalid_argument("Column name not found.");
+}
+
+const string& CSVParser::getString(size_t row, size_t column) const {
     if (row >= _data.size()) {
         throw out_of_range("Row index out of range.");
     }
@@ -64,21 +73,24 @@ const string& CSVParser::getCell(size_t row, size_t column) const {
     return _data[row][column];
 }
 
-const string& CSVParser::getCell(size_t row, const string& columnName) const {
-    if (row >= _data.size()) {
-        throw out_of_range("Row index out of range.");
-    }
-    size_t column = -1;
-    for (size_t i = 0; i < _columnNames.size(); i++) {
-        if (_columnNames[i] == columnName) {
-            column = i;
-            break;
-        }
-    }
-    if (column == -1) {
-        throw invalid_argument("Column name not found.");
-    }
-    return getCell(row, column);
+const string& CSVParser::getString(size_t row, const string& columnName) const {
+    return getString(row, getColumnIndex(columnName));
+}
+
+int CSVParser::getInt(size_t row, size_t column) const {
+    return stoi(getString(row, column));
+}
+
+int CSVParser::getInt(size_t row, const string& columnName) const {
+    return getInt(row, getColumnIndex(columnName));
+}
+
+double CSVParser::getDouble(size_t row, size_t column) const {
+    return stod(getString(row, column));
+}
+
+double CSVParser::getDouble(size_t row, const string& columnName) const {
+    return getDouble(row, getColumnIndex(columnName));
 }
 
 const size_t CSVParser::getNumRows() const {

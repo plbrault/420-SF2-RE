@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -20,9 +22,16 @@ public:
     void parse(std::istream& in) override;
     const std::vector<std::vector<std::string>>& getData() const;
     const std::vector<std::string>& getColumnNames() const;
+    int getColumnIndex(const std::string& columnName) const;
     const std::vector<std::string>& getRow(size_t index) const;
-    const std::string& getCell(size_t row, size_t column) const;
-    const std::string& getCell(size_t row, const std::string& columnName) const;
+
+    const std::string& getString(size_t row, size_t column) const;
+    const std::string& getString(size_t row, const std::string& columnName) const;
+    int getInt(size_t row, size_t column) const;
+    int getInt(size_t row, const std::string& columnName) const;
+    double getDouble(size_t row, size_t column) const;
+    double getDouble(size_t row, const std::string& columnName) const;
+
     const size_t getNumRows() const;
     const size_t getNumColumns() const;
 };

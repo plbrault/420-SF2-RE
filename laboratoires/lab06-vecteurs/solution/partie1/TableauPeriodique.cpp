@@ -20,11 +20,11 @@ void TableauPeriodique::charger(const std::string& nomFichier) {
     _elements.clear();
     for (size_t i = 0; i < _parser.getNumRows(); i++) {
         Element element(
-            _parser.getCell(i, "Nom"),
-            _parser.getCell(i, "Symbole"),
-            stoi(_parser.getCell(i, "Numero atomique")),
-            stoi(_parser.getCell(i, "Nombre de trous")),
-            _parser.getCell(i, "Groupe")
+            _parser.getString(i, "Nom"),
+            _parser.getString(i, "Symbole"),
+            _parser.getInt(i, "Numero atomique"),
+            _parser.getInt(i, "Nombre de trous"),
+            _parser.getString(i, "Groupe")
         );
         _elements.push_back(element);
     }
