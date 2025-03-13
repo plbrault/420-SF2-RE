@@ -99,8 +99,8 @@ std::string Element::toString() const {
            << std::setw(4) << std::right << grp << " |\n";
     flux << "| " << std::setw(11) << std::left << name << " |\n";
     flux << "|             |\n";
-    flux << "| " << std::setw(2) << std::left << _qtIsotopes
-           << "        " << std::setw(2) << std::right << _nbParticuleChargee << " |\n";
+    flux << "| " << std::setw(2) << std::left << (int)_qtIsotopes
+           << "        " << std::setw(2) << std::right << (int)_nbParticuleChargee << " |\n";
     flux << "---------------\n";
 
     return flux.str();

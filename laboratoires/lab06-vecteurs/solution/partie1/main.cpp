@@ -1,16 +1,16 @@
 #include <iostream>
-#include "fonctions.h"
 #include "Menu.h"
+#include "TableauPeriodique.h"
 
 using namespace std;
 
 int main() {
     int choix;
     Menu menu("Menu", "Choisir une option:", true);
-    vector<Element> tableauPeriodique;
+    TableauPeriodique tableauPeriodique;
 
     menu.ajouterOption("Charger le tableau périodique");
-    menu.ajouterOption("Afficher le tableau périodique");
+    menu.ajouterOption("Afficher les elements du tableau périodique");
 
     do {
         cout << menu.obtenirChaine();
@@ -20,12 +20,10 @@ int main() {
         } else {
             switch (choix) {
                 case 1:
-                    tableauPeriodique = parseElements("elements.csv");
+                    tableauPeriodique.charger("elements.csv");
                     break;
                 case 2:
-                    for (Element element : tableauPeriodique) {
-                        cout << element << endl;
-                    }
+                    cout << tableauPeriodique;
                     break;
             }
         }
