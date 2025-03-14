@@ -8,7 +8,7 @@ int main() {
     int choix;
     string recherche;
     const Element* resultatRecherche;
-    Menu menu("Menu", "Choisir une option:", true);
+    Menu menu("Tableau périodique", "Choisir une option:", true);
     TableauPeriodique tableauPeriodique;
 
     menu.ajouterOption("Charger le tableau périodique");

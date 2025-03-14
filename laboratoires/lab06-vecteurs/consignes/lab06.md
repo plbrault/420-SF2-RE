@@ -45,3 +45,22 @@ Décortiquons le contenu du fichier:
 > 🤔 Wô menute. On avait pas dit que *CSV* voulait dire *Comma-separated values*, donc que les valeurs devraient être séparées par des virgules?
 
 En effet, au sens strict du terme, un fichier CSV devrait contenir des valeurs séparées par des virgules (`,`) et non des points-virgules (`;`). Cependant, il faut savoir que le format CSV n'est pas vraiment standardisé, et que d'autres **séparateurs** (***delimiters*** en anglais) sont parfois utilisés selon les logiciels et leurs configurations. Par ailleurs, lorsqu'Excel est configuré en français, il utilise par défaut le point-virgule comme séparateur dans les fichiers CSV, puisqu'il réserve l'usage des virgules à la représentation des nombres décimaux (tandis que le point (`.`) est utilisé à cet effet lorsqu'Excel est configuré en anglais). Le fichier `elements.csv` ne s'afficherait donc pas correctement dans Excel en français s'il utilisait des virgules comme séparateurs.
+
+Maintenant que vous comprenez comment interpréter un fichier CSV, voyons à quoi ressemblera le programme que vous devez créer. On veut d'abord afficher le menu suivant:
+
+```
+Tableau périodique
+
+1 Charger le tableau périodique
+2 Afficher les elements
+3 Trier les éléments par nom
+4 Trier les éléments par numéro atomique
+5 Rechercher un élément
+6 Quitter
+
+Choisir une option: 
+```
+
+Créez donc un projet de base avec un `main` contenant une boucle qui affiche ce menu et lit l'option saisie.
+
+> 🤔 Pourriez-vous réutiliser une classe d'un laboratoire précédent pour faire cela?
