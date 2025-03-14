@@ -86,16 +86,16 @@ def create_path(matrix, start_pos, path_length, continue_path=False):
         previous_val += 1
         visited_positions.append(pos)
 
-num_base_paths = rows + cols // 10
+num_base_paths = (rows + cols) // 10 + 1
 for i in range(num_base_paths):
     start_pos = (random.randint(0, rows - 1), random.randint(0, cols - 1))
     while start_pos in visited_positions:
         start_pos = (random.randint(0, rows - 1), random.randint(0, cols - 1))
-    create_path(matrix, start_pos, i + random.randint(0, 50))
+    create_path(matrix, start_pos, random.randint(num_base_paths, num_base_paths * 2))
 
 for i in range(num_base_paths * 2):
     start_pos = random.choice(visited_positions)
-    create_path(matrix, start_pos, i + random.randint(0, 50), continue_path=True)
+    create_path(matrix, start_pos, random.randint(i, i * 2), continue_path=True)
 
 print_matrix(highlighted_matrix, cell_width=6)
 with open(output_filename, 'w') as f:
