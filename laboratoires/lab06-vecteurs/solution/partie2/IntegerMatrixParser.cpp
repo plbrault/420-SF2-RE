@@ -30,5 +30,6 @@ void IntegerMatrixParser::parse(istream& in) {
         for (string token : tokens) {
 			row.push_back(stoi(token));
 		}
+        _data.push_back(row);
     }
 }
