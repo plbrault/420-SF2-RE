@@ -171,3 +171,36 @@ Implémentez toutes les méthodes de la classe. Référez-vous à [la documentat
 Testez rigoureusement votre *parser* sur le fichiers `elements.csv`.
 
 ### Conversion de la matrice de `string` en vecteur d'`Element`
+
+Vous êtes maintenant en mesure d'importer les données d'un fichier CSV dans votre programme. Une matrice de `string` n'est cependant pas idéale pour travailler sur les éléments du tableau périodique. Vous allez donc convertir cette matrice en vecteur d'`Element`!
+
+Pour ce faire, vous allez créer une nouvelle classe `TableauPeriodique` qui vous accompagnera pour toute la suite de cette partie du laboratoire. Voici la définition de cette classe:
+
+```cpp
+#pragma once
+
+#include <iostream>
+#include <vector>
+#include "CSVParser.h"
+#include "Element.h"
+
+class TableauPeriodique {
+private:
+    CSVParser _parser;
+    std::vector<Element> _elements;
+    bool _estTrieParNom;
+public:
+    TableauPeriodique();
+    void charger(const std::string& nomFichier);
+    // void afficher(std::ostream& sortie);
+    // void trierParNom();
+    // void trierParNumeroAtomique();
+    // const Element* getElementParNom(const std::string& nom) const;
+};
+
+std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodique);
+```
+
+La plupart des méthodes sont commentées, car vous allez les implémenter dans les étapes ultérieures. Pour le moment, implémentez seulement le constructeur et la méthode `charger`. Celle-ci doit ouvrir le fichier CSV, utiliser `_parser` pour récupérer ses données, puis insérer tous les éléments dans `_elements`. N'oubliez pas de fermer le fichier!
+
+Appelez la méthode `charger` dans votre `main` et utilisez le débogueur pour vérifier que le tableau d'éléments est rempli correctement.
