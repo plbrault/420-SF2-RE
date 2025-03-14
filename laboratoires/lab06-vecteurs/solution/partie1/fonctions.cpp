@@ -1,6 +1,4 @@
 #include "fonctions.h"
-#include "CSVParser.h"
-#include <fstream>
 
 using namespace std;
 
