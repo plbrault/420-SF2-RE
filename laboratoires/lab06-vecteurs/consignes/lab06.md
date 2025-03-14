@@ -52,7 +52,7 @@ Maintenant que vous comprenez comment interpréter un fichier CSV, voyons à quo
 Tableau périodique
 
 1 Charger le tableau périodique
-2 Afficher les elements
+2 Afficher les éléments
 3 Trier les éléments par nom
 4 Trier les éléments par numéro atomique
 5 Rechercher un élément
@@ -206,3 +206,27 @@ std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodi
 La plupart des méthodes sont commentées, car vous allez les implémenter dans les étapes ultérieures. Pour le moment, implémentez seulement le constructeur et la méthode `charger`. Celle-ci doit ouvrir le fichier CSV, utiliser `_parser` pour récupérer ses données, puis insérer tous les éléments dans `_elements`. N'oubliez pas de fermer le fichier!
 
 Appelez la méthode `charger` dans votre `main` et utilisez le débogueur pour vérifier que le tableau d'éléments est rempli correctement.
+
+### Affichage des éléments
+
+Implémentez maintenant la méthode `afficher`. Celle-ci doit afficher chacun des éléments du vecteur à l'aide de la méthode `toString` déjà existante dans la classe `Element`.
+
+Vous avez maintenant ce qu'il faut pour faire fonctionner les options 1 et 2 du menu du programme. Testez le tout rigoureusement.
+
+### Tri à bulles
+
+Vous allez maintenant implémenter la méthode `trierParNom`, qui, comme son nom l'indique, doit ordonner les `Element` du vecteur en ordre alphabétique de nom. Pour ce faire, vous allez utiliser l'algorithme du [Tri à bulles](https://fr.wikipedia.org/wiki/Tri_%C3%A0_bulles).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LTN97u8rSY0?si=H-FMr9doEaZ3CT1A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Voici le pseudocode du tri à bulles (tiré de Wikipédia):
+
+```
+tri_à_bulles(Tableau T)
+   pour i allant de (taille de T)-1 à 1
+       pour j allant de 0 à i-1
+           si T[j+1] < T[j]
+               (T[j+1], T[j]) ← (T[j], T[j+1])
+```
+
+Utilisez votre méthode pour implémenter l'option 3 du menu. Validez que votre tri fonctionne correctement avant de continuer.
