@@ -64,3 +64,21 @@ Choisir une option:
 Créez donc un projet de base avec un `main` contenant une boucle qui affiche ce menu et lit l'option saisie.
 
 > 🤔 Pourriez-vous réutiliser une classe d'un laboratoire précédent pour faire cela?
+
+Ajoutez à votre projet votre classe `Element` du laboratoire 3 (prenez celle de la solution au besoin). Assurez-vous que la classe fonctionne dans le projet en instanciant un `Element` dans votre `main` pour voir si le projet compile toujours.
+
+Attaquons-nous maintenant à l'implémentation de l'option 1.
+
+### La fonction `split`
+
+La fonction `split` est une fonction qui existe nativement dans de nombreux langages de programmation, mais malheureusement pas en C++. Elle prend en paramètres une chaîne de caractères et un séparateur, puis retourne un tableau contenant les sous-chaînes résultantes. Par exemple, si la chaîne de caractères est `"Bonjour le monde!"` et que le séparateur est le caractère espace (`' '`), la fonction `split` produira le tableau `["Bonjour", "le", "monde!"]`. De la même façon, si la chaîne de caractères est `Hydrogene;H;1;Alcalins;0` et que le séparateur est `;`, la fonction retournera le tableau `["Hydrogene", "H", "1", "Alcalins", "0"]`. Vous aurez donc compris que cette fonction serait très utile pour séparer les valeurs d'une ligne de notre fichier CSV. C'est pourquoi vous allez l'implémenter!
+
+La fonction à créer doit avoir la signature suivante:
+
+```cpp
+std::vector<std::string> split(const std::string& str, char delimiter);
+```
+
+> 🤔 Pourquoi retourne-t-on le vecteur par valeur?
+
+Pensez à comment vous pourriez faire fonctionner cette fonction (il existe plusieurs solutions possibles), puis implémentez-la. Testez votre fonction rigoureusement avant de continuer.
