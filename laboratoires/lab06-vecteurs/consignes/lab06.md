@@ -215,11 +215,9 @@ Vous avez maintenant ce qu'il faut pour faire fonctionner les options 1 et 2 du 
 
 ### Tri à bulles
 
-Vous allez maintenant implémenter la méthode `trierParNom`, qui, comme son nom l'indique, doit ordonner les `Element` du vecteur en ordre alphabétique de nom. Pour ce faire, vous allez utiliser l'algorithme du [Tri à bulles](https://fr.wikipedia.org/wiki/Tri_%C3%A0_bulles).
+Vous allez maintenant implémenter la méthode `trierParNom`, qui, comme son nom l'indique, doit ordonner les `Element` du vecteur en ordre alphabétique de nom. Pour ce faire, vous allez utiliser l'algorithme du [Tri à bulles](https://fr.wikipedia.org/wiki/Tri_%C3%A0_bulles) ([vidéo explicative](https://www.youtube.com/embed/LTN97u8rSY0?si=H-FMr9doEaZ3CT1A)).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LTN97u8rSY0?si=H-FMr9doEaZ3CT1A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-Voici le pseudocode du tri à bulles (tiré de Wikipédia):
+Voici du pseudocode décrivant le tri à bulles (tiré de Wikipédia):
 
 ```
 tri_à_bulles(Tableau T)
@@ -230,3 +228,30 @@ tri_à_bulles(Tableau T)
 ```
 
 Utilisez votre méthode pour implémenter l'option 3 du menu. Validez que votre tri fonctionne correctement avant de continuer.
+
+### Tri par insertion
+
+Vous allez maintenant implémenter la méthode `trierParNumeroAtomique`. Cette fois-ci, vous allez utiliser l'algorithme du [Tri par insertion](https://fr.wikipedia.org/wiki/Tri_par_insertion) ([vidéo explicative](https://www.youtube.com/watch?v=bRPHvWgc6YM)).
+
+Voici du pseudocode décrivant le tri par insertion (tiré de Wikipédia):
+
+```
+tri_insertion(Tableau T)
+
+    pour i de 1 à taille(T) - 1
+
+        # mémoriser T[i] dans x
+        x ← T[i]                            
+
+        # décaler les éléments T[0]..T[i-1] qui sont plus grands que x, en partant de T[i-1]
+        j ← i                               
+        tant que j > 0 et T[j - 1] > x
+            T[j] ← T[j - 1]
+            j ← j - 1
+
+        # placer x dans le "trou" laissé par le décalage
+        T[j] ← x                            
+
+```
+
+Utilisez votre méthode pour implémenter l'option 4 du menu. Validez que votre tri fonctionne correctement avant de continuer.
