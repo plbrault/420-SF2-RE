@@ -19,16 +19,10 @@ int main() {
 		cerr << "Impossible d'ouvrir le fichier " << nomFichier << endl;
 		return 1;
 	}
-
 	parser.parse(fichier);
-
 	fichier.close();
 
 	carte = parser.getData();
 
-	afficherChemin(
-		cout,
-		carte,
-		trouverChemin(carte)
-	);
+	cout << "Altitude du plus haut sommet atteignable par une pente constante: " << trouverPlusHautSommet(carte) << endl;
 }
