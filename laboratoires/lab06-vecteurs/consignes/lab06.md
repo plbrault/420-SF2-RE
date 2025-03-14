@@ -172,6 +172,8 @@ Testez rigoureusement votre *parser* sur le fichiers `elements.csv`.
 
 ### Conversion de la matrice de `string` en vecteur d'`Element`
 
+> Pour la suite du laboratoire, n'hésitez pas à modifier au besoin la classe `Element`.
+
 Vous êtes maintenant en mesure d'importer les données d'un fichier CSV dans votre programme. Une matrice de `string` n'est cependant pas idéale pour travailler sur les éléments du tableau périodique. Vous allez donc convertir cette matrice en vecteur d'`Element`!
 
 Pour ce faire, vous allez créer une nouvelle classe `TableauPeriodique` qui vous accompagnera pour toute la suite de cette partie du laboratoire. Voici la définition de cette classe:
