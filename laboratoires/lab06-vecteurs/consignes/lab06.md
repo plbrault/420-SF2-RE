@@ -344,7 +344,7 @@ Voici les résultats pour les cartes 1 à 5:
 
 ### *Parsing* des cartes topographiques
 
-La première chose que vous avez affaire, c'est de implémenter un nouveau *parser* pour convertir les fichiers de cartes en matrices d'entiers. Vous nommerez votre nouvelle classe `IntegerMatrixParser`. Voici sa définition:
+La première chose que vous devez faire, c'est d'implémenter un nouveau *parser* pour convertir les fichiers de cartes en matrices d'entiers. Vous nommerez votre nouvelle classe `IntegerMatrixParser`. Voici sa définition:
 
 ```
 class IntegerMatrixParser : public Parser
