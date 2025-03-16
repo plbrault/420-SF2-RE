@@ -43,12 +43,10 @@ ostream& operator<<(ostream& sortie, TableauPeriodique& tableauPeriodique) {
 
 void TableauPeriodique::trierParNom() {
     // Tri à bulles
-    for (size_t i = 0; i < _elements.size(); i++) {
-        for (size_t j = 0; j < _elements.size() - i - 1; j++) {
-            if (_elements[j].getNom() > _elements[j + 1].getNom()) {
-                Element temp = _elements[j];
-                _elements[j] = _elements[j + 1];
-                _elements[j + 1] = temp;
+    for (size_t i = _elements.size() - 1; i > 0; i--) {
+        for (size_t j = 0; j < i; j++) {
+            if (_elements[j + 1].getNom() < _elements[j].getNom()) {
+                swap(_elements[j + 1], _elements[j]);
             }
         }
     }
