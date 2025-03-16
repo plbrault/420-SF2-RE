@@ -391,8 +391,6 @@ Fonction trouverPlusHautSommet:
 
 Toute fonction récursive doit avoir une condition d'arrêt pour éviter une récursion à l'infini. Si on observe le pseudocode de la fonction `trouverSommet` plus attentivement, on peut voir que la récursion s'arrête lorsqu'une position n'a aucune position adjacente satisfaisant la demande.
 
-Complétez le programme de la partie 2 en implémentant l'algorithme correspondant au pseudocode ci-dessus et en utilisant la matrice produite par votre *parser*.
-
-Validez votre résultat pour la carte 6 auprès de l'enseignant.
+Complétez le programme de la partie 2 en implémentant l'algorithme correspondant au pseudocode ci-dessus et en utilisant les matrices produites par votre *parser*. Testez votre programme avec toutes les cartes fournies, et vérifiez que vous arrivez aux bons résultats pour les cartes 1 à 5. Validez ensuite votre résultat pour la carte 6 auprès de l'enseignant.
 
 🎉 Félicitations, vous avez terminé le laboratoire!
