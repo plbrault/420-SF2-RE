@@ -5,14 +5,18 @@
 
 using namespace std;
 
-int main() {
-	IntegerMatrixParser parser;
+int main(int argc, char **argv) {
+		IntegerMatrixParser parser;
 	string nomFichier;
 	ifstream fichier;
 	vector<vector<int>> carte;
 
-	cout << "Entrer le nom du fichier de carte à charger : ";
-	cin >> nomFichier;
+	if (argc == 2) {
+		nomFichier = argv[1];
+	} else {
+		cout << "Entrer le nom du fichier de carte ï¿½ charger : ";
+		cin >> nomFichier;
+	}
 
 	fichier.open(nomFichier);
 	if (!fichier) {
