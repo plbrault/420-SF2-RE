@@ -365,6 +365,8 @@ public:
 
 Testez votre classe rigoureusement avant de continuer.
 
+> 🤔 Trouvez-vous qu'il y a des similarités entre votre `IntegerMatrixParser` et votre `CSVParser` de la partie 1? Ne serait-il pas pratique de pouvoir créer une seule classe pour « parser » des matrices de n'importe quel type? Cela est possible en C++ à l'aide des **modèles de classe** (***class templates***), dont nous allons voir l'utilisation dans un prochain laboratoire.
+
 ### Trouver le plus haut sommet d'un trajet
 
 Une façon de résoudre le problème qui vous est confié est à l'aide d'un **algorithme récursif**, c'est-à-dire un algorithme utilisant une fonction qui s'appelle elle-même. Voici le pseudocode d'une solution possible:
@@ -390,3 +392,7 @@ Fonction trouverPlusHautSommet:
 Toute fonction récursive doit avoir une condition d'arrêt pour éviter une récursion à l'infini. Si on observe le pseudocode de la fonction `trouverSommet` plus attentivement, on peut voir que la récursion s'arrête lorsqu'une position n'a aucune position adjacente satisfaisant la demande.
 
 Complétez le programme de la partie 2 en implémentant l'algorithme correspondant au pseudocode ci-dessus et en utilisant la matrice produite par votre *parser*.
+
+Validez votre résultat pour la carte 6 auprès de l'enseignant.
+
+🎉 Félicitations, vous avez terminé le laboratoire!
