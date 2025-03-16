@@ -318,10 +318,75 @@ Utilisez votre méthode pour implémenter l'option 5 du menu. Validez que votre 
 
 ## Partie 2 - Carte topographique
 
-La [Sépaq](https://www.sepaq.com/organisation/) fait appel à vos talents en algorithmie pour l'assister dans la création d'un nouveau parc national. À l'aide d'une [carte topographique](https://fr.wikipedia.org/wiki/Carte_topographique) d'un terrain montagneux, elle vous demande d'identifier l'emplacement de fin d'un futur sentier pédestre. La carte topographique est représentée par une matrice d'entiers dont chaque valeur représente une altitude. On vous demande de trouver **l'altitude du plus haut sommet pouvant être atteint par une pente graduelle à partir d'un point d'altitude 0**. On vous précise que par « pente graduelle », on entend un trajet dont l'altitude de chaque point est **exactement 1 de plus** que celle du point précédent. Chaque point $ p + 1 $ du trajet est adjacent à un point $ p $ soit horizontalement, verticalement ou en diagonal.
+La [Sépaq](https://www.sepaq.com/organisation/) fait appel à vos compétences en algorithmie pour l'assister dans la création d'un nouveau parc national. À l'aide d'une [carte topographique](https://fr.wikipedia.org/wiki/Carte_topographique) d'un terrain montagneux, elle vous demande d'identifier l'emplacement de fin d'un futur sentier pédestre. La carte topographique est représentée par une matrice d'entiers dont chaque valeur représente une altitude. On vous demande de trouver **l'altitude du plus haut sommet pouvant être atteint par une pente graduelle à partir d'un point d'altitude 0**. On vous précise que par « pente graduelle », on entend un trajet dont l'altitude de chaque point est **exactement 1 de plus** que celle du point précédent. Chaque point $ p + 1 $ du trajet est adjacent à un point $ p $ soit horizontalement, verticalement ou en diagonal.
 
-Par exemple, voici un trajet possible dans une matrice de 5 x 5:
+Par exemple, voici les trajets possibles dans une carte de 5 x 5:
 
 ![](images/trajets_carte5x5.png)
 
 Sur cette carte, on trouve 3 trajets possibles, et l'altitude du plus haut sommet d'un trajet est 6. Le trajet en jaune est en partie compris dans les trajets orange et rose, et il y a plusieurs trajets possibles qui mènent aux sommets de ces derniers.
+
+Voici un deuxième exemple, cette fois-ci avec une carte de 10 x 10:
+
+![](images/trajet_carte10x10.png)
+
+Afin de vous aider à concevoir votre programme, la Sépaq vous a fourni plusieurs cartes, que vous trouverez sur Moodle. Les cartes 1 et 2 sont celles des exemples ci-desssus, et les cartes 3 à 5 sont d'autres cartes pour lesquelles les résultats sont déjà connus. La carte 6 est celle du nouveau parc national pour laquelle vous devez trouver l'altitude du plus haut sommet d'un trajet correspondant à la demande.
+
+Voici les résultats pour les cartes 1 à 5:
+
+| Carte        | Altitude du plus haut sommet d'un trajet |
+|:------------:|:----------------------------------------:|
+| `carte1.txt` | 6                                        |
+| `carte2.txt` | 9                                        |
+| `carte3.txt` | 52                                       |
+| `carte4.txt` | 96                                       |
+| `carte5.txt` | 365                                      |
+
+### *Parsing* des cartes topographiques
+
+La première chose que vous avez affaire, c'est de implémenter un nouveau *parser* pour convertir les fichiers de cartes en matrices d'entiers. Vous nommerez votre nouvelle classe `IntegerMatrixParser`. Voici sa définition:
+
+```
+class IntegerMatrixParser : public Parser
+{
+private:
+	char _delimiter;
+	std::vector<std::vector<int>> _data;
+public:
+	IntegerMatrixParser(char delimiter=' ');
+
+	char getDelimiter() const;
+	void setDelimiter(char delimiter);
+	const std::vector<std::vector<int>>& getData() const;
+
+	void parse(std::istream& in) override;
+};
+```
+
+Testez votre classe rigoureusement avant de continuer.
+
+### Trouver le plus haut sommet d'un trajet
+
+Une façon de résoudre le problème qui vous est confié est à l'aide d'un **algorithme récursif**, c'est-à-dire un algorithme utilisant une fonction qui s'appelle elle-même. Voici le pseudocode d'une solution possible:
+
+```
+Fonction trouverSommet(position):
+    max ← altitude(position)
+    Pour chaque position adjacente à position:
+        Si altitude(position adjacente) = altitude(pos) + 1:
+            Si trouverSommet(position adjacente) > max:
+                max ← altitude(position adjacente)
+    Retourner max
+
+Fonction trouverPlusHautSommet:
+    max ← 0
+    Pour chaque position d'altitude 0:
+        altitude ← trouverSommet(position)
+        Si altitude > max:
+            max ← altitude
+    Retourner max
+```
+
+Toute fonction récursive doit avoir une condition d'arrêt pour éviter une récursion à l'infini. Si on observe le pseudocode de la fonction `trouverSommet` plus attentivement, on peut voir que la récursion s'arrête lorsqu'une position n'a aucune position adjacente satisfaisant la demande.
+
+Complétez le programme de la partie 2 en implémentant l'algorithme correspondant au pseudocode ci-dessus et en utilisant la matrice produite par votre *parser*.

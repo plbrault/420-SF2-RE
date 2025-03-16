@@ -18,7 +18,7 @@ vector<string> split(const string& str, char delimiter) {
     return result;
 }
 
-int parcourir(const vector<vector<int>>& carte, const vector<int>& pos) {
+int trouverSommet(const vector<vector<int>>& carte, const vector<int>& pos) {
     vector<int> nouvellePos;
     int altitudeSommet, altitudePlusHautSommet = carte[pos[0]][pos[1]];
 
@@ -41,7 +41,7 @@ int parcourir(const vector<vector<int>>& carte, const vector<int>& pos) {
             && nouvellePos[1] < carte[0].size()
             && carte[nouvellePos[0]][nouvellePos[1]] == 1 + carte[pos[0]][pos[1]]
         ) {
-            altitudeSommet = parcourir(carte, nouvellePos);
+            altitudeSommet = trouverSommet(carte, nouvellePos);
             if (altitudeSommet > altitudePlusHautSommet) {
 				altitudePlusHautSommet = altitudeSommet;
 			}
@@ -57,7 +57,7 @@ int trouverPlusHautSommet(const vector<vector<int>>& carte) {
     for (int y = 0; y < carte.size(); y++) {
         for (int x = 0; x < carte[0].size(); x++) {
             if (carte[y][x] == 0) {
-				altitudeSommet = parcourir(carte, { y, x });
+				altitudeSommet = trouverSommet(carte, { y, x });
                 if (altitudeSommet > altitudePlusHautSommet) {
 					altitudePlusHautSommet = altitudeSommet;
                 }
