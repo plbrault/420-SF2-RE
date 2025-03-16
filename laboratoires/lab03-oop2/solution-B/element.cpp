@@ -48,6 +48,7 @@ Element &Element::operator=(const Element &element) {
     this->_symbole = element._symbole;
     this->_qtIsotopes = element._qtIsotopes;
     this->_capaciteIsotopes = element._capaciteIsotopes;
+    delete[] this->_isotopes;
     this->_isotopes = new Isotope[this->_capaciteIsotopes];
     for (size_t i = 0; i < this->_qtIsotopes; i++) {
         this->_isotopes[i] = element._isotopes[i];
