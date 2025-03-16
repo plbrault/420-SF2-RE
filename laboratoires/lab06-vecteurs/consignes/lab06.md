@@ -262,7 +262,7 @@ Utilisez votre méthode pour implémenter l'option 4 du menu. Validez que votre 
 
 ### Recherche séquentielle et dichotomique
 
-Vous allez maintenant implémenter la méthode `getElementParNom`. Il s'agit d'une méthode de recherche, qui trouve dans le vecteur l'`Element` correspondant au nom reçu en paramètre, puis le retourne.
+Vous allez maintenant implémenter la méthode `getElementParNom`. Il s'agit d'une méthode de recherche, qui trouve dans le vecteur d'`Element` correspondant au nom reçu en paramètre, puis le retourne.
 
 L'algorithme de recherche le plus simple est la [recherche séquentielle](https://fr.wikipedia.org/wiki/Recherche_s%C3%A9quentielle) ou linéaire. Elle consiste simplement à itérer sur les éléments du tableau jusqu'à ce qu'on ait trouvé celui qui correspond à l'objet recherché. Vous avez déjà utilisé cet algorithme à plusieurs reprises sans le savoir, notamment dans la méthode `getColumnIndex` de votre classe `CSVParser`. Sa complexité en temps est $ O(n) $.
 
