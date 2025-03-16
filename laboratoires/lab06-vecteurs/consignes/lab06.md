@@ -2,10 +2,10 @@
 
 ## Objectifs
 
-* Mettre en pratique la manipulation des vecteurs de la STL pour gérer des tableaux à une ou deux dimensions
-* Se familiariser avec le format de données CSV et sa manipulation
-* Expérimenter quelques algorithmes de tri et de recherche
-* Mobiliser toutes les notions de Programmation orientée objet vues durant la session, incluant l'héritage
+* Mettre en pratique la manipulation des vecteurs de la STL pour gérer des tableaux à une ou deux dimensions.
+* Se familiariser avec le format de données CSV et sa manipulation.
+* Expérimenter quelques algorithmes de tri et de recherche.
+* Mobiliser toutes les notions de Programmation orientée objet vues durant la session, incluant l'héritage.
 
 ## Partie 1 - CSV et Tableau périodique
 
@@ -61,7 +61,7 @@ Tableau périodique
 Choisir une option: 
 ```
 
-Créez donc un projet de base avec un `main` contenant une boucle qui affiche ce menu et lit l'option saisie.
+Créez donc un projet de base avec un `main` contenant une boucle qui affiche ce menu et lit l'option saisie. Ajoutez la structure de base pour traiter les options, et faites fonctionner l'option 6.
 
 > 🤔 Pourriez-vous réutiliser une classe d'un laboratoire précédent pour faire cela?
 
@@ -258,4 +258,60 @@ tri_insertion(Tableau T)
 
 Utilisez votre méthode pour implémenter l'option 4 du menu. Validez que votre tri fonctionne correctement avant de continuer.
 
-> ℹ️ Le tri par insertion est celui que la plupart des gens appliquent instinctivement pour trier des cartes à jouer dans leurs mains. Comme pour le tri à bulles, sa complexité en temps est $ O(n^2) $ en moyenne, mais peut être $ O(n) $ sur des tableaux de petite taille ou qui sont presque triés. Il existe des algorithmes de tri plus efficaces dans le cas général, tels que le [Tri rapide](https://fr.wikipedia.org/wiki/Tri_rapide) ($ O(\log n) $) et le [Tri fusion](https://fr.wikipedia.org/wiki/Tri_fusion) ($ O(n \log n) $), mais nous ne les implémenterons pas dans ce laboratoire.
+> ℹ️ Le tri par insertion est celui que la plupart des gens appliquent instinctivement pour trier des cartes à jouer dans leurs mains. Comme pour le tri à bulles, sa complexité en temps est $ O(n^2) $ en moyenne, mais peut être $ O(n) $ sur des tableaux de petite taille ou qui sont presque triés. Il existe des algorithmes de tri plus efficaces dans le cas général, tels que le [Tri rapide](https://fr.wikipedia.org/wiki/Tri_rapide) et le [Tri fusion](https://fr.wikipedia.org/wiki/Tri_fusion), mais nous ne les implémenterons pas dans ce laboratoire.
+
+### Recherche séquentielle et dichotomique
+
+Vous allez maintenant implémenter la méthode `getElementParNom`. Il s'agit d'une méthode de recherche, qui trouve dans le vecteur l'`Element` correspondant au nom reçu en paramètre, puis le retourne.
+
+L'algorithme de recherche le plus simple est la [recherche séquentielle](https://fr.wikipedia.org/wiki/Recherche_s%C3%A9quentielle) ou linéaire. Elle consiste simplement à itérer sur les éléments du tableau jusqu'à ce qu'on ait trouvé celui qui correspond à l'objet recherché. Vous avez déjà utilisé cet algorithme à plusieurs reprises sans le savoir, notamment dans la méthode `getColumnIndex` de votre classe `CSVParser`. Sa complexité en temps est $ O(n) $.
+
+Dans le cas où le tableau est trié, on peut utiliser un algorithme de recherche plus efficace, soit la [recherche dichotomique](https://fr.wikipedia.org/wiki/Recherche_dichotomique), avec une complexité de $ O(\log n) $. Le principe de cet algorithme est de vérifier d'abord si l'item recherché se trouve au milieu du tableau, puis, si ce n'est pas le cas, de vérifier le milieu de la première ou la deuxième moitié du tableau selon que l'item est plus petit ou plus grand que celui qu'on vient d'observer, et ainsi de suite. C'est l'algorithme qu'on applique instinctivement lorsqu'on cherche un mot dans un dictionnaire.
+
+> NOTE: quand on parle d'une complexité de $ O(\log n) $, on fait généralement référence à un logarithme en base 2. On trouve cette complexité dans les algorithmes de type **Diviser pour mieux régner**, qui découpent l'entrée en plusieurs parties de manière successive.
+
+Remarquez que la classe `TableauPeriodique` possède un attribut booléen `_estTrieParNom`. Si ce n'est pas déjà fait, ajoutez le code nécessaire pour mettre à jour cet attribut aux endroits appropriés.
+
+L'algorithme de haut niveau de la méthode `getElementParNom` sera le suivant:
+
+```
+Si le tableau est trié par nom:
+    Utiliser la recherche dichotomique
+Sinon:
+    Utiliser la recherche séquentielle
+```
+
+La méthode retourne un `const Element*`. Souvenez-vous qu'on peut utiliser l'opérateur `&` pour obtenir l'adresse d'une variable. Dans le cas où l'élément recherché est absent du tableau, retournez `nullptr`.
+
+Voici du pseudocode pour la recherche dichotomique (tiré de Wikipédia):
+
+```
+//déclarations
+ début, fin, val, mil, N : Entiers
+ t : Tableau [0..N] d'entiers classé
+ trouvé : Booléen
+ 
+//initialisation
+ N = taille(t)-1
+ début ← 0 
+ fin ← N
+ trouvé ← faux
+ Saisir val
+
+//Boucle de recherche
+ // La condition début inférieur ou égal à fin permet d'éviter de faire
+ // une boucle infinie si 'val' n'existe pas dans le tableau.
+  Tant que trouvé != vrai et début <= fin:
+      mil ← partie entière((début + fin)/2)
+      si t[mil] == val:
+         trouvé ← vrai
+      sinon:
+         si val > t[mil]:
+            début ← mil+1
+         sinon:
+            fin ← mil-1
+```
+
+Utilisez votre méthode pour implémenter l'option 5 du menu. Validez que votre tri fonctionne correctement avant de continuer.
+
+🎉 Félicitations, vous avez terminé la partie 1 du laboratoire!

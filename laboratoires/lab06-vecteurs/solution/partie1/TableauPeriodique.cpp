@@ -76,14 +76,14 @@ const Element* TableauPeriodique::getElementParNom(const std::string& nom) const
             size_t milieu = (debut + fin) / 2;
             if (_elements[milieu].getNom() == nom) {
                 return &_elements[milieu];
-            } else if (_elements[milieu].getNom() < nom) {
+            } else if (nom > _elements[milieu].getNom()) {
                 debut = milieu + 1;
             } else {
                 fin = milieu - 1;
             }
         }
     } else {
-        // Recherche linéaire
+        // Recherche séquentielle
         for (const Element& element : _elements) {
             if (element.getNom() == nom) {
                 return &element;
