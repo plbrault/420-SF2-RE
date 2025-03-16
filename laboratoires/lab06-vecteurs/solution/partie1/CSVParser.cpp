@@ -93,11 +93,11 @@ double CSVParser::getDouble(size_t row, const string& columnName) const {
     return getDouble(row, getColumnIndex(columnName));
 }
 
-const size_t CSVParser::getNumRows() const {
+size_t CSVParser::getNumRows() const {
     return _data.size();
 }
 
-const size_t CSVParser::getNumColumns() const {
+size_t CSVParser::getNumColumns() const {
     if (_data.empty()) {
         return 0;
     }

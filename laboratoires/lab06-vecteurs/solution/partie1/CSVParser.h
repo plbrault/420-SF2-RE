@@ -32,6 +32,6 @@ public:
     double getDouble(size_t row, size_t column) const;
     double getDouble(size_t row, const std::string& columnName) const;
 
-    const size_t getNumRows() const;
-    const size_t getNumColumns() const;
+    size_t getNumRows() const;
+    size_t getNumColumns() const;
 };
