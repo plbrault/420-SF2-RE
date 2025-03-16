@@ -319,3 +319,9 @@ Utilisez votre méthode pour implémenter l'option 5 du menu. Validez que votre 
 ## Partie 2 - Carte topographique
 
 La [Sépaq](https://www.sepaq.com/organisation/) fait appel à vos talents en algorithmie pour l'assister dans la création d'un nouveau parc national. À l'aide d'une [carte topographique](https://fr.wikipedia.org/wiki/Carte_topographique) d'un terrain montagneux, elle vous demande d'identifier l'emplacement de fin d'un futur sentier pédestre. La carte topographique est représentée par une matrice d'entiers dont chaque valeur représente une altitude. On vous demande de trouver **l'altitude du plus haut sommet pouvant être atteint par une pente graduelle à partir d'un point d'altitude 0**. On vous précise que par « pente graduelle », on entend un trajet dont l'altitude de chaque point est **exactement 1 de plus** que celle du point précédent. Chaque point $ p + 1 $ du trajet est adjacent à un point $ p $ soit horizontalement, verticalement ou en diagonal.
+
+Par exemple, voici un trajet possible dans une matrice de 5 x 5:
+
+![](images/trajets_carte5x5.png)
+
+Sur cette carte, on trouve 3 trajets possibles, et l'altitude du plus haut sommet d'un trajet est 6. Le trajet en jaune est en partie compris dans les trajets orange et rose, et il y a plusieurs trajets possibles qui mènent aux sommets de ces derniers.

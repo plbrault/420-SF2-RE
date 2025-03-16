@@ -32,11 +32,15 @@ highlighted_matrix = copy.deepcopy(matrix)
 visited_positions = []
 
 NORTH = (0, -1)
+NORTHEAST = (1, -1)
 EAST = (1, 0)
+SOUTHEAST = (1, 1)
 SOUTH = (0, 1)
+SOUTHWEST = (-1, 1)
 WEST = (-1, 0)
+NORTHWEST = (-1, -1)
 
-directions = [NORTH, EAST, SOUTH, WEST] 
+directions = [NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST]
 
 def pick_new_position(matrix, current_pos):
     def can_use_position(pos):
@@ -54,14 +58,7 @@ def pick_new_position(matrix, current_pos):
         tries < 4 
         and not can_use_position(new_pos)
     ):
-        if direction == NORTH:
-            direction = EAST
-        elif direction == EAST:
-            direction = SOUTH
-        elif direction == SOUTH:
-            direction = WEST
-        else:
-            direction = NORTH
+        direction = directions[(directions.index(direction) + 1) % len(direction)]
         new_pos = (current_pos[0] + direction[0], current_pos[1] + direction[1])
         tries += 1
     if can_use_position(new_pos):
