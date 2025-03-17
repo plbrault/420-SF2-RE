@@ -6,15 +6,15 @@
 class IntegerMatrixParser : public Parser
 {
 private:
-	char _delimiter;
-	std::vector<std::vector<int>> _data;
+    char _delimiter;
+    std::vector<std::vector<int>> _data;
 public:
-	IntegerMatrixParser(char delimiter=' ');
+    IntegerMatrixParser(char delimiter = ' ');
 
-	char getDelimiter() const;
-	void setDelimiter(char delimiter);
-	const std::vector<std::vector<int>>& getData() const;
+    char getDelimiter() const;
+    void setDelimiter(char delimiter);
+    const std::vector<std::vector<int>>& getData() const;
 
-	void parse(std::istream& in) override;
+    void parse(std::istream& in) override;
 };
 

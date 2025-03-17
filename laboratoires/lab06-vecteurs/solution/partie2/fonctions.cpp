@@ -23,13 +23,13 @@ int trouverSommet(const vector<vector<int>>& carte, const vector<int>& pos) {
     int altitudeSommet, altitudePlusHautSommet = carte[pos[0]][pos[1]];
 
     vector<int> nordOuest = { -1, -1 },
-                nord = { -1, 0 },
-                nordEst = { -1, 1 },
-                est = { 0, 1 },
-                sudEst = { 1, 1 },
-                sud = { 1, 0 },
-                sudOuest = { 1, -1 },
-                ouest = { 0, -1 };
+        nord = { -1, 0 },
+        nordEst = { -1, 1 },
+        est = { 0, 1 },
+        sudEst = { 1, 1 },
+        sud = { 1, 0 },
+        sudOuest = { 1, -1 },
+        ouest = { 0, -1 };
     vector<vector<int>> directions = { nordOuest, nord, nordEst, est, sudEst, sud, sudOuest, ouest };
 
     for (vector<int> direction : directions) {
@@ -40,12 +40,12 @@ int trouverSommet(const vector<vector<int>>& carte, const vector<int>& pos) {
             && nouvellePos[1] >= 0
             && nouvellePos[1] < carte[0].size()
             && carte[nouvellePos[0]][nouvellePos[1]] == 1 + carte[pos[0]][pos[1]]
-        ) {
+            ) {
             altitudeSommet = trouverSommet(carte, nouvellePos);
             if (altitudeSommet > altitudePlusHautSommet) {
-				altitudePlusHautSommet = altitudeSommet;
-			}
-		}
+                altitudePlusHautSommet = altitudeSommet;
+            }
+        }
     }
 
     return altitudePlusHautSommet;
@@ -53,16 +53,16 @@ int trouverSommet(const vector<vector<int>>& carte, const vector<int>& pos) {
 
 int trouverPlusHautSommet(const vector<vector<int>>& carte) {
     int altitudeSommet, altitudePlusHautSommet = 0;
-    
+
     for (int y = 0; y < carte.size(); y++) {
         for (int x = 0; x < carte[0].size(); x++) {
             if (carte[y][x] == 0) {
-				altitudeSommet = trouverSommet(carte, { y, x });
+                altitudeSommet = trouverSommet(carte, { y, x });
                 if (altitudeSommet > altitudePlusHautSommet) {
-					altitudePlusHautSommet = altitudeSommet;
+                    altitudePlusHautSommet = altitudeSommet;
                 }
-			}
-		}
+            }
+        }
     }
 
     return altitudePlusHautSommet;

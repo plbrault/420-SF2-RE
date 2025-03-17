@@ -4,19 +4,19 @@
 using namespace std;
 
 IntegerMatrixParser::IntegerMatrixParser(char delimiter) {
-	_delimiter = delimiter;
+    _delimiter = delimiter;
 }
 
 char IntegerMatrixParser::getDelimiter() const {
-	return _delimiter;
+    return _delimiter;
 }
 
 void IntegerMatrixParser::setDelimiter(char delimiter) {
-	_delimiter = delimiter;
+    _delimiter = delimiter;
 }
 
 const vector<vector<int>>& IntegerMatrixParser::getData() const {
-	return _data;
+    return _data;
 }
 
 void IntegerMatrixParser::parse(istream& in) {
@@ -28,8 +28,8 @@ void IntegerMatrixParser::parse(istream& in) {
         tokens = split(line, _delimiter);
         vector<int> row;
         for (string token : tokens) {
-			row.push_back(stoi(token));
-		}
+            row.push_back(stoi(token));
+        }
         _data.push_back(row);
     }
 }
