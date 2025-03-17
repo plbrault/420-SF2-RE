@@ -36,9 +36,9 @@ int trouverSommet(const vector<vector<int>>& carte, const vector<int>& pos) {
         nouvellePos = { pos[0] + direction[0], pos[1] + direction[1] };
         if (
             nouvellePos[0] >= 0
-            && nouvellePos[0] < carte.size()
+            && nouvellePos[0] < (int64_t)carte.size()
             && nouvellePos[1] >= 0
-            && nouvellePos[1] < carte[0].size()
+            && nouvellePos[1] < (int64_t)carte[0].size()
             && carte[nouvellePos[0]][nouvellePos[1]] == 1 + carte[pos[0]][pos[1]]
             ) {
             altitudeSommet = trouverSommet(carte, nouvellePos);
