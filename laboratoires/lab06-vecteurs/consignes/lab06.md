@@ -391,7 +391,9 @@ Fonction trouverPlusHautSommet:
 
 Toute fonction récursive doit avoir une condition d'arrêt pour éviter une récursion à l'infini. Si on observe le pseudocode de la fonction `trouverSommet` plus attentivement, on peut voir que la récursion s'arrête lorsqu'une position n'a aucune position adjacente satisfaisant la demande.
 
-Complétez le programme de la partie 2 en implémentant l'algorithme correspondant au pseudocode ci-dessus et en utilisant les matrices produites par votre *parser*. Testez votre programme avec toutes les cartes fournies, et vérifiez que vous arrivez aux bons résultats pour les cartes 1 à 5. Validez ensuite votre résultat pour la carte 6 auprès de l'enseignant.
+Complétez le programme de la partie 2 en implémentant l'algorithme correspondant au pseudocode ci-dessus dans des méthodes d'une classe `Solutionneur`. À vous de déterminer quels devraient être les autres membres de la classe!
+
+Testez votre programme avec toutes les cartes fournies, et vérifiez que vous arrivez aux bons résultats pour les cartes 1 à 5. Validez ensuite votre résultat pour la carte 6 auprès de l'enseignant.
 
 🎉 Félicitations, vous avez terminé le laboratoire!
 
@@ -399,9 +401,9 @@ Complétez le programme de la partie 2 en implémentant l'algorithme corresponda
 
 ### Bonus
 
-Votre mission, si vous l'acceptez, est d'ajouter une fonction qui, au lieu de retourner seulement l'altitude du sommet ateignable depuis une position donnée, retourne le chemin complet pour se rendre à ce sommet. Pourquoi ne pas réutiliser pour cela votre classe `Point` des laboratoires précédents?
+Votre mission, si vous l'acceptez, est d'ajouter une méthode qui, au lieu de retourner seulement l'altitude du sommet ateignable depuis une position donnée, retourne le chemin complet pour se rendre à ce sommet. Pourquoi ne pas réutiliser pour cela votre classe `Point` des laboratoires précédents?
 
-La signature de cette fonction pourrait être la suivante:
+La signature de cette méthode pourrait être la suivante:
 
 ```cpp
 std::vector<Point> trouverChemin(const Point& depart);
