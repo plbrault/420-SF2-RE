@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "IntegerMatrixParser.h"
-#include "fonctions.h"
+#include "Solutionneur.h"
 
 using namespace std;
 
@@ -9,7 +9,6 @@ int main(int argc, char** argv) {
     IntegerMatrixParser parser;
     string nomFichier;
     ifstream fichier;
-    vector<vector<int>> carte;
 
     if (argc == 2) {
         nomFichier = argv[1];
@@ -27,7 +26,7 @@ int main(int argc, char** argv) {
     parser.parse(fichier);
     fichier.close();
 
-    carte = parser.getData();
-
-    cout << "Altitude du plus haut sommet atteignable par une pente constante: " << trouverPlusHautSommet(carte) << endl;
+    Solutionneur solutionneur(&parser.getData());
+    cout << "Altitude du plus haut sommet atteignable par une pente constante: "
+         << solutionneur.trouverPlusHautSommet() << endl;
 }
