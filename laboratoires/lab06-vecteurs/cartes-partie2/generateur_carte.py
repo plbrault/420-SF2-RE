@@ -94,13 +94,13 @@ for i in range(num_base_paths):
     start_pos = (random.randint(0, rows - 1), random.randint(0, cols - 1))
     while start_pos in visited_positions:
         start_pos = (random.randint(0, rows - 1), random.randint(0, cols - 1))
-    local_max = create_path(matrix, start_pos, random.randint(num_base_paths, num_base_paths * 2))
+    local_max = create_path(matrix, start_pos, random.randint(rows, rows + cols))
     if local_max > max_val:
         max_val = local_max
 
 for i in range(num_base_paths * 2):
     start_pos = random.choice(visited_positions)
-    local_max = create_path(matrix, start_pos, random.randint(i, i * 2), continue_path=True)
+    local_max = create_path(matrix, start_pos, random.randint(rows // 2, rows), continue_path=True)
     if local_max > max_val:
         max_val = local_max
 
