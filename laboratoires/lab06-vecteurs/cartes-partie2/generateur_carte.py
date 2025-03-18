@@ -67,6 +67,7 @@ def pick_new_position(matrix, current_pos):
         return None
 
 def create_path(matrix, start_pos, path_length, continue_path=False):
+    max_val = 0
     pos = start_pos
     if continue_path:
         previous_val = matrix[pos[0]][pos[1]]
@@ -82,19 +83,29 @@ def create_path(matrix, start_pos, path_length, continue_path=False):
         highlighted_matrix[pos[0]][pos[1]] = '(' + str(previous_val + 1) + ')'
         previous_val += 1
         visited_positions.append(pos)
+        if previous_val > max_val:
+            max_val = previous_val
+    return max_val
+
+max_val = 0
 
 num_base_paths = (rows + cols) // 10 + 1
 for i in range(num_base_paths):
     start_pos = (random.randint(0, rows - 1), random.randint(0, cols - 1))
     while start_pos in visited_positions:
         start_pos = (random.randint(0, rows - 1), random.randint(0, cols - 1))
-    create_path(matrix, start_pos, random.randint(num_base_paths, num_base_paths * 2))
+    local_max = create_path(matrix, start_pos, random.randint(num_base_paths, num_base_paths * 2))
+    if local_max > max_val:
+        max_val = local_max
 
 for i in range(num_base_paths * 2):
     start_pos = random.choice(visited_positions)
-    create_path(matrix, start_pos, random.randint(i, i * 2), continue_path=True)
+    local_max = create_path(matrix, start_pos, random.randint(i, i * 2), continue_path=True)
+    if local_max > max_val:
+        max_val = local_max
 
 print_matrix(highlighted_matrix, cell_width=6)
 with open(output_filename, 'w') as f:
     for row in matrix:
         f.write(' '.join(str(cell) for cell in row) + '\n')
+print('MAX VALUE:', max_val)
