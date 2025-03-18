@@ -25,7 +25,7 @@ matrix = []
 for i in range(rows):
     row = []
     for j in range(cols):
-        row.append(random.randint(0, 200))
+        row.append(random.randint(0, rows + cols))
     matrix.append(row)
 
 highlighted_matrix = copy.deepcopy(matrix)
