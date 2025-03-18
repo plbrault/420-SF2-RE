@@ -55,7 +55,7 @@ def pick_new_position(matrix, current_pos):
     new_pos = (current_pos[0] + direction[0], current_pos[1] + direction[1])
     tries = 1
     while (
-        tries < 4 
+        tries < len(directions)
         and not can_use_position(new_pos)
     ):
         direction = directions[(directions.index(direction) + 1) % len(direction)]
