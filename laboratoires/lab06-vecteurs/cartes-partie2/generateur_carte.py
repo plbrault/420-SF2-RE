@@ -89,7 +89,7 @@ def create_path(matrix, start_pos, path_length, continue_path=False):
 
 max_val = 0
 
-num_base_paths = (rows + cols) // 10 + 1
+num_base_paths = min((rows + cols) // 10 + 1, 10)
 for i in range(num_base_paths):
     start_pos = (random.randint(0, rows - 1), random.randint(0, cols - 1))
     while start_pos in visited_positions:
