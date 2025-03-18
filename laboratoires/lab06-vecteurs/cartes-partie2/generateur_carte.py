@@ -77,7 +77,6 @@ def create_path(matrix, start_pos, path_length, continue_path=False):
         visited_positions.append(pos)
     for i in range(path_length):
         pos = pick_new_position(matrix, pos)
-        print(pos)
         if pos is None:
             break
         matrix[pos[0]][pos[1]] = previous_val + 1
@@ -105,7 +104,7 @@ for i in range(num_base_paths * 2):
     if local_max > max_val:
         max_val = local_max
 
-#print_matrix(highlighted_matrix, cell_width=6)
+print_matrix(highlighted_matrix, cell_width=6)
 with open(output_filename, 'w') as f:
     for row in matrix:
         f.write(' '.join(str(cell) for cell in row) + '\n')
