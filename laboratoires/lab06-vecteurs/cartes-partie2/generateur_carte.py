@@ -58,7 +58,7 @@ def pick_new_position(matrix, current_pos):
         tries < len(directions)
         and not can_use_position(new_pos)
     ):
-        direction = directions[(directions.index(direction) + 1) % len(direction)]
+        direction = directions[(directions.index(direction) + 1) % len(directions)]
         new_pos = (current_pos[0] + direction[0], current_pos[1] + direction[1])
         tries += 1
     if can_use_position(new_pos):
@@ -77,6 +77,7 @@ def create_path(matrix, start_pos, path_length, continue_path=False):
         visited_positions.append(pos)
     for i in range(path_length):
         pos = pick_new_position(matrix, pos)
+        print(pos)
         if pos is None:
             break
         matrix[pos[0]][pos[1]] = previous_val + 1
@@ -104,7 +105,7 @@ for i in range(num_base_paths * 2):
     if local_max > max_val:
         max_val = local_max
 
-print_matrix(highlighted_matrix, cell_width=6)
+#print_matrix(highlighted_matrix, cell_width=6)
 with open(output_filename, 'w') as f:
     for row in matrix:
         f.write(' '.join(str(cell) for cell in row) + '\n')
