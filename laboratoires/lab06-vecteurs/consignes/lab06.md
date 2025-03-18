@@ -336,11 +336,11 @@ Voici les résultats pour les cartes 1 à 5:
 
 | Carte        | Altitude du plus haut sommet d'un trajet |
 |:------------:|:----------------------------------------:|
-| `carte1.txt` | 6                                        |
-| `carte2.txt` | 9                                        |
-| `carte3.txt` | 52                                       |
-| `carte4.txt` | 96                                       |
-| `carte5.txt` | 365                                      |
+| `carte1.txt` | 10                                       |
+| `carte2.txt` | 22                                       |
+| `carte3.txt` | 140                                      |
+| `carte4.txt` | 221                                      |
+| `carte5.txt` | 416                                      |
 
 ### *Parsing* des cartes topographiques
 
