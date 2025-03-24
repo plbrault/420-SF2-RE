@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <chrono>
 
 class Benchmark {
 private:
@@ -13,15 +14,29 @@ private:
 
     std::ifstream _file;
 
+    std::chrono::_V2::system_clock::time_point _start;
+    std::chrono::_V2::system_clock::time_point _end;
+
     void load();
 protected:
     std::vector<double> _data;
     std::vector<double> _extra;
+    std::vector<int64_t> _durations;
+
+    void startTimer();
+    void endTimer();
+    double sum;
 public:
     Benchmark(const std::string &label, const std::string &dataPath, const std::string &extraPath);
 
     void bench();
-    virtual void exec() const = 0;
+    virtual void execPush() = 0;
+    virtual void execInsert() = 0;
+    virtual void execParse() = 0;
+
+    virtual size_t getBenchmarkedSize() const = 0;
+
+    friend std::ostream &operator<<(std::ostream &os, const Benchmark &bench);
 };
 
 #endif

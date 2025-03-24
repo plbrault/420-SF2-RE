@@ -9,8 +9,13 @@ class VectorBenchmark: public Benchmark {
 private:
     std::vector<double> _benchmarked;
 public:
-    void exec() const;
+    VectorBenchmark(const std::string &pathData, const std::string &extraData) 
+        : Benchmark("Vector benchmark", pathData, extraData) { }
+    void execPush();
+    void execInsert();
+    void execParse();
+
+    size_t getBenchmarkedSize() const;
 };
 
 #endif
-
