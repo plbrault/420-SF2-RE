@@ -54,7 +54,7 @@ void Benchmark::bench() {
     this->endTimer();
 
     this->startTimer();
-    this->execPush();
+    this->execInsert();
     this->endTimer();
 
     this->startTimer();
