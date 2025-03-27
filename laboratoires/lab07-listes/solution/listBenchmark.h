@@ -18,6 +18,7 @@ public:
     void execParse();
 
     size_t getBenchmarkedSize() const;
+    const void *getBenchmarked() const;
 };
 
 #endif

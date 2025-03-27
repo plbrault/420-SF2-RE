@@ -20,8 +20,8 @@ void Benchmark::load() {
     std::string extraContent { std::istreambuf_iterator<char>(this->_file), std::istreambuf_iterator<char>() };
     pos = 0; current = 0; count = 0;
 
-    while ((current = mainContent.find("\n", pos)) != std::string::npos && count < 100000) {
-        this->_extra.push_back(atoi(mainContent.substr(pos, current - pos - 1).c_str()));
+    while ((current = extraContent.find("\n", pos)) != std::string::npos && count < 100000) {
+        this->_extra.push_back(atoi(extraContent.substr(pos, current - pos - 1).c_str()));
         pos = current + 1;
         count++;
     }
@@ -43,8 +43,6 @@ Benchmark::Benchmark(const std::string &label, const std::string &dataPath, cons
     this->_dataPath = dataPath;
     this->_extraPath = extraPath;
 
-    this->sum = 0.0;
-
     this->load();
 }
 
@@ -62,12 +60,17 @@ void Benchmark::bench() {
     this->endTimer();
 }
 
+const std::vector<double> &Benchmark::getPointParsed() const
+{
+    return this->pointParsed;
+}
+
 std::ostream &operator<<(std::ostream &os, const Benchmark &bench) {
     os << std::setw(26) << std::left << bench._label;
     for (size_t i = 0; i < bench._durations.size(); i++) {
         os << std::setw(10) << std::right << bench._durations[i] << " ms";
     }
-    os << std::setw(20) << std::right << std::fixed << std::setprecision(3) << bench.sum;
+    os << std::setw(20) << std::right << std::fixed << bench.pointParsed.size();
     os << std::setw(12) << std::right << bench._data.size();
     os << std::setw(12) << std::right << bench._extra.size();
     os << std::setw(12) << std::right << bench.getBenchmarkedSize();

@@ -17,6 +17,7 @@ private:
     std::chrono::_V2::system_clock::time_point _start;
     std::chrono::_V2::system_clock::time_point _end;
 
+
     void load();
 protected:
     std::vector<double> _data;
@@ -25,7 +26,7 @@ protected:
 
     void startTimer();
     void endTimer();
-    double sum;
+    std::vector<double> pointParsed;
 public:
     Benchmark(const std::string &label, const std::string &dataPath, const std::string &extraPath);
 
@@ -34,9 +35,12 @@ public:
     virtual void execInsert() = 0;
     virtual void execParse() = 0;
 
+    const std::vector<double> &getPointParsed() const;
     virtual size_t getBenchmarkedSize() const = 0;
 
     friend std::ostream &operator<<(std::ostream &os, const Benchmark &bench);
+
+    virtual const void *getBenchmarked() const = 0;
 };
 
 #endif
