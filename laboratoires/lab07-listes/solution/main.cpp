@@ -34,10 +34,7 @@ int main(int, char**) {
     for (size_t i = 0; i < dataVector->size(); i++) {
         if ((*dataVector)[i] != *itL) {
             std::cout << "Mismatch at index " << i << ": " << (*dataVector)[i] << " vs " << *itL << std::endl;
-            if (*itL == 266.0)
-                count++;
         }
+        ++itL;
     }
-
-    return count;
 }

@@ -11,7 +11,7 @@ void ListBenchmark::execPush() {
 void ListBenchmark::execInsert() {
     auto insertPos = this->_benchmarked.begin();
     std::advance(insertPos, 500000);
-    for (auto itExtra = this->_extra.rbegin(); itExtra != this->_extra.rend(); ++itExtra) {
+    for (auto itExtra = this->_extra.begin(); itExtra != this->_extra.end(); ++itExtra) {
         insertPos = this->_benchmarked.insert(insertPos, *itExtra);
     }
     
