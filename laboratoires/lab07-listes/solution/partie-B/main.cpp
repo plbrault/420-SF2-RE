@@ -1,21 +1,28 @@
 #include <iostream>
 
-#include "node.h"
+#include "list.h"
 
 int main () {
     std::cout << "Welcome" << std::endl;
 
-    Node *forthNode = new Node(nullptr, 3.7);
-    Node *thirdNode = new Node(forthNode, 3.4);
-    Node *secondNode = new Node(thirdNode, 2.8);
-    Node *firstNode = new Node(secondNode, 2.4);
+    List list;
+    list.push(3);
+    list.push(4);
+    list.push(5);
+    list.push(6);
 
-    Node *current = firstNode;
-    do {
-        std::cout << "The value is " << current->getValue() << std::endl;
-    } while((current = current->getNext()) != nullptr);
+    list.moveAt(2);
+    list.insert(12);
 
-    delete firstNode;
+    list.moveAt(0);
+    
+    Node *temp = list.getCurrent();
+    size_t count = 0;
+    while (temp) {
+        std::cout << "Value: " << temp->getValue() << std::endl;
+        temp = temp->getNext();
+        count++;
+    }
 
     return 0;
 }

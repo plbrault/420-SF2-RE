@@ -16,8 +16,13 @@ public:
     List(const List &list);
     ~List();
 
-    const List &operator=(const List &list);
-
+    List &operator=(const List &other);
+    void push(double value);
+    void pop();
+    void moveAt(size_t pos);
+    void insert(double value);
+    void remove();
+    Node *getCurrent();
 };
 
 #endif

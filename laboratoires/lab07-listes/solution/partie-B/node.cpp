@@ -1,19 +1,16 @@
 #include "node.h"
 
-Node::Node() : Node(nullptr, 0.0) { }
+Node::Node() : _value(0.0), _next(nullptr) { }
 
 Node::Node(Node *next, double value) {
-    this->_next = next;
-    this->_value = value;
+    this->setNext(next);
+    this->setValue(value);
 }
 
-Node::Node(const Node &node) {
-    this->_next = nullptr;
-
-    if (node._next != nullptr) {
-        this->_next = new Node(*node._next);
+Node::Node(const Node &node) : _value(node._value), _next(nullptr) {
+    if (node._next) {
+        _next = new Node(*node._next);
     }
-    this->_value = node._value;
 }
 
 Node::~Node() {
@@ -22,26 +19,34 @@ Node::~Node() {
 }
 
 const Node &Node::operator=(const Node &node) {
-    delete this->_next;
-
-    this->_next = nullptr;
-    if (node._next != nullptr) {
-        this->_next = new Node(*node._next);
+    if (this == &node) {
+        return *this;
     }
-    this->_value = node._value;
+
+    delete _next;
+    _next = nullptr;
+
+    _value = node._value;
+
+    if (node._next) {
+        _next = new Node(*node._next);
+    }
+
     return *this;
 }
 
-Node *Node::getNext() const {
+Node *Node::getNext() {
     return this->_next;
 }
 
 void Node::setNext(Node *next) {
-    if (this->_next == nullptr) {
-        this->_next = next;
-    }
+    this->_next = next;
 }
 
 double Node::getValue() const {
     return this->_value;
+}
+
+void Node::setValue(double value) {
+    this->_value = value;
 }

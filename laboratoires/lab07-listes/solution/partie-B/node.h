@@ -13,9 +13,10 @@ public:
 
     const Node &operator=(const Node &node);
 
-    Node *getNext() const;
+    Node *getNext();
     void setNext(Node *next);
     double getValue() const;
+    void setValue(double value);
 };
 
 #endif
