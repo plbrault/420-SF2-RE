@@ -12,6 +12,7 @@ void Dechiffreur::lireTexteChiffre(std::istream& entree) {
         contenu << ligne << endl;
     }
     _texteChiffre = contenu.str();
+    _texteDechiffre.clear();
 }
 
 const string& Dechiffreur::getTexteChiffre() const {

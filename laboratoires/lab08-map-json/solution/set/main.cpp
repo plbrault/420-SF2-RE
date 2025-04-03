@@ -31,7 +31,9 @@ int main() {
     cesar.lireTexteChiffre(fluxTexteChiffre);
     fluxTexteChiffre.close();
 
-    cout << cesar.getTexteChiffre();
+    // Déchiffrement du premier texte
+    cesar.dechiffrer();
+    cout << cesar.getTexteDechiffre();
 
     return 0;
 }
