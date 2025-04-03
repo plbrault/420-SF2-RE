@@ -2,7 +2,7 @@ import sys
 
 if len(sys.argv) < 2:
     print('Usage:')
-    print('python cesar.py <shift> <text>')
+    print('python cesar.py <shift> "<text>"')
     print('OR python cesar.py <shift> -f <filename>')
     sys.exit(1)
 
