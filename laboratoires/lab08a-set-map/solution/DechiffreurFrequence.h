@@ -15,7 +15,7 @@ private:
     void _trierLettresLangue();
     void _compterLettresTexte();
     void _trierLettresTexte();
-    void _genererSubstitutitons();
+    void _genererSubstitutions();
 public:
     DechiffreurFrequence(const std::map<float, std::vector<char>> lettresParFrequenceLangue);
     void dechiffrer() override;

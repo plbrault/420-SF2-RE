@@ -39,8 +39,10 @@ void DechiffreurFrequence::_trierLettresTexte() {
     }
 }
 
-void DechiffreurFrequence::_genererSubstitutitons() {
-
+void DechiffreurFrequence::_genererSubstitutions() {
+    for (int i = 0; i < _lettresTrieesTexte.size(); i++) {
+        _substitutitons[_lettresTrieesTexte[i]] = _lettresTrieesLangue[i];
+    }
 }
 
 void DechiffreurFrequence::dechiffrer() {
@@ -48,12 +50,12 @@ void DechiffreurFrequence::dechiffrer() {
 
     _compterLettresTexte();
     _trierLettresTexte();
-    _genererSubstitutitons();
+    _genererSubstitutions();
 
     stringstream fluxTexteDechiffre;
     for (auto caractere : _texteChiffre) {
         if ('a' <= tolower(caractere) && tolower(caractere) <= 'z') {
-
+            fluxTexteDechiffre << _substitutitons[tolower(caractere)];
         } else {
             fluxTexteDechiffre << caractere;
         }
