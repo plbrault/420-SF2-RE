@@ -2,14 +2,16 @@
 
 #include "Dechiffreur.h"
 #include <map>
+#include <vector>
 
-class DechiffreurFrequence : Dechiffreur {
+class DechiffreurFrequence : public Dechiffreur {
 private:
-    std::map<float, char> _lettresParFrequenceLangue;
+    const std::map<float, std::vector<char>>* _lettresParFrequenceLangue;
+    size_t _nombreLettres;
     std::map<char, unsigned int> _occurencesLettres;
 
     void _compterLettres();
 public:
-    DechiffreurFrequence(const std::map<float, char>& lettresParFrequenceLangue);
+    DechiffreurFrequence(const std::map<float, std::vector<char>>* lettresParFrequenceLangue);
     void dechiffrer() override;
 };

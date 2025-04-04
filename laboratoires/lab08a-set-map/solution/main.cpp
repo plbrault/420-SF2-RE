@@ -4,6 +4,7 @@
 #include <map>
 #include "JSONParser.h"
 #include "DechiffreurCesar.h"
+#include "DechiffreurFrequence.h"
 
 using namespace std;
 
@@ -14,7 +15,8 @@ int main() {
     ifstream fluxTexteChiffre;
     set<string> motsLangueFrancaise;
     map<float, vector<char>> lettresParFrequence;
-    DechiffreurCesar cesar(&motsLangueFrancaise);
+    DechiffreurCesar dechiffreurCesar(&motsLangueFrancaise);
+    DechiffreurFrequence dechiffreurFrequence(&lettresParFrequence);
 
     // Chargement des mots de la langue française
     if (!fluxLangueFrancaise) {
@@ -45,12 +47,25 @@ int main() {
         cerr << "Erreur d'ouverture du fichier" << endl;
         return 1;
     }
-    cesar.lireTexteChiffre(fluxTexteChiffre);
+    dechiffreurCesar.lireTexteChiffre(fluxTexteChiffre);
+    fluxTexteChiffre.close();
+
+    // Lecture du deuxième texte à déchiffrer
+    fluxTexteChiffre.open("texte2.txt");
+    if (!fluxTexteChiffre) {
+        cerr << "Erreur d'ouverture du fichier" << endl;
+        return 1;
+    }
+    dechiffreurFrequence.lireTexteChiffre(fluxTexteChiffre);
     fluxTexteChiffre.close();
 
     // Déchiffrement du premier texte
     /*cesar.dechiffrer();
     cout << cesar.getTexteDechiffre();*/
+
+    // Déchiffrement du deuxième texte
+    dechiffreurFrequence.dechiffrer();
+    cout << dechiffreurFrequence.getTexteDechiffre();
 
     return 0;
 }
