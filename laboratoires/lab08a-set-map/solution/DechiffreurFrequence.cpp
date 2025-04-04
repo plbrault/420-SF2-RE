@@ -25,14 +25,15 @@ void DechiffreurFrequence::dechiffrer() {
     stringstream fluxTexteDechiffre;
     _compterLettres();
     for (auto caractere : _texteChiffre) {
-        if ('a' <= tolower(caractere) <= 'z') {
-            float frequence = (float)_occurencesLettres[caractere] / (float)_nombreLettres;
-            auto itBas = _lettresParFrequenceLangue->lower_bound(frequence);
-            auto itHaut = _lettresParFrequenceLangue->upper_bound(frequence);
-            vector<char> plusProbable = min(
-                    abs(itBas->first - frequence), abs(itHaut->first - frequence)
-                ) == abs(itBas->first - frequence) ? itBas->second : itHaut->second;
-            fluxTexteDechiffre << plusProbable[0];
+        if ('a' <= tolower(caractere) && tolower(caractere) <= 'z') {
+            int occ = _occurencesLettres[tolower(caractere)];
+            float frequence = (float)occ / (float)_nombreLettres;
+            //float frequence = (float)_occurencesLettres[caractere] / (float)_nombreLettres;
+            auto itLowerBound = _lettresParFrequenceLangue->lower_bound(frequence);
+            if (itLowerBound == _lettresParFrequenceLangue->end()) {
+                itLowerBound--;
+            }
+            fluxTexteDechiffre << itLowerBound->second[0];
         } else {
             fluxTexteDechiffre << caractere;
         }
