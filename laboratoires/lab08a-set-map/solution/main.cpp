@@ -32,8 +32,12 @@ int main() {
     }
     jsonParser.parse(fluxFrequencesLettres);
     fluxFrequencesLettres.close();
-    cout << jsonParser.getData().template get<map<string, vector<string>>>()["0.0017"][0] << endl;
-    //lettresParFrequence = jsonParser.getData().template get<map<float, vector<char>>>();
+    for (const auto& [frequence, lettres] : jsonParser.getData().template get<map<string, vector<string>>>()) {
+        float frequenceFloat = stof(frequence);
+        for (const auto& lettre : lettres) {
+            lettresParFrequence[frequenceFloat].push_back(lettre[0]);
+        }
+    }
 
     // Lecture du premier texte à déchiffrer
     fluxTexteChiffre.open("texte1.txt");
