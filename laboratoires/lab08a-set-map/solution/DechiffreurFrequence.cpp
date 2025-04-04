@@ -24,6 +24,8 @@ void DechiffreurFrequence::_compterLettres() {
 }
 
 void DechiffreurFrequence::dechiffrer() {
+    // Plutôt que de matcher la fréquence la plus proche, y aller par ordre de la plus fréquente à la moins fréquente
+
     stringstream fluxTexteDechiffre;
     _compterLettres();
     for (auto caractere : _texteChiffre) {
