@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <set>
+#include <map>
 #include "JSONParser.h"
 #include "DechiffreurCesar.h"
 
@@ -31,7 +32,8 @@ int main() {
     }
     jsonParser.parse(fluxFrequencesLettres);
     fluxFrequencesLettres.close();
-    lettresParFrequence = jsonParser.getData().template get<map<float, vector<char>>>();
+    cout << jsonParser.getData().template get<map<string, vector<string>>>()["0.0017"][0] << endl;
+    //lettresParFrequence = jsonParser.getData().template get<map<float, vector<char>>>();
 
     // Lecture du premier texte à déchiffrer
     fluxTexteChiffre.open("texte1.txt");
@@ -43,8 +45,8 @@ int main() {
     fluxTexteChiffre.close();
 
     // Déchiffrement du premier texte
-    cesar.dechiffrer();
-    cout << cesar.getTexteDechiffre();
+    /*cesar.dechiffrer();
+    cout << cesar.getTexteDechiffre();*/
 
     return 0;
 }
