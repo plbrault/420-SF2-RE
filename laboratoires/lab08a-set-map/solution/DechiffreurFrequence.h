@@ -10,7 +10,7 @@ private:
     std::map<char, unsigned int> _occurencesLettres;
     std::vector<char> _lettresTrieesLangue;
     std::vector<char> _lettresTrieesTexte;
-    std::map<char, char> _substitutitons;
+    std::map<char, char> _substitutions;
 
     void _trierLettresLangue();
     void _compterLettresTexte();
