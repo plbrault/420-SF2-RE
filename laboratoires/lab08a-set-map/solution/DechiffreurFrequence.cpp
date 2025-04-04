@@ -9,7 +9,11 @@ DechiffreurFrequence::DechiffreurFrequence(const std::map<float, std::vector<cha
 }
 
 void DechiffreurFrequence::_trierLettresLangue() {
-    
+    for (auto it = _lettresParFrequenceLangue.begin(); it != _lettresParFrequenceLangue.end(); it++) {
+        for (auto lettre : it->second) {
+            _lettresTrieesLangue.push_back(lettre);
+        }
+    }
 }
 
 void DechiffreurFrequence::_compterLettresTexte() {
@@ -24,7 +28,15 @@ void DechiffreurFrequence::_compterLettresTexte() {
 }
 
 void DechiffreurFrequence::_trierLettresTexte() {
-
+    map<unsigned int, vector<char>> lettresParOccurences;
+    for (auto it = _occurencesLettres.begin(); it != _occurencesLettres.end(); it++) {
+        lettresParOccurences[it->second].push_back(it->first);
+    }
+    for (auto it = lettresParOccurences.begin(); it != lettresParOccurences.end(); it++) {
+        for (auto lettre : it->second) {
+            _lettresTrieesTexte.push_back(lettre);
+        }
+    }
 }
 
 void DechiffreurFrequence::_genererSubstitutitons() {
@@ -35,7 +47,7 @@ void DechiffreurFrequence::dechiffrer() {
     // Plutôt que de matcher la fréquence la plus proche, y aller par ordre de la plus fréquente à la moins fréquente
 
     _compterLettresTexte();
-    _trierLettresLangue();
+    _trierLettresTexte();
     _genererSubstitutitons();
 
     stringstream fluxTexteDechiffre;
