@@ -7,10 +7,11 @@
 class DechiffreurFrequence : public Dechiffreur {
 private:
     const std::map<float, std::vector<char>>* _lettresParFrequenceLangue;
-    size_t _nombreLettres;
     std::map<char, unsigned int> _occurencesLettres;
+    std::vector<char> _lettresTrieesParOccurences;
 
     void _compterLettres();
+    void _trierLettres();
 public:
     DechiffreurFrequence(const std::map<float, std::vector<char>>* lettresParFrequenceLangue);
     void dechiffrer() override;
