@@ -16,7 +16,6 @@ int main() {
     set<string> motsLangueFrancaise;
     map<float, vector<char>> lettresParFrequence;
     DechiffreurCesar dechiffreurCesar(&motsLangueFrancaise);
-    DechiffreurFrequence dechiffreurFrequence(&lettresParFrequence);
 
     // Chargement des mots de la langue française
     if (!fluxLangueFrancaise) {
@@ -56,6 +55,7 @@ int main() {
         cerr << "Erreur d'ouverture du fichier" << endl;
         return 1;
     }
+    DechiffreurFrequence dechiffreurFrequence(lettresParFrequence);
     dechiffreurFrequence.lireTexteChiffre(fluxTexteChiffre);
     fluxTexteChiffre.close();
 
