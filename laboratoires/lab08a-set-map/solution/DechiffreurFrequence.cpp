@@ -29,9 +29,18 @@ void DechiffreurFrequence::dechiffrer() {
 }
 
 void DechiffreurFrequence::changerSubstitution(char ancien, char nouveau) {
+    char subsChangee = '\0';
     for (auto it = _substitutions.begin(); it != _substitutions.end(); ++it) {
         if (it->second == ancien) {
+            subsChangee = it->first;
             it->second = nouveau;
+            break;
+        }
+    }
+    for (auto it = _substitutions.begin(); it != _substitutions.end(); ++it) {
+        if (it->first != subsChangee && it->second == nouveau) {
+            it->second = ancien;
+            break;
         }
     }
     _substituer();
