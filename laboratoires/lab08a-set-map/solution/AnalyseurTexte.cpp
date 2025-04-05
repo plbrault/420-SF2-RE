@@ -39,7 +39,7 @@ void AnalyseurTexte::_preparerTexte() {
     }
 }
 
-void AnalyseurTexte::_retirerMotPlusFrequent() {
+void AnalyseurTexte::_retirerMotsTropFrequents() {
     string mot;
     map<string, unsigned int> occurencesMots;
     stringstream flux1, flux2;
@@ -57,14 +57,12 @@ void AnalyseurTexte::_retirerMotPlusFrequent() {
         }
     }
     _texte = flux2.str();
-
-    ;
 }
 
 void AnalyseurTexte::analyser(const std::string& texte) {
     _texte = texte;
     _preparerTexte();
-    _retirerMotPlusFrequent();
+    _retirerMotsTropFrequents();
     _compterLettres();
     _trierLettres();
 }

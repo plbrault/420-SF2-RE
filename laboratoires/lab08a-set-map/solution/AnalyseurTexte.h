@@ -11,7 +11,7 @@ private:
     std::vector<char> _lettresTriees;
 
     void _preparerTexte();
-    void _retirerMotPlusFrequent();
+    void _retirerMotsTropFrequents();
     void _compterLettres();
     void _trierLettres();
 public:
