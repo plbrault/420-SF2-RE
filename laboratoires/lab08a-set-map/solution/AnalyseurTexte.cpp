@@ -2,6 +2,7 @@
 #include <map>
 #include <set>
 #include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -45,22 +46,13 @@ void AnalyseurTexte::_retirerMotPlusFrequent() {
 
     flux1.str(_texte);
     while (flux1 >> mot) {
-        if (mot.length() > 3) {
-            occurencesMots[mot]++;
-        }
-    }
-
-    string motPlusFrequent;
-    for (auto it = occurencesMots.begin(); it != occurencesMots.end(); it++) {
-        if (motPlusFrequent.empty() || it->second > occurencesMots[motPlusFrequent]) {
-            motPlusFrequent = it->first;
-        }
+        occurencesMots[mot]++;
     }
 
     flux1.clear();
     flux1.str(_texte);
     while (flux1 >> mot) {
-        if (mot != motPlusFrequent) {
+        if (mot.length() < 4 || occurencesMots[mot] < 0.05 * occurencesMots.size()) {
             flux2 << mot << " ";
         }
     }
