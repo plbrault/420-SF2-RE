@@ -17,7 +17,7 @@ int main() {
     //set<string> motsLangueFrancaise;
     //map<float, vector<char>> lettresParFrequence;
 
-    Langue francais("mots.json");
+    Langue francais("mots.json", "frequences_lettres.json");
     francais.charger();
 
     DechiffreurCesar dechiffreurCesar(&francais);

@@ -11,13 +11,16 @@ class Langue {
 private:
     JSONParser _jsonParser;
     std::string _nomFichierMots;
-    //std::string _nomFichierFrequences;
+    std::string _nomFichierFrequences;
     std::set<std::string> _mots;
-    //std::map<float, std::vector<char>> _lettresParFrequence;
-    //std::vector<char> _lettresTriees;
+    std::map<float, std::vector<char>> _lettresParFrequence;
+    std::vector<char> _lettresTriees;
     bool _estCharge;
+
+    void _trierLettres();
 public:
-    Langue(const std::string& nomFichierMots);
+    Langue(const std::string& nomFichierMots, const std::string& nomFichierFrequences);
     void charger();
     const std::set<std::string>& getMots() const;
+    const std::vector<char>& getLettresTriees() const;
 };
