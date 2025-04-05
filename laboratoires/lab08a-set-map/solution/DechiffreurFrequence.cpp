@@ -18,18 +18,18 @@ void DechiffreurFrequence::_trierLettresLangue() {
 
 void DechiffreurFrequence::_compterLettresTexte() {
     for (char lettre = 'a'; lettre <= 'z'; lettre++) {
-        _occurencesLettres[lettre] = 0;
+        _occurencesLettresTexte[lettre] = 0;
     }
     for (auto caractere : _texteChiffre) {
         if ('a' <= tolower(caractere) && tolower(caractere) <= 'z') {
-            _occurencesLettres[tolower(caractere)]++;
+            _occurencesLettresTexte[tolower(caractere)]++;
         }
     }
 }
 
 void DechiffreurFrequence::_trierLettresTexte() {
     map<unsigned int, vector<char>> lettresParOccurences;
-    for (auto it = _occurencesLettres.begin(); it != _occurencesLettres.end(); it++) {
+    for (auto it = _occurencesLettresTexte.begin(); it != _occurencesLettresTexte.end(); it++) {
         lettresParOccurences[it->second].push_back(it->first);
     }
     for (auto it = lettresParOccurences.begin(); it != lettresParOccurences.end(); it++) {
