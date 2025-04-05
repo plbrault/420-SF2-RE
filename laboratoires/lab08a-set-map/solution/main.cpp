@@ -65,8 +65,8 @@ int main() {
     fluxTexteChiffre.close();
 
     // Déchiffrement du premier texte
-    dechiffreurCesar.dechiffrer();
-    cout << dechiffreurCesar.getTexteDechiffre();
+    //dechiffreurCesar.dechiffrer();
+    //cout << dechiffreurCesar.getTexteDechiffre();
 
     // Déchiffrement du deuxième texte
     dechiffreurFrequence.dechiffrer();

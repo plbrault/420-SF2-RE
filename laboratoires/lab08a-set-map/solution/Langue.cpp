@@ -40,6 +40,7 @@ void Langue::charger() {
             _lettresParFrequence[frequenceFloat].push_back(lettre[0]);
         }
     }
+    _trierLettres();
 
     _estCharge = true;
 }
