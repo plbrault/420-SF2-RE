@@ -3,16 +3,17 @@
 #include "Dechiffreur.h"
 #include <set>
 #include <vector>
+#include "Langue.h"
 
 class DechiffreurCesar : public Dechiffreur {
 private:
-    const std::set<std::string>* _langue;
+    const Langue* _langue;
 
     std::vector<char> _lettresMinuscules;
     std::vector<char> _lettresMajuscules;
     char _decalerLettre(char lettre, int decalage) const;
     bool _essayerDecalage(const std::string& mot, int decalage) const;
 public:
-    DechiffreurCesar(const std::set<std::string>* mots);
+    DechiffreurCesar(const Langue* langue);
     void dechiffrer() override;
 };

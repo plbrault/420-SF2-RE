@@ -5,29 +5,34 @@
 #include "JSONParser.h"
 #include "DechiffreurCesar.h"
 #include "DechiffreurFrequence.h"
+#include "Langue.h"
 
 using namespace std;
 
 int main() {
-    JSONParser jsonParser;
-    ifstream fluxLangueFrancaise("mots.json");
-    ifstream fluxFrequencesLettres("frequences_lettres.json");
+    //JSONParser jsonParser;
+    //ifstream fluxLangueFrancaise("mots.json");
+    //ifstream fluxFrequencesLettres("frequences_lettres.json");
     ifstream fluxTexteChiffre;
-    set<string> motsLangueFrancaise;
-    map<float, vector<char>> lettresParFrequence;
-    DechiffreurCesar dechiffreurCesar(&motsLangueFrancaise);
+    //set<string> motsLangueFrancaise;
+    //map<float, vector<char>> lettresParFrequence;
+
+    Langue francais("mots.json");
+    francais.charger();
+
+    DechiffreurCesar dechiffreurCesar(&francais);
 
     // Chargement des mots de la langue française
-    if (!fluxLangueFrancaise) {
+    /*if (!fluxLangueFrancaise) {
         cerr << "Erreur d'ouverture du fichier" << endl;
         return 1;
     }
     jsonParser.parse(fluxLangueFrancaise);
     fluxLangueFrancaise.close();
-    motsLangueFrancaise = jsonParser.getData().template get<set<string>>();
+    motsLangueFrancaise = jsonParser.getData().template get<set<string>>();*/
 
     // Chargement des lettres par fréquence
-    if (!fluxFrequencesLettres) {
+    /*if (!fluxFrequencesLettres) {
         cerr << "Erreur d'ouverture du fichier" << endl;
         return 1;
     }
@@ -38,7 +43,7 @@ int main() {
         for (const auto& lettre : lettres) {
             lettresParFrequence[frequenceFloat].push_back(lettre[0]);
         }
-    }
+    }*/
 
     // Lecture du premier texte à déchiffrer
     fluxTexteChiffre.open("texte1.txt");
@@ -50,22 +55,22 @@ int main() {
     fluxTexteChiffre.close();
 
     // Lecture du deuxième texte à déchiffrer
-    fluxTexteChiffre.open("texte2.txt");
+    /*fluxTexteChiffre.open("texte2.txt");
     if (!fluxTexteChiffre) {
         cerr << "Erreur d'ouverture du fichier" << endl;
         return 1;
     }
     DechiffreurFrequence dechiffreurFrequence(lettresParFrequence);
     dechiffreurFrequence.lireTexteChiffre(fluxTexteChiffre);
-    fluxTexteChiffre.close();
+    fluxTexteChiffre.close();*/
 
     // Déchiffrement du premier texte
-    /*cesar.dechiffrer();
-    cout << cesar.getTexteDechiffre();*/
+    dechiffreurCesar.dechiffrer();
+    cout << dechiffreurCesar.getTexteDechiffre();
 
     // Déchiffrement du deuxième texte
-    dechiffreurFrequence.dechiffrer();
-    cout << dechiffreurFrequence.getTexteDechiffre();
+    //dechiffreurFrequence.dechiffrer();
+    //cout << dechiffreurFrequence.getTexteDechiffre();
 
     return 0;
 }

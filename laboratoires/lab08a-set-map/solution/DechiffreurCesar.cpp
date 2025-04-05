@@ -3,7 +3,7 @@
 
 using namespace std;
 
-DechiffreurCesar::DechiffreurCesar(const std::set<std::string> *langue) {
+DechiffreurCesar::DechiffreurCesar(const Langue* langue) {
     _langue = langue;
 
     for (char c = 'a'; c <= 'z'; ++c) {
@@ -29,7 +29,7 @@ bool DechiffreurCesar::_essayerDecalage(const std::string& mot, int decalage) co
     for (int i  = 0; i < mot.size(); i++) {
         essai += _decalerLettre(mot[i], decalage);
     }
-    return _langue->find(essai) != _langue->end();
+    return _langue->getMots().find(essai) != _langue->getMots().end();
 }
 
 void DechiffreurCesar::dechiffrer() {
