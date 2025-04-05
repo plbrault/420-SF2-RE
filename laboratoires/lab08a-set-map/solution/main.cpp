@@ -21,6 +21,7 @@ int main() {
     francais.charger();
 
     DechiffreurCesar dechiffreurCesar(&francais);
+    DechiffreurFrequence dechiffreurFrequence(&francais);
 
     // Chargement des mots de la langue française
     /*if (!fluxLangueFrancaise) {
@@ -55,22 +56,21 @@ int main() {
     fluxTexteChiffre.close();
 
     // Lecture du deuxième texte à déchiffrer
-    /*fluxTexteChiffre.open("texte2.txt");
+    fluxTexteChiffre.open("texte2.txt");
     if (!fluxTexteChiffre) {
         cerr << "Erreur d'ouverture du fichier" << endl;
         return 1;
     }
-    DechiffreurFrequence dechiffreurFrequence(lettresParFrequence);
     dechiffreurFrequence.lireTexteChiffre(fluxTexteChiffre);
-    fluxTexteChiffre.close();*/
+    fluxTexteChiffre.close();
 
     // Déchiffrement du premier texte
     dechiffreurCesar.dechiffrer();
     cout << dechiffreurCesar.getTexteDechiffre();
 
     // Déchiffrement du deuxième texte
-    //dechiffreurFrequence.dechiffrer();
-    //cout << dechiffreurFrequence.getTexteDechiffre();
+    dechiffreurFrequence.dechiffrer();
+    cout << dechiffreurFrequence.getTexteDechiffre();
 
     return 0;
 }
