@@ -1,11 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include <set>
-#include <map>
 #include "JSONParser.h"
 #include "DechiffreurCesar.h"
 #include "DechiffreurFrequence.h"
 #include "Langue.h"
+#include "fonctions.h"
 
 using namespace std;
 
@@ -42,15 +41,22 @@ int main() {
 
     // Déchiffrement du deuxième texte
     dechiffreurFrequence.dechiffrer();
-    cout << dechiffreurFrequence.getTexteDechiffre();
 
+    // Substitutions manuelles
+    vector<string> lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
     char ancien, nouveau;
-    while (true) {
-        cout << "Entrez une nouvelle substitution (ancien nouveau): ";
-        cin >> ancien >> nouveau;
-        dechiffreurFrequence.changerSubstitution(ancien, nouveau);
-        cout << "-------------------------" << endl;
-        cout << dechiffreurFrequence.getTexteDechiffre();
+    for (int i = 0; i < lignesTexteDechiffre.size(); i++) {
+        while (lignesTexteDechiffre[i] != "" && ancien != '.') {
+            cout << lignesTexteDechiffre[i] << endl;
+            cout << ">>> Entrer une nouvelle substitution (ancien nouveau) ou . pour passer à la ligne suivante" << endl;
+            cin >> ancien;
+            if (ancien != '.') {
+                cin >> nouveau;
+                dechiffreurFrequence.changerSubstitution(ancien, nouveau);
+                lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
+            }
+        }
+        ancien = '\0';
     }
 
     return 0;
