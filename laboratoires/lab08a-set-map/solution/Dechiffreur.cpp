@@ -3,6 +3,10 @@
 
 using namespace std;
 
+Dechiffreur::Dechiffreur(const Langue *langue) {
+    _langue = langue;
+}
+
 void Dechiffreur::lireTexteChiffre(std::istream& entree) {
     stringstream contenu;
     string ligne;

@@ -3,9 +3,7 @@
 
 using namespace std;
 
-DechiffreurCesar::DechiffreurCesar(const Langue* langue) {
-    _langue = langue;
-
+DechiffreurCesar::DechiffreurCesar(const Langue* langue) : Dechiffreur(langue) {
     for (char c = 'a'; c <= 'z'; ++c) {
         _lettresMinuscules.push_back(c);
     }

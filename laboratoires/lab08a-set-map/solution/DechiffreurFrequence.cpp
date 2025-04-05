@@ -3,19 +3,6 @@
 
 using namespace std;
 
-DechiffreurFrequence::DechiffreurFrequence(const std::map<float, std::vector<char>> lettresParFrequenceLangue) {
-    _lettresParFrequenceLangue = lettresParFrequenceLangue;
-    _trierLettresLangue();
-}
-
-void DechiffreurFrequence::_trierLettresLangue() {
-    for (auto it = _lettresParFrequenceLangue.begin(); it != _lettresParFrequenceLangue.end(); it++) {
-        for (auto lettre : it->second) {
-            _lettresTrieesLangue.push_back(lettre);
-        }
-    }
-}
-
 void DechiffreurFrequence::_compterLettresTexte() {
     for (char lettre = 'a'; lettre <= 'z'; lettre++) {
         _occurencesLettresTexte[lettre] = 0;
@@ -41,7 +28,7 @@ void DechiffreurFrequence::_trierLettresTexte() {
 
 void DechiffreurFrequence::_genererSubstitutions() {
     for (int i = 0; i < _lettresTrieesTexte.size(); i++) {
-        _substitutions[_lettresTrieesTexte[i]] = _lettresTrieesLangue[i];
+        _substitutions[_lettresTrieesTexte[i]] = _langue->getLettresTriees()[i];
     }
 }
 
