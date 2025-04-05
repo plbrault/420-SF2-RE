@@ -10,6 +10,8 @@ private:
     std::map<char, unsigned int> _occurencesLettres;
     std::vector<char> _lettresTriees;
 
+    void _preparerTexte();
+    void _retirerMotPlusFrequent();
     void _compterLettres();
     void _trierLettres();
 public:

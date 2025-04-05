@@ -3,7 +3,6 @@
 #include "Dechiffreur.h"
 #include "AnalyseurTexte.h"
 #include <map>
-#include <vector>
 
 class DechiffreurFrequence : public Dechiffreur {
 private:
