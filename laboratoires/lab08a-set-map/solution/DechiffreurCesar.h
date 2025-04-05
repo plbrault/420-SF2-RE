@@ -7,8 +7,6 @@
 
 class DechiffreurCesar : public Dechiffreur {
 private:
-    const Langue* _langue;
-
     std::vector<char> _lettresMinuscules;
     std::vector<char> _lettresMajuscules;
     char _decalerLettre(char lettre, int decalage) const;
