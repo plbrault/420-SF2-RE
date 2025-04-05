@@ -44,5 +44,14 @@ int main() {
     dechiffreurFrequence.dechiffrer();
     cout << dechiffreurFrequence.getTexteDechiffre();
 
+    char ancien, nouveau;
+    while (true) {
+        cout << "Entrez une nouvelle substitution (ancien nouveau): ";
+        cin >> ancien >> nouveau;
+        dechiffreurFrequence.changerSubstitution(ancien, nouveau);
+        cout << "-------------------------" << endl;
+        cout << dechiffreurFrequence.getTexteDechiffre();
+    }
+
     return 0;
 }

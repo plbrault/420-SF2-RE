@@ -9,10 +9,7 @@ void DechiffreurFrequence::_genererSubstitutions() {
     }
 }
 
-void DechiffreurFrequence::dechiffrer() {
-    _analyseur.analyser(_texteChiffre);
-    _genererSubstitutions();
-
+void DechiffreurFrequence::_substituer() {
     stringstream fluxTexteDechiffre;
     for (auto caractere : _texteChiffre) {
         if ('a' <= tolower(caractere) && tolower(caractere) <= 'z') {
@@ -23,5 +20,20 @@ void DechiffreurFrequence::dechiffrer() {
     }
     _texteDechiffre.clear();
     _texteDechiffre = fluxTexteDechiffre.str();
+}
+
+void DechiffreurFrequence::dechiffrer() {
+    _analyseur.analyser(_texteChiffre);
+    _genererSubstitutions();
+    _substituer();
+}
+
+void DechiffreurFrequence::changerSubstitution(char ancien, char nouveau) {
+    for (auto it = _substitutions.begin(); it != _substitutions.end(); ++it) {
+        if (it->second == ancien) {
+            it->second = nouveau;
+        }
+    }
+    _substituer();
 }
 

@@ -10,7 +10,9 @@ private:
     std::map<char, char> _substitutions;
 
     void _genererSubstitutions();
+    void _substituer();
 public:
     DechiffreurFrequence(const Langue* langue) : Dechiffreur(langue) {}
     void dechiffrer() override;
+    void changerSubstitution(char ancien, char nouveau);
 };
