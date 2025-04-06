@@ -10,6 +10,7 @@ using namespace std;
 
 int main() {
     ifstream fluxTexteChiffre;
+    ofstream sortie;
 
     Langue francais("mots.json", "frequences_lettres.json");
     francais.charger();
@@ -36,10 +37,18 @@ int main() {
     fluxTexteChiffre.close();
 
     // Déchiffrement du premier texte
-    //dechiffreurCesar.dechiffrer();
-    //cout << dechiffreurCesar.getTexteDechiffre();
+    dechiffreurCesar.dechiffrer();
+    cout << dechiffreurCesar.getTexteDechiffre();
+    sortie.open("sortie-cesar.txt");
+    if (!sortie) {
+        cerr << "Erreur d'ouverture du fichier de sortie" << endl;
+        return 1;
+    }
+    sortie << dechiffreurCesar.getTexteDechiffre();
+    sortie.close();
 
     // Déchiffrement du deuxième texte
+    cout << "-----------------------------------------------" << endl;
     dechiffreurFrequence.dechiffrer();
 
     // Substitutions manuelles
@@ -60,7 +69,15 @@ int main() {
         }
         ancien = '\0';
     }
-    cout << "Texte déchiffré:" << endl << dechiffreurFrequence.getTexteDechiffre() << endl;
+    cout << "DEUXIÈME TEXTE DÉCHIFFRÉ:" << endl << dechiffreurFrequence.getTexteDechiffre() << endl;
+
+    sortie.open("sortie-frequence.txt");
+    if (!sortie) {
+        cerr << "Erreur d'ouverture du fichier de sortie" << endl;
+        return 1;
+    }
+    sortie << dechiffreurFrequence.getTexteDechiffre();
+    sortie.close();
 
     return 0;
 }

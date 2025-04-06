@@ -157,7 +157,7 @@ Voici des explications supplémentaires pour quelques-unes des méthodes:
 
 N'hésitez pas à ajouter d'autres attributs ou méthodes privées si cela vous paraît utile.
 
-Le `main` doit utiliser la classe `DechiffreurCesar` pour déchiffrer `texte1.txt` et afficher son contenu déchiffré à l'écran.
+Le `main` doit utiliser la classe `DechiffreurCesar` pour déchiffrer `texte1.txt` et afficher son contenu déchiffré à l'écran. Il doit aussi écrire le texte déchiffré dans un fichier `sortie-cesar.txt`.
 
 ## Le chiffrement par substitution
 
@@ -355,3 +355,7 @@ for (int i = 0; i < lignesTexteDechiffre.size(); i++) {
 }
 cout << "Texte déchiffré:" << endl << dechiffreurFrequence.getTexteDechiffre() << endl;
 ```
+
+Testez le tout. Si vous remarquez des problèmes dans votre implémentation de `changerSubstitutions`, trouvez des solutions et corrigez-les.
+
+À la fin de votre `main`, ajouter le code nécessaire pour écrire le texte déchiffré dans un fichier `sortie-frequence.txt`.
