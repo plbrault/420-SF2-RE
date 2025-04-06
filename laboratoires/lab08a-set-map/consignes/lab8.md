@@ -151,6 +151,171 @@ Voici des explications supplémentaires pour quelques-unes des méthodes:
 
 **Classe `DechiffreurCesar`**
 
-* La méthode privée `_decalerLettre` prend en paramètre une lettre et un décalage et retourne la lettre décalée. Si le caractère reçu en paramètre n'est pas une lettre ou est une lettre accentuée, elle le retourne tel quel.
+* La méthode privée `_decalerLettre` prend en paramètre un caractère et un décalage et retourne la lettre décalée. Si le caractère reçu en paramètre n'est pas une lettre ou est une lettre accentuée, elle le retourne tel quel.
+* La méthode privée `_essayerDecalage` prend en paramètre un mot et un décalage, décale toutes les lettres du mot, puis vérifie si le mot existe dans `_langue`.
+* La méthode `dechiffrer` essaie tous les décalages possibles du texte chiffré, puis retient celui qui produit le maximum de mots valides. Elle met à jour `_texteDechiffre` en conséquence.
 
 N'hésitez pas à ajouter d'autres attributs ou méthodes privées si cela vous paraît utile.
+
+Le `main` doit utiliser la classe `DechiffreurCesar` pour déchiffrer `texte1.txt` et afficher son contenu déchiffré à l'écran.
+
+## Le chiffrement par substitution
+
+Le fichier `texte2.txt` contient un texte en français qui a été chiffré à l'aide d'une méthode légèrement meilleure que le chiffre de César. Chaque lettre de l'alphabet a été substituée par une autre lettre. Contrairement au chiffre de César, le décalage diffère pour chaque lettre. Il y a donc **26!** clés possibles, ou **4,03 × 10<sup>26</sup>**. Si on suppose que votre ordinateur peut tester un million de clés par seconde, il vous faudra environ **12,8 trillions d'années** pour déchiffrer ce texte par force brute.
+
+Vous aurez donc compris qu'il nous faudra une autre méthode pour déchiffrer ce texte. Une façon de faire est d'utiliser une **analyse de fréquences**, c'est-à-dire qu'on peut deviner les lettres d'origine selon la fréquence d'apparition des lettres dans le texte chiffré. Par exemple, puisque la lettre **e** est la plus fréquente dans la langue française, il est probable que la lettre la plus fréquente dans le texte chiffré soit la substitution du **e**.
+
+Il y a cependant un risque que le texte d'origine contienne une distribution biaisée des lettres de l'alphabet. Par exemple, il est probable qu'un article traitant des zébus contienne une quantité anormalement élevée de **Z**. Une solution possible à ce problème est d'ignorer les mots qui apparaissent trop souvent. On ne veut cependant pas ignorer les articles tels que « **de** », « **la** », « **le** » ou « **des** », puisque ceux-ci contribuent certainement à la grande fréquence des lettres telles que **e** et **a** dans la langue française. Nous allons donc ignorer **tous les mots de plus de 3 lettres dont le nombre d'occurences correspond à plus de 5% des mots du texte**.
+
+Sur Moodle, vous trouverez un fichier `frequences_lettres.json` qui contient un classement des lettres de l'alphabet par fréquence d'apparition des lettres [dans le corpus de Wikipédia en français](https://fr.wikipedia.org/wiki/Fr%C3%A9quence_d%27apparition_des_lettres). Voici le contenu du fichier:
+
+```json
+{
+    "0.121": ["e"],
+    "0.0711": ["a"],
+    "0.0659": ["i"],
+    "0.0651": ["s"],
+    "0.0639": ["n"],
+    "0.0607": ["r"],
+    "0.0592": ["t"],
+    "0.0502": ["o"],
+    "0.0496": ["l"],
+    "0.0449": ["u"],
+    "0.0367": ["d"],
+    "0.0318": ["c"],
+    "0.0262": ["m"],
+    "0.0249": ["p"],
+    "0.0123": ["g"],
+    "0.0114": ["b"],
+    "0.0111": ["v", "h", "f"],
+    "0.0065": ["q"],
+    "0.0046": ["y"],
+    "0.0038": ["x"],
+    "0.0034": ["j"],
+    "0.0031": ["k"],
+    "0.0017": ["w"],
+    "0.0015": ["z"]
+}
+```
+
+Remarquez que les clés correspondent aux fréquences, et que les valeurs sont des tableaux contenant les lettres associées à ces fréquences.
+
+Commencez par modifier votre classe `Langue` pour les nouveaux besoins:
+
+```plantuml
+@startuml
+
+class Langue {
+    - JSONParser _jsonParser
+    - string _nomFichierMots
+    - string _nomFichierFrequences
+    - set<string> _mots
+    - map<float, vector<char>> _lettresParFrequence
+    - vector<char> _lettresTriees
+    - bool _estCharge
+    - void _trierLettres()
+    + Langue(const string& nomFichierMots, const string& nomFichierFrequences)
+    + void charger()
+    + bool contientMot(const std::string& mot) const
+    + const vector<char>& getLettresTriees() const
+}
+
+@enduml
+```
+
+Dans la méthode `charger`, ajoutez le code nécessaire pour charger le dictionnaire JSON dans `_lettresParFrequence`.
+
+> **NOTE**: La bibliothèque JSON ne permet pas d'extraire un `map<float, vector<char>>` directement. Vous devrez donc extraire un `map<string, vector<string>>`, puis le convertir à l'aide d'une boucle.
+
+La méthode `charger` doit aussi appeler la méthode privée `_trierLettres`, qui copie les lettres vers `_lettresTriees` en ordre de fréquence. Une façon d'effectuer ce tri est d'itérer sur toutes les clés de `_lettresParFrequence` (qui, par nature du `map`, sont triées) et de les ajouter à la fin du vecteur.
+
+Testez bien votre classe `Langue` mise à jour avant de continuer.
+
+Vous allez ensuite créer une classe `AnalyseurTexte` qui sera utilisée par votre déchiffreur:
+
+```plantuml
+@startuml
+
+class AnalyseurTexte {
+    - string _texte
+    - map<char, unsigned int> _occurencesLettres
+    - vector<char> _lettresTriees
+    + void analyser(const string& texte)
+    + vector<char> getLettresTriees()
+}
+
+@enduml
+```
+
+Cette classe doit permettre d'obtenir un vecteur des lettres triées par nombre d'occurences dans le texte. N'oubliez pas de respecter la règle énoncée plus haut pour éviter que les statistiques soient biaisées par les mots trop fréquents! N'oubliez pas non plus qu'un mot n'est pas nécessairement entouré d'espaces. Par exemple, dans la phrase « L'été est la plus belle saison. », les mots « été » et « saison » sont adjacents à des symboles de ponctuation. Pour vous aider, voici le code d'une méthode privée pour retirer tous les symboles de ponctuation et les sauts de ligne dans le texte:
+
+```cpp
+void AnalyseurTexte::_preparerTexte() {
+    set<char> ponctuation = {'.', ',', ';', ':', '!', '?',
+                            '-', '_', '(', ')', '[', ']',
+                            '{', '}', '\'', '"', '\n',
+                            '\r', '\t'};
+    for (auto& caractere : _texte) {
+        if (ponctuation.contains(caractere)) {
+            caractere = ' ';
+        }
+    }
+}
+```
+
+N'hésitez pas à ajouter d'autres méthodes privées si cela vous paraît pertinent!
+
+Encore une fois, sachez que les caractères accentués et les symboles de ponctuation n'ont pas été chiffrés. Il n'est donc pas nécessaire de les inclure dans votre analyse.
+
+Vous pouvez enfin implémenter votre classe `DechiffreurFrequence`:
+
+```plantuml
+@startuml
+
+class Langue {
+    - JSONParser _jsonParser
+    - string _nomFichierMots
+    - string _nomFichierFrequences
+    - set<string> _mots
+    - map<float, vector<char>> _lettresParFrequence
+    - vector<char> _lettresTriees
+    - bool _estCharge
+    - void _trierLettres()
+    + Langue(const string& nomFichierMots, const string& nomFichierFrequences)
+    + void charger()
+    + bool contientMot(const std::string& mot) const
+    + const vector<char>& getLettresTriees() const
+}
+
+class Dechiffreur {
+    - const Langue* _langue    
+    - string _texteChiffre
+    - string _texteDechiffre
+    + Dechiffreur(const Langue* langue)
+    + void lireTexteChiffre(istream& entree)
+    + virtual void dechiffrer() = 0
+    + const string& getTexteChiffre() const
+    + const string& getTexteDechiffre() const
+}
+
+class DechiffreurFrequence {
+    - AnalyseurTexte _analyseur
+    - map<char, char> _substitutions
+    + DechiffreurFrequence(const Langue* langue) : Dechiffreur(langue) {}
+    + void dechiffrer() override
+}
+
+class AnalyseurTexte {
+    - string _texte
+    - map<char, unsigned int> _occurencesLettres
+    - vector<char> _lettresTriees
+    + void analyser(const string& texte)
+    + vector<char> getLettresTriees()
+}
+
+Dechiffreur <|-- DechiffreurFrequence
+Dechiffreur *-- Langue
+DechiffreurFrequence *-- AnalyseurTexte
+
+@enduml
+```
