@@ -27,7 +27,7 @@ bool DechiffreurCesar::_essayerDecalage(const std::string& mot, int decalage) co
     for (int i  = 0; i < mot.size(); i++) {
         essai += _decalerLettre(mot[i], decalage);
     }
-    return _langue->getMots().find(essai) != _langue->getMots().end();
+    return _langue->contientMot(essai);
 }
 
 void DechiffreurCesar::dechiffrer() {

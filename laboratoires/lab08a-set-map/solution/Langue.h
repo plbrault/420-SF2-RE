@@ -21,6 +21,6 @@ private:
 public:
     Langue(const std::string& nomFichierMots, const std::string& nomFichierFrequences);
     void charger();
-    const std::set<std::string>& getMots() const;
+    bool contientMot(const std::string& mot) const;
     const std::vector<char>& getLettresTriees() const;
 };

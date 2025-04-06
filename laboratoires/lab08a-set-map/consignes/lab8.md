@@ -97,12 +97,49 @@ Le [chiffre de César](https://fr.wikipedia.org/wiki/Chiffrement_par_d%C3%A9cala
 
 Cette méthode de chiffrement est facile à casser en utilisant une [attaque par force brute](https://fr.wikipedia.org/wiki/Attaque_par_force_brute). Un algorithme de force brute consiste à tester successivement toutes les solutions possibles à un problème jusqu'à ce qu'une solution valide soit trouvée. Une méthode de chiffrement réellement sécuritaire n'est pas vulnérable aux attaques par force brute, car le nombre de clés de chiffrement à tester est trop élevé. Dans le cas du chiffre de César, il n'y a que 25 clés possibles.
 
-Vous allez écrire un programme qui utilise une attaque par force brute pour casser le chiffrement d'un texte chiffré avec le chiffre de César. Vous avez probablement déjà une bonne idée de comment vous allez vous y prendre pour tester les 25 décalages possibles. Mais comment votre programme va-t-il déterminer qu'une clé testée est la bonne? 🤔 Une façon de faire est d'utiliser une liste de mots de la langue d'origine du texte pour vérifier quelle clé produit le maximum de mots valides dans le texte déchiffré.
+Vous allez écrire un programme qui utilise une attaque par force brute pour casser le chiffrement d'un texte chiffré avec le chiffre de César. Vous avez probablement déjà une bonne idée de comment vous allez vous y prendre pour tester les 25 décalages possibles. Mais comment votre programme va-t-il déterminer qu'une clé testée est la bonne? 🤔 Une façon de faire est d'utiliser une liste de mots de la langue d'origine du texte pour vérifier quelle clé produit le maximum de mots valides dans le texte déchiffrer.
 
 Vous trouverez donc, sur Moodle, un fichier nommé `mots.json`. Ce fichier contient plus de **366 000** mots de la langue française. Afin d'accélérer la recherche de mots, vous allez extraire cette liste dans un `set<string>`.
 
-Voici les classes que vous implémenterez:
+Vous trouverez aussi un fichier `texte1.txt` qui contient le texte à déchiffrer. Celui-ci a été rédigé en français, puis chiffré avec la méthode du chiffre de César. Le chiffrement a préservé la casse des lettres (majuscule/minuscule). De plus, seuls les caractères de `'A'`  à `'Z'` et de `'a`' à `'z'` ont été chiffrés. Les lettres accentuées et les symboles de ponctuation sont demeurés tels quels.
+
+Voici les classes que vous devez implémenter:
 
 ```plantuml
+@startuml
 
+class Langue {
+    - JSONParser _jsonParser
+    - string _nomFichierMots
+    - set<string> _mots
+    - bool _estCharge
+    + Langue(const string& nomFichierMots)
+    + void charger()
+    + bool contientMot(const std::string& mot) const
+}
+
+class Dechiffreur {
+    - const Langue* _langue    
+    - string _texteChiffre
+    - string _texteDechiffre
+    + Dechiffreur(const Langue* langue)
+    + void lireTexteChiffre(istream& entree)
+    + virtual void dechiffrer() = 0
+    + const string& getTexteChiffre() const
+    + const string& getTexteDechiffre() const
+}
+
+class DechiffreurCesar {
+    - vector<char> _lettresMinuscules
+    - vector<char> _lettresMajuscules
+    - char _decalerLettre(char lettre, int decalage) const
+    - bool _essayerDecalage(const string& mot, int decalage) const
+    + DechiffreurCesar(const Langue* langue)
+    + void dechiffrer() override
+}
+
+Dechiffreur <|-- DechiffreurCesar
+Langue --> Dechiffreur
+
+@enduml
 ```

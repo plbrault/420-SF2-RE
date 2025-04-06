@@ -36,11 +36,11 @@ int main() {
     fluxTexteChiffre.close();
 
     // Déchiffrement du premier texte
-    //dechiffreurCesar.dechiffrer();
-    //cout << dechiffreurCesar.getTexteDechiffre();
+    dechiffreurCesar.dechiffrer();
+    cout << dechiffreurCesar.getTexteDechiffre();
 
     // Déchiffrement du deuxième texte
-    dechiffreurFrequence.dechiffrer();
+    /*dechiffreurFrequence.dechiffrer();
 
     // Substitutions manuelles
     vector<string> lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
@@ -57,7 +57,7 @@ int main() {
             }
         }
         ancien = '\0';
-    }
+    }*/
 
     return 0;
 }

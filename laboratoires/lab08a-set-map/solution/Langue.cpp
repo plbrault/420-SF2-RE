@@ -45,11 +45,11 @@ void Langue::charger() {
     _estCharge = true;
 }
 
-const set<string>& Langue::getMots() const {
+bool Langue::contientMot(const string& mot) const {
     if (!_estCharge) {
         throw runtime_error("Langue non chargée.");
     }
-    return _mots;
+    return _mots.contains(mot);
 }
 
 const vector<char>& Langue::getLettresTriees() const {
