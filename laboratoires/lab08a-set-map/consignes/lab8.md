@@ -97,7 +97,7 @@ Le [chiffre de César](https://fr.wikipedia.org/wiki/Chiffrement_par_d%C3%A9cala
 
 Cette méthode de chiffrement est facile à casser en utilisant une [attaque par force brute](https://fr.wikipedia.org/wiki/Attaque_par_force_brute). Un algorithme de force brute consiste à tester successivement toutes les solutions possibles à un problème jusqu'à ce qu'une solution valide soit trouvée. Une méthode de chiffrement réellement sécuritaire n'est pas vulnérable aux attaques par force brute, car le nombre de clés de chiffrement à tester est trop élevé. Dans le cas du chiffre de César, il n'y a que 25 clés possibles.
 
-Vous allez écrire un programme qui utilise une attaque par force brute pour casser le chiffrement d'un texte chiffré avec le chiffre de César. Vous avez probablement déjà une bonne idée de comment vous allez vous y prendre pour tester les 25 décalages possibles. Mais comment votre programme va-t-il déterminer qu'une clé testée est la bonne? 🤔 Une façon de faire est d'utiliser une liste de mots de la langue d'origine du texte pour vérifier quelle clé produit le maximum de mots valides dans le texte déchiffrer.
+Vous allez écrire un programme qui utilise une attaque par force brute pour casser le chiffrement d'un texte chiffré avec le chiffre de César. Vous avez probablement déjà une bonne idée de comment vous allez vous y prendre pour tester les 25 décalages possibles. Mais comment votre programme va-t-il déterminer qu'une clé testée est la bonne? 🤔 Une façon de faire est d'utiliser une liste de mots de la langue d'origine du texte pour vérifier quelle clé produit le maximum de mots valides dans le texte déchiffré.
 
 Vous trouverez donc, sur Moodle, un fichier nommé `mots.json`. Ce fichier contient plus de **366 000** mots de la langue française. Afin d'accélérer la recherche de mots, vous allez extraire cette liste dans un `set<string>`.
 
@@ -130,8 +130,6 @@ class Dechiffreur {
 }
 
 class DechiffreurCesar {
-    - vector<char> _lettresMinuscules
-    - vector<char> _lettresMajuscules
     - char _decalerLettre(char lettre, int decalage) const
     - bool _essayerDecalage(const string& mot, int decalage) const
     + DechiffreurCesar(const Langue* langue)
@@ -143,3 +141,16 @@ Langue --> Dechiffreur
 
 @enduml
 ```
+
+Voici des explications supplémentaires pour quelques-unes des méthodes:
+
+**Classe `Langue`**
+
+* La méthode `charger` charge le contenu du fichier JSON dans `_mots`.
+* La méthode `contientMot` vérifie si le mot reçu en paramètre est présent dans `mots`. Elle doit lancer une exception si les mots n'ont pas encore été chargés.
+
+**Classe `DechiffreurCesar`**
+
+* La méthode privée `_decalerLettre` prend en paramètre une lettre et un décalage et retourne la lettre décalée. Si le caractère reçu en paramètre n'est pas une lettre ou est une lettre accentuée, elle le retourne tel quel.
+
+N'hésitez pas à ajouter d'autres attributs ou méthodes privées si cela vous paraît utile.
