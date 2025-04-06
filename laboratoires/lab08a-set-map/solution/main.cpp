@@ -36,28 +36,31 @@ int main() {
     fluxTexteChiffre.close();
 
     // Déchiffrement du premier texte
-    dechiffreurCesar.dechiffrer();
-    cout << dechiffreurCesar.getTexteDechiffre();
+    //dechiffreurCesar.dechiffrer();
+    //cout << dechiffreurCesar.getTexteDechiffre();
 
     // Déchiffrement du deuxième texte
-    /*dechiffreurFrequence.dechiffrer();
+    dechiffreurFrequence.dechiffrer();
 
     // Substitutions manuelles
     vector<string> lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
     char ancien, nouveau;
     for (int i = 0; i < lignesTexteDechiffre.size(); i++) {
-        while (lignesTexteDechiffre[i] != "" && ancien != '.') {
+        while (lignesTexteDechiffre[i] != "" && ancien != '.' && ancien != '!') {
             cout << lignesTexteDechiffre[i] << endl;
-            cout << ">>> Entrer une nouvelle substitution (ancien nouveau) ou . pour passer à la ligne suivante" << endl;
+            cout << ">>> Entrer une nouvelle substitution (ancien nouveau), ou « . » pour passer à la ligne suivante, ou « ! » pour terminer." << endl;
             cin >> ancien;
-            if (ancien != '.') {
+            if (ancien != '.' && ancien != '!') {
                 cin >> nouveau;
                 dechiffreurFrequence.changerSubstitution(ancien, nouveau);
                 lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
             }
+        } if (ancien == '!') {
+            break;
         }
         ancien = '\0';
-    }*/
+    }
+    cout << "Texte déchiffré:" << endl << dechiffreurFrequence.getTexteDechiffre() << endl;
 
     return 0;
 }

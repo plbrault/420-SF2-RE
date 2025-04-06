@@ -227,7 +227,7 @@ Dans la méthode `charger`, ajoutez le code nécessaire pour charger le dictionn
 
 > **NOTE**: La bibliothèque JSON ne permet pas d'extraire un `map<float, vector<char>>` directement. Vous devrez donc extraire un `map<string, vector<string>>`, puis le convertir à l'aide d'une boucle.
 
-La méthode `charger` doit aussi appeler la méthode privée `_trierLettres`, qui copie les lettres vers `_lettresTriees` en ordre de fréquence. Une façon d'effectuer ce tri est d'itérer sur toutes les clés de `_lettresParFrequence` (qui, par nature du `map`, sont triées) et de les ajouter à la fin du vecteur.
+La méthode `charger` doit aussi appeler la méthode privée `_trierLettres`, qui copie les lettres vers `_lettresTriees` en ordre de fréquence. Une façon d'effectuer ce tri est d'itérer sur toutes les clés de `_lettresParFrequence` (qui, par nature du `map`, sont triées) et de les ajouter à la fin du vecteur. Les lettres qui partagent la même fréquence peuvent simplement être ajoutées les unes à la suite de l'autre dans le tableau.
 
 Testez bien votre classe `Langue` mise à jour avant de continuer.
 
@@ -318,4 +318,40 @@ Dechiffreur *-- Langue
 DechiffreurFrequence *-- AnalyseurTexte
 
 @enduml
+```
+
+Votre classe `DechiffreurFrequence` doit construire le dictionnaire `_substitutions` en associant ensemble les lettres qui se trouvent à la même position dans les tableaux de lettres triées des classes `Langue`  et `AnalyseurTexte`. Le résultat ne sera sans doute pas parfait (d'autant plus que certaines lettres partageaient la même fréquence dans le fichier JSON) mais avec un peu de chance, suffisamment de substitutions seront correctes pour que nous puissions deviner les substitutions restantes.
+
+Une fois le dictionnaire de substitutions construit, la méthode `dechiffrer` sera en mesure de déchiffrer le texte. Pour vous simplifier la vie, vous n'avez pas à conserver la casse des lettres (tout le texte déchiffré peut être en minuscules).
+
+Faites l'essai de votre déchiffreur dans le `main`. Si vous l'avez implémenté correctement, vous devriez voir un texte encore partiellement incorrect, mais avec suffisamment de caractères substitués correctement pour vous permettre de deviner certains mots. La dernière étape est donc de permettre à l'utilisateur de changer manuellement certaines substitutions. Pour ce faire, ajoutez à votre déchiffreur la méthode suivante:
+
+```cpp
+void changerSubstitution(char ancien, char nouveau);
+```
+
+Cette méthode reçoit une lettre de substitution actuelle, et la remplace par une nouvelle lettre de substitution avant de re-substituer toutes les lettres dans le texte. Pensez bien à la modification que vous devez apporter à `_substitutions` (indice: il ne s'agit PAS de `_substitutions[ancien] = nouveau`).
+
+Voici du code à utiliser dans votre `main` pour afficher le texte déchiffré ligne par ligne et permettre à l'utilisateur de changer des substitutions:
+
+```cpp
+// Substitutions manuelles
+vector<string> lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
+char ancien, nouveau;
+for (int i = 0; i < lignesTexteDechiffre.size(); i++) {
+    while (lignesTexteDechiffre[i] != "" && ancien != '.' && ancien != '!') {
+        cout << lignesTexteDechiffre[i] << endl;
+        cout << ">>> Entrer une nouvelle substitution (ancien nouveau), ou « . » pour passer à la ligne suivante, ou « ! » pour terminer." << endl;
+        cin >> ancien;
+        if (ancien != '.' && ancien != '!') {
+            cin >> nouveau;
+            dechiffreurFrequence.changerSubstitution(ancien, nouveau);
+            lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
+        }
+    } if (ancien == '!') {
+        break;
+    }
+    ancien = '\0';
+}
+cout << "Texte déchiffré:" << endl << dechiffreurFrequence.getTexteDechiffre() << endl;
 ```
