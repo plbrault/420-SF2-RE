@@ -40,7 +40,7 @@ Mais non, c'est une blague!
 
 Vous trouverez un fichier « Parser JSON.zip » sur Moodle. Vous devez le télécharger et placer les fichiers C++ qu'il contient dans votre projet. Les fichiers `JSONParser.h` et `JSONParser.cpp` vous permettent d'utiliser un *parser* JSON qui hérite de la classe *Parser* du laboratoire 6. Si vous ouvrez ces fichiers, vous constaterez qu'ils ne font pas grand-chose. Ils utilisent en fait une bibliothèque (fichier `json.h`) dont la documentation se trouve [ici](https://github.com/nlohmann/json). C'est elle qui fait tout le travail.
 
-La méthode `getData` de `JSONParser` retourne un objet de type `json`. Cette classe provient de la bibliothèque et n'est donc pas un type natif de C++. Elle permet d'extraire les données « parsées » sous forme de conteneurs de la STL.
+La méthode `getData` de `JSONParser` retourne un objet de type `json`. Cette classe provient de la bibliothèque et n'est donc pas un type natif de C++. Elle permet d'extraire les données « parsées » vers des conteneurs de la STL.
 
 Supposons que nous avons le fichier JSON suivant:
 
@@ -161,11 +161,11 @@ Le `main` doit utiliser la classe `DechiffreurCesar` pour déchiffrer `texte1.tx
 
 ## Le chiffrement par substitution
 
-Le fichier `texte2.txt` contient un texte en français qui a été chiffré à l'aide d'une méthode légèrement meilleure que le chiffre de César. Chaque lettre de l'alphabet a été substituée par une autre lettre. Contrairement au chiffre de César, le décalage diffère pour chaque lettre. Il y a donc **26!** clés possibles, ou **4,03 × 10<sup>26</sup>**. Si on suppose que votre ordinateur peut tester un million de clés par seconde, il vous faudra environ **12,8 trillions d'années** pour déchiffrer ce texte par force brute.
+Le fichier `texte2.txt` contient un texte en français qui a été chiffré à l'aide d'une méthode légèrement meilleure que le chiffre de César. Chaque lettre de l'alphabet a été substituée par une autre lettre. Contrairement au chiffre de César, le décalage diffère pour chaque lettre. Il y a donc **26!** clés possibles, soit environ **4,03 × 10<sup>26</sup>**. Si on suppose que votre ordinateur peut tester un million de clés par seconde, il vous faudra environ **12,8 trillions d'années** pour déchiffrer ce texte par force brute.
 
-Vous aurez donc compris qu'il nous faudra une autre méthode pour déchiffrer ce texte. Une façon de faire est d'utiliser une **analyse de fréquences**, c'est-à-dire qu'on peut deviner les lettres d'origine selon la fréquence d'apparition des lettres dans le texte chiffré. Par exemple, puisque la lettre **e** est la plus fréquente dans la langue française, il est probable que la lettre la plus fréquente dans le texte chiffré soit la substitution du **e**.
+Vous aurez donc compris qu'il vous faudra une autre méthode pour déchiffrer ce texte. Une façon de faire est d'utiliser une **analyse de fréquences**, c'est-à-dire deviner les lettres d'origine selon la fréquence d'apparition des lettres dans le texte chiffré. Par exemple, puisque la lettre **e** est la plus fréquente dans la langue française, il est probable que la lettre la plus fréquente dans le texte chiffré soit la substitution du **e**.
 
-Il y a cependant un risque que le texte d'origine contienne une distribution biaisée des lettres de l'alphabet. Par exemple, il est probable qu'un article traitant des zébus contienne une quantité anormalement élevée de **Z**. Une solution possible à ce problème est d'ignorer les mots qui apparaissent trop souvent. On ne veut cependant pas ignorer les articles tels que « **de** », « **la** », « **le** » ou « **des** », puisque ceux-ci contribuent certainement à la grande fréquence des lettres telles que **e** et **a** dans la langue française. Nous allons donc ignorer **tous les mots de plus de 3 lettres dont le nombre d'occurences correspond à plus de 5% des mots du texte**.
+Il y a cependant un risque que le texte d'origine contienne une distribution biaisée des lettres de l'alphabet. Par exemple, il est probable qu'un article traitant des zébus contienne une quantité anormalement élevée de **Z**. Une solution possible à ce problème est d'ignorer les mots qui apparaissent trop souvent. On ne veut cependant pas ignorer les articles tels que « **de** », « **la** », « **le** » ou « **des** », puisque ceux-ci contribuent certainement à la grande fréquence des lettres telles que **e** et **a** dans la langue française. Nous allons donc ignorer **tous les mots de plus de 3 lettres dont le nombre d'occurences correspond à plus de 5% du nombre de mots dans le texte**.
 
 Sur Moodle, vous trouverez un fichier `frequences_lettres.json` qui contient un classement des lettres de l'alphabet par fréquence d'apparition des lettres [dans le corpus de Wikipédia en français](https://fr.wikipedia.org/wiki/Fr%C3%A9quence_d%27apparition_des_lettres). Voici le contenu du fichier:
 
@@ -227,7 +227,7 @@ Dans la méthode `charger`, ajoutez le code nécessaire pour charger le dictionn
 
 > **NOTE**: La bibliothèque JSON ne permet pas d'extraire un `map<float, vector<char>>` directement. Vous devrez donc extraire un `map<string, vector<string>>`, puis le convertir à l'aide d'une boucle.
 
-La méthode `charger` doit aussi appeler la méthode privée `_trierLettres`, qui copie les lettres vers `_lettresTriees` en ordre de fréquence. Une façon d'effectuer ce tri est d'itérer sur toutes les clés de `_lettresParFrequence` (qui, par nature du `map`, sont triées) et de les ajouter à la fin du vecteur. Les lettres qui partagent la même fréquence peuvent simplement être ajoutées les unes à la suite de l'autre dans le tableau.
+La méthode `charger` doit aussi appeler la méthode privée `_trierLettres`, qui copie les lettres vers `_lettresTriees` en ordre de fréquence. Une façon d'effectuer ce tri est d'itérer sur toutes les clés de `_lettresParFrequence` (qui, par nature du `map`, sont triées) et de les ajouter à la fin du vecteur. Les lettres qui partagent la même fréquence peuvent simplement être ajoutées les unes à la suite des autres dans le tableau.
 
 Testez bien votre classe `Langue` mise à jour avant de continuer.
 
@@ -359,3 +359,5 @@ cout << "Texte déchiffré:" << endl << dechiffreurFrequence.getTexteDechiffre()
 Testez le tout. Si vous remarquez des problèmes dans votre implémentation de `changerSubstitutions`, trouvez des solutions et corrigez-les.
 
 À la fin de votre `main`, ajouter le code nécessaire pour écrire le texte déchiffré dans un fichier `sortie-frequence.txt`.
+
+Félicitations, vous avez terminé le laboratoire! 🎉
