@@ -1,4 +1,4 @@
-# Laboratoire 08
+# Laboratoire 08-A
 
 ## Objectifs
 
@@ -89,4 +89,20 @@ En C++, cette structure de données correspond à un `map<string, string>`. On e
 
 ```cpp
 map<string, string> dictionnaire = parser.getData().template get<map<string, string>>();
+```
+
+## Le chiffre de César
+
+Le [chiffre de César](https://fr.wikipedia.org/wiki/Chiffrement_par_d%C3%A9calage) est une méthode de chiffrement primitive qui consiste à décaler d'une même valeur chacune des lettres de l'alphabet. La clé de chiffrement est la valeur du décalage. Par exemple, avec une clé de 3, la lettre `A` devient `D`, la lettre `B` devient `E`, et ainsi de suite. Les lettres `X`, `Y` et `Z`, pour leur part, deviennent respectivement `A`, `B` et `C`.
+
+Cette méthode de chiffrement est facile à casser en utilisant une [attaque par force brute](https://fr.wikipedia.org/wiki/Attaque_par_force_brute). Un algorithme de force brute consiste à tester successivement toutes les solutions possibles à un problème jusqu'à ce qu'une solution valide soit trouvée. Une méthode de chiffrement réellement sécuritaire n'est pas vulnérable aux attaques par force brute, car le nombre de clés de chiffrement à tester est trop élevé. Dans le cas du chiffre de César, il n'y a que 25 clés possibles.
+
+Vous allez écrire un programme qui utilise une attaque par force brute pour casser le chiffrement d'un texte chiffré avec le chiffre de César. Vous avez probablement déjà une bonne idée de comment vous allez vous y prendre pour tester les 25 décalages possibles. Mais comment votre programme va-t-il déterminer qu'une clé testée est la bonne? 🤔 Une façon de faire est d'utiliser une liste de mots de la langue d'origine du texte pour vérifier quelle clé produit le maximum de mots valides dans le texte déchiffré.
+
+Vous trouverez donc, sur Moodle, un fichier nommé `mots.json`. Ce fichier contient plus de **366 000** mots de la langue française. Afin d'accélérer la recherche de mots, vous allez extraire cette liste dans un `set<string>`.
+
+Voici les classes que vous implémenterez:
+
+```plantuml
+
 ```
