@@ -24,7 +24,7 @@ char DechiffreurCesar::_decalerLettre(char lettre, int decalage) const {
 
 bool DechiffreurCesar::_essayerDecalage(const std::string& mot, int decalage) const {
     std::string essai;
-    for (int i  = 0; i < mot.size(); i++) {
+    for (size_t i  = 0; i < mot.size(); i++) {
         essai += _decalerLettre(mot[i], decalage);
     }
     return _langue->contientMot(essai);

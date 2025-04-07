@@ -4,7 +4,7 @@
 using namespace std;
 
 void DechiffreurFrequence::_genererSubstitutions() {
-    for (int i = 0; i < _analyseur.getLettresTriees().size(); i++) {
+    for (size_t i = 0; i < _analyseur.getLettresTriees().size(); i++) {
         _substitutions[_analyseur.getLettresTriees()[i]] = _langue->getLettresTriees()[i];
     }
 }

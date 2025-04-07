@@ -54,7 +54,7 @@ int main() {
     // Substitutions manuelles
     vector<string> lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
     char ancien, nouveau;
-    for (int i = 0; i < lignesTexteDechiffre.size(); i++) {
+    for (size_t i = 0; i < lignesTexteDechiffre.size(); i++) {
         while (lignesTexteDechiffre[i] != "" && ancien != '.' && ancien != '!') {
             cout << lignesTexteDechiffre[i] << endl;
             cout << ">>> Entrer une nouvelle substitution (ancien nouveau), ou « . » pour passer à la ligne suivante, ou « ! » pour terminer." << endl;
