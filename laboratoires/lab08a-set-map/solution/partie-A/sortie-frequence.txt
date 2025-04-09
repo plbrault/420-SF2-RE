@@ -1,0 +1,557 @@
+contenu de l'article « informatique » sur wikipédia en français
+
+l'informatique est un domaine d'activité scientifique, technique et industrielle concernant le traitement automatique de l'information numérique par l'exécution de programmes informatiques hébergés par des dispositifs électriques-électroniques : systèmes embarqués, ordinateurs, robots et automates.
+
+les champs d'application sont :
+
+    l'informatique théorique, qui concerne la définition de concepts et modèles.
+    l'informatique pratique, qui s'intéresse aux techniques concrètes de mise en œuvre.
+    l'informatique quantique, qui concerne les calculs complexes à faire rapidement.
+
+certains aspects de l'informatique sont très abstraits, comme la complexité algorithmique, d'autres sont plus proches d'un public profane.
+
+ainsi, la théorie des langages demeure un domaine davantage accessible aux professionnels formés (description des ordinateurs et méthodes de programmation), tandis que les métiers liés aux interfaces homme-machine (ihm) sont accessibles à un plus large public.
+définitions
+
+    « computer science is no more about computers than astronomy is about telescopes »
+
+— hal abelson[note 1].
+
+    « la science informatique n'est pas plus la science des ordinateurs que l'astronomie n'est celle des télescopes. »
+
+le terme « informatique » résulte de l'association du terme « information » au suffixe « -ique » signifiant « qui est propre à » :
+
+    comme adjectif, il s'applique à l'ensemble des traitements liés à l'emploi des ordinateurs et systèmes numériques.
+    comme substantif, il désigne les activités liées à la conception et à la mise en œuvre de ces machines. des questions de télécommunications comme le traitement du signal ou la théorie de l'information, aussi bien que des problèmes mathématiques comme la calculabilité s'y rattachent.
+
+dans le vocabulaire universitaire américain, l'informatique (« computer science ») désigne surtout l'informatique théorique : un ensemble de sciences formelles qui ont pour objet d'étude la notion d'information et des procédés de traitement automatique de celle-ci, l'algorithmique.
+
+les applications de l'informatique depuis les années 1950 forment la base du secteur d'activité des technologies de l'information et de la communication. ce secteur industriel et commercial est lié à la fois aux procédés (logiciels, à l'architectures de systèmes) et au matériel (électronique, télécommunication). le secteur fournit également de nombreux services liés à l'utilisation de ses produits : développement, maintenance, enseignement, assistance, surveillance et entretien.
+Étymologie
+
+en 1957, l'ingénieur allemand karl steinbuch crée le terme « informatik » pour son essai intitulé informatik: automatische informationsverarbeitung, pouvant être rendu en français par « informatique : traitement automatique de l'information »[1].
+
+en mars 1962, philippe dreyfus, ancien directeur du centre national de calcul électronique de bull, utilise pour la première fois en france le terme « informatique »[2] pour son entreprise « société d'informatique appliquée » (sia)[3]. selon certains, ce néologisme est un mot-valise qui agglomère « information » et « automatique », pour désigner le traitement automatique des données[4],[5].
+
+en 1966, l'académie française consacre l'usage officiel du mot pour désigner la « science du traitement de l'information ». la presse, l'industrie et le milieu universitaire l'adoptent dès cette époque.
+
+en juillet 1968, le ministre fédéral de la recherche scientifique d'allemagne de l'ouest, gerhard stoltenberg, prononce le mot « informatik » lors d'un discours officiel sur la nécessité d'enseigner cette nouvelle discipline dans les universités de son pays ; on emploie ce même terme pour nommer certains cours dans les universités allemandes[6]. le mot informatica fait alors son apparition en italie et en espagne, de même qu’informatics au royaume-uni.
+
+les fondateurs de la compagnie générale d'informatique (cgi) reprennent le mot « informatique » en 1969[7].
+Évolution sémantique
+
+dans l'usage contemporain, le substantif « informatique » devient un mot polysémique qui désigne autant le domaine industriel en rapport avec l'ordinateur (au sens de calculateur fonctionnant avec des algorithmes), que la science du traitement des informations par des algorithmes.
+
+les expressions « science informatique », « informatique fondamentale » ou « informatique théorique » désignent sans ambiguïté la science, tandis que « technologies de l'information » ou « technologies de l'information et de la communication » désignent le secteur industriel et ses produits. des institutions assimilent parfois la compétence des utilisateurs dans la manipulation des appareils à l'alphabétisation ou à la conduite automobile, comme veut le faire entendre l'expression european computer driving license (traduction littérale : « permis de conduire un ordinateur »)[8],[9].
+Équivalents en anglais
+
+plusieurs termes en anglais désignent l'informatique :
+
+    informatics (en) : surtout en tant que domaine scientifique (se rencontre en europe de l'ouest)[10] ;
+    computer science : l'informatique fondamentale ou science des calculateurs, une branche de la science en rapport avec le traitement automatique d'informations[11] ;
+    computing : qui qualifie les activités nécessitant une masse d'opérations mathématiques et logiques (par exemple, dans cloud computing ou decision support computing)[12] ;
+    electronic data processing : traitement des données à l'aide de l'électronique ;
+    information technology : souvent utilisé pour désigner le secteur industriel des technologies de l'information[13],[14].
+
+dans le monde du travail, on parle volontiers d’i.t., le département informatique étant the i.t. department[15] (les autres termes ne sont quasiment jamais utilisés).
+histoire
+articles détaillés : histoire des ordinateurs, histoire de l'informatique et chronologie de l'informatique.
+
+depuis des millénaires, l'homme a créé et utilisé des outils l'aidant à calculer (abaque, boulier, etc.), exigeant, comme les opérations manuelles, des algorithmes de calcul, dont des tables datant de l'époque d'hammourabi (environ 1750 av. j.-c.) figurent parmi les exemples les plus anciens.
+
+si les machines à calculer évoluent constamment depuis l'antiquité, elles n'exécutent pas elles-mêmes l'algorithme : c'est l'homme qui doit apprendre et exécuter la suite des opérations, comme pour réaliser les différentes étapes d'une division euclidienne. en 1642, blaise pascal imagine une machine à calculer[16],[17], la pascaline, qui fut commercialisée. sept exemplaires subsistent dans des musées comme celui des arts et métiers[18] à paris, et deux sont dans des collections privées (ibm en possède une)[19]. joseph marie jacquard avec ses métiers à tisser à cartes perforées illustre en premier le concept de programmation, comme enchaînement automatique d'opérations élémentaires. george boole et ada lovelace esquissent une théorie de la programmation des opérations mathématiques.
+
+le secteur très féminisé à ses débuts avec des pionnières comme ada lovelace, grace hopper, frances allen, adele goldberg est devenu progressivement plus masculin avec la professionnalisation des différents métiers dans l'informatique (premiers diplômes en informatique[20]). la place des femmes en informatique décroît dès le milieu des années 1980 en france[21].
+mécanographie
+
+dans les années 1880, herman hollerith, futur fondateur d'ibm, fonde la mécanographie en inventant une machine électromécanique destinée à faciliter le recensement en stockant les informations sur une carte perforée[22]. le gouvernement des États-unis utilise pour la première fois à grande échelle les trieuses et les tabulatrices lors du recensement de 1890, à la suite de l'afflux des immigrants dans ce pays dans la seconde moitié du xixe siècle.
+
+l'ingénieur norvégien fredrik rosing bull a créé la première entreprise européenne qui a développé et commercialisé des équipements mécanographiques. installé en suisse dans les années 1930 il est ensuite venu en france pour s'attaquer au marché français. pendant la seconde guerre mondiale, rené carmille utilisait des machines mécanographiques bull.
+
+les allemands étaient équipés de machines mécanographiques avant la seconde guerre mondiale. ces équipements étaient installés dans des ateliers composés de trieuses, interclasseuses, perforatrices, tabulatrices et calculatrices connectées à des perforateurs de cartes. des machines électromécaniques utilisant aussi des lampes radio comme les triodes effectuaient les traitements. ces lampes dégageaient de la chaleur qui attirait les insectes, et les bugs (terme anglais pour insectes, francisé en « bogue ») étaient une cause de panne courante.
+
+les femmes occupent une place prépondérante au début de l'informatique dans les activités de calcul et de programmation. les programmeuses de l'ordinateur eniac en 1944 sont six mathématiciennes : marlyn meltzer, betty holberton, kathleen antonelli, ruth teitelbaum, jean bartik, frances spence[23]. adele goldstine est leur formatrice et elles sont surnommées les « eniac girls »[24].
+
+l'informatique moderne n'a pu émerger qu'à la suite de l'invention du transistor en 1947 et son industrialisation dans les années 1960.
+naissance de l'informatique moderne
+
+l'informatique moderne commence avant la seconde guerre mondiale, lorsque le mathématicien alan turing pose les bases d'une théorisation de ce qu'est un ordinateur, avec son concept de machine universelle de turing. turing pose dans son article les fondements théoriques de ce qui sépare la machine à calculer de l'ordinateur : la capacité de ce dernier à réaliser un calcul en utilisant un algorithme conditionnel.
+
+après la seconde guerre mondiale, l'invention du transistor, puis du circuit intégré permettront de remplacer les relais électromécaniques et les tubes à vide, qui équipent les machines à calculs pour les rendre à la fois plus petites, plus complexes, plus économiques et plus fiables. le capital-risque finance des dizaines de sociétés électroniques.
+
+avec l'architecture de von neumann, mise en application de la machine universelle de turing, les ordinateurs dépassent la simple faculté de calculer et peuvent commencer à accepter des programmes plus évolués, de nature algorithmique.
+
+en 1961, marion créhange soutient une des premières thèses en informatique en france[25].
+
+dans les années 1970, l'informatique se développe avec les télécommunications, avec arpanet, le réseau cyclades et la distributed system architecture (dsa) de réseau en couches, qui donnera naissance en 1978 au modèle osi, appelé aussi « osi-dsa », puis aux protocoles tcp-ip dans les années 1990, grâce à la baisse des prix des microprocesseurs. les concepts de datagramme[26] et d'informatique distribuée, d'abord jugés risqués, s'imposeront grâce à l'internet.
+développement des applications informatiques
+
+la série de livres the art of computer programming de donald knuth, publiée à partir des années 1960, fait ressortir les aspects mathématiques de la programmation informatique[27]. edsger dijkstra, niklaus wirth et christopher strachey travaillent et publient vers un même axe. ces travaux préfigurent d'importants développements en matière de langage de programmation.
+
+l'amélioration de l'expressivité des langages de programmation a permis la mise en œuvre d'algorithmes toujours plus sophistiqués, appliqués à des données de plus en plus variées. la miniaturisation des composants et la réduction des coûts de production, associées à une augmentation de la demande en traitements des informations de toutes sortes (scientifiques, financières, commerciales, etc.), ont eu pour conséquence une diffusion de l'informatique dans tous les secteurs économiques, ainsi que dans la vie quotidienne des individus.
+
+dans les années 1970, xerox fait réaliser des études en psychologie cognitive et en ergonomie en vue de simplifier l'utilisation des outils informatiques. l'interface graphique propose un accès à la machine plus proche des objets ordinaires que l'interface en ligne de commande existant jusque-là. les constructeurs souhaitant concurrencer le géant ibm promeuvent une informatique plus décentralisée.
+
+la démocratisation de l'utilisation d'internet – réseau basé sur arpanet – depuis 1995, a amené les outils informatiques à être de plus en plus utilisés dans une logique de réseau[28] comme moyen de télécommunication, à la place des outils tels que la poste ou le téléphone. elle s'est poursuivie avec l'apparition des logiciels libres[29], puis des réseaux sociaux et des outils de travail collaboratif dont wikipédia n'est qu'un des nombreux exemples.
+
+face à la demande pour numériser photos et musiques, les capacités de stockage, de traitement et de partage des données explosent et les sociétés qui ont parié sur la croissance la plus forte l'emportent le plus souvent, en profitant d'une énorme bulle spéculative sur les sociétés d'informatique.
+
+en france, l'informatique n'a commencé à se développer que dans les années 1960, avec le plan calcul. depuis lors, les gouvernements successifs ont mené des politiques diverses en faveur de la recherche scientifique, l'enseignement, la tutelle des télécommunications, la nationalisation d'entreprises clés.
+science informatique
+article détaillé : informatique théorique.
+
+la science informatique est une science formelle, dont l'objet d'étude est le calcul[30] au sens large, c'est-à-dire, non pas exclusivement arithmétique, mais en rapport avec tout type d'information que l'on peut représenter par une suite de nombres.
+
+ainsi, textes, séquences d'adn, images, sons ou formules logiques peuvent faire l'objet de calculs.
+
+selon le contexte, on parle d'un calcul, d'un algorithme, d'un programme, d'une procédure.
+calculabilité
+article détaillé : calculabilité.
+
+un algorithme est une manière systématique de procéder pour arriver à calculer un résultat[31].
+
+un des exemples classiques est l'algorithme d'euclide du calcul du « plus grand commun diviseur » (pgcd) qui remonte au moins à 300 av. j.-c., mais il s'agit déjà d'un calcul complexe. avant cela, le simple fait d'utiliser un abaque demande d'avoir réfléchi à un moyen systématique (et correct) d'utiliser cet outil pour réaliser des opérations arithmétiques.
+
+des algorithmes existent donc depuis l'antiquité, mais ce n'est que depuis les années 1930, avec les débuts de la théorie de la calculabilité, que les scientifiques se sont posé les questions « qu'est-ce qu'un modèle de calcul ? », « est-ce que tout est calculable ? » et ont tenté d'y répondre formellement[32].
+
+il existe de nombreux modèles de calcul, dont les deux principaux sont la « machine de turing » et le « lambda-calcul ». ces deux systèmes formels définissent des objets qui peuvent représenter ce qu'on appelle des procédures de calcul, des algorithmes ou des programmes. ils définissent ensuite un moyen systématique d'appliquer ces procédures, c'est-à-dire de calculer.
+
+le résultat le plus important de la calculabilité est probablement le fait que les principaux modèles de calcul ont exactement la même puissance[33], c'est-à-dire qu'il n'existe pas de procédure que l'on pourrait exprimer dans un modèle mais pas dans un autre. la thèse de church postule que ces modèles de calcul équivalents décrivent complètement et mathématiquement tout ce qui est physiquement calculable.
+
+un deuxième résultat fondamental est l'existence de fonctions incalculables, une fonction étant ce que calcule une procédure ou un algorithme (ceux-ci désignant plutôt comment faire le calcul). on peut montrer qu'il existe des fonctions, bien définies, pour lesquelles il n'existe pas de procédure pour les calculer. l'exemple le plus connu étant probablement le problème de l'arrêt, qui montre qu'il n'existe pas de machine de turing calculant si une autre machine de turing donnée s'arrêtera (et donc donnera un résultat) ou non.
+
+tous les modèles de calcul étant équivalents, ce résultat s'applique aussi aux autres modèles, ce qui inclut les programmes et logiciels que l'on peut trouver dans les ordinateurs courants. il existe un lien très fort entre les fonctions que l'on ne peut pas calculer et les problèmes que l'on ne peut pas décider (voir décidabilité).
+algorithmique
+article détaillé : algorithmique.
+
+l'algorithmique est l'étude comparative des différents algorithmes. tous les algorithmes ne se valent pas : le nombre d'opérations nécessaires pour arriver à un même résultat diffère d'un algorithme à l'autre. ce nombre d'opérations, appelé la complexité algorithmique est le sujet de la théorie de la complexité des algorithmes, qui constitue une préoccupation essentielle en algorithmique.
+
+la complexité algorithmique sert en particulier à déterminer comment le nombre d'opérations nécessaires évolue en fonction du nombre d'éléments à traiter (la taille des données) :
+
+    soit l'évolution peut être indépendante de la taille des données, on parle alors de complexité constante ;
+    soit le nombre d'opérations peut augmenter selon un rapport logarithmique, linéaire, polynomial ou exponentiel (dans l'ordre décroissant d'efficacité et pour ne citer que les plus répandues) ;
+        une augmentation exponentielle de la complexité aboutit très rapidement à des durées de calcul déraisonnables pour une utilisation en pratique ;
+        tandis que pour une complexité polynomiale (ou meilleure), le résultat sera obtenu après une durée de calcul réduite, même avec de grandes quantités de données.
+
+nous arrivons maintenant à un problème ouvert fondamental en informatique : « p est-il égal à np ? »[34]. en simplifiant beaucoup : p est « l'ensemble des problèmes pour lesquels on connaît un algorithme efficace » et np « l'ensemble des problèmes pour lesquels on connaît un algorithme efficace pour vérifier une solution à ce problème ». et en simplifiant encore plus : existe-t-il des problèmes difficiles ? des problèmes pour lesquels il n'existe pas d'algorithme efficace ?
+
+cette question est non seulement d'un grand intérêt théorique mais aussi pratique. en effet, un grand nombre de problématiques courantes et utiles sont des problèmes que l'on ne sait pas résoudre de manière efficace. c'est d'ailleurs un des problèmes du prix du millénaire et le clay mathematics institute s'est engagé à verser un million de dollars aux personnes qui en trouveraient la solution.
+
+c'est un problème ouvert, donc formellement, il n'y a pas de réponse reconnue. mais, en pratique, la plupart des spécialistes[réf. nécessaire] s'accordent pour penser que p≠np, c'est-à-dire qu'il existe effectivement des problèmes difficiles qui n'admettent pas d'algorithme efficace.
+cryptologie
+article détaillé : cryptologie.
+
+ce type de problème de complexité algorithmique est directement utilisé en cryptologie.
+
+en effet, les méthodes de cryptologie modernes reposent sur l'existence d'une fonction facile à calculer qui possède une fonction réciproque difficile à calculer. c'est ce qui permet de chiffrer un message qui sera difficile à décrypter (sans la clé).
+
+la plupart des chiffrements (méthode de cryptographie) reposent sur le fait que la procédure de décomposition en produit de facteurs premiers n'a pas d'algorithme efficace connu.
+
+si quelqu'un trouvait un tel algorithme, il serait capable de décrypter la plupart des cryptogrammes facilement. on sait d'ailleurs qu'un calculateur quantique en serait capable, mais les calculateurs quantiques actuels n'ont pas encore cette capacité.
+autre
+article détaillé : traitement automatique du langage naturel.
+
+depuis les années 1960, et à la frontière avec la logique mathématique : la correspondance de curry-howard a jeté un pont entre le monde des démonstrations formelles et celui des programmes, dans la discipline des méthodes formelles.
+
+citons aussi l'étude de la mécanisation des procédés de calcul et de pensée qui a permis de mieux comprendre la réflexion humaine, et apporté des éclairages en psychologie cognitive et en linguistique, par exemple, à travers la discipline du traitement automatique du langage naturel[35],[36].
+technologies de l'information et de la communication
+
+le terme technologies de l'information et de la communication désigne un secteur d'activité et un ensemble de biens qui sont des applications pratiques des connaissances scientifiques en informatique ainsi qu'en électronique numérique, en télécommunication, en sciences de l'information et de la communication et en cryptologie.
+
+    le matériel informatique est un ensemble d'équipements (pièces détachées) servant au traitement des informations.
+    un logiciel contient des suites d'instructions qui décrivent en détail les algorithmes des opérations de traitement d'information ainsi que les informations relatives à ce traitement (valeurs clés, textes, images, etc.).
+
+les appareils en électronique numérique utilisent tous un système logique. les entrées et sorties des composants électroniques n'ont que deux états ; l'un correspondant à vrai, l'autre à faux. on démontre qu'en assimilant vrai au nombre 1 et faux au nombre 0, on peut établir les règles logiques qui fondent un système de numération binaire. les appareils représentent toute l'information sous cette forme.
+
+les appareils informatiques se décomposent en quatre ensembles qui servent respectivement à entrer des données, les stocker, les traiter, puis les faire ressortir de l'appareil, selon les principes de la machine de turing et l'architecture de von neumann. les données circulent entre les pièces des différentes unités par des lignes de communication, les bus. le processeur est la pièce centrale qui anime l'appareil en suivant les instructions des programmes qui sont enregistrés à l'intérieur.
+appareils informatiques
+article détaillé : appareil informatique.
+un distributeur de billets contient un logiciel d'ordinateur.
+
+il existe aujourd'hui une gamme étendue d'appareils capables de traiter automatiquement des informations. de ces appareils, l'ordinateur est le plus connu, le plus ouvert, le plus complexe et un des plus anciens.
+
+l'ordinateur est une machine modulable et universelle qui peut être adaptée à de nombreuses tâches par ajout de matériel ou de logiciel.
+
+un système embarqué est un appareil équipé de matériel et de logiciel informatique, et affecté à une tâche bien précise.
+
+exemples d'appareils :
+
+    la console de jeu est un appareil destiné au jeu vidéo, une activité que l'on peut aussi exercer avec un ordinateur ;
+    le nas (acronyme de l'anglais network attached storage, littéralement « mémoire attachée à un réseau ») est un appareil destiné à garder des informations en mémoire et à les mettre à disposition via un réseau informatique ;
+    le distributeur de billets : un automate qui distribue sur demande des billets de banque ou des tickets de transport public ; les distributeurs sont souvent des ordinateurs effectuant un nombre limité de tâches ;
+    le récepteur satellite tout comme le décodeur de télévision numérique terrestre : les émissions de télévision se font en numérique et sont captées et décodées par des appareils informatiques ;
+    les appareils d'avionique sont des appareils électroniques et informatiques placés dans les avions et les véhicules spatiaux ; ils servent à la navigation, la prévention des collisions et la télécommunication ;
+    le gps : un appareil qui affiche une carte géographique, et se positionne sur la carte grâce à un réseau de satellites ; les cartes géographiques sont des informations créées par ordinateur ;
+    le téléphone mobile : initialement c'est un simple appareil analogique utilisable par un nombre restreint d'utilisateurs, le téléphone portable numérisé est utilisable en masse et sert aussi à jouer, à visionner des images ou des vidéos ;
+    les smartphones sont de véritables ordinateurs de poche, intégrant de nombreux capteurs (positionnement gps, accéléromètres multi-axes, capteur photographique, thermomètre, hygromètre), regroupant ainsi plusieurs appareils différents dans un même boîtier ;
+    les systèmes d'arme sont des dispositifs informatiques qui permettent l'organisation et le suivi des opérations militaires : positionnement géographique, calcul des tirs, guidage des appareils et des véhicules ;
+    les robots sont des appareils électromécaniques qui effectuent, de manière autonome, des tâches pour assister ou remplacer des humains ; l'autonomie est assurée par un appareil informatique placé à l'intérieur et/ou à l'extérieur du robot.
+
+matériel informatique
+article détaillé : matériel informatique.
+cette section a besoin d'être recyclée (avril 2017).
+une réorganisation et une clarification du contenu sont nécessaires. améliorez-la ou discutez des points à améliorer.
+
+le matériel informatique, ou en anglais hardware, désigne l’ensemble des composants électroniques physiques nécessaires au fonctionnement des appareils numériques. un boîtier est composé de pièces centrales, comme par exemple le processeur, et de pièces périphériques servant à l’acquisition, au stockage, à la restitution et à la transmission d’informations. l’appareil se compose d’un assemblage de pièces provenant potentiellement de divers fabricants. le respect des normes industrielles par ces différents acteurs rend possible l’interopérabilité et le bon fonctionnement de l’ensemble.
+carte mère
+carte mère avec le support du microprocesseur, les connecteurs mémoire et périphériques
+article détaillé : carte mère.
+
+la carte mère est le composant central d’un ordinateur, auquel sont reliés tous les autres éléments matériels, comme le processeur, la mémoire vive (ram), les cartes graphiques ou encore les dispositifs de stockage. on peut associer la carte mère, de manière métaphorique, à la colonne vertébrale du système[37], laquelle assure la communication entre ces différents composants via des bus, des connecteurs et des circuits imprimés.
+
+la carte mère contient aussi des puces comme le bios ou, sur les machines plus récentes, l’uefi qui permettent de démarrer l’ordinateur et de gérer les interactions de base entre les composants.
+boîtier et périphériques
+
+l'intérieur du boîtier d'un appareil informatique contient un ou plusieurs circuits imprimés sur lesquels sont soudés des composants électroniques et des connecteurs. la carte mère est le circuit imprimé central, sur lequel sont connectés tous les autres équipements.
+
+un bus est un ensemble de lignes de communication qui servent aux échanges d'information entre les composants de l'appareil informatique. les informations sont transmises sous forme de signaux électriques. le plus petit élément d'information manipulable en informatique correspond à un bit. les bus transfèrent des bytes d’informations composés de plusieurs bits en parallèle.
+
+les périphériques sont par définition, les équipements situés à l'extérieur du boîtier.
+Équipements d'entrée
+le boîtier avec la carte mère, le ventilateur du processeur, l'alimentation et la mémoire.
+carte interchangeable, circuit imprimé assurant support et liaison pour les composants numériques.
+
+les périphériques d'entrée servent à commander l'appareil informatique ou à y envoyer des informations.
+
+l'envoi des informations se fait par le procédé de numérisation. il s'agit de transformer des informations brutes (une page d'un livre, les listes des éléments périodiques, etc.) en suite de nombres binaires pouvant être manipulées par un appareil informatique. la transformation est faite par un circuit électronique. la construction du circuit diffère en fonction de la nature de l'information à numériser.
+
+l'ensemble des dispositifs de commande et les périphériques de sortie directement associés forment une façade de commande appelée interface homme-machine.
+stockage d'information
+
+une mémoire est un dispositif électronique (circuit intégré) ou électromécanique destiné à conserver des informations dans un appareil informatique.
+
+    une mémoire de masse : dispositif de stockage de grande capacité, souvent électromagnétique (bandes magnétiques, disques durs), destiné à conserver longtemps une grande quantité d'informations. sur ces supports les données sont enregistrées dans des fichiers.
+        un disque dur : mémoire de masse à accès direct, de grande capacité, composée d'un ou de plusieurs disques rigides superposés et magnétiques. l'ibm ramac 305, le premier disque dur, a été dévoilé en 1956. le disque dur est une des mémoires de masse les plus utilisées en informatique. pour gérer de grandes volumétries, ces disques sont associés par des mécanismes logiciels permettant d'étendre leur capacité (jusqu'à plusieurs po) et d'y intégrer une protection avancée (raid et réplication au niveau bloc. réplication, versioning et snapshot au niveau fichier).
+    une mémoire morte (« read only memory » en anglais, ou rom) : mémoire composée de circuits intégrés où les informations ne peuvent pas être modifiées. ce type de mémoire est toujours installé par le constructeur et utilisé pour conserver définitivement des logiciels embarqués.
+    une mémoire vive : mémoire composée de circuits intégrés où les informations peuvent être modifiées. les informations non enregistrées sont souvent perdues à la mise hors tension.
+
+processeur
+microprocesseur.
+
+le processeur est le ou les composants électroniques qui exécute des instructions (calcul, choix, gestion des taches). un appareil informatique contient au moins un microprocesseur, voire deux, quatre, ou plus. les ordinateurs géants contiennent des milliers de processeurs.
+
+le sigle cpu (pour l'anglais central processing unit) désigne le ou les processeurs centraux de l'appareil. l'exécution des instructions par le ou les cpu influence tout le déroulement des traitements.
+
+un microprocesseur multi-cœur réunit plusieurs circuits intégrés de processeur dans un seul boîtier. un composant électronique construit de cette manière effectue le même travail que plusieurs processeurs.
+Équipements de sortie
+
+les équipements de sortie servent à présenter les informations provenant d'un appareil informatique sous une forme reconnaissable par un humain.
+
+    un convertisseur numérique-analogique (en anglais digital to analog converter ou dac) est un composant électronique qui transforme une information numérique (une suite de nombres généralement en binaire) en un signal électrique analogique. il effectue le travail inverse de la numérisation (exemple : un lecteur de cd audio).
+    un écran est une surface sur laquelle s'affiche une image (exemple : des fenêtres de dialogue et des documents). les images à afficher sont générées par un circuit électronique convertisseur numérique-analogique en sortie des cartes vidéos pour l'affichage sur les écrans analogiques. de plus en plus souvent, l'étape du dac est supprimée grâce à la connexion hdmi avec les écrans interprétant directement les images numériques.
+    un moniteur est un écran utilisant les mêmes techniques que celles utilisées par les téléviseurs, qui affiche des graphiques et des textes provenant de l'appareil informatique.
+    une imprimante est un équipement servant à produire des informations non volatiles, sous forme d'impression sur papier. il peut s'agir de textes, de tableaux, de graphiques, de schémas, de photos, etc.
+    un haut-parleur ou un « jack » : on peut brancher un casque, un système d'enceintes amplifiées, ou tout système audio, afin de reproduire les sons dans le spectre audible par les humains, fabriqués ou passant par la carte son. cette dernière utilisant aussi un dac mais aussi adc, permettant de numériser les signaux analogiques provenant de microphones ou de tout appareil électronique de reproduction sonore que l'on connecte au connecteur mic ou line.
+
+transmission par câbles.
+Équipements de réseau
+
+les équipements de réseau servent à la communication d'informations entre des appareils informatiques, en particulier, à l'envoi d'informations, à la réception, à la retransmission, et au filtrage. les communications peuvent se faire par câble, par onde radio, par satellite, ou par fibre optique.
+
+un protocole de communication est une norme industrielle relative à la communication d'informations. la norme établit autant le point de vue électronique (tensions, fréquences) que le point de vue informationnel (choix des informations, format), ainsi que le déroulement des opérations de communication (qui initie la communication, comment réagit le correspondant, combien de temps dure la communication, etc.).
+
+selon le modèle osi – qui comporte sept niveaux –, une norme industrielle (en particulier un protocole de communication) d'un niveau donné, peut être combinée avec n'importe quelle norme industrielle d'une couche située en dessus ou en dessous.
+
+une carte réseau est un circuit imprimé qui sert à recevoir et envoyer des informations conformément à un ou plusieurs protocoles.
+
+un modem est un équipement qui sert à envoyer des informations sous forme d'un signal électrique modulé, ce qui permet de les faire passer sur une ligne de communication analogique telle une ligne téléphonique.
+logiciel informatique
+article détaillé : logiciel.
+
+un logiciel est un ensemble d'informations relatives à un traitement automatisé, qui correspond à la « procédure » d'une machine de turing. la mécanique de cette machine correspondant au processeur.
+
+le logiciel peut être composé d'instructions et de données. les instructions mettent en application les algorithmes en rapport avec le traitement d'information voulu. les données incluses dans un logiciel sont les informations relatives à ce traitement ou exigées par lui (valeurs clés, textes, images, etc.).
+
+le logiciel peut prendre une forme exécutable (c'est-à-dire, directement compréhensible par le micro-processeur) ou source, c'est-à-dire que la représentation est composée d'une suite d'instructions directement compréhensible par un individu. ainsi donc, on peut considérer le logiciel comme une abstraction qui peut prendre une multitude de formes : il peut être imprimé sur du papier, conservé sous forme de fichiers informatiques ou encore stocké dans une mémoire (une disquette, une clé usb).
+catégories de logiciels.
+
+un appareil informatique peut contenir de très nombreux logiciels, organisés en trois catégories :
+
+    logiciel applicatif : contient les instructions et les informations relatives à une activité automatisée. un ordinateur peut stocker une panoplie de logiciels applicatifs, correspondant aux très nombreuses activités pour lesquelles il est utilisé ;
+    logiciel système : contient les instructions et les informations relatives à des opérations de routine effectuées par les différents logiciels applicatifs ;
+    système d'exploitation : logiciel système qui contient l'ensemble des instructions et des informations relatives à l’utilisation commune du matériel informatique par les logiciels applicatifs ;
+    micrologiciel (firmware en anglais) : logiciel de bas niveau permettant la configuration, le démarrage d'un système et de rendre celui-ci « standard » quels que soient son constructeur et sa technologie. un micrologiciel contient les instructions et les informations relatives au déroulement de cette opération sur l'équipement en question. un appareil informatique peut contenir de nombreux micrologiciels. chaque micrologiciel contient les instructions et les informations relatives à tous les traitements qui peuvent être effectués par les équipements d'une série ou d'une marque déterminée.
+
+un logiciel embarqué, un logiciel libre, un logiciel propriétaire font référence à une manière de distribuer le logiciel. voir « distribution de logiciels ».
+domaines d'activités informatisées
+
+lire en ligne : ieee computer society - keywords[38].
+
+    manipulation d'informations administratives : commerciales, financières, légales, industrielles et comptables depuis 1962.
+    ingénierie : conception assistée par ordinateur et fabrication assistée par ordinateur dans les domaines de l'aéronautique, l'astronautique, la mécanique, la chimie, l'électronique et l'informatique.
+    sciences de la vie : biologie, santé.
+    sciences sociales : psychologie, sociologie, économie.
+    design et artisanat : architecture, littérature, musique.
+    malware ou logiciel malveillant : espionnage, vol d'informations, usurpation d'identité.
+
+logiciel applicatif
+
+un logiciel applicatif ou application informatique contient les instructions et les informations relatives à une activité automatisée par un appareil informatique (informatisée). il peut s'agir d'une activité de production (exemple : activité professionnelle), de recherche, ou de loisir.
+
+    par exemple, une application de gestion est un logiciel applicatif servant au stockage, au tri et au classement d'une grande quantité d'informations. les traitements consistent en la collecte et la vérification des informations fraîchement entrées, la recherche d'informations et la rédaction automatique de documents (rapports).
+    un autre exemple, un jeu vidéo est un logiciel applicatif servant à jouer. les traitements consistent en la manipulation d'images et de sons, la création d'images par synthèse, ainsi que l'arbitrage des règles du jeu.
+
+logiciel système
+
+un logiciel système contient les instructions et les informations relatives à des opérations de routine susceptibles d'être exécutées par plusieurs logiciels applicatifs. un logiciel système sert à fédérer, unifier et aussi simplifier les traitements d'un logiciel applicatif. les logiciels systèmes contiennent souvent des bibliothèques logicielles.
+
+lorsqu'un logiciel applicatif doit effectuer une opération de routine, celui-ci fait appel au logiciel système par un mécanisme appelé appel système. la façade formée par l'ensemble des appels systèmes auquel un logiciel système peut répondre est appelée interface de programmation ou api (acronyme de l'anglais application programming interface).
+
+un logiciel applicatif effectue typiquement un grand nombre d'appels système, et par conséquent, il peut fonctionner uniquement avec un système d'exploitation dont l'interface de programmation correspond. le logiciel est alors dit compatible avec ce système d'exploitation, et inversement.
+système d'exploitation
+article détaillé : système d'exploitation.
+
+le système d'exploitation est un logiciel système qui contient l'ensemble des instructions et des informations relatives à l’utilisation commune du matériel informatique par les logiciels applicatifs.
+
+les traitements effectués par le système d'exploitation incluent : répartition du temps d'utilisation du processeur par les différents logiciels (multitâche), répartition des informations en mémoire vive et en mémoire de masse.
+
+en mémoire de masse, les informations sont groupées sous formes d'unités logiques appelées fichiers.
+
+les traitements effectués par le système d'exploitation incluent également les mécanismes de protection contre l'utilisation simultanée par plusieurs logiciels applicatifs d'équipements de matériel informatique qui par nature ne peuvent pas être utilisés de manière partagée (voir exclusion mutuelle).
+
+posix est une norme industrielle d'une interface de programmation qui est appliquée dans de nombreux systèmes d'exploitation, notamment la famille unix.
+environnement graphique
+environnement graphique.
+
+l’environnement graphique est le logiciel système qui organise automatiquement l'utilisation de la surface de l'écran par les différents logiciels applicatifs et redirige les informations provenant des dispositifs de pointage (souris).
+
+l'environnement graphique est souvent partie intégrante du système d'exploitation.
+système de gestion de base de données
+
+une base de données est un stock structuré d'informations enregistré dans un dispositif informatique.
+
+un système de gestion de base de données (sigle : sgbd) est un logiciel système dont les traitements consistent à l'organisation du stockage d'informations dans une ou plusieurs bases de données. les informations sont disposées de manière à pouvoir être facilement modifiées, triées, classées, ou supprimées. les automatismes du sgbd incluent également des protections contre l'introduction d'informations incorrectes, contradictoires ou dépassées[39].
+micrologiciel
+puce contenant un micrologiciel.
+
+    dans un équipement informatique utilisation d'un équipement matériel déterminé, opération de routine. un micrologiciel contient les instructions et les informations relatives au traitement de cette opération sur l'équipement en question. chaque micrologiciel contient les informations relatives à tous les traitements de routine qui peuvent être effectués par les équipements d'une série ou d'une marque déterminée.
+        bios (acronyme de l'anglais basic input output system) : nom du micrologiciel incorporé à la carte mère d'un ordinateur, qui est développé spécifiquement pour celle-ci. il contient toutes les routines spécifiques : boot ou démarrage du système d'exploitation, gestion des entrées-sorties, gestion de l'énergie et du refroidissement, etc. c'est à lui que s'adresse le système d'exploitation pour effectuer une grande diversité de tâches.
+    dans un appareil électronique : les micrologiciels sont utilisés pour réaliser des automatismes difficiles à concevoir uniquement avec des circuits électroniques. par exemple, dans des appareils électroménagers (lave-linge, lave-vaisselle) ou les moteurs (calcul de la durée d'injection).
+
+le micrologiciel est souvent distribué sur une puce de mémoire morte faisant partie intégrante du matériel en question. il peut être mis à jour soit en changeant la rom ou pour les systèmes les plus récents en réécrivant la mémoire flash.
+utilisations et domaines d'activités
+article connexe : application (informatique).
+
+le traitement de l'information s'applique à tous les domaines d'activité et ceux-ci peuvent se trouver associés au mot « informatique », comme dans « informatique médicale », où les outils informatiques sont utilisés dans l'aide au diagnostic (ce champ d'activité se rapportera plutôt à l'informatique scientifique décrite ci-dessous), ou dans « informatique bancaire », désignant des systèmes d'information bancaire qui relèvent plutôt de l'informatique de gestion, de la conception et de l'implémentation de produits financiers qui relèvent plutôt de l'informatique scientifique et des mathématiques, ou encore de l'automatisation des salles de marché qui en partie relève de l'informatique temps réel.
+
+on peut dire de l'informatique, capable de traiter mathématiquement des commandes de langage formel, qu'elle réalise le projet de la modernité juridique. (la gouvernance) de la sorte, l'informatique a une fonction politique, conformément à la pensée cybernétique[40]. l'informatique déploie des machines à gouverner, qui complètent et se synchronisent avec les lois et procédures.
+
+les grands domaines d'utilisation de l'informatique sont :
+
+informatique de gestion
+    informatique en rapport avec la gestion de données, à savoir le traitement en masse de grandes quantités d'information. l'informatique de gestion a de nombreuses applications pratiques dans les entreprises : manipulation des informations relatives aux employés, commandes, ventes, statistiques commerciales, journaux de comptabilité générale y compris, en son temps, le calcul du décalage pour les déclarations de tva à récupérer et gestion de la production et des approvisionnements, gestion de stocks et des inventaires, etc. ce domaine est de loin celui qui représente la plus forte activité.
+informatique scientifique[41]
+    consiste à aider les ingénieurs de conception dans les domaines de l'ingénierie industrielle à concevoir et dimensionner des équipements à l'aide de programmes de calcul : réacteurs nucléaires, avions et automobiles (langages souvent employés : historiquement le fortran, de plus en plus concurrencé par c et c++). l'informatique scientifique est surtout utilisée dans les bureaux d'étude et les entreprises d'ingénierie industrielle car elle permet de simuler, par la recherche opérationnelle ou par itération, des scénarios de façon rapide et fiable. :par exemple, l'écurie italienne de formule 1 scuderia ferrari s'est équipée en 2006 avec un des plus puissants calculateurs du monde afin de permettre les essais numériques de sa monoplace et accélérer la mise au point de ses prototypes ;
+informatique embarquée
+    consiste à définir les logiciels destinés à être embarqués dans des dispositifs matériels autonomes interagissant avec leur environnement physique. l'informatique embarquée assure alors parfois le pilotage de systèmes électromécaniques plus ou moins complexes. elle est ainsi à rapprocher de la production de systèmes informatiques temps réel tant le temps devient une préoccupation clef lorsque l'informatique est acteur du monde réel. elle trouve aussi ses domaines d'applications dans de nombreux objets de notre vie quotidienne en enrichissant les performances et les fonctionnalités des services proposés. :historiquement d'abord liés à l'aéronautique, le spatial, l'armement, le nucléaire, on en trouve aujourd'hui de nombreuses illustrations dans notre vie quotidienne : automobile, machine à laver, téléphone portable, carte à puce, domotique, etc.
+ingénierie des connaissances
+    forme d'ingénierie informatique, qui consiste à gérer les processus d'innovation, dans tous les domaines, selon des modèles assez différents de ceux jusqu'alors employés en informatique de gestion. cette forme d'ingénierie permettra peut-être d'accroître la cohérence des trois domaines, qui sont la gestion, le temps réel, et le scientifique dans l'organisation des entreprises. elle s'intéresse plus au contenu et à la qualité des bases de données et de connaissances qu'à l'automatisation des traitements. elle se développe déjà beaucoup aux États-unis.
+les applications du renseignement économique et stratégique
+    font appel aux techniques de l'information, notamment dans l'analyse du contexte, pour la recherche d'informations (moteurs de recherche). d'autre part, dans une optique de développement durable, il est nécessaire de structurer les relations avec les parties prenantes, ce qui fait appel à d'autres techniques telles les protocoles d'échange et les moteurs de règles.
+
+exemples de domaines d'utilisation
+
+les différents domaines d'utilisation de l'informatique sont les suivants :
+
+    automatique : appareils de régulation tels le pilote automatique.
+    bio-informatique : outils d'aide dans la recherche en biologie.
+    bureautique : outils d'aide au travail de bureau : rédaction de documents commerciaux et correspondance.
+    calcul parallèle : pour des applications qui demandent de nombreux calculs : prévisions météo ou image de synthèse.
+    cryptographie : déchiffrage d'informations chiffrées par un code secret.
+    domotique : commande d'appareils domestiques et systèmes d'alarme.
+    exploration de données : extraction automatique de connaissances.
+    gestion de contenu : collecte des documents électroniques d'une entreprise : mail, fax, contrats.
+    hypermédias : manipulation de documents de présentation contenant des vidéos, des images et du son.
+    imagerie informatique : création ou manipulation d'images : images de synthèse, traitement d'images, jeux vidéo, simulateurs de vol.
+    informatique décisionnelle : analyses et statistiques en vue d'aide à la décision pour les responsables d'entreprise.
+    informatique de gestion : manipulation en masse de grandes quantités d'informations : listes de clients, des fournisseurs, de produits.
+    informatique industrielle : utilisation dans des chaînes de fabrication industrielles.
+    informatique médicale : manipulations d'images médicales (scanner, échographies), dossiers médicaux.
+    informatique musicale : composition musicale.
+    instrumentation : collecte d'informations provenant de capteurs, lors d'expériences scientifiques.
+    linguistique informatique : correction d'orthographe, traduction automatique.
+    logiciels malveillants : logiciels mal intentionnés qui s'installent et agissent à l'insu de l'utilisateur : vol d'informations, falsification, usurpation d'identité.
+    nanotechnologie : aide à la recherche en nanotechnologie.
+    publication assistée par ordinateur : outils de création de la presse et du livre.
+    robotique : pilotage des machines autonomes que sont les robots.
+    télécommunications : transmission d'informations.
+
+terminologie de l'informatique
+article détaillé : terminologie informatique.
+
+l'informatique est un secteur d'activité scientifique et industriel important aux États-unis, en europe et au japon. les produits et services de cette activité s'échangent dans le monde entier. les produits immatériels tels que les connaissances, les normes, les logiciels ou les langages de programmation circulent très rapidement par l'intermédiaire des réseaux informatiques et de la presse spécialisée, et sont suivis par les groupes de veille technologique des entreprises et des institutions. les matériels informatiques peuvent être conçus sur un continent et construits sur un autre.
+
+l'anglais international est la langue véhiculaire du secteur d'activité. il est enseigné dans les écoles[42]. c'est la langue des publications scientifiques ainsi que de nombreux ouvrages techniques. la grande majorité des langages de programmation utilisent le vocabulaire anglais comme base. les termes peuvent provenir des instituts de recherche, des entreprises, ou des organismes de normalisation du secteur. de nombreux néologismes sont des abréviations ou des mots-valise basés sur des mots en anglais. le grand nombre d'anglicismes reflète la domination actuelle des États-unis sur ce marché[43].
+
+l'usage d'abréviations joue le même rôle que celui des formules chimiques : l'ébauche d'une nomenclature internationale qui facilite l'accès des lecteurs non anglophones à la littérature informatique. il existe en outre, un phénomène d'emprunt lexical réciproque entre les langages de programmation – dont le lexique est basé sur l'anglais – et le jargon informatique[44].
+marché de l'informatique
+article connexe : terminologie de la distribution informatique.
+
+on trouve dans le monde environ un milliard de micro-ordinateurs[45], trois cent mille stations de travail, quelques dizaines de milliers de mainframes, et deux mille superordinateurs en état de marche.
+
+on ne connaît pas avec certitude la part de marché occupée par l'industrie des systèmes embarqués, mais on estime que l'informatique représente le tiers du coût d'un avion ou d'une voiture[46].
+
+la distribution des produits informatiques est faite sous la forme de multiples canaux de distribution, parmi lesquels on compte la vente directe, le commerce en ligne, les chaînes de revendeurs, les groupements de revendeurs, la vente par correspondance.
+
+les grossistes informatiques ont un rôle clef dans la distribution informatique et sont un point de passage quasi obligé pour les sociétés qui ont choisi la vente indirecte (par un réseau de revendeurs). les grossistes, qu'ils soient généralistes ou spécialisés, adressent la multitude de petits points de vente ou les sociétés de service pour lesquelles l'activité de négoce représente un volume d'activité faible.
+
+aujourd'hui, la plupart des constructeurs sont spécialisés soit dans le matériel, soit dans le logiciel, soit dans les services.
+
+apple et oracle (sun) sont parmi les seuls constructeurs spécialisés à la fois dans le matériel et le logiciel. ibm et hp sont parmi les seuls constructeurs spécialisés à la fois dans le matériel et les services.
+
+dans le sultanat d'oman entre 2002 et 2005, 16 % des ventes concernaient du logiciel, 30 % concernait des ordinateurs, 28 % concernait des services, et 25 % concernait des équipements de transmission[47].
+
+en autriche, en 2007, 21 % des ventes concernent le logiciel, 34 % concernent le matériel, et 45 % concernent des services[48].
+histoire
+
+historiquement, le matériel informatique était distribué par les grands constructeurs qui traitaient en direct avec leurs clients ; la plupart de ceux-ci étant de grandes entreprises ou des organismes publics. les logiciels étaient créés par les clients. les constructeurs fournissaient uniquement un système d'exploitation, et assistaient leurs clients par l'organisation de cours de programmation à la formation des analystes programmeurs. au fur et à mesure de la baisse des prix des systèmes, le marché s'est élargi, obligeant plusieurs constructeurs à se structurer pour mieux diffuser leur produit et à s'appuyer sur des partenaires.
+
+ces partenaires étaient au départ mono-marque et travaillaient souvent sous la forme d'agent semi-exclusif, puis ils se sont transformés au fil du temps en revendeurs indépendants multi-marques.
+
+dans les années 1980, en même temps que les premiers mini-ordinateurs, sont apparus les premiers éditeurs spécialisés dans le logiciel.
+
+depuis 1987, le marché du micro-ordinateur est le principal secteur du marché informatique, et les micro-ordinateurs, initialement utilisés à des fins domestiques, sont désormais largement utilisés dans les entreprises et les institutions, où ils tendent à remplacer les stations de travail et les mainframes.
+
+du fait de la croissance très rapide du marché, vecteur de forte concurrence, de nombreuses sociétés ont disparu dans les années 1980. des quatorze grands fabricants de l'époque, en 1997 il n'en reste plus que deux (intel et amd)[49].
+marché du matériel
+
+l'ordinateur est un appareil modulable, construit par assemblage de composants de différentes marques.
+
+le développement et la construction des composants est le fait de quelques marques très spécialisées. la majorité des constructeurs d'ordinateurs sont des assembleurs : un assembleur est une société qui vend des ordinateurs construits par assemblage de composants provenant d'autres marques, y compris de concurrents.
+loi de moore
+alignement à la loi de moore.
+
+en 1965, gordon earle moore, cofondateur d'intel, un grand fabricant de microprocesseurs, émettait la loi de moore. cette loi, basée sur l'observation, prédit que la complexité des microprocesseurs devrait doubler tous les deux ans.
+offre en matériel
+article connexe : liste de constructeurs informatiques.
+
+le matériel informatique est aujourd'hui produit par diverses multinationales, majoritairement du japon et de taïwan. exemples :
+
+en autriche par exemple, les principales marques d'ordinateur sont, en 2007 : hewlett-packard (palo alto, États-unis), dell, (round rock, États-unis), fujitsu (japon), siemens (berlin, allemagne), sony (tokyo, japon) et acer (taïwan)[48].
+
+les principales marques de consoles de jeux sont en 2007 : sony (tokyo, japon), nintendo (kyoto, japon), et microsoft (redmond, États-unis)[50].
+marché du logiciel
+
+la fabrication d'un logiciel (développement) demande très peu de moyens techniques, et par contre beaucoup de temps et de savoir-faire.
+
+il existe aujourd'hui un très grand nombre d'auteurs de logiciels, il peut s'agir de multinationales comme microsoft, de petites entreprises locales, voire de particuliers ou de bénévoles.
+
+les grosses entreprises, utilisant du matériel informatique pour leurs propres besoins, ont souvent des équipes spécialisées, qui créent des logiciels sur mesure pour les besoins de l'entreprise. ces logiciels ne seront jamais mis sur le marché. un progiciel est un logiciel prêt-à-porter et générique prévu pour répondre à un besoin ordinaire. par opposition à un logiciel spécifique, qui est développé sur mesure en vue de répondre au besoin d'un client en particulier. la création de logiciels spécifique est le principal sujet de contrats de services des entreprises informatiques.
+
+dans des secteurs industriels comme l'aviation, des équipes créent des logiciels pour les systèmes embarqués de ce secteur. ces logiciels ne sont jamais mis sur le marché séparément.
+
+un logiciel étant un ensemble d'informations, il peut être transmis par les moyens de télécommunications. le téléchargement est l'opération qui consiste à utiliser un réseau de télécommunication pour récupérer un logiciel en provenance d'un autre appareil. le commerce en ligne est l'activité qui consiste à vendre des logiciels (ou d'autres biens) en les distribuant par des réseaux de télécommunication comme internet.
+types de logiciels
+
+on peut distinguer quatre grands types de logiciels : libres, propriétaires, shareware, freeware, en fonction du type de contrat de licence qui régit leur distribution, utilisation et copie.
+
+    un logiciel libre (ou open source) est un logiciel que l'on peut utiliser, étudier, modifier et redistribuer librement. un tel logiciel peut être soumis au droit d'auteur (sous une certaine licence) ou non (dans le domaine public). les logiciels libres sont souvent distribués gratuitement.
+    un logiciel propriétaire peut être utilisé, mais ne peut pas être ni étudié, ni modifié, ni redistribué librement. ces logiciels sont le plus souvent distribués par l'intermédiaire de réseaux de vente et, pour certains d'entre eux, associés de manière plus ou moins licite, à la vente d'un micro-ordinateur.
+    un gratuiciel (en anglais freeware) est un logiciel qui peut être distribué gratuitement. l'auteur se réserve le droit exclusif de le modifier.
+    un partagiciel (ou shareware) est un logiciel propriétaire qui est gratuit pendant une période d'essai et payant ensuite. de nombreuses variantes de shareware existent, selon le paiement demandé (qui est parfois un don à une organisation caritative, l'envoi d'une carte postale à l'auteur, etc.) et le fonctionnement du logiciel à la fin de la période d'essai (le logiciel peut tomber en panne, ou alors il reste utilisable mais importune l'utilisateur en l'avertissant de façon répétée qu'il doit acheter le produit, etc.).
+    un micrologiciel (ou firmware) est un logiciel incorporé dans un matériel informatique, et indissociable de celui-ci.
+
+terminologie de la distribution de logiciels
+article détaillé : terminologie de la distribution informatique.
+offre générale en logiciels
+
+il existe aujourd'hui une offre très large de logiciels, de tous les types : libres, propriétaires, shareware et freeware.
+
+l'industrie du logiciel est un des principaux secteurs économiques en europe et aux États-unis. de nombreux constructeurs de logiciels sont aux États-unis. la création de logiciels applicatifs représente 52 % de l'activité[51].
+
+si le japon est un des pays les mieux équipés en matériel informatique, on y trouve les plus grands fabricants de matériel, il n'en va pas de même pour le logiciel, et de nombreux logiciels posent des problèmes pour l'écriture de textes en utilisant l'alphabet japonais[52].
+
+il existe en 2008 environ quatre-vingts systèmes d'exploitation différents. le marché est largement occupé par la famille windows : cette famille de systèmes d'exploitation, propriété de microsoft (redmond, États-unis) occupe environ 90 % du marché des systèmes d'exploitation pour ordinateurs personnels. la société microsoft a fait l'objet de divers procès pour monopolisation du marché[53].
+
+en 2019, le marché des smartphones, tablettes et objet connectés a fortement évolué et utilise très majoritairement le système android développé par google.
+offre en logiciels libres
+
+gnu est un projet de système d'exploitation lancé en 1985, entièrement basé sur des produits open source. linux est un système d'exploitation open source, écrit par une équipe de plus de 3 200 bénévoles. la valeur de revente de linux est estimée à plus de 1,4 milliard de dollars[53].
+
+l'offre en logiciels libres consiste notamment en des ensembles qui contiennent à la fois des produits gnu et linux. ils sont distribués avec des magazines, ou mis à disposition pour le téléchargement.
+
+aujourd'hui la majorité des téléphones portable sont basés sur des systèmes d'exploitation libres : os x a été développé à partir de free bsd, android est quant à lui basé sur un système linux classique. ce qui fait des systèmes open source linux et free bsd les systèmes les plus répandus sur le marché du téléphone portable.
+copie et contrefaçon
+vendeur à la sauvette de contrefaçons.
+
+la contrefaçon numérique consiste à utiliser ou à mettre à disposition tout ou partie d'un logiciel alors que sa licence ne l'autorise pas, les éditeurs logiciel parlent volontiers de pirates pour désigner les auteurs voir, les utilisateurs de ces contrefaçons.
+
+la licence d'utilisation s'apparente à un contrat (dont la valeur juridique varie selon les pays) accepté implicitement par tout acheteur d'un logiciel (ou explicitement lors de l'installation ou du premier lancement de celui-ci).
+
+par une licence propriétaire, l'éditeur octroie le droit, généralement exclusif et non transmissible, à l'acheteur d'utiliser le logiciel. si une copie de ce logiciel est mise à disposition d'autrui, l'utilisation par autrui est alors une violation des clauses du contrat de licence et la mise à disposition est considérée comme un acte de contrefaçon.
+
+la vente de licences d'utilisation est la première source de revenus de nombreux éditeurs logiciels et la copie voir la diffusion illégale représente pour eux un important manque à gagner. la contrefaçon touche le marché du logiciel comme les marchés d'autres biens immatériels tels que la musique ou la vidéo.
+
+les éditeurs vendent souvent leur logiciel accompagné de services tels que garantie et mises à jour, des services qui ne sont, la plupart du temps, disponibles que sur les logiciels légalement utilisés.
+
+le nombre de copies de logiciels vendues par des contrefacteurs est plus ou moins élevé selon les pays. selon la business software alliance, en algérie 85 % des logiciels vendus en 2008 seraient issus du piratage[54]. toujours selon la business software alliance, au luxembourg, ce taux aurait été de 21 % en 2007, ce qui serait le taux le plus bas du monde[55].
+marché des services
+icône d'horloge obsolète.
+cette section doit être actualisée.
+des passages de cette section sont obsolètes ou annoncent des événements désormais passés. améliorez-la ou discutez-en.
+
+le passage d'un marché industriel[56] de produits à un marché des services est relativement récent et en forte progression[57]. le commerce de services consiste principalement en la vente et l'exécution de mandats concernant des modifications sur des systèmes d'information d'entreprises ou de collectivités.
+
+les systèmes d'information des entreprises sont parfois composés de centaines d'ordinateurs, sur lesquels sont exécutés des centaines de logiciels de manière simultanée. il existe de nombreux liens entre les différents logiciels et les différents ordinateurs, et le simple fait d'arrêter un seul des éléments risque de déranger des milliers d'usagers, voire de provoquer le chômage technique de l'entreprise.
+
+selon le cabinet gartner dataquest, les services informatiques ont généré 672,3 milliards de dollars dans le monde en 2006. soit un marché en augmentation de 6,4 % par rapport à 2005[58].
+
+un consultant est une personne chargée d'une mission de services.
+offre en services
+
+    une ssii (abréviation de société de service en ingénierie informatique) est une société qui met à disposition des spécialistes pour des missions de service sur des systèmes informatiques.
+
+de nombreuses ssii se trouvent aux États-unis et en inde. parmi les leaders du marché on trouve ibm – la plus ancienne société d'informatique encore en activité –, ainsi que eds, accenture et hewlett-packard, toutes originaires des États-unis.
+
+les principaux sujets des mandats sont la création de logiciels sur mesure, la mise en place de progiciels et la modification des fichiers de configuration en fonction des besoins, des opérations de réglage, d'expertise et de surveillance du système informatique. en france la majorité des constructeurs de logiciels sont des ssii.
+
+    sap désigne par abus de langage un progiciel de gestion intégré pour les entreprises, construit par la société sap ag (walldorf, allemagne). l'adaptation aux besoins des entreprises de ce logiciel riche et multi-fonctionnel est une activité courante des ssii.
+
+métiers et activités
+ibm pc 5150
+
+l'informaticien est d'une manière générale une personne qui travaille dans le secteur de l'informatique. il existe dans ce secteur diverses activités qui sont orientées vers la création de logiciels ou la maintenance d'un système informatique – matériel et logiciels.
+
+le secteur dépend également des activités des fabricants de semi-conducteurs et de pièces détachées, des assembleurs, ainsi que des fournisseurs de télécommunications et des services d'assistance.
+maintenance d'un système informatique
+
+la maintenance d'un système informatique consiste à la préparation d'ordinateurs tels que serveurs, ordinateurs personnels, ainsi que la pose d'imprimantes, de routeurs ou d'autres appareils. l'activité consiste également au dépannage des machines, à l'adaptation de leur configuration, l'installation de logiciels tels que systèmes d'exploitation, systèmes de gestion de base de données ou logiciels applicatifs, ainsi que divers travaux de prévention des pannes, des pertes ou des fuites d'informations telles que l'attribution de droits d'accès ou la création régulière de copies de sauvegarde (backup en anglais).
+
+le directeur informatique décide des évolutions du système informatique dans les grandes lignes, conformément à la politique d'évolution de la société qui l'emploie. il sert d'intermédiaire entre les fournisseurs et les clients (employés de l'entreprise), ainsi que la direction générale. il propose des budgets, des évolutions, puis mandate des fournisseurs pour des travaux.
+
+l'ingénieur système travaille à la mise en place et l'entretien du système informatique : la pose de matériel informatique, l'installation de logiciels tels que systèmes d'exploitation, systèmes de gestion de base de données ou logiciels applicatifs, et le réglage des paramètres de configuration des logiciels.
+
+l'administrateur de bases de données est chargé de la disponibilité des informations contenues dans des bases de données et la bonne utilisation des systèmes de gestion de base de données – les logiciels qui mettent à disposition les informations et qui occupent une place stratégique dans de nombreuses entreprises. il s'occupe des travaux de construction, d'organisation et de transformation des bases de données, ainsi que du réglage des paramètres de configuration du système de gestion de base de données et de l'attribution de droit d'accès sur le contenu des bases de données.
+
+le responsable d'exploitation veille à la disponibilité constante du système informatique. il effectue des tâches de sauvegarde régulière en vue de prévenir la perte irrémédiable d'informations, organise les travaux de transformation du système informatique en vue de limiter la durée des mises hors service et attribue des droits d'accès en vue de limiter les possibilités de manipulation du système informatique au strict nécessaire pour chaque usager – ceci en vue de prévenir des pertes ou des fuites d'information.
+création de logiciels
+
+le développement de logiciels consiste à la création de nouveaux logiciels ainsi que la transformation et la correction de logiciels existants. en font partie la définition d'un cahier des charges pour le futur logiciel, l'écriture du logiciel dans un ou l'autre langage de programmation, le contrôle du logiciel créé, la planification et l'estimation du budget des travaux.
+
+dans une équipe d'ingénieurs, le chef de projet est chargé d'estimer la durée des travaux, d'établir un planning, de distribuer les tâches entre les différents membres de l'équipe, puis de veiller à l'avancée des travaux, au respect du planning et du cahier des charges. le chef de projet participe également à la mise en place du logiciel chez le client et récolte les avis des usagers.
+
+l'analyste-programmeur est chargé d'examiner le cahier des charges du futur logiciel, de déterminer la liste de toutes les tâches de programmation nécessaire pour mettre en œuvre le logiciel. il est chargé de déterminer les automatismes les mieux appropriés en fonction du cahier des charges et des possibilités existantes sur le système informatique. l'analyste-programmeur est ensuite chargé d'effectuer les modifications nécessaires dans le logiciel, de rédiger ou de modifier le code source du logiciel et de vérifier son bon fonctionnement.
+
+l'architecte des systèmes d'informations est chargé de déterminer, d'organiser et de cartographier les grandes lignes de systèmes informatiques ou de logiciels. il réalise des plans d'ensemble, détermine les composants (logiciel et matériel) principaux de l'ensemble, ainsi que les flux d'informations entre ces composants. lors de la création de nouveaux logiciels il est chargé de découper le futur logiciel en composants, puis d'organiser et de cartographier le logiciel et les produits connexes.
+sous-traitance, infogérance, intégration
+
+les entreprises et les institutions qui ont un système informatique de grande ampleur ont souvent une équipe d'informaticiens qui travaillent à la maintenance du système ainsi qu'à la création de logiciels pour le compte de l'entreprise. cette équipe, dirigée par le directeur informatique peut faire appel à des éditeurs de logiciel ou des sociétés de services en ingénierie informatique (abréviation ssii) pour certains travaux. par exemple, lorsque l'équipe interne est trop peu nombreuse ou ne possède pas les connaissances nécessaires. les entreprises peuvent également faire appel à des consultants – des employés d'une société tierce – pour prêter main-forte ou conseiller leur équipe sur un sujet précis.
+
+l'infogérance consiste à déléguer toute la maintenance du système d'information à une société de services. ces services sont parfois réalisés offshore : des équipes délocalisées (parfois situées dans un pays lointain) pilotent les ordinateurs à travers les réseaux informatiques (télémaintenance).
+
+l'intégration verticale consiste pour une société informatique à non seulement créer un logiciel, mais également travailler sur des opérations antérieures et postérieures au développement du logiciel en question, tels que le management du système d'information, l'aide à la décision de la direction des systèmes d'information, les opérations de migration ou les services d'assistance.
+
+en cloud computing, un site informatique - matériel, logiciel et raccordements réseau - appartenant à un fournisseur, est mis à disposition des consommateurs en libre-service payé à l'usage. selon le service offert, la responsabilité du système d'exploitation, des logiciels moteurs et des logiciels applicatifs incombe soit au fournisseur soit au consommateur.
+informatique et développement durable
+article détaillé : informatique et développement durable.
+
+on applique souvent l'adjectif « virtuel » ou « immatériel » aux produits de l'informatique, ce qui pourrait laisser croire que l'informatique est peu consommatrice de ressources naturelles. jean-marc jancovici montre que la dématérialisation, souvent présentée comme une solution pour le développement durable de l'économie, ne s'est pas accompagnée d'une diminution des flux physiques par rapport aux flux d'information[59]. en pratique, dans les années 2010, les directions des systèmes d'information sont généralement tenues à l'écart des programmes de développement durable des entreprises.
+
+on se rend compte aujourd'hui, avec les premières études des experts en informatique verte (tic durables), que l'informatique serait directement à l'origine de 5 % des émissions de gaz à effet de serre de la france[60]. l'informatique générerait également une forte consommation d'électricité. mais les impacts environnementaux sont surtout concentrés lors de la fabrication des équipements et leur fin de vie. les principaux impacts sont l'épuisement des ressources naturelles non renouvelables et les pollutions (eau, air, sol) qui dégradent les écosystèmes[61].
+
+l'application des principes de développement durable à l'informatique donne naissance aux tic durables. elle englobe les trois piliers du développement durable (environnement, social, économique) et se caractérise par une double démarche (souvent menée en parallèle) :
+
+    le premier périmètre, désigné par le terme informatique écoresponsable (ou officiellement éco-tic en france et green it 1.0 en anglo-américain) désigne l'ensemble des méthodes qui réduisent l'impact de l'informatique sur l'environnement par une démarche écoresponsable (écoconception, économies d'énergie, gestion des déchets). elle s'applique principalement au matériel informatique, aux flux (kwh électriques, papier, etc.), ainsi qu'aux méthodes de développement logiciel qui diminuent leur empreinte ressource ;
+    le deuxième périmètre, parfois désigné par écoinformatique (ou green it 2.0 en anglo-américain), désigne la réduction de l’empreinte écologique de la société grâce aux technologies de l'information et de la communication : c'est l'utilisation des tic pour réorganiser et optimiser les processus métiers en fonction de leur empreinte écologique grâce à l'analyse du cycle de vie (acv) ;
+
+À terme, le développement durable devrait faire évoluer les modèles employés en informatique. il est, en effet, nécessaire d'expliciter la sémantique des données, documents ou modèles, ce qui relève de la branche de l'informatique appelée représentation des connaissances. plusieurs projets en écoinformatique se déroulent dans le cadre d'initiatives telles que le web sémantique[réf. souhaitée]. 

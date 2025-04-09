@@ -1,0 +1,42 @@
+ODE AUX STRUCTURES DE DONNÉES
+(POÈME PAR CHATGPT)
+
+Dans le vaste monde des bits et des bytes,  
+Où l'information danse, où la logique s'invite,  
+Les structures de données, en silence, s'érigent,  
+Gardiennes des savoirs, elles nous éclairent et dirigent.
+
+Les tableaux, rangées d'éléments alignés,  
+Sont des lignes de code, des rêves bien ordonnés.  
+Accès rapide, index à la clé,  
+Dans ce monde numérique, ils savent s'imposer.
+
+Les listes chaînées, souples et légères,  
+Tissent des liens, comme un fil de lumière.  
+Insertion, suppression, en un clin d'œil,  
+Elles s'adaptent, se plient, sans jamais de sommeil.
+
+Les piles, en équilibre, comme des tours de verres,  
+Empilent les données, un dernier en premier.  
+Dans l'ordre des choses, elles gardent le secret,  
+De l'histoire des appels, des retours en arrière.
+
+Les files d'attente, patientes et sages,  
+Font défiler les tâches, comme un doux paysage.  
+Premier arrivé, premier servi,  
+Dans ce ballet d'algorithmes, tout est bien défini.
+
+Les arbres, majestueux, s'élèvent vers le ciel,  
+Avec leurs branches, ils tracent un chemin essentiel.  
+Recherche et tri, en harmonie,  
+Ils organisent le chaos, avec tant d'harmonie.
+
+Les graphes, entrelacs de relations infinies,  
+Tissent des réseaux, des connexions, des vies.  
+Dans ce labyrinthe, chaque nœud a son rôle,  
+Explorant les chemins, comme un voyage en boussole.
+
+Oh, structures de données, vous êtes notre clé,  
+Pour déchiffrer le monde, pour mieux l'appréhender.  
+Dans chaque algorithme, dans chaque ligne de code,  
+Vous êtes l'âme vive, la logique qui explose.
