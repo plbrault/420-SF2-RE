@@ -26,6 +26,10 @@ std::ostream &operator<<(std::ostream &os, const Disk &disk) {
     }
 
     os << "▌";
+
+    for (std::size_t i = disk._length; i < 13; i++) {
+        os << ' ';
+    }
     
     return os;
 }

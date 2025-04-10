@@ -1,17 +1,14 @@
 #include <iostream>
 
-#include "tower.h"
+#include "hanoi.h"
 
 int main () {
     std::cout << "Lab 8" << std::endl;
 
-    Tower east;
-
-    for (size_t i = 8; i > 0; i--) {
-        east.push(Disk(i));
-    }
+    Hanoi game;
+    game.newGame();
     
-    std::cout << east << std::endl;
+    std::cout << game << std::endl;
 
     return 0;
 }

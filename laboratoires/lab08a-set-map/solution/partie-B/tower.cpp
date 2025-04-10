@@ -51,11 +51,18 @@ std::ostream &operator<<(std::ostream &os, Tower tower) {
             os << ' ';
         }
 
-        os << "░▓░\n";
+        os << "░▓░";
+
+        for (std::size_t i = 0; i < 13; i++) {
+            os << ' ';
+        }
+        os << "\n";
     }
 
+
     while (tower._disks.size() > 0) {
-        os << tower._disks.top() << "\n";
+        os << tower._disks.top();
+        os << '\n';
         tower._disks.pop();
     }
 
