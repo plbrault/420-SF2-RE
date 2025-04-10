@@ -17,6 +17,18 @@ void Hanoi::newGame() {
     this->_towers[2] = empty;
 }
 
+uint16_t Hanoi::getCounter() const {
+    return this->_counter;
+}
+
+Tower &Hanoi::operator[](std::size_t idx) {
+    if (idx < 3) {
+        return this->_towers[idx];
+    }
+
+    throw std::invalid_argument("Indice en dehors de la plage valide");
+}
+
 std::ostream &operator<<(std::ostream &os, const Hanoi &hanoi) {
     std::stringstream stream[3];
 
@@ -44,7 +56,7 @@ std::ostream &operator<<(std::ostream &os, const Hanoi &hanoi) {
     for (std::size_t i = 0; i < hanoi._towers.size(); i++) {
         os << "              [" << (i + 1) << "]              ";
     }
-    
+
     os << "\n";
 
     return os;

@@ -23,12 +23,15 @@ bool Tower::transfert(Tower &tower) {
         return false;
     }
 
-    if (this->_disks.top().getLength() > tower._disks.top().getLength()) {
-        return false;
+    if (tower._disks.size() == 0) {
+        tower.push(this->_disks.top());
+        this->_disks.pop();
+        return true;
+    } else if (tower._disks.top().getLength() > this->_disks.top().getLength()) {
+        tower.push(this->_disks.top());
+        this->_disks.pop();
+        return true;
     }
-
-    this->push(tower._disks.top());
-    tower._disks.pop();
 
     return false;
 }
