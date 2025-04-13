@@ -17,9 +17,9 @@ public:
 
     uint16_t getCounter() const;
 
-    Tower &operator[](std::size_t idx);
+    Tower operator[](std::size_t idx);
 
-    friend std::ostream &operator<<(std::ostream &os, const Hanoi &hanoi);
+    friend std::ostream &operator<<(std::ostream &os, Hanoi hanoi);
 };
 
 #endif
