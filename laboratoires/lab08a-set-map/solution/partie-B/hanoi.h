@@ -1,7 +1,7 @@
 #ifndef __HANOI_H
 #define __HANOI_H
 
-#include <queue>
+#include <array>
 #include <cstdint>
 #include <sstream>
 
@@ -9,7 +9,7 @@
 
 class Hanoi {
 private:
-    std::queue<Tower> _towers;
+    std::array<Tower, 3> _towers;
     uint16_t _counter;
 
 public:
@@ -17,9 +17,9 @@ public:
 
     uint16_t getCounter() const;
 
-    Tower operator[](std::size_t idx);
+    Tower &operator[](std::size_t idx);
 
-    friend std::ostream &operator<<(std::ostream &os, Hanoi hanoi);
+    friend std::ostream &operator<<(std::ostream &os, const Hanoi &hanoi);
 };
 
 #endif
