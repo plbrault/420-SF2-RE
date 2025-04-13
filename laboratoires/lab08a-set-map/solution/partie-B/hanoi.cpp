@@ -17,10 +17,6 @@ void Hanoi::newGame() {
     this->_towers[2] = empty;
 }
 
-uint16_t Hanoi::getCounter() const {
-    return this->_counter;
-}
-
 Tower &Hanoi::operator[](std::size_t idx) {
     if (idx < 3) {
         return this->_towers[idx];

@@ -1,9 +1,5 @@
 #include "tower.h"
 
-Tower::Tower() { 
-    this->_moveCount = 0;
-}
-
 bool Tower::push(const Disk &disk) {
     if (this->_disks.size() == 0) {
         this->_disks.push(disk);
@@ -34,18 +30,6 @@ bool Tower::transfert(Tower &tower) {
     }
 
     return false;
-}
-
-std::string Tower::lineToString(std::size_t idx) const {
-    std::stringstream stream;
-
-    if (idx == 0) {
-        stream << "\n";
-    } else if (idx < this->_disks.size()) {
-
-    }
-
-    return stream.str();
 }
 
 std::ostream &operator<<(std::ostream &os, Tower tower) {

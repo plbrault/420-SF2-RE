@@ -10,12 +10,9 @@
 class Hanoi {
 private:
     std::array<Tower, 3> _towers;
-    uint16_t _counter;
 
 public:
     void newGame();
-
-    uint16_t getCounter() const;
 
     Tower &operator[](std::size_t idx);
 
