@@ -1,7 +1,7 @@
 #ifndef __HANOI_H
 #define __HANOI_H
 
-#include <array>
+#include <queue>
 #include <cstdint>
 #include <sstream>
 
@@ -9,7 +9,7 @@
 
 class Hanoi {
 private:
-    std::array<Tower, 3> _towers;
+    std::queue<Tower> _towers;
     uint16_t _counter;
 
 public:

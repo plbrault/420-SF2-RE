@@ -9,12 +9,12 @@ void Hanoi::newGame() {
         full.push(Disk(i));
     }
 
-    this->_towers[0] = full;
+    this->_towers.push(full);
 
     Tower empty;
 
-    this->_towers[1] = empty;
-    this->_towers[2] = empty;
+    this->_towers.push(empty);
+    this->_towers.push(empty);
 }
 
 uint16_t Hanoi::getCounter() const {
@@ -23,6 +23,14 @@ uint16_t Hanoi::getCounter() const {
 
 Tower &Hanoi::operator[](std::size_t idx) {
     if (idx < 3) {
+        Hanoi temp = *this;
+        Tower result;
+        std::size_t count = 0;
+        while (count < idx) {
+            
+        }
+
+
         return this->_towers[idx];
     }
 
