@@ -40,10 +40,10 @@ int main () {
         }
 
         char again;
-        std::cout << "Voulez-vous continuer ? [y|n]: ";
+        std::cout << "Voulez-vous continuer ? [o|n]: ";
         std::cin >> again;
 
-        ended = tolower(again) != 'y';
+        ended = tolower(again) != 'o';
     }
     
     std::cout << game << std::endl;

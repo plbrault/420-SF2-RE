@@ -37,7 +37,7 @@ Ainsi, chaque tour on demande c'est question :
 Sélectionner la tour de provenance: 1
 Sélectionner la tour cible: 2
 Déplacement valide
-Voulez-vous continuer ? [y|n]: y
+Voulez-vous continuer ? [o|n]: y
 
                   ░▓░                                      ░▓░                                       ░▓░
                   ░▓░                                      ░▓░                                       ░▓░
@@ -60,7 +60,7 @@ On voit (subtilement) que la tour 2 à reçu le disque 1. Si on essaie de mettre
 Sélectionner la tour de provenance: 1
 Sélectionner la tour cible: 2
 ERREUR: Déplacement invalide
-Voulez-vous continuer ? [y|n]: y
+Voulez-vous continuer ? [o|n]: y
 
                   ░▓░                                      ░▓░                                       ░▓░
                   ░▓░                                      ░▓░                                       ░▓░
