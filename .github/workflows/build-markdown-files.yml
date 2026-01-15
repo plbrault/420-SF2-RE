@@ -228,8 +228,8 @@ jobs:
             tmphtml=$(mktemp --suffix=.html)
             (cd "$WORKSPACE/$dir" && pandoc "$tmp" -f markdown-implicit_figures --webtex --highlight-style=pygments --self-contained --standalone -o "$tmphtml")
             
-            # Extract style tags and body content for Moodle
-            { sed -n '/<style>/,/<\/style>/p' "$tmphtml"; sed -n '/<body>/,/<\/body>/p' "$tmphtml" | sed '1d;$d'; } > "$WORKSPACE/${release_base}-moodle.html"
+            # Extract style tags and body content for Moodle, wrap body in div
+            { sed -n '/<style>/,/<\/style>/p' "$tmphtml"; echo '<div>'; sed -n '/<body>/,/<\/body>/p' "$tmphtml" | sed '1d;$d'; echo '</div>'; } > "$WORKSPACE/${release_base}-moodle.html"
             
             echo "Built ${release_base}-moodle.html"
             rm -f "$tmp" "$tmphtml"
