@@ -219,9 +219,15 @@ jobs:
             # Generate self-contained Moodle HTML with base64-encoded images
             echo "Generating Moodle HTML from: $procfile"
             
+            # Create temp file with h1 headers removed and all other headers shifted down
+            tmp=$(mktemp)
+            # Remove h1 headers (lines starting with single #) and shift all others down by one level
+            sed '/^# /d' "$procfile" | sed 's/^## /# /; s/^### /## /; s/^#### /### /; s/^##### /#### /; s/^###### /#####/' > "$tmp"
+            
             # Generate HTML with embedded resources (pandoc handles base64 conversion)
-            (cd "$WORKSPACE/$dir" && pandoc "./${base}.processed.md" -f markdown-implicit_figures --self-contained --standalone -o "$WORKSPACE/${release_base}-moodle.html")
+            (cd "$WORKSPACE/$dir" && pandoc "$tmp" -f markdown-implicit_figures --self-contained --standalone -o "$WORKSPACE/${release_base}-moodle.html")
             echo "Built ${release_base}-moodle.html"
+            rm -f "$tmp"
           done < /tmp/changed_files.txt
 
       - name: Cleanup generated files
