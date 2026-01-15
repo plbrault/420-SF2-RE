@@ -236,7 +236,7 @@ jobs:
             done < "$procfile"
             
             # Generate HTML with embedded resources
-            pandoc "$tmp" -f markdown-implicit_figures --embed-resources --standalone -o "$WORKSPACE/${release_base}-moodle.html"
+            pandoc "$tmp" -f markdown-implicit_figures --self-contained --standalone -o "$WORKSPACE/${release_base}-moodle.html"
             echo "Built ${release_base}-moodle.html"
             rm -f "$tmp"
           done < /tmp/changed_files.txt
