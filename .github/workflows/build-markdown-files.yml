@@ -219,39 +219,9 @@ jobs:
             # Generate self-contained Moodle HTML with base64-encoded images
             echo "Generating Moodle HTML from: $procfile"
             
-            # Copy processed file to temp and convert all local images to base64
-            tmp=$(mktemp)
-            cp "$procfile" "$tmp"
-            
-            # Find all image files in the directory and convert references to base64
-            shopt -s nullglob  # Make glob patterns expand to nothing if no matches
-            for img in "$WORKSPACE/$dir"/*.png "$WORKSPACE/$dir"/*.jpg "$WORKSPACE/$dir"/*.jpeg "$WORKSPACE/$dir"/*.gif "$WORKSPACE/$dir"/*.svg; do
-              [ -f "$img" ] || continue
-              imgname=$(basename "$img")
-              ext="${imgname##*.}"
-              
-              # Determine MIME type
-              case "${ext,,}" in
-                png) mime_type="image/png" ;;
-                jpg|jpeg) mime_type="image/jpeg" ;;
-                gif) mime_type="image/gif" ;;
-                svg) mime_type="image/svg+xml" ;;
-                *) continue ;;
-              esac
-              
-              # Convert image to base64
-              base64_data=$(base64 -w 0 "$img")
-              
-              # Replace all references to this image with base64 data URI
-              # This handles ![...](filename) format
-              sed -i "s|!\[\([^]]*\)\]($imgname)|![\1](data:${mime_type};base64,$base64_data)|g" "$tmp"
-            done
-            shopt -u nullglob
-            
-            # Generate HTML with embedded resources
-            pandoc "$tmp" -f markdown-implicit_figures --self-contained --standalone -o "$WORKSPACE/${release_base}-moodle.html"
+            # Generate HTML with embedded resources (pandoc handles base64 conversion)
+            (cd "$WORKSPACE/$dir" && pandoc "./${base}.processed.md" -f markdown-implicit_figures --self-contained --standalone -o "$WORKSPACE/${release_base}-moodle.html")
             echo "Built ${release_base}-moodle.html"
-            rm -f "$tmp"
           done < /tmp/changed_files.txt
 
       - name: Cleanup generated files
