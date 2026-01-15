@@ -224,7 +224,7 @@ jobs:
             tmphtml=$(mktemp --suffix=.html)
             (cd "$WORKSPACE/$dir" && pandoc "$tmp" -f markdown-implicit_figures --webtex --highlight-style=pygments --self-contained --standalone -o "$tmphtml")
             
-            { sed -n '/<style>/,/<\/style>/p' "$tmphtml"; echo '<div style="max-width: 1000px; margin: auto;">'; sed -n '/<body>/,/<\/body>/p' "$tmphtml" | sed '1d;$d'; echo '</div>'; } > "$WORKSPACE/${release_base}-moodle.html"
+            { sed -n '/<style>/,/<\/style>/p' "$tmphtml" | sed 's|</style>|p { max-width: 900px; }\n</style>|'; echo '<div>'; sed -n '/<body>/,/<\/body>/p' "$tmphtml" | sed '1d;$d'; echo '</div>'; } > "$WORKSPACE/${release_base}-moodle.html"
             
             echo "Built ${release_base}-moodle.html"
             rm -f "$tmp" "$tmphtml"
