@@ -216,19 +216,14 @@ jobs:
             procfile="$WORKSPACE/$dir/${base}.processed.md"
             release_base=$(get_release_name "$f" basename_count)
             
-            # Generate self-contained Moodle HTML with base64-encoded images
-            echo "Generating Moodle HTML from: $procfile"
+            echo "Generating HTML (Moodle ready) from: $procfile"
             
-            # Create temp file with h1 headers removed and all other headers shifted down
             tmp=$(mktemp)
-            # Remove h1 headers (lines starting with single #) and shift all others down by one level
             sed '/^# /d' "$procfile" | sed 's/^## /# /; s/^### /## /; s/^#### /### /; s/^##### /#### /; s/^###### /#####/' > "$tmp"
             
-            # Generate HTML with embedded resources (pandoc handles base64 conversion)
             tmphtml=$(mktemp --suffix=.html)
             (cd "$WORKSPACE/$dir" && pandoc "$tmp" -f markdown-implicit_figures --webtex --highlight-style=pygments --self-contained --standalone -o "$tmphtml")
             
-            # Extract style tags and body content for Moodle, wrap body in div
             { sed -n '/<style>/,/<\/style>/p' "$tmphtml"; echo '<div style="max-width: 1000px; margin: auto;">'; sed -n '/<body>/,/<\/body>/p' "$tmphtml" | sed '1d;$d'; echo '</div>'; } > "$WORKSPACE/${release_base}-moodle.html"
             
             echo "Built ${release_base}-moodle.html"
@@ -310,7 +305,7 @@ jobs:
               const pdfDownloadUrl = `https://github.com/${repo.owner}/${repo.repo}/releases/download/pr-${prNumber}/${releaseBase}.pdf`;
               const zipDownloadUrl = `https://github.com/${repo.owner}/${repo.repo}/releases/download/pr-${prNumber}/${releaseBase}-html.zip`;
               const moodleDownloadUrl = `https://github.com/${repo.owner}/${repo.repo}/releases/download/pr-${prNumber}/${releaseBase}-moodle.html`;
-              return `- ${f}\n  - [\`PDF\`](${pdfDownloadUrl})\n  - [\`HTML (zip)\`](${zipDownloadUrl})\n  - [\`Moodle HTML\`](${moodleDownloadUrl})`;
+              return `- ${f}\n  - [\`PDF\`](${pdfDownloadUrl})\n  - [\`HTML (zip)\`](${zipDownloadUrl})\n  - [\`HTML (Moodle ready)\`](${moodleDownloadUrl})`;
             }).join('\n');
             
             const comment = `## 📄 Files generated from Markdown
