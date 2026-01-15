@@ -6,6 +6,14 @@ $$
 e^{i\pi} + 1 = 0
 $$
 
+```cpp
+int a = 0;
+int b = 0;
+int c = a + b;
+
+cout << c;
+```
+
 ```plantuml
 @startuml
 
