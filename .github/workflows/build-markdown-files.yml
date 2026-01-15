@@ -219,14 +219,26 @@ jobs:
             # Generate self-contained Moodle HTML with base64-encoded images
             echo "Generating Moodle HTML from: $procfile"
             tmp=$(mktemp)
-            # Convert PlantUML PNG references to base64 data URIs
-            img_pattern='^\!\[\]\(([^)]+\.png)\)$'
+            # Convert image references to base64 data URIs
+            img_pattern='^\!\[([^\]]*)\]\(([^)]+\.(png|jpg|jpeg|gif|svg))\)$'
             while IFS= read -r line; do
               if [[ "$line" =~ $img_pattern ]]; then
-                pngfile="${BASH_REMATCH[1]}"
-                if [ -f "$WORKSPACE/$dir/$pngfile" ]; then
-                  base64_data=$(base64 -w 0 "$WORKSPACE/$dir/$pngfile")
-                  echo "![](data:image/png;base64,$base64_data)" >> "$tmp"
+                alt_text="${BASH_REMATCH[1]}"
+                imgfile="${BASH_REMATCH[2]}"
+                ext="${BASH_REMATCH[3]}"
+                
+                if [ -f "$WORKSPACE/$dir/$imgfile" ]; then
+                  # Determine MIME type based on extension
+                  case "${ext,,}" in
+                    png) mime_type="image/png" ;;
+                    jpg|jpeg) mime_type="image/jpeg" ;;
+                    gif) mime_type="image/gif" ;;
+                    svg) mime_type="image/svg+xml" ;;
+                    *) mime_type="application/octet-stream" ;;
+                  esac
+                  
+                  base64_data=$(base64 -w 0 "$WORKSPACE/$dir/$imgfile")
+                  echo "![${alt_text}](data:${mime_type};base64,$base64_data)" >> "$tmp"
                 else
                   echo "$line" >> "$tmp"
                 fi
