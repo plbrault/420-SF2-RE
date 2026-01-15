@@ -225,8 +225,14 @@ jobs:
             sed '/^# /d' "$procfile" | sed 's/^## /# /; s/^### /## /; s/^#### /### /; s/^##### /#### /; s/^###### /#####/' > "$tmp"
             
             # Generate HTML with embedded resources (pandoc handles base64 conversion)
-            (cd "$WORKSPACE/$dir" && pandoc "$tmp" -f markdown-implicit_figures --webtex --highlight-style=pygments --self-contained -o "$WORKSPACE/${release_base}-moodle.html")
+            tmphtml=$(mktemp --suffix=.html)
+            (cd "$WORKSPACE/$dir" && pandoc "$tmp" -f markdown-implicit_figures --webtex --highlight-style=pygments --self-contained --standalone -o "$tmphtml")
+            
+            # Extract style tags and body content for Moodle
+            { sed -n '/<style>/,/<\/style>/p' "$tmphtml"; sed -n '/<body>/,/<\/body>/p' "$tmphtml" | sed '1d;$d'; } > "$WORKSPACE/${release_base}-moodle.html"
+            
             echo "Built ${release_base}-moodle.html"
+            rm -f "$tmp" "$tmphtml"
             rm -f "$tmp"
           done < /tmp/changed_files.txt
 
