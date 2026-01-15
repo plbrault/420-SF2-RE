@@ -150,7 +150,7 @@ jobs:
             echo "Copied to ${release_base}.pdf for release"
           done < /tmp/changed_files.txt
 
-      - name: Generate HTML files and create ZIP bundles
+      - name: Generate HTML files
         if: steps.changed.outputs.has_files == 'true'
         shell: bash
         run: |
@@ -172,19 +172,87 @@ jobs:
               exit 1
             fi
             
-            release_base=$(get_release_name "$f" basename_count)
-            
             # Generate HTML (use absolute paths to avoid issues with special characters)
             echo "Generating HTML from: $procfile"
             (cd "$WORKSPACE/$dir" && pandoc "./${base}.processed.md" -f markdown-implicit_figures -o "./${base}.html")
             echo "Built $dir/${base}.html"
+          done < /tmp/changed_files.txt
+
+      - name: Create ZIP bundles
+        if: steps.changed.outputs.has_files == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORKSPACE=$(pwd)
+          source "$WORKSPACE/.github/scripts/process-files.sh"
+          
+          build_basename_counts "$(cat /tmp/changed_files.txt)"
+          
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            dir=$(dirname "$f")
+            base=$(basename "$f" .md)
+            release_base=$(get_release_name "$f" basename_count)
             
             # Create ZIP bundle with HTML and PlantUML PNGs
             (cd "$WORKSPACE/$dir" && zip -r "$WORKSPACE/${release_base}-html.zip" "./${base}.html" "${base}"-plantuml-*.png 2>/dev/null || zip "$WORKSPACE/${release_base}-html.zip" "./${base}.html")
             echo "Created ${release_base}-html.zip for release"
+          done < /tmp/changed_files.txt
+
+      - name: Generate stand-alone HTML files for Moodle
+        if: steps.changed.outputs.has_files == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORKSPACE=$(pwd)
+          source "$WORKSPACE/.github/scripts/process-files.sh"
+          
+          build_basename_counts "$(cat /tmp/changed_files.txt)"
+          
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            dir=$(dirname "$f")
+            base=$(basename "$f" .md)
+            procfile="$WORKSPACE/$dir/${base}.processed.md"
+            release_base=$(get_release_name "$f" basename_count)
             
-            # Cleanup generated files
-            rm -f "$procfile"
+            # Generate self-contained Moodle HTML with base64-encoded images
+            echo "Generating Moodle HTML from: $procfile"
+            tmp=$(mktemp)
+            # Convert PlantUML PNG references to base64 data URIs
+            while IFS= read -r line; do
+              if [[ "$line" =~ ^\!\[\]\(([^)]+\.png)\)$ ]]; then
+                pngfile="${BASH_REMATCH[1]}"
+                if [ -f "$WORKSPACE/$dir/$pngfile" ]; then
+                  base64_data=$(base64 -w 0 "$WORKSPACE/$dir/$pngfile")
+                  echo "![](data:image/png;base64,$base64_data)" >> "$tmp"
+                else
+                  echo "$line" >> "$tmp"
+                fi
+              else
+                echo "$line" >> "$tmp"
+              fi
+            done < "$procfile"
+            
+            # Generate HTML with embedded resources
+            pandoc "$tmp" -f markdown-implicit_figures --embed-resources --standalone -o "$WORKSPACE/${release_base}-moodle.html"
+            echo "Built ${release_base}-moodle.html"
+            rm -f "$tmp"
+          done < /tmp/changed_files.txt
+
+      - name: Cleanup generated files
+        if: steps.changed.outputs.has_files == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORKSPACE=$(pwd)
+          
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            dir=$(dirname "$f")
+            base=$(basename "$f" .md)
+            
+            rm -f "$WORKSPACE/$dir/${base}.processed.md"
             rm -f "$WORKSPACE/$dir/${base}.html"
             rm -f "$WORKSPACE/$dir/${base}"-plantuml-*.uml
             rm -f "$WORKSPACE/$dir/${base}"-plantuml-*.png
@@ -194,7 +262,7 @@ jobs:
         if: steps.changed.outputs.has_files == 'true'
         run: |
           echo "Files in workspace root:"
-          ls -lh *.pdf *.zip 2>/dev/null || echo "No PDF or ZIP files found"
+          ls -lh *.pdf *.zip *.html 2>/dev/null || echo "No PDF, ZIP, or HTML files found"
 
       - name: Create release with PDFs and HTML bundles
         if: steps.changed.outputs.has_files == 'true'
@@ -211,6 +279,7 @@ jobs:
           artifacts: |
             *.pdf
             *.zip
+            *-moodle.html
           artifactContentType: application/octet-stream
           allowUpdates: true
           removeArtifacts: true
@@ -244,7 +313,8 @@ jobs:
                 : sanitize(base);
               const pdfDownloadUrl = `https://github.com/${repo.owner}/${repo.repo}/releases/download/pr-${prNumber}/${releaseBase}.pdf`;
               const zipDownloadUrl = `https://github.com/${repo.owner}/${repo.repo}/releases/download/pr-${prNumber}/${releaseBase}-html.zip`;
-              return `- ${f}\n  - [\`PDF\`](${pdfDownloadUrl})\n  - [\`HTML (zip)\`](${zipDownloadUrl})`;
+              const moodleDownloadUrl = `https://github.com/${repo.owner}/${repo.repo}/releases/download/pr-${prNumber}/${releaseBase}-moodle.html`;
+              return `- ${f}\n  - [\`PDF\`](${pdfDownloadUrl})\n  - [\`HTML (zip)\`](${zipDownloadUrl})\n  - [\`Moodle HTML\`](${moodleDownloadUrl})`;
             }).join('\n');
             
             const comment = `## 📄 Files generated from Markdown
