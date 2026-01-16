@@ -4,5 +4,6 @@
 #include <string>
 
 void afficherMenu();
+int demanderChoix(int min, int max);
 
 #endif

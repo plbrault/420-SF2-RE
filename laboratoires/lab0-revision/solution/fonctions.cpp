@@ -10,3 +10,16 @@ void afficherMenu() {
                 << "4. Ajouter une température" << std::endl
                 << "5. Enregistrer les températures" << std::endl;
 }
+
+int demanderChoix(int min, int max) {
+    int choix;
+    do {
+        std::cout << "Entrez un choix entre " << min << " et " << max << ": ";
+        std::cin >> choix;
+
+        if (choix < min || choix > max) {
+            std::cout << "Votre choix est invalide." << std::endl;
+        }
+    } while (choix < min || choix > max);
+    return choix;
+}
