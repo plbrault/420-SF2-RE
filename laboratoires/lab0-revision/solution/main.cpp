@@ -6,19 +6,9 @@ const size_t CAPACITE_TEMPERATURES = 100;
 
 int main() {
     double temperatures[CAPACITE_TEMPERATURES];
-    int nbTemperatures = 0;
-    std::ifstream fichierTemperatures;
+    size_t nbTemperatures = 0;
 
-    fichierTemperatures.open("temperatures.txt");
-    if (!fichierTemperatures) {
-        std::cout << "Erreur: le fichier n'existe pas." << std::endl;
-        exit(1);
-    }
-    while (!fichierTemperatures.eof() && nbTemperatures < CAPACITE_TEMPERATURES) {
-        fichierTemperatures >> temperatures[nbTemperatures];
-        nbTemperatures++;
-    }
-    fichierTemperatures.close();
+    chargerTemperatures(temperatures, nbTemperatures, CAPACITE_TEMPERATURES, "temperatures.txt");
 
     int optionChoisie;
     do {

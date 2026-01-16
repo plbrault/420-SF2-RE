@@ -5,6 +5,20 @@
 const double ZERO_ABSOLU = -273.15;
 const double TEMPERATURE_DE_PLANCK = 1.416808e32;
 
+void chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier) {
+    std::ifstream fichierTemperatures;
+    fichierTemperatures.open("temperatures.txt");
+    if (!fichierTemperatures) {
+        std::cout << "Erreur: le fichier n'existe pas." << std::endl;
+        exit(1);
+    }
+    while (!fichierTemperatures.eof() && nbTemperatures < capaciteTableau) {
+        fichierTemperatures >> temperatures[nbTemperatures];
+        nbTemperatures++;
+    }
+    fichierTemperatures.close();
+}
+
 void afficherMenu() {
     std::cout   << std::endl << "MENU" << std::endl << "====================" << std::endl
                 << "1. Afficher les températures en Celsius" << std::endl
@@ -28,20 +42,20 @@ int demanderChoix(int min, int max) {
     return choix;
 }
 
-void afficherTemperaturesCelsius(double temperatures[], int nbTemperatures) {
+void afficherTemperaturesCelsius(double temperatures[], size_t nbTemperatures) {
     for (size_t i = 0; i < nbTemperatures; i++) {
         std::cout << (i + 1) << ". " << temperatures[i] << '\370' << "C" << std::endl;
     }
 }
 
-void afficherTemperaturesKelvin(double temperatures[], int nbTemperatures) {
+void afficherTemperaturesKelvin(double temperatures[], size_t nbTemperatures) {
     for (size_t i = 0 ; i < nbTemperatures; i++) {
         double kelvin = temperatures[i] - ZERO_ABSOLU;
         std::cout << (i + 1) << ". " << kelvin << " K" << std::endl;
     }
 }
 
-double calculerTemperatureMoyenne(double temperatures[], int nbTemperatures) {
+double calculerTemperatureMoyenne(double temperatures[], size_t nbTemperatures) {
     double somme = 0;
     for (size_t i = 0; i < nbTemperatures; i++) {
         somme += temperatures[i];
@@ -49,7 +63,7 @@ double calculerTemperatureMoyenne(double temperatures[], int nbTemperatures) {
     return somme / nbTemperatures;
 }
 
-bool ajouterTemperature(double temperatures[], int& nbTemperatures, int capaciteTableau) {
+bool ajouterTemperature(double temperatures[], size_t &nbTemperatures, size_t capaciteTableau) {
     double nouvelleTemperature;
     if (nbTemperatures >= capaciteTableau) {
         std::cout << "Le nombre maximal de températures a été atteint." << std::endl;
@@ -71,9 +85,9 @@ bool ajouterTemperature(double temperatures[], int& nbTemperatures, int capacite
     return true;
 }
 
-void exporterTemperatures(double temperatures[], int nbTemperatures) {
+void exporterTemperatures(double temperatures[], size_t nbTemperatures) {
     std::string nomFichier;
-    std::cout << "Entrer le nom du fichier dans lequel enregistrer les températures:";
+    std::cout << "Entrer le nom du fichier dans lequel enregistrer les températures: ";
     std::cin >> nomFichier;
 
     std::ofstream fichier(nomFichier);
