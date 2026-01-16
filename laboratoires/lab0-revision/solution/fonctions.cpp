@@ -24,13 +24,13 @@ int demanderChoix(int min, int max) {
     return choix;
 }
 
-void afficherTemperaturesCelsius(int temperatures[], int nbTemperatures) {
+void afficherTemperaturesCelsius(double temperatures[], int nbTemperatures) {
     for (int i = 0; i < nbTemperatures; i++) {
         std::cout << (i + 1) << ". " << temperatures[i] << '\370' << "C" << std::endl;
     }
 }
 
-void afficherTemperaturesKelvin(int temperatures[], int nbTemperatures) {
+void afficherTemperaturesKelvin(double temperatures[], int nbTemperatures) {
     for (int i = 0 ; i < nbTemperatures; i++) {
         double kelvin = temperatures[i] + 273.15;
         std::cout << (i + 1) << ". " << kelvin << " K" << std::endl;

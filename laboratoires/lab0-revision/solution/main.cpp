@@ -5,7 +5,7 @@
 #define CAPACITE_TEMPERATURES 100
 
 int main() {
-    int temperatures[CAPACITE_TEMPERATURES];
+    double temperatures[CAPACITE_TEMPERATURES];
     int nbTemperatures = 0;
     std::ifstream fichierTemperatures;
 

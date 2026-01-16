@@ -6,7 +6,7 @@
 void afficherMenu();
 int demanderChoix(int min, int max);
 
-void afficherTemperaturesCelsius(int temperatures[], int nbTemperatures);
-void afficherTemperaturesKelvin(int temperatures[], int nbTemperatures);
+void afficherTemperaturesCelsius(double temperatures[], int nbTemperatures);
+void afficherTemperaturesKelvin(double temperatures[], int nbTemperatures);
 
 #endif
