@@ -39,6 +39,7 @@ int demanderChoix(int min, int max) {
             std::cout << "Votre choix est invalide." << std::endl;
         }
     } while (choix < min || choix > max);
+    std::cout << std::endl;
     return choix;
 }
 
