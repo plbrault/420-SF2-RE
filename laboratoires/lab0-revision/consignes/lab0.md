@@ -149,3 +149,122 @@ Entrez un choix entre 1 et 6: 6
 Au revoir!
 ```
 
+## Consignes
+
+### Étape 1 - Mise en place du projet
+
+Créez un nouveau projet à l'aide de votre IDE. Dans ce projet, créez les trois fichiers suivants:
+
+* main.cpp
+* fonctions.h
+* fonctions.cpp
+
+À la racine de votre projet, créez un fichier texte que vous nommerez `temperatures.txt`. Voici le contenu de ce fichier:
+
+```text
+-8.0
+-7.5
+-7.5
+-7.25
+-7.0
+-6.75
+-6.75
+-6.5
+-6.0
+-5.5
+-5.0
+-4.0
+-4.0
+-3.0
+-2.0
+-1.5
+-0.5
+0
+0.25
+0.5
+1
+1
+1.5
+2
+```
+
+Ajoutez le code de départ suivant dans vos fichiers de code et assurez-vous que votre programme compile:
+
+**fonctions.h**
+
+```cpp
+#ifndef SOLUTION_FONCTIONS_H
+#define SOLUTION_FONCTIONS_H
+
+#include <string>
+
+void chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier);
+
+void afficherMenu();
+int demanderChoix(int min, int max);
+
+void afficherTemperaturesCelsius(double temperatures[], size_t nbTemperatures);
+void afficherTemperaturesKelvin(double temperatures[], size_t nbTemperatures);
+double calculerTemperatureMoyenne(double temperatures[], size_t nbTemperatures);
+bool ajouterTemperature(double temperatures[], size_t &nbTemperatures, size_t capaciteTableau);
+void exporterTemperatures(double temperatures[], size_t nbTemperatures);
+
+#endif
+```
+
+**fonctions.cpp**
+
+```cpp
+#include "fonctions.h"
+#include <fstream>
+#include <iostream>
+
+const double ZERO_ABSOLU = -273.15;
+const double TEMPERATURE_DE_PLANCK = 1.416808e32;
+
+void chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier) {
+}
+
+void afficherMenu() {
+}
+
+int demanderChoix(int min, int max) {
+    return 0;
+}
+
+void afficherTemperaturesCelsius(double temperatures[], size_t nbTemperatures) {
+}
+
+void afficherTemperaturesKelvin(double temperatures[], size_t nbTemperatures) {
+}
+
+double calculerTemperatureMoyenne(double temperatures[], size_t nbTemperatures) {
+    return 0.0;
+}
+
+bool ajouterTemperature(double temperatures[], size_t &nbTemperatures, size_t capaciteTableau) {
+    return false;
+}
+
+void exporterTemperatures(double temperatures[], size_t nbTemperatures) {
+}
+```
+
+**main.cpp**
+
+```cpp
+#include <iostream>
+#include <fstream>
+#include "fonctions.h"
+
+const size_t CAPACITE_TEMPERATURES = 100;
+
+int main() {
+    double temperatures[CAPACITE_TEMPERATURES];
+    size_t nbTemperatures = 0;
+
+    chargerTemperatures(temperatures, nbTemperatures, CAPACITE_TEMPERATURES, "temperatures.txt");
+
+    return 0;
+}
+```
