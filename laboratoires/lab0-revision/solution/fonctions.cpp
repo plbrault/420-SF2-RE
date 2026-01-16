@@ -21,7 +21,7 @@ void chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t c
 
 void afficherMenu() {
     std::cout   << std::endl << "MENU" << std::endl << "====================" << std::endl
-                << "1. Afficher les températures en Celsius" << std::endl
+                << "1. Afficher les températures en degrés Celsius" << std::endl
                 << "2. Afficher les températures en Kelvin" << std::endl
                 << "3. Calculer la température moyenne" << std::endl
                 << "4. Ajouter une température" << std::endl
