@@ -2,13 +2,16 @@
 #include <fstream>
 #include <iostream>
 
+const double ZERO_ABSOLU = -273.15;
+const double TEMPERATURE_DE_PLANCK = 1.416808e32;
+
 void afficherMenu() {
     std::cout   << std::endl << "MENU" << std::endl << "====================" << std::endl
                 << "1. Afficher les températures en Celsius" << std::endl
                 << "2. Afficher les températures en Kelvin" << std::endl
                 << "3. Calculer la température moyenne" << std::endl
                 << "4. Ajouter une température" << std::endl
-                << "5. Enregistrer les températures" << std::endl
+                << "5. Exporter les températures" << std::endl
                 << "6. Quitter" << std::endl;
 }
 
@@ -33,7 +36,7 @@ void afficherTemperaturesCelsius(double temperatures[], int nbTemperatures) {
 
 void afficherTemperaturesKelvin(double temperatures[], int nbTemperatures) {
     for (size_t i = 0 ; i < nbTemperatures; i++) {
-        double kelvin = temperatures[i] + 273.15;
+        double kelvin = temperatures[i] - ZERO_ABSOLU;
         std::cout << (i + 1) << ". " << kelvin << " K" << std::endl;
     }
 }
@@ -44,4 +47,44 @@ double calculerTemperatureMoyenne(double temperatures[], int nbTemperatures) {
         somme += temperatures[i];
     }
     return somme / nbTemperatures;
+}
+
+bool ajouterTemperature(double temperatures[], int& nbTemperatures, int capaciteTableau) {
+    double nouvelleTemperature;
+    if (nbTemperatures >= capaciteTableau) {
+        std::cout << "Le nombre maximal de températures a été atteint." << std::endl;
+        return false;
+    }
+    do {
+        std::cout << "Entrez une nouvelle température en Celsius: ";
+        std::cin >> nouvelleTemperature;
+        if (nouvelleTemperature < ZERO_ABSOLU) {
+            std::cout << "La température est trop petite." << std::endl;
+        } else if (nouvelleTemperature > TEMPERATURE_DE_PLANCK) {
+            std::cout << "La température est trop grande." << std::endl;
+        } else {
+            temperatures[nbTemperatures] = nouvelleTemperature;
+            nbTemperatures++;
+            std::cout << "La température a été ajoutée." << std::endl;
+        }
+    } while (nouvelleTemperature < ZERO_ABSOLU || nouvelleTemperature > TEMPERATURE_DE_PLANCK);
+    return true;
+}
+
+void exporterTemperatures(double temperatures[], int nbTemperatures) {
+    std::string nomFichier;
+    std::cout << "Entrer le nom du fichier dans lequel enregistrer les températures:";
+    std::cin >> nomFichier;
+
+    std::ofstream fichier(nomFichier);
+    if (!fichier) {
+        std::cout << "Erreur d'ouverture du fichier." << std::endl;
+        return;
+    }
+    for (size_t i = 0; i < nbTemperatures; i++) {
+        fichier << temperatures[i] << std::endl;
+    }
+    fichier.close();
+
+    std::cout << "Les données ont été enregistrées dans " << nomFichier << "." << std::endl;
 }

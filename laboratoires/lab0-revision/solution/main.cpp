@@ -2,7 +2,7 @@
 #include <fstream>
 #include "fonctions.h"
 
-#define CAPACITE_TEMPERATURES 100
+const size_t CAPACITE_TEMPERATURES = 100;
 
 int main() {
     double temperatures[CAPACITE_TEMPERATURES];
@@ -14,16 +14,16 @@ int main() {
         std::cout << "Erreur: le fichier n'existe pas." << std::endl;
         exit(1);
     }
-
     while (!fichierTemperatures.eof() && nbTemperatures < CAPACITE_TEMPERATURES) {
         fichierTemperatures >> temperatures[nbTemperatures];
         nbTemperatures++;
     }
+    fichierTemperatures.close();
 
     int optionChoisie;
     do {
         afficherMenu();
-        int optionChoisie = demanderChoix(1, 6);
+        optionChoisie = demanderChoix(1, 6);
 
         switch (optionChoisie) {
             case 1:
@@ -37,6 +37,12 @@ int main() {
                     << calculerTemperatureMoyenne(temperatures, nbTemperatures)
                     << '\370' << "C"
                     << std::endl;
+                break;
+            case 4:
+                ajouterTemperature(temperatures, nbTemperatures, CAPACITE_TEMPERATURES);
+                break;
+            case 5:
+                exporterTemperatures(temperatures, nbTemperatures);
                 break;
         }
     } while (optionChoisie != 6);
