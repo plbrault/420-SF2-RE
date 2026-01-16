@@ -20,16 +20,28 @@ int main() {
         nbTemperatures++;
     }
 
-    afficherMenu();
-    int optionChoisie = demanderChoix(1, 5);
+    int optionChoisie;
+    do {
+        afficherMenu();
+        int optionChoisie = demanderChoix(1, 6);
 
-    switch (optionChoisie) {
-        case 1:
-            afficherTemperaturesCelsius(temperatures, nbTemperatures);
-            break;
-        case 2:
-            afficherTemperaturesKelvin(temperatures, nbTemperatures);
-    }
+        switch (optionChoisie) {
+            case 1:
+                afficherTemperaturesCelsius(temperatures, nbTemperatures);
+                break;
+            case 2:
+                afficherTemperaturesKelvin(temperatures, nbTemperatures);
+                break;
+            case 3:
+                std::cout << "La température moyenne est de "
+                    << calculerTemperatureMoyenne(temperatures, nbTemperatures)
+                    << '\370' << "C"
+                    << std::endl;
+                break;
+        }
+    } while (optionChoisie != 6);
+
+    std::cout << "Au revoir!";
 
     return 0;
     // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
