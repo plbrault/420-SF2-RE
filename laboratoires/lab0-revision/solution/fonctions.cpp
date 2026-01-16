@@ -23,3 +23,9 @@ int demanderChoix(int min, int max) {
     } while (choix < min || choix > max);
     return choix;
 }
+
+void afficherTemperaturesCelsius(int temperatures[], int nbTemperatures) {
+    for (int i = 0; i < nbTemperatures; i++) {
+        std::cout << (i + 1) << ". " << temperatures[i] << '\370' << "C" << std::endl;
+    }
+}

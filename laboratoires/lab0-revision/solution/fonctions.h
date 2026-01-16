@@ -6,4 +6,6 @@
 void afficherMenu();
 int demanderChoix(int min, int max);
 
+void afficherTemperaturesCelsius(int temperatures[], int nbTemperatures);
+
 #endif
