@@ -376,7 +376,7 @@ Entrez un choix entre 1 et 6: 6
 Au revoir!
 ```
 
-### Étape 6 - Afficher les températures en degrés Celsius
+### Étape 6 - Fonction `afficherTemperaturesCelsius`
 
 Complétez la fonction `afficherTemperaturesCelsius`. Celle-ci doit parcourir le tableau de températures et afficher son contenu. Voici l'affichage attendu:
 
@@ -411,7 +411,7 @@ Vous pouvez utiliser la valeur `'\370'` pour afficher le caractère `°` sur Win
 
 Appelez la fonction à l'endroit approprié dans votre `main`. Testez bien votre code.
 
-### Étape 7 - Afficher les températures en Kelvin
+### Étape 7 - Fonction `afficherTemperaturesKelvin`
 
 Complétez la fonction `afficherTemperaturesKelvin`. Celle-ci doit parcourir le tableau de températures et afficher son contenu converti en Kelvin. Voici l'affichage attendu:
 
@@ -443,3 +443,13 @@ Complétez la fonction `afficherTemperaturesKelvin`. Celle-ci doit parcourir le 
 ```
 
 Appelez la fonction à l'endroit approprié dans votre `main`. Testez bien votre code.
+
+### Étape 8 - Fonction `calculerTemperatureMoyenne`
+
+Complétez la fonction `calculerTemperatureMoyenne`. Celle-ci doit retourner la moyenne en Celsius de toutes les températures du tableau. Avec le contenu actuel du fichier, vous devriez obtenir la valeur **-3.4375**.
+
+Dans le `main`, utilisez cette fonction pour générer l'affichage suivant lorsque l'utilisateur choisit l'option 3:
+
+```text
+La température moyenne est de -3.4375°C
+```
