@@ -273,7 +273,7 @@ int main() {
 }
 ```
 
-### Étape 2 - Lire le fichier de températures
+### Étape 2 - Fonction `chargerTemperatures`
 
 Complétez la fonction `chargerTemperatures`. Cette fonction doit:
 
@@ -285,11 +285,13 @@ Si l'ouverture du fichier échoue, il faut immédiatement retourner `false`. Aut
 
 La fonction doit aussi s'assurer de ne pas tenter d'ajouter plus de températures que la capacité du tableau (`capaciteTableau`).
 
+Vous pouvez prendre pour acquis que toutes les valeurs contenues dans le fichier sont valides.
+
 La fonction est déjà appelée dans le `main`. **Utilisez le débogueur pour valider son fonctionnement avant de passer à l'étape suivante.**
 
 > Remarquez que la fonction `chargerTemperatures` prend 4 paramètres. Cela commence à faire beaucoup! Nous avons besoin de trois paramètres uniquement pour la gestion du tableau. La programmation orientée objet et les structures de données nous aideront éventuellement à simplifier de telles fonctions.
 
-### Étape 3 - Afficher le menu
+### Étape 3 - Fonction `afficherMenu`
 
 Complétez la fonction `afficherMenu`. Celle-ci doit afficher le menu ci-dessous:
 
@@ -306,3 +308,22 @@ MENU
 
 Appelez la fonction dans le `main` pour la tester.
 
+### Étape 4 - Fonction `demanderChoix`
+
+Complétez la fonction `demanderChoix`. Celle-ci doit:
+
+* Demander à l'utilisateur d'entrer un choix entre `min` et `max`
+* Tant que la valeur saisie n'est pas dans la plage demandée, afficher un message d'erreur et demander une nouvelle valeur
+* Une fois qu'une valeur valide est saisie, retourner cette valeur
+
+Il n'est pas nécessaire de valider le type de la donnée saisie (prendre pour acquis que l'utilisateur entre un nombre entier).
+
+Voici un exemple d'exécution:
+
+```text
+Entrez un choix entre 1 et 6: -7
+Votre choix est invalide.
+Entrez un choix entre 1 et 6: 8
+Votre choix est invalide.
+Entrez un choix entre 1 et 6: 2
+```
