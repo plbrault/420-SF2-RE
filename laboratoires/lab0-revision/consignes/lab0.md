@@ -27,7 +27,7 @@ Vous devez utiliser seulement les notions couvertes dans le cours *Introduction 
 
 Voici un exemple d'exécution du programme attendu, dans lequel on exécute toutes les options une à la suite de l'autre:
 
-```console
+```text
 MENU
 ====================
 1. Afficher les températures en degrés Celsius
@@ -375,3 +375,39 @@ Entrez un choix entre 1 et 6: 6
 
 Au revoir!
 ```
+
+### Étape 6 - Afficher les températures en degrés Celsius
+
+Complétez la fonction `afficherTemperaturesCelsius`. Celle-ci doit parcourir le tableau de températures et afficher son contenu. Voici l'affichage attendu:
+
+```text
+1. -8°C
+2. -7.5°C
+3. -7.5°C
+4. -7.25°C
+5. -7°C
+6. -6.75°C
+7. -6.75°C
+8. -6.5°C
+9. -6°C
+10. -5.5°C
+11. -5°C
+12. -4°C
+13. -4°C
+14. -3°C
+15. -2°C
+16. -1.5°C
+17. -0.5°C
+18. 0°C
+19. 0.25°C
+20. 0.5°C
+21. 1°C
+22. 1°C
+23. 1.5°C
+24. 2°C
+```
+
+Vous pouvez utiliser la valeur `'\370'` pour afficher le caractère `°` sur Windows.
+
+Appelez la fonction à l'endroit approprié dans votre `main`. Testez bien votre code.
+
