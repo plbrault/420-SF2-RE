@@ -8,8 +8,10 @@ int main() {
     double temperatures[CAPACITE_TEMPERATURES];
     size_t nbTemperatures = 0;
 
-    chargerTemperatures(temperatures, nbTemperatures, CAPACITE_TEMPERATURES, "temperatures.txt");
-
+    if (!chargerTemperatures(temperatures, nbTemperatures, CAPACITE_TEMPERATURES, "temperatures.txt")) {
+        std::cout << "Erreur lors de l'ouverture du fichier." << std::endl;
+        return 1;
+    }
     int optionChoisie;
     do {
         afficherMenu();

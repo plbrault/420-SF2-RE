@@ -5,7 +5,8 @@
 const double ZERO_ABSOLU = -273.15;
 const double TEMPERATURE_DE_PLANCK = 1.416808e32;
 
-void chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier) {
+bool chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier) {
+    return true;
 }
 
 void afficherMenu() {

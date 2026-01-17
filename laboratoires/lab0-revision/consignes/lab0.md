@@ -198,7 +198,7 @@ Ajoutez le code de départ suivant dans vos fichiers de code et assurez-vous que
 
 #include <string>
 
-void chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier);
+bool chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier);
 
 void afficherMenu();
 int demanderChoix(int min, int max);
@@ -222,7 +222,8 @@ void exporterTemperatures(double temperatures[], size_t nbTemperatures);
 const double ZERO_ABSOLU = -273.15;
 const double TEMPERATURE_DE_PLANCK = 1.416808e32;
 
-void chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier) {
+bool chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier) {
+    return true;
 }
 
 void afficherMenu() {
@@ -263,8 +264,27 @@ int main() {
     double temperatures[CAPACITE_TEMPERATURES];
     size_t nbTemperatures = 0;
 
-    chargerTemperatures(temperatures, nbTemperatures, CAPACITE_TEMPERATURES, "temperatures.txt");
+    if (!chargerTemperatures(temperatures, nbTemperatures, CAPACITE_TEMPERATURES, "temperatures.txt")) {
+        std::cout << "Erreur lors de l'ouverture du fichier." << std::endl;
+        return 1;
+    }
 
     return 0;
 }
 ```
+
+### Étape 2 - Lire le fichier de températures
+
+Complétez la fonction `chargerTemperatures`. Cette fonction doit:
+
+* Lire toutes les températures dans le fichier `nomFichier`
+* Les ajouter au tableau `temperatures`
+* Mettre à jour la variable `nbTemperatures` (passée par référence)
+
+Si l'ouverture du fichier échoue, il faut immédiatement retourner `false`. Autrement, on retourne `true` à la fin de la fonction. N'oubliez cependant pas de fermer le fichier!
+
+La fonction doit aussi s'assurer de ne pas tenter d'ajouter plus de températures que la capacité du tableau (`capaciteTableau`).
+
+La fonction est déjà appelée dans le `main`. **Utilisez le débogueur pour valider son fonctionnement avant de passer à l'étape suivante.**
+
+> Remarquez que la fonction `chargerTemperatures` prend 4 paramètres. Cela commence à faire beaucoup! Nous avons besoin de trois paramètres uniquement pour la gestion du tableau. La programmation orientée objet et les structures de données nous aideront éventuellement à simplifier de telles fonctions.

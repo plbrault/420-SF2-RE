@@ -5,18 +5,18 @@
 const double ZERO_ABSOLU = -273.15;
 const double TEMPERATURE_DE_PLANCK = 1.416808e32;
 
-void chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier) {
+bool chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier) {
     std::ifstream fichierTemperatures;
-    fichierTemperatures.open("temperatures.txt");
+    fichierTemperatures.open(nomFichier);
     if (!fichierTemperatures) {
-        std::cout << "Erreur: le fichier n'existe pas." << std::endl;
-        exit(1);
+        return false;
     }
     while (!fichierTemperatures.eof() && nbTemperatures < capaciteTableau) {
         fichierTemperatures >> temperatures[nbTemperatures];
         nbTemperatures++;
     }
     fichierTemperatures.close();
+    return true;
 }
 
 void afficherMenu() {

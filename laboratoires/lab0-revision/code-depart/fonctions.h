@@ -3,7 +3,7 @@
 
 #include <string>
 
-void chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier);
+bool chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier);
 
 void afficherMenu();
 int demanderChoix(int min, int max);
