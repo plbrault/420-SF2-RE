@@ -70,19 +70,23 @@ bool ajouterTemperature(double temperatures[], size_t &nbTemperatures, size_t ca
         std::cout << "Le nombre maximal de températures a été atteint." << std::endl;
         return false;
     }
-    do {
-        std::cout << "Entrez une nouvelle température en Celsius: ";
-        std::cin >> nouvelleTemperature;
-        if (nouvelleTemperature < ZERO_ABSOLU) {
-            std::cout << "La température est trop petite." << std::endl;
-        } else if (nouvelleTemperature > TEMPERATURE_DE_PLANCK) {
-            std::cout << "La température est trop grande." << std::endl;
-        } else {
-            temperatures[nbTemperatures] = nouvelleTemperature;
-            nbTemperatures++;
-            std::cout << "La température a été ajoutée." << std::endl;
-        }
-    } while (nouvelleTemperature < ZERO_ABSOLU || nouvelleTemperature > TEMPERATURE_DE_PLANCK);
+
+    std::cout << "Entrez une nouvelle température en Celsius: ";
+    std::cin >> nouvelleTemperature;
+
+    if (nouvelleTemperature < ZERO_ABSOLU) {
+        std::cout << "La température est trop petite." << std::endl;
+        return false;
+    }
+    if (nouvelleTemperature > TEMPERATURE_DE_PLANCK) {
+        std::cout << "La température est trop grande." << std::endl;
+        return false;
+    }
+
+    temperatures[nbTemperatures] = nouvelleTemperature;
+    nbTemperatures++;
+    std::cout << "La température a été ajoutée." << std::endl;
+
     return true;
 }
 

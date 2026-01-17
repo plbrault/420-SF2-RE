@@ -453,3 +453,97 @@ Dans le `main`, utilisez cette fonction pour générer l'affichage suivant lorsq
 ```text
 La température moyenne est de -3.4375°C
 ```
+
+### Étape 9 - Fonction `ajouterTemperature`
+
+Complétez la fonction `ajouterTemperature`. Cette fonction demande à l'utilisateur d'entrer une température en degrés Celsius. Elle valide ensuite que la température saisie respecte les conditions suivantes:
+
+* Elle n'est pas inférieure au zéro absolu
+* Elle n'est pas supérieure à la [température de Planck](https://fr.wikipedia.org/wiki/Temp%C3%A9rature_de_Planck)
+
+Si une de ces conditions n'est pas respectée, un message d'erreur significatif doit être affiché. La fonction doit ensuite immédiatement retourner `false`.
+
+Si la température est valide, il faut l'ajouter à la suite de la dernière température ajoutée au tableau, et mettre à jour `nbTemperatures`. N'oubliez pas de valider que la capacité du tableau n'est pas dépassée!
+
+La fonction doit retourner `true` uniquement si l'ajout d'une température est réussi.
+
+Voici quelques exemples d'exécution:
+
+```text
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+Entrez un choix entre 1 et 6: 4
+
+Entrez une nouvelle température en Celsius: -345.67 
+La température est trop petite.
+
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+Entrez un choix entre 1 et 6: 4
+
+Entrez une nouvelle température en Celsius: 1e33
+La température est trop grande.
+
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+Entrez un choix entre 1 et 6: 4
+
+Entrez une nouvelle température en Celsius: 14.5
+La température a été ajoutée.
+
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+Entrez un choix entre 1 et 6: 1
+
+1. -8°C
+2. -7.5°C
+3. -7.5°C
+4. -7.25°C
+5. -7°C
+6. -6.75°C
+7. -6.75°C
+8. -6.5°C
+9. -6°C
+10. -5.5°C
+11. -5°C
+12. -4°C
+13. -4°C
+14. -3°C
+15. -2°C
+16. -1.5°C
+17. -0.5°C
+18. 0°C
+19. 0.25°C
+20. 0.5°C
+21. 1°C
+22. 1°C
+23. 1.5°C
+24. 2°C
+25. 14.5°C
+```
+
+Testez bien les différentes possibilités avant de poursuivre.
