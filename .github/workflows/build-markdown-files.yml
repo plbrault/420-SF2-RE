@@ -218,17 +218,21 @@ jobs:
             
             echo "Generating HTML (Moodle ready) from: $procfile"
             
-            tmp=$(mktemp)
-            sed '/^# /d' "$procfile" | sed 's/^## /# /; s/^### /## /; s/^#### /### /; s/^##### /#### /; s/^###### /#####/' > "$tmp"
-            
             tmphtml=$(mktemp --suffix=.html)
-            (cd "$WORKSPACE/$dir" && pandoc "$tmp" -f markdown-implicit_figures --webtex --highlight-style=pygments --self-contained --standalone -o "$tmphtml")
+            (cd "$WORKSPACE/$dir" && pandoc "$procfile" -f markdown-implicit_figures --webtex --highlight-style=pygments --self-contained --standalone -o "$tmphtml")
+            
+            # Remove h1 elements and offset other headings (h2->h3, h3->h4, etc.)
+            sed -i '/<h1[^>]*>.*<\/h1>/d' "$tmphtml"
+            sed -i 's|</h6>|</h7>|g; s|<h6|<h7|g' "$tmphtml"
+            sed -i 's|</h5>|</h6>|g; s|<h5|<h6|g' "$tmphtml"
+            sed -i 's|</h4>|</h5>|g; s|<h4|<h5|g' "$tmphtml"
+            sed -i 's|</h3>|</h4>|g; s|<h3|<h4|g' "$tmphtml"
+            sed -i 's|</h2>|</h3>|g; s|<h2|<h3|g' "$tmphtml"
             
             { sed -n '/<style>/,/<\/style>/p' "$tmphtml" | sed 's|</style>|p { max-width: 900px; }\n</style>|'; echo '<div>'; sed -n '/<body>/,/<\/body>/p' "$tmphtml" | sed '1d;$d'; echo '</div>'; } > "$WORKSPACE/${release_base}-moodle.html"
             
             echo "Built ${release_base}-moodle.html"
-            rm -f "$tmp" "$tmphtml"
-            rm -f "$tmp"
+            rm -f "$tmphtml"
           done < /tmp/changed_files.txt
 
       - name: Cleanup generated files
