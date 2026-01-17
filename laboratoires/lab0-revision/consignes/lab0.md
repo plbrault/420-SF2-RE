@@ -288,3 +288,21 @@ La fonction doit aussi s'assurer de ne pas tenter d'ajouter plus de température
 La fonction est déjà appelée dans le `main`. **Utilisez le débogueur pour valider son fonctionnement avant de passer à l'étape suivante.**
 
 > Remarquez que la fonction `chargerTemperatures` prend 4 paramètres. Cela commence à faire beaucoup! Nous avons besoin de trois paramètres uniquement pour la gestion du tableau. La programmation orientée objet et les structures de données nous aideront éventuellement à simplifier de telles fonctions.
+
+### Étape 3 - Afficher le menu
+
+Complétez la fonction `afficherMenu`. Celle-ci doit afficher le menu ci-dessous:
+
+```text
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+```
+
+Appelez la fonction dans le `main` pour la tester.
+
