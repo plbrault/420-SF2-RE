@@ -411,3 +411,35 @@ Vous pouvez utiliser la valeur `'\370'` pour afficher le caractère `°` sur Win
 
 Appelez la fonction à l'endroit approprié dans votre `main`. Testez bien votre code.
 
+### Étape 7 - Afficher les températures en Kelvin
+
+Complétez la fonction `afficherTemperaturesKelvin`. Celle-ci doit parcourir le tableau de températures et afficher son contenu converti en Kelvin. Voici l'affichage attendu:
+
+```text
+1. 265.15 K
+2. 265.65 K
+3. 265.65 K
+4. 265.9 K
+5. 266.15 K
+6. 266.4 K
+7. 266.4 K
+8. 266.65 K
+9. 267.15 K
+10. 267.65 K
+11. 268.15 K
+12. 269.15 K
+13. 269.15 K
+14. 270.15 K
+15. 271.15 K
+16. 271.65 K
+17. 272.65 K
+18. 273.15 K
+19. 273.4 K
+20. 273.65 K
+21. 274.15 K
+22. 274.15 K
+23. 274.65 K
+24. 275.15 K
+```
+
+Appelez la fonction à l'endroit approprié dans votre `main`. Testez bien votre code.
