@@ -327,3 +327,51 @@ Entrez un choix entre 1 et 6: 8
 Votre choix est invalide.
 Entrez un choix entre 1 et 6: 2
 ```
+
+Testez bien votre fonction dans le `main` avant de poursuivre.
+
+### Étape 5 - Boucle principale
+
+Il est temps d'ajouter la boucle principale du programme dans le `main`. Chaque itération de cette boucle doit:
+
+1. Afficher le menu
+2. Demander un choix à l'utilisateur
+3. Utiliser un `switch` pour gérer l'option choisie (les `case` seront vides pour l'instant)
+
+Cette boucle doit se répéter tant que l'option `6 - Quitter` n'est pas choisie. Dans ce dernier cas, il faut afficher `Au revoir!` avant l'arrêt du programme.
+
+Testez bien votre code. Voici à quoi devrait ressembler son exécution à ce stade-ci:
+
+```text
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+Entrez un choix entre 1 et 6: 1
+
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+Entrez un choix entre 1 et 6: 2
+
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+Entrez un choix entre 1 et 6: 6
+
+Au revoir!
+```
