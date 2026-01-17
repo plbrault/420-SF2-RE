@@ -547,3 +547,30 @@ Entrez un choix entre 1 et 6: 1
 ```
 
 Testez bien les différentes possibilités avant de poursuivre.
+
+### Étape 10 - Fonction `exporterTemperatures`
+
+Complétez la fonction `exporterTemperatures`. Cette fonction doit écrire le contenu du tableau de températures dans le fichier indiqué par l'utilisateur. Voici un exemple d'exécution:
+
+```text
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+Entrez un choix entre 1 et 6: 5
+
+Entrer le nom du fichier dans lequel enregistrer les températures: temperatures2.txt
+Les données ont été enregistrées dans temperatures2.txt.
+```
+
+Il faut bien sûr gérer l'ouverture et la fermeture du fichier, de même que l'affichage d'un message significatif en cas d'erreur.
+
+Les températures dans le fichier de sortie doivent être séparées par des sauts de ligne.
+
+Vérifiez que le contenu du fichier est correct.
+
+> 🎉 Félicitations, vous avez complété ce premier laboratoire! Conservez vos fichiers en lieu sûr, car vous en aurez besoin pour le laboratoire 2.
