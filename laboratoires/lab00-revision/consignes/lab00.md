@@ -573,4 +573,4 @@ Les températures dans le fichier de sortie doivent être séparées par des sau
 
 Vérifiez que le contenu du fichier est correct.
 
-> 🎉 Félicitations, vous avez complété ce premier laboratoire! Conservez vos fichiers en lieu sûr, car vous en aurez besoin pour le laboratoire 2.
+> 🎉 Félicitations, vous avez complété le Laboratoire 0! Conservez vos fichiers en lieu sûr, car vous en aurez besoin pour le Laboratoire 1.
