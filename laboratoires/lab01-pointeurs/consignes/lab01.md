@@ -312,7 +312,7 @@ Si un de ces cas ne fonctionne pas correctement, modifiez votre code en conséqu
 
 ## Laboratoire 01-C
 
-Dans cette partie, vous allez repartir du code de votre laboratoire 0. Vous allez ensuite l'adapter pour que la taille de la liste de tâches soit dynamique.
+Dans cette partie, vous allez repartir du code de votre laboratoire 0. Vous allez ensuite l'adapter pour que la taille de la liste de températures soit dynamique.
 
 Commencez donc par copier votre projet du laboratoire 0. Utilisez la nouvelle copie pour réaliser les étapes suivantes.
 
