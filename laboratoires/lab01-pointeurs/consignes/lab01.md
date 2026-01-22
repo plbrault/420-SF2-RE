@@ -364,8 +364,8 @@ Commentez ensuite l'appel de la fonction `ajouterTemperature` dans le `case 4` d
 
 Utilisez l'option 1 du menu (*Afficher les températures en degrés Celsius*) pour valider que la lecture du fichier fonctionne toujours correctement. Vous devriez voir les mêmes valeurs que dans le fichier `temperatures.txt`.
 
-> Remarquez que la fonction `chargerTemperatures`, sous sa forme actuelle, n'est pas particulièrement efficace: pour chaque température lue dans le fichier, elle copie un par un tous les éléments du tableau vers un nouveau tableau. Pour $n$ températures, on obtiendrait $n(n + 1) / 2$ copies.
-Imaginez si $n$ valait 1 milliard. On aurait alors $5 \times 10^{17}$ copies! Pourrait-on changer notre algorithme pour éviter de faire autant de copies? 🤔 Ne changez pas votre code, contentez-vous d'y penser pour le moment.
+> Remarquez que la fonction `chargerTemperatures`, sous sa forme actuelle, n'est pas particulièrement efficace: pour chaque température lue dans le fichier, elle copie un par un tous les éléments du tableau vers un nouveau tableau. Pour $n$ températures, on obtiendrait $n(n + 1) / 2$ opérations de copie.
+Imaginez si $n$ valait 1 milliard. On aurait alors $5 \times 10^{17}$ opérations de copie! Pourrait-on changer notre algorithme pour éviter de faire autant de copies? 🤔 Ne changez pas votre code, contentez-vous d'y penser pour le moment.
 
 ### Étape 2
 
