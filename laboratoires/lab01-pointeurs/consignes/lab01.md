@@ -346,7 +346,7 @@ Voici la nouvelle logique que vous devez maintenant implémenter dans cette fonc
 - Fermer le fichier
 - Retourner `temperatures`
 
-> 🤔 Que fait cette nouvelle logique au juste? Ajoutez un commentaire au-dessus de chaque ligne qui manipule les pointeurs pour expliquer dans vos mots ce que fait cette ligne.
+> 🤔 Que fait cette nouvelle logique au juste? Ajoutez des commentaires dans votre fonction pour expliquer dans vos mots ce qui se passe concrètement lors de l'exécution du code.
 
 Ensuite, remplacez la condition du `main` qui appelle la fonction `chargerTemperatures` par le code suivant:
 
