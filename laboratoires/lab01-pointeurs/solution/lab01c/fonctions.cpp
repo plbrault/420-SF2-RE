@@ -1,180 +1,109 @@
-#include <iostream>
-#include <fstream>
 #include "fonctions.h"
+#include <fstream>
+#include <iostream>
 
-using namespace std;
+const double ZERO_ABSOLU = -273.15;
+const double TEMPERATURE_DE_PLANCK = 1.416808e32;
 
-void afficherMenu() {
-    cout << "Liste de tâches" << endl
-        << "================================" << endl
-        << "1. Afficher la liste" << endl
-        << "2. Ajouter une tâche" << endl
-        << "3. Marquer une tâche comme faite" << endl
-        << "4. Échanger deux tâches" << endl
-        << "5. Supprimer une tâche" << endl
-        << "6. Sauvegarder les tâches" << endl
-        << "7. Charger les tâches" << endl
-        << "8. Quitter" << endl;
+bool chargerTemperatures(double temperatures[], size_t& nbTemperatures, size_t capaciteTableau, std::string nomFichier) {
+    std::ifstream fichierTemperatures;
+    fichierTemperatures.open(nomFichier);
+    if (!fichierTemperatures) {
+        return false;
+    }
+    while (!fichierTemperatures.eof() && nbTemperatures < capaciteTableau) {
+        fichierTemperatures >> temperatures[nbTemperatures];
+        nbTemperatures++;
+    }
+    fichierTemperatures.close();
+    return true;
 }
 
-int demanderChoix(int max) {
+void afficherMenu() {
+    std::cout   << std::endl << "MENU" << std::endl << "====================" << std::endl
+                << "1. Afficher les températures en degrés Celsius" << std::endl
+                << "2. Afficher les températures en Kelvin" << std::endl
+                << "3. Calculer la température moyenne" << std::endl
+                << "4. Ajouter une température" << std::endl
+                << "5. Exporter les températures" << std::endl
+                << "6. Quitter" << std::endl;
+}
+
+int demanderChoix(int min, int max) {
     int choix;
-
     do {
-        cout << "Entrez votre choix : ";
-        cin >> choix;
+        std::cout << "Entrez un choix entre " << min << " et " << max << ": ";
+        std::cin >> choix;
 
-        if (choix < 1 || choix > max) {
-            cout << "Le choix doit être un chiffre entre 1 et " << max << "." << endl;
+        if (choix < min || choix > max) {
+            std::cout << "Votre choix est invalide." << std::endl;
         }
-    } while (choix < 1 || choix > max);
-
+    } while (choix < min || choix > max);
+    std::cout << std::endl;
     return choix;
 }
 
-void afficherListe(string taches[], bool tacheCompletee[], int nombreTaches) {
-    if (nombreTaches == 0) {
-        cout << "La liste est vide." << endl;
-    } else {
-        for (int i = 0; i < nombreTaches; i++) {
-            cout << i + 1 << ". ";
-            if (tacheCompletee[i]) {
-                cout << "[X] ";
-            } else {
-                cout << "[ ] ";
-            }
-            cout << taches[i] << endl;
-        }
+void afficherTemperaturesCelsius(double temperatures[], size_t nbTemperatures) {
+    for (size_t i = 0; i < nbTemperatures; i++) {
+        std::cout << (i + 1) << ". " << temperatures[i] << '\370' << "C" << std::endl;
     }
 }
 
-void ajouterTache(string taches[], int nombreTaches) {
-    string tache;
-
-    cout << "Entrez la tâche à ajouter : ";
-    cin.ignore();
-    getline(cin, tache);
-
-    taches[nombreTaches - 1] = tache;
-}
-
-int demanderNumeroTache(string texte, int nombreTaches) {
-    int numeroTache;
-
-    do {
-        cout << texte;
-        cin >> numeroTache;
-        if (numeroTache < 1 || numeroTache > nombreTaches) {
-            cout << "Le numéro entré est invalide." << endl;
-        }
-    } while (numeroTache < 1 || numeroTache > nombreTaches);
-
-    return numeroTache;
-}
-
-
-void marquerFaite(string taches[], bool tacheCompletee[], int nombreTaches) {
-    int numeroTache;
-
-    afficherListe(taches, tacheCompletee, nombreTaches);
-
-    if (nombreTaches > 0) {
-        numeroTache = demanderNumeroTache(
-    "Entrez le numéro de la tâche à marquer comme faite : ",
-            nombreTaches
-        );
-        tacheCompletee[numeroTache - 1] = true;
+void afficherTemperaturesKelvin(double temperatures[], size_t nbTemperatures) {
+    for (size_t i = 0 ; i < nbTemperatures; i++) {
+        double kelvin = temperatures[i] - ZERO_ABSOLU;
+        std::cout << (i + 1) << ". " << kelvin << " K" << std::endl;
     }
 }
 
-void echangerTaches(string taches[], bool tacheCompletee[], int nombreTaches) {
-    int numeroTache;
-
-    int numeroTache1, numeroTache2;
-    string tacheTemp;
-    bool completeeTemp;
-
-    if (nombreTaches >= 2) {
-        afficherListe(taches, tacheCompletee, nombreTaches);
-
-        numeroTache1 = demanderNumeroTache(
-            "Entrez le numéro de la première tâche à échanger : ",
-            nombreTaches
-        );
-        numeroTache2 = demanderNumeroTache(
-            "Entrez le numéro de la deuxième tâche à échanger : ",
-            nombreTaches
-        );
-
-        tacheTemp = taches[numeroTache1 - 1];
-        taches[numeroTache1 - 1] = taches[numeroTache2 - 1];
-        taches[numeroTache2 - 1] = tacheTemp;
-
-        completeeTemp = tacheCompletee[numeroTache1 - 1];
-        tacheCompletee[numeroTache1 - 1] = tacheCompletee[numeroTache2 - 1];
-        tacheCompletee[numeroTache2 - 1] = completeeTemp;
-
-        cout << "Échange complété." << endl;
-    } else {
-        cout << "La liste comporte moins de deux tâches." << endl;
+double calculerTemperatureMoyenne(double temperatures[], size_t nbTemperatures) {
+    double somme = 0;
+    for (size_t i = 0; i < nbTemperatures; i++) {
+        somme += temperatures[i];
     }
+    return somme / nbTemperatures;
 }
 
-void supprimerTache(std::string taches[], bool tacheCompletee[], int &nombreTaches) {
-    int numeroTache;
-
-    afficherListe(taches, tacheCompletee, nombreTaches);
-    cout << endl;
-
-    if (nombreTaches > 0) {
-        numeroTache = demanderNumeroTache(
-            "Entrez le numéro de la tâche à supprimer : ",
-            nombreTaches
-        );
-
-        nombreTaches--;
-        for (int i = numeroTache - 1; i < nombreTaches; i++) {
-            taches[i] = taches[i + 1];
-            tacheCompletee[i] = tacheCompletee[i + 1];
-        }
-
-        cout << "Suppression complétée." << endl;
+bool ajouterTemperature(double temperatures[], size_t &nbTemperatures, size_t capaciteTableau) {
+    double nouvelleTemperature;
+    if (nbTemperatures >= capaciteTableau) {
+        std::cout << "Le nombre maximal de températures a été atteint." << std::endl;
+        return false;
     }
+
+    std::cout << "Entrez une nouvelle température en Celsius: ";
+    std::cin >> nouvelleTemperature;
+
+    if (nouvelleTemperature < ZERO_ABSOLU) {
+        std::cout << "La température est trop petite." << std::endl;
+        return false;
+    }
+    if (nouvelleTemperature > TEMPERATURE_DE_PLANCK) {
+        std::cout << "La température est trop grande." << std::endl;
+        return false;
+    }
+
+    temperatures[nbTemperatures] = nouvelleTemperature;
+    nbTemperatures++;
+    std::cout << "La température a été ajoutée." << std::endl;
+
+    return true;
 }
 
-void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTaches) {
-    ofstream fichier("taches.txt");
-    if (!fichier.is_open()) {
-        cout << "Le fichier taches.txt n'a pas pu être ouvert." << endl;
+void exporterTemperatures(double temperatures[], size_t nbTemperatures) {
+    std::string nomFichier;
+    std::cout << "Entrer le nom du fichier dans lequel enregistrer les températures: ";
+    std::cin >> nomFichier;
+
+    std::ofstream fichier(nomFichier);
+    if (!fichier) {
+        std::cout << "Erreur d'ouverture du fichier." << std::endl;
         return;
     }
-
-    for (int i = 0; i < nombreTaches; i++) {
-        fichier << taches[i] << endl;
-        fichier << tacheCompletee[i] << endl;
-    };
-
+    for (size_t i = 0; i < nbTemperatures; i++) {
+        fichier << temperatures[i] << std::endl;
+    }
     fichier.close();
 
-    cout << "La liste de tâches a été sauvegardée." << endl;
-}
-
-void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches) {
-    ifstream fichier("taches.txt");
-    if (!fichier.is_open()) {
-        cout << "Le fichier taches.txt n'a pas pu être ouvert." << endl;
-        return;
-    }
-
-    nombreTaches = 0;
-
-    string ligne;
-    while (getline(fichier, ligne)) {
-        taches[nombreTaches] = ligne;
-        getline(fichier, ligne);
-        tacheCompletee[nombreTaches] = ligne == "1";
-        nombreTaches++;
-    }
-
-    cout << "La liste de tâches a été chargée." << endl;
+    std::cout << "Les données ont été enregistrées dans " << nomFichier << "." << std::endl;
 }

@@ -1,12 +1,17 @@
-#pragma once
+#ifndef SOLUTION_FONCTIONS_H
+#define SOLUTION_FONCTIONS_H
+
+#include <string>
+
+double* chargerTemperatures(double* temperatures, size_t& nbTemperatures, std::string nomFichier);
 
 void afficherMenu();
-int demanderChoix(int max);
-void afficherListe(std::string taches[], bool tacheCompletee[], int nombreTaches);
-void ajouterTache(std::string taches[], int nombreTaches);
-int demanderNumeroTache(std::string texte, int nombreTaches);
-void marquerFaite(std::string taches[], bool tacheCompletee[], int nombreTaches);
-void echangerTaches(std::string taches[], bool tacheCompletee[], int nombreTaches);
-void supprimerTache(std::string taches[], bool tacheCompletee[], int &nombreTaches);
-void sauvegarderListe(std::string taches[], bool tacheCompletee[], int nombreTaches);
-void chargerListe(std::string taches[], bool tacheCompletee[], int& nombreTaches);
+int demanderChoix(int min, int max);
+
+void afficherTemperaturesCelsius(double temperatures[], size_t nbTemperatures);
+void afficherTemperaturesKelvin(double temperatures[], size_t nbTemperatures);
+double calculerTemperatureMoyenne(double temperatures[], size_t nbTemperatures);
+bool ajouterTemperature(double temperatures[], size_t &nbTemperatures, size_t capaciteTableau);
+void exporterTemperatures(double temperatures[], size_t nbTemperatures);
+
+#endif

@@ -1,70 +1,44 @@
 #include <iostream>
+#include <fstream>
 #include "fonctions.h"
 
-using namespace std;
-
 int main() {
-    locale::global(locale{ "" });
+    double* temperatures = nullptr;
+    size_t nbTemperatures = 0;
 
-    int choix;
-    int tailleTableau = 10;
-    string *taches = new string[tailleTableau];
-    bool *tacheCompletee = new bool[tailleTableau];
-    int nombreTaches = 0;
-
+    if (!chargerTemperatures(temperatures, nbTemperatures, CAPACITE_TEMPERATURES, "temperatures.txt")) {
+        std::cout << "Erreur lors de l'ouverture du fichier." << std::endl;
+        return 1;
+    }
+    int optionChoisie;
     do {
         afficherMenu();
-        choix = demanderChoix(8);
+        optionChoisie = demanderChoix(1, 6);
 
-        cout << endl;
-        switch (choix) {
+        switch (optionChoisie) {
             case 1:
-                afficherListe(taches, tacheCompletee, nombreTaches);
+                afficherTemperaturesCelsius(temperatures, nbTemperatures);
                 break;
             case 2:
-                nombreTaches++;
-
-                if (nombreTaches > tailleTableau) {
-                    tailleTableau *= 2;
-
-                    string* tachesTemp = taches;
-                    bool* tacheCompleteeTemp = tacheCompletee;
-
-                    taches = new string[tailleTableau];
-                    tacheCompletee = new bool[tailleTableau] {false};
-
-                    for (int i = 0; i < nombreTaches - 1; i++) {
-                        taches[i] = tachesTemp[i];
-                        tacheCompletee[i] = tacheCompleteeTemp[i];
-                    }
-
-                    delete[] tachesTemp;
-                    delete[] tacheCompleteeTemp;
-                }
-
-                ajouterTache(taches, nombreTaches);
+                afficherTemperaturesKelvin(temperatures, nbTemperatures);
                 break;
             case 3:
-                marquerFaite(taches, tacheCompletee, nombreTaches);
+                std::cout << "La température moyenne est de "
+                    << calculerTemperatureMoyenne(temperatures, nbTemperatures)
+                    << '\370' << "C"
+                    << std::endl;
                 break;
             case 4:
-                echangerTaches(taches, tacheCompletee, nombreTaches);
+                ajouterTemperature(temperatures, nbTemperatures, CAPACITE_TEMPERATURES);
                 break;
             case 5:
-                supprimerTache(taches, tacheCompletee, nombreTaches);
+                exporterTemperatures(temperatures, nbTemperatures);
                 break;
-            case 6:
-                sauvegarderListe(taches, tacheCompletee, nombreTaches);
-                break;
-            case 7:
-                chargerListe(taches, tacheCompletee, nombreTaches);
-                break;
-            default:
-                cout << "Au revoir!" << endl;
         }
-        cout << endl;
-    } while (choix != 6);
+    } while (optionChoisie != 6);
 
-    delete[] taches;
-    delete[] tacheCompletee;
+    std::cout << "Au revoir!";
+
+    return 0;
+    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }

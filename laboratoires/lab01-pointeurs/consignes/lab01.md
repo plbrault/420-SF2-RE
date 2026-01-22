@@ -318,7 +318,34 @@ Commencez donc par copier votre projet du laboratoire 0. Utilisez la nouvelle co
 
 ### Étape 1
 
-Dans votre fonction `main`, remplacez la déclaration de vos tableaux `taches` et `tacheCompletee` par celles de pointeurs initialisés à `nullptr`. Les types de données respectifs (`int` et `bool`) doivent demeurer les mêmes.
+Dans votre fonction `main`, remplacez la déclaration de votre tableau `temperatures` par celle d'un pointeur de `double` initialisé à `nullptr`. Retirez aussi la constante `CAPACITE_TEMPERATURES`, puisque vous n'en aurez plus besoin.
+
+Changez ensuite la signature de votre fonction `chargerTemperatures` pour celle-ci:
+
+```cpp
+double* chargerTemperatures(double* temperatures, size_t& nbTemperatures, std::string nomFichier);
+```
+
+Remarquez que le paramètre `capaciteTableau` a maintenant disparu.
+
+Voici la nouvelle logique que vous devez maintenant implémenter dans cette fonction:
+
+- Ouvrir le fichier `nomFichier`
+- Si l'ouverture du fichier a échoué:
+    - **Retourner** un pointeur nul (`nullptr`)
+- Déclarer un nouveau pointeur de `double` nommé `temperaturesAjouts`
+- Utiliser `temperaturesAjouts = temperatures` pour copier l'adresse de `temperatures` dans `temperaturesAjouts`
+- Tant qu'on n'a pas atteint la fin du fichier:
+    - Lire un `double` dans le fichier
+    - Déclarer un nouveau pointeur `temporaire` et y copier l'adresse de `temperaturesAjouts`
+    - Incrémenter `nbTemperatures`
+    - Allouer (avec `new`) un nouveau tableau de `nbTemperatures` éléments et assigner son adresse à `temperaturesAjouts`
+    - Copier les `nbTemperatures - 1` premiers éléments de `temporaire` dans `temperaturesAjouts`
+    - Désallouer (avec `delete[]`) le tableau sur lequel pointe `temporaire`
+- Retourner `temperaturesAjouts`
+
+> 🤔 Que fait cette nouvelle logique au juste? Ajoutez un commentaire au-dessus de chaque ligne qui manipule les pointeurs pour expliquer dans vos mots ce que fait cette ligne.
+
 
 Vous devez ensuite ajouter du code **au-dessus de l'appel** de la fonction `ajouterTache` dans votre `case 2` (et non PAS dans le corps de la fonction). Ce code doit:
 
