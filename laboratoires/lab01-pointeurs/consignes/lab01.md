@@ -323,112 +323,58 @@ Dans votre fonction `main`, remplacez la déclaration de votre tableau `temperat
 Changez ensuite la signature de votre fonction `chargerTemperatures` pour celle-ci:
 
 ```cpp
-double* chargerTemperatures(double* temperatures, size_t& nbTemperatures, std::string nomFichier);
+double* chargerTemperatures(std::string nomFichier, size_t &nbTemperatures);
 ```
 
-Remarquez que le paramètre `capaciteTableau` a maintenant disparu.
+Remarquez que les paramètres `temperatures` et `capaciteTableau` ont disparu.
 
 Voici la nouvelle logique que vous devez maintenant implémenter dans cette fonction:
 
+- Déclarer un pointeur de `double` nommé `temperatures` initialisé à `nullptr`
+- Réinitialiser `nbTemperatures` à 0
 - Ouvrir le fichier `nomFichier`
 - Si l'ouverture du fichier a échoué:
-    - **Retourner** un pointeur nul (`nullptr`)
-- Déclarer un nouveau pointeur de `double` nommé `temperaturesAjouts`
-- Utiliser `temperaturesAjouts = temperatures` pour copier l'adresse de `temperatures` dans `temperaturesAjouts`
+    - **Retourner** `temperatures` (qui contient présentement `nullptr`)
 - Tant qu'on n'a pas atteint la fin du fichier:
-    - Lire un `double` dans le fichier
-    - Déclarer un nouveau pointeur `temporaire` et y copier l'adresse de `temperaturesAjouts`
-    - Incrémenter `nbTemperatures`
-    - Allouer (avec `new`) un nouveau tableau de `nbTemperatures` éléments et assigner son adresse à `temperaturesAjouts`
-    - Copier les `nbTemperatures - 1` premiers éléments de `temporaire` dans `temperaturesAjouts`
+    - Lire un nombre dans le fichier et le stocker dans une nouvelle variable de type `double`
+    - Déclarer un nouveau pointeur `temporaire` et y copier l'adresse de `temperatures`
+    - Allouer (avec `new`) un nouveau tableau de `nbTemperatures + 1` éléments et assigner son adresse à `temperatures`
+    - À l'aide d'une boucle, copier tous les éléments de `temporaire` vers `temperatures`
+    - Affecter la nouvelle température lue dans le fichier à `*(temperaturesAjouts + nbTemperatures)`
     - Désallouer (avec `delete[]`) le tableau sur lequel pointe `temporaire`
-- Retourner `temperaturesAjouts`
+    - Incrémenter `nbTemperatures`
+- Fermer le fichier
+- Retourner `temperatures`
 
 > 🤔 Que fait cette nouvelle logique au juste? Ajoutez un commentaire au-dessus de chaque ligne qui manipule les pointeurs pour expliquer dans vos mots ce que fait cette ligne.
 
+Ensuite, remplacez la condition du `main` qui appelle la fonction `chargerTemperatures` par le code suivant:
 
-Vous devez ensuite ajouter du code **au-dessus de l'appel** de la fonction `ajouterTache` dans votre `case 2` (et non PAS dans le corps de la fonction). Ce code doit:
+```cpp
+temperatures = chargerTemperatures(nbTemperatures, "temperatures.txt");
+if (temperatures == nullptr) {
+    std::cout << "Erreur lors de l'ouverture du fichier." << std::endl;
+    return 1;
+}
+```
 
-1. Incrémenter `nombreTaches`
-2. Agrandir les tableaux `taches` et `tacheCompletee` de 1
+Observez bien la première ligne. La nouvelle version de la fonction `chargerTemperatures` retourne l'adresse d'un tableau contenant toutes les températures lues dans le fichier, ou `nullptr` si l'ouverture du fichier a échoué. C'est pourquoi on assigne le résultat de la fonction à la variable `temperatures`. Vous saviez sans doute déjà qu'une fonction ne peut pas retourner un tableau. Vous savez maintenant qu'une fonction peut cependant retourner l'*adresse* d'un tableau alloué dynamiquement!
 
-Pour ce faire, inspirez-vous de ce que vous avez fait dans le laboratoire 01-B. N'oubliez pas de prendre en compte le cas où les pointeurs contiennent `nullptr`!
+Commentez ensuite l'appel de la fonction `ajouterTemperature` dans le `case 4` de votre `switch`. Si tout va bien, votre code devrait compiler de nouveau. Si ce n'est pas le cas, apportez les correctifs nécessaires.
 
-Modifiez ensuite votre fonction `ajouterTache` afin que celle-ci ne modifie plus la valeur de `nombreTaches` (puisque vous le faites maintenant dans le `main`), ainsi que pour retirer la limite de 100 tâches (nous n'en avons plus besoin puisque le tableau s'agrandit chaque fois que nous ajoutons une tâche).
+Utilisez l'option 1 du menu (*Afficher les températures en degrés Celsius*) pour valider que la lecture du fichier fonctionne toujours correctement. Vous devriez voir les mêmes valeurs que dans le fichier `temperatures.txt`.
+
+> Remarquez que la fonction `chargerTemperatures`, sous sa forme actuelle, n'est pas particulièrement efficace: pour chaque température lue dans le fichier, elle copie un par un tous les éléments du tableau vers un nouveau tableau. Pour $n$ températures, on obtient le nombre suivant d'opérations de copie:$$ \frac{n(n + 1)}{2} $$
+Imaginez si $n$ valait 1 milliard. On aurait alors $5 \times 10^{17}$ copies! Pourrait-on changer notre algorithme pour éviter de faire autant de copies? 🤔 Ne changez pas votre code, contentez-vous d'y penser pour le moment.
+
+### Étape 2
+
+Votre code lit maintenant le contenu du fichier dans un tableau de taille dynamique. Nous avons cependant fait un oubli important: nous ne désallouons jamais le tableau! Avec l'allocation dynamique, le programmeur doit impérativement gérer également la désallocation. Ajoutez donc un `delete[] temperatures` à la fin de votre `main`.
+
+----
 
 **N'oubliez pas de désallouer les deux tableaux à la fin du `main`.**
 
 Testez votre programme au complet. Normalement, tout devrait maintenant fonctionner comme avant. Félicitations, vous avez déjà une version fonctionnelle de votre liste de tâches avec un tableau dynamique!
-
-### Étape 2
-
-Nous allons maintenant ajouter une amélioration à notre programme pour le rendre plus efficace.
-
-Présentement, notre programme ré-alloue le tableau chaque fois que nous ajoutons une tâche. Cela sera coûteux à la longue, puisque la réallocation implique chaque fois de ré-itérer sur tout l'ancien tableau afin de copier ses éléments vers le nouveau. Imaginez si le tableau avait 1 milliard d'éléments!
-
-En programmation, il faut souvent faire un compromis entre la mémoire et le temps. Ici, nous avons un programme qui minimise l'utilisation de la mémoire: on a un tableau contenant toujours exactement le nombre d'éléments dont nous avons besoin. Cette façon de faire est cependant coûteuse en temps, vu la nécessité de recopier tout le tableau chaque fois qu'on ajoute un élément. Le compromis que nous allons faire consiste à utiliser un peu plus de mémoire que nécessaire, afin de limiter les opérations de copie du tableau à une fois de temps en temps.
-
-Voici l'approche que nous utiliserons:
-
-1) Au lieu d'initialiser les deux pointeurs à `nullptr`, nous allouerons immédiatement deux tableaux de 10 éléments.
-2) Chaque fois que l'ajout d'une nouvelle tâche sera demandé, nous vérifierons d'abord s'il reste de la place dans les tableaux. **Si et seulement si** ce n'est pas le cas, nous doublerons la taille des tableaux. On passera donc de 10 à 20 éléments, puis de 20 à 40, puis de 40 à 80, et ainsi de suite.
-
-Ainsi, les opérations d'allocation et de copie des tableaux ne seront nécessaires que lors de l'ajoue d'une onzième tâche, puis d'une vingt-et-unième, puis d'une quarante-et-unième, etc. Notre code sera beaucoup plus efficace de cette manière, même s'il utilisera davantage de mémoire.
-
-Apportez les modifications nécessaires à votre code. Vous aurez besoin d'une nouvelle variable `tailleTableau` dont la valeur différera de `nombreTaches`.
-
-Une fois les modifications apportées, testez le programme rigoureusement. Il devrait continuer de fonctionner comme avant.
-
-### Étape 3
-
-Vous allez finalement ajouter une nouvelle option « Supprimer une tâche » au programme. Celle-ci doit permettre de retirer une tâche au choix de la liste. Voici un exemple d'exécution de cette option:
-
-```
-Liste de tâches
-================================
-1. Afficher la liste
-2. Ajouter une tâche
-3. Marquer une tâche comme faite
-4. Échanger deux tâches
-5. Supprimer une tâche
-6. Sauvegarder les tâches
-7. Charger les tâches
-8. Quitter
-Entrez votre choix : 5
-
-1. [ ] Faire le laboratoire 01-A
-2. [ ] Faire le laboratoire 01-B
-3. [ ] Faire le laboratoire 01-C
-
-Entrez le numéro de la tâche à supprimer : 2
-Suppression complétée.
-
-Liste de tâches
-================================
-1. Afficher la liste
-2. Ajouter une tâche
-3. Marquer une tâche comme faite
-4. Échanger deux tâches
-5. Supprimer une tâche
-6. Sauvegarder les tâches
-7. Charger les tâches
-8. Quitter
-Entrez votre choix : 1
-
-1. [ ] Faire le laboratoire 01-A
-2. [ ] Faire le laboratoire 01-C
-```
-
-Pensez à comment vous pourriez vous y prendre pour réaliser la suppression. **Indice: vous n'avez pas à allouer de nouveau tableau!**
-
-Voici le prototype de la fonction que vous devez ajouter pour cette option:
-
-```
-void supprimerTache(std::string taches[], bool tacheCompletee[], int &nombreTaches);
-```
-
-Une fois la nouvelle option implémentée, testez-la rigoureusement.
-
-Félicitations, vous avez complété le laboratoire!
 
 **⚠️ Faites valider votre laboratoire 01-C par l'enseignant.**

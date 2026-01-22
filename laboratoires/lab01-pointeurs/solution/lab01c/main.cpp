@@ -6,7 +6,8 @@ int main() {
     double* temperatures = nullptr;
     size_t nbTemperatures = 0;
 
-    if (!chargerTemperatures(temperatures, nbTemperatures, CAPACITE_TEMPERATURES, "temperatures.txt")) {
+    temperatures = chargerTemperatures(nbTemperatures, "temperatures.txt");
+    if (temperatures == nullptr) {
         std::cout << "Erreur lors de l'ouverture du fichier." << std::endl;
         return 1;
     }
@@ -29,7 +30,7 @@ int main() {
                     << std::endl;
                 break;
             case 4:
-                ajouterTemperature(temperatures, nbTemperatures, CAPACITE_TEMPERATURES);
+                //ajouterTemperature(temperatures, nbTemperatures, CAPACITE_TEMPERATURES);
                 break;
             case 5:
                 exporterTemperatures(temperatures, nbTemperatures);
@@ -39,6 +40,7 @@ int main() {
 
     std::cout << "Au revoir!";
 
+    delete[] temperatures;
+
     return 0;
-    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }
