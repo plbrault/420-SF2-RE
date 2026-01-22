@@ -320,7 +320,7 @@ Commencez donc par copier votre projet du laboratoire 0. Utilisez la nouvelle co
 
 Dans votre fonction `main`, remplacez la déclaration de votre tableau `temperatures` par celle d'un pointeur de `double` initialisé à `nullptr`. Retirez aussi la constante `CAPACITE_TEMPERATURES`, puisque vous n'en aurez plus besoin.
 
-Changez ensuite la signature de votre fonction `chargerTemperatures` pour celle-ci:
+Changez ensuite le prototype de votre fonction `chargerTemperatures` pour celle-ci:
 
 ```cpp
 double* chargerTemperatures(std::string nomFichier, size_t &nbTemperatures);
@@ -371,10 +371,20 @@ Imaginez si $n$ valait 1 milliard. On aurait alors $5 \times 10^{17}$ copies! Po
 
 Votre code lit maintenant le contenu du fichier dans un tableau de taille dynamique. Nous avons cependant fait un oubli important: nous ne désallouons jamais le tableau! Avec l'allocation dynamique, le programmeur doit impérativement gérer également la désallocation. Ajoutez donc un `delete[] temperatures` à la fin de votre `main`.
 
-----
+### Étape 3
 
-**N'oubliez pas de désallouer les deux tableaux à la fin du `main`.**
+Il reste maintenant à mettre à jour la fonction `ajouterTemperature`. Voici son nouveau prototype:
 
-Testez votre programme au complet. Normalement, tout devrait maintenant fonctionner comme avant. Félicitations, vous avez déjà une version fonctionnelle de votre liste de tâches avec un tableau dynamique!
+```cpp
+double* ajouterTemperature(double* temperatures, size_t &nbTemperatures)
+```
+
+La fonction reçoit l'adresse du tableau `temperatures` actuel, et doit retourner l'adresse d'un nouveau tableau contenant toutes les températures existantes, suivies de la nouvelle température ajoutée par l'utilisateur. Si la température saisie par l'utilisateur est invalide, la fonction doit retourner l'adresse de l'ancien tableau (et non `nullptr`).
+
+Il faut aussi bien sûr modifier la ligne de code qui appelle cette fonction dans le `main` afin d'assigner l'adresse du nouveau tableau à `temperatures`. Assurez-vous que votre fonction désalloue l'ancien tableau!
+
+Faites les modifications nécessaires dans votre code (elles devraient normalement être assez simples).
+
+Testez votre programme au complet. Normalement, tout devrait maintenant fonctionner comme avant.
 
 **⚠️ Faites valider votre laboratoire 01-C par l'enseignant.**

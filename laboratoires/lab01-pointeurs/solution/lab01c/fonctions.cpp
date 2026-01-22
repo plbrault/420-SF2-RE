@@ -77,30 +77,32 @@ double calculerTemperatureMoyenne(double temperatures[], size_t nbTemperatures) 
     return somme / nbTemperatures;
 }
 
-bool ajouterTemperature(double temperatures[], size_t &nbTemperatures, size_t capaciteTableau) {
+double* ajouterTemperature(double* temperatures, size_t &nbTemperatures) {
     double nouvelleTemperature;
-    if (nbTemperatures >= capaciteTableau) {
-        std::cout << "Le nombre maximal de températures a été atteint." << std::endl;
-        return false;
-    }
 
     std::cout << "Entrez une nouvelle température en Celsius: ";
     std::cin >> nouvelleTemperature;
 
     if (nouvelleTemperature < ZERO_ABSOLU) {
         std::cout << "La température est trop petite." << std::endl;
-        return false;
+        return temperatures;
     }
     if (nouvelleTemperature > TEMPERATURE_DE_PLANCK) {
         std::cout << "La température est trop grande." << std::endl;
-        return false;
+        return temperatures;
     }
 
+    double* temporaire = temperatures;
+    temperatures = new double[nbTemperatures + 1];
+    for (size_t i = 0; i < nbTemperatures; i++) {
+        temperatures[i] = temporaire[i];
+    }
     temperatures[nbTemperatures] = nouvelleTemperature;
     nbTemperatures++;
+    delete[] temporaire;
     std::cout << "La température a été ajoutée." << std::endl;
 
-    return true;
+    return temperatures;
 }
 
 void exporterTemperatures(double temperatures[], size_t nbTemperatures) {

@@ -30,7 +30,7 @@ int main() {
                     << std::endl;
                 break;
             case 4:
-                //ajouterTemperature(temperatures, nbTemperatures, CAPACITE_TEMPERATURES);
+                temperatures = ajouterTemperature(temperatures, nbTemperatures);
                 break;
             case 5:
                 exporterTemperatures(temperatures, nbTemperatures);
