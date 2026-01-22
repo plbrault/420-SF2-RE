@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
 	double* nombres = nullptr;
-	int nombreValeurs;
+	size_t nombreValeurs;
 
 	cout << "Combien de nombres voulez-vous entrer? ";
 	cin >> nombreValeurs;

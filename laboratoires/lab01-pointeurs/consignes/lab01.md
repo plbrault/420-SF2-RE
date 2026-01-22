@@ -185,11 +185,13 @@ Commencez avec un nouveau projet contenant une fonction `main` vide.
 
 ### Étape 1
 
-En vous basant sur l'exemple d'exécution, ajoutez le code nécessaire pour demander à l'utilisateur combien de nombres il souhaite entrer. Stockez sa réponse dans un `int`.
+En vous basant sur l'exemple d'exécution, ajoutez le code nécessaire pour demander à l'utilisateur combien de nombres il souhaite entrer. Stockez sa réponse dans un `size_t`.
 
 Si le nombre saisi est supérieur à 0, utilisez un pointeur pour allouer dynamiquement un tableau contenant le nombre de valeurs demandé.
 
 Ajoutez ensuite le code nécessaire pour demander des nombres à l'utilisateur et les stocker dans le tableau. Vous pouvez pour cela créer une fonction `demanderNombres`. Puisque le nom d'un tableau correspond en réalité à l'adresse de son premier élément, votre fonction peut soit prendre en paramètre un pointeur de float (`float *nombres`) ou un tableau de float (`float nombres[]`). Dans les deux cas, vous serez en mesure de passer votre pointeur à votre fonction, et le résultat sera le même.
+
+> 🤔 Est-ce que la fonction `demanderNombres` doit prendre d'autres paramètres?
 
 Testez votre code avant de continuer. À la fin de cette étape, l'exécution de votre programme devrait ressembler à ceci:
 
