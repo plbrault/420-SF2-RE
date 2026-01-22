@@ -204,7 +204,7 @@ Entrez le nombre #3: 32
 
 ### Étape 2
 
-Ajoutez le code nécessaire pour calculer la moyenne des valeurs du tableau et l'afficher à l'écran. Pour cela, vous pourriez par exemple créer des fonctions `calculerMoyenne` et `afficherMoyenne`.
+Ajoutez le code nécessaire pour calculer la moyenne des valeurs du tableau et l'afficher à l'écran. Pour cela, vous pourriez par exemple créer des fonctions `calculerMoyenne` et `afficherMoyenne`. À vous de déterminer les paramètres que doivent prendre ces fonctions.
 
 Voici à quoi devrait ressembler l'exécution de votre programme après cette étape:
 
