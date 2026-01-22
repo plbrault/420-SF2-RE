@@ -189,7 +189,7 @@ En vous basant sur l'exemple d'exécution, ajoutez le code nécessaire pour dema
 
 Si le nombre saisi est supérieur à 0, utilisez un pointeur pour allouer dynamiquement un tableau contenant le nombre de valeurs demandé.
 
-Ajoutez ensuite le code nécessaire pour demander des nombres à l'utilisateur et les stocker dans le tableau. Vous pouvez pour cela créer une fonction `demanderNombres`. Puisqu'un tableau est en réalité un pointeur, votre fonction peut soit prendre en paramètre un pointeur de float (`float *nombres`) ou un tableau de float (`float nombres[]`). Dans les deux cas, vous serez en mesure de passer votre pointeur à votre fonction, et le résultat sera le même.
+Ajoutez ensuite le code nécessaire pour demander des nombres à l'utilisateur et les stocker dans le tableau. Vous pouvez pour cela créer une fonction `demanderNombres`. Puisque le nom d'un tableau correspond en réalité à l'adresse de son premier élément, votre fonction peut soit prendre en paramètre un pointeur de float (`float *nombres`) ou un tableau de float (`float nombres[]`). Dans les deux cas, vous serez en mesure de passer votre pointeur à votre fonction, et le résultat sera le même.
 
 Testez votre code avant de continuer. À la fin de cette étape, l'exécution de votre programme devrait ressembler à ceci:
 

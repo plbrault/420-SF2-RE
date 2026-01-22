@@ -1,5 +1,5 @@
 #pragma once
 
-void demanderNombres(float nombres[], int indexMin, int indexMax);
-float calculerMoyenne(float nombres[], int nombreValeurs);
-void afficherMoyenne(int nombreValeurs, float moyenne);
+void demanderNombres(double nombres[], size_t indexMin, size_t indexMax);
+double calculerMoyenne(double nombres[], size_t nombreValeurs);
+void afficherMoyenne(size_t nombreValeurs, double moyenne);

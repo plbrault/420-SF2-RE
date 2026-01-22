@@ -4,14 +4,14 @@
 using namespace std;
 
 int main() {
-	float* nombres = nullptr;
+	double* nombres = nullptr;
 	int nombreValeurs;
 
 	cout << "Combien de nombres voulez-vous entrer? ";
 	cin >> nombreValeurs;
 
 	if (nombreValeurs > 0) {
-		nombres = new float[nombreValeurs];
+		nombres = new double[nombreValeurs];
 		demanderNombres(nombres, 0, nombreValeurs - 1);
 		afficherMoyenne(nombreValeurs, calculerMoyenne(nombres, nombreValeurs));
 	}
@@ -26,7 +26,7 @@ int main() {
 		cin >> nombreNouvellesValeurs;
 
 		if (nombreNouvellesValeurs > 0) {
-			float* nouveauTableau = new float[nombreValeurs + nombreNouvellesValeurs];
+			double* nouveauTableau = new double[nombreValeurs + nombreNouvellesValeurs];
 			for (int i = 0; i < nombreValeurs; i++) {
 				nouveauTableau[i] = nombres[i];
 			}
