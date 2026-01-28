@@ -76,8 +76,36 @@ Planète Neptune:
 
 Pour ce faire, nous allons bien sûr utiliser une classe `Planete` !
 
+### Étape 1
+
 Commencez par créer un nouveau projet avec un `main` vide. Assurez-vous que le tout compile.
 
 Dans ce projet, ajoutez ensuite un fichier `Planete.h` et un fichier `Planete.cpp`.
 
 > **Astuce:** vous pouvez utiliser l'option ***New C++ Class*** dans CLion. Celle-ci créera automatiquement votre fichier **.h** et votre fichier **.cpp**.
+
+Dans votre fichier `Planete.h`, ajoutez le code de départ pour la définition d'une classe `Planete`.
+
+```cpp
+class Planete {
+private:
+
+public:
+
+};
+```
+
+Dans la partie privée (***private***) de la classe, définissez les attributs (propriétés) suivants:
+
+* `_nom` de type `std::string`
+* `_rayon` de type `double`
+* `_masse` de type `double`
+* `_distanceSoleil` de type `double`
+
+Les attributs `_rayon` et `_distanceSoleil` sont exprimés en mètres, tandis que l'attribut `masse` est exprimé en kilogrammes.
+
+Ensuite, dans la partie publique (***public***), ajoutez le constructeur suivant:
+
+```cpp
+Planete(std::string nom, double rayon, double masse, double distanceSoleil);
+```
