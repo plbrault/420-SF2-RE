@@ -292,6 +292,8 @@ Où:
 * $M$ est la masse de la planète
 * $R$ est le rayon de la planète
 
+La gravité de surface s'exprime en $\mathrm{m\,/\,s^{2}}$.
+
 Voici le prototype de la méthode que vous devez implémenter:
 
 ```cpp
@@ -302,3 +304,24 @@ Une fois votre méthode implémentée, appelez-la dans votre `main` sur les obje
 
 * Terre: `9.81997`
 * Mars: `3.71114`
+
+## Étape 6
+
+Ce serait bien d'afficher la gravité de surface avec le reste des caractéristiques de la planète.
+
+Pour ce faire, modifiez la méthode `afficher` pour ajouter cette valeur à l'affichage. La méthode `afficher` doit appeler la méthode `calculerGraviteSurface`.
+
+La sortie de votre programme devrait maintenant ressembler à ceci:
+
+```text
+Planète Terre:
+ - Rayon: 6.371e+06 m
+ - Masse: 5.972e+24 kg
+ - Distance du soleil: 1.496e+08
+ - Gravité de surface: 9.81997 m/s^2
+Planète Mars:
+ - Rayon: 3.39e+06 m
+ - Masse: 6.39e+23 kg
+ - Distance du soleil: 2.279e+08
+ - Gravité de surface: 3.71114 m/s^2
+```
