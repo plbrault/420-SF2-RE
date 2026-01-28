@@ -156,3 +156,124 @@ Pour instancier cet objet, vous appelez son **constructeur**, qui prend 4 param�
 * Sa distance du soleil, soit **$1.496 \times 10^{8}$ mètres**
 
 Validez que votre code compile. Utilisez le débogueur pour vérifier que l'objet `terre` contient les bonnes valeurs d'attributs.
+
+### Étape 2
+
+On veut maintenant pouvoir afficher le contenu de notre objet de type `Planete`. Pour ce faire, nous allons ajouter une méthode `afficher` dans la partie publique de la classe (fichier **.h**):
+
+```cpp
+void afficher();
+```
+
+Et l'implémentation (fichier **.cpp**):
+
+```cpp
+void Planete::afficher() {
+    // Ajoutez ici le code nécessaire pour afficher les attributs de la planète
+}
+```
+
+Voici un exemple de l'affichage voulu à ce stade-ci:
+
+```text
+Planète Terre:
+ - Rayon: 6371000 m
+ - Masse: 5.972e+24 kg
+ - Distance du soleil: 1.496e+08
+```
+
+Pour tester votre méthode, il faut l'appeler. Ajoutez donc la ligne de code suivante à la suite de l'instanciation de l'objet `terre` dans votre `main`:
+
+```cpp
+terre.afficher();
+```
+
+Vous devriez obtenir le même affichage que dans l'exemple ci-dessus. Autrement, corrigez le code de votre méthode.
+
+Testez maintenant votre méthode avec une deuxième planète:
+
+```cpp
+Planete mars("Mars", 3390000, 6.39e23, 2.279e8);
+
+mars.afficher();
+```
+
+Voici le résultat attendu:
+
+```text
+Planète Mars:
+ - Rayon: 3390000 m
+ - Masse: 6.39e+23 kg
+ - Distance du soleil: 2.279e+08
+```
+
+### Étape 3
+
+Votre méthode `afficher` fonctionne bien, mais elle assume qu'on veut afficher la planète dans la **sortie standard**. Si on voulait plutôt afficher la planète dans une autre sortie, par exemple la sortie d'erreur ou les journaux du système, on ne pourrait pas utiliser cette méthode.
+
+N'ayez crainte, car il existe une façon simple de rendre notre méthode plus réutilisable. Elle consiste à **passer la sortie voulue à la méthode**. Pour ce faire, il faut ajouter un paramètre de type `std::ostream`, passé par référence:
+
+```cpp
+void afficher(std::ostream& sortie);
+```
+
+Ensuite, il faut modifier le code de la méthode en y remplaçant `std::cout` par `sortie`.
+
+```cpp
+void Planete::afficher(std::ostream &sortie) {
+    sortie << "Planète " << this->_nom << ":" << std::endl
+        << // ...
+}
+```
+
+Finalement, il faut modifier l'appel de la méthode `afficher` pour passer `std::cout` au paramètre `sortie`:
+
+```cpp
+Planete terre("Terre", 6371000, 5.972e24, 1.496e8);
+Planete mars("Mars", 3390000, 6.39e23, 2.279e8);
+
+terre.afficher(std::cout);
+mars.afficher(std::cout);
+```
+
+Validez que votre programme compile toujours et que son résultat n'a pas changé.
+
+> Suite à cette modification, il devient même possible d'utiliser la méthode `afficher` pour écrire dans un fichier, en lui passant un objet de type `std::ofstream` au lieu de `std::cout`. Cela est permis puisque `std::ofstream` est une version spécialisée de `std::ostream`. Cela sera plus clair lorsque nous aurons vu l'héritage au chapitre 5.
+
+### Étape 4
+
+Bon, la réutilisabilité c'est bien, mais ça vous ennuie quand même un peu de devoir toujours passer `std::cout` chaque fois que vous appelez la méthode `afficher`, non? Et si on ajoutait une deuxième version de la méthode, qui utiliserait `std::cout` par défaut?
+
+**Conservez votre méthode `void afficher(std::ostream& sortie)` actuelle.** Suite à cette méthode, ajoutez une autre méthode, qui portera le même nom:
+
+```cpp
+void afficher();
+```
+
+Voici son implémentation:
+
+```cpp
+void Planete::afficher() {
+    this->afficher(std::cout);
+}
+```
+
+Comme vous voyez, cette méthode ne prend aucun paramètre (comme avant!). Mais au lieu de faire l'affichage directement, elle appelle l'**autre version de la méthode**, en passant `std::cout` à son paramètre `sortie`.
+
+![](./images/bob_leponge_reutilisation.jpg)
+
+Vous pouvez maintenant ré-enlever `std::cout` dans vos appels de la méthode `afficher` (dans le `main`):
+
+```cpp
+Planete terre("Terre", 6371000, 5.972e24, 1.496e8);
+Planete mars("Mars", 3390000, 6.39e23, 2.279e8);
+
+terre.afficher();
+mars.afficher();
+```
+
+À ce stade-ci, notre classe `Planete` a:
+
+* 4 attributs privés
+* 1 constructeur avec paramètres
+* 2 versions d'une méthode `afficher`
