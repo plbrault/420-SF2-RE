@@ -25,7 +25,7 @@ void Planete::afficher(std::ostream &sortie) {
         << " - Rayon: " << this->_rayon << " m" << std::endl
         << " - Masse: " << this->_masse << " kg" << std::endl
         << " - Distance du soleil: " << this->_distanceSoleil << std::endl
-        << " - Gravité de surface: " << this->calculerGraviteSurface() << std::endl;
+        << " - Gravité de surface: " << this->calculerGraviteSurface() << " m/s^2" << std::endl;
 }
 
 void Planete::afficher() {
