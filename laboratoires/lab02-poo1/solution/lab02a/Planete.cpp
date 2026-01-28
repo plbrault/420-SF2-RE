@@ -13,7 +13,7 @@ Planete::Planete() {
     this->_distanceSoleil = 0;
 }
 
-Planete::Planete(std::string nom, unsigned int rayon, double masse, double distanceSoleil) {
+Planete::Planete(std::string nom, double rayon, double masse, double distanceSoleil) {
     this->_nom = nom;
     this->_rayon = rayon;
     this->_masse = masse;

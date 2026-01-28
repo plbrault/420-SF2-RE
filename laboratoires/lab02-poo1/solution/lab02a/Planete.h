@@ -10,13 +10,13 @@
 class Planete {
 private:
     std::string _nom;
-    unsigned int _rayon;
+    double _rayon;
     double _masse;
     double _distanceSoleil;
 
 public:
     Planete();
-    Planete(std::string nom, unsigned int rayon, double masse, double distanceSoleil);
+    Planete(std::string nom, double rayon, double masse, double distanceSoleil);
 
     void afficher(std::ostream &sortie);
     void afficher();

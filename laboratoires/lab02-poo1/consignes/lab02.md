@@ -98,18 +98,16 @@ public:
 Dans la partie privée (***private***) de la classe, définissez les attributs (propriétés) suivants:
 
 * `_nom` de type `std::string`
-* `_rayon` de type `unsigned int`
+* `_rayon` de type `double`
 * `_masse` de type `double`
 * `_distanceSoleil` de type `double`
-
-> `unsigned int` signifie « **nombre entier non signé** », c'est-à-dire un nombre entier qui ne peut être négatif. L'avantage d'utiliser un `unsigned int` lorsque possible est qu'on peut exprimer des nombres plus grands avec le même nombre de bits, puisque la valeur maximale d'un `unsigned int` sur 32 bits est **4 294 967 295** tandis que celle d'un `int` est **2 147 483 647**. Cela est dû au fait qu'un `int` doit réserver la moitié de ses valeurs possibles pour les nombres négatifs.
 
 Les attributs `_rayon` et `_distanceSoleil` sont exprimés en mètres, tandis que l'attribut `masse` est exprimé en kilogrammes.
 
 Ensuite, dans la partie publique (***public***), ajoutez le constructeur suivant:
 
 ```cpp
-Planete(std::string nom, unsigned int rayon, double masse, double distanceSoleil);
+Planete(std::string nom, double rayon, double masse, double distanceSoleil);
 ```
 
 Voici à quoi devrait ressembler votre définition de classe à ce stade-ci:
@@ -118,19 +116,19 @@ Voici à quoi devrait ressembler votre définition de classe à ce stade-ci:
 class Planete {
 private:
     std::string _nom;
-    unsigned int _rayon;
+    double _rayon;
     double _masse;
     double _distanceSoleil;
 
 public:
-    Planete(std::string nom, unsigned int rayon, double masse, double distanceSoleil);
+    Planete(std::string nom, double rayon, double masse, double distanceSoleil);
 };
 ```
 
 Pour pouvoir utiliser cette classe, il vous reste à **implémenter** votre constructeur dans le fichier `Planete.cpp`.
 
 ```cpp
-Planete::Planete(std::string nom, unsigned int rayon, double masse, double distanceSoleil) {
+Planete::Planete(std::string nom, double rayon, double masse, double distanceSoleil) {
     // Ajoutez ici le code nécessaire pour assigner les
     // paramètres aux attributs correspondants de l'objet
 }
@@ -272,8 +270,35 @@ terre.afficher();
 mars.afficher();
 ```
 
+## Étape 5
+
 À ce stade-ci, notre classe `Planete` a:
 
 * 4 attributs privés
 * 1 constructeur avec paramètres
 * 2 versions d'une méthode `afficher`
+
+Ne serait-il pas amusant d'ajouter une méthode pour calculer la [gravité de surface](https://fr.wikipedia.org/wiki/Gravit%C3%A9_de_surface) de la planète?
+
+La formule pour calculer la gravité de surface ($g$) est:
+
+$$
+g = G \times \frac{M}{R^{2}}
+$$
+
+Où:
+
+* $G$ est la constante gravitationnelle universelle (`6.67430e-11`)
+* $M$ est la masse de la planète
+* $R$ est le rayon de la planète
+
+Voici le prototype de la méthode que vous devez implémenter:
+
+```cpp
+double calculerGraviteSurface();
+```
+
+Une fois votre méthode implémentée, appelez-la dans votre `main` sur les objets `terre` et `mars`, et faites afficher le résultat. Vous devriez obtenir les valeurs suivantes:
+
+* Terre: `9.81997`
+* Mars: `3.71114`
