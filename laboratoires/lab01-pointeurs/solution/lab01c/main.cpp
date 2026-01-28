@@ -1,0 +1,46 @@
+#include <iostream>
+#include <fstream>
+#include "fonctions.h"
+
+int main() {
+    double* temperatures = nullptr;
+    size_t nbTemperatures = 0;
+
+    temperatures = chargerTemperatures(nbTemperatures, "temperatures.txt");
+    if (temperatures == nullptr) {
+        std::cout << "Erreur lors de l'ouverture du fichier." << std::endl;
+        return 1;
+    }
+    int optionChoisie;
+    do {
+        afficherMenu();
+        optionChoisie = demanderChoix(1, 6);
+
+        switch (optionChoisie) {
+            case 1:
+                afficherTemperaturesCelsius(temperatures, nbTemperatures);
+                break;
+            case 2:
+                afficherTemperaturesKelvin(temperatures, nbTemperatures);
+                break;
+            case 3:
+                std::cout << "La température moyenne est de "
+                    << calculerTemperatureMoyenne(temperatures, nbTemperatures)
+                    << '\370' << "C"
+                    << std::endl;
+                break;
+            case 4:
+                temperatures = ajouterTemperature(temperatures, nbTemperatures);
+                break;
+            case 5:
+                exporterTemperatures(temperatures, nbTemperatures);
+                break;
+        }
+    } while (optionChoisie != 6);
+
+    std::cout << "Au revoir!";
+
+    delete[] temperatures;
+
+    return 0;
+}
