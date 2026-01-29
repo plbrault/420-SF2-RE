@@ -526,3 +526,121 @@ Valeur de y: 293341
 
 ## Laboratoire 02-C
 
+Reprenez votre programme du **Laboratoire 01-C** avec la liste de températures.
+
+Ce programme affiche un menu et valide le choix de l'utilisateur:
+
+```text
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+Entrez un choix entre 1 et 6: 7
+Votre choix est invalide.
+Entrez un choix entre 1 et 6: 6
+
+Au revoir!
+```
+
+Ne serait-il pas pratique de déplacer cette logique dans une classe `Menu`?
+
+### Étape 1
+
+Créez les nouveaux fichiers `Menu.h` et `Menu.cpp` dans votre projet.
+
+Dans le fichier `Menu.h`, ajoutez la définition de classe suivante:
+
+```cpp
+class Menu {
+private:
+    std::string* _options;
+    size_t _nombreOptions;
+    bool _optionQuitter;
+public:
+    Menu();
+    Menu(bool optionQuitter);
+    ~Menu();
+
+    void ajouterOption(std::string option);
+    std::string obtenirChaine();
+    size_t demanderChoix();
+    bool estQuitter(size_t idOption);
+};
+```
+
+Puis, dans le fichier `Menu.cpp`, ajoutez les implémentations vides ci-dessous. Vous allez les compléter dans les étapes ultérieures.
+
+```cpp
+Menu::Menu() {
+}
+
+Menu::Menu(bool optionQuitter) : Menu() {
+}
+
+Menu::~Menu() {
+}
+
+void Menu::ajouterOption(std::string option) {
+}
+
+std::string Menu::obtenirChaine() {
+    return "";
+}
+
+size_t Menu::demanderChoix() {
+    return 0;
+}
+
+bool Menu::estQuitter(size_t option) {
+    return false;
+}
+```
+
+Voici quelques détails sur le fonctionnement de notre classe:
+
+* Le pointeur `_options` pointera sur un tableau contenant toutes les options disponibles dans le menu (à l'exception de l'option « Quitter »). Nous utilisons un pointeur, car nous ne savons pas d'avance combien d'options comprendra le menu (l'objectif étant de créer un menu réutilisable).
+* `_nombreOptions` indiquera le nombre d'éléments contenus dans `_options`.
+* `_optionQuitter` indiquera si le menu doit afficher une option "Quitter".
+
+### Étape 2
+
+Implémentez le constructeur sans paramètre de la classe. Celui-ci doit:
+
+* Initialiser l'attribut `_options` à `nullptr`
+* Initialiser l'attribut `_nombreOptions` à 0
+* Initialiser l'attribut `_optionQuitter` à `false`
+
+Testez dans votre `main` que vous êtes en mesure d'instancier un menu avec `Menu menu`.
+
+### Étape 3
+
+Implémentez le deuxième constructeur, qui prend un paramètre `optionQuitter`. Attardons-nous à un petit détail de l'implémentation vide que vous avez ajoutée précédemment dans votre `.cpp`:
+
+```cpp
+Menu::Menu(bool optionQuitter) : Menu() {
+}
+```
+
+Remarquez le ` : Menu()` après la parenthèse fermante de la signature du constructeur.
+
+Il indique au compilateur que le **constructeur avec paramètre** doit lui-même appeler le **constructeur sans paramètre** avant de faire quoique ce soit d'autre.
+
+Ainsi, dans l'implémentation du **constructeur avec paramètre**, vous n'avez pas à initialiser les attributs `_options` et `_nombreOptions`, puisqu'ils sont déjà initialisés aux valeurs voulues par le **constructeur sans paramètre**! Voici donc la seule chose qu'il vous reste à faire dans le constructeur avec paramètre:
+
+```cpp
+Menu::Menu(bool optionQuitter) : Menu() {
+    this->_optionQuitter = optionQuitter;
+}
+```
+
+![](./images/bob_leponge_reutilisation.jpg)
+
+### Étape 4
+
+Puisque notre classe contient un pointeur (l'attribut `_options`) auquel elle allouera de la mémoire, elle doit impérativement implémenter un **destructeur** pour désallouer la mémoire de ce pointeur.
+
+Ajoutez donc la ligne de code nécessaire au destructeur (`~Menu()`) pour désallouer le tableau pointé par `_options`.

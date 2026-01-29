@@ -39,5 +39,17 @@ std::string Menu::obtenirChaine() {
         flux << (i + 1) << ". " << this->_options[i] << std::endl;
     }
 
+    if (this->_optionQuitter) {
+        flux << (_nombreOptions + 1) << ". " << "Quitter" << std::endl;
+    }
+
     return flux.str();
+}
+
+size_t Menu::demanderChoix() {
+    return 0;
+}
+
+bool Menu::estQuitter(size_t option) {
+    return false;
 }
