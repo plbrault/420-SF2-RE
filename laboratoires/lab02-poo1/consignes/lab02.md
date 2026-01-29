@@ -146,7 +146,7 @@ Planete terre("Terre", 6371000, 5.972e24, 1.496e8);
 
 Cette ligne de code crée un nouvel **objet** de type `Planete`.
 Cet objet est donc une **instance** de la classe `Planete`.
-L'objet est stocké dans la variable `planete`.
+L'objet est stocké dans la variable `terre`.
 
 Pour instancier cet objet, vous appelez son **constructeur**, qui prend 4 paramètres. Vous lui passez les paramètres suivants:
 
