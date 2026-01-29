@@ -9,6 +9,7 @@ Mettre en pratique les notions suivantes:
 * Implémentation d'un destructeur
 * Instancation et utilisation des objets
 * Création et utilisation d'un tableau d'objets en allocation statique
+* Passage d'un objet en paramètre d'une fonction
 
 ## Parties
 
@@ -522,3 +523,6 @@ Valeur de y: 293341
 ```
 
 **⚠️ Faites valider votre laboratoire 02-B par l'enseignant.**
+
+## Laboratoire 02-C
+
