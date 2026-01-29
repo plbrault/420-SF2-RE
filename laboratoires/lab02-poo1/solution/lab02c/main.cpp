@@ -22,7 +22,7 @@ int main() {
     int optionChoisie;
     do {
         afficherMenu(menu);
-        optionChoisie = demanderChoix(1, 6);
+        optionChoisie = menu.demanderChoix();
 
         switch (optionChoisie) {
             case 1:
@@ -44,7 +44,7 @@ int main() {
                 exporterTemperatures(temperatures, nbTemperatures);
                 break;
         }
-    } while (optionChoisie != 6);
+    } while (!menu.estQuitter(optionChoisie));
 
     std::cout << "Au revoir!";
 

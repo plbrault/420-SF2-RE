@@ -567,8 +567,8 @@ public:
 
     void ajouterOption(std::string option);
     std::string obtenirChaine();
-    size_t demanderChoix();
-    bool estQuitter(size_t idOption);
+    int demanderChoix();
+    bool estQuitter(int idOption);
 };
 ```
 
@@ -591,11 +591,11 @@ std::string Menu::obtenirChaine() {
     return "";
 }
 
-size_t Menu::demanderChoix() {
+int Menu::demanderChoix() {
     return 0;
 }
 
-bool Menu::estQuitter(size_t option) {
+bool Menu::estQuitter(int option) {
     return false;
 }
 ```
@@ -725,3 +725,23 @@ void afficherMenu(Menu& menu);
 N'oubliez pas de modifier l'appel de la fonction `afficherMenu` dans le `main` afin de lui passer le menu.
 
 Testez votre programme. Il devrait fonctionner comme avant. Si ce n'est pas le cas, corrigez votre code.
+
+### Étape 7
+
+Il est temps d'implémenter votre méthode `demanderChoix`. Cette méthode doit faire la même chose que votre ancienne fonction du même nom, mais elle doit utiliser les attributs de l'objet `Menu` pour valider le choix au lieu de prendre des paramètres `min` et `max`.
+
+Modifiez ensuite votre `main` pour utiliser votre nouvelle méthode.
+
+Testez votre programme. Il devrait fonctionner comme avant. Si ce n'est pas le cas, corrigez votre code.
+
+### Étape 8
+
+Implémentez finalement la méthode `estQuitter`. Cette méthode prend en paramètre l'indice d'une option du menu, et retourne un booléen indiquant si cet indice correspond à l'option « Quitter ». Si l'attribut `_optionQuitter` vaut `false`, il faut toujours retourner `false`.
+
+Utilisez ensuite cette méthode dans la condition de la boucle principale du programme pour déterminer s'il faut quitter.
+
+Testez votre programme. Il devrait fonctionner comme avant. Si ce n'est pas le cas, corrigez votre code.
+
+**⚠️ Faites valider votre laboratoire 02-C par l'enseignant.**
+
+> 🎉 Félicitations, vous avez complété votre premier laboratoire sur la programmation orientée objet!

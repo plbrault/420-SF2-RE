@@ -46,10 +46,21 @@ std::string Menu::obtenirChaine() {
     return flux.str();
 }
 
-size_t Menu::demanderChoix() {
-    return 0;
+int Menu::demanderChoix() {
+    int choix;
+    int max = this->_optionQuitter ? (this->_nombreOptions + 1) : this->_nombreOptions;
+    do {
+        std::cout << "Entrez un choix entre 1 et " << max << ": ";
+        std::cin >> choix;
+
+        if (choix < 1 || choix > max) {
+            std::cout << "Votre choix est invalide." << std::endl;
+        }
+    } while (choix < 1 || choix > max);
+    std::cout << std::endl;
+    return choix;
 }
 
-bool Menu::estQuitter(size_t option) {
-    return false;
+bool Menu::estQuitter(int option) {
+    return this->_optionQuitter && option == (this->_nombreOptions + 1);
 }

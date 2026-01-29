@@ -36,20 +36,6 @@ void afficherMenu(Menu& menu) {
     std::cout << menu.obtenirChaine();
 }
 
-int demanderChoix(int min, int max) {
-    int choix;
-    do {
-        std::cout << "Entrez un choix entre " << min << " et " << max << ": ";
-        std::cin >> choix;
-
-        if (choix < min || choix > max) {
-            std::cout << "Votre choix est invalide." << std::endl;
-        }
-    } while (choix < min || choix > max);
-    std::cout << std::endl;
-    return choix;
-}
-
 void afficherTemperaturesCelsius(double temperatures[], size_t nbTemperatures) {
     for (size_t i = 0; i < nbTemperatures; i++) {
         std::cout << (i + 1) << ". " << temperatures[i] << '\370' << "C" << std::endl;

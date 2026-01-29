@@ -19,8 +19,8 @@ public:
 
     void ajouterOption(std::string option);
     std::string obtenirChaine();
-    size_t demanderChoix();
-    bool estQuitter(size_t idOption);
+    int demanderChoix();
+    bool estQuitter(int idOption);
 };
 
 
