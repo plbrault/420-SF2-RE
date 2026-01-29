@@ -714,10 +714,14 @@ MENU
 
 Il faut bien sûr que la chaîne contienne les options qui se trouvent dans l'attribut `_options`. De plus, il faut aussi ajouter une option "Quitter" **si et seulement si** l'attribut `_optionQuitter` vaut `true`.
 
-Il est maintenant temps de tester le tout dans votre `main`. Pour ce faire:
+Il est maintenant temps de tester le tout dans votre `main`. Pour ce faire, commencez par ajouter toutes les options au menu (sauf l'option « Quitter ») à l'aide de la méthode `ajouterOption`.
 
-1. Ajoutez toutes les options au menu (sauf l'option « Quitter ») à l'aide de la méthode `ajouterOption`
-2. Modifiez votre fonction `afficherMenu` des laboratoires précédents pour qu'elle reçoive le menu en paramètre, puis affiche la chaîne de caractères produite par sa méthode `obtenirChaine`
-3. Modifiez l'appel de votre fonction `afficherMenu` afin de lui passer le menu
+Ensuite, modifiez votre fonction `afficherMenu` des laboratoires précédents pour qu'elle reçoive le menu en paramètre, puis affiche la chaîne de caractères produite par sa méthode `obtenirChaine`. **ATTENTION:** il est essentiel que votre fonction `afficherMenu` reçoive le menu par référence, pour des raisons que nous verrons dans les chapitres ultérieurs.
+
+```cpp
+void afficherMenu(Menu& menu);
+```
+
+N'oubliez pas de modifier l'appel de la fonction `afficherMenu` dans le `main` afin de lui passer le menu.
 
 Testez votre programme. Il devrait fonctionner comme avant. Si ce n'est pas le cas, corrigez votre code.
