@@ -728,7 +728,7 @@ Testez votre programme. Il devrait fonctionner comme avant. Si ce n'est pas le c
 
 ### Étape 7
 
-Il est temps d'implémenter votre méthode `demanderChoix`. Cette méthode doit faire la même chose que votre ancienne fonction du même nom, mais elle doit utiliser les attributs de l'objet `Menu` pour valider le choix au lieu de prendre des paramètres `min` et `max`.
+Il est temps d'implémenter votre méthode `demanderChoix`. Cette méthode doit faire la même chose que votre ancienne fonction du même nom, mais elle doit utiliser les attributs de l'objet pour valider le choix au lieu de prendre des paramètres `min` et `max`.
 
 Modifiez ensuite votre `main` pour utiliser votre nouvelle méthode.
 
