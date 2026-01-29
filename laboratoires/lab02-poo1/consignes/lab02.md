@@ -282,13 +282,9 @@ Ne serait-il pas amusant d'ajouter une méthode pour calculer la [gravité de su
 
 La formule pour calculer la gravité de surface ($g$) est:
 
-<center>
-
 $$
 g = G \times \frac{M}{R^{2}}
 $$
-
-</center>
 
 Où:
 
@@ -330,3 +326,129 @@ Planète Mars:
  - Gravité de surface: 3.71114 m/s^2
 ```
 
+## Étape 7
+
+Remplacez votre code du `main` par celui-ci, qui instancie toutes les planètes du système solaire:
+
+```cpp
+Planete mercure("Mercure", 2439000, 3.301e23, 5.79e7);
+Planete venus("Vénus", 6052000, 4.867e24, 1.082e8);
+Planete terre("Terre", 6371000, 5.972e24, 1.496e8);
+Planete mars("Mars", 3390000, 6.39e23, 2.279e8);
+Planete jupiter("Jupiter", 69911000, 1.898e27, 7.785e8);
+Planete saturne("Saturne", 58232000, 5.683e26, 1.433e9);
+Planete uranus("Uranus", 25362000, 8.681e25, 2.877e9);
+Planete neptune("Neptune", 24622000, 1.024e26, 4.503e9);
+```
+
+Vérifiez que votre programme compile toujours (il ne devrait maintenant rien afficher).
+
+Nous voulons maintenant ajouter ces planètes à un tableau représentant le système solaire. Commencez par déclarer ce tableau en allocation statique:
+
+```cpp
+Planete systemeSolaire[8];
+```
+
+Oh non! Vous avez maintenant une erreur de compilation! 😱 Pourquoi donc?
+
+Voyons voir ce que dit le message d'erreur en passant la souris sur notre tableau dans CLion:
+
+> *Cannot initialize an object of type Planet[8]: default constructor is missing*
+
+On nous parle de *default constructor* qui serait manquant 🤔. L'erreur serait-elle en lien avec notre constructeur?
+
+```cpp
+Planete(std::string nom, double rayon, double masse, double distanceSoleil);
+```
+
+Ah, voilà. Nous avons implémenté un **constructeur avec paramètres**. Ce faisant, nous avons désactivé le **constructeur par défaut**, qui lui est un **constructeur sans paramètre**.
+
+Le problème, c'est que pour allouer un tableau d'objets, la classe concernée doit absolument posséder un constructeur sans paramètre. Sinon, le compilateur ne sait pas comment allouer la mémoire pour le tableau.
+
+Mais quelle tragédie! Qu'allons donc nous faire? 😭
+
+Surtout pas de panique! Nous allons tout simplement... 🥁 ajouter un constructeur sans paramètre!
+
+```cpp
+Planete();
+```
+
+> Oui, mais prof, on met quoi dans l'implémentation de notre constructeur sans paramètre? 🤔
+
+On donne des valeurs par défaut à notre objet, tout simplement. Voici l'implémentation que je vous propose:
+
+```cpp
+Planete::Planete() {
+    this->_nom = "(Planète sans nom)";
+    this->_rayon = 0;
+    this->_masse = 0;
+    this->_distanceSoleil = 0;
+}
+```
+
+Et voilà. Ainsi, à la création de notre tableau, le compilateur initialisera 8 planètes avec le **constructeur sans paramètre**. Ces planètes auront donc le nom `(Planète sans nom)` et leurs attributs numériques seront initialisés à 0. Ensuite, nous allons remplacer ces 8 planètes par celles que nous aurons instanciées à l'aide du **constructeur avec paramètres**.
+
+Votre code devrait maintenant compiler. Si c'est bien le cas, modifiez votre `main` pour assigner les 8 planètes aux 8 emplacements du tableau. Utilisez le débogueur pour valider que tout fonctionne correctement.
+
+## Étape 8
+
+Maintenant que vous avez un tableau contenant les 8 planètes, vous devriez assez facilement pouvoir faire une boucle qui itère sur tout le tableau et appelle la méthode `afficher` de chaque planète. Pour rappel, voici le résultat visé:
+
+```text
+=== PLANÈTES DU SYSTÈME SOLAIRE ===
+===================================
+
+Planète Mercure:
+ - Rayon: 2.439e+06 m
+ - Masse: 3.301e+23 kg
+ - Distance du soleil: 5.79e+07
+ - Gravité de surface: 3.70363 m/s^2
+
+Planète Vénus:
+ - Rayon: 6.052e+06 m
+ - Masse: 4.867e+24 kg
+ - Distance du soleil: 1.082e+08
+ - Gravité de surface: 8.86889 m/s^2
+
+Planète Terre:
+ - Rayon: 6.371e+06 m
+ - Masse: 5.972e+24 kg
+ - Distance du soleil: 1.496e+08
+ - Gravité de surface: 9.81997 m/s^2
+
+Planète Mars:
+ - Rayon: 3.39e+06 m
+ - Masse: 6.39e+23 kg
+ - Distance du soleil: 2.279e+08
+ - Gravité de surface: 3.71114 m/s^2
+
+Planète Jupiter:
+ - Rayon: 6.9911e+07 m
+ - Masse: 1.898e+27 kg
+ - Distance du soleil: 7.785e+08
+ - Gravité de surface: 25.9186 m/s^2
+
+Planète Saturne:
+ - Rayon: 5.8232e+07 m
+ - Masse: 5.683e+26 kg
+ - Distance du soleil: 1.433e+09
+ - Gravité de surface: 11.1856 m/s^2
+
+Planète Uranus:
+ - Rayon: 2.5362e+07 m
+ - Masse: 8.681e+25 kg
+ - Distance du soleil: 2.877e+09
+ - Gravité de surface: 9.00759 m/s^2
+
+Planète Neptune:
+ - Rayon: 2.4622e+07 m
+ - Masse: 1.024e+26 kg
+ - Distance du soleil: 4.503e+09
+ - Gravité de surface: 11.2735 m/s^2
+```
+
+**⚠️ Faites valider votre laboratoire 02-A par l'enseignant.**
+
+## Laboratoire 02-B
+
+À venir

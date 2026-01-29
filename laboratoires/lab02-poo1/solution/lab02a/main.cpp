@@ -13,16 +13,16 @@ int main() {
     Planete uranus("Uranus", 25362000, 8.681e25, 2.877e9);
     Planete neptune("Neptune", 24622000, 1.024e26, 4.503e9);
 
-    Planete systemeSolaire[NOMBRE_PLANETES] = {
-        mercure,
-        venus,
-        terre,
-        mars,
-        jupiter,
-        saturne,
-        uranus,
-        neptune
-    };
+    Planete systemeSolaire[NOMBRE_PLANETES];
+
+    systemeSolaire[0] = mercure;
+    systemeSolaire[1] = venus;
+    systemeSolaire[2] = terre;
+    systemeSolaire[3] = mars;
+    systemeSolaire[4] = jupiter;
+    systemeSolaire[5] = saturne;
+    systemeSolaire[6] = uranus;
+    systemeSolaire[7] = neptune;
 
     std::cout << "=== PLANÈTES DU SYSTÈME SOLAIRE ===" << std::endl
               << "===================================" << std::endl << std::endl;

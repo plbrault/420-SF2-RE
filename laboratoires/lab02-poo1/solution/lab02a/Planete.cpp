@@ -7,7 +7,7 @@
 const double CONSTANTE_GRAVITATIONNELLE = 6.67430e-11;
 
 Planete::Planete() {
-    this->_nom = "(Planète inconnue)";
+    this->_nom = "(Planète sans nom)";
     this->_rayon = 0;
     this->_masse = 0;
     this->_distanceSoleil = 0;
