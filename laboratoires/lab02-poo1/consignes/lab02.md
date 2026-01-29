@@ -8,14 +8,15 @@ Mettre en pratique les notions suivantes:
 * Implémentation des constructeurs avec et sans paramètres
 * Implémentation d'un destructeur
 * Instancation et utilisation des objets
-* Création et utilisation d'un tableau d'objets en allocation statique et dynamique
+* Création et utilisation d'un tableau d'objets en allocation statique
 
 ## Parties
 
-Ce laboratoire est divisé en deux parties:
+Ce laboratoire est divisé en trois parties:
 
 * **Laboratoire 02-A**: représentation du système solaire à l'aide d'une classe `Planete`
-* **Laboratoire 02-B**: implémentation des classes `Temperature` et `Menu` dans le programme des laboratoire précédents
+* **Laboratoire 02-B**: implémentation d'une classe `Parabole` représentant une équation quadratique
+* **Laboratoire 02-C**: implémentation des classes `ListeTemperatures` et `Menu` dans le programme des laboratoire précédents
 
 ## Laboratoire 02-A
 
