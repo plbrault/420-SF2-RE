@@ -6,7 +6,7 @@
 
 double* chargerTemperatures(size_t &nbTemperatures, std::string nomFichier);
 
-void afficherMenu(Menu& menu);
+void afficherMenu(Menu menu);
 int demanderChoix(int min, int max);
 
 void afficherTemperaturesCelsius(double temperatures[], size_t nbTemperatures);

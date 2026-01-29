@@ -32,7 +32,7 @@ double* chargerTemperatures(size_t &nbTemperatures, std::string nomFichier) {
     return temperatures;
 }
 
-void afficherMenu(Menu& menu) {
+void afficherMenu(Menu menu) {
     std::cout << menu.obtenirChaine();
 }
 

@@ -629,7 +629,11 @@ Remarquez le ` : Menu()` après la parenthèse fermante de la signature du const
 
 Il indique au compilateur que le **constructeur avec paramètre** doit lui-même appeler le **constructeur sans paramètre** avant de faire quoique ce soit d'autre.
 
-Ainsi, dans l'implémentation du **constructeur avec paramètre**, vous n'avez pas à initialiser les attributs `_options` et `_nombreOptions`, puisqu'ils sont déjà initialisés aux valeurs voulues par le **constructeur sans paramètre**! Voici donc la seule chose qu'il vous reste à faire dans le constructeur avec paramètre:
+Ainsi, dans l'implémentation du **constructeur avec paramètre**, vous n'avez pas à initialiser les attributs `_options` et `_nombreOptions`, puisqu'ils sont déjà initialisés aux valeurs voulues par le **constructeur sans paramètre**!
+
+![](./images/bob_leponge_reutilisation.jpg)
+
+Voici donc la seule chose qu'il vous reste à faire dans le constructeur avec paramètre:
 
 ```cpp
 Menu::Menu(bool optionQuitter) : Menu() {
@@ -637,7 +641,7 @@ Menu::Menu(bool optionQuitter) : Menu() {
 }
 ```
 
-![](./images/bob_leponge_reutilisation.jpg)
+Dans votre `main`, remplacez votre instanciation précédente (`Menu menu`) par (`Menu menu(true)`). Utilisez le débogueur pour valider que `_optionQuitter` reçoit la bonne valeur.
 
 ### Étape 4
 
@@ -652,3 +656,68 @@ Implémentez maintenant la méthode `ajouterOption`. Celle-ci doit:
 * Agrandir d'un emplacement le tableau `_options` (souvenez-vous des étapes suivies dans le laboratoire 1 pour agrandir un tableau)
 * Insérer l'option reçue en paramètre à la fin du tableau
 * Incrémenter l'attribut `_nombreOptions`
+
+### Étape 6
+
+Il est temps d'implémenter la méthode `obtenirChaine`. Cette méthode, au lieu d'afficher directement le menu à l'écran, doit **retourner une chaîne de caractères contenant le contenu à afficher**.
+
+Pour ce faire, il vous est suggéré d'utiliser un objet de type `std::stringstream`, qui se trouve dans la librairie `sstream`. Un `std::stringstream` s'utilise de la même façon que `std::cout`, mais permet de produire une chaîne de caractères au lieu d'afficher du texte à l'écran.
+
+Voici un exemple de programme qui utilise `std::stringstream` pour produire une chaîne de caractères contenant les chiffres de 0 à 9 séparés par des sauts de ligne:
+
+```cpp
+#include <iostream>
+#include <sstream>
+
+int main() {
+    std::string chaine;
+    std::stringstream flux;
+    
+    // Ajout du contenu au stringstream (flux)
+    flux << "Les chiffres du système décimal:" << std::endl;
+    for (int i = 0; i < 10; i++) {
+        flux << i << std::endl;
+    }
+    
+    /* 
+    Génération de la chaîne de caractères contenant
+    tout ce qui a été ajouté au flux
+    */
+    chaine = flux.str();
+
+    /*
+    `chaine` contient maintenant "Les chiffres du système décimal:"
+    suivi d'un saut de ligne, puis des chiffres de 0 à 9 avec un
+    saut de ligne entre chaque chiffre. Rien n'a encore été affiché
+    à l'écran.
+    */
+    
+    // Affichage de la chaîne
+    std::cout << chaine;
+
+    return 0;
+}
+```
+
+Dans votre cas, vous voulez plutôt générer une chaîne de caractères contenant le menu au format suivant:
+
+```cpp
+MENU
+====================
+1. Afficher les températures en degrés Celsius
+2. Afficher les températures en Kelvin
+3. Calculer la température moyenne
+4. Ajouter une température
+5. Exporter les températures
+6. Quitter
+```
+
+Il faut bien sûr que la chaîne contienne les options qui se trouvent dans l'attribut `_options`. De plus, il faut aussi ajouter une option "Quitter" **si et seulement si** l'attribut `_optionQuitter` vaut `true`.
+
+Il est maintenant temps de tester le tout dans votre `main`. Pour ce faire:
+
+1. Ajoutez toutes les options au menu (sauf l'option « Quitter ») à l'aide de la méthode `ajouterOption`
+2. Modifiez votre fonction `afficherMenu` des laboratoires précédents pour qu'elle reçoive le menu en paramètre, puis affiche la chaîne de caractères produite par sa méthode `obtenirChaine`
+3. Modifiez l'appel de votre fonction `afficherMenu` afin de lui passer le menu
+
+Testez votre programme. Il devrait fonctionner comme avant. Si ce n'est pas le cas, corrigez votre code.
