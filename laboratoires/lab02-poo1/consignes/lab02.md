@@ -282,9 +282,13 @@ Ne serait-il pas amusant d'ajouter une méthode pour calculer la [gravité de su
 
 La formule pour calculer la gravité de surface ($g$) est:
 
+<center>
+
 $$
 g = G \times \frac{M}{R^{2}}
 $$
+
+</center>
 
 Où:
 
@@ -325,3 +329,4 @@ Planète Mars:
  - Distance du soleil: 2.279e+08
  - Gravité de surface: 3.71114 m/s^2
 ```
+
