@@ -644,3 +644,11 @@ Menu::Menu(bool optionQuitter) : Menu() {
 Puisque notre classe contient un pointeur (l'attribut `_options`) auquel elle allouera de la mémoire, elle doit impérativement implémenter un **destructeur** pour désallouer la mémoire de ce pointeur.
 
 Ajoutez donc la ligne de code nécessaire au destructeur (`~Menu()`) pour désallouer le tableau pointé par `_options`.
+
+### Étape 5
+
+Implémentez maintenant la méthode `ajouterOption`. Celle-ci doit:
+
+* Agrandir d'un emplacement le tableau `_options` (souvenez-vous des étapes suivies dans le laboratoire 1 pour agrandir un tableau)
+* Insérer l'option reçue en paramètre à la fin du tableau
+* Incrémenter l'attribut `_nombreOptions`
