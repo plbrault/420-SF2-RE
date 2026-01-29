@@ -16,7 +16,7 @@ Ce laboratoire est divisé en trois parties:
 
 * **Laboratoire 02-A**: représentation du système solaire à l'aide d'une classe `Planete`
 * **Laboratoire 02-B**: implémentation d'une classe `Parabole` représentant une équation quadratique
-* **Laboratoire 02-C**: implémentation des classes `ListeTemperatures` et `Menu` dans le programme des laboratoire précédents
+* **Laboratoire 02-C**: implémentation d'une classe `Menu` dans le programme du Laboratoire 01-C
 
 ## Laboratoire 02-A
 
@@ -452,4 +452,73 @@ Planète Neptune:
 
 ## Laboratoire 02-B
 
-À venir
+La partie précédente vous a guidé étape par étape dans la création et l'utilisation de votre première classe, la classe `Planete`. Voyons maintenant si vous pouvez créer une deuxième classe simple par vous-même.
+
+Votre mission, si vous l'acceptez (et je vous recommande fortement de l'accepter), est de créer une classe `Parabole` qui représente une équation sous la forme suivante:
+
+$$
+y = ax^2 + bx + c
+$$
+
+Votre classe doit posséder les attributs privés suivants:
+
+* `_valA`
+* `_valB`
+* `_valC`
+
+Ces attributs représentent respectivement les valeur de $a$, $b$ et $c$ dans l'équation.
+
+> 🤔 Quels devraient être les types de ces attributs?
+
+Elle doit aussi posséder deux constructeurs:
+
+* Un constructeur sans paramètre
+* Un constructeur avec trois paramètres (`valA`, `valB` et `valC`)
+
+Le constructeur sans paramètre doit initialiser les paramètres de manière à ce que l'équation par défaut soit la suivante:
+
+$$
+y = x^2
+$$
+
+Finalement, votre classe doit posséder également les quatre méthodes suivantes:
+
+* `double evaluerY(double x);`
+* `std::string obtenirEquation();`
+* `void afficher(std::ostream& sortie);`
+* `void afficher();`
+
+La méthode `evaluerY` prend en paramètre une valeur de `x` et calcule la valeur de `y` correspondante.
+
+La méthode `obtenirEquation` retourne une chaîne de caractères correspondant à l'équation sous la forme `ax^2 + bx + c`, en remplaçant bien sûr `a`, `b` et `c` par les valeurs des attributs de l'objet.
+
+> **Note:** pour concaténer un `double` à une `string`, vous pouvez d'abord convertir le `double` en `string` à l'aide de la fonction `std::to_string(double)`.
+
+La méthode `afficher(std::ostream& sortie)` affiche l'équation à l'aide du `std::ostream` reçu en paramètre. Pour ce faire, elle appelle la méthode `obtenirEquation`.
+
+La deuxième version de la méthode `afficher` appelle la première en lui passant `std::cout`, comme vous avez fait dans la première partie du laboratoire.
+
+**Testez vos méthodes au fur et à mesure que vous les implémentez.**
+
+Une fois que le tout est fonctionnel, utilisez votre classe pour créer un programme qui:
+
+1. Demande à l'utilisateur les valeurs de $a$, $b$ et $c$
+2. Instancie une `Parabole` à l'aide de ces valeurs
+3. Affiche l'équation de la parabole
+4. Demande à l'utilisateur la valeur de $x$
+5. Affiche la valeur de $y$ correspondante
+
+Voici un exemple de l'exécution attendue:
+
+```text
+Entrez la valeur de a: 14
+Entrez la valeur de b: 21
+Entrez la valeur de c: 12.7
+
+Équation: 14.000000x^2 + 21.000000x + 12.700000
+
+Entrez la valeur de x: 144
+Valeur de y: 293341
+```
+
+**⚠️ Faites valider votre laboratoire 02-B par l'enseignant.**
