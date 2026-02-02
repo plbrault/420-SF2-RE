@@ -104,7 +104,7 @@ Dans la partie privée (***private***) de la classe, définissez les attributs (
 * `_masse` de type `double`
 * `_distanceSoleil` de type `double`
 
-Les attributs `_rayon` et `_distanceSoleil` sont exprimés en mètres, tandis que l'attribut `masse` est exprimé en kilogrammes.
+Les attributs `_rayon` et `_distanceSoleil` sont exprimés en mètres, tandis que l'attribut `_masse` est exprimé en kilogrammes.
 
 Ensuite, dans la partie publique (***public***), ajoutez le constructeur suivant:
 
