@@ -20,6 +20,38 @@ Planete::Planete(std::string nom, double rayon, double masse, double distanceEto
     this->_distanceEtoile = distanceEtoile;
 }
 
+std::string Planete::getNom() const {
+    return this->_nom;
+}
+
+double Planete::getRayon() const {
+    return this->_rayon;
+}
+
+double Planete::getMasse() const {
+    return this->_masse;
+}
+
+double Planete::getDistanceEtoile() const {
+    return this->_distanceEtoile;
+}
+
+void Planete::setNom(std::string nom) {
+    _nom = nom;
+}
+
+void Planete::setRayon(double rayon) {
+    _rayon = rayon;
+}
+
+void Planete::setMasse(double masse) {
+    _masse = masse;
+}
+
+void Planete::setDistanceEtoile(double distanceEtoile) {
+    _distanceEtoile = distanceEtoile;
+}
+
 void Planete::afficher(std::ostream &sortie) {
     sortie << "Planète " << this->_nom << ":" << std::endl
         << " - Rayon: " << this->_rayon << " m" << std::endl
