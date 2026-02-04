@@ -14,10 +14,10 @@ Planete::Planete() {
 }
 
 Planete::Planete(std::string nom, double rayon, double masse, double distanceEtoile) {
-    this->_nom = nom;
-    this->_rayon = rayon;
-    this->_masse = masse;
-    this->_distanceEtoile = distanceEtoile;
+    this->setNom(nom);
+    this->setRayon(rayon);
+    this->setMasse(masse);
+    this->setDistanceEtoile(distanceEtoile);
 }
 
 std::string Planete::getNom() const {

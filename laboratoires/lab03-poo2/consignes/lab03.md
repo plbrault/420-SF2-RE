@@ -150,8 +150,28 @@ Vous avez peut-être l'impression que ce n'est pas une amélioration, puisqu'on 
 
 La réponse est très simple en fait: quand on instancie un objet sans appeler son **constructeur avec paramètres**, c'est le **constructeur sans paramètre** qui est appelé. C'est le cas lorsqu'on déclare un tableau de `Planete` en allocation statique. Ainsi, tout de suite après l'exécution de la ligne `Planete systemeSolaire[8];`, on a un tableau de 8 planètes avec le nom `"(Planète inconnue)"` et la valeur `0` pour les trois autres attributs. C'est ce que vous observerez si vous utilisez le débogueur pour vérifier la valeur des attributs à ce moment.
 
+> 🧐 Souvenez-vous: pour pouvoir instancier un tableau d'objets, il faut impérativement que la classe correspondante ait un constructeur sans paramètre!
+
 Pour tester le tout correctement, retirez le code que vous avez ajouté dans la boucle du `main` à l'étape précédente, puis décommentez l'ancien code qui utilisait la méthode `afficher`. Le résultat d'origine devrait être de retour.
 
 ### Étape 5
 
-appeler les mutateurs dans les constructeurs
+Présentement, vos mutateurs se contentent d'insérer les valeurs reçues dans les attributs correspondant. Éventuellement, nous améliorerons nos mutateurs afin qu'ils valident la donnée reçue avant de modifier la valeur de l'attribut.
+
+Pour cette raison, il serait judicieux de modifier le **constructeur avec paramètres** afin qu'il appelle les mutateurs au lieu d'affecter les valeurs aux attributs directement. Ainsi, le jour où nous ajouterons du code de validation dans nos mutateurs, nous n'aurons pas besoin d'ajouter ce même code dans le constructeur.
+
+![](./images/bob_leponge_reutilisation.jpg)
+
+Modifiez donc votre constructeur de la manière suivante:
+
+```cpp
+Planete::Planete(std::string nom, double rayon, double masse, double distanceEtoile) {
+    this->setNom(nom);
+    this->setRayon(rayon);
+    this->setMasse(masse);
+    this->setDistanceEtoile(distanceEtoile);
+}
+```
+
+Il n'est pas obligatoire de faire la même chose dans le constructeur sans paramètre, puisque les valeurs qu'il affecte aux attributs sont forcément valides. Il n'y aurait cependant rien de mal à le faire quand même.
+
