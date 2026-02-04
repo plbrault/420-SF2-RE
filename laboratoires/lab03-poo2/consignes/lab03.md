@@ -11,12 +11,11 @@ Mettre en pratique les notions suivantes:
 
 ## Parties
 
-Ce laboratoire est divisé entre quatre parties:
+Ce laboratoire comprend trois parties:
 
 * **Laboratoire 03-A**: amélioration de la classe `Planete` du Laboratoire 02-A et ajout d'une classe `SystemePlanetaire`
 * **Laboratoire 03-B**: création de classes `Element` et `Isotope`
 * **Laboratoire 03-C**: amélioration de la classe `Parabole` du Laboratoire 02-B et ajout d'une classe `Point`
-* **Laboratoire 03-D**: évolution de la liste des températures à l'aide d'une nouvelle classe `ListeTemperatures`
 
 ## Laboratoire 03-A
 
@@ -227,6 +226,7 @@ class SystemePlanetaire {
 private:
     Planete* _planetes;
     size_t _nombrePlanetes;
+    size_t _capacitePlanetes;
 public:
     SystemePlanetaire();
     SystemePlanetaire(const SystemePlanetaire& autreSysteme);
@@ -242,8 +242,32 @@ public:
 
 Vous devriez remarquer un certain nombre de choses par rapport à cette classe:
 
-* Elle contient un pointeur de `Planete` et un nombre de planètes. On peut supposer qu'elle allouera dynamiquement un tableau de `Planete`.
+* Elle contient un pointeur de `Planete` et un attribut `_nombrePlanetes`. On peut supposer qu'elle allouera dynamiquement un tableau de `Planete`.
+* Elle contient aussi un attribut `_capacitePlanetes`. À quoi sert cet attribut? Nous y reviendrons.
 * Elle contient une méthode `ajouterPlanete`. On peut supposer qu'elle fera agrandir le tableau, comme le faisait la méthode `ajouterOption` de la classe `Menu` du laboratoire précédent.
 * Elle définit un constructeur de copie. Cela est essentiel puisqu'elle contient un pointeur. On veut éviter qu'une copie d'un `SystemePlanetaire` pointe sur le même tableau de `Planete` que le `SystemePlanetaire` d'origine.
 * Elle définit un destructeur. Cela est nécessaire puisque la classe alloue de la mémoire dynamiquement.
 * Elle définit deux accesseurs du même nom (`getPlanete`), et ceux-ci sont particuliers parce qu'ils prennent chacun un paramètre.
+
+On est donc en présence d'une classe qui gère un tableau dynamique d'instances d'une autre classe. La taille de ce tableau varie d'un système planétaire à l'autre.
+
+Revenons à l'attribut `_capacitePlanetes`. À quoi peut-il bien servir?
+
+Voyez-vous, jusqu'à maintenant, nous avons géré les tableaux dynamiques en augmentant leur taille de 1 à chaque ajout. Cela est peu efficace, puisqu'à chaque agrandissement, il faut allouer un nouveau tableau et recopier un par un chacun des éléments de l'ancien tableau vers le nouveau tableau. Ainsi, pour ajouter 1 milliard d'éléments à un tableau, il faudrait effectuer  $5 \times 10^{17}$ opérations de copie!
+
+En programmation, il faut souvent faire un compromis entre la mémoire et le temps. Jusqu'à maintenant, nous avons géré les tableaux dynamiques en minimisant l'utilisation de la mémoire: nos tableaux ont toujours contenu exactement le nombre d'éléments dont nous avions besoin. Cette façon de faire est cependant coûteuse en temps, vu la nécessité de recopier tout le tableau chaque fois qu'on ajoute un élément. Cette fois-ci, nous allons faire un compromis consistant à utiliser un peu plus de mémoire que nécessaire, afin de limiter les opérations de copie du tableau à une fois de temps en temps.
+
+Voici l'approche que nous utiliserons:
+
+1) Au lieu d'initialiser le pointeur à `nullptr`, le constructeur allouera immédiatement un tableau de 10 `Planete`.
+2) La méthode `ajouterPlanete` vérifiera d'abord s'il reste de la place dans le tableau. Si ce n'est pas le cas, elle allouera un nouveau tableau contenant 10 emplacements supplémentaires.
+
+Ainsi, les opérations d'allocation et de copie ne seront nécessaires que lors de l'ajout d'une onzième planète, puis d'une vingt-et-unième, puis d'une trente-et-unième, et ainsi de suite. Notre code sera beaucoup plus efficace de cette manière, même s'il utilisera le plus souvent « trop » de mémoire pour ses besoins.
+
+Pour ce faire, nous devons faire la ditinction entre la **capacité du tableau** (le nombre d'emplacements alloués en mémoire) et la **taille du tableau** (le nombre d'éléments utiles présents dans le tableau). Dans notre classe, l'attribut `_nombrePlanetes` correspond à la taille, et `_capacitePlanetes` à la capacité.
+
+Avec tout cela en tête, implémentez le **constructeur sans paramètre**. Celui-ci doit:
+
+* Initialiser la capacité du tableau (`_capacitePlanetes`) à 10
+* Initialiser la taille du tableau (`_nombrePlanetes`) à 0
+* Allouer un tableau de `_capacitePlanetes` et l'assigner à `_planetes`

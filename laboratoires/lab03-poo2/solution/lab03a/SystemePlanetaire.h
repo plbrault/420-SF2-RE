@@ -7,6 +7,7 @@ class SystemePlanetaire {
 private:
     Planete* _planetes;
     size_t _nombrePlanetes;
+    size_t _capacitePlanetes;
 public:
     SystemePlanetaire();
     SystemePlanetaire(const SystemePlanetaire& autreSysteme);
