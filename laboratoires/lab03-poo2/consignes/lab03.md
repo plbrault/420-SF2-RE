@@ -213,3 +213,37 @@ Cela dit, il reste encore deux méthodes auxquelles nous devrions ajouter `const
 En effet, bien que ces deux méthodes produisent des effets de bord (elles écrivent en console), elles ne modifient aucunement l'objet `Planete`. Il faut donc leur ajouter `const`!
 
 Faites la modification et assurez-vous que votre code compile toujours.
+
+### Étape 8
+
+Bon, laissons de côté la classe `Planete` pour le moment. Et si on s'amusait maintenant à créer une autre classe qui aurait pour but de représenter un ensemble de planètes?
+
+Et oui, j'ai nommé la classe `SystemePlanetaire`! Un système planétaire contient plusieurs planètes gravitant autour d'une étoile. Le système solaire pourrait donc être représenté par une instance de la classe `SystemePlanetaire`.
+
+Voici la définition de la classe `SystemePlanetaire`:
+
+```cpp
+class SystemePlanetaire {
+private:
+    Planete* _planetes;
+    size_t _nombrePlanetes;
+public:
+    SystemePlanetaire();
+    SystemePlanetaire(const SystemePlanetaire& autreSysteme);
+    ~SystemePlanetaire();
+
+    void ajouterPlanete();
+
+    size_t getNombrePlanetes();
+    Planete getPlanete(size_t i) const;
+    Planete getPlanete(std::string nom) const;
+};
+```
+
+Vous devriez remarquer un certain nombre de choses par rapport à cette classe:
+
+* Elle contient un pointeur de `Planete` et un nombre de planètes. On peut supposer qu'elle allouera dynamiquement un tableau de `Planete`.
+* Elle contient une méthode `ajouterPlanete`. On peut supposer qu'elle fera agrandir le tableau, comme le faisait la méthode `ajouterOption` de la classe `Menu` du laboratoire précédent.
+* Elle définit un constructeur de copie. Cela est essentiel puisqu'elle contient un pointeur. On veut éviter qu'une copie d'un `SystemePlanetaire` pointe sur le même tableau de `Planete` que le `SystemePlanetaire` d'origine.
+* Elle définit un destructeur. Cela est nécessaire puisque la classe alloue de la mémoire dynamiquement.
+* Elle définit deux accesseurs du même nom (`getPlanete`), et ceux-ci sont particuliers parce qu'ils prennent chacun un paramètre.
