@@ -175,3 +175,41 @@ Planete::Planete(std::string nom, double rayon, double masse, double distanceEto
 
 Il n'est pas obligatoire de faire la même chose dans le constructeur sans paramètre, puisque les valeurs qu'il affecte aux attributs sont forcément valides. Il n'y aurait cependant rien de mal à le faire quand même.
 
+Testez votre constructeur modifié avant de poursuivre.
+
+### Étape 6
+
+Vous souvenez-vous de la méthode `calculerGraviteSurface`?
+
+Celle-ci calcule une valeur basée sur les attributs de l'objet, puis la retourne.
+
+Formellement, cette méthode n'est pas un accesseur (*getter*), puisqu'elle ne retourne pas la valeur d'un attribut de l'objet.
+
+Du point de vue de l'utilisateur de la classe cependant, cette méthode ressemble beaucoup à un accesseur: elle retourne une valeur, **et ne modifie aucun attribut de l'objet**.
+
+Il serait donc très intuitif de voir cette méthode comme un accesseur, même s'il n'en est pas techniquement un. En fait, l'utilisateur de la classe n'a aucunement besoin de savoir que cette méthode n'est pas un accesseur. En ce qui le concerne, la méthode *agit* comme un accesseur. Pour autant qu'il sache, la gravité de surface pourrait tout aussi bien être un attribut de l'objet. Voilà toute la distinction entre l'**interface** (ce que l'utilisateur de la classe voit) et l'**implémentation** (le fonctionnement interne de la classe).
+
+Ainsi, puisqu'il serait intuitif pour l'utilisateur de penser que cette méthode est un accesseur, nous allons la « déguiser » en accesseur. Pour ce faire, renommez la méthode en `getGraviteSurface`. N'oubliez pas d'ajouter le modificateur `const`!
+
+Effectuez les autres changements nécessaires dans votre code. Validez que tout fonctionne toujours.
+
+### Étape 7
+
+Lors des étapes précédentes, vous avez utilisé le modificateur `const` pour chacune des méthodes suivantes:
+
+* `getNom`
+* `getRayon`
+* `getMasse`
+* `getDistanceEtoile`
+* `getGraviteSurface`
+
+Les mutateurs ne prennent pas de `const` puisqu'ils modifient des attributs de l'objet.
+
+Cela dit, il reste encore deux méthodes auxquelles nous devrions ajouter `const`:
+
+* `void afficher(std::ostream &sortie)`
+* `void afficher()`
+
+En effet, bien que ces deux méthodes produisent des effets de bord (elles écrivent en console), elles ne modifient aucunement l'objet `Planete`. Il faut donc leur ajouter `const`!
+
+Faites la modification et assurez-vous que votre code compile toujours.

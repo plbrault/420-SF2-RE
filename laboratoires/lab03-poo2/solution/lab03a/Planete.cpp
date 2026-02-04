@@ -52,7 +52,7 @@ void Planete::setDistanceEtoile(double distanceEtoile) {
     _distanceEtoile = distanceEtoile;
 }
 
-void Planete::afficher(std::ostream &sortie) {
+void Planete::afficher(std::ostream &sortie) const {
     sortie << "Planète " << this->_nom << ":" << std::endl
         << " - Rayon: " << this->_rayon << " m" << std::endl
         << " - Masse: " << this->_masse << " kg" << std::endl
@@ -60,11 +60,11 @@ void Planete::afficher(std::ostream &sortie) {
         << " - Gravité de surface: " << this->getGraviteSurface() << " m/s^2" << std::endl;
 }
 
-void Planete::afficher() {
+void Planete::afficher() const {
     this->afficher(std::cout);
 }
 
-double Planete::getGraviteSurface() {
+double Planete::getGraviteSurface() const {
     double graviteSurface = CONSTANTE_GRAVITATIONNELLE * this->_masse / (this->_rayon * this->_rayon);
     return graviteSurface;
 }

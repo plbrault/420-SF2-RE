@@ -28,10 +28,10 @@ public:
     void setMasse(double masse);
     void setDistanceEtoile(double distanceEtoile);
 
-    double getGraviteSurface();
+    double getGraviteSurface() const;
 
-    void afficher(std::ostream &sortie);
-    void afficher();
+    void afficher(std::ostream &sortie) const;
+    void afficher() const;
 };
 
 
