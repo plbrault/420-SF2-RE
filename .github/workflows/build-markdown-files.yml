@@ -47,6 +47,7 @@ jobs:
       - name: Install GraphViz (not cached)
         if: steps.changed.outputs.has_files == 'true'
         run: |
+          sudo apt-get update
           sudo apt-get install -y graphviz
 
       - name: Install TeX Live (not cached)
