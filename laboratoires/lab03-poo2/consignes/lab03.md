@@ -703,9 +703,9 @@ C'est logique, puisque ce ne sont pas tous les isotopes qui ont des demi-vie. Ç
 * Nous pourrions utiliser la valeur de `-1` pour indiquer l'absence de demi-vie
 * Ou bien nous pourrions utiliser la valeur `std::numeric_limits<double>::infinity()`, qui se trouve dans la librairie `limits` et représente l'infini. Cela serait logique, puisque dire qu'un isotope a une demi-vie infinie revient à dire qu'il n'en a pas.
 
-Choisissez la solution que vous préférez.
+Choisissez la solution que vous préférez. La méthode `estStable` doit se baser sur cette valeur pour déterminer si l'isotope est stable ou non. Un isotope est stable s'il n'a pas de demi-vie.
 
-En plus des membres mentionnés précédemment, vous devez également fournir **les accesseurs (*getters*) et mutateurs (*setters*) pour chaque attribut privé des deux classes**.
+En plus des membres mentionnés précédemment, vous devez également fournir **les accesseurs (*getters*) et mutateurs (*setters*) pour chaque attribut privé présent dans le diagramme.**.
 
 N'oubliez pas de tester votre code au fur et à mesure que vous l'écrivez!
 
