@@ -707,7 +707,7 @@ C'est logique, puisque ce ne sont pas tous les isotopes qui ont des demi-vie. Ç
 
 Choisissez la solution que vous préférez. La méthode `estStable` doit se baser sur cette valeur pour déterminer si l'isotope est stable ou non. Un isotope est stable s'il n'a pas de demi-vie.
 
-En plus des membres mentionnés précédemment, vous devez également fournir **les accesseurs (*getters*) et mutateurs (*setters*) pour chaque attribut privé présent dans le diagramme.**.
+En plus des membres mentionnés précédemment, vous devez également fournir **les accesseurs (*getters*) et mutateurs (*setters*) pour chaque attribut privé présent dans le diagramme.**
 
 N'oubliez pas de tester votre code au fur et à mesure que vous l'écrivez!
 
@@ -740,7 +740,7 @@ Sans modifier vos classes, ajoutez le code nécessaire à votre `main` afin de g
 
 > **NOTE:** La librairie `iomanip` peut vous être utile. Des notes de cours à son sujet sont disponibles sur Moodle sous le laboratoire.
 
-`He` est le symbol, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotopes, et `2` le nombre de particules chargées (2 protons, 2 électrons).
+`He` est le symbole, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotopes, et `2` le nombre de particules chargées (2 protons, 2 électrons).
 
 **⚠️ Faites valider votre laboratoire 03-B par l'enseignant.**
 
