@@ -16,7 +16,7 @@ Ce laboratoire comprend deux parties:
 * **Laboratoire 03-A**: amélioration de la classe `Planete` du Laboratoire 02-A et ajout d'une classe `SystemePlanetaire`
 * **Laboratoire 03-B**: le tableau périodique des éléments (classes `Element` et `Isotope`)
 
-## Laboratoire 03-A
+## Laboratoire 03-A - Le système solaire
 
 Dans cette première partie, nous allons faire évoluer la classe `Planete` du Laboratoire 02-A. Nous allons d'abord ajouter des accesseurs (*getters*) et des mutateurs (*setters*) à cette classe, puis nous allons ajouter une nouvelle classe `SystemePlanetaire` en relation avec la classe `Planete`.
 
@@ -645,6 +645,93 @@ SystemePlanetaire *-- Planete
 @enduml
 ```
 
-## Laboratoire 03-B
+**⚠️ Faites valider votre laboratoire 03-A par l'enseignant.**
 
-À venir
+## Laboratoire 03-B - Le tableau périodique des éléments
+
+Nous allons maintenant créer un programme implémentant une classe `Element` et une classe `Isotope`. Voici le diagramme de classes de ce programme:
+
+```plantuml
+Element *-- Isotope
+
+class Element {
+    - int _nbParticulesChargees
+    - std::string _groupe
+    - std::string _symbole
+    - Isotope* _isotopes
+
+    + Element(std::string symbole, int nbParticulesChargees, std::string groupe)
+    + void ajouterIsotope(Isotope isotope)
+
+    + bool aIsotopeStable()
+}
+
+@startuml
+class Isotope {
+    - std::string _nom
+    - int _nbNeutrons
+    - double _occurence
+    - double _demiVie
+    - double _masse
+
+    + Isotope(std::string nom, int nbNeutrons, double occurence, double masse)
+    + Isotope(std::string nom, int nbNeutrons, double occurence, double demiVie, double masse)
+    + bool estStable() const
+}
+
+@enduml
+```
+
+Dans ce diagramme, la demi-vie d'un isotope est exprimée en années.
+
+### Étape 1
+
+Dans un nouveau projet, implémentez les classes présentées dans le diagramme. **Prenez note que ce diagramme ne présente pas tous les membres dont vous aurez besoin.** Pensez à ce que vous devrez ajouter pour:
+
+* Être en mesure de créer des tableaux d'`Element` et `Isotope`
+* Gérer correctement la désallocation de la mémoire
+* Gérer correctement la copie d'un objet
+* Gérer efficacement le tableau dynamique d'`Iosotope`
+
+Remarquez par ailleurs que la classe `Isotope` spécifie deux versions du constructeur avec paramètres:
+
+* L'une avec un paramètre `demiVie`
+* L'autre sans paramètre `demiVie`
+
+C'est logique, puisque ce ne sont pas tous les isotopes qui ont des demi-vie. Ça veut dire qu'il nous faut une façon dans notre programme de représenter l'**absence de valeur** pour cet attribut. Je vous suggère deux possibilités:
+
+* Nous pourrions utiliser la valeur de `-1` pour indiquer l'absence de demi-vie
+* Ou bien nous pourrions utiliser la valeur `std::numeric_limits<double>::infinity()`, qui se trouve dans la librairie `limits` et représente l'infini. Cela serait logique, puisque dire qu'un isotope a une demi-vie infinie revient à dire qu'il n'en a pas.
+
+Choisissez la solution que vous préférez.
+
+En plus des membres mentionnés précédemment, vous devez également fournir **les accesseurs (*getters*) et mutateurs (*setters*) pour chaque attribut privé des deux classes**.
+
+N'oubliez pas de tester votre code au fur et à mesure que vous l'écrivez!
+
+### Étape 2
+
+Dans le `main`, on veut maintenant instancier les 6 premiers éléments du tableau périodique, de même que leurs isotopes. Mais avez-vous vraiment envie de coder ça vous-même? Et si vous vous entraîniez plutôt à utiliser un LLM (intelligence artificielle générative) de façon à vous aider plutôt qu'à vous nuire?
+
+Réfléchissez aux instructions et aux éléments de contexte que vous devriez donner à un LLM pour qu'il vous génère du code valide à intégrer dans votre programme actuel afin de répondre à la demande ci-dessus. Utilisez ensuite le LLM de votre choix (que ce soit ChatGPT, Claude ou autre) pour générer ce code. **Validez que le résultat est correct avant de l'intégrer à votre programme!** De plus, copiez le texte de votre *prompt* dans un commentaire au début de votre `main`. L'enseignant sera ainsi en mesure de vous donner une rétroaction sur celui-ci lors de la validation de votre laboratoire.
+
+Testez bien le code généré avant de poursuivre.
+
+### Étape 3
+
+Sans modifier vos classes, ajoutez le code nécessaire à votre `main` afin de générer l'affichage suivant pour chacun des éléments instanciés à l'étape 2:
+
+```text
+---------------
+| He       18 |
+| Helium      |
+|             |
+| 9         2 |
+---------------
+```
+
+`He` est le symbol, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotopes, et `2` le nombre de particules chargées (2 protons, 2 électrons).
+
+**⚠️ Faites valider votre laboratoire 03-B par l'enseignant.**
+
+> 🎉 Félicitations, vous avez complété votre deuxième laboratoire sur la programmation orientée objet!
