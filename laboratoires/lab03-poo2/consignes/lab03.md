@@ -713,9 +713,9 @@ N'oubliez pas de tester votre code au fur et à mesure que vous l'écrivez!
 
 ### Étape 2
 
-Dans le `main`, on veut maintenant instancier les 6 premiers éléments du tableau périodique, de même que leurs isotopes. Mais avez-vous vraiment envie de coder ça vous-même? Et si vous vous entraîniez plutôt à utiliser un LLM (intelligence artificielle générative) de façon à vous aider plutôt qu'à vous nuire?
+Dans le `main`, on veut maintenant instancier les 6 premiers éléments du tableau périodique, de même que tous leurs isotopes présents naturellement sur Terre. Mais avez-vous vraiment envie de coder ça vous-même? Et si vous vous entraîniez plutôt à utiliser un LLM (intelligence artificielle générative) de façon à vous aider plutôt qu'à vous nuire?
 
-Réfléchissez aux instructions et aux éléments de contexte que vous devriez donner à un LLM pour qu'il vous génère du code valide à intégrer dans votre programme actuel afin de répondre à la demande ci-dessus. Utilisez ensuite le LLM de votre choix (que ce soit ChatGPT, Claude ou autre) pour générer ce code. **Validez que le résultat est correct avant de l'intégrer à votre programme!** De plus, copiez le texte de votre *prompt* dans un commentaire au début de votre `main`. L'enseignant sera ainsi en mesure de vous donner une rétroaction sur celui-ci lors de la validation de votre laboratoire.
+Réfléchissez aux instructions et aux éléments de contexte que vous devriez donner à un LLM pour qu'il vous génère du code valide à intégrer dans votre programme actuel afin de répondre à la demande ci-dessus. Utilisez ensuite le LLM de votre choix (que ce soit ChatGPT, Claude ou autre) pour générer ce code. **Validez que le résultat est correct avant de l'intégrer à votre programme! Demandez des correctifs à l'IA au besoin.** De plus, copiez le texte de votre *prompt* dans un commentaire au début de votre `main`. L'enseignant sera ainsi en mesure de vous donner une rétroaction sur celui-ci lors de la validation de votre laboratoire. Si votre *prompt* n'a pas donné un résultat valide du premier coup, résumez le problème et les correctifs que vous avez dû demander à l'IA.
 
 **IMPORTANT:** incluez la phrase suivante dans votre *prompt*:
 
@@ -734,13 +734,19 @@ Sans modifier vos classes, ajoutez le code nécessaire à votre `main` afin de g
 | He       18 |
 | Helium      |
 |             |
-| 9         2 |
+| 2         2 |
+---------------
+---------------
+| Li       1 |
+| Lithium    |
+|             |
+| 2        3 |
 ---------------
 ```
 
 > **NOTE:** La librairie `iomanip` peut vous être utile. Des notes de cours à son sujet sont disponibles sur Moodle sous le laboratoire.
 
-`He` est le symbole, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotopes, et `2` le nombre de particules chargées (2 protons, 2 électrons).
+`Li` est le symbole, `1` est le groupe, `Lithium` est le nom, `2` est le nombre d'isotopes, et `3` le nombre de particules chargées (2 protons, 1 électrons).
 
 **⚠️ Faites valider votre laboratoire 03-B par l'enseignant.**
 
