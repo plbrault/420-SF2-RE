@@ -39,6 +39,9 @@ int main() {
     std::cout << "Affichage de la planète à l'indice 2:" << std::endl;
     systemeSolaire.getPlanete(2)->afficher();
 
+    std::cout << "Affichage de la planète Jupiter:" << std::endl;
+    systemeSolaire.getPlanete("Jupiter")->afficher();
+
     return 0;
     // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }

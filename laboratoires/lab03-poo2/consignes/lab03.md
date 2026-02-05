@@ -421,9 +421,23 @@ Implémentez `getNom` et `getNombrePlanetes`. Testez ces deux méthodes avant de
 
 Nous en sommes maintenant à implémenter l'accesseur `Planete* getPlanete(size_t indice) const`. Celui-ci prend un paramètre, car il retourne l'**adresse** d'une planète en particulier (celle à l'indice `indice`), et non pas du tableau de planètes. Si l'indice est invalide, la méthode retourne `nullptr`.
 
-Voici une ligne de code vous permettant de tester votre méthode:
+Voici du code vous permettant de tester votre méthode:
 
 ```cpp
 std::cout << "Affichage de la planète à l'indice 2:" << std::endl;
 systemeSolaire.getPlanete(2)->afficher();
 ```
+
+### Étape 14
+
+Implémentons finalement l'autre version de la méthode `getPlanete`, soit `Planete* getPlanete(std::string nom) const`.
+
+Cette méthode doit parcourir le tableau `_planetes` pour y trouver la planète correspondant au nom reçu en paramètre. Si cette planète existe, elle retourne son adresse. Sinon, elle retourne `nullptr`.
+
+Utilisez le code suivant pour tester votre méthode:
+
+```cpp
+std::cout << "Affichage de la planète Jupiter:" << std::endl;
+systemeSolaire.getPlanete("Jupiter")->afficher();
+```
+

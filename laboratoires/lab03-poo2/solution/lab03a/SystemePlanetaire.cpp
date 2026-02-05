@@ -70,6 +70,15 @@ Planete* SystemePlanetaire::getPlanete(size_t indice) const {
     return nullptr;
 }
 
+Planete* SystemePlanetaire::getPlanete(std::string nom) const {
+    for (size_t i = 0; i < this->_nombrePlanetes; i++) {
+        if (this->_planetes[i].getNom() == nom) {
+            return this->_planetes + i;
+        }
+    }
+    return nullptr;
+}
+
 void SystemePlanetaire::setNom(std::string nom) {
     this->_nom = nom;
 }
