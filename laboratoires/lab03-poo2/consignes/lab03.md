@@ -146,7 +146,7 @@ Vous avez peut-être l'impression que ce n'est pas une amélioration, puisqu'on 
 
 > 🤔 **Qu'est-ce qui se trouve dans les attributs des 8 planètes avant l'appel des mutateurs?**
 
-La réponse est très simple en fait: quand on instancie un objet sans appeler son **constructeur avec paramètres**, c'est le **constructeur sans paramètre** qui est appelé. C'est le cas lorsqu'on déclare un tableau de `Planete` en allocation statique. Ainsi, tout de suite après l'exécution de la ligne `Planete systemeSolaire[8];`, on a un tableau de 8 planètes avec le nom `"(Planète inconnue)"` et la valeur `0` pour les trois autres attributs. C'est ce que vous observerez si vous utilisez le débogueur pour vérifier la valeur des attributs à ce moment.
+La réponse est très simple en fait: quand on instancie un objet sans appeler son **constructeur avec paramètres**, c'est le **constructeur sans paramètre** qui est appelé. C'est le cas lorsqu'on déclare un tableau de `Planete` en allocation statique. Ainsi, tout de suite après l'exécution de la ligne `Planete systemeSolaire[8];`, on a un tableau de 8 planètes avec le nom `"(Planète sans nom)"` et la valeur `0` pour les trois autres attributs. C'est ce que vous observerez si vous utilisez le débogueur pour vérifier la valeur des attributs à ce moment.
 
 > 🧐 Souvenez-vous: pour pouvoir instancier un tableau d'objets, il faut impérativement que la classe correspondante ait un constructeur sans paramètre!
 
@@ -271,7 +271,7 @@ Voici l'approche que nous utiliserons:
 
 Ainsi, les opérations d'allocation et de copie ne seront nécessaires que lors de l'ajout d'une troisième planète, puis d'une cinquième, puis d'une neuvième, puis d'une dix-septième, puis d'une trente-troisième, et ainsi de suite. Notre code sera beaucoup plus efficace de cette manière, même s'il utilisera le plus souvent « trop » de mémoire pour ses besoins.
 
-Pour ce faire, nous devons faire la ditinction entre la **capacité du tableau** (le nombre d'emplacements alloués en mémoire) et la **taille du tableau** (le nombre d'éléments utiles présents dans le tableau). Dans notre classe, l'attribut `_nombrePlanetes` correspond à la taille, et `_capacitePlanetes` à la capacité.
+Pour ce faire, nous devons faire la distinction entre la **capacité du tableau** (le nombre d'emplacements alloués en mémoire) et la **taille du tableau** (le nombre d'éléments utiles présents dans le tableau). Dans notre classe, l'attribut `_nombrePlanetes` correspond à la taille, et `_capacitePlanetes` à la capacité.
 
 Avec tout cela en tête, implémentez le **constructeur sans paramètre**. Celui-ci doit:
 
@@ -652,32 +652,34 @@ SystemePlanetaire *-- Planete
 Nous allons maintenant créer un programme implémentant une classe `Element` et une classe `Isotope`. Voici le diagramme de classes de ce programme:
 
 ```plantuml
-Element *-- Isotope
+@startuml
 
 class Element {
+    - string _symbole
+    - string _nom
     - int _nbParticulesChargees
-    - std::string _groupe
-    - std::string _symbole
+    - string _groupe
     - Isotope* _isotopes
 
-    + Element(std::string symbole, int nbParticulesChargees, std::string groupe)
+    + Element(string symbole, string nom, int nbParticulesChargees, string groupe)
     + void ajouterIsotope(Isotope isotope)
 
     + bool aIsotopeStable()
 }
 
-@startuml
 class Isotope {
-    - std::string _nom
+    - string _nom
     - int _nbNeutrons
     - double _occurence
     - double _demiVie
     - double _masse
 
-    + Isotope(std::string nom, int nbNeutrons, double occurence, double masse)
-    + Isotope(std::string nom, int nbNeutrons, double occurence, double demiVie, double masse)
+    + Isotope(string nom, int nbNeutrons, double occurence, double masse)
+    + Isotope(string nom, int nbNeutrons, double occurence, double demiVie, double masse)
     + bool estStable() const
 }
+
+Element *-- Isotope
 
 @enduml
 ```
@@ -691,7 +693,7 @@ Dans un nouveau projet, implémentez les classes présentées dans le diagramme.
 * Être en mesure de créer des tableaux d'`Element` et `Isotope`
 * Gérer correctement la désallocation de la mémoire
 * Gérer correctement la copie d'un objet
-* Gérer efficacement le tableau dynamique d'`Iosotope`
+* Gérer efficacement le tableau dynamique d'`Isotope`
 
 Remarquez par ailleurs que la classe `Isotope` spécifie deux versions du constructeur avec paramètres:
 
