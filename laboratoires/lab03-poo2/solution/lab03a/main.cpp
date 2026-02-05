@@ -5,7 +5,8 @@
 const size_t NOMBRE_PLANETES = 8;
 
 int main() {
-    SystemePlanetaire systemeSolaire("Système solaire");
+    SystemePlanetaire systemeSolaire;
+    systemeSolaire.setNom("Système solaire");
 
     systemeSolaire.ajouterPlanete(Planete("Mercure", 2439000, 3.301e23, 5.79e7));
     systemeSolaire.ajouterPlanete(Planete("Vénus", 6052000, 4.867e24, 1.082e8));

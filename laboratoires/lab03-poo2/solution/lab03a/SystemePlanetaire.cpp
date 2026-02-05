@@ -43,3 +43,7 @@ void SystemePlanetaire::afficher(std::ostream& sortie) const {
 void SystemePlanetaire::afficher() const {
     this->afficher(std::cout);
 }
+
+void SystemePlanetaire::setNom(std::string nom) {
+    this->_nom = nom;
+}

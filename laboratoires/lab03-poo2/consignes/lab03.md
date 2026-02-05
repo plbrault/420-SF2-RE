@@ -370,3 +370,12 @@ Planète Neptune:
  - Distance de l'étoile: 4.503e+09
  - Gravité de surface: 11.2735 m/s^2
 ```
+
+### Étape 10
+
+Implémentez le mutateur `setNom`. Testez-le dans votre `main` en remplaçant l'initialisation de `systemeSolaire` de cette façon:
+
+```cpp
+SystemePlanetaire systemeSolaire;
+systemeSolaire.setNom("Système solaire");
+```
