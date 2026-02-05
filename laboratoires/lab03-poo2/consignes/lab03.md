@@ -224,19 +224,26 @@ Voici la définition de la classe `SystemePlanetaire`:
 ```cpp
 class SystemePlanetaire {
 private:
+    std::string _nom;
     Planete* _planetes;
     size_t _nombrePlanetes;
     size_t _capacitePlanetes;
 public:
     SystemePlanetaire();
+    SystemePlanetaire(std::string nom);
     SystemePlanetaire(const SystemePlanetaire& autreSysteme);
     ~SystemePlanetaire();
 
-    void ajouterPlanete();
+    void ajouterPlanete(Planete planete);
+    void afficher(std::ostream& sortie) const;
+    void afficher() const;
 
-    size_t getNombrePlanetes();
-    Planete getPlanete(size_t i) const;
-    Planete getPlanete(std::string nom) const;
+    std::string getNom() const;
+    size_t getNombrePlanetes() const;
+    Planete* getPlanete(size_t indice) const;
+    Planete* getPlanete(std::string nom) const;
+
+    void setNom(std::string nom);
 };
 ```
 
@@ -247,7 +254,8 @@ Vous devriez remarquer un certain nombre de choses par rapport à cette classe:
 * Elle contient une méthode `ajouterPlanete`. On peut supposer qu'elle fera agrandir le tableau, comme le faisait la méthode `ajouterOption` de la classe `Menu` du laboratoire précédent.
 * Elle définit un constructeur de copie. Cela est essentiel puisqu'elle contient un pointeur. On veut éviter qu'une copie d'un `SystemePlanetaire` pointe sur le même tableau de `Planete` que le `SystemePlanetaire` d'origine.
 * Elle définit un destructeur. Cela est nécessaire puisque la classe alloue de la mémoire dynamiquement.
-* Elle définit deux accesseurs du même nom (`getPlanete`), et ceux-ci sont particuliers parce qu'ils prennent chacun un paramètre.
+* Elle définit plusieurs accesseurs (*getters*), dont deux qui sont particuliers parce qu'ils prennent chacun un paramètre. Ces deux accesseurs ont par ailleurs le même nom.
+* Elle définit un seul mutateur (*setter*), soit pour le nom. Il ferait peu de sens de définir des mutateurs pour les autres attributs, qui sont gérés à l'interne par la classe.
 
 On est donc en présence d'une classe qui gère un tableau dynamique d'instances d'une autre classe. La taille de ce tableau varie d'un système planétaire à l'autre.
 
@@ -259,15 +267,106 @@ En programmation, il faut souvent faire un compromis entre la mémoire et le tem
 
 Voici l'approche que nous utiliserons:
 
-1) Au lieu d'initialiser le pointeur à `nullptr`, le constructeur allouera immédiatement un tableau de 10 `Planete`.
-2) La méthode `ajouterPlanete` vérifiera d'abord s'il reste de la place dans le tableau. Si ce n'est pas le cas, elle allouera un nouveau tableau contenant 10 emplacements supplémentaires.
+1) Au lieu d'initialiser le pointeur à `nullptr`, le constructeur allouera immédiatement un tableau de 2 `Planete`.
+2) La méthode `ajouterPlanete` vérifiera d'abord s'il reste de la place dans le tableau. Si ce n'est pas le cas, elle allouera un nouveau tableau **deux fois plus grand** avant d'y insérer la planète.
 
-Ainsi, les opérations d'allocation et de copie ne seront nécessaires que lors de l'ajout d'une onzième planète, puis d'une vingt-et-unième, puis d'une trente-et-unième, et ainsi de suite. Notre code sera beaucoup plus efficace de cette manière, même s'il utilisera le plus souvent « trop » de mémoire pour ses besoins.
+Ainsi, les opérations d'allocation et de copie ne seront nécessaires que lors de l'ajout d'une troisième planète, puis d'une cinquième, puis d'une neuvième, puis d'une dix-septième, puis d'une trente-troisième, et ainsi de suite. Notre code sera beaucoup plus efficace de cette manière, même s'il utilisera le plus souvent « trop » de mémoire pour ses besoins.
 
 Pour ce faire, nous devons faire la ditinction entre la **capacité du tableau** (le nombre d'emplacements alloués en mémoire) et la **taille du tableau** (le nombre d'éléments utiles présents dans le tableau). Dans notre classe, l'attribut `_nombrePlanetes` correspond à la taille, et `_capacitePlanetes` à la capacité.
 
 Avec tout cela en tête, implémentez le **constructeur sans paramètre**. Celui-ci doit:
 
-* Initialiser la capacité du tableau (`_capacitePlanetes`) à 10
-* Initialiser la taille du tableau (`_nombrePlanetes`) à 0
+* Initialiser à 2 la **capacité** du tableau (`_capacitePlanetes`)
+* Initialiser à 0 la **taille** du tableau (`_nombrePlanetes`)
 * Allouer un tableau de `_capacitePlanetes` et l'assigner à `_planetes`
+
+Implémentez ensuite le **constructeur avec paramètre**, qui prend seulement un paramètre `nom`. Celui-ci doit:
+
+* Appeler le constructeur sans paramètre (retournez voir votre constructeur avec paramètre de `Menu` pour vous rappeler comment faire)
+* Affecter le nom reçu à l'attribut `_nom`
+
+Vous devez aussi implémenter le destructeur, qui désalloue le tableau `_planetes`.
+
+Instanciez deux `SystemePlanetaire` dans votre `main` en utilisant les deux versions du constructeur, et vérifiez à l'aide du débogueur qu'ils reçoivent les bonnes valeurs d'attributs.
+
+## Étape 9
+
+Implémentez maintenant la méthode `ajouterPlanete`. Celle-ci prend un objet `Planete` en paramètre.
+
+Voici pour rappel le fonctionnement attendu de cette méthode:
+
+* S'il n'y a plus de place dans le tableau (autrement dit, si sa taille est égale à sa capacité), doubler la capacité du tableau.
+* Ajouter la planète à l'endroit approprié dans le tableau et incrémenter la taille.
+
+Pour pouvoir vérifier que votre méthode fonctionne correctement, implémentez aussi les deux versions de la méthode `afficher`. Celle-ci doit d'abord afficher le nom du système planétaire, suivi d'un « : » puis d'une ligne vide, et appeler ensuite la méthode « afficher » de chacune des planètes du système planétaire, avec une ligne vide entre chaque planète.
+
+Voici du code à utiliser dans votre `main` pour tester vos deux méthodes:
+
+```cpp
+SystemePlanetaire systemeSolaire("Système solaire");
+
+systemeSolaire.ajouterPlanete(Planete("Mercure", 2439000, 3.301e23, 5.79e7));
+systemeSolaire.ajouterPlanete(Planete("Vénus", 6052000, 4.867e24, 1.082e8));
+systemeSolaire.ajouterPlanete(Planete("Terre", 6371000, 5.972e24, 1.496e8));
+systemeSolaire.ajouterPlanete(Planete("Mars", 3390000, 6.39e23, 2.279e8));
+systemeSolaire.ajouterPlanete(Planete("Jupiter", 69911000, 1.898e27, 7.785e8));
+systemeSolaire.ajouterPlanete(Planete("Saturne", 58232000, 5.683e26, 1.433e9));
+systemeSolaire.ajouterPlanete(Planete("Uranus", 25362000, 8.681e25, 2.877e9));
+systemeSolaire.ajouterPlanete(Planete("Neptune", 24622000, 1.024e26, 4.503e9));
+
+systemeSolaire.afficher();
+```
+
+Et voici le résultat attendu:
+
+```text
+Système solaire:
+
+Planète Mercure:
+ - Rayon: 2.439e+06 m
+ - Masse: 3.301e+23 kg
+ - Distance de l'étoile: 5.79e+07
+ - Gravité de surface: 3.70363 m/s^2
+
+Planète Vénus:
+ - Rayon: 6.052e+06 m
+ - Masse: 4.867e+24 kg
+ - Distance de l'étoile: 1.082e+08
+ - Gravité de surface: 8.86889 m/s^2
+
+Planète Terre:
+ - Rayon: 6.371e+06 m
+ - Masse: 5.972e+24 kg
+ - Distance de l'étoile: 1.496e+08
+ - Gravité de surface: 9.81997 m/s^2
+
+Planète Mars:
+ - Rayon: 3.39e+06 m
+ - Masse: 6.39e+23 kg
+ - Distance de l'étoile: 2.279e+08
+ - Gravité de surface: 3.71114 m/s^2
+
+Planète Jupiter:
+ - Rayon: 6.9911e+07 m
+ - Masse: 1.898e+27 kg
+ - Distance de l'étoile: 7.785e+08
+ - Gravité de surface: 25.9186 m/s^2
+
+Planète Saturne:
+ - Rayon: 5.8232e+07 m
+ - Masse: 5.683e+26 kg
+ - Distance de l'étoile: 1.433e+09
+ - Gravité de surface: 11.1856 m/s^2
+
+Planète Uranus:
+ - Rayon: 2.5362e+07 m
+ - Masse: 8.681e+25 kg
+ - Distance de l'étoile: 2.877e+09
+ - Gravité de surface: 9.00759 m/s^2
+
+Planète Neptune:
+ - Rayon: 2.4622e+07 m
+ - Masse: 1.024e+26 kg
+ - Distance de l'étoile: 4.503e+09
+ - Gravité de surface: 11.2735 m/s^2
+```

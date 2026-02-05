@@ -5,20 +5,26 @@
 
 class SystemePlanetaire {
 private:
+    std::string _nom;
     Planete* _planetes;
     size_t _nombrePlanetes;
     size_t _capacitePlanetes;
 public:
     SystemePlanetaire();
+    SystemePlanetaire(std::string nom);
     SystemePlanetaire(const SystemePlanetaire& autreSysteme);
     ~SystemePlanetaire();
 
-    void ajouterPlanete();
+    void ajouterPlanete(Planete planete);
+    void afficher(std::ostream& sortie) const;
+    void afficher() const;
 
-    void afficher()const;
+    std::string getNom() const;
+    size_t getNombrePlanetes() const;
+    Planete* getPlanete(size_t indice) const;
+    Planete* getPlanete(std::string nom) const;
 
-    Planete getPlanete(size_t i) const;
-    Planete getPlanete(std::string nom) const;
+    void setNom(std::string nom);
 };
 
 #endif //LAB03A_SYSTEMEPLANETAIRE_H
