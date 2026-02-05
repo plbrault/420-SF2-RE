@@ -413,6 +413,8 @@ SystemePlanetaire systemeSolaire;
 systemeSolaire.setNom("Système solaire");
 ```
 
+Pensez à modifier votre constructeur avec paramètre pour appeler `setNom` !
+
 ### Étape 12
 
 Implémentez `getNom` et `getNombrePlanetes`. Testez ces deux méthodes avant de continuer. Avec l'objet `systemeSolaire`, elles devraient retourner respectivement `"Système solaire"` et `8`.
@@ -441,3 +443,139 @@ std::cout << "Affichage de la planète Jupiter:" << std::endl;
 systemeSolaire.getPlanete("Jupiter")->afficher();
 ```
 
+### Étape 15
+
+Reprenez votre classe `Menu` du Laboratoire 02-C et utilisez-la pour construire le menu suivant:
+
+```text
+1. Afficher toutes les planètes
+2. Rechercher une planète par numéro
+3. Rechercher une planète par nom
+4. Quitter
+```
+
+Affichez ensuite ce menu dans une boucle et utilisez votre objet `systemeSolaire` pour faire fonctionner chacune des options. Voici un exemple d'exécution:
+
+```text
+MENU
+====================
+1. Afficher toutes les planètes
+2. Rechercher une planète par numéro
+3. Rechercher une planète par nom
+4. Quitter
+Entrez un choix entre 1 et 4: 2
+
+Entrer le numéro de la planète: 5
+Planète Jupiter:
+ - Rayon: 6.9911e+07 m
+ - Masse: 1.898e+27 kg
+ - Distance de l'étoile: 7.785e+08
+ - Gravité de surface: 25.9186 m/s^2
+
+MENU
+====================
+1. Afficher toutes les planètes
+2. Rechercher une planète par numéro
+3. Rechercher une planète par nom
+4. Quitter
+Entrez un choix entre 1 et 4: 2
+
+Entrer le numéro de la planète: 10
+Numéro de planète invalide.
+
+MENU
+====================
+1. Afficher toutes les planètes
+2. Rechercher une planète par numéro
+3. Rechercher une planète par nom
+4. Quitter
+Entrez un choix entre 1 et 4: 3
+
+Entrer le nom de la planète: Mars
+Planète Mars:
+ - Rayon: 3.39e+06 m
+ - Masse: 6.39e+23 kg
+ - Distance de l'étoile: 2.279e+08
+ - Gravité de surface: 3.71114 m/s^2
+
+MENU
+====================
+1. Afficher toutes les planètes
+2. Rechercher une planète par numéro
+3. Rechercher une planète par nom
+4. Quitter
+Entrez un choix entre 1 et 4: 3
+
+Entrer le nom de la planète: Pluton
+Nom de planète invalide. 
+
+MENU
+====================
+1. Afficher toutes les planètes
+2. Rechercher une planète par numéro
+3. Rechercher une planète par nom
+4. Quitter
+Entrez un choix entre 1 et 4: 1
+
+Système solaire:
+
+Planète Mercure:
+ - Rayon: 2.439e+06 m
+ - Masse: 3.301e+23 kg
+ - Distance de l'étoile: 5.79e+07
+ - Gravité de surface: 3.70363 m/s^2
+
+Planète Vénus:
+ - Rayon: 6.052e+06 m
+ - Masse: 4.867e+24 kg
+ - Distance de l'étoile: 1.082e+08
+ - Gravité de surface: 8.86889 m/s^2
+
+Planète Terre:
+ - Rayon: 6.371e+06 m
+ - Masse: 5.972e+24 kg
+ - Distance de l'étoile: 1.496e+08
+ - Gravité de surface: 9.81997 m/s^2
+
+Planète Mars:
+ - Rayon: 3.39e+06 m
+ - Masse: 6.39e+23 kg
+ - Distance de l'étoile: 2.279e+08
+ - Gravité de surface: 3.71114 m/s^2
+
+Planète Jupiter:
+ - Rayon: 6.9911e+07 m
+ - Masse: 1.898e+27 kg
+ - Distance de l'étoile: 7.785e+08
+ - Gravité de surface: 25.9186 m/s^2
+
+Planète Saturne:
+ - Rayon: 5.8232e+07 m
+ - Masse: 5.683e+26 kg
+ - Distance de l'étoile: 1.433e+09
+ - Gravité de surface: 11.1856 m/s^2
+
+Planète Uranus:
+ - Rayon: 2.5362e+07 m
+ - Masse: 8.681e+25 kg
+ - Distance de l'étoile: 2.877e+09
+ - Gravité de surface: 9.00759 m/s^2
+
+Planète Neptune:
+ - Rayon: 2.4622e+07 m
+ - Masse: 1.024e+26 kg
+ - Distance de l'étoile: 4.503e+09
+ - Gravité de surface: 11.2735 m/s^2
+
+MENU
+====================
+1. Afficher toutes les planètes
+2. Rechercher une planète par numéro
+3. Rechercher une planète par nom
+4. Quitter
+Entrez un choix entre 1 et 4: 4
+
+Au revoir!
+```
+
+### Le diagramme de classes

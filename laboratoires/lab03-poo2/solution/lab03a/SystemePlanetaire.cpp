@@ -11,7 +11,7 @@ SystemePlanetaire::SystemePlanetaire() {
 }
 
 SystemePlanetaire::SystemePlanetaire(std::string nom) : SystemePlanetaire() {
-    this->_nom = nom;
+    this->setNom(nom);
 }
 
 SystemePlanetaire::SystemePlanetaire(const SystemePlanetaire &autreSysteme) {

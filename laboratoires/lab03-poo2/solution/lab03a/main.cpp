@@ -1,12 +1,12 @@
 #include <iostream>
 #include "Planete.h"
 #include "SystemePlanetaire.h"
+#include "Menu.h"
 
 const size_t NOMBRE_PLANETES = 8;
 
 int main() {
-    SystemePlanetaire systemeSolaire;
-    systemeSolaire.setNom("Système solaire");
+    SystemePlanetaire systemeSolaire("Système solaire");
 
     systemeSolaire.ajouterPlanete(Planete("Mercure", 2439000, 3.301e23, 5.79e7));
     systemeSolaire.ajouterPlanete(Planete("Vénus", 6052000, 4.867e24, 1.082e8));
@@ -17,30 +17,50 @@ int main() {
     systemeSolaire.ajouterPlanete(Planete("Uranus", 25362000, 8.681e25, 2.877e9));
     systemeSolaire.ajouterPlanete(Planete("Neptune", 24622000, 1.024e26, 4.503e9));
 
-    systemeSolaire.afficher();
+    Menu menu(true);
+    menu.ajouterOption("Afficher toutes les planètes");
+    menu.ajouterOption("Rechercher une planète par numéro");
+    menu.ajouterOption("Rechercher une planète par nom");
 
-    // Créer une copie du système solaire en allocation statique
-    SystemePlanetaire copie1(systemeSolaire);
+    int choix;
+    do {
+        int numeroPlanete;
+        std::string nomPlanete;
+        Planete* planete;
 
-    // Créer une deuxième copie du système solaire en allocation dynamique
-    SystemePlanetaire* copie2 = new SystemePlanetaire(copie1);
+        std::cout << menu.obtenirChaine();
+        choix = menu.demanderChoix();
 
-    // Désallouer la deuxième copie
-    // Si le constructeur de copie est implémenté correctement, les autres
-    // copies ne seront pas affectées
-    delete copie2;
+        switch (choix) {
+            case 1:
+                systemeSolaire.afficher();
+                break;
+            case 2:
+                std::cout << "Entrer le numéro de la planète: ";
+                std::cin >> numeroPlanete;
+                planete = systemeSolaire.getPlanete(numeroPlanete - 1);
+                if (planete == nullptr) {
+                    std::cout << "Numéro de planète invalide." << std::endl;
+                } else {
+                    planete->afficher();
+                }
+                std::cout << std::endl;
+                break;
+            case 3:
+                std::cout << "Entrer le nom de la planète: ";
+                std::cin >> nomPlanete;
+                planete = systemeSolaire.getPlanete(nomPlanete);
+                if (planete == nullptr) {
+                    std::cout << "Nom de planète invalide. " << std::endl;
+                } else {
+                    planete->afficher();
+                }
+                std::cout << std::endl;
+                break;
+        }
+    } while (!menu.estQuitter(choix));
 
-    // Renommer la copie
-    copie1.setNom("Système solaire (copie)");
-
-    // Afficher la copie
-    copie1.afficher();
-
-    std::cout << "Affichage de la planète à l'indice 2:" << std::endl;
-    systemeSolaire.getPlanete(2)->afficher();
-
-    std::cout << "Affichage de la planète Jupiter:" << std::endl;
-    systemeSolaire.getPlanete("Jupiter")->afficher();
+    std::cout << "Au revoir!" << std::endl;
 
     return 0;
     // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
