@@ -731,22 +731,16 @@ Sans modifier vos classes, ajoutez le code nécessaire à votre `main` afin de g
 
 ```text
 ---------------
-| He       18 |
-| Helium      |
+| Li       1  |
+| Lithium     |
 |             |
-| 2         2 |
----------------
----------------
-| Li       1 |
-| Lithium    |
-|             |
-| 2        3 |
+| 2        3  |
 ---------------
 ```
 
 > **NOTE:** La librairie `iomanip` peut vous être utile. Des notes de cours à son sujet sont disponibles sur Moodle sous le laboratoire.
 
-`Li` est le symbole, `1` est le groupe, `Lithium` est le nom, `2` est le nombre d'isotopes, et `3` le nombre de particules chargées (2 protons, 1 électrons).
+`Li` est le symbole, `1` est le groupe, `Lithium` est le nom, `2` est le nombre d'isotopes, et `3` le numéro atomique.
 
 **⚠️ Faites valider votre laboratoire 03-B par l'enseignant.**
 
