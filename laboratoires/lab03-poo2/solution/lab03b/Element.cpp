@@ -3,24 +3,24 @@
 Element::Element() {
     this->_symbole = "";
     this->_nom = "(Élément sans nom)";
-    this->_nbParticulesChargees = 0;
+    this->_numeroAtomique = 0;
     this->_groupe = 0;
     this->_capaciteIsotopes = 2;
     this->_nombreIsotopes = 0;
     this->_isotopes = new Isotope[this->_capaciteIsotopes];
 }
 
-Element::Element(std::string symbole, std::string nom, int nbParticulesChargees, int groupe) : Element() {
+Element::Element(std::string symbole, std::string nom, int numeroAtomique, int groupe) : Element() {
     this->setSymbole(symbole);
     this->setNom(nom);
-    this->setNbParticulesChargees(nbParticulesChargees);
+    this->setNumeroAtomique(numeroAtomique);
     this->setGroupe(groupe);
 }
 
 Element::Element(const Element& autreElement) {
     this->_symbole = autreElement._symbole;
     this->_nom = autreElement._nom;
-    this->_nbParticulesChargees = autreElement._nbParticulesChargees;
+    this->_numeroAtomique = autreElement._numeroAtomique;
     this->_groupe = autreElement._groupe;
     this->_capaciteIsotopes = autreElement._capaciteIsotopes;
     this->_nombreIsotopes = autreElement._nombreIsotopes;
@@ -57,8 +57,8 @@ std::string Element::getNom() const {
     return this->_nom;
 }
 
-int Element::getNbParticulesChargees() const {
-    return this->_nbParticulesChargees;
+int Element::getNumeroAtomique() const {
+    return this->_numeroAtomique;
 }
 
 int Element::getGroupe() const {
@@ -84,8 +84,8 @@ void Element::setNom(std::string nom) {
     this->_nom = nom;
 }
 
-void Element::setNbParticulesChargees(int nbParticulesChargees) {
-    this->_nbParticulesChargees = nbParticulesChargees;
+void Element::setNumeroAtomique(int numeroAtomique) {
+    this->_numeroAtomique = numeroAtomique;
 }
 
 void Element::setGroupe(int groupe) {

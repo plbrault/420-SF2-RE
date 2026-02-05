@@ -657,11 +657,11 @@ Nous allons maintenant créer un programme implémentant une classe `Element` et
 class Element {
     - string _symbole
     - string _nom
-    - int _nbParticulesChargees
+    - int _numeroAtomique
     - int _groupe
     - Isotope* _isotopes
 
-    + Element(string symbole, string nom, int nbParticulesChargees, int groupe)
+    + Element(string symbole, string nom, int numeroAtomique, int groupe)
     + void ajouterIsotope(Isotope isotope)
 
     + bool aIsotopeStable()

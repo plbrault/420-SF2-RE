@@ -9,6 +9,6 @@ void afficherElement(const Element& element) {
     std::cout << "| " << std::left << std::setw(10) << element.getNom() << " |" << std::endl;
     std::cout << "|             |" << std::endl;
     std::cout << "| " << std::left << std::setw(5) << element.getNombreIsotopes()
-              << std::right << std::setw(5) << element.getNbParticulesChargees() << " |" << std::endl;
+              << std::right << std::setw(5) << element.getNumeroAtomique() << " |" << std::endl;
     std::cout << "---------------" << std::endl;
 }

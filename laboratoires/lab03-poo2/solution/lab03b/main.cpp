@@ -12,7 +12,7 @@ int main() {
     private:
         std::string _symbole;
         std::string _nom;
-        int _nbParticulesChargees;
+        int _numeroAtomique;
         int _groupe;
         Isotope* _isotopes;
         size_t _nombreIsotopes;
@@ -20,7 +20,7 @@ int main() {
 
     public:
         Element();
-        Element(std::string symbole, std::string nom, int nbParticulesChargees, int groupe);
+        Element(std::string symbole, std::string nom, int numeroAtomique, int groupe);
         Element(const Element& autreElement);
         ~Element();
 
@@ -28,14 +28,14 @@ int main() {
 
         std::string getSymbole() const;
         std::string getNom() const;
-        int getNbParticulesChargees() const;
+        int getNumeroAtomique() const;
         int getGroupe() const;
         size_t getNombreIsotopes() const;
         Isotope* getIsotope(size_t indice) const;
 
         void setSymbole(std::string symbole);
         void setNom(std::string nom);
-        void setNbParticulesChargees(int nbParticulesChargees);
+        void setNumeroAtomique(int numeroAtomique);
         void setGroupe(int groupe);
 
         bool aIsotopeStable() const;
