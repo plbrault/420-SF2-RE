@@ -44,6 +44,14 @@ void SystemePlanetaire::afficher() const {
     this->afficher(std::cout);
 }
 
+std::string SystemePlanetaire::getNom() const {
+    return this->_nom;
+}
+
+size_t SystemePlanetaire::getNombrePlanetes() const {
+    return this->_nombrePlanetes;
+}
+
 void SystemePlanetaire::setNom(std::string nom) {
     this->_nom = nom;
 }

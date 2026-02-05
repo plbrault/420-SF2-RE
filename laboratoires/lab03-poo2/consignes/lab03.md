@@ -379,3 +379,7 @@ Implémentez le mutateur `setNom`. Testez-le dans votre `main` en remplaçant l'
 SystemePlanetaire systemeSolaire;
 systemeSolaire.setNom("Système solaire");
 ```
+
+### Étape 11
+
+Implémentez `getNom` et `getNombrePlanetes`. Testez ces deux méthodes avant de continuer. Avec l'objet `systemeSolaire`, elles devraient retourner respectivement `"Système solaire"` et `8`.
