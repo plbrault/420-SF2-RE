@@ -700,7 +700,7 @@ Remarquez par ailleurs que la classe `Isotope` spécifie deux versions du constr
 * L'une avec un paramètre `demiVie`
 * L'autre sans paramètre `demiVie`
 
-C'est logique, puisque ce ne sont pas tous les isotopes qui ont des demi-vie. Ça veut dire qu'il nous faut une façon dans notre programme de représenter l'**absence de valeur** pour cet attribut. Je vous suggère deux possibilités:
+C'est logique, puisque ce ne sont pas tous les isotopes qui ont une demi-vie. Ça veut dire qu'il nous faut une façon dans notre programme de représenter l'**absence de valeur** pour cet attribut. Je vous suggère deux possibilités:
 
 * Nous pourrions utiliser la valeur de `-1` pour indiquer l'absence de demi-vie
 * Ou bien nous pourrions utiliser la valeur `std::numeric_limits<double>::infinity()`, qui se trouve dans la librairie `limits` et représente l'infini. Cela serait logique, puisque dire qu'un isotope a une demi-vie infinie revient à dire qu'il n'en a pas.
@@ -730,12 +730,12 @@ Testez bien le code généré avant de poursuivre.
 Sans modifier vos classes, ajoutez le code nécessaire à votre `main` afin de générer un affichage semblable à celui-ci pour chacun des éléments instanciés à l'étape 2:
 
 ```text
----------------
-| Li       1  |
-| Lithium     |
-|             |
-| 2        3  |
----------------
+----------------
+| Li        1  |
+| Lithium      |
+|              |
+| 2         3  |
+----------------
 ```
 
 > **NOTE:** La librairie `iomanip` peut vous être utile. Des notes de cours à son sujet sont disponibles sur Moodle sous le laboratoire.

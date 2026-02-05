@@ -79,6 +79,8 @@ int main() {
     Les demi-vies sont exprimées en années. Un isotope stable a une demi-vie infinie
     (`std::numeric_limits<double>::infinity()`).
 
+    N'inclue pas les caractères accentués dans les noms des éléments et des isotopes.
+
     Je n'ai pas besoin que tu me fournisses le code des classes, je l'ai déjà. Je veux seulement le code d'instanciation
     des objets.
 
@@ -88,20 +90,20 @@ int main() {
     // DÉBUT DU CODE GÉNÉRÉ PAR L'IA
 
     Element elements[6] = {
-        // Hydrogène (groupe 1)
+        // Hydrogene (groupe 1)
         [](){
-            Element e("H", "Hydrogène", 1, 1);
-            e.ajouterIsotope(Isotope("Hydrogène-1", 0, 0.999885, std::numeric_limits<double>::infinity()));
-            e.ajouterIsotope(Isotope("Deutérium", 1, 0.000115, std::numeric_limits<double>::infinity()));
+            Element e("H", "Hydrogene", 1, 1);
+            e.ajouterIsotope(Isotope("Hydrogene-1", 0, 0.999885, std::numeric_limits<double>::infinity()));
+            e.ajouterIsotope(Isotope("Deuterium", 1, 0.000115, std::numeric_limits<double>::infinity()));
             e.ajouterIsotope(Isotope("Tritium", 2, 0.0, 12.32)); // demi-vie ~ 12.32 ans
             return e;
         }(),
 
-        // Hélium (groupe 18)
+        // Helium (groupe 18)
         [](){
-            Element e("He", "Hélium", 2, 18);
-            e.ajouterIsotope(Isotope("Hélium-3", 1, 0.00000137, std::numeric_limits<double>::infinity()));
-            e.ajouterIsotope(Isotope("Hélium-4", 2, 0.99999863, std::numeric_limits<double>::infinity()));
+            Element e("He", "Helium", 2, 18);
+            e.ajouterIsotope(Isotope("Helium-3", 1, 0.00000137, std::numeric_limits<double>::infinity()));
+            e.ajouterIsotope(Isotope("Helium-4", 2, 0.99999863, std::numeric_limits<double>::infinity()));
             return e;
         }(),
 
@@ -113,12 +115,12 @@ int main() {
             return e;
         }(),
 
-        // Béryllium (groupe 2)
+        // Beryllium (groupe 2)
         [](){
-            Element e("Be", "Béryllium", 4, 2);
-            e.ajouterIsotope(Isotope("Béryllium-9", 5, 1.0, std::numeric_limits<double>::infinity()));
-            // isotope cosmogénique
-            e.ajouterIsotope(Isotope("Béryllium-10", 6, 0.0, 1.387e6));
+            Element e("Be", "Beryllium", 4, 2);
+            e.ajouterIsotope(Isotope("Beryllium-9", 5, 1.0, std::numeric_limits<double>::infinity()));
+            // isotope cosmogenique
+            e.ajouterIsotope(Isotope("Beryllium-10", 6, 0.0, 1.387e6));
             return e;
         }(),
 
