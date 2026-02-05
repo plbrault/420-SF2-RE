@@ -63,6 +63,13 @@ size_t SystemePlanetaire::getNombrePlanetes() const {
     return this->_nombrePlanetes;
 }
 
+Planete* SystemePlanetaire::getPlanete(size_t indice) const {
+    if (indice < this->_nombrePlanetes) {
+        return this->_planetes + indice;
+    }
+    return nullptr;
+}
+
 void SystemePlanetaire::setNom(std::string nom) {
     this->_nom = nom;
 }

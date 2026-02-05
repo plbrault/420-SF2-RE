@@ -11,11 +11,10 @@ Mettre en pratique les notions suivantes:
 
 ## Parties
 
-Ce laboratoire comprend trois parties:
+Ce laboratoire comprend deux parties:
 
 * **Laboratoire 03-A**: amélioration de la classe `Planete` du Laboratoire 02-A et ajout d'une classe `SystemePlanetaire`
-* **Laboratoire 03-B**: création de classes `Element` et `Isotope`
-* **Laboratoire 03-C**: amélioration de la classe `Parabole` du Laboratoire 02-B et ajout d'une classe `Point`
+* **Laboratoire 03-B**: le tableau périodique des éléments (classes `Element` et `Isotope`)
 
 ## Laboratoire 03-A
 
@@ -420,4 +419,11 @@ Implémentez `getNom` et `getNombrePlanetes`. Testez ces deux méthodes avant de
 
 ### Étape 13
 
+Nous en sommes maintenant à implémenter l'accesseur `Planete* getPlanete(size_t indice) const`. Celui-ci prend un paramètre, car il retourne l'**adresse** d'une planète en particulier (celle à l'indice `indice`), et non pas du tableau de planètes. Si l'indice est invalide, la méthode retourne `nullptr`.
 
+Voici une ligne de code vous permettant de tester votre méthode:
+
+```cpp
+std::cout << "Affichage de la planète à l'indice 2:" << std::endl;
+systemeSolaire.getPlanete(2)->afficher();
+```
