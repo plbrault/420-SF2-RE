@@ -373,6 +373,40 @@ Planète Neptune:
 
 ### Étape 10
 
+Le temps est venu d'implémenter le constructeur de copie! Ce constructeur prend en paramètre une instance de `SystemePlanetaire`, et en crée une copie.
+
+**Le plus important pour le constructeur de copie est de bien copier les planètes**. Il ne faut surtout pas faire `this->_planetes = autreSysteme._planetes`. On veut plutôt faire cela:
+
+1. Allouer un nouveau tableau avec la même capacité que celui d'`autreSysteme` et assigner son adresse à `this->_planetes`
+2. Copier un par un les planètes d'`autreSysteme` vers ce nouveau tableau
+
+Pour ce qui est des autres attributs (`_nom`, `_nombrePlanetes`, `_capacitePlanetes`), ceux-ci peuvent être copiés tels quels, puisqu'ils ne sont pas des pointeurs.
+
+Pour tester le fonctionnement de votre constructeur de copie, ajouter le code suivant **à la fin** de votre `main`:
+
+```cpp
+// Créer une copie du système solaire en allocation statique
+SystemePlanetaire copie1(systemeSolaire);
+
+// Créer une deuxième copie du système solaire en allocation dynamique
+SystemePlanetaire* copie2 = new SystemePlanetaire(copie1);
+
+// Désallouer la deuxième copie
+// Si le constructeur de copie est implémenté correctement, les autres
+// copies ne seront pas affectées
+delete copie2;
+
+// Renommer la copie
+copie1.setNom("Système solaire (copie)");
+
+// Afficher la copie
+copie1.afficher();
+```
+
+Si votre implémentation est correcte, vous verrez maintenant la copie du système solaire s'afficher à la suite de l'original.
+
+### Étape 11
+
 Implémentez le mutateur `setNom`. Testez-le dans votre `main` en remplaçant l'initialisation de `systemeSolaire` de cette façon:
 
 ```cpp
@@ -380,6 +414,10 @@ SystemePlanetaire systemeSolaire;
 systemeSolaire.setNom("Système solaire");
 ```
 
-### Étape 11
+### Étape 12
 
 Implémentez `getNom` et `getNombrePlanetes`. Testez ces deux méthodes avant de continuer. Avec l'objet `systemeSolaire`, elles devraient retourner respectivement `"Système solaire"` et `8`.
+
+### Étape 13
+
+

@@ -19,6 +19,23 @@ int main() {
 
     systemeSolaire.afficher();
 
+    // Créer une copie du système solaire en allocation statique
+    SystemePlanetaire copie1(systemeSolaire);
+
+    // Créer une deuxième copie du système solaire en allocation dynamique
+    SystemePlanetaire* copie2 = new SystemePlanetaire(copie1);
+
+    // Désallouer la deuxième copie
+    // Si le constructeur de copie est implémenté correctement, les autres
+    // copies ne seront pas affectées
+    delete copie2;
+
+    // Renommer la copie
+    copie1.setNom("Système solaire (copie)");
+
+    // Afficher la copie
+    copie1.afficher();
+
     return 0;
     // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }

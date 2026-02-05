@@ -14,6 +14,17 @@ SystemePlanetaire::SystemePlanetaire(std::string nom) : SystemePlanetaire() {
     this->_nom = nom;
 }
 
+SystemePlanetaire::SystemePlanetaire(const SystemePlanetaire &autreSysteme) {
+    this->_nom = autreSysteme._nom;
+    this->_capacitePlanetes = autreSysteme._capacitePlanetes;
+    this->_nombrePlanetes = autreSysteme._nombrePlanetes;
+
+    this->_planetes = new Planete[this->_capacitePlanetes];
+    for (size_t i = 0; i < this->_nombrePlanetes; i++) {
+        this->_planetes[i] = autreSysteme._planetes[i];
+    }
+}
+
 SystemePlanetaire::~SystemePlanetaire() {
     delete[] this->_planetes;
 }
