@@ -288,7 +288,7 @@ Vous devez aussi implémenter le destructeur, qui désalloue le tableau `_planet
 
 Instanciez deux `SystemePlanetaire` dans votre `main` en utilisant les deux versions du constructeur, et vérifiez à l'aide du débogueur qu'ils reçoivent les bonnes valeurs d'attributs.
 
-## Étape 9
+### Étape 9
 
 Implémentez maintenant la méthode `ajouterPlanete`. Celle-ci prend un objet `Planete` en paramètre.
 
@@ -579,3 +579,72 @@ Au revoir!
 ```
 
 ### Le diagramme de classes
+
+Voici le [diagramme de classes](https://fr.wikipedia.org/wiki/Diagramme_de_classes) représentant notre programme. Celui-ci nous permet d'avoir une représentation visuelle des différentes classes avec leurs membres privés et publics, de même que des relations entre les classes.
+
+```plantuml
+@startuml
+
+class Planete {
+    - std::string _nom
+    - double _rayon
+    - double _masse
+    - double _distanceEtoile
+    --
+    + Planete()
+    + Planete(std::string nom, double rayon, double masse, double distanceEtoile)
+    + std::string getNom() const
+    + double getRayon() const
+    + double getMasse() const
+    + double getDistanceEtoile() const
+    + void setNom(std::string nom)
+    + void setRayon(double rayon)
+    + void setMasse(double masse)
+    + void setDistanceEtoile(double distanceEtoile)
+    + double getGraviteSurface() const
+    + void afficher(std::ostream& sortie) const
+    + void afficher() const
+}
+
+class SystemePlanetaire {
+    - std::string _nom
+    - Planete* _planetes
+    - size_t _nombrePlanetes
+    - size_t _capacitePlanetes
+    --
+    + SystemePlanetaire()
+    + SystemePlanetaire(std::string nom)
+    + SystemePlanetaire(const SystemePlanetaire& autreSysteme)
+    + ~SystemePlanetaire()
+    + void ajouterPlanete(Planete planete)
+    + void afficher(std::ostream& sortie) const
+    + void afficher() const
+    + std::string getNom() const
+    + size_t getNombrePlanetes() const
+    + Planete* getPlanete(size_t indice) const
+    + Planete* getPlanete(std::string nom) const
+    + void setNom(std::string nom)
+}
+
+class Menu {
+    - std::string* _options
+    - size_t _nombreOptions
+    - bool _optionQuitter
+    --
+    + Menu()
+    + Menu(bool optionQuitter)
+    + ~Menu()
+    + void ajouterOption(std::string option)
+    + std::string obtenirChaine()
+    + int demanderChoix()
+    + bool estQuitter(int idOption)
+}
+
+SystemePlanetaire *-- Planete
+
+@enduml
+```
+
+## Laboratoire 03-B
+
+À venir
