@@ -658,10 +658,10 @@ class Element {
     - string _symbole
     - string _nom
     - int _nbParticulesChargees
-    - string _groupe
+    - int _groupe
     - Isotope* _isotopes
 
-    + Element(string symbole, string nom, int nbParticulesChargees, string groupe)
+    + Element(string symbole, string nom, int nbParticulesChargees, int groupe)
     + void ajouterIsotope(Isotope isotope)
 
     + bool aIsotopeStable()

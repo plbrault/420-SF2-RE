@@ -4,13 +4,13 @@ Element::Element() {
     this->_symbole = "";
     this->_nom = "(Élément sans nom)";
     this->_nbParticulesChargees = 0;
-    this->_groupe = "";
+    this->_groupe = 0;
     this->_capaciteIsotopes = 2;
     this->_nombreIsotopes = 0;
     this->_isotopes = new Isotope[this->_capaciteIsotopes];
 }
 
-Element::Element(std::string symbole, std::string nom, int nbParticulesChargees, std::string groupe) : Element() {
+Element::Element(std::string symbole, std::string nom, int nbParticulesChargees, int groupe) : Element() {
     this->setSymbole(symbole);
     this->setNom(nom);
     this->setNbParticulesChargees(nbParticulesChargees);
@@ -61,7 +61,7 @@ int Element::getNbParticulesChargees() const {
     return this->_nbParticulesChargees;
 }
 
-std::string Element::getGroupe() const {
+int Element::getGroupe() const {
     return this->_groupe;
 }
 
@@ -88,7 +88,7 @@ void Element::setNbParticulesChargees(int nbParticulesChargees) {
     this->_nbParticulesChargees = nbParticulesChargees;
 }
 
-void Element::setGroupe(std::string groupe) {
+void Element::setGroupe(int groupe) {
     this->_groupe = groupe;
 }
 
