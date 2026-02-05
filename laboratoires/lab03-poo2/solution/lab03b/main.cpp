@@ -3,34 +3,103 @@
 #include "fonctions.h"
 
 int main() {
-    Element hydrogene("H", "Hydrogen", 1, "1");
-    hydrogene.ajouterIsotope(Isotope("Protium", 0, 99.9885, 1.00782503207));
-    hydrogene.ajouterIsotope(Isotope("Deuterium", 1, 0.0115, 2.01410177785));
-    hydrogene.ajouterIsotope(Isotope("Tritium", 2, 0, 12.32, 3.0160492777));
+    /*
+    === PROMPT UTILISÉ POUR GÉNÉRER L'INSTANCIATION DES ÉLÉMENTS ET DES ISOTOPES ===
 
-    Element helium("He", "Helium", 2, "18");
-    helium.ajouterIsotope(Isotope("Helium-3", 1, 0.000137, 3.0160293191));
-    helium.ajouterIsotope(Isotope("Helium-4", 2, 99.999863, 4.00260325415));
+    Voici les définitions de mes classes Element et Isotope:
 
-    Element lithium("Li", "Lithium", 3, "1");
-    lithium.ajouterIsotope(Isotope("Lithium-6", 3, 7.59, 6.015122795));
-    lithium.ajouterIsotope(Isotope("Lithium-7", 4, 92.41, 7.01600455));
+    class Element {
+    private:
+        std::string _symbole;
+        std::string _nom;
+        int _nbParticulesChargees;
+        std::string _groupe;
+        Isotope* _isotopes;
+        size_t _nombreIsotopes;
+        size_t _capaciteIsotopes;
 
-    Element beryllium("Be", "Beryllium", 4, "2");
-    beryllium.ajouterIsotope(Isotope("Beryllium-7", 3, 0, 0.1461, 7.01692983));
-    beryllium.ajouterIsotope(Isotope("Beryllium-9", 5, 100, 9.0121822));
-    beryllium.ajouterIsotope(Isotope("Beryllium-10", 6, 0, 1.51e6, 10.0135338));
+    public:
+        Element();
+        Element(std::string symbole, std::string nom, int nbParticulesChargees, std::string groupe);
+        Element(const Element& autreElement);
+        ~Element();
 
-    Element bore("B", "Bore", 5, "13");
-    bore.ajouterIsotope(Isotope("Bore-10", 5, 19.9, 10.0129370));
-    bore.ajouterIsotope(Isotope("Bore-11", 6, 80.1, 11.0093054));
+        void ajouterIsotope(Isotope isotope);
 
-    Element carbone("C", "Carbone", 6, "14");
-    carbone.ajouterIsotope(Isotope("Carbone-12", 6, 98.93, 12.0));
-    carbone.ajouterIsotope(Isotope("Carbone-13", 7, 1.07, 13.0033548378));
-    carbone.ajouterIsotope(Isotope("Carbone-14", 8, 0, 5730, 14.003241989));
+        std::string getSymbole() const;
+        std::string getNom() const;
+        int getNbParticulesChargees() const;
+        std::string getGroupe() const;
+        size_t getNombreIsotopes() const;
+        Isotope* getIsotope(size_t indice) const;
 
-    Element elements[6] = {hydrogene, helium, lithium, beryllium, bore, carbone};
+        void setSymbole(std::string symbole);
+        void setNom(std::string nom);
+        void setNbParticulesChargees(int nbParticulesChargees);
+        void setGroupe(std::string groupe);
+
+        bool aIsotopeStable() const;
+    };
+
+    class Isotope {
+    private:
+        std::string _nom;
+        int _nbNeutrons;
+        double _occurence;
+        double _demiVie;
+        double _masse;
+
+    public:
+        Isotope();
+        Isotope(std::string nom, int nbNeutrons, double occurence, double masse);
+        Isotope(std::string nom, int nbNeutrons, double occurence, double demiVie, double masse);
+
+        std::string getNom() const;
+        int getNbNeutrons() const;
+        double getOccurence() const;
+        double getDemiVie() const;
+        double getMasse() const;
+
+        void setNom(std::string nom);
+        void setNbNeutrons(int nbNeutrons);
+        void setOccurence(double occurence);
+        void setDemiVie(double demiVie);
+        void setMasse(double masse);
+
+        bool estStable() const;
+    };
+
+    En te basant sur ces définitions, génère du code permettant d'instancier les 6 premiers éléments
+    du tableau périodique avec leurs isotopes. Place les éléments dans un tableau `elements`.
+
+    N'utilise pas l'opérateur d'affectation de la classe Element.
+    */
+
+    // DÉBUT DU CODE GÉNÉRÉ PAR L'IA
+
+    Element elements[6] = {
+        Element("H", "Hydrogène", 1, "Non-métal"),
+        Element("He", "Hélium", 2, "Noble gaz"),
+        Element("Li", "Lithium", 3, "Métal alcalin"),
+        Element("Be", "Béryllium", 4, "Métal alcalino-terreux"),
+        Element("B", "Bore", 5, "Métalloïde"),
+        Element("C", "Carbone", 6, "Non-métal")
+    };
+
+    // Ajout des isotopes
+    elements[0].ajouterIsotope(Isotope("H-1", 0, 99.98, 1.00784));
+    elements[0].ajouterIsotope(Isotope("H-2", 1, 0.02, 2.014102));
+    elements[1].ajouterIsotope(Isotope("He-3", 1, 0.000137, 3.01603));
+    elements[1].ajouterIsotope(Isotope("He-4", 2, 99.999863, 4.002602));
+    elements[2].ajouterIsotope(Isotope("Li-6", 3, 7.5, 6.015122));
+    elements[2].ajouterIsotope(Isotope("Li-7", 4, 92.5, 7.016004));
+    elements[3].ajouterIsotope(Isotope("Be-8", 4, 0.0, 8.005305)); // Instable
+    elements[4].ajouterIsotope(Isotope("B-10", 5, 19.9, 10.012937));
+    elements[4].ajouterIsotope(Isotope("B-11", 6, 80.1, 11.009305));
+    elements[5].ajouterIsotope(Isotope("C-12", 6, 98.89, 12.000000));
+    elements[5].ajouterIsotope(Isotope("C-13", 7, 1.11, 13.003355));
+
+    // FIN DU CODE GÉNÉRÉ PAR L'IA
 
     for (size_t i = 0; i < 6; i++) {
         afficherElement(elements[i]);

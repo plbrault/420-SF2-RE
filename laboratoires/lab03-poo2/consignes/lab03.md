@@ -715,11 +715,17 @@ Dans le `main`, on veut maintenant instancier les 6 premiers éléments du table
 
 Réfléchissez aux instructions et aux éléments de contexte que vous devriez donner à un LLM pour qu'il vous génère du code valide à intégrer dans votre programme actuel afin de répondre à la demande ci-dessus. Utilisez ensuite le LLM de votre choix (que ce soit ChatGPT, Claude ou autre) pour générer ce code. **Validez que le résultat est correct avant de l'intégrer à votre programme!** De plus, copiez le texte de votre *prompt* dans un commentaire au début de votre `main`. L'enseignant sera ainsi en mesure de vous donner une rétroaction sur celui-ci lors de la validation de votre laboratoire.
 
+**IMPORTANT:** incluez la phrase suivante dans votre *prompt*:
+
+> N'utilise pas l'opérateur d'affectation de la classe Element.
+
+Autrement, le LLM risque de générer du code non fonctionnel, pour des raisons que nous verrons au chapitre 04.
+
 Testez bien le code généré avant de poursuivre.
 
 ### Étape 3
 
-Sans modifier vos classes, ajoutez le code nécessaire à votre `main` afin de générer l'affichage suivant pour chacun des éléments instanciés à l'étape 2:
+Sans modifier vos classes, ajoutez le code nécessaire à votre `main` afin de générer un affichage semblable à celui-ci pour chacun des éléments instanciés à l'étape 2:
 
 ```text
 ---------------
@@ -729,6 +735,8 @@ Sans modifier vos classes, ajoutez le code nécessaire à votre `main` afin de g
 | 9         2 |
 ---------------
 ```
+
+> **NOTE:** La librairie `iomanip` peut vous être utile. Des notes de cours à son sujet sont disponibles sur Moodle sous le laboratoire.
 
 `He` est le symbol, `18` est le groupe, `Helium` est le nom, `9` est le nombre d'isotopes, et `2` le nombre de particules chargées (2 protons, 2 électrons).
 
