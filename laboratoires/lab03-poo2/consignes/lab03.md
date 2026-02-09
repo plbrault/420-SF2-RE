@@ -372,6 +372,17 @@ Planète Neptune:
 
 ### Étape 10
 
+Implémentez le mutateur `setNom`. Testez-le dans votre `main` en remplaçant l'initialisation de `systemeSolaire` de cette façon:
+
+```cpp
+SystemePlanetaire systemeSolaire;
+systemeSolaire.setNom("Système solaire");
+```
+
+Pensez à modifier votre constructeur avec paramètre pour appeler `setNom` !
+
+### Étape 11
+
 Le temps est venu d'implémenter le constructeur de copie! Ce constructeur prend en paramètre une instance de `SystemePlanetaire`, et en crée une copie.
 
 **Le plus important pour le constructeur de copie est de bien copier les planètes**. Il ne faut surtout pas faire `this->_planetes = autreSysteme._planetes`. On veut plutôt faire cela:
@@ -403,17 +414,6 @@ copie1.afficher();
 ```
 
 Si votre implémentation est correcte, vous verrez maintenant la copie du système solaire s'afficher à la suite de l'original.
-
-### Étape 11
-
-Implémentez le mutateur `setNom`. Testez-le dans votre `main` en remplaçant l'initialisation de `systemeSolaire` de cette façon:
-
-```cpp
-SystemePlanetaire systemeSolaire;
-systemeSolaire.setNom("Système solaire");
-```
-
-Pensez à modifier votre constructeur avec paramètre pour appeler `setNom` !
 
 ### Étape 12
 
