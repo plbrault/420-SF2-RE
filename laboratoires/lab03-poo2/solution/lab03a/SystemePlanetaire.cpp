@@ -47,7 +47,7 @@ void SystemePlanetaire::ajouterPlanete(Planete planete) {
 void SystemePlanetaire::afficher(std::ostream& sortie) const {
     sortie << this->_nom << ":" << std::endl << std::endl;
     for (size_t i = 0; i < this->_nombrePlanetes; i++) {
-        this->_planetes[i].afficher();
+        this->_planetes[i].afficher(sortie);
         sortie << std::endl;
     }
 }
