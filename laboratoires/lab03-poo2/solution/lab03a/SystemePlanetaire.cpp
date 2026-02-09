@@ -5,6 +5,7 @@
 #include "SystemePlanetaire.h"
 
 SystemePlanetaire::SystemePlanetaire() {
+    this->_nom = "(Système planétaire sans nom)";
     this->_capacitePlanetes = 2;
     this->_nombrePlanetes = 0;
     this->_planetes = new Planete[this->_capacitePlanetes];

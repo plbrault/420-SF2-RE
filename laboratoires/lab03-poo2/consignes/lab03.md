@@ -707,7 +707,9 @@ C'est logique, puisque ce ne sont pas tous les isotopes qui ont une demi-vie. Ç
 
 Choisissez la solution que vous préférez. La méthode `estStable` doit se baser sur cette valeur pour déterminer si l'isotope est stable ou non. Un isotope est stable s'il n'a pas de demi-vie.
 
-En plus des membres mentionnés précédemment, vous devez également fournir **les accesseurs (*getters*) et mutateurs (*setters*) pour chaque attribut privé présent dans le diagramme.**. Pour l'attribut `_isotopes` de la classe `Element`, faites seulement un accesseur `Isotope* getIsotope(size_t indice) const`. Vous aurez aussi besoin d'un accesseur qui retourne le nombre d'isotopes de l'élément.
+En plus des membres mentionnés précédemment, vous devez également fournir **les accesseurs (*getters*) et mutateurs (*setters*) pour chaque attribut privé présent dans le diagramme.**, à l'exception de l'attribut `_isotopes` de la classe `Element`.
+
+Dans la classe `Element`, ajoutez aussi la méthode `Isotope* getIsotope(size_t indice) const`, de même qu'un accesseur qui retourne le nombre d'isotopes de l'élément.
 
 N'oubliez pas de tester votre code au fur et à mesure que vous l'écrivez!
 
