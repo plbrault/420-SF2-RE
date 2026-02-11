@@ -5,20 +5,20 @@
 
 class Time {
 private:
-    int _hours;
-    int _minutes;
-    int _seconds;
+    unsigned int _hours;
+    unsigned int _minutes;
+    unsigned int _seconds;
 public:
     Time() : Time(0, 0, 0) {}
-    Time(int hours, int minutes, int seconds);
+    Time(unsigned int hours, unsigned int minutes, unsigned int seconds);
 
-    void setHours(int hours);
-    void setMinutes(int minutes);
-    void setSeconds(int seconds);
+    void setHours(unsigned int hours);
+    void setMinutes(unsigned int minutes);
+    void setSeconds(unsigned int seconds);
 
-    int getHours() const;
-    int getMinutes() const;
-    int getSeconds() const;
+    unsigned int getHours() const;
+    unsigned int getMinutes() const;
+    unsigned int getSeconds() const;
 
     std::string toString() const;
 

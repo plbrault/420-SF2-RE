@@ -5,11 +5,11 @@
 
 class Duration {
 private:
-    int _totalSeconds;
+    unsigned int _totalSeconds;
 public:
     Duration() : Duration(0) {}
-    Duration(int totalSeconds);
-    Duration(int hours, int minutes, int seconds);
+    Duration(unsigned int totalSeconds);
+    Duration(unsigned int hours, unsigned int minutes, unsigned int seconds);
 
     int getTotalSeconds() const;
     int getHours() const;
