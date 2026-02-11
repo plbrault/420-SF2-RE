@@ -27,6 +27,25 @@ public:
 
     void print(std::ostream& output) const;
     void read(std::istream& input);
+
+    bool operator==(const Duration& other) const;
+    bool operator!=(const Duration& other) const;
+    bool operator<(const Duration& other) const;
+    bool operator<=(const Duration& other) const;
+    bool operator>(const Duration& other) const;
+    bool operator>=(const Duration& other) const;
+
+    Duration& operator+=(const Duration& other);
+    Duration operator+(const Duration& other) const;
+    Duration& operator-=(const Duration& other);
+    Duration operator-(const Duration& other) const;
+
+    Duration& operator*=(double factor);
+    Duration operator*(double factor) const;
+    Duration& operator/=(double divisor);
+    Duration operator/(double divisor) const;
+    double operator/=(const Duration& divisor) const;
+    double operator/(const Duration& divisor) const;
 };
 
 std::ostream& operator<<(std::ostream& output, const Duration& duration);

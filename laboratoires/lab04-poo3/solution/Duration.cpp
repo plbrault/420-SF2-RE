@@ -1,5 +1,6 @@
 #include "Duration.h"
 #include <sstream>
+#include <cmath>
 
 Duration::Duration(unsigned int totalSeconds) {
     this->_totalSeconds = totalSeconds;
@@ -93,4 +94,80 @@ std::ostream& operator<<(std::ostream& output, const Duration& duration) {
 std::istream& operator>>(std::istream& input, Duration& duration) {
     duration.read(input);
     return input;
+}
+
+bool Duration::operator==(const Duration& other) const {
+    return this->_totalSeconds == other._totalSeconds;
+}
+
+bool Duration::operator!=(const Duration& other) const {
+    return this->_totalSeconds != other._totalSeconds;
+}
+
+bool Duration::operator<(const Duration& other) const {
+    return this->_totalSeconds < other._totalSeconds;
+}
+
+bool Duration::operator<=(const Duration& other) const {
+    return this->_totalSeconds <= other._totalSeconds;
+}
+
+bool Duration::operator>(const Duration& other) const {
+    return this->_totalSeconds > other._totalSeconds;
+}
+
+bool Duration::operator>=(const Duration& other) const {
+    return this->_totalSeconds >= other._totalSeconds;
+}
+
+Duration& Duration::operator+=(const Duration& other) {
+    return this->addSeconds(other._totalSeconds);
+}
+
+Duration Duration::operator+(const Duration& other) const {
+    Duration result(*this);
+    return result += other;
+}
+
+Duration& Duration::operator-=(const Duration& other) {
+    return this->subtractSeconds(other._totalSeconds);
+}
+
+Duration Duration::operator-(const Duration& other) const {
+    Duration result(*this);
+    return result -= other;
+}
+
+Duration& Duration::operator*=(double factor) {
+    this->_totalSeconds = std::round(this->_totalSeconds * factor);
+    return *this;
+}
+
+Duration Duration::operator*(double factor) const {
+    Duration result(*this);
+    return result *= factor;
+}
+
+Duration& Duration::operator/=(double divisor) {
+    if (divisor == 0) {
+        throw std::invalid_argument("Le diviseur ne peut pas être zéro.");
+    }
+    this->_totalSeconds = std::round(this->_totalSeconds / divisor);
+    return *this;
+}
+
+Duration Duration::operator/(double divisor) const {
+    Duration result(*this);
+    return result /= divisor;
+}
+
+double Duration::operator/=(const Duration& divisor) const {
+    if (divisor._totalSeconds == 0) {
+        throw std::invalid_argument("Le diviseur ne peut pas être zéro.");
+    }
+    return static_cast<double>(this->_totalSeconds) / divisor._totalSeconds;
+}
+
+double Duration::operator/(const Duration& divisor) const {
+    return *this /= divisor;
 }
