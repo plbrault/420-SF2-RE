@@ -1,13 +1,14 @@
 #include <iostream>
 #include "Time.h"
+#include "Duration.h"
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 int main() {
-    Time time(13, 25, 19);
+    Duration dur(10, 0, 0);
 
-    std::cout << "Entrer une heure (hh:mm:ss): ";
-    std::cin >> time;
+    dur.addHours(10).addMinutes(20).addSeconds(3730);
+    std::cout << dur.toString();
 
-    std::cout << "L'heure entrée est: " << time << std::endl;
+    return 0;
     // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }

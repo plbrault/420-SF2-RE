@@ -11,17 +11,19 @@ public:
     Duration(unsigned int totalSeconds);
     Duration(unsigned int hours, unsigned int minutes, unsigned int seconds);
 
-    int getTotalSeconds() const;
-    int getHours() const;
-    int getMinutes() const;
-    int getSeconds() const;
+    unsigned int getTotalSeconds() const;
+    unsigned int getHours() const;
+    unsigned int getMinutes() const;
+    unsigned int getSeconds() const;
 
-    Duration& addHours();
-    Duration& addMinutes();
-    Duration& addSeconds();
-    Duration& subtractHours();
-    Duration& subtractMinutes();
-    Duration& subtractSeconds();
+    Duration& addHours(unsigned int hours);
+    Duration& addMinutes(unsigned int minutes);
+    Duration& addSeconds(unsigned int seconds);
+    Duration& subtractHours(unsigned int hours);
+    Duration& subtractMinutes(unsigned int minutes);
+    Duration& subtractSeconds(unsigned int seconds);
+
+    std::string toString() const;
 
     void print(std::ostream& output) const;
 };

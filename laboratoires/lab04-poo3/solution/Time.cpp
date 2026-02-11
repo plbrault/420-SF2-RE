@@ -9,21 +9,21 @@ Time::Time(unsigned int hours, unsigned int minutes, unsigned int seconds) {
 }
 
 void Time::setHours(unsigned int hours) {
-    if (hours < 0 || hours > 23) {
+    if (hours > 23) {
         throw std::out_of_range("Les heures doivent être comprises entre 0 et 23.");
     }
     this->_hours = hours;
 }
 
 void Time::setMinutes(unsigned int minutes) {
-    if (minutes < 0 || minutes > 59) {
+    if (minutes > 59) {
         throw std::out_of_range("Les minutes doivent être comprises entre 0 et 59.");
     }
     this->_minutes = minutes;
 }
 
 void Time::setSeconds(unsigned int seconds) {
-    if (seconds < 0 || seconds > 59) {
+    if (seconds > 59) {
         throw std::out_of_range("Les minutes doivent être comprises entre 0 et 59.");
     }
     this->_seconds = seconds;
