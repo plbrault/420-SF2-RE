@@ -70,3 +70,27 @@ std::string Duration::toString() const {
     out << this->getSeconds();
     return out.str();
 }
+
+void Duration::print(std::ostream& output) const {
+    output << this->toString();
+}
+
+void Duration::read(std::istream &input) {
+    unsigned int hours, minutes, seconds;
+    char separator1, separator2;
+
+    input >> hours >> separator1 >> minutes >> separator2 >> seconds;
+
+    this->_totalSeconds = 0;
+    this->addHours(hours).addMinutes(minutes).addSeconds(seconds);
+}
+
+std::ostream& operator<<(std::ostream& output, const Duration& duration) {
+    duration.print(output);
+    return output;
+}
+
+std::istream& operator>>(std::istream& input, Duration& duration) {
+    duration.read(input);
+    return input;
+}

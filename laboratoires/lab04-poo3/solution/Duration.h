@@ -26,7 +26,10 @@ public:
     std::string toString() const;
 
     void print(std::ostream& output) const;
+    void read(std::istream& input);
 };
 
+std::ostream& operator<<(std::ostream& output, const Duration& duration);
+std::istream& operator>>(std::istream& input, Duration& duration);
 
 #endif //SOLUTION_DURATION_H
