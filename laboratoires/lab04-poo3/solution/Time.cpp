@@ -58,7 +58,7 @@ std::string Time::toString() const {
     return out.str();
 }
 
-void Time::print(std::ostream& output) {
+void Time::print(std::ostream& output) const {
     output << this->toString();
 }
 
@@ -74,7 +74,7 @@ void Time::read(std::istream& input) {
 }
 
 std::ostream& operator<<(std::ostream& output, const Time& time) {
-    output << time.toString();
+    time.print(output);
     return output;
 }
 

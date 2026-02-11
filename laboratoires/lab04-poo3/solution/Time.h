@@ -22,7 +22,7 @@ public:
 
     std::string toString() const;
 
-    void print(std::ostream& output);
+    void print(std::ostream& output) const;
     void read(std::istream& input);
 };
 

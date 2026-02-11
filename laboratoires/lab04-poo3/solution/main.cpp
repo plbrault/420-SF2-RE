@@ -5,8 +5,6 @@
 int main() {
     Time time(13, 25, 19);
 
-    std::cout << time.toString();
-
     std::cout << "Entrer une heure (hh:mm:ss): ";
     std::cin >> time;
 
