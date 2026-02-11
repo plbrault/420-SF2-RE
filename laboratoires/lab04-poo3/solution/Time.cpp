@@ -57,3 +57,28 @@ std::string Time::toString() const {
     out << this->_seconds;
     return out.str();
 }
+
+void Time::print(std::ostream& output) {
+    output << this->toString();
+}
+
+void Time::read(std::istream& input) {
+    int hours, minutes, seconds;
+    char separator1, separator2;
+
+    input >> hours >> separator1 >> minutes >> separator2 >> seconds;
+
+    this->setHours(hours);
+    this->setMinutes(minutes);
+    this->setSeconds(seconds);
+}
+
+std::ostream& operator<<(std::ostream& output, const Time& time) {
+    output << time.toString();
+    return output;
+}
+
+std::istream& operator>>(std::istream& input, Time& time) {
+    time.read(input);
+    return input;
+}

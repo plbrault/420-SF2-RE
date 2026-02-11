@@ -21,7 +21,12 @@ public:
     int getSeconds() const;
 
     std::string toString() const;
+
+    void print(std::ostream& output);
+    void read(std::istream& input);
 };
 
+std::ostream& operator<<(std::ostream& output, const Time& time);
+std::istream& operator>>(std::istream& input, Time& time);
 
 #endif //SOLUTION_TIME_H
