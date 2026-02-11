@@ -147,3 +147,9 @@ Time Time::operator-(const Duration& duration) const {
     result -= duration;
     return result;
 }
+
+Duration Time::operator-(const Time& other) const {
+    Duration thisAsDuration(this->_hours, this->_minutes, this->_seconds);
+    Duration otherAsDuration(other._hours, other._minutes, other._seconds);
+    return thisAsDuration - otherAsDuration;
+}

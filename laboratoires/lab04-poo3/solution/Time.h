@@ -37,6 +37,8 @@ public:
     Time operator+(const Duration& duration) const;
     Time& operator-=(const Duration& duration);
     Time operator-(const Duration& duration) const;
+
+    Duration operator-(const Time& other) const;
 };
 
 std::ostream& operator<<(std::ostream& output, const Time& time);
