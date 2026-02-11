@@ -82,3 +82,68 @@ std::istream& operator>>(std::istream& input, Time& time) {
     time.read(input);
     return input;
 }
+
+bool Time::operator==(const Time& other) const {
+    return this->_hours == other._hours &&
+           this->_minutes == other._minutes &&
+           this->_seconds == other._seconds;
+}
+
+bool Time::operator!=(const Time& other) const {
+    return !(*this == other);
+}
+
+bool Time::operator<(const Time& other) const {
+    if (this->_hours != other._hours) {
+        return this->_hours < other._hours;
+    }
+    if (this->_minutes != other._minutes) {
+        return this->_minutes < other._minutes;
+    }
+    return this->_seconds < other._seconds;
+}
+
+bool Time::operator<=(const Time& other) const {
+    return *this < other || *this == other;
+}
+
+bool Time::operator>(const Time& other) const {
+    return !(*this <= other);
+}
+
+bool Time::operator>=(const Time& other) const {
+    return !(*this < other);
+}
+
+Time& Time::operator+=(const Duration& duration) {
+    Duration timeAsDuration(this->_hours, this->_minutes, this->_seconds);
+    Duration sum = timeAsDuration + duration;
+    if (sum.getHours() >= 24) {
+        throw std::overflow_error("Heure dépassant la valeur maximale de 23:59:59.");
+    }
+    this->setHours(sum.getHours());
+    this->setMinutes(sum.getMinutes());
+    this->setSeconds(sum.getSeconds());
+    return *this;
+}
+
+Time Time::operator+(const Duration& duration) const {
+    Time result = *this;
+    result += duration;
+    return result;
+}
+
+Time& Time::operator-=(const Duration& duration) {
+    Duration timeAsDuration(this->_hours, this->_minutes, this->_seconds);
+    Duration difference = timeAsDuration - duration;
+    this->setHours(difference.getHours());
+    this->setMinutes(difference.getMinutes());
+    this->setSeconds(difference.getSeconds());
+    return *this;
+}
+
+Time Time::operator-(const Duration& duration) const {
+    Time result = *this;
+    result -= duration;
+    return result;
+}

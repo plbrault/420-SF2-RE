@@ -2,6 +2,7 @@
 #define SOLUTION_TIME_H
 
 #include <iostream>
+#include "Duration.h"
 
 class Time {
 private:
@@ -24,6 +25,18 @@ public:
 
     void print(std::ostream& output) const;
     void read(std::istream& input);
+
+    bool operator==(const Time& other) const;
+    bool operator!=(const Time& other) const;
+    bool operator<(const Time& other) const;
+    bool operator<=(const Time& other) const;
+    bool operator>(const Time& other) const;
+    bool operator>=(const Time& other) const;
+
+    Time& operator+=(const Duration& duration);
+    Time operator+(const Duration& duration) const;
+    Time& operator-=(const Duration& duration);
+    Time operator-(const Duration& duration) const;
 };
 
 std::ostream& operator<<(std::ostream& output, const Time& time);
