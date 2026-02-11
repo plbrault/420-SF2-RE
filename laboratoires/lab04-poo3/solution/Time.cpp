@@ -57,38 +57,3 @@ std::string Time::toString() const {
     out << this->_seconds;
     return out.str();
 }
-
-Time& Time::addHours(int hours) {
-    int newHours = this->_hours + hours;
-    if (newHours > 23) {
-        throw std::overflow_error("Dépassement de la valeur maximale pour les heures.");
-    }
-    this->_hours = newHours;
-    return *this;
-}
-
-Time& Time::addMinutes(int minutes) {
-    int extraHours = (this->_minutes + minutes) / 60;
-    int newMinutes = (this->_minutes + minutes) % 60;
-
-    if (newMinutes > 59) {
-        throw std::overflow_error("Dépassement de la valeur maximale pour les minutes.");
-    }
-    addHours(extraHours);
-    this->_minutes = newMinutes;
-
-    return *this;
-}
-
-Time& Time::addSeconds(int seconds) {
-    int extraMinutes = (this->_seconds + seconds) / 60;
-    int newSeconds = (this->_seconds + seconds) % 60;
-
-    if (newSeconds > 59) {
-        throw std::overflow_error("Dépassement de la valeur maximale pour les secondes.");
-    }
-    addMinutes(extraMinutes);
-    this->_seconds = newSeconds;
-    
-    return *this;
-}

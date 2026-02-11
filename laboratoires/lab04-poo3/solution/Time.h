@@ -20,13 +20,6 @@ public:
     int getMinutes() const;
     int getSeconds() const;
 
-    Time& addHours(int hours);
-    Time& addMinutes(int minutes);
-    Time& addSeconds(int seconds);
-    Time& subtractHours(int hours);
-    Time& subtractMinutes(int minutes);
-    Time& subtractSeconds(int seconds);
-
     std::string toString() const;
 };
 

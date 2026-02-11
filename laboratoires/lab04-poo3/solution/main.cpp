@@ -14,7 +14,7 @@ int main() {
     time.addMinutes(120);
     std::cout << "\n" << time.toString();
 
-    time.addHours(6);
+    time.subtractSeconds(120);
     std::cout << "\n" << time.toString();
     // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }
