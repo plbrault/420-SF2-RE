@@ -249,10 +249,47 @@ operator<<(
 
 Pour vérifier que l'opérateur fonctionne, modifiez la méthode `afficher` de la classe `Planetaire` pour utiliser `sortie << this._planetes[i]` dans votre boucle d'affichage au lieu de `this._planetes[i].afficher(sortie)`.
 
---
+### Étape 6
 
-Menu -> ajouter constructeur de copie + operator=
-Planete -> opérateurs ==, !=, <<
-SystemePlanetaire -> opérateurs =, +=, <<
+La classe `SystemePlanetaire` gère de la mémoire dynamique comme `Menu`. Il faut donc lui ajouter l'opérateur d'affectation (`=`) comme pour `Menu` ! Effectuez donc cet ajout, et assurez-vous qu'il fonctionne avant de poursuivre.
 
-fonction amie pour le print/read d'une des classes
+### Étape 7
+
+La classe `SystemePlanetaire` a toutes les apparences d'un **conteneur**: son rôle est principalement de contenir des `Planete` en nombre variable.
+
+Il arrive qu'un conteneur implémente l'opérateur `+=` pour fournir une syntaxe plus courte permettant d'ajouter des éléments. Par exemple dans notre cas, nous pourrions remplacer une partie du code actuel du `main` par:
+
+```cpp
+SystemePlanetaire systemeSolaire("Système solaire");
+
+systemeSolaire += Planete("Mercure", 2439000, 3.301e23, 5.79e7);
+systemeSolaire += Planete("Vénus", 6052000, 4.867e24, 1.082e8);
+systemeSolaire += Planete("Terre", 6371000, 5.972e24, 1.496e8);
+systemeSolaire += Planete("Mars", 3390000, 6.39e23, 2.279e8);
+systemeSolaire += Planete("Jupiter", 69911000, 1.898e27, 7.785e8);
+systemeSolaire += Planete("Saturne", 58232000, 5.683e26, 1.433e9);
+systemeSolaire += Planete("Uranus", 25362000, 8.681e25, 2.877e9);
+systemeSolaire += Planete("Neptune", 24622000, 1.024e26, 4.503e9);
+```
+
+L'opérateur `+=` deviendrait donc une alternative à la méthode `ajouterPlanete`.
+
+Pour que cela soit possible, il faut bien sûr surcharger cet opérateur. Ci-dessus, on peut voir que le paramètre à utiliser est de type `Planete`. De plus, puisque cet opérateur supporte le chaînage (comme `=`), il doit retourner `*this`. Voici donc la signature de cette surcharge:
+
+```cpp
+SystemePlanetaire& SystemePlanetaire::operator+=(const Planete &planete);
+```
+
+L'implémentation doit simplement appeler la méthode `ajouterPlanete`, puis retourner `*this`. Utilisez le code ci-dessus pour tester.
+
+### Étape 8
+
+Il reste à surcharger l'opérateur `<<` pour `SystemePlanetaire`. Inspirez-vous pour ce faire de ce qui a été fait plus haut pour `Planete`. Remplacez ensuite la ligne `systemeSolaire.afficher()` du `main` pour vérifier que la surcharge fonctionne.
+
+## Laboratoire 04-B
+
+À venir
+
+## Laboratoire 04-C
+
+À venir

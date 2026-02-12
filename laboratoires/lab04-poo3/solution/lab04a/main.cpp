@@ -33,7 +33,7 @@ int main() {
 
         switch (choix) {
             case 1:
-                systemeSolaire.afficher();
+                std::cout << systemeSolaire;
                 break;
             case 2:
                 std::cout << "Entrer le numéro de la planète: ";
