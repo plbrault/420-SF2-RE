@@ -22,12 +22,16 @@ public:
 
     std::string getNom() const;
     size_t getNombrePlanetes() const;
-    Planete* getPlanete(size_t indice) const;
-    Planete* getPlanete(std::string nom) const;
 
     void setNom(std::string nom);
 
     SystemePlanetaire& operator+=(const Planete& planete);
+
+    const Planete& operator[](size_t indice) const;
+    Planete& operator[](size_t indice);
+
+    const Planete& operator[](std::string nom) const;
+    Planete& operator[](std::string nom);
 };
 
 std::ostream& operator<<(std::ostream& sortie, const SystemePlanetaire& systeme);

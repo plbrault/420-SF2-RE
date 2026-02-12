@@ -286,6 +286,77 @@ L'implémentation doit simplement appeler la méthode `ajouterPlanete`, puis ret
 
 ### Étape 8
 
+Nous avons présentement deux versions de `getPlanete` qui retournent toutes les deux l'**adresse** de la planète demandée. **Cela n'est pas une bonne pratique**, puisqu'elle brise l'encapsulation: rien n'empêche l'utilisateur de la méthode `getPlanete` d'ensuite modifier directement la mémoire à l'adresse retournée, de même qu'accéder au reste du tableau. Nous avons surtout codé nos méthodes de cette façon afin de pouvoir retourner `nullptr` pour exprimer que la planète demandée n'existe pas. Il existe cependant d'autres façons de faire cela.
+
+Par ailleurs, ne serait-il pas intéressant de pouvoir utiliser l'opérateur `[]` pour accéder à une planète du système planétaire, plutôt que devoir appeler une méthode `getPlanete` ? Nous allons donc surcharger cet opérateur.
+
+Commencez par retirer les deux versions de la méthode `getPlanete` dans `SystemePlanetaire.h` et `SystemePlanetaire.cpp`. Votre `main` ne compilera plus, mais ne vous en préoccupez pas pour le moment.
+
+Ajoutons deux versions de l'opérateur `[]` pour remplacer les deux versions de la méthode `getPlanete`. Voici les implémentations à utiliser:
+
+```cpp
+Planete& SystemePlanetaire::operator[](size_t indice) {
+    if (indice >= this->_nombrePlanetes) {
+        throw std::out_of_range("Dépassement de la taille du tableau");
+    }
+    return this->_planetes[indice];
+}
+
+Planete& SystemePlanetaire::operator[](std::string nom) {
+    for (size_t i = 0; i < this->_nombrePlanetes; i++) {
+        if (this->_planetes[i].getNom() == nom) {
+            return this->_planetes[i];
+        }
+    }
+    throw std::invalid_argument("Planète non trouvée");
+}
+```
+
+Ces deux implémentations permettent respectivement d'utiliser l'opérateur `[]` avec un indice et avec un nom de planète:
+
+```cpp
+Planete mercure = systemePlanetaire[0];
+Planete saturne = systemePlanetaire["Saturne"];
+```
+
+Remarquez d'abord le type de retour: on retourne maintenant une **référence** vers la planète plutôt qu'un **pointeur**. Cela est plus sécuritaire, car une référence ne permet pas de manipuler la mémoire directement. Une référence ne peut cependant pas prendre la valeur `nullptr`. Nous avons donc besoin d'une autre façon d'exprimer que l'indice ou le nom reçu en paramètre n'existe pas dans ce système planétaire.
+
+C'est là qu'entre en jeu le concept d'**exception**. Une exception indique au programmeur qu'une erreur est survenue. Par défaut, elle fait planter le programme. On utilise le mot-clé `throw` pour lancer une exception. Il existe plusieurs types d'exceptions, définis dans la librairie `stdexcept` (elle-même incluse dans `iostream`). Voici quelques-uns des types d'exceptions disponibles:
+
+* `logic_error` est utilisé lors de la détection d'une erreur de logique
+* `invalid_argument` est utilisé lorsqu'un paramètre n'est pas valide
+* `length_error` est utilisé dans un contexte d'erreur de longueur
+* `out_of_range` est utilisé si une valeur est en dehors de la plage permise
+* `range_error` est utilisé pour tout autre type d'erreur lié à une plage de valeurs
+* `overflow_error` est utilisé si une variable a dépassé sa valeur maximale
+* `underflow_error` est utilisé si une variable a dépassé sa valeur minimale (en soustraction)
+* `runtime_error` est utilisé lorsqu'une erreur est survenue durant l'exécution du programme
+
+Les exceptions sont par ailleurs très utiles pour implémenter des validations dans les mutateurs (ce que nous n'avons pas fait dans le laboratoire 03).
+
+Dans le `main`, remplacez vos appels à `getPlanete` par l'utilisation de l'opérateur `[]`. **Attention: vous ne pourrez plus stocker le résultat dans un pointeur!** De plus, retirez pour l'instant vos conditions qui détectent que la planète demandée n'existe pas (avec `nullptr`).
+
+Testez que votre programme fonctionne toujours. Observez ce qui se passe si vous entrez un numéro ou un nom de planète invalide. Le programme plantera en affichant le message passé à l'exception. Cela n'est bien entendu pas idéal. Heureusement, il existe une manière d'intercepter les exceptions pour gérer les erreurs au lieu de faire planter le programme. Il faut pour cela utiliser un `try-catch`:
+
+```cpp
+std::cout << "Entrer le numéro de la planète: ";
+std::cin >> numeroPlanete;
+try {
+    planete = systemeSolaire[numeroPlanete - 1];
+    std::cout << planete << std::endl;
+} catch (const std::exception& e) {
+    std::cout << "Numéro de planète invalide. " << std::endl;
+}
+```
+
+Lorsqu'on utilise une méthode ou un opérateur susceptible de lancer une exception, on peut englober le code dans un `try`. Si une exception est lancée, la séquence d'instructions est interrompue, et le contenu du `catch` est exécuté.
+
+Adaptez le code de votre `main` en ajoutant des `try-catch` aux bons endroits. Testez bien votre programme avant de continuer.
+
+## Étape 9
+
+### Étape 10
+
 Il reste à surcharger l'opérateur `<<` pour `SystemePlanetaire`. Inspirez-vous de ce qui a été fait plus haut pour `Planete`, cette fois-ci en ajoutant le prototype de la fonction sous votre classe dans `SystemePlanetaire.h` et son implémentation dans `SystemePlanetaire.cpp`. Remplacez ensuite la ligne `systemeSolaire.afficher()` du `main` pour vérifier que la surcharge fonctionne.
 
 ## Laboratoire 04-B

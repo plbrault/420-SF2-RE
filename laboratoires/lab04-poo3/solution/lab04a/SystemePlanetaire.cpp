@@ -80,22 +80,6 @@ size_t SystemePlanetaire::getNombrePlanetes() const {
     return this->_nombrePlanetes;
 }
 
-Planete* SystemePlanetaire::getPlanete(size_t indice) const {
-    if (indice < this->_nombrePlanetes) {
-        return this->_planetes + indice;
-    }
-    return nullptr;
-}
-
-Planete* SystemePlanetaire::getPlanete(std::string nom) const {
-    for (size_t i = 0; i < this->_nombrePlanetes; i++) {
-        if (this->_planetes[i].getNom() == nom) {
-            return this->_planetes + i;
-        }
-    }
-    return nullptr;
-}
-
 void SystemePlanetaire::setNom(std::string nom) {
     this->_nom = nom;
 }
@@ -108,4 +92,36 @@ SystemePlanetaire& SystemePlanetaire::operator+=(const Planete &planete) {
 std::ostream& operator<<(std::ostream& sortie, const SystemePlanetaire& systeme) {
     systeme.afficher(sortie);
     return sortie;
+}
+
+const Planete& SystemePlanetaire::operator[](size_t indice) const {
+    if (indice >= this->_nombrePlanetes) {
+        throw std::out_of_range("Dépassement de la taille du tableau");
+    }
+    return this->_planetes[indice];
+}
+
+Planete& SystemePlanetaire::operator[](size_t indice) {
+    if (indice >= this->_nombrePlanetes) {
+        throw std::out_of_range("Dépassement de la taille du tableau");
+    }
+    return this->_planetes[indice];
+}
+
+const Planete& SystemePlanetaire::operator[](std::string nom) const {
+    for (size_t i = 0; i < this->_nombrePlanetes; i++) {
+        if (this->_planetes[i].getNom() == nom) {
+            return this->_planetes[i];
+        }
+    }
+    throw std::invalid_argument("Planète non trouvée");
+}
+
+Planete& SystemePlanetaire::operator[](std::string nom) {
+    for (size_t i = 0; i < this->_nombrePlanetes; i++) {
+        if (this->_planetes[i].getNom() == nom) {
+            return this->_planetes[i];
+        }
+    }
+    throw std::invalid_argument("Planète non trouvée");
 }
