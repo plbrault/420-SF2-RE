@@ -426,6 +426,8 @@ Il n'y a malheureusement pas de meilleure façon de faire. Eh non, pas de réuti
 
 Il reste à surcharger l'opérateur `<<` pour `SystemePlanetaire`. Inspirez-vous de ce qui a été fait plus haut pour `Planete`, cette fois-ci en ajoutant le prototype de la fonction sous votre classe dans `SystemePlanetaire.h` et son implémentation dans `SystemePlanetaire.cpp`. Remplacez ensuite la ligne `systemeSolaire.afficher()` du `main` pour vérifier que la surcharge fonctionne.
 
+**⚠️ Faites valider votre laboratoire 04-A par l'enseignant.**
+
 ## Laboratoire 04-B
 
 À venir
