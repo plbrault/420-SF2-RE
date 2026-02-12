@@ -1,3 +1,256 @@
+# Laboratoire 04
+
+## Objectif
+
+Mettre en pratique les notions suivantes:
+
+* Toutes les notions des trois chapitres précédents
+* Le passage et le retour d'objets par référence constante
+* Les surcharges d'opérateurs
+* Les fonctions amies
+
+## Parties
+
+Ce laboratoire comprend trois parties:
+
+* **Laboratoire 04-A**: Amélioration du programme du système solaire
+* **Laboratoire 04-B**: La gestion du temps avec les classes `Time`, `Duration`, `Date` et `DateTime`
+* **Laboratoire 04-C**: Le retour de la liste de températures
+
+## Laboratoire 04-A - Amélioration du programme du système solaire
+
+Pour cette partie, reprenez votre programme du Laboratoire 03-A avec les classes `Planete`, `SystemePlanetaire` et `Menu`. Pour rappel, voici le diagramme de classes de ce programme:
+
+```plantuml
+@startuml
+
+class Planete {
+    - std::string _nom
+    - double _rayon
+    - double _masse
+    - double _distanceEtoile
+    --
+    + Planete()
+    + Planete(std::string nom, double rayon, double masse, double distanceEtoile)
+    + std::string getNom() const
+    + double getRayon() const
+    + double getMasse() const
+    + double getDistanceEtoile() const
+    + void setNom(std::string nom)
+    + void setRayon(double rayon)
+    + void setMasse(double masse)
+    + void setDistanceEtoile(double distanceEtoile)
+    + double getGraviteSurface() const
+    + void afficher(std::ostream& sortie) const
+    + void afficher() const
+}
+
+class SystemePlanetaire {
+    - std::string _nom
+    - Planete* _planetes
+    - size_t _nombrePlanetes
+    - size_t _capacitePlanetes
+    --
+    + SystemePlanetaire()
+    + SystemePlanetaire(std::string nom)
+    + SystemePlanetaire(const SystemePlanetaire& autreSysteme)
+    + ~SystemePlanetaire()
+    + void ajouterPlanete(Planete planete)
+    + void afficher(std::ostream& sortie) const
+    + void afficher() const
+    + std::string getNom() const
+    + size_t getNombrePlanetes() const
+    + Planete* getPlanete(size_t indice) const
+    + Planete* getPlanete(std::string nom) const
+    + void setNom(std::string nom)
+}
+
+class Menu {
+    - std::string* _options
+    - size_t _nombreOptions
+    - bool _optionQuitter
+    --
+    + Menu()
+    + Menu(bool optionQuitter)
+    + ~Menu()
+    + void ajouterOption(std::string option)
+    + std::string obtenirChaine()
+    + int demanderChoix()
+    + bool estQuitter(int idOption)
+}
+
+SystemePlanetaire *-- Planete
+
+@enduml
+```
+
+### Étape 1
+
+Commençons par revoir la classe `Menu`. Celle-ci alloue de la mémoire via son pointeur `_options`. C'est pourquoi elle définit un destructeur.
+
+Au chapitre précédent, nous avons vu que le compilateur définit automatiquement un **constructeur de copie** pour toutes les classes. Celui-ci copie tous les attributs de l'objet source vers l'objet cible. Cela n'est habituellement pas un problème, sauf lorsque la classe contient des pointeurs, puisque le constructeur de copie par défaut copie uniquement les adresses des objets pointés, et non les objets eux-mêmes. Il faut donc redéfinir le constructeur de copie pour corriger ce comportement.
+
+Le constructeur de copie de la classe `Menu` est présentement absent. Implémentez-le. Testez-le bien dans votre `main` avant de poursuivre.
+
+### Étape 2
+
+Les classes ont un autre membre qui est défini automatiquement par le compilateur, et qui pose le même problème que le constructeur de copie lorsque la classe contient des pointeurs: il s'agit de l'**opérateur d'affectation** (`operator=`). Il faut donc également implémenter cet opérateur lorsqu'une classe contient des pointeurs.
+
+**En résumé, toute classe qui gère de la mémoire en allocation dynamique doit obligatoirement implémenter les trois membres suivants:**
+
+* **Le destructeur**
+* **Le constructeur de copie (copieur)**
+* **L'opérateur d'affectation (affectateur)**
+
+Il faut donc surcharger l'opérateur d'affectation dans la classe `Menu`. Voici l'implémentation à utiliser:
+
+```cpp
+Menu& Menu::operator=(const Menu &autreMenu) {
+    if (this != &autreMenu) {
+        delete[] this->_options;
+
+        this->_nombreOptions = autreMenu._nombreOptions;
+        this->_optionQuitter = autreMenu._optionQuitter;
+        this->_options = new std::string[this->_nombreOptions];
+        for (size_t i = 0; i < this->_nombreOptions; i++) {
+            this->_options[i] = autreMenu._options[i];
+        }
+    }
+    return *this;
+}
+```
+
+Remarquez que cette implémentation ressemble beaucoup à celle du constructeur de copie. Elle contient cependant quelques éléments supplémentaires:
+
+* Elle vérifie si on essaie d'assigner l'objet à lui-même (d'où la condition `this != &autreMenu`), auquel cas elle ne fait rien.
+* Elle désalloue le tableau d'options. Cela est nécessaire, car contrairement au constructeur de copie, l'affectation se fait dans un objet existant. Voilà d'ailleurs pourquoi il est important de détecter le cas où on essaie d'assigner l'objet à lui-même: la désallocation aurait pour effet de « briser » notre objet!
+* Elle retourne l'objet courant (`*this`). Cela est nécessaire pour permettre le chaînage d'opérateurs, comme ceci:
+
+```cpp
+Menu menu1, menu2, menu3;
+menu1 = menu2 = menu3;
+```
+
+Lorsqu'on exécute ce code, la ligne avec les `=` est en fait remplacée par ceci:
+
+```cpp
+menu1.operator=(menu2.operator=(menu3));
+```
+
+Puisque `menu1.operator=` s'attend à recevoir un `Menu` en paramètre, on peut déduire que `menu2.operator=(menu3)` doit lui-même retourner un `Menu` (d'où le type de retour `Menu&` de la surcharge d'opérateur). Le `Menu` à retourner dans ce cas-ci, c'est `menu2`, donc `*this` du point de vue de la méthode.
+
+Testez l'opérateur `=` dans votre `main` avant de poursuivre.
+
+### Étape 3
+
+Et si on ajoutait maintenant quelques surcharges d'opérateurs à la classe `Planete` ?
+
+Commençons par l'opérateur d'égalité (`==`). Quelle devrait être la signature de sa surcharge? Observons un appel de cet opérateur:
+
+```cpp
+if (planete1 == planete2) {
+    // ...
+}
+```
+
+Cela est équivalent à:
+
+```cpp
+if (planete1.operator==(planete2)) {
+    // ...
+}
+```
+
+Donc clairement, le paramètre est de type `Planete`. De plus, on peut supposer que cet opérateur ne doit modifier ni `planete1`, ni `planete2`. La signature ressemblera donc à:
+
+```cpp
+<type de retour> operator==(const Planete& autrePlanete) const;
+```
+
+Qu'en est-il du type de retour maintenant? 🤔 Eh bien, puisque l'opérateur `==` s'utilise dans une condition, il doit nécessairement retourner un booléen!
+
+```cpp
+bool operator==(const Planete& autrePlanete) const;
+```
+
+Vous avez maintenant tout ce qui faut pour implémenter cette surcharge d'opérateur. Celle-ci doit retourner `true` **si tous les attributs des deux planètes sont égaux**.
+
+Testez l'opérateur `==` dans le `main` avant de poursuivre.
+
+### Étape 4
+
+Ajoutons maintenant l'opérateur d'inégalité (`!=`). Puisque celui-ci est l'inverse de l'opérateur d'égalité (`==`) qu'on vient d'implémenter, on peut facilement faire de la..
+
+![](images/bob_leponge_reutilisation.jpg)
+
+Dans cette optique, je vous propose l'implémentation suivante:
+
+```cpp
+bool Planete::operator!=(const Planete &autrePlanete) const {
+    return !(*this == autrePlanete);
+}
+```
+
+Assurez-vous de comprendre ce code avant de poursuivre.
+
+### Étape 5
+
+Ne serait-il pas pratique de pouvoir afficher une planète en faisant `std::cout << planete` ? Mais quelle serait la signature de cette surcharge? 🤔
+
+```cpp
+std::cout << planete;
+
+// devient
+std::cout.operator<<(planete);
+```
+
+Hmmm... on a comme un problème là. `std::cout` étant du type `std::ostream`, on dirait bien qu'`operator<<` est une méthode de `std::ostream` et non de `Planete` !
+
+Alors voici le formulaire de contact de l'organisme de standardisation du langage C++ pour leur demander d'ajouter le support de votre classe `Planete` à `std::ostream`:
+
+https://isocpp.org/about/contact
+
+Mais non, c'est une blague!
+
+On va plutôt utiliser un tour de passe-passe qui consiste à définir l'opérateur comme une fonction qui prend deux paramètres (un `std::ostream` et un `Planete`):
+
+```cpp
+std::ostream& operator<<(std::ostream &sortie, const Planete &planete);
+```
+
+**Il s'agit bien d'une fonction, et non d'une méthode de la classe `Planete`.** Vous ne devez donc PAS ajouter son prototype entre les accolades de votre `class`, mais plutôt APRÈS la définition de la classe, dans votre fichier `Planete.h`.
+
+Voici l'implémentation à ajouter dans `Planete.cpp`:
+
+```cpp
+std::ostream& operator<<(std::ostream &sortie, const Planete &planete) {
+    planete.afficher(sortie);
+    return sortie;
+}
+```
+
+Ici, par chance, on a déjà une méthode `afficher`, alors il suffit de l'appeler. Remarquez que l'opérateur retourne le `std::ostream`. C'est ce qui rend possible le chaînage de cet opérateur, comme ceci:
+
+```cpp
+std::cout << "Ma planète: " << planete << std::endl;
+
+// devient
+operator<<(
+    operator<<(
+        operator<<(
+            std::cout,
+            std::endl
+        ),
+        planete
+    ),
+    "Ma planète: "
+)
+```
+
+Pour vérifier que l'opérateur fonctionne, modifiez la méthode `afficher` de la classe `Planetaire` pour utiliser `sortie << this._planetes[i]` dans votre boucle d'affichage au lieu de `this._planetes[i].afficher(sortie)`.
+
+--
+
 Menu -> ajouter constructeur de copie + operator=
 Planete -> opérateurs ==, !=, <<
 SystemePlanetaire -> opérateurs =, +=, <<
