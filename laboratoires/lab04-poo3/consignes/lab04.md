@@ -353,7 +353,74 @@ Lorsqu'on utilise une méthode ou un opérateur susceptible de lancer une except
 
 Adaptez le code de votre `main` en ajoutant des `try-catch` aux bons endroits. Testez bien votre programme avant de continuer.
 
-## Étape 9
+### Étape 9
+
+Observez plus attentivement les signatures des surcharges d'opérateur `[]` que nous venons d'implémenter:
+
+```cpp
+Planete& operator[](size_t indice);
+Planete& operator[](std::string nom);
+```
+
+Ce sont des **méthodes non constantes**, et ils retournent les `Planete` par **référence non constante** également. Cela signifie que des opérations de ce genre sont maintenant permises:
+
+```cpp
+/* On peut modifier la planète puisqu'elle est retournée par référence non constante */
+systemeSolaire[0].setNom("Mercury");
+
+/* On peut même réaffecter l'objet! Cela appelle l'opérateur = de la classe Planete. */
+systemePlanetaire[0] = Planete("Bye bye Mercure mwahahahaha!", 0, 0, 0);
+
+/* Sans doute un coup de Pluton, encore amère d'avoir été exclue du club des planètes en 2006. */
+```
+
+Cela peut être tout à fait acceptable et pratique. Cependant, le fait que l'opérateur `[]` soit non constant peut parfois poser problème. Essayez par exemple d'ajouter la méthode suivante à la classe `SystemePlanetaire`:
+
+Coup de théâtre! Ça ne compile plus! C'est parce qu'**une méthode constante n'a pas le droit d'appeler une méthode non-constante**, autrement le compilateur ne peut pas garantir que l'objet n'est pas modifié.
+
+La solution est simple, mais un peu « plate »: il faut dupliquer nos surcharges d'opérateurs pour offrir une version constante contenant exactement le même code:
+
+```cpp
+// Version non-constante de l'opérateur [] avec un indice
+Planete& SystemePlanetaire::operator[](size_t indice) {
+    if (indice >= this->_nombrePlanetes) {
+        throw std::out_of_range("Dépassement de la taille du tableau");
+    }
+    return this->_planetes[indice];
+}
+
+// Version constante de l'opérateur [] avec un indice
+const Planete& SystemePlanetaire::operator[](size_t indice) const {
+    if (indice >= this->_nombrePlanetes) {
+        throw std::out_of_range("Dépassement de la taille du tableau");
+    }
+    return this->_planetes[indice];
+}
+
+// Version non-constante de l'opérateur [] avec un nom de planète
+Planete& SystemePlanetaire::operator[](std::string nom) {
+    for (size_t i = 0; i < this->_nombrePlanetes; i++) {
+        if (this->_planetes[i].getNom() == nom) {
+            return this->_planetes[i];
+        }
+    }
+    throw std::invalid_argument("Planète non trouvée");
+}
+
+// Version constante de l'opérateur [] avec un nom de planète
+const Planete& SystemePlanetaire::operator[](std::string nom) const {
+    for (size_t i = 0; i < this->_nombrePlanetes; i++) {
+        if (this->_planetes[i].getNom() == nom) {
+            return this->_planetes[i];
+        }
+    }
+    throw std::invalid_argument("Planète non trouvée");
+}
+```
+
+Il n'y a malheureusement pas de meilleure façon de faire. Eh non, pas de réutilisation possible ici!
+
+![](images/crying-spongebob.gif)
 
 ### Étape 10
 
