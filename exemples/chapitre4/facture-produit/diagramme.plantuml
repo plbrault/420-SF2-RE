@@ -3,7 +3,7 @@ class Produit {
     - std::string _description
     - double _prix
     + Produit()
-    + Produit(std::string description, float prix)
+    + Produit(std::string description, double prix)
     + std::string getDescription() const
     + void setDescription(std::string description)
     + double getPrix() const
@@ -30,7 +30,7 @@ class Facture {
     + ~Facture()
     + size_t getNombreLignes() const
     + void ajouterLigne(Produit produit, int quantite)
-    + LigneFacture getLigne(int index) const
+    + LigneFacture getLigne(size_t index) const
     + double getTotal() const
 }
 
