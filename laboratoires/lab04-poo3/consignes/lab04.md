@@ -376,6 +376,12 @@ systemePlanetaire[0] = Planete("Bye bye Mercure mwahahahaha!", 0, 0, 0);
 
 Cela peut être tout à fait acceptable et pratique. Cependant, le fait que l'opérateur `[]` soit non constant peut parfois poser problème. Essayez par exemple d'ajouter la méthode suivante à la classe `SystemePlanetaire`:
 
+```cpp
+bool SystemePlanetaire::testConstant() const {
+    return (*this)[0].getNom() == "Mercure";
+}
+```
+
 Coup de théâtre! Ça ne compile plus! C'est parce qu'**une méthode constante n'a pas le droit d'appeler une méthode non-constante**, autrement le compilateur ne peut pas garantir que l'objet n'est pas modifié.
 
 La solution est simple, mais un peu « plate »: il faut dupliquer nos surcharges d'opérateurs pour offrir une version constante contenant exactement le même code:
