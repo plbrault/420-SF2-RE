@@ -564,6 +564,24 @@ Les classes de ce diagramme représentent des concepts en lien avec le temps.
 * `Duration` représente une durée. La différence entre une durée et une heure est qu'une durée n'a pas de valeur maximale (en fait si, mais nous y reviendrons).
 * `DateTime` représente une combinaison d'une date et d'une heure, elle permet donc de définir un moment exact dans le temps.
 
+### Étape 1
+
+Commencez par définir la classe `Date` avec ses attributs privés en vous basant sur le diagramme de classes. Définissez ensuite le **constructeur avec paramètres**.
+
+Pour ce qui est du **constructeur sans paramètre**, ajoutez simplement cette définition dans votre fichier `Date.h`:
+
+```cpp
+Date(): Date(0, 1, 1) {}
+```
+
+Vous avez maintenant un **constructeur sans paramètre** qui appelle le **constructeur avec paramètres**, soit le contraire de ce que nous faisions jusqu'à maintenant. Comme vous pouvez voir, il initialise la date au 1er janvier de l'an 0. Puisqu'il n'y a rien à faire dans le corps du constructeur, on peut mettre une paire d'accolades (`{}`) pour faire l'implémentation vide directement dans le fichier `.h`. Il n'y a donc rien à faire dans le fichier `.cpp` pour ce constructeur.
+
+Utiliser le **constructeur avec paramètres** pour implémenter le **constructeur sans paramètre**, c'est bien sûr un excellent exemple de...
+
+![](./images/bob_leponge_reutilisation.jpg)
+
+> **À ce stade-ci, vous devriez avoir pris l'habitude de tester les membres de vos classes au fur et à mesure que vous les implémentez.** À partir de maintenant, il n'y aura plus de rappels de tester vos méthodes à chaque étape.
+
 ## Laboratoire 04-C
 
 À venir
