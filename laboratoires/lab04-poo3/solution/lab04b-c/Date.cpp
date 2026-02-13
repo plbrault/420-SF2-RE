@@ -45,6 +45,12 @@ void Date::setValue(unsigned int year, unsigned int month, unsigned int day) {
 
 std::string Date::toString() const {
     std::stringstream out;
+    if (this->_year < 1000) {
+        out << 0;
+    }
+    if (this->_year < 100) {
+        out << 0;
+    }
     out << this->_year << "-";
     if (this->_month < 10) {
         out << 0;

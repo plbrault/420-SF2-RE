@@ -608,7 +608,11 @@ Implémentez maintenant les trois accesseurs:
 * `getMonth`
 * `getDay`
 
+### Étape 4
 
+Vous pouvez maintenant implémenter la méthode `toString`, qui retourne la date sous forme de chaîne de caractères au [format ISO](https://fr.wikipedia.org/wiki/ISO_8601), soit `AAAA-MM-JJ`. Par exemple, le **3 février 2026** s'écrit `2026-02-03`. Attention à bien ajouter des 0 devant les mois et jours inférieurs à 10, de même que les années inférieures à 1000.
+
+> **Remarque importante:** bien que cette méthode retourne un `std::string`, donc un objet, il ne faut absolument PAS le retourner par référence. C'est parce que cet objet **est créé localement par la méthode**, et ce en allocation statique. Il est donc automatiquement détruit par le compilateur lorsque l'exécution de la méthode se termine. Ainsi, si on le retournait par référence, on aurait une référence à un objet qui n'existe plus! On peut donc se donner la règle suivante: **on retourne un objet par référence, sauf lorsqu'il s'agit d'un nouvel objet alloué statiquement dans la fonction**.
 
 ## Laboratoire 04-C
 
