@@ -208,7 +208,7 @@ Hmmm... on a comme un problème là. `std::cout` étant du type `std::ostream`, 
 
 Alors voici le formulaire de contact de l'organisme de standardisation du langage C++ pour leur demander d'ajouter le support de votre classe `Planete` à `std::ostream`:
 
-https://isocpp.org/about/contact
+[https://isocpp.org/about/contact](https://youtu.be/Aq5WXmQQooo?si=rW1BJDpzpqEYamHf)
 
 Mais non, c'est une blague!
 
