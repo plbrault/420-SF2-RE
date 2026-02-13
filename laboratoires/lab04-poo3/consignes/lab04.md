@@ -610,9 +610,50 @@ Implémentez maintenant les trois accesseurs:
 
 ### Étape 4
 
-Vous pouvez maintenant implémenter la méthode `toString`, qui retourne la date sous forme de chaîne de caractères au [format ISO](https://fr.wikipedia.org/wiki/ISO_8601), soit `AAAA-MM-JJ`. Par exemple, le **3 février 2026** s'écrit `2026-02-03`. Attention à bien ajouter des 0 devant les mois et jours inférieurs à 10, de même que les années inférieures à 1000.
+*Le temps* est maintenant venu d'implémenter la méthode `toString`, qui retourne la date sous forme de chaîne de caractères au [format ISO](https://fr.wikipedia.org/wiki/ISO_8601), soit `AAAA-MM-JJ`. Par exemple, le **3 février 2026** s'écrit `2026-02-03`. Attention à bien ajouter des 0 devant les mois et jours inférieurs à 10, de même que les années inférieures à 1000.
 
 > **Remarque importante:** bien que cette méthode retourne un `std::string`, donc un objet, il ne faut absolument PAS le retourner par référence. C'est parce que cet objet **est créé localement par la méthode**, et ce en allocation statique. Il est donc automatiquement détruit par le compilateur lorsque l'exécution de la méthode se termine. Ainsi, si on le retournait par référence, on aurait une référence à un objet qui n'existe plus! On peut donc se donner la règle suivante: **on retourne un objet par référence, sauf lorsqu'il s'agit d'un nouvel objet alloué statiquement dans la fonction**.
+
+### Étape 5
+
+Implémentez maintenant la méthode `print`, qui est équivalente à la méthode `afficher` des laboratoires précédents.
+
+### Étape 6
+
+Implémentez maintenant la méthode `read`. Celle-ci prend en paramètre un `std::istream` (tel que `std::cin`) et permet donc par exemple de lire une date saisie au clavier, toujours au format `AAAA-MM-JJ`.
+
+Pensez à comment vous feriez pour lire une date dans ce format avec `std::cin`. Vous découperiez sans doute le problème en plus petites étapes comme celles-ci:
+
+1. Lire l'année dans un `int`
+2. Lire le séparateur `-` dans un `char`
+3. Lire le mois dans un `int`
+4. Lire le séparateur `-` dans un `char`
+5. Lire le jour dans un `int`
+
+Alors vous devez faire la même chose, mais avec le `std::istream` reçu en paramètre.
+
+### Étape 7
+
+En vous inspirant de ce que vous avez fait au Laboratoire 04-A, surchargez maintenant les opérateurs `<<` et `>>`, qui doivent appeler respectivement vos méthodes `print` et  `read`.
+
+### Étape 8
+
+Implémentez les 6 opérateurs de comparaison:
+
+* `==`
+* `!=`
+* `<`
+* `<=`
+* `>`
+* `>=`
+
+Prenez *le temps* de penser aux racourcis que vous pourriez prendre pour implémenter certains de ces opérateurs en faisant de la...
+
+![](./images/bob_leponge_reutilisation.jpg)
+
+de vos autres opérateurs.
+
+**⚠️ Faites valider votre classe `Date` par l'enseignant avant de continuer.**
 
 ## Laboratoire 04-C
 
