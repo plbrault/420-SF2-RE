@@ -557,11 +557,12 @@ Time ..> Duration
 @enduml
 ```
 
-Les classes de ce diagramme permettent de gérer des unités de temps.
+Les classes de ce diagramme représentent des concepts en lien avec le temps.
 
 * `Date` représente une date, et est donc composée d'une année, un mois et un jour. Les années négatives ne sont pas supportées, et ce pour se simplifier la vie dans un laboratoire ultérieur (eh oui, *spoiler* !).
 * `Time` représente une heure entre 00:00 et 23:59.
 * `Duration` représente une durée. La différence entre une durée et une heure est qu'une durée n'a pas de valeur maximale (en fait si, mais nous y reviendrons).
+* `DateTime` représente une combinaison d'une date et d'une heure, elle permet donc de définir un moment exact dans le temps.
 
 ## Laboratoire 04-C
 
