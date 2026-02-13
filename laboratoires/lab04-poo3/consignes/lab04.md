@@ -566,7 +566,27 @@ Les classes de ce diagramme représentent des concepts en lien avec le temps.
 
 ### Étape 1
 
-Commencez par définir la classe `Date` avec ses attributs privés en vous basant sur le diagramme de classes. Définissez ensuite le **constructeur avec paramètres**.
+Commencez par définir la classe `Date` avec ses attributs privés en vous basant sur le diagramme de classes. N'ajoutez pas tout de suite les constructeurs.
+
+Vous pouvez voir dans le diagramme qu'il n'y a pas de mutateurs (*setters*) individuels pour les attributs `_year`, `_month` et `_date`. C'est parce qu'implémenter des validations dans de tels mutateurs serait complexe, puisqu'il est impossible de savoir si un jour est valide avant de connaître le mois (puisque le nombre de jours n'est pas le même dans chaque mois) ou même l'année (à cause des années bissextiles). En d'autres mots, il faut connaître la date au complet pour être en mesure de la valider correctement. Nous allons donc faire un seul mutateur combiné. Voici sa signature:
+
+```cpp
+void setValue(unsigned int year, unsigned int month, unsigned int day);
+```
+
+Ce mutateur doit d'abord valider que:
+
+* le mois a une valeur valide
+* le jour a une valeur valide en fonction du mois
+* si la date est un 29 février, l'année est divisible par 4 **mais PAS** par 100, ou l'année est divisible par 400
+
+Si au moins une de ces conditions n'est pas respectée, il faut lancer une exception `std::out_of_range`, **et il ne faut modifier aucun attribut**.
+
+> **À ce stade-ci, vous devriez avoir pris l'habitude de tester les membres de vos classes au fur et à mesure que vous les implémentez.** À partir de maintenant, il n'y aura plus de rappels de tester vos méthodes à chaque étape.
+
+### Étape 2
+
+Définissez maintenant le **constructeur avec paramètres**, qui appelle `setValue`.
 
 Pour ce qui est du **constructeur sans paramètre**, ajoutez simplement cette définition dans votre fichier `Date.h`:
 
@@ -580,7 +600,15 @@ Utiliser le **constructeur avec paramètres** pour implémenter le **constructeu
 
 ![](./images/bob_leponge_reutilisation.jpg)
 
-> **À ce stade-ci, vous devriez avoir pris l'habitude de tester les membres de vos classes au fur et à mesure que vous les implémentez.** À partir de maintenant, il n'y aura plus de rappels de tester vos méthodes à chaque étape.
+### Étape 3
+
+Implémentez maintenant les trois accesseurs:
+
+* `getYear`
+* `getMonth`
+* `getDay`
+
+
 
 ## Laboratoire 04-C
 
