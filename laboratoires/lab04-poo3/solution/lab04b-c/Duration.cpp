@@ -2,7 +2,7 @@
 #include <sstream>
 #include <cmath>
 
-Duration::Duration(unsigned int totalSeconds) {
+Duration::Duration(unsigned long int totalSeconds) {
     this->_totalSeconds = totalSeconds;
 }
 
@@ -10,7 +10,7 @@ Duration::Duration(unsigned int hours, unsigned int minutes, unsigned int second
     this->_totalSeconds = hours * 3600 + minutes * 60 + seconds;
 }
 
-unsigned int Duration::getTotalSeconds() const {
+unsigned long int Duration::getTotalSeconds() const {
     return this->_totalSeconds;
 }
 
@@ -34,7 +34,7 @@ Duration& Duration::addMinutes(unsigned int minutes) {
     return this->addSeconds(minutes * 60);
 }
 
-Duration& Duration::addSeconds(unsigned int seconds) {
+Duration& Duration::addSeconds(unsigned long int seconds) {
     this->_totalSeconds += seconds;
     return *this;
 }
@@ -47,7 +47,7 @@ Duration& Duration::subtractMinutes(unsigned int minutes) {
     return this->subtractSeconds(minutes * 60);
 }
 
-Duration& Duration::subtractSeconds(unsigned int seconds) {
+Duration& Duration::subtractSeconds(unsigned long int seconds) {
     if (seconds > this->_totalSeconds) {
         throw std::underflow_error("Une durée ne peut être négative.");
     }

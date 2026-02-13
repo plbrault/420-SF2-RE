@@ -436,7 +436,132 @@ Il reste à surcharger l'opérateur `<<` pour `SystemePlanetaire`. Inspirez-vous
 
 ## Laboratoire 04-B
 
-À venir
+Prenez *le temps* de regarder le diagramme de classes ci-dessous:
+
+```plantuml
+@startuml
+
+class Date {
+    - unsigned int _year
+    - unsigned int _month
+    - unsigned int _day
+    --
+    + Date()
+    + Date(unsigned int year, unsigned int month, unsigned int day)
+    + unsigned int getYear() const
+    + unsigned int getMonth() const
+    + unsigned int getDay() const
+    + void setValue(unsigned int year, unsigned int month, unsigned int day)
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const Date& other) const
+    + bool operator!=(const Date& other) const
+    + bool operator<(const Date& other) const
+    + bool operator<=(const Date& other) const
+    + bool operator>(const Date& other) const
+    + bool operator>=(const Date& other) const
+}
+
+class Time {
+    - unsigned int _hours
+    - unsigned int _minutes
+    - unsigned int _seconds
+    --
+    + Time()
+    + Time(unsigned int hours, unsigned int minutes, unsigned int seconds)
+    + void setHours(unsigned int hours)
+    + void setMinutes(unsigned int minutes)
+    + void setSeconds(unsigned int seconds)
+    + unsigned int getHours() const
+    + unsigned int getMinutes() const
+    + unsigned int getSeconds() const
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const Time& other) const
+    + bool operator!=(const Time& other) const
+    + bool operator<(const Time& other) const
+    + bool operator<=(const Time& other) const
+    + bool operator>(const Time& other) const
+    + bool operator>=(const Time& other) const
+    + Time& operator+=(const Duration& duration)
+    + Time operator+(const Duration& duration) const
+    + Time& operator-=(const Duration& duration)
+    + Time operator-(const Duration& duration) const
+    + Duration operator-(const Time& other) const
+}
+
+class Duration {
+    - unsigned long int _totalSeconds
+    --
+    + Duration()
+    + Duration(unsigned int totalSeconds)
+    + Duration(unsigned int hours, unsigned int minutes, unsigned int seconds)
+    + unsigned int getTotalSeconds() const
+    + unsigned int getHours() const
+    + unsigned int getMinutes() const
+    + unsigned int getSeconds() const
+    + Duration& addHours(unsigned int hours)
+    + Duration& addMinutes(unsigned int minutes)
+    + Duration& addSeconds(unsigned int seconds)
+    + Duration& subtractHours(unsigned int hours)
+    + Duration& subtractMinutes(unsigned int minutes)
+    + Duration& subtractSeconds(unsigned int seconds)
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const Duration& other) const
+    + bool operator!=(const Duration& other) const
+    + bool operator<(const Duration& other) const
+    + bool operator<=(const Duration& other) const
+    + bool operator>(const Duration& other) const
+    + bool operator>=(const Duration& other) const
+    + Duration& operator+=(const Duration& other)
+    + Duration operator+(const Duration& other) const
+    + Duration& operator-=(const Duration& other)
+    + Duration operator-(const Duration& other) const
+    + Duration& operator*=(double factor)
+    + Duration operator*(double factor) const
+    + Duration& operator/=(double divisor)
+    + Duration operator/(double divisor) const
+    + double operator/=(const Duration& divisor) const
+    + double operator/(const Duration& divisor) const
+}
+
+class DateTime {
+    - Date _date
+    - Time _time
+    --
+    + DateTime()
+    + DateTime(const Date& date, const Time& time)
+    + const Date& getDate() const
+    + const Time& getTime() const
+    + void setDate(const Date& date)
+    + void setTime(const Time& time)
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const DateTime& other) const
+    + bool operator!=(const DateTime& other) const
+    + bool operator<(const DateTime& other) const
+    + bool operator<=(const DateTime& other) const
+    + bool operator>(const DateTime& other) const
+    + bool operator>=(const DateTime& other) const
+}
+
+DateTime *-- Date
+DateTime *-- Time
+Time ..> Duration
+
+@enduml
+```
+
+Les classes de ce diagramme permettent de gérer des unités de temps.
+
+* `Date` représente une date, et est donc composée d'une année, un mois et un jour. Les années négatives ne sont pas supportées, et ce pour se simplifier la vie dans un laboratoire ultérieur (eh oui, *spoiler* !).
+* `Time` représente une heure entre 00:00 et 23:59.
+* `Duration` représente une durée. La différence entre une durée et une heure est qu'une durée n'a pas de valeur maximale (en fait si, mais nous y reviendrons).
 
 ## Laboratoire 04-C
 
