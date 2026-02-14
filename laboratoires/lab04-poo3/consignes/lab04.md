@@ -559,8 +559,8 @@ Time ..> Duration
 
 Les classes de ce diagramme représentent des concepts en lien avec le temps.
 
-* `Date` représente une date, et est donc composée d'une année, un mois et un jour. Les années négatives ne sont pas supportées, et ce pour se simplifier la vie dans un laboratoire ultérieur (eh oui, *spoiler* !).
-* `Time` représente une heure entre 00:00 et 23:59.
+* `Date` représente une date, et est donc composée d'une année, un mois et un jour. Les années négatives ne sont pas supportées, et ce pour se simplifier la vie lors d'un laboratoire ultérieur (eh oui, *spoiler* !).
+* `Time` représente une heure entre `00:00:00` et `23:59:59`.
 * `Duration` représente une durée. La différence entre une durée et une heure est qu'une durée n'a pas de valeur maximale (en fait si, mais nous y reviendrons).
 * `DateTime` représente une combinaison d'une date et d'une heure, elle permet donc de définir un moment exact dans le temps.
 
@@ -654,6 +654,62 @@ Prenez *le temps* de penser aux racourcis que vous pourriez prendre pour implém
 de vos autres opérateurs.
 
 **⚠️ Faites valider votre classe `Date` par l'enseignant avant de continuer.**
+
+### Étape 9
+
+Attaquons-nous maintenant à la classe `Time`.
+
+```plantuml
+class Time {
+    - unsigned int _hours
+    - unsigned int _minutes
+    - unsigned int _seconds
+    --
+    + Time()
+    + Time(unsigned int hours, unsigned int minutes, unsigned int seconds)
+    + void setHours(unsigned int hours)
+    + void setMinutes(unsigned int minutes)
+    + void setSeconds(unsigned int seconds)
+    + unsigned int getHours() const
+    + unsigned int getMinutes() const
+    + unsigned int getSeconds() const
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const Time& other) const
+    + bool operator!=(const Time& other) const
+    + bool operator<(const Time& other) const
+    + bool operator<=(const Time& other) const
+    + bool operator>(const Time& other) const
+    + bool operator>=(const Time& other) const
+    + Time& operator+=(const Duration& duration)
+    + Time operator+(const Duration& duration) const
+    + Time& operator-=(const Duration& duration)
+    + Time operator-(const Duration& duration) const
+    + Duration operator-(const Time& other) const
+}
+```
+
+Définissez la classe et implémentez ses membres suivants dans un ordre qui vous paraît logique:
+
+* Les deux constructeurs
+* `setHours`
+* `setMinutes`
+* `setSeconds`
+* `getHours`
+* `getMinutes`
+* `getSeconds`
+* `toString`
+* `print`
+* `read`
+* L'opérateur `<<`
+* L'opérateur `>>`
+
+N'implémentez pas tout de suite les autres surcharges d'opérateurs, nous y reviendrons *plus tard*.
+
+Une heure est comprise entre `00:00:00` et `23:59:59`. Un objet `Time` doit valider que les valeurs qu'on tente de lui donner pour les heures, minutes et secondes sont valides. Autrement, il doit lancer une exception `std::out_of_range`.
+
+Comme pour `Date`, un objet `Time` doit s'afficher au format ISO, soit `HH:MM:SS`. N'oubliez pas d'ajouter des zéros lorsque nécessaire!
 
 ## Laboratoire 04-C
 
