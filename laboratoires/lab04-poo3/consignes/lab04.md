@@ -704,6 +704,12 @@ Définissez la classe et implémentez ses membres suivants dans un ordre qui vou
 * `read`
 * L'opérateur `<<`
 * L'opérateur `>>`
+* L'opérateur `==`
+* L'opérateur `!=`
+* L'opérateur `<`
+* L'opérateur `<=`
+* L'opérateur `>`
+* L'opérateur `>=`
 
 N'implémentez pas tout de suite les autres surcharges d'opérateurs, nous y reviendrons *plus tard*.
 
@@ -774,6 +780,14 @@ Définissez la classe et implémentez ses membres suivants dans un ordre qui vou
 * `toString`
 * `print`
 * `read`
+* L'opérateur `<<`
+* L'opérateur `>>`
+* L'opérateur `==`
+* L'opérateur `!=`
+* L'opérateur `<`
+* L'opérateur `<=`
+* L'opérateur `>`
+* L'opérateur `>=`
 
 La distinction entre `getTotalSeconds` et `getSeconds` est que `getTotalSeconds` retourne la valeur de `_totalSeconds` directement, tandis que `getSeconds` retourne le nombre de secondes restant (entre 0 et 59) une fois qu'on a décomposé la durée en nombre d'heures et de minutes.
 
