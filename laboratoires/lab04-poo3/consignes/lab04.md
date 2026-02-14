@@ -758,6 +758,37 @@ Contairement à la classe `Time` qui possède des attributs distincts pour les h
 
 > Pourquoi utiliser le type `unsigned long int` pour l'attribut `_totalSeconds`? Un `unsigned int` en C++ est le plus souvent représenté sur 32 bits (quoique cela dépend ultimement du compilateur et du système). Sa valeur maximale est donc de $2^{32} - 1$, soit environ 4,3 milliards. Cela correspondrait à une durée maximale d'environ 136 ans dans le cas qui nous intéresse. Dépendamment de l'application à développer, une telle durée maximale pourrait être largement insuffisante (imaginez qu'on essaie de représenter l'âge de l'univers, ou ne serait-ce que l'âge de la ville de Sherbrooke, fondée en 1802). En comparaison, un `unsigned long int` est le plus souvent représenté sur 64 bits, ce qui nous donne une valeur maximale de $2^{64} - 1$, soit environ $1,8 \times 10^{19}$. Appliquée à un nombre de secondes, cette valeur correspond à environ 585 milliards d'années, soit 42 fois l'âge de l'univers, ce qui devrait être largement suffisant pour la plupart des applications. Tout ça pour un maigre 4 octets de plus!
 
+Définissez la classe et implémentez ses membres suivants dans un ordre qui vous paraît logique:
+
+* Les trois constructeurs
+* `getTotalSeconds`
+* `getHours`
+* `getMinutes`
+* `getSeconds`
+* `addHours`
+* `addMinutes`
+* `addSeconds`
+* `subtractHours`
+* `subtractMinutes`
+* `subtractSeconds`
+* `toString`
+* `print`
+* `read`
+
+La distinction entre `getTotalSeconds` et `getSeconds` est que `getTotalSeconds` retourne la valeur de `_totalSeconds` directement, tandis que `getSeconds` retourne le nombre de secondes restant (entre 0 et 59) une fois qu'on a décomposé la durée en nombre d'heures et de minutes.
+
+Plutôt que des mutateurs `setHours`, `setMinutes` et `setSeconds`, vous implémenterez des méthodes `addHours`, `addMinutes` et `addSeconds` qui ajouteront du temps à la durée actuelle. Il n'y a aucune validation particulière à faire dans ces méthodes (si l'utilisateur veut ajouter 600 minutes plutôt que 10 heures, grand bien lui fasse). Ces méthodes doivent retourner `*this`, ce qui permettra de chaîner les appels de cette façon:
+
+```cpp
+Time time;
+// Ajouter 13 heures, 35 minutes et 17 secondes
+time.addHours(13).addMinutes(35).addSeconds(17);
+```
+
+Les méthodes `subtractHours`, `subtractMinutes` et `subtractSeconds` fonctionnent sensiblement de la même façon, mais doivent en plus valider que la valeur à soustraire n'est pas supérieure à la valeur actuelle (auquel cas il faut lancer un `std::underflow_error` sans modifier l'objet).
+
+L'affichage d'un objet `Duration` utilise le même format qu'un objet `Time`.
+
 ## Laboratoire 04-C
 
 À venir
