@@ -849,6 +849,8 @@ Pour ce qui est des surcharges d'opérateurs `/=` et `/`, vous remarquerez que c
 
 Implémentez les opérateurs de multiplication, ainsi que les deux versions des opérateurs de division.
 
+**⚠️ Faites valider votre classe `Duration` par l'enseignant avant de continuer.**
+
 ## Laboratoire 04-C
 
 À venir
