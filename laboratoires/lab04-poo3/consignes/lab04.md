@@ -839,6 +839,16 @@ Duration Duration::operator+(const Duration& other) const {
 
 La soustraction fonctionne sensiblement de la même façon. Vous êtes donc maintenant en mesure d'implémenter les opérateurs `-=` et `-`.
 
+### Étape 12
+
+Observez attentivement les autres surcharges d'opérateurs arithmétiques de `Duration` dans le diagramme. Que remarquez-vous?
+
+Les opérateurs `*=` et `*` prennent chacun en paramètre un `double` plutôt qu'un `Duration`. C'est parce qu'il ne ferait pas vraiment de sens de multiplier deux durées (on ne risque pas de vouloir calculer quelque chose du genre `03:30:00 * 17:15:22` par exemple). Il est plus logique de pouvoir multiplier une durée par un nombre (ex: `3 * 03:30:00`).
+
+Pour ce qui est des surcharges d'opérateurs `/=` et `/`, vous remarquerez que chacune existe en deux versions: l'une avec un paramètre `double`, et l'autre avec un paramètre `Duration`. C'est que contrairement à la multiplication, il peut être logique de diviser une durée par une autre (pour savoir combien de temps une période de 20 minutes entre dans une période de 3 heures, par exemple).
+
+Implémentez les opérateurs de multiplication, ainsi que les deux versions des opérateurs de division.
+
 ## Laboratoire 04-C
 
 À venir
