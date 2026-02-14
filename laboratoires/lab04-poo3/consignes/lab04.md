@@ -711,6 +711,53 @@ Une heure est comprise entre `00:00:00` et `23:59:59`. Un objet `Time` doit vali
 
 Comme pour `Date`, un objet `Time` doit s'afficher au format ISO, soit `HH:MM:SS`. N'oubliez pas d'ajouter des zéros lorsque nécessaire!
 
+### Étape 10
+
+Mettons de côté la classe `Time` et attaquons-nous maintenant à la classe `Duration`.
+
+```plantuml
+class Duration {
+    - unsigned long int _totalSeconds
+    --
+    + Duration()
+    + Duration(unsigned long int totalSeconds)
+    + Duration(unsigned int hours, unsigned int minutes, unsigned int seconds)
+    + unsigned long int getTotalSeconds() const
+    + unsigned int getHours() const
+    + unsigned int getMinutes() const
+    + unsigned int getSeconds() const
+    + Duration& addHours(unsigned int hours)
+    + Duration& addMinutes(unsigned int minutes)
+    + Duration& addSeconds(unsigned long int seconds)
+    + Duration& subtractHours(unsigned int hours)
+    + Duration& subtractMinutes(unsigned int minutes)
+    + Duration& subtractSeconds(unsigned long int seconds)
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const Duration& other) const
+    + bool operator!=(const Duration& other) const
+    + bool operator<(const Duration& other) const
+    + bool operator<=(const Duration& other) const
+    + bool operator>(const Duration& other) const
+    + bool operator>=(const Duration& other) const
+    + Duration& operator+=(const Duration& other)
+    + Duration operator+(const Duration& other) const
+    + Duration& operator-=(const Duration& other)
+    + Duration operator-(const Duration& other) const
+    + Duration& operator*=(double factor)
+    + Duration operator*(double factor) const
+    + Duration& operator/=(double divisor)
+    + Duration operator/(double divisor) const
+    + double operator/=(const Duration& divisor) const
+    + double operator/(const Duration& divisor) const
+}
+```
+
+Contairement à la classe `Time` qui possède des attributs distincts pour les heures, les minutes et les secondes, la classe `Duration` ne stocke en mémoire que le nombre total de secondes correspondant à la durée (`_totalSeconds`). Par exemple, une durée de `30:10:05` correspond à $30 \times 3600 + 10 \times 60 + 5$ secondes, soit une valeur de `108605` pour l'attribut  `_totalSeconds`. Bien entendu, lorsqu'on affichera la durée, on voudra bel et bien afficher `30:10:05`. Il y a donc, pour cette classe, une distinction entre la représentation des données par **l'interface** de la classe, et la façon dont elles sont représentées dans l'**état interne** de l'objet. Cette façon de faire présente l'avantage de simplifier grandement certains calculs: il est par exemple beaucoup plus facile d'additionner ou soustraire deux durées exprimées en secondes que deux durées décomposées en nombres d'heures, minutes et secondes.
+
+> Pourquoi utiliser le type `unsigned long int` pour l'attribut `_totalSeconds`? Un `unsigned int` en C++ est le plus souvent représenté sur 32 bits (quoique cela dépend ultimement du compilateur et du système). Sa valeur maximale est donc de $2^{32} - 1$, soit environ 4,3 milliards. Cela correspondrait à une durée maximale d'environ 136 ans dans le cas qui nous intéresse. Dépendamment de l'application à développer, une telle durée maximale pourrait être largement insuffisante (imaginez qu'on essaie de représenter l'âge de l'univers, ou ne serait-ce que l'âge de la ville de Sherbrooke, fondée en 1802). En comparaison, un `unsigned long int` est le plus souvent représenté sur 64 bits, ce qui nous donne une valeur maximale de $2^{64} - 1$, soit environ $1,8 \times 10^{19}$. Appliquée à un nombre de secondes, cette valeur correspond à environ 585 milliards d'années, soit 42 fois l'âge de l'univers, ce qui devrait être largement suffisant pour la plupart des applications. Tout ça pour un maigre 4 octets de plus!
+
 ## Laboratoire 04-C
 
 À venir
