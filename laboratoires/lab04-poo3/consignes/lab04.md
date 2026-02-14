@@ -803,6 +803,42 @@ Les méthodes `subtractHours`, `subtractMinutes` et `subtractSeconds` fonctionne
 
 L'affichage d'un objet `Duration` utilise le même format qu'un objet `Time`.
 
+### Étape 11
+
+*Le moment* est venu de parler des opérateurs arithmétiques.
+
+On veut notamment pouvoir additionner deux durées ensemble. Deux opérateurs permettent de faire cela, soit `+` et `+=`. Commençons par voir comment implémenter `+=`:
+
+```cpp
+Duration& Duration::operator+=(const Duration& other) {
+    return this->addSeconds(other._totalSeconds);
+}
+```
+
+L'opérateur `+=` doit toujours retourner `*this` pour permettre le chaînage d'opérateurs. Dans notre cas, puisque `this->addSeconds` retourne déjà `*this`, il n'y a rien de plus à faire. On aurait aussi pu écrire le code de cette façon:
+
+```cpp
+Duration& Duration::operator+=(const Duration& other) {
+    this->addSeconds(other._totalSeconds);
+    return *this;
+}
+```
+
+Une fois que l'opérateur `+=` est implémenté, on peut facilement implémenter `+` en faisant de la... (*wait for it*)
+
+![](./images/bob_leponge_reutilisation.jpg)
+
+L'opérateur `+` présente une différence importante par rapport à `+=`: il ne retourne pas `*this`, mais plutôt un nouvel objet `Duration` correspondant à la somme de `*this` et `other`. Je vous propose de créer d'abord une copie de `*this`, puis de lui additionner `other` via l'opérateur `+=` existant. Puisque le résultat est un nouvel objet, il faut le retourner par valeur.
+
+```cpp
+Duration Duration::operator+(const Duration& other) const {
+    Duration result(*this);
+    return result += other;
+}
+```
+
+La soustraction fonctionne sensiblement de la même façon. Vous êtes donc maintenant en mesure d'implémenter les opérateurs `-=` et `-`.
+
 ## Laboratoire 04-C
 
 À venir
