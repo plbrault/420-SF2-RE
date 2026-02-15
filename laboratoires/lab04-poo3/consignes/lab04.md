@@ -434,7 +434,7 @@ Il reste à surcharger l'opérateur `<<` pour `SystemePlanetaire`. Inspirez-vous
 
 **⚠️ Faites valider votre laboratoire 04-A par l'enseignant.**
 
-## Laboratoire 04-B
+## Laboratoire 04-B - La gestion du temps
 
 Prenez *le temps* de regarder le diagramme de classes ci-dessous:
 
@@ -996,6 +996,8 @@ Remarquez que le constructeur sans paramètre de la classe `DateTime` n'a rien �
 
 **⚠️ Faites valider votre classe `DateTime` par l'enseignant avant de continuer.**
 
-## Laboratoire 04-C
+## Laboratoire 04-C - Le retour de la liste de températures
 
-À venir
+Cette partie est à faire dans le même programme que le Laboratoire 04-B en utilisant la classe `DateTime` que vous venez d'implémenter.
+
+
