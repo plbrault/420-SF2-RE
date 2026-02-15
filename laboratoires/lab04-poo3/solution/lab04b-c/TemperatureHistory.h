@@ -14,7 +14,6 @@ private:
     size_t _capacity;
 
     void increaseCapacity();
-    size_t findDatapoint(const DateTime& datetime) const;
 public:
     TemperatureHistory();
     TemperatureHistory(const TemperatureHistory& other);
@@ -22,10 +21,12 @@ public:
     TemperatureHistory& operator=(const TemperatureHistory& other);
 
     size_t getSize() const;
+
     void clear();
     void addDatapoint(const TemperatureDatapoint& datapoint);
     void deleteDatapoint(size_t index);
     void deleteDatapoint(const DateTime& datetime);
+    size_t findDatapoint(const DateTime& datetime) const;
 
     void readFromFile(const std::string& filename);
 

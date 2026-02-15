@@ -74,7 +74,7 @@ void TemperatureHistory::addDatapoint(const TemperatureDatapoint &datapoint) {
 
 void TemperatureHistory::deleteDatapoint(size_t index) {
     if (index >= this->_size) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("Indice invalide.");
     }
     for (size_t i = index; i < this->_size - 1; i++) {
         this->_datapoints[i] = this->_datapoints[i + 1];
@@ -96,14 +96,14 @@ TemperatureHistory& TemperatureHistory::operator+=(const TemperatureDatapoint &d
 
 TemperatureDatapoint& TemperatureHistory::operator[](size_t index) {
     if (index >= this->_size) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("Indice invalide.");
     }
     return this->_datapoints[index];
 }
 
 const TemperatureDatapoint& TemperatureHistory::operator[](size_t index) const {
     if (index >= this->_size) {
-        throw std::out_of_range("Index out of range");
+        throw std::out_of_range("Indice invalide.");
     }
     return this->_datapoints[index];
 }
@@ -111,7 +111,7 @@ const TemperatureDatapoint& TemperatureHistory::operator[](size_t index) const {
 TemperatureDatapoint& TemperatureHistory::operator[](const DateTime &datetime) {
     size_t index = findDatapoint(datetime);
     if (index >= this->_size) {
-        throw std::out_of_range("DateTime not found");
+        throw std::out_of_range("Aucun datapoint trouvé pour ce DateTime.");
     }
     return this->_datapoints[index];
 }
@@ -119,7 +119,7 @@ TemperatureDatapoint& TemperatureHistory::operator[](const DateTime &datetime) {
 const TemperatureDatapoint& TemperatureHistory::operator[](const DateTime &datetime) const {
     size_t index = findDatapoint(datetime);
     if (index >= this->_size) {
-        throw std::out_of_range("DateTime not found");
+        throw std::out_of_range("Aucun datapoint trouvé pour ce DateTime.");
     }
     return this->_datapoints[index];
 }
@@ -127,10 +127,11 @@ const TemperatureDatapoint& TemperatureHistory::operator[](const DateTime &datet
 void TemperatureHistory::readFromFile(const std::string &filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
-        throw std::runtime_error("Could not open file");
+        throw std::runtime_error("Erreur lors de l'ouverture du fichier.");
     }
     TemperatureDatapoint datapoint;
-    while (file >> datapoint) {
+    while (!file.eof()) {
+        file >> datapoint;
         this->addDatapoint(datapoint);
     }
     file.close();

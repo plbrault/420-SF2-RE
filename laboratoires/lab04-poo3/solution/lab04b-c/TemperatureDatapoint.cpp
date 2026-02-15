@@ -35,6 +35,7 @@ std::ostream &operator<<(std::ostream &output, const TemperatureDatapoint &datap
 }
 
 std::istream &operator>>(std::istream &input, TemperatureDatapoint &datapoint) {
-    input >> datapoint._datetime >> datapoint._temperature;
+    input >> datapoint._datetime;
+    input >> datapoint._temperature;
     return input;
 }
