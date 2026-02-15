@@ -1064,6 +1064,166 @@ La classe `TemperatureDatapoint.h` définit une classe permettant de représente
 
 La classe `TemperatureHistory`, pour sa part, permet de gérer un historique de températures à travers le temps. Il s'agit donc essentiellement d'un conteneur de `TemperatureDatapoint`.
 
+Voici le diagramme complet du programme:
+
+```plantuml
+@startuml
+
+class Date {
+    - unsigned int _year
+    - unsigned int _month
+    - unsigned int _day
+    --
+    + Date()
+    + Date(unsigned int year, unsigned int month, unsigned int day)
+    + unsigned int getYear() const
+    + unsigned int getMonth() const
+    + unsigned int getDay() const
+    + void setValue(unsigned int year, unsigned int month, unsigned int day)
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const Date& other) const
+    + bool operator!=(const Date& other) const
+    + bool operator<(const Date& other) const
+    + bool operator<=(const Date& other) const
+    + bool operator>(const Date& other) const
+    + bool operator>=(const Date& other) const
+    + friend std::ostream& operator<<(std::ostream& output, const Date& date)
+    + friend std::istream& operator>>(std::istream& input, Date& date)
+}
+
+class Time {
+    - unsigned int _hours
+    - unsigned int _minutes
+    - unsigned int _seconds
+    --
+    + Time()
+    + Time(unsigned int hours, unsigned int minutes, unsigned int seconds)
+    + void setHours(unsigned int hours)
+    + void setMinutes(unsigned int minutes)
+    + void setSeconds(unsigned int seconds)
+    + unsigned int getHours() const
+    + unsigned int getMinutes() const
+    + unsigned int getSeconds() const
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const Time& other) const
+    + bool operator!=(const Time& other) const
+    + bool operator<(const Time& other) const
+    + bool operator<=(const Time& other) const
+    + bool operator>(const Time& other) const
+    + bool operator>=(const Time& other) const
+    + Time& operator+=(const Duration& duration)
+    + Time operator+(const Duration& duration) const
+    + Time& operator-=(const Duration& duration)
+    + Time operator-(const Duration& duration) const
+}
+
+class Duration {
+    - unsigned long int _totalSeconds
+    --
+    + Duration()
+    + Duration(unsigned long int totalSeconds)
+    + Duration(unsigned int hours, unsigned int minutes, unsigned int seconds)
+    + unsigned long int getTotalSeconds() const
+    + unsigned int getHours() const
+    + unsigned int getMinutes() const
+    + unsigned int getSeconds() const
+    + Duration& addHours(unsigned int hours)
+    + Duration& addMinutes(unsigned int minutes)
+    + Duration& addSeconds(unsigned long int seconds)
+    + Duration& subtractHours(unsigned int hours)
+    + Duration& subtractMinutes(unsigned int minutes)
+    + Duration& subtractSeconds(unsigned long int seconds)
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const Duration& other) const
+    + bool operator!=(const Duration& other) const
+    + bool operator<(const Duration& other) const
+    + bool operator<=(const Duration& other) const
+    + bool operator>(const Duration& other) const
+    + bool operator>=(const Duration& other) const
+    + Duration& operator+=(const Duration& other)
+    + Duration operator+(const Duration& other) const
+    + Duration& operator-=(const Duration& other)
+    + Duration operator-(const Duration& other) const
+}
+
+class DateTime {
+    - Date _date
+    - Time _time
+    --
+    + DateTime()
+    + DateTime(const Date& date, const Time& time)
+    + const Date& getDate() const
+    + const Time& getTime() const
+    + void setDate(const Date& date)
+    + void setTime(const Time& time)
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const DateTime& other) const
+    + bool operator!=(const DateTime& other) const
+    + bool operator<(const DateTime& other) const
+    + bool operator<=(const DateTime& other) const
+    + bool operator>(const DateTime& other) const
+    + bool operator>=(const DateTime& other) const
+    + friend std::ostream& operator<<(std::ostream& output, const DateTime& dateTime)
+    + friend std::istream& operator>>(std::istream& input, DateTime& dateTime)
+}
+
+class TemperatureDatapoint {
+    - DateTime _moment
+    - double _temperature
+    --
+    + TemperatureDatapoint()
+    + TemperatureDatapoint(const DateTime& datetime, double temperature)
+    + const DateTime& getMoment() const
+    + double getTemperature() const
+    + void setMoment(const DateTime& timestamp)
+    + void setTemperature(double temperature)
+    + bool operator==(const TemperatureDatapoint& other) const
+    + bool operator!=(const TemperatureDatapoint& other) const
+    + friend std::ostream& operator<<(std::ostream& output, const TemperatureDatapoint& datapoint)
+    + friend std::istream& operator>>(std::istream& input, TemperatureDatapoint& datapoint)
+}
+
+class TemperatureHistory {
+    - TemperatureDatapoint* _datapoints
+    - size_t _size
+    - size_t _capacity
+    - void increaseCapacity()
+    --
+    + TemperatureHistory()
+    + TemperatureHistory(const TemperatureHistory& other)
+    + ~TemperatureHistory()
+    + TemperatureHistory& operator=(const TemperatureHistory& other)
+    + size_t getSize() const
+    + void clear()
+    + void addDatapoint(const TemperatureDatapoint& datapoint)
+    + void deleteDatapoint(size_t index)
+    + void deleteDatapoint(const DateTime& moment)
+    + size_t findDatapoint(const DateTime& moment) const
+    + void readFromFile(const std::string& filename)
+    + TemperatureHistory& operator+=(const TemperatureDatapoint& datapoint)
+    + const TemperatureDatapoint& operator[](size_t index) const
+    + TemperatureDatapoint& operator[](size_t index)
+    + const TemperatureDatapoint& operator[](const DateTime& moment) const
+    + TemperatureDatapoint& operator[](const DateTime& moment)
+}
+
+TemperatureHistory *-- TemperatureDatapoint
+TemperatureDatapoint *-- DateTime
+DateTime *-- Date
+DateTime *-- Time
+Time ..> Duration
+
+@enduml
+```
+
 ### Étape 1
 
 Le contenu du `main` permet de confirmer que vos classes `Date`, `Time` et `DateTime` fonctionnent correctement. Testez les options 1 à 3 du menu avec les entrées fournies dans l'exemple d'exécution ci-dessous. Vous devriez obtenir les mêmes résultats.
@@ -1162,7 +1322,7 @@ Entrez un choix entre 1 et 5: 5
 Au revoir!
 ```
 
-### Étape 3
+### Étape 2
 
 Il vous reste à implémenter la méthode `void deleteDatapoint(size_t index)` de la classe `TemperatureHistory`. Celle-ci doit supprimer la lecture dont l'indice dans le tableau `_datapoints` est passé en paramètre. L'implémentation vide est déjà présente à la fin du fichier `TemperatureHistory.cpp`.
 
