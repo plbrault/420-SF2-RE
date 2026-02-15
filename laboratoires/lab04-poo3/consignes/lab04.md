@@ -1007,7 +1007,7 @@ Bon, d'accord, je vais vous le dire.
 
 Vous vous souvenez de l'attribut `_totalSeconds` de la classe `Duration`, qui permet de simplifier grandement les calculs? Et vous vous souvenez aussi qu'on a déjà implémenté les opérateurs arithmétiques dans cette classe? Alors, **pourquoi ne pas déléguer les calculs à la classe `Duration`?**
 
-Voici à quoi ressemblerait l'algorithme pour l'opérateur `+=`?
+Voici à quoi ressemblerait l'algorithme pour l'opérateur `+=`:
 
 1. Créer un objet `Duration` avec le même nombre d'heures, de minutes et de secondes que `this`
 2. Additionner cette durée à celle reçue en paramètres
