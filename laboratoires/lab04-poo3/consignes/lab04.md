@@ -660,6 +660,7 @@ de vos autres opérateurs.
 Attaquons-nous maintenant à la classe `Time`.
 
 ```plantuml
+@startuml
 class Time {
     - unsigned int _hours
     - unsigned int _minutes
@@ -688,6 +689,7 @@ class Time {
     + Time operator-(const Duration& duration) const
     + Duration operator-(const Time& other) const
 }
+@enduml
 ```
 
 Définissez la classe et implémentez ses membres suivants dans un ordre qui vous paraît logique:
@@ -722,6 +724,7 @@ Comme pour `Date`, un objet `Time` doit s'afficher au format ISO, soit `HH:MM:SS
 Mettons de côté la classe `Time` et attaquons-nous maintenant à la classe `Duration`.
 
 ```plantuml
+@startuml
 class Duration {
     - unsigned long int _totalSeconds
     --
@@ -758,6 +761,7 @@ class Duration {
     + double operator/=(const Duration& divisor) const
     + double operator/(const Duration& divisor) const
 }
+@enduml
 ```
 
 Contairement à la classe `Time` qui possède des attributs distincts pour les heures, les minutes et les secondes, la classe `Duration` ne stocke en mémoire que le nombre total de secondes correspondant à la durée (`_totalSeconds`). Par exemple, une durée de `30:10:05` correspond à $30 \times 3600 + 10 \times 60 + 5$ secondes, soit une valeur de `108605` pour l'attribut  `_totalSeconds`. Bien entendu, lorsqu'on affichera la durée, on voudra bel et bien afficher `30:10:05`. Il y a donc, pour cette classe, une distinction entre la représentation des données par **l'interface** de la classe, et la façon dont elles sont représentées dans l'**état interne** de l'objet. Cette façon de faire présente l'avantage de simplifier grandement certains calculs: il est par exemple beaucoup plus facile d'additionner ou soustraire deux durées exprimées en secondes que deux durées décomposées en nombres d'heures, minutes et secondes.
@@ -856,6 +860,7 @@ Implémentez les opérateurs de multiplication, ainsi que les deux versions des 
 Revenons à la classe `Time` dont nous avons commencé l'implémentation *plus tôt*.
 
 ```plantuml
+@startuml
 class Time {
     - unsigned int _hours
     - unsigned int _minutes
@@ -884,6 +889,7 @@ class Time {
     + Time operator-(const Duration& duration) const
     + Duration operator-(const Time& other) const
 }
+@enduml
 ```
 
 Observons les surcharges d'opérateurs arithmétiques prévus pour la classe. On remarque que les opérateurs d'addition ne permettent pas d'additionner un objet `Time` à un autre (cela n'aurait pas vraiment de sens), mais permettent plutôt d'additionner un objet `Duration` à un objet `Time`. Le résultat, dans ce cas, est un `Time`. L'opérateur `-=` permet pour sa part de soustraire un `Duration` à un `Time`. Finalement, l'opérateur `-` est offert en deux versions: une première version qui soustrait un `Duration` à un `Time`, et retourne un `Time`, ainsi qu'une deuxième version qui calcule la différence entre deux `Time` et retourne donc un `Duration`.
@@ -1017,6 +1023,7 @@ En suivant les mêmes principes, implémentez tous les autres opérateurs arithm
 Implémentez finalement la classe `DateTime`, qui est une combinaison d'un `Date` et d'un `Time`.
 
 ```plantuml
+@startuml
 class DateTime {
     - Date _date
     - Time _time
@@ -1037,6 +1044,7 @@ class DateTime {
     + bool operator>(const DateTime& other) const
     + bool operator>=(const DateTime& other) const
 }
+@enduml
 ```
 
 Le format d'affichage d'un `DateTime`, pour respecter le format ISO, est `AAAA-MM-JJTHH:MM:SS` (ex: `2026-02-15T11:29:31`).
