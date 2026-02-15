@@ -6,16 +6,16 @@
 
 class TemperatureDatapoint {
 private:
-    DateTime _datetime;
+    DateTime _moment;
     double _temperature;
 public:
     TemperatureDatapoint() : TemperatureDatapoint(DateTime(), 0.0) {}
     TemperatureDatapoint(const DateTime& datetime, double temperature);
 
-    const DateTime& getDateTime() const;
+    const DateTime& getMoment() const;
     double getTemperature() const;
 
-    void setDateTime(const DateTime& timestamp);
+    void setMoment(const DateTime& timestamp);
     void setTemperature(double temperature);
 
     bool operator==(const TemperatureDatapoint& other) const;

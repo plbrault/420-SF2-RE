@@ -44,9 +44,9 @@ void TemperatureHistory::increaseCapacity() {
     this->_capacity = newCapacity;
 }
 
-size_t TemperatureHistory::findDatapoint(const DateTime &datetime) const {
+size_t TemperatureHistory::findDatapoint(const DateTime &moment) const {
     for (size_t i = 0; i < this->_size; i++) {
-        if (this->_datapoints[i].getDateTime() == datetime) {
+        if (this->_datapoints[i].getMoment() == moment) {
             return i;
         }
     }
@@ -72,23 +72,6 @@ void TemperatureHistory::addDatapoint(const TemperatureDatapoint &datapoint) {
     this->_size++;
 }
 
-void TemperatureHistory::deleteDatapoint(size_t index) {
-    if (index >= this->_size) {
-        throw std::out_of_range("Indice invalide.");
-    }
-    for (size_t i = index; i < this->_size - 1; i++) {
-        this->_datapoints[i] = this->_datapoints[i + 1];
-    }
-    this->_size--;
-}
-
-void TemperatureHistory::deleteDatapoint(const DateTime &datetime) {
-    size_t index = findDatapoint(datetime);
-    if (index < this->_size) {
-        deleteDatapoint(index);
-    }
-}
-
 TemperatureHistory& TemperatureHistory::operator+=(const TemperatureDatapoint &datapoint) {
     addDatapoint(datapoint);
     return *this;
@@ -108,18 +91,18 @@ const TemperatureDatapoint& TemperatureHistory::operator[](size_t index) const {
     return this->_datapoints[index];
 }
 
-TemperatureDatapoint& TemperatureHistory::operator[](const DateTime &datetime) {
-    size_t index = findDatapoint(datetime);
+TemperatureDatapoint& TemperatureHistory::operator[](const DateTime &moment) {
+    size_t index = findDatapoint(moment);
     if (index >= this->_size) {
-        throw std::out_of_range("Aucun datapoint trouvé pour ce DateTime.");
+        throw std::out_of_range("Aucun datapoint trouvé pour ce moment.");
     }
     return this->_datapoints[index];
 }
 
-const TemperatureDatapoint& TemperatureHistory::operator[](const DateTime &datetime) const {
-    size_t index = findDatapoint(datetime);
+const TemperatureDatapoint& TemperatureHistory::operator[](const DateTime &moment) const {
+    size_t index = findDatapoint(moment);
     if (index >= this->_size) {
-        throw std::out_of_range("Aucun datapoint trouvé pour ce DateTime.");
+        throw std::out_of_range("Aucun datapoint trouvé pour ce moment.");
     }
     return this->_datapoints[index];
 }
@@ -129,10 +112,25 @@ void TemperatureHistory::readFromFile(const std::string &filename) {
     if (!file.is_open()) {
         throw std::runtime_error("Erreur lors de l'ouverture du fichier.");
     }
+    this->clear();
     TemperatureDatapoint datapoint;
     while (!file.eof()) {
         file >> datapoint;
         this->addDatapoint(datapoint);
     }
     file.close();
+}
+
+void TemperatureHistory::deleteDatapoint(const DateTime &moment) {
+    deleteDatapoint(findDatapoint(moment));
+}
+
+void TemperatureHistory::deleteDatapoint(size_t index) {
+    if (index >= this->_size) {
+        return;
+    }
+    for (size_t i = index; i < this->_size - 1; i++) {
+        this->_datapoints[i] = this->_datapoints[i + 1];
+    }
+    this->_size--;
 }

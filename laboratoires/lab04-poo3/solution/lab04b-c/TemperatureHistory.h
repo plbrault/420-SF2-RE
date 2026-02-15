@@ -25,8 +25,8 @@ public:
     void clear();
     void addDatapoint(const TemperatureDatapoint& datapoint);
     void deleteDatapoint(size_t index);
-    void deleteDatapoint(const DateTime& datetime);
-    size_t findDatapoint(const DateTime& datetime) const;
+    void deleteDatapoint(const DateTime& moment);
+    size_t findDatapoint(const DateTime& moment) const;
 
     void readFromFile(const std::string& filename);
 
@@ -35,8 +35,8 @@ public:
     const TemperatureDatapoint& operator[](size_t index) const;
     TemperatureDatapoint& operator[](size_t index);
 
-    const TemperatureDatapoint& operator[](const DateTime& datetime) const;
-    TemperatureDatapoint& operator[](const DateTime& datetime);
+    const TemperatureDatapoint& operator[](const DateTime& moment) const;
+    TemperatureDatapoint& operator[](const DateTime& moment);
 };
 
 

@@ -1064,5 +1064,194 @@ La classe `TemperatureDatapoint.h` définit une classe permettant de représente
 
 La classe `TemperatureHistory`, pour sa part, permet de gérer un historique de températures à travers le temps. Il s'agit donc essentiellement d'un conteneur de `TemperatureDatapoint`.
 
+### Étape 1
 
+Le contenu du `main` permet de confirmer que vos classes `Date`, `Time` et `DateTime` fonctionnent correctement. Testez les options 1 à 3 du menu avec les entrées fournies dans l'exemple d'exécution ci-dessous. Vous devriez obtenir les mêmes résultats.
 
+```text
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 1
+
+Historique chargé avec succès.
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 2
+
+Entrez le moment (format AAAA-MM-DDTHH:MM:SS): 2026-01-12T17:00:00
+La température au moment 2026-01-12T17:00:00 était: -3.08348
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 2
+
+Entrez le moment (format AAAA-MM-DDTHH:MM:SS): 2026-01-12T17:15:00
+Aucune lecture trouvée pour la date et heure saisies.
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 3
+
+Entrez le moment de début (format AAAA-MM-DDTHH:MM:SS): 2026-01-15T02:00:00
+Entrez le moment de fin (format AAAA-MM-DDTHH:MM:SS): 2026-01-16T04:00:00
+La température moyenne entre 2026-01-15T02:00:00 et 2026-01-16T04:00:00 est: -4.89881
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 3
+
+Entrez le moment de début (format AAAA-MM-DDTHH:MM:SS): 2026-01-16T04:00:00
+Entrez le moment de fin (format AAAA-MM-DDTHH:MM:SS): 2026-01-16T02:00:00
+Le moment de début doit être antérieur au moment de fin.
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 3
+
+Entrez le moment de début (format AAAA-MM-DDTHH:MM:SS): 2026-01-16T04:30:00
+Entrez le moment de fin (format AAAA-MM-DDTHH:MM:SS): 2026-01-16T05:00:00
+L'une des dates et heures saisies n'est pas présente dans l'historique.
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 5
+
+Au revoir!
+```
+
+### Étape 3
+
+Il vous reste à implémenter la méthode `void deleteDatapoint(size_t index)` de la classe `TemperatureHistory`. Celle-ci doit supprimer la lecture dont l'indice dans le tableau `_datapoints` est passé en paramètre. L'implémentation vide est déjà présente à la fin du fichier `TemperatureHistory.cpp`.
+
+Pour supprimer une température dans le tableau, il suffit de décaler d'Un indice vers la gauche chacune des températures suivantes, puis de décrémenter `_size`. Il n'est pas nécessaire de redimensionner le tableau. Si l'indice reçu en paramètre est invalide, il faut lancer un `std::out_of_range`.
+
+Nous voulons que la suppression soit [idempotente](https://fr.wikipedia.org/wiki/Idempotence), c'est-à-dire qu'elle produise le même résultat si on appelle la méthode plusieurs fois de suite avec le même paramètre. Autrement dit, si l'indice passé en paramètre n'existe pas, il faut simplement quitter la fonction, sans lancer d'erreur.
+
+Il existe une deuxième version de la méthode, qui elle prend en paramètre un moment. Cette deuxième version est déjà implémentée, et elle appelle l'autre version.
+
+Vous pouvez tester votre méthode avec l'exemple d'exécution suivant:
+
+```text
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 1
+
+Historique chargé avec succès.
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 4
+
+Entrez le moment de la lecture à supprimer (format AAAA-MM-DDTHH:MM:SS): 2026-01-16T03:00:00
+Lecture supprimée avec succès.
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 3
+
+Entrez le moment de début (format AAAA-MM-DDTHH:MM:SS): 2026-01-15T02:00:00
+Entrez le moment de fin (format AAAA-MM-DDTHH:MM:SS): 2026-01-16T04:00:00
+La température moyenne entre 2026-01-15T02:00:00 et 2026-01-16T04:00:00 est: -4.49158
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 4
+
+Entrez le moment de la lecture à supprimer (format AAAA-MM-DDTHH:MM:SS): 2026-01-16T03:00:00
+Lecture supprimée avec succès.
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 3
+
+Entrez le moment de début (format AAAA-MM-DDTHH:MM:SS): 2026-01-15T02:00:00
+Entrez le moment de fin (format AAAA-MM-DDTHH:MM:SS): 2026-01-16T04:00:00
+La température moyenne entre 2026-01-15T02:00:00 et 2026-01-16T04:00:00 est: -4.49158
+
+MENU
+====================
+1. Charger l'historique
+2. Afficher la température à un moment précis
+3. Calculer la température moyenne entre deux moments
+4. Supprimer une lecture
+5. Quitter
+
+Entrez un choix entre 1 et 5: 5
+
+Au revoir!
+```
+
+> 🎉 Félicitations, vous avez complété le laboratoire!
