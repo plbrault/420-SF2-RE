@@ -1,12 +1,8 @@
-//
-// Created by plbrault on 2026-02-11.
-//
-
 #include "TemperatureDatapoint.h"
 
 TemperatureDatapoint::TemperatureDatapoint(const DateTime &datetime, double temperature) {
-    this->_datetime = datetime;
-    this->_temperature = temperature;
+    this->setDateTime(datetime);
+    this->setTemperature(temperature);
 }
 
 const DateTime &TemperatureDatapoint::getDateTime() const {
@@ -25,14 +21,6 @@ void TemperatureDatapoint::setTemperature(double temperature) {
     this->_temperature = temperature;
 }
 
-void TemperatureDatapoint::print(std::ostream &output) const {
-    output << "[" << this->_datetime << "] " << this->_temperature << "°C";
-}
-
-void TemperatureDatapoint::read(std::istream &input) {
-    input >> this->_datetime >> this->_temperature;
-}
-
 bool TemperatureDatapoint::operator==(const TemperatureDatapoint &other) const {
     return this->_datetime == other._datetime && this->_temperature == other._temperature;
 }
@@ -42,11 +30,11 @@ bool TemperatureDatapoint::operator!=(const TemperatureDatapoint &other) const {
 }
 
 std::ostream &operator<<(std::ostream &output, const TemperatureDatapoint &datapoint) {
-    datapoint.print(output);
+    output << "[" << datapoint._datetime << "] " << datapoint._temperature << "°C";
     return output;
 }
 
 std::istream &operator>>(std::istream &input, TemperatureDatapoint &datapoint) {
-    datapoint.read(input);
+    input >> datapoint._datetime >> datapoint._temperature;
     return input;
 }
