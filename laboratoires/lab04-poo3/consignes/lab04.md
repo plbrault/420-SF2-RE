@@ -963,6 +963,39 @@ En suivant les mêmes principes, implémentez tous les autres opérateurs arithm
 
 **⚠️ Faites valider votre classe `Time` par l'enseignant avant de continuer.**
 
+### Étape 14
+
+Implémentez finalement la classe `DateTime`, qui est une combinaison d'un `Date` et d'un `Time`.
+
+```plantuml
+class DateTime {
+    - Date _date
+    - Time _time
+    --
+    + DateTime()
+    + DateTime(const Date& date, const Time& time)
+    + const Date& getDate() const
+    + const Time& getTime() const
+    + void setDate(const Date& date)
+    + void setTime(const Time& time)
+    + std::string toString() const
+    + void print(std::ostream& output) const
+    + void read(std::istream& input)
+    + bool operator==(const DateTime& other) const
+    + bool operator!=(const DateTime& other) const
+    + bool operator<(const DateTime& other) const
+    + bool operator<=(const DateTime& other) const
+    + bool operator>(const DateTime& other) const
+    + bool operator>=(const DateTime& other) const
+}
+```
+
+Le format d'affichage d'un `DateTime`, pour respecter le format ISO, est `AAAA-MM-JJTHH:MM:SS` (ex: `2026-02-15T11:29:31`).
+
+Remarquez que le constructeur sans paramètre de la classe `DateTime` n'a rien à faire, puisque les attributs `_date` et `_time` sont déjà initialisés par les constructeurs de leurs classes respectives. De la même façon, la classe `DateTime` devrait réutiliser ce qui est déjà implémenté dans ces classes partout où c'est possible.
+
+**⚠️ Faites valider votre classe `DateTime` par l'enseignant avant de continuer.**
+
 ## Laboratoire 04-C
 
 À venir
