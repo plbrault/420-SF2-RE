@@ -126,11 +126,5 @@ void TemperatureHistory::deleteDatapoint(const DateTime &moment) {
 }
 
 void TemperatureHistory::deleteDatapoint(size_t index) {
-    if (index >= this->_size) {
-        return;
-    }
-    for (size_t i = index; i < this->_size - 1; i++) {
-        this->_datapoints[i] = this->_datapoints[i + 1];
-    }
-    this->_size--;
+    // À implémenter
 }
