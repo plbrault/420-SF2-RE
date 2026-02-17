@@ -757,7 +757,6 @@ class Duration {
     + Duration operator*(double factor) const
     + Duration& operator/=(double divisor)
     + Duration operator/(double divisor) const
-    + double operator/=(const Duration& divisor) const
     + double operator/(const Duration& divisor) const
 }
 @enduml
@@ -1126,6 +1125,7 @@ class Time {
     + Time operator+(const Duration& duration) const
     + Time& operator-=(const Duration& duration)
     + Time operator-(const Duration& duration) const
+    + Duration operator-(const Time& other) const
 }
 
 class Duration {
@@ -1157,6 +1157,11 @@ class Duration {
     + Duration operator+(const Duration& other) const
     + Duration& operator-=(const Duration& other)
     + Duration operator-(const Duration& other) const
+    + Duration& operator*=(double factor)
+    + Duration operator*(double factor) const
+    + Duration& operator/=(double divisor)
+    + Duration operator/(double divisor) const
+    + double operator/(const Duration& divisor) const
 }
 
 class DateTime {
