@@ -161,13 +161,9 @@ Duration Duration::operator/(double divisor) const {
     return result /= divisor;
 }
 
-double Duration::operator/=(const Duration& divisor) const {
+double Duration::operator/(const Duration& divisor) const {
     if (divisor._totalSeconds == 0) {
         throw std::invalid_argument("Le diviseur ne peut pas être zéro.");
     }
     return static_cast<double>(this->_totalSeconds) / divisor._totalSeconds;
-}
-
-double Duration::operator/(const Duration& divisor) const {
-    return *this /= divisor;
 }

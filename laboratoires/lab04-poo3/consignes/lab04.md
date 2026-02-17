@@ -525,7 +525,6 @@ class Duration {
     + Duration operator*(double factor) const
     + Duration& operator/=(double divisor)
     + Duration operator/(double divisor) const
-    + double operator/=(const Duration& divisor) const
     + double operator/(const Duration& divisor) const
 }
 
@@ -849,9 +848,9 @@ Observez attentivement les autres surcharges d'opérateurs arithmétiques de `Du
 
 Les opérateurs `*=` et `*` prennent chacun en paramètre un `double` plutôt qu'un `Duration`. C'est parce qu'il ne ferait pas vraiment de sens de multiplier deux durées (on ne risque pas de vouloir calculer quelque chose du genre `03:30:00 * 17:15:22` par exemple). Il est plus logique de pouvoir multiplier une durée par un nombre (ex: `3 * 03:30:00`).
 
-Pour ce qui est des surcharges d'opérateurs `/=` et `/`, vous remarquerez que chacune existe en deux versions: l'une avec un paramètre `double`, et l'autre avec un paramètre `Duration`. C'est que contrairement à la multiplication, il peut être logique de diviser une durée par une autre (pour savoir combien de temps une période de 20 minutes entre dans une période de 3 heures, par exemple).
+Pour ce qui est de la surcharge d'opérateur `/`, vous remarquerez qu'elle existe en deux versions: l'une avec un paramètre `double`, et l'autre avec un paramètre `Duration`. C'est que contrairement à la multiplication, il peut être logique de diviser une durée par une autre (pour savoir combien de temps une période de 20 minutes entre dans une période de 3 heures, par exemple). Le résultat de cette division est un `double` et non un `Duration`, c'est pourquoi il n'y a pas d'opérateur `/=` pour cette version.
 
-Implémentez les opérateurs de multiplication, ainsi que les deux versions des opérateurs de division.
+Implémentez les deux opérateurs de multiplication, ainsi que les trois opérateurs de division.
 
 **⚠️ Faites valider votre classe `Duration` par l'enseignant avant de continuer.**
 

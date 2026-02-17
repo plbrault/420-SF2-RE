@@ -44,7 +44,6 @@ public:
     Duration operator*(double factor) const;
     Duration& operator/=(double divisor);
     Duration operator/(double divisor) const;
-    double operator/=(const Duration& divisor) const;
     double operator/(const Duration& divisor) const;
 };
 
