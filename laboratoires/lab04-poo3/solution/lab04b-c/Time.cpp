@@ -64,9 +64,9 @@ void Time::print(std::ostream& output) const {
 
 void Time::read(std::istream& input) {
     unsigned int hours, minutes, seconds;
-    char separator1, separator2;
+    char separator;
 
-    input >> hours >> separator1 >> minutes >> separator2 >> seconds;
+    input >> hours >> separator >> minutes >> separator >> seconds;
 
     this->setHours(hours);
     this->setMinutes(minutes);

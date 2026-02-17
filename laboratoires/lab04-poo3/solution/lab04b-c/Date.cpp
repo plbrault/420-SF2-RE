@@ -69,8 +69,8 @@ void Date::print(std::ostream& output) const {
 
 void Date::read(std::istream& input) {
     unsigned int year, month, day;
-    char sep1, sep2;
-    input >> year >> sep1 >> month >> sep2 >> day;
+    char separator;
+    input >> year >> separator >> month >> separator >> day;
     this->setValue(year, month, day);
 }
 

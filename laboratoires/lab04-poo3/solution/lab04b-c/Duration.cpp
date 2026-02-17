@@ -78,9 +78,9 @@ void Duration::print(std::ostream& output) const {
 
 void Duration::read(std::istream &input) {
     unsigned int hours, minutes, seconds;
-    char separator1, separator2;
+    char separator;
 
-    input >> hours >> separator1 >> minutes >> separator2 >> seconds;
+    input >> hours >> separator >> minutes >> separator >> seconds;
 
     this->_totalSeconds = 0;
     this->addHours(hours).addMinutes(minutes).addSeconds(seconds);
