@@ -1,7 +1,3 @@
-//
-// Created by plbrault on 2026-02-11.
-//
-
 #ifndef SOLUTION_TEMPERATUREHISTORY_H
 #define SOLUTION_TEMPERATUREHISTORY_H
 

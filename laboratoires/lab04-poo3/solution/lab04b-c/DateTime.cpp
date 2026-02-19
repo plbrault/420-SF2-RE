@@ -1,7 +1,3 @@
-//
-// Created by plbrault on 2026-02-11.
-//
-
 #include "DateTime.h"
 
 DateTime::DateTime(const Date& date, const Time& time) {
