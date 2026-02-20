@@ -1338,11 +1338,9 @@ Au revoir!
 
 Il vous reste à implémenter la méthode `void deleteDatapoint(size_t index)` de la classe `TemperatureHistory`. Celle-ci doit supprimer la lecture dont l'indice dans le tableau `_datapoints` est passé en paramètre. L'implémentation vide est déjà présente à la fin du fichier `TemperatureHistory.cpp`.
 
-Pour supprimer une température dans le tableau, il suffit de décaler d'un indice vers la gauche chacune des températures suivantes, puis de décrémenter `_size`. Il n'est pas nécessaire de redimensionner le tableau. Si l'indice reçu en paramètre est invalide, il faut lancer un `std::out_of_range`.
+Pour supprimer une température dans le tableau, il suffit de décaler d'un indice vers la gauche chacune des températures suivantes, puis de décrémenter `_size`. Si l'indice reçu en paramètre est invalide, la méthode ne doit rien faire (elle ne doit pas lancer d'exception).
 
-Nous voulons que la suppression soit [idempotente](https://fr.wikipedia.org/wiki/Idempotence), c'est-à-dire qu'elle produise le même résultat si on appelle la méthode plusieurs fois de suite avec le même paramètre. Autrement dit, si l'indice passé en paramètre n'existe pas, il faut simplement quitter la fonction, sans lancer d'erreur.
-
-Il existe une deuxième version de la méthode, qui elle prend en paramètre un moment. Cette deuxième version est déjà implémentée, et elle appelle l'autre version.
+Il existe une deuxième version de la méthode, qui elle prend en paramètre un moment. Cette deuxième version est déjà implémentée, et elle appelle l'autre version. Cette version de la méthode est [idempotente](https://fr.wikipedia.org/wiki/Idempotence), c'est-à-dire qu'elle produit le même résultat si on appelle la méthode plusieurs fois de suite avec le même paramètre. En d'autres mots, il n'y a aucune conséquence au fait de demander la suppression d'un élément déjà supprimé.
 
 Vous pouvez tester votre méthode avec l'exemple d'exécution suivant:
 
