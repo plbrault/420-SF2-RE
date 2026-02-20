@@ -892,7 +892,7 @@ class Time {
 
 Observons les surcharges d'opérateurs arithmétiques prévus pour la classe. On remarque que les opérateurs d'addition ne permettent pas d'additionner un objet `Time` à un autre (cela n'aurait pas vraiment de sens), mais permettent plutôt d'additionner un objet `Duration` à un objet `Time`. Le résultat, dans ce cas, est un `Time`. L'opérateur `-=` permet pour sa part de soustraire un `Duration` à un `Time`. Finalement, l'opérateur `-` est offert en deux versions: une première version qui soustrait un `Duration` à un `Time`, et retourne un `Time`, ainsi qu'une deuxième version qui calcule la différence entre deux `Time` et retourne donc un `Duration`.
 
-Comment additionne-t-on une heure à une durée? Il ne suffit pas d'additionner ensemble les heures, les minutes et les secondes, puisqu'on aurait alors des résultats du genre `01:35:59 + 02:40:15 = 03:75:74`, ce qui n'est évidemment pas une heure valide. Dans notre exemple, le résultat correct serait plutôt `04:16:14`. Les calculs nécessaires pour implémenter l'addition, et encore plus la soubstraction, seront fastidieux à implémenter... à moins qu'on puisse les éviter complètement? 🤔 Prenez *le temps* d'y penser.
+Comment additionne-t-on une heure à une durée? Il ne suffit pas d'additionner ensemble les heures, les minutes et les secondes, puisqu'on aurait alors des résultats du genre `01:35:59 + 02:40:15 = 03:75:74`, ce qui n'est évidemment pas une heure valide. Dans notre exemple, le résultat correct serait plutôt `04:16:14`. Les calculs nécessaires pour implémenter l'addition, et encore plus la soustraction, seront fastidieux à implémenter... à moins qu'on puisse les éviter complètement? 🤔 Prenez *le temps* d'y penser.
 
 Sérieusement, pensez-y.
 
