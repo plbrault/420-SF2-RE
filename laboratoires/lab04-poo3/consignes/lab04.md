@@ -1045,7 +1045,7 @@ class DateTime {
 @enduml
 ```
 
-Le format d'affichage d'un `DateTime`, pour respecter le format ISO, est `AAAA-MM-JJTHH:MM:SS` (ex: `2026-02-15T11:29:31`).
+Le format d'affichage d'un `DateTime`, pour respecter le format ISO, est `AAAA-MM-JJTHH:MM:SS` (ex: `2026-02-15T11:29:31`). N'oubliez pas d'implémenter les opérateurs `<<` et `>>`.
 
 Remarquez que le constructeur sans paramètre de la classe `DateTime` n'a rien à faire, puisque les attributs `_date` et `_time` sont déjà initialisés par les constructeurs de leurs classes respectives. De la même façon, la classe `DateTime` devrait réutiliser ce qui est déjà implémenté dans ces classes partout où c'est possible.
 
