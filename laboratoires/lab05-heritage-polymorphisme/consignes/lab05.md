@@ -25,3 +25,11 @@ Remarquer que suite à ces étapes, il n'y a plus rien dans Time.cpp (sauf du co
 15 - Surcharger addHours pour la même raison, doit retourner un Time& au lieu de Duration&, et retourne *this
 16 - Montrer que `t.addHours(1).addMinutes(1).addHours(42);` fonctionne et expliquer pourquoi
 17 - Surcharger addMinutes et addSeconds
+
+Surcharges d'opérateurs arithmétiques. Les étapes suivantes doivent être effectuées au complet pour que ça compile:
+
+18 - Décommenter les surcharges
+19 - Adapter += pour appeler la méthode parente et faire la validation (réparer l'objet en cas d'erreur comme dans addHours, etc)
+20 - Adapter -= pour retourner bon type d'objet, aucune validation supplémentaire
+21 - constater qu'opérateurs + et -(duration) sont encore bons
+22 - retirer operator- puisque celui de la classe mère fait la job

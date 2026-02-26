@@ -3,10 +3,6 @@
 #include "Menu.h"
 
 int main() {
-    Time t;
-    t.addHours(1).addMinutes(1).addHours(42);
-    std::cout << t << std::endl;
-
     Menu menu(true);
     menu.ajouterOption("Charger l'historique");
     menu.ajouterOption("Afficher la température à un moment précis");
