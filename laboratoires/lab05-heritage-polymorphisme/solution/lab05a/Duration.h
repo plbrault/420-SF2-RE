@@ -16,6 +16,11 @@ public:
     unsigned int getMinutes() const;
     unsigned int getSeconds() const;
 
+    void setTotalSeconds(unsigned long int totalSeconds);
+    void setHours(unsigned int hours);
+    void setMinutes(unsigned int minutes);
+    void setSeconds(unsigned int seconds);
+
     Duration& addHours(unsigned int hours);
     Duration& addMinutes(unsigned int minutes);
     Duration& addSeconds(unsigned long int seconds);

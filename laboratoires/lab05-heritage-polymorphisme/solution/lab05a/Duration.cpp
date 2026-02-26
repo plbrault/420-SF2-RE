@@ -26,6 +26,29 @@ unsigned int Duration::getSeconds() const {
     return this->_totalSeconds % 60;
 }
 
+void Duration::setTotalSeconds(unsigned long int totalSeconds) {
+    this->_totalSeconds = totalSeconds;
+
+}
+
+void Duration::setHours(unsigned int hours) {
+    this->setTotalSeconds(hours * 3600 + this->getMinutes() * 60 + this->getSeconds());
+}
+
+void Duration::setMinutes(unsigned int minutes) {
+    if (minutes >= 60) {
+        throw std::invalid_argument("Les minutes doivent être comprises entre 0 et 59.");
+    }
+    this->setTotalSeconds(this->getHours() * 3600 + minutes * 60 + this->getSeconds());
+}
+
+void Duration::setSeconds(unsigned int seconds) {
+    if (seconds >= 60) {
+        throw std::invalid_argument("Les secondes doivent être comprises entre 0 et 59.");
+    }
+    this->setTotalSeconds(this->getHours() * 3600 + this->getMinutes() * 60 + seconds);
+}
+
 Duration& Duration::addHours(unsigned int hours) {
     return this->addSeconds(hours * 3600);
 }

@@ -19,3 +19,5 @@
 
 Remarquer que suite à ces étapes, il n'y a plus rien dans Time.cpp (sauf du code commenté)
 
+12 - Ajouter setHours, setMinutes et setSeconds directement dans Duration. Il y a une validation pour setMinutes et setSeconds, mais pas pour setHours (vu qu'on est dans la classe Duration). Les méthodes peuvent retourner *this pour permettre le chaînage.
+13 - Ajouter des tests avec Time au début du main.
