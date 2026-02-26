@@ -5,7 +5,6 @@
 #include "Duration.h"
 
 class Time : public Duration {
-private:
 public:
     Time() : Time(0, 0, 0) {}
     Time(unsigned int hours, unsigned int minutes, unsigned int seconds) : Duration(hours, minutes, seconds) {}
@@ -20,6 +19,12 @@ public:
     Time operator+(const Duration& duration) const;
     Time& operator-=(const Duration& duration);
     Time operator-(const Duration& duration) const;
+
+    Duration& operator*=(double factor) = delete;
+    Duration operator*(double factor) = delete;
+    Duration& operator/=(double divisor) = delete;
+    Duration operator/(double divisor) = delete;
+    double operator/(const Duration& divisor) = delete;
 };
 
 #endif //SOLUTION_TIME_H

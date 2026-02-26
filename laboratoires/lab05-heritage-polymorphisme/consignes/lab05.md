@@ -33,3 +33,4 @@ Surcharges d'opérateurs arithmétiques. Les étapes suivantes doivent être eff
 20 - Adapter -= pour retourner bon type d'objet, aucune validation supplémentaire
 21 - constater qu'opérateurs + et -(duration) sont encore bons
 22 - retirer operator- puisque celui de la classe mère fait la job
+23 - Ajouter des définitions avec `= delete` pour les opérateurs de Duration qui ne font pas de sens pour Time
