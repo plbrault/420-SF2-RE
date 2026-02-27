@@ -18,8 +18,8 @@ Dans les deux premières parties de laboratoire, vous effectuerez des refactoris
 Ce laboratoire comprend trois parties:
 
 * **Laboratoire 05-A**: Refactorisation des classes `Time` et `Duration`
-* **Laboratoire 04-B**: Introduction du polymorphisme et refactorisation de la classe `Date`
-* **Laboratoire 04-C**: Création d'un programme utilisant une classe abstraite
+* **Laboratoire 05-B**: Introduction du polymorphisme et refactorisation de la classe `Date`
+* **Laboratoire 05-C**: Création d'un programme utilisant une classe abstraite
 
 ## Laboratoire 05-A - Refactorisation de la classe `Time`
 
@@ -330,7 +330,7 @@ Il faut aussi surcharger `addHours` pour ajouter la même validation. Voici l'im
 ```cpp
 Time& Time::addHours(unsigned int hours) {
     // Faire une sauvegarde de la valeur actuelle de `_totalSeconds`
-    unsigned int previousTotalSeconds = this->getTotalSeconds();
+    unsigned long int previousTotalSeconds = this->getTotalSeconds();
 
     // Appeler la méthode `addHours` de la classe mère, qui modifie `_totalSeconds`
     Duration::addHours(hours);

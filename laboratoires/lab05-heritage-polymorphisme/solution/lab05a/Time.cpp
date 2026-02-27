@@ -16,7 +16,7 @@ void Time::setHours(unsigned int hours) {
 }
 
 Time& Time::addHours(unsigned int hours) {
-    unsigned int previousTotalSeconds = this->getTotalSeconds();
+    unsigned long int previousTotalSeconds = this->getTotalSeconds();
     Duration::addHours(hours);
     if (this->getTotalSeconds() >= 24 * 3600) {
         this->setTotalSeconds(previousTotalSeconds);
@@ -26,7 +26,7 @@ Time& Time::addHours(unsigned int hours) {
 }
 
 Time& Time::addMinutes(unsigned int minutes) {
-    unsigned int previousTotalSeconds = this->getTotalSeconds();
+    unsigned long int previousTotalSeconds = this->getTotalSeconds();
     Duration::addMinutes(minutes);
     if (this->getTotalSeconds() >= 24 * 3600) {
         this->setTotalSeconds(previousTotalSeconds);
@@ -36,7 +36,7 @@ Time& Time::addMinutes(unsigned int minutes) {
 }
 
 Time& Time::addSeconds(unsigned int seconds) {
-    unsigned int previousTotalSeconds = this->getTotalSeconds();
+    unsigned long int previousTotalSeconds = this->getTotalSeconds();
     Duration::addSeconds(seconds);
     if (this->getTotalSeconds() >= 24 * 3600) {
         this->setTotalSeconds(previousTotalSeconds);
@@ -55,7 +55,7 @@ void Time::read(std::istream &input) {
 }
 
 Time& Time::operator+=(const Duration& duration) {
-    unsigned int previousTotalSeconds = this->getTotalSeconds();
+    unsigned long int previousTotalSeconds = this->getTotalSeconds();
     Duration::operator+=(duration);
     if (this->getHours() >= 24) {
         this->setTotalSeconds(previousTotalSeconds);
