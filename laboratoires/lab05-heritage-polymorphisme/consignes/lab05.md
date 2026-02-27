@@ -260,7 +260,7 @@ Duration <|-- Time
 En observant ce diagramme, vous pouvez remarquer plusieurs choses:
 
 1. L'attribut `_totalSeconds` de la classe `Duration` est maintenant protégé (représenté par un losange) plutôt que privé
-2. Des méthodes `setHours`, `setMinutes` et `setSeconds` ont été ajoutées directement dans la classe `Duration`
+2. Des méthodes `setTotalSeconds`, `setHours`, `setMinutes` et `setSeconds` ont été ajoutées dans la classe `Duration`
 3. Il n'y a plus d'attributs dans la classe `Time`
 4. Plusieurs méthodes de la classe `Time` sont disparues
 5. Malgré le lien d'héritage, plusieurs méthodes se trouvent à la fois dans la classe `Duration` et dans la classe `Time`
@@ -282,23 +282,94 @@ Apportez les modifications suivantes à la classe `Time`. Ces modification doive
 3. Retirer les accesseurs `getHours`, `getMinutes` et `getSeconds`.
 4. Retirer aussi les mutateurs (nous allons les réimplémenter dans la classe mère dans une étape ultérieure).
 5. Retirer les méthodes `toString` et `print`.
-6. Retirer le code qui se trouve dans la méthode `read`, mais conservez cette méthode. Nous y reviendrons.
+6. Retirer le code qui se trouve dans la méthode `read`, mais conserver la méthode vide. Nous y reviendrons.
 7. Retirer tous les opérateurs de comparaison.
 8. Mettre en commentaire les opérateurs arithmétiques pour le moment.
 9. Retirer la surcharge d'opérateur `<<`, mais conserver `>>`.
+
+### Étape 3
+
+Ajoutez les méthodes `setTotalSeconds`, `setHours`, `setMinutes` et `setSeconds` dans la classe `Duration`. Voici une implémentation possible de la méthode `setHours`, dont vous pouvez vous inspirer pour implémenter les méthodes `setMinutes` et `setSeconds`:
+
+```cpp
+void Duration::setHours(unsigned int hours) {
+    this->setTotalSeconds(hours * 3600 + this->getMinutes() * 60 + this->getSeconds());
+}
+```
+
+N'oubliez pas que l'objectif de ces méthodes est de changer uniquement la valeur de l'unité de temps correspondante. Par exemple, si on appelle `setMinutes(22)` sur la durée `07:30:25`, elle doit devenir `07:22:25`.
+
+### Étape 4
+
+Il faut maintenant **surcharger** les méthodes `setTotalSeconds` et `setHours` dans la classe `Time` afin d'ajouter une validation pour s'assurer que le nombre d'heures ne dépasse jamais 23
+
+Lorsqu'on surcharge une méthode de la classe mère, l'idéal est de réutiliser autant que possible l'implémentation existante. Voici donc les implémentations qui vous sont proposées:
+
+```cpp
+void Time::setTotalSeconds(unsigned long int totalSeconds) {
+    if (totalSeconds >= 24 * 3600) {
+        throw std::invalid_argument("Le nombre total de secondes doit être inférieur à 86400 (24 heures).");
+    }
+    Duration::setTotalSeconds(totalSeconds);
+}
+```
+
+```cpp
+void Time::setHours(unsigned int hours) {
+    if (hours >= 24) {
+        throw std::invalid_argument("Les heures doivent être comprises entre 0 et 23.");
+    }
+    Duration::setHours(hours);
+}
+```
+
+### Étape 5
+
+Il faut aussi surcharger `addHours` pour ajouter la même validation. Voici l'implémentation proposée:
+
+```cpp
+Time& Time::addHours(unsigned int hours) {
+    // Faire une sauvegarde de la valeur actuelle de `_totalSeconds`
+    unsigned int previousTotalSeconds = this->getTotalSeconds();
+
+    // Appeler la méthode `addHours` de la classe mère, qui modifie `_totalSeconds`
+    Duration::addHours(hours);
+
+    if (this->getTotalSeconds() >= 24 * 3600) { // Si la nouvelle valeur est invalide
+        // Annuler le changement
+        this->setTotalSeconds(previousTotalSeconds);
+
+        // Lancer une exception.
+        throw std::overflow_error("Heure dépassant la valeur maximale de 23:59:59.");
+    }
+
+    return *this;
+}
+```
+
+Vérifiez que votre validation fonctionne en ajoutant du code de test au début du `main`.  Testez ensuite le code suivant:
+
+```cpp
+Time t;
+t.addMinutes(30).addHours(42);
+std::cout << t << std::endl;
+```
+
+Vous remarquerez que la valeur qui s'affiche est `42:30:00`. La valeur `42` pour les heures ne respecte pourtant pas la condition de validation. C'est parce que la méthode `addMinutes`, implémentée uniquement dans `Duration`, retourne l'objet (`*this`) en tant que `Duration` et non en tant que `Time`. C'est donc la version de `Time` de la méthode `addHours` qui est ensuite appelée!
+
+Surchargez maintenant les méthodes `addMinutes` et `addSeconds` en incluant la même validation que dans la méthode `addHours` (puisque l'ajout de minutes ou de secondes à un `Duration` peut le faire dépasser la valeur `23:59:59`, ce qui n'est pas permis dans un `Time`). Assurez-vous de retourner un objet `Time` et non un objet `Duration`.
+
+### Étape 6
+
+Ré-ajoutez du code dans la méthode `read`. Celle-ci doit réutiliser la méthode de la classe parente tout en y ajoutant une validation, comme vous l'avez fait pour les méthodes précédentes.
+
+Vous constaterez que l'opérateur `<<` fonctionne comme avant. C'est parce qu'il appelait déjà votre méthode `read`, dont vous avez maintenant changé l'implémentation.
 
 ----
 
 Étapes à inclure dans le lab 05-A:
 
 
-12 - Ajouter setHours, setMinutes et setSeconds directement dans Duration. Il y a une validation pour setMinutes et setSeconds, mais pas pour setHours (vu qu'on est dans la classe Duration).
-13 - Ajouter des tests avec Time au début du main.
-14 - Surcharger setTotalSeconds et setHours dans Time pour faire la validation, puis appeler la méthode de Duration
-15 - Surcharger addHours pour la même raison, doit retourner un Time& au lieu de Duration&, et retourne *this
-16 - Montrer que `t.addHours(1).addMinutes(1).addHours(42);` fonctionne et expliquer pourquoi
-17 - Surcharger addMinutes et addSeconds
-17.5 - Surcharger read et constater que l'opérateur >> fonctionne encore
 
 Surcharges d'opérateurs arithmétiques. Les étapes suivantes doivent être effectuées au complet pour que ça compile:
 
