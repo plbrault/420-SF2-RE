@@ -269,36 +269,36 @@ Pourquoi donc les méthodes `setTotalSeconds`, `setHours`, `addHours`, `addMinut
 
 ***⚠️ N'oubliez pas de tester vos modifications après chaque étape en vérifiant que le programme continue de fonctionner comme avant, ou en ajoutant au besoin du code de test temporaire au début du `main`.***
 
+### Étape 1
+
+Commencez par changer le spécificateur d'accès de l'attribut `_totalSeconds` de la classe `Duration` de `private` à `protected`, puis faites hériter la classe `Time` de la classe `Duration` de manière publique. Vérifiez que le code compile toujours.
+
+### Étape 2
+
+Apportez les modifications suivantes à la classe `Time`. Ces modification doivent être effectuées dans leur entièreté avant que le code compile à nouveau.
+
+1. Retirer les trois attributs (`_hours`, `_minutes` et `_seconds`) de `Time`.
+2. Retirer l'implémentation du constructeur avec paramètres du fichier `Time.cpp`, et remplacez sa définition de façon à appeler le constructeur de la classe `Duration` directement dans le fichier `Time.h` avec une implémentation vide (voir l'exemple de constructeur d'une classe fille dans la présentation du chapitre 05-A).
+3. Retirer les accesseurs `getHours`, `getMinutes` et `getSeconds`.
+4. Retirer aussi les mutateurs (nous allons les réimplémenter dans la classe mère dans une étape ultérieure).
+5. Retirer les méthodes `toString` et `print`.
+6. Retirer le code qui se trouve dans la méthode `read`, mais conservez cette méthode. Nous y reviendrons.
+7. Retirer tous les opérateurs de comparaison.
+8. Mettre en commentaire les opérateurs arithmétiques pour le moment.
+9. Retirer la surcharge d'opérateur `<<`, mais conserver `>>`.
+
 ----
 
 Étapes à inclure dans le lab 05-A:
 
-0 - Expliquer qu'on va faire un refactor, et ce que ça veut dire
 
-1 - Changer private pour public dans Duration
-2 - Faire hériter Time de Duration
-
-Étapes à faire au complet avant de pouvoir compiler à nouveau:
-
-3 - Retirer les trois attributs (_hours, _minutes, _seconds) de Time.
-4 - Retirer l'implémentation du constructeur avec paramètres et appeler celui de Duration
-5 - Retirer les getters getHours, getMinutes et getSeconds
-6 - Retirer aussi les setters (nous allons les réimplémenter dans Duration dans une étape ultérieure)
-7 - Retirer toString, print et read
-8 - Retirer tous les opérateurs de comparaison
-9 - Mettre en commentaires les opérateurs arithmétiques pour le moment
-10 - Retirer les surcharges d'opérateurs << et >>
-11 - Vérifier que le programme fonctionne encore comme avant (on devrait encore pouvoir faire afficher une température à un moment précis)
-
-Remarquer que suite à ces étapes, il n'y a plus rien dans Time.cpp (sauf du code commenté)
-
-12 - Ajouter setHours, setMinutes et setSeconds directement dans Duration. Il y a une validation pour setMinutes et setSeconds, mais pas pour setHours (vu qu'on est dans la classe Duration). Les méthodes peuvent retourner *this pour permettre le chaînage.
+12 - Ajouter setHours, setMinutes et setSeconds directement dans Duration. Il y a une validation pour setMinutes et setSeconds, mais pas pour setHours (vu qu'on est dans la classe Duration).
 13 - Ajouter des tests avec Time au début du main.
 14 - Surcharger setTotalSeconds et setHours dans Time pour faire la validation, puis appeler la méthode de Duration
 15 - Surcharger addHours pour la même raison, doit retourner un Time& au lieu de Duration&, et retourne *this
 16 - Montrer que `t.addHours(1).addMinutes(1).addHours(42);` fonctionne et expliquer pourquoi
 17 - Surcharger addMinutes et addSeconds
-17.5 - Surcharger read et réimplémenter l'opérateur <<
+17.5 - Surcharger read et constater que l'opérateur >> fonctionne encore
 
 Surcharges d'opérateurs arithmétiques. Les étapes suivantes doivent être effectuées au complet pour que ça compile:
 
