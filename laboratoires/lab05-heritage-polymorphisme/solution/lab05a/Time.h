@@ -15,6 +15,8 @@ public:
     Time& addMinutes(unsigned int minutes);
     Time& addSeconds(unsigned int seconds);
 
+    void read(std::istream& input);
+
     Time& operator+=(const Duration& duration);
     Time operator+(const Duration& duration) const;
     Time& operator-=(const Duration& duration);
@@ -26,5 +28,7 @@ public:
     Duration operator/(double divisor) = delete;
     double operator/(const Duration& divisor) = delete;
 };
+
+std::istream& operator>>(std::istream& input, Time& time);
 
 #endif //SOLUTION_TIME_H

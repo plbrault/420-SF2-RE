@@ -45,6 +45,15 @@ Time& Time::addSeconds(unsigned int seconds) {
     return *this;
 }
 
+void Time::read(std::istream &input) {
+    unsigned long int previousTotalSeconds = this->getTotalSeconds();
+    Duration::read(input);
+    if (this->getTotalSeconds() >= 24 * 3600) {
+        this->setTotalSeconds(previousTotalSeconds);
+        throw std::invalid_argument("Heure dépassant la valeur maximale de 23:59:59.");
+    }
+}
+
 Time& Time::operator+=(const Duration& duration) {
     unsigned int previousTotalSeconds = this->getTotalSeconds();
     Duration::operator+=(duration);
@@ -70,4 +79,9 @@ Time Time::operator-(const Duration& duration) const {
     Time result = *this;
     result -= duration;
     return result;
+}
+
+std::istream& operator>>(std::istream& input, Time& time) {
+    time.read(input);
+    return input;
 }
