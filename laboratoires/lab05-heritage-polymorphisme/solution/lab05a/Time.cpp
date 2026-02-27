@@ -81,6 +81,10 @@ Time Time::operator-(const Duration& duration) const {
     return result;
 }
 
+Duration Time::operator-(const Time& other) const {
+    return Duration::operator-(other);
+}
+
 std::istream& operator>>(std::istream& input, Time& time) {
     time.read(input);
     return input;

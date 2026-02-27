@@ -275,7 +275,7 @@ Commencez par changer le spécificateur d'accès de l'attribut `_totalSeconds` d
 
 ### Étape 2
 
-Apportez les modifications suivantes à la classe `Time`. Ces modification doivent être effectuées dans leur entièreté avant que le code compile à nouveau.
+Apportez les modifications suivantes à la classe `Time`. Ces modifications doivent être effectuées dans leur entièreté avant que le code compile à nouveau.
 
 1. Retirer les trois attributs (`_hours`, `_minutes` et `_seconds`) de `Time`.
 2. Retirer l'implémentation du constructeur avec paramètres du fichier `Time.cpp`, et remplacez sa définition de façon à appeler le constructeur de la classe `Duration` directement dans le fichier `Time.h` avec une implémentation vide (voir l'exemple de constructeur d'une classe fille dans la présentation du chapitre 05-A).
@@ -365,17 +365,33 @@ Ré-ajoutez du code dans la méthode `read`. Celle-ci doit réutiliser la métho
 
 Vous constaterez que l'opérateur `<<` fonctionne comme avant. C'est parce qu'il appelait déjà votre méthode `read`, dont vous avez maintenant changé l'implémentation.
 
-----
+### Étape 7
 
-Étapes à inclure dans le lab 05-A:
+Apportez les modifications suivantes à la classe `Time`. Ces modifications doivent être effectuées dans leur entièreté avant que le code compile à nouveau.
 
+1. Décommentez les surcharges d'opérateurs arithmétiques
+2. Adaptez l'opérateur `+=` afin d'ajouter la validation nécessaire tout en réutilisant l'opérateur de la classe mère. Il n'y a rien à changer dans l'opérateur `+` à condition que celui-ci réutilise votre opérateur `+=`.
+3. Adaptez l'opérateur `-=` afin qu'il retourne le bon type d'objet tout en réutilisant l'opérateur de la classe mère. Il n'y a aucune validation supplémentaire à ajouter pour cette méthode. Il n'y a rien à changer dans la version de l'opérateur `-` qui prend en paramètre un `Duration`,  à condition que celui-ci réutilise votre opérateur `+=`.
+4. Remplacez le corps de la version de l'opérateur `-` qui prend en paramètre un `Time` par `return Duration::operator-(other);`. Cela est suffisant puisque l'opérateur de la classe mère fait déjà ce qu'on veut. On veut seulement s'assurer de retourner un `Duration` et non un `Time`.
 
+### Étape 8
 
-Surcharges d'opérateurs arithmétiques. Les étapes suivantes doivent être effectuées au complet pour que ça compile:
+Certains opérateurs arithmétiques implémentés dans la classe `Duration` ne font pas vraiment de sens dans la classe `Time`. Vous pouvez donc ajouter les lignes de code ci-dessous dans la partie publique de votre classe `Time`. Le mot-clé `delete`, dans ce cas-ci, **désactive** les méthodes correspondantes de la classe mère dans la classe fille.
 
-18 - Décommenter les surcharges
-19 - Adapter += pour appeler la méthode parente et faire la validation (réparer l'objet en cas d'erreur comme dans addHours, etc)
-20 - Adapter -= pour retourner bon type d'objet, aucune validation supplémentaire
-21 - constater qu'opérateurs + et -(duration) sont encore bons
-22 - retirer operator- puisque celui de la classe mère fait la job
-23 - Ajouter des définitions avec `= delete` pour les opérateurs de Duration qui ne font pas de sens pour Time
+```cpp
+Duration& operator*=(double factor) = delete;
+Duration operator*(double factor) = delete;
+Duration& operator/=(double divisor) = delete;
+Duration operator/(double divisor) = delete;
+double operator/(const Duration& divisor) = delete;
+```
+
+**⚠️ Faites valider votre laboratoire 05-A par l'enseignant.**
+
+## Laboratoire 05-B
+
+À venir
+
+## Laboratoire 05-C
+
+À venir

@@ -21,6 +21,7 @@ public:
     Time operator+(const Duration& duration) const;
     Time& operator-=(const Duration& duration);
     Time operator-(const Duration& duration) const;
+    Duration operator-(const Time& other) const;
 
     Duration& operator*=(double factor) = delete;
     Duration operator*(double factor) = delete;
