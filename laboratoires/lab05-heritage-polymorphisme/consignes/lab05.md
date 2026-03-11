@@ -363,7 +363,7 @@ Surchargez maintenant les méthodes `addMinutes` et `addSeconds` en incluant la 
 
 Ré-ajoutez du code dans la méthode `read`. Celle-ci doit réutiliser la méthode de la classe parente tout en y ajoutant une validation, comme vous l'avez fait pour les méthodes précédentes.
 
-Vous constaterez que l'opérateur `<<` fonctionne comme avant. C'est parce qu'il appelait déjà votre méthode `read`, dont vous avez maintenant changé l'implémentation.
+Vous constaterez que l'opérateur `>>` fonctionne comme avant. C'est parce qu'il appelait déjà votre méthode `read`, dont vous avez maintenant changé l'implémentation.
 
 ### Étape 7
 
@@ -371,7 +371,7 @@ Apportez les modifications suivantes à la classe `Time`. Ces modifications doiv
 
 1. Décommentez les surcharges d'opérateurs arithmétiques
 2. Adaptez l'opérateur `+=` afin d'ajouter la validation nécessaire tout en réutilisant l'opérateur de la classe mère. Il n'y a rien à changer dans l'opérateur `+` à condition que celui-ci réutilise votre opérateur `+=`.
-3. Adaptez l'opérateur `-=` afin qu'il retourne le bon type d'objet tout en réutilisant l'opérateur de la classe mère. Il n'y a aucune validation supplémentaire à ajouter pour cette méthode. Il n'y a rien à changer dans la version de l'opérateur `-` qui prend en paramètre un `Duration`,  à condition que celui-ci réutilise votre opérateur `+=`.
+3. Adaptez l'opérateur `-=` afin qu'il retourne le bon type d'objet tout en réutilisant l'opérateur de la classe mère. Il n'y a aucune validation supplémentaire à ajouter pour cette méthode. Il n'y a rien à changer dans la version de l'opérateur `-` qui prend en paramètre un `Duration`,  à condition que celui-ci réutilise votre opérateur `-=`.
 4. Remplacez le corps de la version de l'opérateur `-` qui prend en paramètre un `Time` par `return Duration::operator-(other);`. Cela est suffisant puisque l'opérateur de la classe mère fait déjà ce qu'on veut. On veut seulement s'assurer de retourner un `Duration` et non un `Time`.
 
 ### Étape 8
