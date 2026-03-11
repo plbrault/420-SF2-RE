@@ -892,7 +892,7 @@ class Time {
 
 Observons les surcharges d'opérateurs arithmétiques prévus pour la classe. On remarque que les opérateurs d'addition ne permettent pas d'additionner un objet `Time` à un autre (cela n'aurait pas vraiment de sens), mais permettent plutôt d'additionner un objet `Duration` à un objet `Time`. Le résultat, dans ce cas, est un `Time`. L'opérateur `-=` permet pour sa part de soustraire un `Duration` à un `Time`. Finalement, l'opérateur `-` est offert en deux versions: une première version qui soustrait un `Duration` à un `Time`, et retourne un `Time`, ainsi qu'une deuxième version qui calcule la différence entre deux `Time` et retourne donc un `Duration`.
 
-Comment additionne-t-on une heure à une durée? Il ne suffit pas d'additionner ensemble les heures, les minutes et les secondes, puisqu'on aurait alors des résultats du genre `01:35:59 + 02:40:15 = 03:75:74`, ce qui n'est évidemment pas une heure valide. Dans notre exemple, le résultat correct serait plutôt `04:16:14`. Les calculs nécessaires pour implémenter l'addition, et encore plus la soubstraction, seront fastidieux à implémenter... à moins qu'on puisse les éviter complètement? 🤔 Prenez *le temps* d'y penser.
+Comment additionne-t-on une heure à une durée? Il ne suffit pas d'additionner ensemble les heures, les minutes et les secondes, puisqu'on aurait alors des résultats du genre `01:35:59 + 02:40:15 = 03:75:74`, ce qui n'est évidemment pas une heure valide. Dans notre exemple, le résultat correct serait plutôt `04:16:14`. Les calculs nécessaires pour implémenter l'addition, et encore plus la soustraction, seront fastidieux à implémenter... à moins qu'on puisse les éviter complètement? 🤔 Prenez *le temps* d'y penser.
 
 Sérieusement, pensez-y.
 
@@ -1045,7 +1045,7 @@ class DateTime {
 @enduml
 ```
 
-Le format d'affichage d'un `DateTime`, pour respecter le format ISO, est `AAAA-MM-JJTHH:MM:SS` (ex: `2026-02-15T11:29:31`).
+Le format d'affichage d'un `DateTime`, pour respecter le format ISO, est `AAAA-MM-JJTHH:MM:SS` (ex: `2026-02-15T11:29:31`). N'oubliez pas d'implémenter les opérateurs `<<` et `>>`.
 
 Remarquez que le constructeur sans paramètre de la classe `DateTime` n'a rien à faire, puisque les attributs `_date` et `_time` sont déjà initialisés par les constructeurs de leurs classes respectives. De la même façon, la classe `DateTime` devrait réutiliser ce qui est déjà implémenté dans ces classes partout où c'est possible.
 
@@ -1338,11 +1338,9 @@ Au revoir!
 
 Il vous reste à implémenter la méthode `void deleteDatapoint(size_t index)` de la classe `TemperatureHistory`. Celle-ci doit supprimer la lecture dont l'indice dans le tableau `_datapoints` est passé en paramètre. L'implémentation vide est déjà présente à la fin du fichier `TemperatureHistory.cpp`.
 
-Pour supprimer une température dans le tableau, il suffit de décaler d'un indice vers la gauche chacune des températures suivantes, puis de décrémenter `_size`. Il n'est pas nécessaire de redimensionner le tableau. Si l'indice reçu en paramètre est invalide, il faut lancer un `std::out_of_range`.
+Pour supprimer une température dans le tableau, il suffit de décaler d'un indice vers la gauche chacune des températures suivantes, puis de décrémenter `_size`. Si l'indice reçu en paramètre est invalide, la méthode ne doit rien faire (elle ne doit pas lancer d'exception).
 
-Nous voulons que la suppression soit [idempotente](https://fr.wikipedia.org/wiki/Idempotence), c'est-à-dire qu'elle produise le même résultat si on appelle la méthode plusieurs fois de suite avec le même paramètre. Autrement dit, si l'indice passé en paramètre n'existe pas, il faut simplement quitter la fonction, sans lancer d'erreur.
-
-Il existe une deuxième version de la méthode, qui elle prend en paramètre un moment. Cette deuxième version est déjà implémentée, et elle appelle l'autre version.
+Il existe une deuxième version de la méthode, qui elle prend en paramètre un moment. Cette deuxième version est déjà implémentée, et elle appelle l'autre version. Cette version de la méthode est [idempotente](https://fr.wikipedia.org/wiki/Idempotence), c'est-à-dire qu'elle produit le même résultat si on appelle la méthode plusieurs fois de suite avec le même paramètre. En d'autres mots, il n'y a aucune conséquence au fait de demander la suppression d'un élément déjà supprimé.
 
 Vous pouvez tester votre méthode avec l'exemple d'exécution suivant:
 
