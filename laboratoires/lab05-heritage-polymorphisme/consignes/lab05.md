@@ -355,7 +355,7 @@ t.addMinutes(30).addHours(42);
 std::cout << t << std::endl;
 ```
 
-Vous remarquerez que la valeur qui s'affiche est `42:30:00`. La valeur `42` pour les heures ne respecte pourtant pas la condition de validation. C'est parce que la méthode `addMinutes`, implémentée uniquement dans `Duration`, retourne l'objet (`*this`) en tant que `Duration` et non en tant que `Time`. C'est donc la version de `Time` de la méthode `addHours` qui est ensuite appelée!
+Vous remarquerez que la valeur qui s'affiche est `42:30:00`. La valeur `42` pour les heures ne respecte pourtant pas la condition de validation. C'est parce que la méthode `addMinutes`, implémentée uniquement dans `Duration`, retourne l'objet (`*this`) en tant que `Duration` et non en tant que `Time`. C'est donc la version de `Duration` de la méthode `addHours` qui est ensuite appelée!
 
 Surchargez maintenant les méthodes `addMinutes` et `addSeconds` en incluant la même validation que dans la méthode `addHours` (puisque l'ajout de minutes ou de secondes à un `Duration` peut le faire dépasser la valeur `23:59:59`, ce qui n'est pas permis dans un `Time`). Assurez-vous de retourner un objet `Time` et non un objet `Duration`.
 
