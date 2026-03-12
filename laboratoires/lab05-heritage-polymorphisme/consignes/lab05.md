@@ -392,6 +392,47 @@ double operator/(const Duration& divisor) = delete;
 
 À venir
 
+Duration
+
+Mettre les méthodes suivantes virtual:
+
+- setTotalSeconds
+- setHours
+- setMinutes
+- setSeconds
+- addHours
+- addMinutes
+- addSeconds
+- subtractHours
+- subtractMinutes
+- subtractSeconds
+- read
+- operator+=
+- operator-=
+- operator*=
+- operator*
+- operator/=
+- operator/
+- operator/
+
+PAS pour operator+, operator-, operator* et operator/ (impossible à override par Duration car retourne type différent par valeur)
+Pas trop grave car ne risque pas de briser l'objet Time
+
+Time
+
+Mettre override aux méthodes suivantes (seulement dans le .h):
+
+- setTotalSeconds
+- setHours
+- addHours
+- addMinutes
+- addSeconds
+- read
+- operator+=
+- operator-=
+
+Pour les méthodes *= et /=, il faut enlever le `= delete` et mettre override. Ensuite, implémenter dans le .cpp et lancer une std::logic_error.
+
 ## Laboratoire 05-C
 
 À venir
