@@ -18,8 +18,8 @@ Dans les deux premières parties de laboratoire, vous effectuerez des refactoris
 Ce laboratoire comprend trois parties:
 
 * **Laboratoire 05-A**: Refactorisation des classes `Time` et `Duration`
-* **Laboratoire 05-B**: Introduction du polymorphisme et refactorisation de la classe `Date`
-* **Laboratoire 05-C**: Création d'un programme utilisant une classe abstraite
+* **Laboratoire 05-B**: Introduction du polymorphisme
+* **Laboratoire 05-C**: Introduction d'une classe abstraite
 
 ## Laboratoire 05-A - Refactorisation de la classe `Time`
 
@@ -388,55 +388,69 @@ double operator/(const Duration& divisor) = delete;
 
 **⚠️ Faites valider votre laboratoire 05-A par l'enseignant.**
 
-## Laboratoire 05-B
+## Laboratoire 05-B - Introduction du polymorphisme
 
-À venir
-
-Duration
-
-Mettre les méthodes suivantes virtual:
-
-- setTotalSeconds
-- setHours
-- setMinutes
-- setSeconds
-- addHours
-- addMinutes
-- addSeconds
-- subtractHours
-- subtractMinutes
-- subtractSeconds
-- read
-- operator+=
-- operator-=
-- operator*=
-- operator*
-- operator/=
-- operator/
-- operator/
-
-PAS pour operator+, operator-, operator* et operator/ (impossible à override par Duration car retourne type différent par valeur)
-Pas trop grave car ne risque pas de briser l'objet Time
-
-Time
-
-Mettre override aux méthodes suivantes (seulement dans le .h):
-
-- setTotalSeconds
-- setHours
-- addHours
-- addMinutes
-- addSeconds
-- read
-- operator+=
-- operator-=
-
-Pour les méthodes *= et /=, il faut enlever le `= delete` et mettre override. Ensuite, implémenter dans le .cpp et lancer une std::logic_error.
-
-Code de test au début du main (commenter le reste)
+Puisque la classe `Time` hérite maintenant de la classe `Duration`, un pointeur ou une référence de type `Duration` peut maintenant pointer sur une instance de la classe `Time`. Voici un exemple de code qui est maintenant valide:
 
 ```cpp
-Duration* temporalUnits[2]; // Attention: ceci est un tableau de 2 pointeurs de Duration et non pointeur sur un tableau de 2 Duration!
+void modifierDuree(Duration& duree) {
+    duree.setHours(25);
+}
+
+void modifierDuree(Duration* duree) {
+    duree->setHours(25);
+}
+
+int main() {
+    Time heure(0, 0, 0);
+    modifierDuree(heure);   // version avec passage par référence
+    modifierDuree(&heure);  // version avec passage par adresse (pointeur)
+
+    return 0;
+}
+```
+
+Le problème avec cet exemple de code, c'est que puisque `modifierDuree` reçoit son paramètre en tant qu'objet de type `Duration`, c'est la version de la méthode `setHours` de la classe `Duration`, et non celle de la classe `Time`, qui sera appelée. Résultat: l'heure sera bel et bien changée pour 25, ce qui est interdit pour un objet de type `Time`!
+
+Le **polymorphisme** apporte une solution à ce problème. En C++, le polymorphisme est implémenté à l'aide des **méthodes virtuelles**. Lorsqu'une méthode est déclarée comme étant virtuelle (*virtual*) dans la classe mère, et qu'on appelle cette méthode sur une instance d'une classe fille, c'est toujours la version de la méthode surchargée dans la classe fille (si elle existe) qui est appelée, **à condition d'utiliser un pointeur ou une référence pour appeler la méthode**.
+
+Ajoutez donc le mot-clé `virtual` aux méthodes suivantes de la classe `Duration`. Pour rappel, le mot-clé `virtual` doit seulement être ajouté dans le fichier `.h`.
+
+* `setTotalSeconds`
+* `setHours`
+* `setMinutes`
+* `setSeconds`
+* `addHours`
+* `addMinutes`
+* `addSeconds`
+* `subtractHours`
+* `subtractMinutes`
+* `subtractSeconds`
+* `read`
+* `operator+=`
+* `operator-=`
+* `operator*=`
+* `operator/=`
+
+Il ne faut PAS rendre virtuelles les méthodes `operator+`, `operator-`, `operator*` et `operator/`. Le compilateur ne permettrait alors pas les surcharges qui sont présentes dans la classe `Time`, puisque celles-ci utilisent un type de retour différent. Le fait que ces méthodes ne soient pas virtuelles n'est pas très grave, puisqu'il s'agit de méthodes constantes qui ne risquent donc pas de mettre un objet `Time` dans un état invalide si jamais la mauvaise version de la méthode est appelée.
+
+Ajoutez ensuite le mot-clé `override` aux méthodes suivantes dans `Time.h`:
+
+* `setTotalSeconds`
+* `setHours`
+* `addHours`
+* `addMinutes`
+* `addSeconds`
+* `read`
+* `operator+=`
+* `operator-=`
+
+Pour ce qui est des méthodes `*=` et `/=`, il faut malheureusement retirer les `= delete` dans la classe `Time`, puisqu'il est impossible pour une classe fille de supprimer une méthode virtuelle de la classe mère. Remplacez donc ces deux `= delete` par `override`. Vous n'avez maintenant pas le choix d'implémenter ces deux méthodes dans `Time.cpp`. Puisque la multiplication et la division n'ont pas de sens pour la classe `Time`, les implémentations doivent simplement lancer une exception de type `std::logic_error`.
+
+Vous pouvez tester vos modifications en ajoutant le code de test ci-dessous au début du `main`. Assurez-vous de bien comprendre ce code, incluant le commentaire accompagnant la déclaration de `temporalUnits`.
+
+```cpp
+Duration* temporalUnits[2]; /* Attention: ceci est un tableau de pointeurs et non un pointeur vers un tableau! Autrement dit, c'est un tableau statique contenant 2 pointeurs pouvant chacun stocker l'adresse d'un objet, et non un pointeur contenant l'adresse d'un tableau de 2 objets. */
 
 temporalUnits[0] = new Duration(0);
 temporalUnits[1] = new Time(0, 0, 0);
@@ -503,7 +517,7 @@ for (size_t i = 0; i < 2; i++) {
 }
 ```
 
-Résultat attendu:
+Voici le résultat que vous devriez obtenir:
 
 ```text
 setTotalSeconds(25 * 60 * 60) a réussi pour l'unité temporelle 0
@@ -525,7 +539,7 @@ operator-=(Duration(1, 0, 0)) a échoué pour l'unité temporelle 1: Une durée 
 operator*=(2) a échoué pour l'unité temporelle 1: La multiplication d'une heure par un facteur n'est pas autorisée.
 ```
 
-## Laboratoire 05-C
+## Laboratoire 05-C - Introduction d'une classe abstraite
 
 Étapes:
 
