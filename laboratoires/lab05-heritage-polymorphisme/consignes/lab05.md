@@ -433,6 +433,98 @@ Mettre override aux méthodes suivantes (seulement dans le .h):
 
 Pour les méthodes *= et /=, il faut enlever le `= delete` et mettre override. Ensuite, implémenter dans le .cpp et lancer une std::logic_error.
 
+Code de test au début du main (commenter le reste)
+
+```cpp
+Duration* temporalUnits[2]; // Attention: ceci est un tableau de 2 pointeurs de Duration et non pointeur sur un tableau de 2 Duration!
+
+temporalUnits[0] = new Duration(0);
+temporalUnits[1] = new Time(0, 0, 0);
+
+for (size_t i = 0; i < 2; i++) {
+    Duration* unit = temporalUnits[i];
+    try {
+        unit->setTotalSeconds(25 * 60 * 60);
+        std::cout << "setTotalSeconds(25 * 60 * 60) a réussi pour l'unité temporelle " << i << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "setTotalSeconds(25 * 60 * 60) a échoué pour l'unité temporelle " << i << ": " << e.what() << std::endl;
+    }
+
+    try {
+        unit->setHours(25);
+        std::cout << "setHours(25) a réussi pour l'unité temporelle " << i << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "setHours(25) a échoué pour l'unité temporelle " << i << ": " << e.what() << std::endl;
+    }
+
+    try {
+        unit->addHours(25);
+        std::cout << "addHours(25) a réussi pour l'unité temporelle " << i << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "addHours(25) a échoué pour l'unité temporelle " << i << ": " << e.what() << std::endl;
+    }
+
+    try {
+        unit->addMinutes(25 * 60);
+        std::cout << "addHours(25 * 60) a réussi pour l'unité temporelle " << i << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "addHours(25 * 60) a échoué pour l'unité temporelle " << i << ": " << e.what() << std::endl;
+    }
+
+    try {
+        unit->addSeconds(25 * 60 * 60);
+        std::cout << "addHours(25 * 60 * 60) a réussi pour l'unité temporelle " << i << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "addHours(25 * 60 * 60) a échoué pour l'unité temporelle " << i << ": " << e.what() << std::endl;
+    }
+
+    try {
+        *unit += Duration(25, 0, 0);
+        std::cout << "operator+=(Duration(25, 0, 0)) a réussi pour l'unité temporelle " << i << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "operator+=(Duration(25, 0, 0)) a échoué pour l'unité temporelle " << i << ": " << e.what() << std::endl;
+    }
+
+    try {
+        *unit -= Duration(1, 0, 0);
+        std::cout << "operator-=(Duration(1, 0, 0)) a réussi pour l'unité temporelle " << i << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "operator-=(Duration(1, 0, 0)) a échoué pour l'unité temporelle " << i << ": " << e.what() << std::endl;
+    }
+
+    try {
+        *unit *= 2;
+        std::cout << "operator*=(2) a réussi pour l'unité temporelle " << i << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "operator*=(2) a échoué pour l'unité temporelle " << i << ": " << e.what() << std::endl;
+    }
+
+    std::cout << std::endl;
+}
+```
+
+Résultat attendu:
+
+```text
+setTotalSeconds(25 * 60 * 60) a réussi pour l'unité temporelle 0
+setHours(25) a réussi pour l'unité temporelle 0
+addHours(25) a réussi pour l'unité temporelle 0
+addHours(25 * 60) a réussi pour l'unité temporelle 0
+addHours(25 * 60 * 60) a réussi pour l'unité temporelle 0
+operator+=(Duration(25, 0, 0)) a réussi pour l'unité temporelle 0
+operator-=(Duration(1, 0, 0)) a réussi pour l'unité temporelle 0
+operator*=(2) a réussi pour l'unité temporelle 0
+
+setTotalSeconds(25 * 60 * 60) a échoué pour l'unité temporelle 1: Le nombre total de secondes doit être inférieur à 86400 (24 heures).
+setHours(25) a échoué pour l'unité temporelle 1: Les heures doivent être comprises entre 0 et 23.
+addHours(25) a échoué pour l'unité temporelle 1: Heure dépassant la valeur maximale de 23:59:59.
+addHours(25 * 60) a échoué pour l'unité temporelle 1: Heure dépassant la valeur maximale de 23:59:59.
+addHours(25 * 60 * 60) a échoué pour l'unité temporelle 1: Heure dépassant la valeur maximale de 23:59:59.
+operator+=(Duration(25, 0, 0)) a échoué pour l'unité temporelle 1: Heure dépassant la valeur maximale de 23:59:59.
+operator-=(Duration(1, 0, 0)) a échoué pour l'unité temporelle 1: Une durée ne peut être négative.
+operator*=(2) a échoué pour l'unité temporelle 1: La multiplication d'une heure par un facteur n'est pas autorisée.
+```
+
 ## Laboratoire 05-C
 
 À venir
