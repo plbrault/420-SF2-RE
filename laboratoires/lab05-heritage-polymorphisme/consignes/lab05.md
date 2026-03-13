@@ -557,7 +557,7 @@ Les classes `Date`, `DateTime`, `Duration` et par extension `Time` (parce qu'ell
 
 Puisque toutes ces classes permettent de gérer des objets qui peuvent être représentés au format ISO, et qu'elles offrent par conséquent toutes la méthode `toISOString`, il serait pertinent de toutes les faire hériter d'une même **classe abstraite** définissant cette méthode. En C++, une classe abstraite est une classe qui définit au moins une **méthode virtuelle pure**.
 
-Ajoutez donc une classe `ISOFormatEntity` définissant seulement `std::string toISOString() const` en tant que **méthode virtuelle pure** (n'oubliez pas d'inclure la librairie `string`). Faites ensuite hériter les classes `Date`, `DateTime` et `Time` de votre classe abstraite. Il n'est pas nécessaire de modifier la classe `Time`, puisque celle-ci hérite déjà de `Duration`, et héritera par le fait même de `ISOFormatEntity`.
+Ajoutez donc une classe `ISOFormatEntity` définissant seulement `std::string toISOString() const` en tant que **méthode virtuelle pure** (n'oubliez pas d'inclure la librairie `string`). Faites ensuite hériter les classes `Date`, `DateTime` et `Duration` de votre classe abstraite. Il n'est pas nécessaire de modifier la classe `Time`, puisque celle-ci hérite déjà de `Duration`, et héritera par le fait même de `ISOFormatEntity`.
 
 Vérifiez que le programme continue de fonctionner comme avant.
 
