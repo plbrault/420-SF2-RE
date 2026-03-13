@@ -2,8 +2,9 @@
 #define SOLUTION_DATE_H
 
 #include <iostream>
+#include "ISOFormatEntity.h"
 
-class Date {
+class Date : public ISOFormatEntity {
 private:
     unsigned int _year;
     unsigned int _month;
@@ -18,7 +19,7 @@ public:
 
     void setValue(unsigned int year, unsigned int month, unsigned int day);
 
-    std::string toString() const;
+    std::string toISOString() const override;
 
     void print(std::ostream& output) const;
     void read(std::istream& input);

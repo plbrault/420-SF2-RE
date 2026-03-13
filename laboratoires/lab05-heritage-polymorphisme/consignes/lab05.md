@@ -527,4 +527,8 @@ operator*=(2) a échoué pour l'unité temporelle 1: La multiplication d'une heu
 
 ## Laboratoire 05-C
 
-À venir
+Étapes:
+
+- renommer toString en toISOString dans les classes Date, DateTime et Duration (astuce: clic droit dans le .h -> rename)
+- classe ISOFormatEntity avec une seule méthode publique, toISOString, virtuelle pure
+- Date, DateTime et Duration doivent hériter de cette classe et la méthode toISOString doit être override

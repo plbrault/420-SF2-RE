@@ -78,7 +78,7 @@ Duration& Duration::subtractSeconds(unsigned long int seconds) {
     return *this;
 }
 
-std::string Duration::toString() const {
+std::string Duration::toISOString() const {
     std::stringstream out;
     if (this->getHours() < 10) {
         out << 0;
@@ -96,7 +96,7 @@ std::string Duration::toString() const {
 }
 
 void Duration::print(std::ostream& output) const {
-    output << this->toString();
+    output << this->toISOString();
 }
 
 void Duration::read(std::istream &input) {

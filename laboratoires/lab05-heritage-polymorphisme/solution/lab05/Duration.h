@@ -2,8 +2,9 @@
 #define SOLUTION_DURATION_H
 
 #include <iostream>
+#include "ISOFormatEntity.h"
 
-class Duration {
+class Duration : public ISOFormatEntity {
 protected:
     unsigned long int _totalSeconds;
 public:
@@ -28,7 +29,7 @@ public:
     virtual Duration& subtractMinutes(unsigned int minutes);
     virtual Duration& subtractSeconds(unsigned long int seconds);
 
-    std::string toString() const;
+    std::string toISOString() const override;
 
     void print(std::ostream& output) const;
     virtual void read(std::istream& input);

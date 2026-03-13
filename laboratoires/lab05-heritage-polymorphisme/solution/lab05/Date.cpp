@@ -39,7 +39,7 @@ void Date::setValue(unsigned int year, unsigned int month, unsigned int day) {
     this->_day = day;
 }
 
-std::string Date::toString() const {
+std::string Date::toISOString() const {
     std::stringstream out;
     if (this->_year < 1000) {
         out << 0;
@@ -63,7 +63,7 @@ std::string Date::toString() const {
 }
 
 void Date::print(std::ostream& output) const {
-    output << this->toString();
+    output << this->toISOString();
 }
 
 void Date::read(std::istream& input) {

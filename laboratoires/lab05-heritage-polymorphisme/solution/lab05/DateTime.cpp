@@ -21,12 +21,12 @@ void DateTime::setTime(const Time& time) {
     this->_time = time;
 }
 
-std::string DateTime::toString() const {
-    return this->_date.toString() + "T" + this->_time.toString();
+std::string DateTime::toISOString() const {
+    return this->_date.toISOString() + "T" + this->_time.toISOString();
 }
 
 void DateTime::print(std::ostream& output) const {
-    output << this->toString();
+    output << this->toISOString();
 }
 
 void DateTime::read(std::istream& input) {

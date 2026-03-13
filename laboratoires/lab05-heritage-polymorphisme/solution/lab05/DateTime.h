@@ -4,8 +4,9 @@
 #include <iostream>
 #include "Date.h"
 #include "Time.h"
+#include "ISOFormatEntity.h"
 
-class DateTime {
+class DateTime : public ISOFormatEntity {
 private:
     Date _date;
     Time _time;
@@ -19,7 +20,7 @@ public:
     void setDate(const Date& date);
     void setTime(const Time& time);
 
-    std::string toString() const;
+    std::string toISOString() const override;
 
     void print(std::ostream& output) const;
     void read(std::istream& input);
