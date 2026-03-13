@@ -450,12 +450,19 @@ Pour ce qui est des méthodes `*=` et `/=`, il faut malheureusement retirer les 
 Vous pouvez tester vos modifications en ajoutant le code de test ci-dessous au début du `main`. Assurez-vous de bien comprendre ce code, incluant le commentaire accompagnant la déclaration de `temporalUnits`.
 
 ```cpp
-Duration* temporalUnits[2]; /* Attention: ceci est un tableau de pointeurs et non un pointeur vers un tableau! Autrement dit, c'est un tableau statique contenant 2 pointeurs pouvant chacun stocker l'adresse d'un objet, et non un pointeur contenant l'adresse d'un tableau de 2 objets. C'est ce qui explique la syntaxe différente par rapport à ce qu'on fait d'habitude (« Duration* temporalUnits = new Duration[2]; »). */
+Duration* temporalUnits[2]; /* Attention: ceci est un tableau de pointeurs
+et non un pointeur vers un tableau! Autrement dit, c'est un tableau
+statique contenant 2 pointeurs pouvant chacun stocker l'adresse d'un objet,
+et non un pointeur contenant l'adresse d'un tableau de 2 objets. C'est ce
+qui explique la syntaxe différente par rapport à ce qu'on fait d'habitude
+(« Duration* temporalUnits = new Duration[2]; »). */
 
-/* Alloue un nouvel objet `Duration` et assigne son adresse au premier pointeur contenu dans le tableau */
+/* Alloue un nouvel objet `Duration` et assigne son adresse au premier
+pointeur contenu dans le tableau */
 temporalUnits[0] = new Duration(0);
 
-/* Alloue un nouvel objet `Time` et assigne son adresse au deuxième pointeur contenu dans le tableau */
+/* Alloue un nouvel objet `Time` et assigne son adresse au deuxième
+pointeur contenu dans le tableau */
 temporalUnits[1] = new Time(0, 0, 0);
 
 for (size_t i = 0; i < 2; i++) {
