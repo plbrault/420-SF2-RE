@@ -191,7 +191,7 @@ Time ..> Duration
 
 Ce programme utilise notamment une classe `Duration`, permettant de représenter une durée, ainsi qu'une classe `Time`, permettant de représenter une heure de la journée. Mais au fond, **qu'est-ce qu'une heure de la journée si ce n'est la durée écoulée depuis minuit?**
 
-Vous l'aurez deviné, vous allez modifié le programme de façon à ce que la classe `Time` hérite de la classe `Duration`!
+Vous l'aurez deviné, vous allez modifier le programme de façon à ce que la classe `Time` hérite de la classe `Duration`!
 
 Voici le diagramme représentant ces deux classes avec un lien d'héritage:
 
@@ -265,7 +265,7 @@ En observant ce diagramme, vous pouvez remarquer plusieurs choses:
 4. Plusieurs méthodes de la classe `Time` sont disparues
 5. Malgré le lien d'héritage, plusieurs méthodes se trouvent à la fois dans la classe `Duration` et dans la classe `Time`
 
-Pourquoi donc les méthodes `setTotalSeconds`, `setHours`, `addHours`, `addMinutes`, `addSeconds` et `read`, de même que la plupart des opérateurs arithmétiques, sont définis à la fois dans `Duration` et dans `Time`? 🤔 C'est parce que ces méthodes doivent effectuer des validations dans la classe fille `Time` qui ne sont pas effectuées dans la classe mère `Duration`, puisqu'un objet `Time` ne peut représenter une valeur supérieure à `23:59:59`, contrairement à un objet `Duration`. Il faut donc **surcharger** ces méthodes de la classe mère dans la classe fille afin d'en adapter le comportement. De plus, les opérateurs arithmétiques de la classe `Time`doivent retourner des objets `Time`, et non des objets `Duration` comme le font les surcharges d'opérateurs de la classe `Duration`.
+Pourquoi donc les méthodes `setTotalSeconds`, `setHours`, `addHours`, `addMinutes`, `addSeconds` et `read`, de même que la plupart des opérateurs arithmétiques, sont définis à la fois dans `Duration` et dans `Time`? 🤔 C'est parce que ces méthodes doivent effectuer des validations dans la classe fille `Time` qui ne sont pas effectuées dans la classe mère `Duration`, puisqu'un objet `Time` ne peut représenter une valeur supérieure à `23:59:59`, contrairement à un objet `Duration`. Il faut donc **surcharger** ces méthodes de la classe mère dans la classe fille afin d'adapter leur comportement. De plus, les opérateurs arithmétiques de la classe `Time` doivent retourner des objets `Time`, et non des objets `Duration` comme le font les surcharges d'opérateurs de la classe `Duration`.
 
 ***⚠️ N'oubliez pas de tester vos modifications après chaque étape en vérifiant que le programme continue de fonctionner comme avant, ou en ajoutant au besoin du code de test temporaire au début du `main`.***
 
@@ -370,7 +370,7 @@ Vous constaterez que l'opérateur `>>` fonctionne comme avant. C'est parce qu'il
 Apportez les modifications suivantes à la classe `Time`. Ces modifications doivent être effectuées dans leur entièreté avant que le code compile à nouveau.
 
 1. Décommentez les surcharges d'opérateurs arithmétiques
-2. Adaptez l'opérateur `+=` afin d'ajouter la validation nécessaire tout en réutilisant l'opérateur de la classe mère. Il n'y a rien à changer dans l'opérateur `+` à condition que celui-ci réutilise votre opérateur `+=`.
+2. Adaptez l'opérateur `+=` afin d'ajouter la validation nécessaire tout en réutilisant l'opérateur de la classe mère. Il n'y a rien à changer dans l'opérateur `+`, à condition que celui-ci réutilise votre opérateur `+=`.
 3. Adaptez l'opérateur `-=` afin qu'il retourne le bon type d'objet tout en réutilisant l'opérateur de la classe mère. Il n'y a aucune validation supplémentaire à ajouter pour cette méthode. Il n'y a rien à changer dans la version de l'opérateur `-` qui prend en paramètre un `Duration`,  à condition que celui-ci réutilise votre opérateur `-=`.
 4. Remplacez le corps de la version de l'opérateur `-` qui prend en paramètre un `Time` par `return Duration::operator-(other);`. Cela est suffisant puisque l'opérateur de la classe mère fait déjà ce qu'on veut. On veut seulement s'assurer de retourner un `Duration` et non un `Time`.
 
@@ -410,7 +410,7 @@ int main() {
 }
 ```
 
-Le problème avec cet exemple de code, c'est que puisque `modifierDuree` reçoit son paramètre en tant qu'objet de type `Duration`, c'est la version de la méthode `setHours` de la classe `Duration`, et non celle de la classe `Time`, qui sera appelée. Résultat: l'heure sera bel et bien changée pour 25, ce qui est interdit pour un objet de type `Time`!
+Le problème avec cet exemple de code, c'est que puisque `modifierDuree` reçoit son paramètre en tant qu'objet de type `Duration`, c'est la version de la méthode `setHours` de la classe `Duration`, et non celle de la classe `Time`, qui est appelée. Résultat: l'heure est bel et bien changée pour 25, ce qui est interdit pour un objet de type `Time`!
 
 Le **polymorphisme** apporte une solution à ce problème. En C++, le polymorphisme est implémenté à l'aide des **méthodes virtuelles**. Lorsqu'une méthode est déclarée comme étant virtuelle (*virtual*) dans la classe mère, et qu'on appelle cette méthode sur une instance d'une classe fille, c'est toujours la version de la méthode surchargée dans la classe fille (si elle existe) qui est appelée, **à condition d'utiliser un pointeur ou une référence pour appeler la méthode**.
 
@@ -450,9 +450,12 @@ Pour ce qui est des méthodes `*=` et `/=`, il faut malheureusement retirer les 
 Vous pouvez tester vos modifications en ajoutant le code de test ci-dessous au début du `main`. Assurez-vous de bien comprendre ce code, incluant le commentaire accompagnant la déclaration de `temporalUnits`.
 
 ```cpp
-Duration* temporalUnits[2]; /* Attention: ceci est un tableau de pointeurs et non un pointeur vers un tableau! Autrement dit, c'est un tableau statique contenant 2 pointeurs pouvant chacun stocker l'adresse d'un objet, et non un pointeur contenant l'adresse d'un tableau de 2 objets. */
+Duration* temporalUnits[2]; /* Attention: ceci est un tableau de pointeurs et non un pointeur vers un tableau! Autrement dit, c'est un tableau statique contenant 2 pointeurs pouvant chacun stocker l'adresse d'un objet, et non un pointeur contenant l'adresse d'un tableau de 2 objets. C'est ce qui explique la syntaxe différente par rapport à ce qu'on fait d'habitude (« Duration* temporalUnits = new Duration[2]; »). */
 
+/* Alloue un nouvel objet `Duration` et assigne son adresse au premier pointeur contenu dans le tableau */
 temporalUnits[0] = new Duration(0);
+
+/* Alloue un nouvel objet `Time` et assigne son adresse au deuxième pointeur contenu dans le tableau */
 temporalUnits[1] = new Time(0, 0, 0);
 
 for (size_t i = 0; i < 2; i++) {
@@ -541,13 +544,13 @@ operator*=(2) a échoué pour l'unité temporelle 1: La multiplication d'une heu
 
 ## Laboratoire 05-C - Introduction d'une classe abstraite
 
-Les classes `Date`, `DateTime`, `Duration` et par extension `Time` (parce qu'il hérite de `Duration`) ont toutes pour particularité d'offrir une méthode `toString` qui retourne une chaîne représentant l'objet au format ISO (plus spécifiquement au format [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601), soit la norme ISO pour la représentation des dates et des heures). Afin qu'il soit très clair que la chaîne retournée est au format ISO, renommez cette méthode en `toISOString`.
+Les classes `Date`, `DateTime`, `Duration` et par extension `Time` (parce qu'elle hérite de `Duration`) ont toutes pour particularité d'offrir une méthode `toString` qui retourne une chaîne représentant l'objet au format ISO (plus spécifiquement au format [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601), soit la norme ISO pour la représentation des dates et des heures). Afin qu'il soit très clair que la chaîne retournée est au format ISO, renommez cette méthode en `toISOString`.
 
 > **Astuce:** faites un clic droit sur l'attribut suivi de l'option `Rename` dans CLion. Cela mettra à jour toutes les utilisations de cette méthode.
 
 Puisque toutes ces classes permettent de gérer des objets qui peuvent être représentés au format ISO, et qu'elles offrent par conséquent toutes la méthode `toISOString`, il serait pertinent de toutes les faire hériter d'une même **classe abstraite** définissant cette méthode. En C++, une classe abstraite est une classe qui définit au moins une **méthode virtuelle pure**.
 
-Ajoutez donc une classe `ISOFormatEntity` définissant seulement une méthode virtuelle pure `std::string toISOString() const` (n'oubliez pas d'inclure la librairie `string`). Faites ensuite hériter les classes `Date`, `DateTime` et `Time` de votre classe abstraite. Il n'est pas nécessaire de modifier la classe `Time`, puisque celle-ci hérite déjà de `Duration`, et héritera par le fait même de `ISOFormatEntity`.
+Ajoutez donc une classe `ISOFormatEntity` définissant seulement `std::string toISOString() const` en tant que **méthode virtuelle pure** (n'oubliez pas d'inclure la librairie `string`). Faites ensuite hériter les classes `Date`, `DateTime` et `Time` de votre classe abstraite. Il n'est pas nécessaire de modifier la classe `Time`, puisque celle-ci hérite déjà de `Duration`, et héritera par le fait même de `ISOFormatEntity`.
 
 Vérifiez que le programme continue de fonctionner comme avant.
 
