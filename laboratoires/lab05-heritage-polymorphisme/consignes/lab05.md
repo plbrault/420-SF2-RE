@@ -541,8 +541,16 @@ operator*=(2) a échoué pour l'unité temporelle 1: La multiplication d'une heu
 
 ## Laboratoire 05-C - Introduction d'une classe abstraite
 
-Étapes:
+Les classes `Date`, `DateTime`, `Duration` et par extension `Time` (parce qu'il hérite de `Duration`) ont toutes pour particularité d'offrir une méthode `toString` qui retourne une chaîne représentant l'objet au format ISO (plus spécifiquement au format [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601), soit la norme ISO pour la représentation des dates et des heures). Afin qu'il soit très clair que la chaîne retournée est au format ISO, renommez cette méthode en `toISOString`.
 
-- renommer toString en toISOString dans les classes Date, DateTime et Duration (astuce: clic droit dans le .h -> rename)
-- classe ISOFormatEntity avec une seule méthode publique, toISOString, virtuelle pure
-- Date, DateTime et Duration doivent hériter de cette classe et la méthode toISOString doit être override
+> **Astuce:** faites un clic droit sur l'attribut suivi de l'option `Rename` dans CLion. Cela mettra à jour toutes les utilisations de cette méthode.
+
+Puisque toutes ces classes permettent de gérer des objets qui peuvent être représentés au format ISO, et qu'elles offrent par conséquent toutes la méthode `toISOString`, il serait pertinent de toutes les faire hériter d'une même **classe abstraite** définissant cette méthode. En C++, une classe abstraite est une classe qui définit au moins une **méthode virtuelle pure**.
+
+Ajoutez donc une classe `ISOFormatEntity` définissant seulement une méthode virtuelle pure `std::string toISOString() const` (n'oubliez pas d'inclure la librairie `string`). Faites ensuite hériter les classes `Date`, `DateTime` et `Time` de votre classe abstraite. Il n'est pas nécessaire de modifier la classe `Time`, puisque celle-ci hérite déjà de `Duration`, et héritera par le fait même de `ISOFormatEntity`.
+
+Vérifiez que le programme continue de fonctionner comme avant.
+
+**⚠️ Faites valider vos laboratoires 05-B et 05-C par l'enseignant.**
+
+> 🎉 Félicitations, vous avez complété le laboratoire!
