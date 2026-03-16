@@ -29,15 +29,15 @@ Contrairement à ce que vos yeux vous laissent croire, un fichier CSV n'est pas 
 
 ```csv
 "Nom de l'élément";"Numéro atomique";"Symbole";"Masse atomique"
-"Hydrogène";1;"H";1,007975
-"Hélium";2;"He";4,002602
-"Lithium";3;"Li";6,9395
-"Béryllium";4;"Be";9,012183
-"Bore";5;"B";10,8135
-"Carbone";6;"C";12,0106
-"Azote";7;"N";14,006855
-"Oxygène";8;"O";15,9994
-"Fluor";9;"F";18,998403
+"Hydrogène";1;"H";1.007975
+"Hélium";2;"He";4.002602
+"Lithium";3;"Li";6.9395
+"Béryllium";4;"Be";9.012183
+"Bore";5;"B";10.8135
+"Carbone";6;"C";12.0106
+"Azote";7;"N";14.006855
+"Oxygène";8;"O";15.9994
+"Fluor";9;"F";18.998403
 (...)
 ```
 
@@ -50,15 +50,11 @@ Décortiquons le contenu du fichier:
 
 > 🤔 Wô menute. On avait pas dit que *CSV* voulait dire *Comma-separated values*, donc que les valeurs devraient être séparées par des virgules?
 
-En effet, au sens strict du terme, un fichier CSV devrait contenir des valeurs séparées par des virgules (`,`) et non des points-virgules (`;`). Cependant, il faut savoir que le format CSV n'est pas vraiment standardisé, et que d'autres **séparateurs** (***delimiters*** en anglais) sont parfois utilisés selon les logiciels et leurs configurations. Par ailleurs, lorsqu'Excel est configuré en français, il utilise par défaut le point-virgule comme séparateur dans les fichiers CSV, puisqu'il réserve l'usage des virgules à la représentation des nombres décimaux (tandis que le point (`.`) est utilisé à cet effet lorsqu'Excel est configuré en anglais). Le fichier `elements.csv` ne s'afficherait donc pas correctement dans Excel en français s'il utilisait des virgules comme séparateurs.
+En effet, au sens strict du terme, un fichier CSV devrait contenir des valeurs séparées par des virgules (`,`) et non des points-virgules (`;`). Cependant, il faut savoir que le format CSV n'est pas vraiment standardisé, et que d'autres **séparateurs** (***delimiters*** en anglais) sont parfois utilisés selon les logiciels et leurs configurations. Par ailleurs, lorsqu'Excel est configuré en français, il utilise par défaut le point-virgule comme séparateur dans les fichiers CSV, puisqu'il réserve l'usage des virgules à la représentation des nombres décimaux (dans notre cas, nous utiliserons tout de même le point (`.`) à cet effet dans nos fichiers CSV, et ce pour se faciliter la vie en C++). Le fichier `elements.csv` ne s'afficherait donc pas correctement dans Excel en français s'il utilisait des virgules comme séparateurs.
 
+Attaquons-nous donc à la lecture d'un fichier CSV!
 
-
-Ajoutez à votre projet votre classe `Element` du laboratoire 3 (prenez celle de la solution au besoin). Assurez-vous que la classe fonctionne dans le projet en instanciant un `Element` dans votre `main` pour voir si le projet compile toujours.
-
-Attaquons-nous maintenant à l'implémentation de l'option 1.
-
-### La fonction `split`
+### Étape 1 - La fonction `split`
 
 La fonction `split` est une fonction qui existe nativement dans de nombreux langages de programmation, mais malheureusement pas en C++. Elle prend en paramètres une chaîne de caractères et un séparateur, puis retourne un tableau contenant les sous-chaînes résultantes. Par exemple, si la chaîne de caractères est `"Bonjour le monde!"` et que le séparateur est le caractère espace (`' '`), la fonction `split` produira le tableau `["Bonjour", "le", "monde!"]`. De la même façon, si la chaîne de caractères est `Hydrogene;H;1;Alcalins;0` et que le séparateur est `;`, la fonction retournera le tableau `["Hydrogene", "H", "1", "Alcalins", "0"]`. Vous aurez donc compris que cette fonction serait très utile pour séparer les valeurs d'une ligne de notre fichier CSV. C'est pourquoi vous allez l'implémenter!
 
@@ -131,7 +127,7 @@ public:
 };
 ```
 
-Remarquez que la méthode `parse` prend en paramètre un `istream`. Vous savez déjà que `cin` est un `istream`, mais vous ne savez peut-être pas que la classe `ifstream` (qui, pour rappel, sert à lire dans un fichier) hérite d'`istream`! En prenant en paramètre un `istream`, la méthode `parse` pourra lire ses données d'entrée soit à partir d'un fichier, soit à partir d'une saisie au clavier, et ce sans devoir changer l'implémentation de la méthode. Voilà toute la puissance de l'héritage!
+Remarquez que la méthode `parse` prend en paramètre un `istream`. Vous savez déjà que `cin` est un `istream`, mais vous ne savez peut-être pas que la classe `ifstream` (qui, pour rappel, sert à lire dans un fichier) hérite d'`istream`! En prenant en paramètre un `istream`, la méthode `parse` pourra lire ses données d'entrée soit à partir d'un fichier, soit à partir d'une saisie au clavier, et ce sans devoir changer l'implémentation de la méthode. Voilà toute la puissance de l'héritage et du polymorphisme!
 
 Remarquez également que la classe `CSVParser` ne définit pas de destructeur, d'opérateur = et de constructeur de copie, même si elle comprend un tableau alloué dynamiquement. C'est parce que ce dernier est encapsulé dans la classe `vector`, et donc géré par celle-ci. Voilà pourquoi les vecteurs sont beaucoup plus pratiques à utiliser que les pointeurs de tableaux!
 
@@ -157,7 +153,7 @@ Penchons-nous maintenant sur les méthodes. En plus du constructeur et des acces
 
 Implémentez toutes les méthodes de la classe. Référez-vous à [la documentation de std::vector](https://en.cppreference.com/w/cpp/container/vector) au besoin. N'oubliez pas de penser aux cas limites et à comment vous devriez les gérer.
 
-Testez rigoureusement votre *parser* sur le fichiers `elements.csv`.
+Testez rigoureusement votre *parser* sur le fichier `elements.csv`.
 
 ### Conversion de la matrice de `string` en vecteur d'`Element`
 
