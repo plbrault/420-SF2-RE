@@ -7,9 +7,17 @@
 * Expérimenter quelques algorithmes de tri et de recherche.
 * Mobiliser toutes les notions de Programmation orientée objet vues durant la session, incluant l'héritage.
 
-## Partie 1 - CSV et Tableau périodique
+## Parties
 
-[CSV](https://fr.wikipedia.org/wiki/Comma-separated_values), pour *Comma-separated values* (« valeurs séparées par des virgules ») est un format de données courramment utilisé pour représenter des données tabulaires dans un fichier texte. Ce format est surtout utilisé pour importer et exporter des données entre des logiciels. Dans cette partie du laboratoire, vous allez créer un programme en C++ qui fait la lecture d'un fichier CSV et le convertit en matrice (vecteur de vecteurs) d'objets.
+Ce laboratoire comprend trois parties:
+
+* **Partie 06-A** (***préalable à un laboratoire en chimie***): CSV et Tableau périodique
+* **Partie 06-B**: Algorithmes de tri et de recherche sur le tableau périodique
+* **Partie 06-C**: Algorithme récursif sur une matrice
+
+## Partie A - Importation de fichiers CSV et tableau périodique
+
+[CSV](https://fr.wikipedia.org/wiki/Comma-separated_values), pour *Comma-separated values* (« valeurs séparées par des virgules ») est un format de données couramment utilisé pour représenter des données tabulaires dans un fichier texte. Ce format est surtout utilisé pour importer et exporter des données entre des logiciels. Dans cette partie du laboratoire, vous allez créer un programme en C++ qui fait la lecture d'un fichier CSV et le convertit en matrice (vecteur de vecteurs) d'objets.
 
 Sur Moodle, vous trouverez un fichier `elements.csv`. Téléchargez-le, puis double-cliquez dessus. Si un tableur tel que *Microsoft Excel* ou *LibreOffice Calc* est installé sur votre ordinateur, il est fort probable que le fichier s'ouvrira dans ce logiciel et s'affichera sous forme de chiffrier.
 
@@ -17,21 +25,19 @@ Sur Moodle, vous trouverez un fichier `elements.csv`. Téléchargez-le, puis dou
 
 Comme vous pouvez le constater, ce fichier contient des informations sur les éléments du tableau périodique.
 
-> NOTE: Le contenu du fichier a été généré par ChatGPT. L'exactitude des informations qu'il contient n'est donc pas garantie.
-
 Contrairement à ce que vos yeux vous laissent croire, un fichier CSV n'est pas un fichier Excel! Fermez donc votre tableur, puis ouvrez maintenant le fichier dans un éditeur de texte tel que *Bloc-Notes* ou *Notepad++*. Vous verrez que le véritable contenu du fichier ressemble à ceci:
 
 ```csv
-Nom;Symbole;Numero atomique;Groupe;Nombre de trous
-Hydrogene;H;1;Alcalins;0
-Helium;He;2;Gaz nobles;0
-Lithium;Li;3;Alcalins;1
-Beryllium;Be;4;Alcalino-terreux;2
-Bore;B;5;Autres metaux;3
-Carbone;C;6;Non-metaux;4
-Azote;N;7;Non-metaux;3
-Oxygene;O;8;Non-metaux;2
-Fluor;F;9;Halogenes;1
+"Nom de l'élément";"Numéro atomique";"Symbole";"Masse atomique"
+"Hydrogène";1;"H";1,007975
+"Hélium";2;"He";4,002602
+"Lithium";3;"Li";6,9395
+"Béryllium";4;"Be";9,012183
+"Bore";5;"B";10,8135
+"Carbone";6;"C";12,0106
+"Azote";7;"N";14,006855
+"Oxygène";8;"O";15,9994
+"Fluor";9;"F";18,998403
 (...)
 ```
 
@@ -46,24 +52,7 @@ Décortiquons le contenu du fichier:
 
 En effet, au sens strict du terme, un fichier CSV devrait contenir des valeurs séparées par des virgules (`,`) et non des points-virgules (`;`). Cependant, il faut savoir que le format CSV n'est pas vraiment standardisé, et que d'autres **séparateurs** (***delimiters*** en anglais) sont parfois utilisés selon les logiciels et leurs configurations. Par ailleurs, lorsqu'Excel est configuré en français, il utilise par défaut le point-virgule comme séparateur dans les fichiers CSV, puisqu'il réserve l'usage des virgules à la représentation des nombres décimaux (tandis que le point (`.`) est utilisé à cet effet lorsqu'Excel est configuré en anglais). Le fichier `elements.csv` ne s'afficherait donc pas correctement dans Excel en français s'il utilisait des virgules comme séparateurs.
 
-Maintenant que vous comprenez comment interpréter un fichier CSV, voyons à quoi ressemblera le programme que vous devez créer. On veut d'abord afficher le menu suivant:
 
-```
-Tableau périodique
-
-1 Charger le tableau périodique
-2 Afficher les éléments
-3 Trier les éléments par nom
-4 Trier les éléments par numéro atomique
-5 Rechercher un élément
-6 Quitter
-
-Choisir une option: 
-```
-
-Créez donc un projet de base avec un `main` contenant une boucle qui affiche ce menu et lit l'option saisie. Ajoutez la structure de base pour traiter les options, et faites fonctionner l'option 6.
-
-> 🤔 Pourriez-vous réutiliser une classe d'un laboratoire précédent pour faire cela?
 
 Ajoutez à votre projet votre classe `Element` du laboratoire 3 (prenez celle de la solution au besoin). Assurez-vous que la classe fonctionne dans le projet en instanciant un `Element` dans votre `main` pour voir si le projet compile toujours.
 
@@ -316,7 +305,32 @@ Utilisez votre méthode pour implémenter l'option 5 du menu. Validez que votre 
 
 🎉 Félicitations, vous avez terminé la partie 1 du laboratoire!
 
-## Partie 2 - Carte topographique
+## Laboratoire 06-B - Algorithmes de tri et de recherche
+
+(extraits rapatriés de la partie 1 de 2025)
+
+Maintenant que vous comprenez comment interpréter un fichier CSV, voyons à quoi ressemblera le programme que vous devez créer. On veut d'abord afficher le menu suivant:
+
+```
+Tableau périodique
+
+1 Charger le tableau périodique
+2 Afficher les éléments
+3 Trier les éléments par nom
+4 Trier les éléments par numéro atomique
+5 Rechercher un élément
+6 Quitter
+
+Choisir une option:
+```
+
+Créez donc un projet de base avec un `main` contenant une boucle qui affiche ce menu et lit l'option saisie. Ajoutez la structure de base pour traiter les options, et faites fonctionner l'option 6.
+
+> 🤔 Pourriez-vous réutiliser une classe d'un laboratoire précédent pour faire cela?
+
+
+
+## Laboratoire 06-C - Carte topographique
 
 La [Sépaq](https://www.sepaq.com/organisation/) fait appel à vos compétences en algorithmie pour l'assister dans la création d'un nouveau parc national. À l'aide d'une [carte topographique](https://fr.wikipedia.org/wiki/Carte_topographique) d'un terrain montagneux, elle vous demande d'identifier l'emplacement de fin d'un futur sentier pédestre. La carte topographique est représentée par une matrice d'entiers dont chaque valeur représente une altitude. On vous demande de trouver **l'altitude du plus haut sommet pouvant être atteint par une pente graduelle à partir d'un point d'altitude 0**. On vous précise que par « pente graduelle », on entend un trajet dont l'altitude de chaque point est **exactement 1 de plus** que celle du point précédent. Chaque point $ p + 1 $ du trajet est adjacent à un point $ p $ soit horizontalement, verticalement ou en diagonal.
 
