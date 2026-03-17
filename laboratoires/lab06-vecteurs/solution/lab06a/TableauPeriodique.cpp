@@ -6,13 +6,12 @@ using namespace std;
 
 TableauPeriodique::TableauPeriodique() {
     _parser.setDelimiter(';');
-    _estTrieParNom = false;
 }
 
 void TableauPeriodique::charger(const std::string& nomFichier) {
     ifstream elementsFile(nomFichier);
     if (!elementsFile.is_open()) {
-        throw invalid_argument("Le fichier n'a pas pu etre ouvert.");
+        throw invalid_argument("Le fichier n'a pas pu être ouvert.");
     }
     _parser.parse(elementsFile);
     elementsFile.close();

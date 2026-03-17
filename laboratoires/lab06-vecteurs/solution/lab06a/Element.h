@@ -1,42 +1,28 @@
-#ifndef __ELEMENT_H
-#define __ELEMENT_H
-
-#include <string>
-#include <cstdint>
+#ifndef LAB03B_ELEMENT_H
+#define LAB03B_ELEMENT_H
 
 #include "Isotope.h"
-
-#define ISOTOPE_CAPACITE_INCREMENT 10
 
 class Element {
 private:
     std::string _nom;
-    uint8_t _nbParticuleChargee;
-    uint8_t _nbTrou;
-    std::string _groupe;
+    int _numeroAtomique;
     std::string _symbole;
-    Isotope *_isotopes;
-    size_t _qtIsotopes;
-    size_t _capaciteIsotopes;
+    double _masseAtomique;
 
-    void _agrandirTableauIsotope();
 public:
-    Element(const std::string &, const std::string &, uint8_t, uint8_t, const std::string &);
-    Element(const Element &);
-    ~Element();
-
-    Element &operator=(const Element &);
-
-    void ajouterIsotope(const Isotope &);
-    size_t nbIsotope() const;
-    bool aIsotopeStable() const;
+    Element() : Element("", 0, "", 0) {}
+    Element(const std::string& nom, int numeroAtomique, const std::string& symbole, double masseAtomique);
 
     const std::string& getNom() const;
-    uint8_t getNombreParticulesChargees() const;
+    int getNumeroAtomique() const;
+    const std::string& getSymbole() const;
+    double getMasseAtomique() const;
 
-    std::string toString() const;
+    void setNom(const std::string& nom);
+    void setNumeroAtomique(int numeroAtomique);
+    void setSymbole(const std::string& symbole);
+    void setMasseAtomique(double masseAtomique);
 };
 
-std::ostream& operator<<(std::ostream&, const Element&);
-
-#endif
+#endif //LAB03B_ELEMENT_H

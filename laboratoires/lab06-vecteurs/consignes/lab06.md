@@ -15,7 +15,7 @@ Ce laboratoire comprend trois parties:
 * **Partie 06-B**: Algorithmes de tri et de recherche sur le tableau périodique
 * **Partie 06-C**: Algorithme récursif sur une matrice
 
-## Partie A - Importation de fichiers CSV et tableau périodique
+## Laboratoire 06-A - Importation de fichiers CSV et tableau périodique
 
 [CSV](https://fr.wikipedia.org/wiki/Comma-separated_values), pour *Comma-separated values* (« valeurs séparées par des virgules ») est un format de données couramment utilisé pour représenter des données tabulaires dans un fichier texte. Ce format est surtout utilisé pour importer et exporter des données entre des logiciels. Dans cette partie du laboratoire, vous allez créer un programme en C++ qui fait la lecture d'un fichier CSV et le convertit en matrice (vecteur de vecteurs) d'objets.
 
@@ -223,11 +223,11 @@ Ce code devrait afficher les éléments du tableau périodique. Voici un extrait
 | Fluor            | 9                | F                |          18.9984 |
 ```
 
-### Conversion de la matrice de `string` en vecteur d'`Element`
-
-> Pour la suite du laboratoire, n'hésitez pas à modifier au besoin la classe `Element`.
+### Étape 3 - Conversion de la matrice de `string` en vecteur d'`Element`
 
 Vous êtes maintenant en mesure d'importer les données d'un fichier CSV dans votre programme. Une matrice de `string` n'est cependant pas idéale pour travailler sur les éléments du tableau périodique. Vous allez donc convertir cette matrice en vecteur d'`Element`!
+
+Vous avez créé une classe `Element` dans le Laboratoire 03.
 
 Pour ce faire, vous allez créer une nouvelle classe `TableauPeriodique` qui vous accompagnera pour toute la suite de cette partie du laboratoire. Voici la définition de cette classe:
 
@@ -259,6 +259,35 @@ std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodi
 La plupart des méthodes sont commentées, car vous allez les implémenter dans les étapes ultérieures. Pour le moment, implémentez seulement le constructeur et la méthode `charger`. Celle-ci doit ouvrir le fichier CSV, utiliser `_parser` pour récupérer ses données, puis insérer tous les éléments dans `_elements`. N'oubliez pas de fermer le fichier!
 
 Appelez la méthode `charger` dans votre `main` et utilisez le débogueur pour vérifier que le tableau d'éléments est rempli correctement.
+
+
+
+🎉 Félicitations, vous avez terminé la partie 1 du laboratoire!
+
+## Laboratoire 06-B - Algorithmes de tri et de recherche
+
+(extraits rapatriés de la partie 1 de 2025)
+
+Maintenant que vous comprenez comment interpréter un fichier CSV, voyons à quoi ressemblera le programme que vous devez créer. On veut d'abord afficher le menu suivant:
+
+```
+Tableau périodique
+
+1 Charger le tableau périodique
+2 Afficher les éléments
+3 Trier les éléments par nom
+4 Trier les éléments par numéro atomique
+5 Rechercher un élément
+6 Quitter
+
+Choisir une option:
+```
+
+Créez donc un projet de base avec un `main` contenant une boucle qui affiche ce menu et lit l'option saisie. Ajoutez la structure de base pour traiter les options, et faites fonctionner l'option 6.
+
+> 🤔 Pourriez-vous réutiliser une classe d'un laboratoire précédent pour faire cela?
+
+---
 
 ### Affichage des éléments
 
@@ -296,16 +325,16 @@ tri_insertion(Tableau T)
     pour i de 1 à taille(T) - 1
 
         # mémoriser T[i] dans x
-        x ← T[i]                            
+        x ← T[i]
 
         # décaler les éléments T[0]..T[i-1] qui sont plus grands que x, en partant de T[i-1]
-        j ← i                               
+        j ← i
         tant que j > 0 et T[j - 1] > x
             T[j] ← T[j - 1]
             j ← j - 1
 
         # placer x dans le "trou" laissé par le décalage
-        T[j] ← x                            
+        T[j] ← x
 
 ```
 
@@ -343,10 +372,10 @@ Voici du pseudocode pour la recherche dichotomique (tiré de Wikipédia):
  début, fin, val, mil, N : Entiers
  t : Tableau [0..N] d'entiers classé
  trouvé : Booléen
- 
+
 //initialisation
  N = taille(t)-1
- début ← 0 
+ début ← 0
  fin ← N
  trouvé ← faux
  Saisir val
@@ -366,33 +395,6 @@ Voici du pseudocode pour la recherche dichotomique (tiré de Wikipédia):
 ```
 
 Utilisez votre méthode pour implémenter l'option 5 du menu. Validez que votre tri fonctionne correctement avant de continuer.
-
-🎉 Félicitations, vous avez terminé la partie 1 du laboratoire!
-
-## Laboratoire 06-B - Algorithmes de tri et de recherche
-
-(extraits rapatriés de la partie 1 de 2025)
-
-Maintenant que vous comprenez comment interpréter un fichier CSV, voyons à quoi ressemblera le programme que vous devez créer. On veut d'abord afficher le menu suivant:
-
-```
-Tableau périodique
-
-1 Charger le tableau périodique
-2 Afficher les éléments
-3 Trier les éléments par nom
-4 Trier les éléments par numéro atomique
-5 Rechercher un élément
-6 Quitter
-
-Choisir une option:
-```
-
-Créez donc un projet de base avec un `main` contenant une boucle qui affiche ce menu et lit l'option saisie. Ajoutez la structure de base pour traiter les options, et faites fonctionner l'option 6.
-
-> 🤔 Pourriez-vous réutiliser une classe d'un laboratoire précédent pour faire cela?
-
-
 
 ## Laboratoire 06-C - Carte topographique
 
