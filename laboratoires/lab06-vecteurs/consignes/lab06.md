@@ -28,16 +28,16 @@ Comme vous pouvez le constater, ce fichier contient des informations sur les él
 Contrairement à ce que vos yeux vous laissent croire, un fichier CSV n'est pas un fichier Excel! Fermez donc votre tableur, puis ouvrez maintenant le fichier dans un éditeur de texte tel que *Bloc-Notes* ou *Notepad++*. Vous verrez que le véritable contenu du fichier ressemble à ceci:
 
 ```csv
-"Nom de l'élément";"Numéro atomique";"Symbole";"Masse atomique"
-"Hydrogène";1;"H";1.007975
-"Hélium";2;"He";4.002602
-"Lithium";3;"Li";6.9395
-"Béryllium";4;"Be";9.012183
-"Bore";5;"B";10.8135
-"Carbone";6;"C";12.0106
-"Azote";7;"N";14.006855
-"Oxygène";8;"O";15.9994
-"Fluor";9;"F";18.998403
+Nom de l'élément;Numéro atomique;Symbole;Masse atomique
+Hydrogène;1;H;1.007975
+Hélium;2;He;4.002602
+Lithium;3;Li;6.9395
+Béryllium;4;Be;9.012183
+Bore;5;B;10.8135
+Carbone;6;C;12.0106
+Azote;7;N;14.006855
+Oxygène;8;O;15.9994
+Fluor;9;F;18.998403
 (...)
 ```
 
@@ -50,13 +50,15 @@ Décortiquons le contenu du fichier:
 
 > 🤔 Wô menute. On avait pas dit que *CSV* voulait dire *Comma-separated values*, donc que les valeurs devraient être séparées par des virgules?
 
-En effet, au sens strict du terme, un fichier CSV devrait contenir des valeurs séparées par des virgules (`,`) et non des points-virgules (`;`). Cependant, il faut savoir que le format CSV n'est pas vraiment standardisé, et que d'autres **séparateurs** (***delimiters*** en anglais) sont parfois utilisés selon les logiciels et leurs configurations. Par ailleurs, lorsqu'Excel est configuré en français, il utilise par défaut le point-virgule comme séparateur dans les fichiers CSV, puisqu'il réserve l'usage des virgules à la représentation des nombres décimaux (dans notre cas, nous utiliserons tout de même le point (`.`) à cet effet dans nos fichiers CSV, et ce pour se faciliter la vie en C++). Le fichier `elements.csv` ne s'afficherait donc pas correctement dans Excel en français s'il utilisait des virgules comme séparateurs.
+En effet, au sens strict du terme, un fichier CSV devrait contenir des valeurs séparées par des virgules (`,`) et non des points-virgules (`;`). Cependant, il faut savoir que le format CSV n'est pas vraiment standardisé, et que d'autres **séparateurs** (***delimiters*** en anglais) sont parfois utilisés selon les logiciels et leurs configurations. Par ailleurs, lorsqu'Excel est configuré en français, il utilise par défaut le point-virgule comme séparateur dans les fichiers CSV, puisqu'il réserve l'usage des virgules à la représentation des nombres décimaux. Le fichier `elements.csv` ne s'afficherait donc pas correctement dans Excel en français s'il utilisait des virgules comme séparateurs.
+
+> Note: le fichier CSV du tableau périodique utilise le `;` comme délimiteur, mais utilise tout de même le point (`.`) pour les valeurs décimales, et ce pour vous simplifier la vie en C++.
 
 Attaquons-nous donc à la lecture d'un fichier CSV!
 
 ### Étape 1 - La fonction `split`
 
-La fonction `split` est une fonction qui existe nativement dans de nombreux langages de programmation, mais malheureusement pas en C++. Elle prend en paramètres une chaîne de caractères et un séparateur, puis retourne un tableau contenant les sous-chaînes résultantes. Par exemple, si la chaîne de caractères est `"Bonjour le monde!"` et que le séparateur est le caractère espace (`' '`), la fonction `split` produira le tableau `["Bonjour", "le", "monde!"]`. De la même façon, si la chaîne de caractères est `Hydrogene;H;1;Alcalins;0` et que le séparateur est `;`, la fonction retournera le tableau `["Hydrogene", "H", "1", "Alcalins", "0"]`. Vous aurez donc compris que cette fonction serait très utile pour séparer les valeurs d'une ligne de notre fichier CSV. C'est pourquoi vous allez l'implémenter!
+La fonction `split` est une fonction qui existe nativement dans de nombreux langages de programmation, mais malheureusement pas en C++. Elle prend en paramètres une chaîne de caractères et un séparateur, puis retourne un tableau contenant les sous-chaînes résultantes. Par exemple, si la chaîne de caractères est `"Bonjour le monde!"` et que le séparateur est le caractère espace (`' '`), la fonction `split` produira le tableau `["Bonjour", "le", "monde!"]`. De la même façon, si la chaîne de caractères est `Hydrogene;1;H;1.007975` et que le séparateur est `;`, la fonction retournera le tableau `["Hydrogene", "1", "H", "1.007975"]`. Vous aurez donc compris que cette fonction serait très utile pour séparer les valeurs d'une ligne de notre fichier CSV. C'est pourquoi vous allez l'implémenter!
 
 La fonction à créer doit avoir la signature suivante:
 
@@ -68,7 +70,7 @@ std::vector<std::string> split(const std::string& str, char delimiter);
 
 Pensez à comment vous pourriez faire fonctionner cette fonction (il existe plusieurs solutions possibles), puis implémentez-la. Testez votre fonction rigoureusement avant de continuer.
 
-### Les classes `Parser` et `CSVParser`
+### Étape 2 - Les classes `Parser` et `CSVParser`
 
 À l'étape précédente, vous avez créé une fonction qui sera utile pour convertir une ligne du fichier CSV en `vector<string>`. Un fichier CSV peut être représenté par une matrice de `string`. Puisqu'une matrice est essentiellement un tableau de tableaux, on pourra la représenter sous forme de `vector<vector<string>>`.
 
@@ -127,14 +129,14 @@ public:
 };
 ```
 
-Remarquez que la méthode `parse` prend en paramètre un `istream`. Vous savez déjà que `cin` est un `istream`, mais vous ne savez peut-être pas que la classe `ifstream` (qui, pour rappel, sert à lire dans un fichier) hérite d'`istream`! En prenant en paramètre un `istream`, la méthode `parse` pourra lire ses données d'entrée soit à partir d'un fichier, soit à partir d'une saisie au clavier, et ce sans devoir changer l'implémentation de la méthode. Voilà toute la puissance de l'héritage et du polymorphisme!
+Remarquez également que la méthode `parse` prend en paramètre un `istream`. Vous savez déjà que `cin` est un `istream`, mais vous ne savez peut-être pas que la classe `ifstream` (qui, pour rappel, sert à lire dans un fichier) hérite d'`istream`! En prenant en paramètre un `istream`, la méthode `parse` pourra lire ses données d'entrée soit à partir d'un fichier, soit à partir d'une saisie au clavier, et ce sans devoir changer l'implémentation de la méthode. Voilà toute la puissance de l'héritage et du polymorphisme!
 
-Remarquez également que la classe `CSVParser` ne définit pas de destructeur, d'opérateur = et de constructeur de copie, même si elle comprend un tableau alloué dynamiquement. C'est parce que ce dernier est encapsulé dans la classe `vector`, et donc géré par celle-ci. Voilà pourquoi les vecteurs sont beaucoup plus pratiques à utiliser que les pointeurs de tableaux!
+Remarquez également que la classe `CSVParser` ne définit pas de destructeur, d'opérateur `=` et de constructeur de copie, même si elle comprend un tableau alloué dynamiquement. C'est parce que ce dernier est encapsulé dans la classe `vector`, et donc géré par celle-ci. Voilà pourquoi les vecteurs sont beaucoup plus pratiques à utiliser que les pointeurs de tableaux!
 
 Observons plus attentivement les attributs de la classe `CSVParser`:
 
 * `_delimiter` contient le caractère utilisé pour séparer les valeurs d'une même ligne dans un fichier CSV. Sa valeur par défaut (définie dans le prototype du constructeur) est `,`.
-* `_readsColumnNames` indique si les valeurs de la première ligne du fichier CSV doivent être interprétée comme des noms de colonnes. Sa valeur par défaut est `true`.
+* `_readsColumnNames` indique si les valeurs de la première ligne du fichier CSV doivent être interprétées comme des noms de colonnes. Sa valeur par défaut est `true`.
 * `_data` est la matrice dans laquelle les données « parsées » seront stockées.
 * `_columnNames` est le vecteur dans lequel seront stockés les noms des colonnes, si `_readsColumnNames` est à `true`.
 
@@ -153,7 +155,73 @@ Penchons-nous maintenant sur les méthodes. En plus du constructeur et des acces
 
 Implémentez toutes les méthodes de la classe. Référez-vous à [la documentation de std::vector](https://en.cppreference.com/w/cpp/container/vector) au besoin. N'oubliez pas de penser aux cas limites et à comment vous devriez les gérer.
 
-Testez rigoureusement votre *parser* sur le fichier `elements.csv`.
+Voici du code à placer dans votre fichier `main.cpp` pour tester votre *parser* avec le tableau périodique:
+
+```cpp
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include "CSVParser.h"
+
+#define COL_WIDTH 16
+
+int main() {
+    std::ifstream file;
+    file.open("../elements.csv");
+    if (!file.is_open()) {
+        std::cerr << "L'ouverture du fichier a échoué." << std::endl;
+        return 1;
+    }
+
+    CSVParser parser(';', true);
+
+    parser.parse(file);
+
+    std::cout << "| ";
+    for (size_t i = 0; i < parser.getNumColumns(); i++) {
+        std::cout << std::left << std::setw(COL_WIDTH) << parser.getColumnNames()[i] << " | ";
+    }
+
+    std::cout << std::endl;
+    for (size_t i = 0; i < parser.getNumColumns(); i++) {
+        std::cout << "|" << std::string(COL_WIDTH + 2, '-');
+    }
+    std::cout << "|" << std::endl;
+
+    for (size_t i = 0; i < parser.getNumRows(); i++) {
+        // Nom de l'élément
+        std::cout << "| " << std::left << std::setw(COL_WIDTH) << parser.getString(i, 0);
+        // Numéro atomique
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getInt(i, 1);
+        // Symbole
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getString(i, 2);
+        // Masse atomique
+        std::cout << " | " << std::right << std::setw(COL_WIDTH) << parser.getDouble(i, 3);
+
+        std::cout << " | " << std::endl;
+    }
+
+    std::cout << std::string((COL_WIDTH + 3) * parser.getNumColumns() + 1, '-') << std::endl;
+
+    return 0;
+}
+```
+
+Ce code devrait afficher les éléments du tableau périodique. Voici un extrait du résultat attendu:
+
+```text
+| Nom de l'element | Numero atomique  | Symbole          | Masse atomique   |
+|------------------|------------------|------------------|------------------|
+| Hydrogene        | 1                | H                |          1.00798 |
+| Helium           | 2                | He               |           4.0026 |
+| Lithium          | 3                | Li               |           6.9395 |
+| Beryllium        | 4                | Be               |          9.01218 |
+| Bore             | 5                | B                |          10.8135 |
+| Carbone          | 6                | C                |          12.0106 |
+| Azote            | 7                | N                |          14.0069 |
+| Oxygene          | 8                | O                |          15.9994 |
+| Fluor            | 9                | F                |          18.9984 |
+```
 
 ### Conversion de la matrice de `string` en vecteur d'`Element`
 

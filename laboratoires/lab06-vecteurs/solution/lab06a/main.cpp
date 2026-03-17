@@ -1,72 +1,47 @@
 #include <iostream>
-#include "Menu.h"
-#include "TableauPeriodique.h"
+#include <fstream>
+#include <iomanip>
+#include "CSVParser.h"
 
-#include <iostream>
-#include <locale>
-
-using namespace std;
-
-template <class charT, charT sep>
-class punct_facet: public std::numpunct<charT> {
-protected:
-    charT do_decimal_point() const { return sep; }
-};
+#define COL_WIDTH 16
 
 int main() {
-    std::cin.imbue(std::locale(std::cout.getloc(), new punct_facet<char, ','>));
+    std::ifstream file;
+    file.open("../elements.csv");
+    if (!file.is_open()) {
+        std::cerr << "L'ouverture du fichier a échoué." << std::endl;
+        return 1;
+    }
 
-    double x;
+    CSVParser parser(';', true);
 
-    cout << "X:";
-    cin >> x;
-    cout << x << endl;
+    parser.parse(file);
+
+    std::cout << "| ";
+    for (size_t i = 0; i < parser.getNumColumns(); i++) {
+        std::cout << std::left << std::setw(COL_WIDTH) << parser.getColumnNames()[i] << " | ";
+    }
+
+    std::cout << std::endl;
+    for (size_t i = 0; i < parser.getNumColumns(); i++) {
+        std::cout << "|" << std::string(COL_WIDTH + 2, '-');
+    }
+    std::cout << "|" << std::endl;
+
+    for (size_t i = 0; i < parser.getNumRows(); i++) {
+        // Nom de l'élément
+        std::cout << "| " << std::left << std::setw(COL_WIDTH) << parser.getString(i, 0);
+        // Numéro atomique
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getInt(i, 1);
+        // Symbole
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getString(i, 2);
+        // Masse atomique
+        std::cout << " | " << std::right << std::setw(COL_WIDTH) << parser.getDouble(i, 3);
+
+        std::cout << " | " << std::endl;
+    }
+
+    std::cout << std::string((COL_WIDTH + 3) * parser.getNumColumns() + 1, '-') << std::endl;
+
     return 0;
-
-    int choix;
-    string recherche;
-    const Element* resultatRecherche;
-    Menu menu("Tableau périodique", "Choisir une option:", true);
-    TableauPeriodique tableauPeriodique;
-
-    menu.ajouterOption("Charger le tableau périodique");
-    menu.ajouterOption("Afficher les elements");
-    menu.ajouterOption("Trier les éléments par nom");
-    menu.ajouterOption("Trier les éléments par numéro atomique");
-    menu.ajouterOption("Rechercher un élément");
-
-    do {
-        cout << menu.obtenirChaine();
-        cin >> choix;
-        if (!menu.validerSelection(choix)) {
-            cout << "Option invalide." << endl;
-        } else {
-            switch (choix) {
-                case 1:
-                    tableauPeriodique.charger("elements.csv");
-                    break;
-                case 2:
-                    cout << tableauPeriodique;
-                    break;
-                case 3:
-                    tableauPeriodique.trierParNom();
-                    break;
-                case 4:
-                    tableauPeriodique.trierParNumeroAtomique();
-                    break;
-                case 5:
-                    cout << "Entrez le nom de l'élément recherché: ";
-                    cin >> recherche;
-                    resultatRecherche = tableauPeriodique.getElementParNom(recherche);
-                    if (resultatRecherche != nullptr) {
-                        cout << *resultatRecherche << endl;
-                    } else {
-                        cout << "Élément non trouvé." << endl;
-                    }
-                    break;
-            }
-        }
-    } while (choix != menu.valeurMaximale());
-
-    cout << "Au revoir!" << endl;
 }
