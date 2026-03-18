@@ -28,15 +28,15 @@ Comme vous pouvez le constater, ce fichier contient des informations sur les él
 Contrairement à ce que vos yeux vous laissent croire, un fichier CSV n'est pas un fichier Excel! Fermez donc votre tableur, puis ouvrez maintenant le fichier dans un éditeur de texte tel que *Bloc-Notes* ou *Notepad++*. Vous verrez que le véritable contenu du fichier ressemble à ceci:
 
 ```csv
-Nom de l'élément;Numéro atomique;Symbole;Masse atomique
-Hydrogène;1;H;1.007975
-Hélium;2;He;4.002602
+Nom de l'element;Numero atomique;Symbole;Masse atomique
+Hydrogene;1;H;1.007975
+Helium;2;He;4.002602
 Lithium;3;Li;6.9395
-Béryllium;4;Be;9.012183
+Beryllium;4;Be;9.012183
 Bore;5;B;10.8135
 Carbone;6;C;12.0106
 Azote;7;N;14.006855
-Oxygène;8;O;15.9994
+Oxygene;8;O;15.9994
 Fluor;9;F;18.998403
 (...)
 ```
