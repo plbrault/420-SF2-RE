@@ -353,23 +353,29 @@ private:
 public:
     TableauPeriodique();
     void charger(const std::string& nomFichier);
-    // void afficher(std::ostream& sortie);
+    //void afficher(std::ostream& sortie);
+    // void trierParNom();
+    // void trierParNumeroAtomique();
     // const Element& trouverElementParSymbole(const std::string& symbole) const;
     // const Element& trouverElementParNom(const std::string& nom) const;
 };
 
-std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodique);
+// std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodique);
 ```
 
 La plupart des méthodes sont commentées, car vous allez les implémenter dans les étapes ultérieures. Pour le moment, implémentez seulement le constructeur et la méthode `charger`. Le constructeur doit configurer le `parser` selon les caractéristiques du fichier `elements.csv`. La méthode `charger` doit pour sa part ouvrir le fichier CSV correspondant à `nomFichier`, utiliser `_parser` pour récupérer ses données, puis insérer tous les éléments dans `_elements`. N'oubliez pas de fermer le fichier!
 
 Appelez la méthode `charger` dans votre `main` et utilisez le débogueur pour vérifier que le tableau d'éléments est rempli correctement.
 
-### Étape 4 - Recherche d'un élément par symbole
+### Étape 4 - Méthode `trouverElementParSymbole`
+
+Implémentez maintenant la méthode `trouverElementParSymbole`. Celle-ci doit retourner l'`Element` correspondant au symbole reçu en paramètre, ou lancer une exception `std::invalid_argument` si ce symbole est introuvable.
+
+Pour ce faire, vous implémenterez un algorithme dit de [recherche séquentielle](https://fr.wikipedia.org/wiki/Recherche_s%C3%A9quentielle) ou linéaire. Cet algorithme, le plus simple des algorithmes de recherche, consiste simplement à itérer sur les éléments du tableau jusqu'à ce qu'on ait trouvé celui qui correspond à l'objet recherché. Vous avez déjà utilisé cet algorithme à plusieurs reprises sans le savoir, notamment dans la méthode `getColumnIndex` de votre classe `CSVParser`.
+
+### Étape 5 - Classe `Molecule`
 
 
-
-🎉 Félicitations, vous avez terminé la partie 1 du laboratoire!
 
 ## Laboratoire 06-B - Algorithmes de tri et de recherche
 

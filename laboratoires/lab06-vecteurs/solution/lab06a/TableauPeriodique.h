@@ -12,9 +12,11 @@ private:
 public:
     TableauPeriodique();
     void charger(const std::string& nomFichier);
-    /*void afficher(std::ostream& sortie);
-    const Element& trouverElementParSymbole(const std::string& symbole) const;
-    const Element& trouverElementParNom(const std::string& nom) const;*/
+    //void afficher(std::ostream& sortie);
+    // void trierParNom();
+    // void trierParNumeroAtomique();
+    // const Element& trouverElementParSymbole(const std::string& symbole) const;
+    // const Element& trouverElementParNom(const std::string& nom) const;
 };
 
-std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodique);
+// std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodique);
