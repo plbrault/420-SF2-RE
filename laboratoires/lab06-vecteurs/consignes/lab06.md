@@ -389,7 +389,156 @@ Pour ce faire, vous implémenterez un algorithme dit de [recherche séquentielle
 
 ### Étape 5 - Classe `Molecule` et méthode `creerMolecule`
 
+Voici une classe `Molecule` à ajouter à votre projet. Celle-ci permet de représenter une molécule constituée de plusieurs éléments avec le nombre d'atomes pour chacun.
 
+**Fichier `Molecule.h`**
+
+```cpp
+#pragma once
+
+#include <string>
+#include <iostream>
+#include <vector>
+#include "Element.h"
+
+class Molecule
+{
+private:
+    struct ElementMolecule
+    {
+        Element element;
+        int _nombreAtomes;
+    };
+
+    std::vector<ElementMolecule> _elements;
+    std::string _formule;
+public:
+    Molecule() : Molecule("", std::vector<Element>(), std::vector<int>()) {}
+    Molecule(const std::string& formule, const std::vector<Element>& elements, const std::vector<int>& nombreAtomes);
+
+    const std::string& getFormule() const;
+    size_t getNombreElements() const;
+
+    const Element& getElement(size_t indice) const;
+    int getNombreAtomes(size_t indice) const;
+    int getNombreAtomes(const std::string& symbole) const;
+    int getNombreAtomes(const Element& element) const;
+};
+
+std::ostream& operator<<(std::ostream& output, const Molecule& molecule);
+```
+
+**Fichier `Molecule.cpp`**
+
+```cpp
+#include "Molecule.h"
+
+Molecule::Molecule(const std::string& formule, const std::vector<Element>& elements, const std::vector<int>& nombreAtomes) {
+    this->_formule = formule;
+    for (size_t i = 0; i < elements.size(); ++i) {
+        ElementMolecule elementMolecule;
+        elementMolecule.element = elements[i];
+        elementMolecule._nombreAtomes = nombreAtomes[i];
+        this->_elements.push_back(elementMolecule);
+    }
+}
+
+const std::string& Molecule::getFormule() const {
+    return this->_formule;
+}
+
+size_t Molecule::getNombreElements() const {
+    return this->_elements.size();
+}
+
+const Element& Molecule::getElement(size_t indice) const {
+    return this->_elements[indice].element;
+}
+
+int Molecule::getNombreAtomes(size_t indice) const {
+    return this->_elements[indice]._nombreAtomes;
+}
+
+int Molecule::getNombreAtomes(const std::string& symbole) const {
+    for (const auto& elementMolecule : this->_elements) {
+        if (elementMolecule.element.getSymbole() == symbole) {
+            return elementMolecule._nombreAtomes;
+        }
+    }
+    return 0;
+}
+
+int Molecule::getNombreAtomes(const Element& element) const {
+    return this->getNombreAtomes(element.getSymbole());
+}
+
+std::ostream& operator<<(std::ostream& output, const Molecule& molecule) {
+    output << molecule.getFormule();
+    return output;
+}
+```
+
+Dans le fichier `TableauPeriodique.h`, décommentez la ligne `#include "Molecule.h"` de même que la définition de la méthode `creerMolecule`. Voici l'implémentation à ajouter dans `TableauPeriodique.cpp`:
+
+```cpp
+Molecule TableauPeriodique::creerMolecule(const std::string& formule) const {
+    std::string formuleMajuscule = formule;
+    for (auto& c : formuleMajuscule) {
+        if (isalpha(c)) {
+            c = toupper(c);
+        }
+    }
+
+    vector<Element> elements;
+    vector<int> nombreAtomes;
+
+    size_t i = 0;
+    while (i < formuleMajuscule.size())
+    {
+        if (isalpha(formuleMajuscule[i])) {
+            string symbole(1, formuleMajuscule[i]);
+            i++;
+            if (i < formuleMajuscule.size() && isalpha(formuleMajuscule[i]) && islower(formuleMajuscule[i])) {
+                symbole += formuleMajuscule[i];
+                i++;
+            }
+            const Element& element = this->trouverElementParSymbole(symbole);
+            elements.push_back(element);
+
+            int nombre = 0;
+            while (i < formuleMajuscule.size() && isdigit(formuleMajuscule[i])) {
+                nombre = nombre * 10 + (formuleMajuscule[i] - '0');
+                i++;
+            }
+            if (nombre == 0) {
+                nombre = 1;
+            }
+            nombreAtomes.push_back(nombre);
+        } else {
+            throw invalid_argument("Formule chimique invalide.");
+        }
+    }
+
+    return Molecule(formule, elements, nombreAtomes);
+}
+```
+
+Voici un exemple d'utilisation de cette méthode. Ajoutez-le dans le `main` et assurez-vous que vous obtenez le bon résultat.
+
+```cpp
+TableauPeriodique tableauPeriodique;
+tableauPeriodique.charger("../elements.csv");
+
+Molecule eau = tableauPeriodique.creerMolecule("H2O");
+std::cout << "Une molécule d'eau contient "
+            << eau.getNombreAtomes("H") << " atomes d'" << eau.getElement(0).getNom() << " et "
+            << eau.getNombreAtomes("O") << " atome d'" << eau.getElement(1).getNom() << "."
+            << std::endl;
+```
+
+Pour vous assurer que vous comprenez comment utiliser la classe `Molecule` et la méthode `creerMolecule`, créez un programme qui demande à l'utilisateur d'entrer la formule d'une molécule, puis qui affiche, pour chaque élément de la molécule, son numéro atomique, son nom et le nombre d'atomes de cet élément dans la molécule.
+
+**⚠️ Faites valider votre laboratoire 06-A par l'enseignant.**
 
 ## Laboratoire 06-B - Algorithmes de tri et de recherche
 

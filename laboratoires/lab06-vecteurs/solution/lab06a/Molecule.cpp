@@ -1,7 +1,3 @@
-//
-// Created by plbrault on 2026-03-17.
-//
-
 #include "Molecule.h"
 
 Molecule::Molecule(const std::string& formule, const std::vector<Element>& elements, const std::vector<int>& nombreAtomes) {

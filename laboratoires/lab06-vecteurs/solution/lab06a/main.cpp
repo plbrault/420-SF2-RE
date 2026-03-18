@@ -44,9 +44,10 @@ int main() {
     tableauPeriodique.charger("../elements.csv");
 
     Molecule eau = tableauPeriodique.creerMolecule("H2O");
-    std::cout << "L'eau contient "
-              << eau.getNombreAtomes("H") << " atomes d'hydrogène et "
-              << eau.getNombreAtomes("O") << " atome d'oxygène." << std::endl;
+    std::cout << "Une molécule d'eau contient "
+              << eau.getNombreAtomes("H") << " atomes d'" << eau.getElement(0).getNom() << " et "
+              << eau.getNombreAtomes("O") << " atome d'" << eau.getElement(1).getNom() << "."
+              << std::endl;
 
     return 0;
 }
