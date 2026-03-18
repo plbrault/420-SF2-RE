@@ -259,9 +259,84 @@ Ce code devrait afficher les éléments du tableau périodique. Voici un extrait
 
 Vous êtes maintenant en mesure d'importer les données d'un fichier CSV dans votre programme. Une matrice de `string` n'est cependant pas idéale pour travailler sur les éléments du tableau périodique. Vous allez donc convertir cette matrice en vecteur d'`Element`!
 
-Vous avez créé une classe `Element` dans le Laboratoire 03.
+Voici le code de la classe `Element` à utiliser. Elle diffère légèrement de celle que vous avez implémentée dans le Laboratoire 03.
 
-Pour ce faire, vous allez créer une nouvelle classe `TableauPeriodique` qui vous accompagnera pour toute la suite de cette partie du laboratoire. Voici la définition de cette classe:
+**Fichier `Element.h`**
+
+```cpp
+#pragma once
+
+#include <string>
+
+class Element {
+private:
+    std::string _nom;
+    int _numeroAtomique;
+    std::string _symbole;
+    double _masseAtomique;
+
+public:
+    Element() : Element("", 0, "", 0) {}
+    Element(const std::string& nom, int numeroAtomique, const std::string& symbole, double masseAtomique);
+
+    const std::string& getNom() const;
+    int getNumeroAtomique() const;
+    const std::string& getSymbole() const;
+    double getMasseAtomique() const;
+
+    void setNom(const std::string& nom);
+    void setNumeroAtomique(int numeroAtomique);
+    void setSymbole(const std::string& symbole);
+    void setMasseAtomique(double masseAtomique);
+};
+```
+
+**Fichier `Element.cpp`**
+
+```cpp
+#include "Element.h"
+
+Element::Element(const std::string& nom, int numeroAtomique, const std::string& symbole, double masseAtomique) {
+    this->_nom = nom;
+    this->_numeroAtomique = numeroAtomique;
+    this->_symbole = symbole;
+    this->_masseAtomique = masseAtomique;
+}
+
+const std::string& Element::getNom() const {
+    return this->_nom;
+}
+
+int Element::getNumeroAtomique() const {
+    return this->_numeroAtomique;
+}
+
+const std::string& Element::getSymbole() const {
+    return this->_symbole;
+}
+
+double Element::getMasseAtomique() const {
+    return this->_masseAtomique;
+}
+
+void Element::setNom(const std::string& nom) {
+    this->_nom = nom;
+}
+
+void Element::setNumeroAtomique(int numeroAtomique) {
+    this->_numeroAtomique = numeroAtomique;
+}
+
+void Element::setSymbole(const std::string& symbole) {
+    this->_symbole = symbole;
+}
+
+void Element::setMasseAtomique(double masseAtomique) {
+    this->_masseAtomique = masseAtomique;
+}
+```
+
+Vous devez maintenant créer une nouvelle classe `TableauPeriodique`. Voici la définition de cette classe:
 
 ```cpp
 #pragma once
@@ -275,22 +350,22 @@ class TableauPeriodique {
 private:
     CSVParser _parser;
     std::vector<Element> _elements;
-    bool _estTrieParNom;
 public:
     TableauPeriodique();
     void charger(const std::string& nomFichier);
     // void afficher(std::ostream& sortie);
-    // void trierParNom();
-    // void trierParNumeroAtomique();
-    // const Element* getElementParNom(const std::string& nom) const;
+    // const Element& trouverElementParSymbole(const std::string& symbole) const;
+    // const Element& trouverElementParNom(const std::string& nom) const;
 };
 
 std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodique);
 ```
 
-La plupart des méthodes sont commentées, car vous allez les implémenter dans les étapes ultérieures. Pour le moment, implémentez seulement le constructeur et la méthode `charger`. Celle-ci doit ouvrir le fichier CSV, utiliser `_parser` pour récupérer ses données, puis insérer tous les éléments dans `_elements`. N'oubliez pas de fermer le fichier!
+La plupart des méthodes sont commentées, car vous allez les implémenter dans les étapes ultérieures. Pour le moment, implémentez seulement le constructeur et la méthode `charger`. Le constructeur doit configurer le `parser` selon les caractéristiques du fichier `elements.csv`. La méthode `charger` doit pour sa part ouvrir le fichier CSV correspondant à `nomFichier`, utiliser `_parser` pour récupérer ses données, puis insérer tous les éléments dans `_elements`. N'oubliez pas de fermer le fichier!
 
 Appelez la méthode `charger` dans votre `main` et utilisez le débogueur pour vérifier que le tableau d'éléments est rempli correctement.
+
+### Étape 4 - Recherche d'un élément par symbole
 
 
 

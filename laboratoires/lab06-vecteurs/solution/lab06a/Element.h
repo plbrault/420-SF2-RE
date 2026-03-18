@@ -1,7 +1,6 @@
-#ifndef LAB03B_ELEMENT_H
-#define LAB03B_ELEMENT_H
+#pragma once
 
-#include "Isotope.h"
+#include <string>
 
 class Element {
 private:
@@ -24,5 +23,3 @@ public:
     void setSymbole(const std::string& symbole);
     void setMasseAtomique(double masseAtomique);
 };
-
-#endif //LAB03B_ELEMENT_H
