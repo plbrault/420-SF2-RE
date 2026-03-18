@@ -51,7 +51,9 @@ public:
     /* Méthode qui lit le flux d'entrée et le convertit en matrice de `string` qu'il stocke dans `_data`.
      * La fonction `split` créée précédemment sera utile à l'implémentation de cette méthode.
      * Il ne faudra par ailleurs pas oublier de vider les vecteurs `_data` et `_columnNames` avant de procéder,
-     * et de stocker les nouveaux noms de colonnes dans `_columnNames` si `_readsColumnNames` est à `true`. */
+     * et de stocker les nouveaux noms de colonnes dans `_columnNames` si `_readsColumnNames` est à `true`.
+     * ATTENTION: il ne faut PAS stocker les noms de colonnes dans `_data`!
+     */
     void parse(std::istream& in) override;
 
     /* Retourne l'indice de la colonne correspondant au nom donné en paramètre, ou lance une exception
@@ -69,18 +71,12 @@ public:
     const std::string& getString(size_t row, const std::string& columnName) const;
 
     /* Retourne la valeur présente à la ligne et la colonne spécifiée, en la convertissant d'abord en `int`.
-     * Cette méthode existe en deux versions: une qui reçoit l'indice de la colonne, et une autre qui reçoit plutôt
-     * le nom de la colonne. Lance une exception `std::out_of_range` au besoin.
-     *
      * Utilisez la fonction `std::stoi` pour convertir la chaîne de caractères en `int`.
      */
     int getInt(size_t row, size_t column) const;
     int getInt(size_t row, const std::string& columnName) const;
 
     /* Retourne la valeur présente à la ligne et la colonne spécifiée, en la convertissant d'abord en `double`.
-     * Cette méthode existe en deux versions: une qui reçoit l'indice de la colonne, et une autre qui reçoit plutôt
-     * le nom de la colonne. Lance une exception `std::out_of_range` au besoin.
-     *
      * Utilisez la fonction `std::stod` pour convertir la chaîne de caractères en `double`.
      */
     double getDouble(size_t row, size_t column) const;
