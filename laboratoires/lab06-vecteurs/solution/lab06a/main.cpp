@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include "CSVParser.h"
+#include "TableauPeriodique.h"
 
 #define COL_WIDTH 16
 
@@ -38,6 +39,14 @@ int main() {
     }
 
     std::cout << std::string((COL_WIDTH + 3) * parser.getNumColumns() + 1, '-') << std::endl;
+
+    TableauPeriodique tableauPeriodique;
+    tableauPeriodique.charger("../elements.csv");
+
+    Molecule eau = tableauPeriodique.creerMolecule("H2O");
+    std::cout << "L'eau contient "
+              << eau.getNombreAtomes("H") << " atomes d'hydrogène et "
+              << eau.getNombreAtomes("O") << " atome d'oxygène." << std::endl;
 
     return 0;
 }

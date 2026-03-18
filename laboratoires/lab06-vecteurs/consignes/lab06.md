@@ -288,6 +288,8 @@ public:
     void setNumeroAtomique(int numeroAtomique);
     void setSymbole(const std::string& symbole);
     void setMasseAtomique(double masseAtomique);
+
+    bool operator==(const Element& other) const;
 };
 ```
 
@@ -334,6 +336,13 @@ void Element::setSymbole(const std::string& symbole) {
 void Element::setMasseAtomique(double masseAtomique) {
     this->_masseAtomique = masseAtomique;
 }
+
+bool Element::operator==(const Element& other) const {
+    return this->_symbole == other._symbole
+        && this->_numeroAtomique == other._numeroAtomique
+        && this->_nom == other._nom
+        && this->_masseAtomique == other._masseAtomique;
+}
 ```
 
 Vous devez maintenant créer une nouvelle classe `TableauPeriodique`. Voici la définition de cette classe:
@@ -341,29 +350,34 @@ Vous devez maintenant créer une nouvelle classe `TableauPeriodique`. Voici la d
 ```cpp
 #pragma once
 
-#include <iostream>
 #include <vector>
 #include "CSVParser.h"
 #include "Element.h"
+// #include "Molecule.h"
 
 class TableauPeriodique {
 private:
     CSVParser _parser;
     std::vector<Element> _elements;
+    // bool _estTrieParNom;
 public:
     TableauPeriodique();
     void charger(const std::string& nomFichier);
     //void afficher(std::ostream& sortie);
     // void trierParNom();
     // void trierParNumeroAtomique();
-    // const Element& trouverElementParSymbole(const std::string& symbole) const;
+    const Element& trouverElementParSymbole(const std::string& symbole) const;
     // const Element& trouverElementParNom(const std::string& nom) const;
+    // const Element& trouverElementParNumeroAtomique(int numeroAtomique) const;
+    // Molecule creerMolecule(const std::string& formule) const;
 };
 
 // std::ostream& operator<<(std::ostream& sortie, TableauPeriodique& tableauPeriodique);
 ```
 
-La plupart des méthodes sont commentées, car vous allez les implémenter dans les étapes ultérieures. Pour le moment, implémentez seulement le constructeur et la méthode `charger`. Le constructeur doit configurer le `parser` selon les caractéristiques du fichier `elements.csv`. La méthode `charger` doit pour sa part ouvrir le fichier CSV correspondant à `nomFichier`, utiliser `_parser` pour récupérer ses données, puis insérer tous les éléments dans `_elements`. N'oubliez pas de fermer le fichier!
+Plusieurs lignes sont commentées, vous les décommenterez lors d'étapes ultérieures.
+
+Pour le moment, implémentez seulement le constructeur et la méthode `charger`. Le constructeur doit configurer le `parser` selon les caractéristiques du fichier `elements.csv`. La méthode `charger` doit pour sa part ouvrir le fichier CSV correspondant à `nomFichier`, utiliser `_parser` pour récupérer ses données, puis insérer tous les éléments dans `_elements`. N'oubliez pas de fermer le fichier!
 
 Appelez la méthode `charger` dans votre `main` et utilisez le débogueur pour vérifier que le tableau d'éléments est rempli correctement.
 
@@ -373,7 +387,7 @@ Implémentez maintenant la méthode `trouverElementParSymbole`. Celle-ci doit re
 
 Pour ce faire, vous implémenterez un algorithme dit de [recherche séquentielle](https://fr.wikipedia.org/wiki/Recherche_s%C3%A9quentielle) ou linéaire. Cet algorithme, le plus simple des algorithmes de recherche, consiste simplement à itérer sur les éléments du tableau jusqu'à ce qu'on ait trouvé celui qui correspond à l'objet recherché. Vous avez déjà utilisé cet algorithme à plusieurs reprises sans le savoir, notamment dans la méthode `getColumnIndex` de votre classe `CSVParser`.
 
-### Étape 5 - Classe `Molecule`
+### Étape 5 - Classe `Molecule` et méthode `creerMolecule`
 
 
 

@@ -22,4 +22,6 @@ public:
     void setNumeroAtomique(int numeroAtomique);
     void setSymbole(const std::string& symbole);
     void setMasseAtomique(double masseAtomique);
+
+    bool operator==(const Element& other) const;
 };

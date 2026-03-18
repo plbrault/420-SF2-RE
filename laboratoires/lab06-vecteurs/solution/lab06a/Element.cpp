@@ -38,3 +38,10 @@ void Element::setSymbole(const std::string& symbole) {
 void Element::setMasseAtomique(double masseAtomique) {
     this->_masseAtomique = masseAtomique;
 }
+
+bool Element::operator==(const Element& other) const {
+    return this->_symbole == other._symbole
+        && this->_numeroAtomique == other._numeroAtomique
+        && this->_nom == other._nom
+        && this->_masseAtomique == other._masseAtomique;
+}

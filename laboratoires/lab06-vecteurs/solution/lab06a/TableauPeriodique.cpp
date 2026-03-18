@@ -1,34 +1,33 @@
-// #include "TableauPeriodique.h"
-// #include <fstream>
-// #include <vector>
-//
-// using namespace std;
-//
-// TableauPeriodique::TableauPeriodique() {
-//     _parser.setDelimiter(';');
-// }
-//
-// void TableauPeriodique::charger(const std::string& nomFichier) {
-//     ifstream elementsFile(nomFichier);
-//     if (!elementsFile.is_open()) {
-//         throw invalid_argument("Le fichier n'a pas pu être ouvert.");
-//     }
-//     _parser.parse(elementsFile);
-//     elementsFile.close();
-//
-//     _elements.clear();
-//     for (size_t i = 0; i < _parser.getNumRows(); i++) {
-//         Element element(
-//             _parser.getString(i, "Nom"),
-//             _parser.getString(i, "Symbole"),
-//             _parser.getInt(i, "Numero atomique"),
-//             _parser.getInt(i, "Nombre de trous"),
-//             _parser.getString(i, "Groupe")
-//         );
-//         _elements.push_back(element);
-//     }
-// }
-//
+#include "TableauPeriodique.h"
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+TableauPeriodique::TableauPeriodique() {
+    _parser.setDelimiter(';');
+}
+
+void TableauPeriodique::charger(const std::string& nomFichier) {
+    ifstream elementsFile(nomFichier);
+    if (!elementsFile.is_open()) {
+        throw invalid_argument("Le fichier n'a pas pu être ouvert.");
+    }
+    _parser.parse(elementsFile);
+    elementsFile.close();
+
+    _elements.clear();
+    for (size_t i = 0; i < _parser.getNumRows(); i++) {
+        Element element(
+            _parser.getString(i, "Nom de l'element"),
+            _parser.getInt(i, "Numero atomique"),
+            _parser.getString(i, "Symbole"),
+            _parser.getDouble(i, "Masse atomique")
+        );
+        _elements.push_back(element);
+    }
+}
+
 // void TableauPeriodique::afficher(std::ostream& sortie) {
 //     for (Element element : _elements) {
 //         sortie << element << endl;
@@ -65,7 +64,17 @@
 //     }
 //     _estTrieParNom = false;
 // }
-//
+
+const Element& TableauPeriodique::trouverElementParSymbole(const std::string& symbole) const
+{
+    for (const Element& element : _elements) {
+        if (element.getSymbole() == symbole) {
+            return element;
+        }
+    }
+    throw invalid_argument("Aucun élément trouvé avec le symbole donné.");
+}
+
 // const Element* TableauPeriodique::getElementParNom(const std::string& nom) const {
 //     if (_estTrieParNom) {
 //         // Recherche dichotomique
@@ -91,3 +100,45 @@
 //     }
 //     return nullptr;
 // }
+
+Molecule TableauPeriodique::creerMolecule(const std::string& formule) const {
+    std::string formuleMajuscule = formule;
+    for (auto& c : formuleMajuscule) {
+        if (isalpha(c)) {
+            c = toupper(c);
+        }
+    }
+
+    vector<Element> elements;
+    vector<int> nombreAtomes;
+
+    size_t i = 0;
+    while (i < formuleMajuscule.size())
+    {
+        if (isalpha(formuleMajuscule[i])) {
+            string symbole(1, formuleMajuscule[i]);
+            i++;
+            if (i < formuleMajuscule.size() && isalpha(formuleMajuscule[i]) && islower(formuleMajuscule[i])) {
+                symbole += formuleMajuscule[i];
+                i++;
+            }
+            const Element& element = this->trouverElementParSymbole(symbole);
+            elements.push_back(element);
+
+            int nombre = 0;
+            while (i < formuleMajuscule.size() && isdigit(formuleMajuscule[i])) {
+                nombre = nombre * 10 + (formuleMajuscule[i] - '0');
+                i++;
+            }
+            if (nombre == 0) {
+                nombre = 1;
+            }
+            nombreAtomes.push_back(nombre);
+        } else {
+            throw invalid_argument("Formule chimique invalide.");
+        }
+    }
+
+    return Molecule(formule, elements, nombreAtomes);
+}
+
