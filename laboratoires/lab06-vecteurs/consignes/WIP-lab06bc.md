@@ -46,7 +46,7 @@ tri_à_bulles(Tableau T)
 
 Utilisez votre méthode pour implémenter l'option 3 du menu. Validez que votre tri fonctionne correctement avant de continuer.
 
-> ℹ️ Le tri à bulles n'est pas un algorithme de tri particulièrement efficace. On dit que sa **complexité en temps** est en moyenne $ O(n^2) $, c'est-à-dire que le temps d'exécution est proportionnel au carré du nombre d'éléments en entrée. C'est souvent le cas des algorithmes basés sur deux boucles *for* imbriquées.
+> ℹ️ Le tri à bulles n'est pas un algorithme de tri particulièrement efficace. On dit que sa **complexité en temps** est en moyenne $O(n^2)$, c'est-à-dire que le temps d'exécution est proportionnel au carré du nombre d'éléments en entrée. C'est souvent le cas des algorithmes basés sur deux boucles *for* imbriquées.
 
 ### Tri par insertion
 
@@ -75,19 +75,19 @@ tri_insertion(Tableau T)
 
 Utilisez votre méthode pour implémenter l'option 4 du menu. Validez que votre tri fonctionne correctement avant de continuer.
 
-> ℹ️ Le tri par insertion est celui que la plupart des gens appliquent instinctivement pour trier des cartes à jouer qu'ils tiennent dans leurs mains. Comme pour le tri à bulles, sa complexité en temps est $ O(n^2) $ en moyenne, mais peut être $ O(n) $ sur des tableaux de petite taille ou qui sont presque triés. Il existe des algorithmes de tri plus efficaces dans le cas général, tels que le [Tri rapide](https://fr.wikipedia.org/wiki/Tri_rapide) et le [Tri fusion](https://fr.wikipedia.org/wiki/Tri_fusion), mais nous ne les implémenterons pas dans ce laboratoire.
+> ℹ️ Le tri par insertion est celui que la plupart des gens appliquent instinctivement pour trier des cartes à jouer qu'ils tiennent dans leurs mains. Comme pour le tri à bulles, sa complexité en temps est  $O(n^2)$en moyenne, mais peut être  $O(n)$ sur des tableaux de petite taille ou qui sont presque triés. Il existe des algorithmes de tri plus efficaces dans le cas général, tels que le [Tri rapide](https://fr.wikipedia.org/wiki/Tri_rapide) et le [Tri fusion](https://fr.wikipedia.org/wiki/Tri_fusion), mais nous ne les implémenterons pas dans ce laboratoire.
 
 ### Recherche séquentielle et dichotomique
 
 Vous allez maintenant implémenter la méthode `getElementParNom`. Il s'agit d'une méthode de recherche, qui trouve dans le vecteur d'`Element` correspondant au nom reçu en paramètre, puis le retourne.
 
-L'algorithme de recherche le plus simple est la [recherche séquentielle](https://fr.wikipedia.org/wiki/Recherche_s%C3%A9quentielle) ou linéaire. Elle consiste simplement à itérer sur les éléments du tableau jusqu'à ce qu'on ait trouvé celui qui correspond à l'objet recherché. Vous avez déjà utilisé cet algorithme à plusieurs reprises sans le savoir, notamment dans la méthode `getColumnIndex` de votre classe `CSVParser`. Sa complexité en temps est $ O(n) $.
+L'algorithme de recherche le plus simple est la [recherche séquentielle](https://fr.wikipedia.org/wiki/Recherche_s%C3%A9quentielle) ou linéaire. Elle consiste simplement à itérer sur les éléments du tableau jusqu'à ce qu'on ait trouvé celui qui correspond à l'objet recherché. Vous avez déjà utilisé cet algorithme à plusieurs reprises sans le savoir, notamment dans la méthode `getColumnIndex` de votre classe `CSVParser`. Sa complexité en temps est $O(n)$.
 
 ```
-Dans le cas où le tableau est trié, on peut utiliser un algorithme de recherche plus efficace, soit la [recherche dichotomique](https://fr.wikipedia.org/wiki/Recherche_dichotomique), avec une complexité de $ O(\log n) $. Le principe de cet algorithme est de vérifier d'abord si l'item recherché se trouve au milieu du tableau, puis, si ce n'est pas le cas, de vérifier le milieu de la première ou la deuxième moitié du tableau selon que l'item est plus petit ou plus grand que celui qu'on vient d'observer, et ainsi de suite. C'est l'algorithme qu'on applique instinctivement lorsqu'on cherche un mot dans un dictionnaire.
+Dans le cas où le tableau est trié, on peut utiliser un algorithme de recherche plus efficace, soit la [recherche dichotomique](https://fr.wikipedia.org/wiki/Recherche_dichotomique), avec une complexité de $O(\log n)$. Le principe de cet algorithme est de vérifier d'abord si l'item recherché se trouve au milieu du tableau, puis, si ce n'est pas le cas, de vérifier le milieu de la première ou la deuxième moitié du tableau selon que l'item est plus petit ou plus grand que celui qu'on vient d'observer, et ainsi de suite. C'est l'algorithme qu'on applique instinctivement lorsqu'on cherche un mot dans un dictionnaire.
 ```
 
-> NOTE: quand on parle d'une complexité de $ O(\log n) $, on fait généralement référence à un logarithme en base 2. On trouve cette complexité dans les algorithmes de type **Diviser pour mieux régner**, qui découpent l'entrée en plusieurs parties de manière successive.
+> NOTE: quand on parle d'une complexité de $O(\log n)$, on fait généralement référence à un logarithme en base 2. On trouve cette complexité dans les algorithmes de type **Diviser pour mieux régner**, qui découpent l'entrée en plusieurs parties de manière successive.
 
 Remarquez que la classe `TableauPeriodique` possède un attribut booléen `_estTrieParNom`. Si ce n'est pas déjà fait, ajoutez le code nécessaire pour mettre à jour cet attribut aux endroits appropriés.
 
@@ -135,7 +135,7 @@ Utilisez votre méthode pour implémenter l'option 5 du menu. Validez que votre 
 
 ## Laboratoire 06-C - Carte topographique
 
-La [Sépaq](https://www.sepaq.com/organisation/) fait appel à vos compétences en algorithmie pour l'assister dans la création d'un nouveau parc national. À l'aide d'une [carte topographique](https://fr.wikipedia.org/wiki/Carte_topographique) d'un terrain montagneux, elle vous demande d'identifier l'emplacement de fin d'un futur sentier pédestre. La carte topographique est représentée par une matrice d'entiers dont chaque valeur représente une altitude. On vous demande de trouver **l'altitude du plus haut sommet pouvant être atteint par une pente graduelle à partir d'un point d'altitude 0**. On vous précise que par « pente graduelle », on entend un trajet dont l'altitude de chaque point est **exactement 1 de plus** que celle du point précédent. Chaque point $ p + 1 $ du trajet est adjacent à un point $ p $ soit horizontalement, verticalement ou en diagonal.
+La [Sépaq](https://www.sepaq.com/organisation/) fait appel à vos compétences en algorithmie pour l'assister dans la création d'un nouveau parc national. À l'aide d'une [carte topographique](https://fr.wikipedia.org/wiki/Carte_topographique) d'un terrain montagneux, elle vous demande d'identifier l'emplacement de fin d'un futur sentier pédestre. La carte topographique est représentée par une matrice d'entiers dont chaque valeur représente une altitude. On vous demande de trouver **l'altitude du plus haut sommet pouvant être atteint par une pente graduelle à partir d'un point d'altitude 0**. On vous précise que par « pente graduelle », on entend un trajet dont l'altitude de chaque point est **exactement 1 de plus** que celle du point précédent. Chaque point$p + 1$du trajet est adjacent à un point$p$soit horizontalement, verticalement ou en diagonal.
 
 Par exemple, voici les trajets possibles dans une carte de 5 x 5:
 
