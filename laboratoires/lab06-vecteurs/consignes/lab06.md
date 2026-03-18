@@ -74,7 +74,7 @@ Pensez à comment vous pourriez faire fonctionner cette fonction (il existe plus
 
 À l'étape précédente, vous avez créé une fonction qui sera utile pour convertir une ligne du fichier CSV en `vector<string>`. Un fichier CSV peut être représenté par une matrice de `string`. Puisqu'une matrice est essentiellement un tableau de tableaux, on pourra la représenter sous forme de `vector<vector<string>>`.
 
-Ce que nous voulons ici, c'est créer ce qu'on appelle un ***parser***. En informatique, le verbe anglais ***parse*** décrit l'opération qui interprète des données textuelles pour les convertir en données exploitables par un programme. Dans notre cas, on cherche à « parser » du CSV. Vous créerez donc une classe `CSVParser`. Voici la définition de cette classe:
+Ce que nous voulons ici, c'est créer ce qu'on appelle un ***parser***. En informatique, le verbe anglais ***parse*** décrit l'opération qui interprète des données textuelles pour les convertir en données exploitables par un programme. Dans notre cas, on cherche à « parser » du CSV. Vous créerez donc une classe `CSVParser`. Voici la définition de cette classe, avec des commentaires expliquant chacun de ses membres:
 
 ```cpp
 #pragma once
@@ -86,32 +86,86 @@ Ce que nous voulons ici, c'est créer ce qu'on appelle un ***parser***. En infor
 
 class CSVParser : public Parser {
 private:
+    // Caractère utilisé pour séparer les valeurs d'une même ligne dans le fichier CSV (ex: ',' ou ';').
     char _delimiter;
+
+    // Indique si les valeurs de la première ligne du fichier CSV doivent être interprétées comme des noms de colonnes.
     bool _readsColumnNames;
+
+    /*
+     * Les données du CSV une fois "parsées", stockées sous forme de tableau 2D de chaînes de caractères
+     * (vecteur de vecteurs de string). Chaque ligne du CSV correspond donc à un vecteur de string,
+     * et chaque string représente une cellule de la ligne.
+     */
     std::vector<std::vector<std::string>> _data;
+
+    /* Les noms des colonnes, donc le contenu de la première ligne du tableau si `_readsColumnNames` est à `true`.
+     * Si `_readsColumnNames` est à `false`, ce vecteur doit rester vide. */
     std::vector<std::string> _columnNames;
 public:
+    /* Constructeur avec paramètres.
+     *
+     * Des valeurs par défaut sont données aux paramètres.
+     * On peut donc appeler le constructeur en lui passant soit 0, 1 ou 2 paramètres.
+     * Si on ne lui passe aucun paramètre, ce sont les valeurs par défaut qui seront utilisées.
+     * Si on lui en passe un seul, il s'appliquera à `delimiter`, et `readsColumnNames` prendra sa valeur par défaut.
+     *
+     * Autrement dit, c'est comme si on définissait les trois constructeurs suivants d'un seul coup:
+     *
+     * CSVParser() : CSVParser(',', true) {}
+     * CSVParser(char delimiter) : CSVParser(delimiter, true) {}
+     * CSVParser(char delimiter, bool readColumnNames);
+     *
+     * Les valeurs par défaut ne doivent pas être incluses dans l'implémentation (fichier .cpp). */
     CSVParser(char delimiter=',', bool readColumnNames = true);
 
+    // Accesseurs et mutateurs d'attributs
     char getDelimiter() const;
     void setDelimiter(char delimiter);
     bool readsColumnNames() const;
     void setReadsColumnNames(bool readsColumnNames);
-
-    void parse(std::istream& in) override;
     const std::vector<std::vector<std::string>>& getData() const;
     const std::vector<std::string>& getColumnNames() const;
+
+    /* Méthode qui lit le flux d'entrée et le convertit en matrice de `string` qu'il stocke dans `_data`.
+     * La fonction `split` créée précédemment sera utile à l'implémentation de cette méthode.
+     * Il ne faudra par ailleurs pas oublier de vider les vecteurs `_data` et `_columnNames` avant de procéder,
+     * et de stocker les nouveaux noms de colonnes dans `_columnNames` si `_readsColumnNames` est à `true`.
+     * ATTENTION: il ne faut PAS stocker les noms de colonnes dans `_data`!
+     */
+    void parse(std::istream& in) override;
+
+    /* Retourne l'indice de la colonne correspondant au nom donné en paramètre, ou lance une exception
+     * `std::invalid_argument` si aucune colonne ne correspond au nom donné. */
     int getColumnIndex(const std::string& columnName) const;
+
+    /* Retourne la ligne de la matrice correspondant à l'indice reçu en paramètre, ou lance une exception
+     * `std::out_of_range` si l'indice est invalide. */
     const std::vector<std::string>& getRow(size_t index) const;
 
+    /* Retourne la chaîne de caractères présente à la ligne et la colonne spécifiés.
+     * Cette méthode existe en deux versions: une qui reçoit l'indice de la colonne, et une autre qui reçoit plutôt
+     * le nom de la colonne. Lance une exception `std::out_of_range` au besoin. */
     const std::string& getString(size_t row, size_t column) const;
     const std::string& getString(size_t row, const std::string& columnName) const;
+
+    /* Retourne la valeur présente à la ligne et la colonne spécifiée, en la convertissant d'abord en `int`.
+     * Utilisez la fonction `std::stoi` pour convertir la chaîne de caractères en `int`.
+     */
     int getInt(size_t row, size_t column) const;
     int getInt(size_t row, const std::string& columnName) const;
+
+    /* Retourne la valeur présente à la ligne et la colonne spécifiée, en la convertissant d'abord en `double`.
+     * Utilisez la fonction `std::stod` pour convertir la chaîne de caractères en `double`.
+     */
     double getDouble(size_t row, size_t column) const;
     double getDouble(size_t row, const std::string& columnName) const;
 
+    // Accesseur du nombre de lignes présentes dans `_data`
     size_t getNumRows() const;
+
+    /* Accesseur du nombre de colonnes.
+     * Attention: doit retourner le bon résultat même s'il n'y a pas de noms de colonnes! */
     size_t getNumColumns() const;
 };
 ```
@@ -131,32 +185,11 @@ public:
 
 Remarquez également que la méthode `parse` prend en paramètre un `istream`. Vous savez déjà que `cin` est un `istream`, mais vous ne savez peut-être pas que la classe `ifstream` (qui, pour rappel, sert à lire dans un fichier) hérite d'`istream`! En prenant en paramètre un `istream`, la méthode `parse` pourra lire ses données d'entrée soit à partir d'un fichier, soit à partir d'une saisie au clavier, et ce sans devoir changer l'implémentation de la méthode. Voilà toute la puissance de l'héritage et du polymorphisme!
 
-Remarquez également que la classe `CSVParser` ne définit pas de destructeur, d'opérateur `=` et de constructeur de copie, même si elle comprend un tableau alloué dynamiquement. C'est parce que ce dernier est encapsulé dans la classe `vector`, et donc géré par celle-ci. Voilà pourquoi les vecteurs sont beaucoup plus pratiques à utiliser que les pointeurs de tableaux!
+Par ailleurs, la classe `CSVParser` ne définit pas de destructeur, d'opérateur `=` et de constructeur de copie, même si elle comprend un tableau alloué dynamiquement. C'est parce que ce dernier est encapsulé dans la classe `vector`, et donc géré par celle-ci. Voilà pourquoi les vecteurs sont beaucoup plus pratiques à utiliser que les pointeurs de tableaux!
 
+Implémentez toutes les méthodes de la classe en vous basant sur les explications fournies dans les commentaires. Référez-vous à [la documentation de std::vector](https://en.cppreference.com/w/cpp/container/vector) au besoin. N'oubliez pas de penser aux cas limites et à comment vous devriez les gérer. En implémentant les méthodes, pensez aussi aux endroits où vous pourriez faire de la...
 
-Vous remarquez que certaines méthodes existent en 2 versions. Pensez à faire de la... [réutilisation]
-
-Observons plus attentivement les attributs de la classe `CSVParser`:
-
-* `_delimiter` contient le caractère utilisé pour séparer les valeurs d'une même ligne dans un fichier CSV. Sa valeur par défaut (définie dans le prototype du constructeur) est `,`.
-* `_readsColumnNames` indique si les valeurs de la première ligne du fichier CSV doivent être interprétées comme des noms de colonnes. Sa valeur par défaut est `true`.
-* `_data` est la matrice dans laquelle les données « parsées » seront stockées.
-* `_columnNames` est le vecteur dans lequel seront stockés les noms des colonnes, si `_readsColumnNames` est à `true`.
-
-Penchons-nous maintenant sur les méthodes. En plus du constructeur et des accesseurs et mutateurs pour les deux attributs scalaires, la classe `CSVParser` offre les méthodes suivantes:
-
-* `parse`: lit le flux d'entrée et le convertit en matrice de `string` qu'il stockera dans `_data`. La fonction `split` créée précédemment sera utile à l'implémentation de cette méthode. Il ne faudra par ailleurs pas oublier de vider les vecteurs `_data` et `_columnNames` avant de procéder, et de stocker les nouveaux noms de colonnes dans `_columnNames` si la configuration du *parser* l'exige.
-* `getData`: retourne la matrice au complet.
-* `getColumnNames`: retourne les noms de colonnes. Si `readsColumnNames` était à `false` au moment du *parsing*, le vecteur retourné devrait être vide.
-* `getRow`: retourne la ligne de la matrice correspondant à l'indice reçu en paramètre.
-* `getColumnIndex`: retourne l'indice de la colonne correspondant au nom reçu en paramètre.
-* `getString`: retourne la **chaîne de caractères** présente à la ligne et la colonne spécifiés. Cette méthode existe en deux versions: une qui reçoit l'indice de la colonne, et une autre qui reçoit plutôt le nom de la colonne.
-* `getInt`: retourne le **nombre entier** présent à la ligne et la colonne spécifiés. La fonction `stoi` de C++ sera utile à l'implémentation de cette méthode.
-* `getDouble`: retourne le **nombre à virgule** présent à la ligne et la colonne spécifiés. La fonction `stod` de C++ sera utile à l'implémentation de cette méthode.
-* `getNumRows`: retourne le nombre de lignes.
-* `getNumColumns`: retourne le nombre de colonnes. **Attention: doit retourner le bon résultat même s'il n'y a pas de noms de colonnes!**
-
-Implémentez toutes les méthodes de la classe. Référez-vous à [la documentation de std::vector](https://en.cppreference.com/w/cpp/container/vector) au besoin. N'oubliez pas de penser aux cas limites et à comment vous devriez les gérer.
+![](./images/bob_leponge_reutilisation.jpg)
 
 Voici du code à placer dans votre fichier `main.cpp` pour tester votre *parser* avec le tableau périodique:
 
@@ -192,14 +225,10 @@ int main() {
     std::cout << "|" << std::endl;
 
     for (size_t i = 0; i < parser.getNumRows(); i++) {
-        // Nom de l'élément
-        std::cout << "| " << std::left << std::setw(COL_WIDTH) << parser.getString(i, 0);
-        // Numéro atomique
-        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getInt(i, 1);
-        // Symbole
-        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getString(i, 2);
-        // Masse atomique
-        std::cout << " | " << std::right << std::setw(COL_WIDTH) << parser.getDouble(i, 3);
+        std::cout << "| " << std::left << std::setw(COL_WIDTH) << parser.getString(i, "Nom de l'element");
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getInt(i, "Numero atomique");
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getString(i, "Symbole");
+        std::cout << " | " << std::right << std::setw(COL_WIDTH) << parser.getDouble(i, "Masse atomique");
 
         std::cout << " | " << std::endl;
     }

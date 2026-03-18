@@ -29,14 +29,10 @@ int main() {
     std::cout << "|" << std::endl;
 
     for (size_t i = 0; i < parser.getNumRows(); i++) {
-        // Nom de l'élément
-        std::cout << "| " << std::left << std::setw(COL_WIDTH) << parser.getString(i, 0);
-        // Numéro atomique
-        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getInt(i, 1);
-        // Symbole
-        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getString(i, 2);
-        // Masse atomique
-        std::cout << " | " << std::right << std::setw(COL_WIDTH) << parser.getDouble(i, 3);
+        std::cout << "| " << std::left << std::setw(COL_WIDTH) << parser.getString(i, "Nom de l'element");
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getInt(i, "Numero atomique");
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << parser.getString(i, "Symbole");
+        std::cout << " | " << std::right << std::setw(COL_WIDTH) << parser.getDouble(i, "Masse atomique");
 
         std::cout << " | " << std::endl;
     }
