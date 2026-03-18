@@ -58,7 +58,7 @@ Attaquons-nous donc à la lecture d'un fichier CSV!
 
 ### Étape 1 - La fonction `split`
 
-La fonction `split` est une fonction qui existe nativement dans de nombreux langages de programmation, mais malheureusement pas en C++. Elle prend en paramètres une chaîne de caractères et un séparateur, puis retourne un tableau contenant les sous-chaînes résultantes. Par exemple, si la chaîne de caractères est `"Bonjour le monde!"` et que le séparateur est le caractère espace (`' '`), la fonction `split` produira le tableau `["Bonjour", "le", "monde!"]`. De la même façon, si la chaîne de caractères est `Hydrogene;1;H;1.007975` et que le séparateur est `;`, la fonction retournera le tableau `["Hydrogene", "1", "H", "1.007975"]`. Vous aurez donc compris que cette fonction serait très utile pour séparer les valeurs d'une ligne de notre fichier CSV. C'est pourquoi vous allez l'implémenter!
+La fonction `split` est une fonction qui existe nativement dans de nombreux langages de programmation, mais malheureusement pas en C++. Elle prend en paramètres une chaîne de caractères et un séparateur, puis retourne un tableau contenant les sous-chaînes résultantes. Par exemple, si la chaîne de caractères est `"Bonjour le monde!"` et que le séparateur est le caractère espace (`' '`), la fonction `split` produira le tableau `["Bonjour", "le", "monde!"]`. De la même façon, si la chaîne de caractères est `"Hydrogene;1;H;1.007975"` et que le séparateur est `;`, la fonction retournera le tableau `["Hydrogene", "1", "H", "1.007975"]`. Vous aurez donc compris que cette fonction serait très utile pour séparer les valeurs d'une ligne de notre fichier CSV. C'est pourquoi vous allez l'implémenter!
 
 La fonction à créer doit avoir la signature suivante:
 
@@ -68,7 +68,7 @@ std::vector<std::string> split(const std::string& str, char delimiter);
 
 > 🤔 Pourquoi retourne-t-on le vecteur par valeur?
 
-Pensez à comment vous pourriez faire fonctionner cette fonction (il existe plusieurs solutions possibles), puis implémentez-la. Testez votre fonction rigoureusement avant de continuer.
+Pensez à comment vous pourriez faire fonctionner cette fonction (il existe plusieurs solutions possibles), puis définissez-la dans un fichier `fonctions.h` et implémentez-la dans un fichier `fonctions.cpp`. Testez votre fonction rigoureusement avant de continuer.
 
 ### Étape 2 - Les classes `Parser` et `CSVParser`
 
@@ -132,6 +132,9 @@ public:
 Remarquez également que la méthode `parse` prend en paramètre un `istream`. Vous savez déjà que `cin` est un `istream`, mais vous ne savez peut-être pas que la classe `ifstream` (qui, pour rappel, sert à lire dans un fichier) hérite d'`istream`! En prenant en paramètre un `istream`, la méthode `parse` pourra lire ses données d'entrée soit à partir d'un fichier, soit à partir d'une saisie au clavier, et ce sans devoir changer l'implémentation de la méthode. Voilà toute la puissance de l'héritage et du polymorphisme!
 
 Remarquez également que la classe `CSVParser` ne définit pas de destructeur, d'opérateur `=` et de constructeur de copie, même si elle comprend un tableau alloué dynamiquement. C'est parce que ce dernier est encapsulé dans la classe `vector`, et donc géré par celle-ci. Voilà pourquoi les vecteurs sont beaucoup plus pratiques à utiliser que les pointeurs de tableaux!
+
+
+Vous remarquez que certaines méthodes existent en 2 versions. Pensez à faire de la... [réutilisation]
 
 Observons plus attentivement les attributs de la classe `CSVParser`:
 
