@@ -482,32 +482,25 @@ Dans le fichier `TableauPeriodique.h`, décommentez la ligne `#include "Molecule
 
 ```cpp
 Molecule TableauPeriodique::creerMolecule(const std::string& formule) const {
-    std::string formuleMajuscule = formule;
-    for (auto& c : formuleMajuscule) {
-        if (isalpha(c)) {
-            c = toupper(c);
-        }
-    }
-
     vector<Element> elements;
     vector<int> nombreAtomes;
 
     size_t i = 0;
-    while (i < formuleMajuscule.size())
+    while (i < formule.size())
     {
-        if (isalpha(formuleMajuscule[i])) {
-            string symbole(1, formuleMajuscule[i]);
+        if (isalpha(formule[i])) {
+            string symbole(1, formule[i]);
             i++;
-            if (i < formuleMajuscule.size() && isalpha(formuleMajuscule[i]) && islower(formuleMajuscule[i])) {
-                symbole += formuleMajuscule[i];
+            if (i < formule.size() && isalpha(formule[i]) && islower(formule[i])) {
+                symbole += formule[i];
                 i++;
             }
             const Element& element = this->trouverElementParSymbole(symbole);
             elements.push_back(element);
 
             int nombre = 0;
-            while (i < formuleMajuscule.size() && isdigit(formuleMajuscule[i])) {
-                nombre = nombre * 10 + (formuleMajuscule[i] - '0');
+            while (i < formule.size() && isdigit(formule[i])) {
+                nombre = nombre * 10 + (formule[i] - '0');
                 i++;
             }
             if (nombre == 0) {

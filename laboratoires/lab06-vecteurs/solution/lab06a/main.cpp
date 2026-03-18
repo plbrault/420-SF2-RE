@@ -49,5 +49,10 @@ int main() {
               << eau.getNombreAtomes("O") << " atome d'" << eau.getElement(1).getNom() << "."
               << std::endl;
 
+    Molecule sel = tableauPeriodique.creerMolecule("NaCl");
+    std::cout << "Une molécule de sel contient "
+              << sel.getNombreAtomes("Na") << " atome de " << sel.getElement(0).getNom() << " et "
+              << sel.getNombreAtomes("Cl") << " atome de " << sel.getElement(1).getNom() << ".";
+
     return 0;
 }
