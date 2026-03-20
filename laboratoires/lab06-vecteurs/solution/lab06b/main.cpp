@@ -42,6 +42,27 @@ int main() {
             tableauPeriodique.trierParNumeroAtomique();
             std::cout << "Le tableau périodique est maintenant trié par numéro atomique." << std::endl;
             break;
+        case 5:
+            try {
+                std::string symbole;
+                std::cout << "Entrez le symbole de l'élément: ";
+                std::cin >> symbole;
+                const Element& element = tableauPeriodique.trouverElementParSymbole(symbole);
+                std::cout << "Élément trouvé: " << element.getNom() << " (Numéro atomique: " << element.getNumeroAtomique() << ", Masse atomique: " << element.getMasseAtomique() << ")" << std::endl;
+            } catch (const std::exception& e) {
+                std::cout << "Erreur lors de la recherche de l'élément: " << e.what() << std::endl;
+            }
+            break;
+        case 6:
+            try {
+                std::string nom;
+                std::cout << "Entrez le nom de l'élément: ";
+                std::cin >> nom;
+                const Element& element = tableauPeriodique.trouverElementParNom(nom);
+                std::cout << "Élément trouvé: " << element.getSymbole() << " (Numéro atomique: " << element.getNumeroAtomique() << ", Masse atomique: " << element.getMasseAtomique() << ")" << std::endl;
+            } catch (const std::exception& e) {
+                std::cout << "Erreur lors de la recherche de l'élément: " << e.what() << std::endl;
+            }
         }
 
         std::cout << std::endl;

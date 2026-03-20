@@ -577,6 +577,8 @@ void TableauPeriodique::afficher(std::ostream& sortie) {
 }
 ```
 
+Implémentez également l'option 5 à l'aide de la méthode `trouverElementParNom` que vous avez implémentée dans la partie A.
+
 ### Étape 2 - Tri à bulles
 
 Vous allez maintenant implémenter la méthode `trierParNom` de la classe `TableauPeriodique`, qui, comme son nom l'indique, doit ordonner les `Element` du vecteur en ordre alphabétique de nom. Pour ce faire, vous allez utiliser l'algorithme du [Tri à bulles](https://fr.wikipedia.org/wiki/Tri_%C3%A0_bulles) ([vidéo explicative](https://youtu.be/LTN97u8rSY0?si=AUxhj2gTp4Qa1tI4)).
@@ -678,7 +680,7 @@ Voici du pseudocode pour la recherche dichotomique (tiré de Wikipédia):
             fin ← mil-1
 ```
 
-Utilisez votre méthode pour implémenter l'option 5 du menu. Validez que la recherche fonctionne correctement avant de continuer.
+Utilisez votre méthode pour implémenter l'option 6 du menu. Validez que la recherche fonctionne correctement avant de continuer. **N'oubliez pas de tester avec et sans le tri par nom!**
 
 ## Laboratoire 06-C - Algorithme récursif dans une matrice
 
