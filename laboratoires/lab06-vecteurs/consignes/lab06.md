@@ -628,6 +628,58 @@ Utilisez votre méthode pour implémenter l'option 4 du menu. Validez que votre 
 
 > ℹ️ Le tri par insertion est celui que la plupart des gens appliquent instinctivement pour trier des cartes à jouer qu'ils tiennent dans leurs mains. Comme pour le tri à bulles, sa complexité en temps est  $O(n^2)$ en moyenne, mais peut être  $O(n)$ sur des tableaux de petite taille ou qui sont presque triés. Il existe des algorithmes de tri plus efficaces dans le cas général, tels que le [Tri rapide](https://fr.wikipedia.org/wiki/Tri_rapide) et le [Tri fusion](https://fr.wikipedia.org/wiki/Tri_fusion), mais nous ne les implémenterons pas dans ce laboratoire.
 
+### Étape 4 - Recherche séquentielle et dichotomique
+
+Vous allez maintenant implémenter la méthode `trouverElementParNom`. Il s'agit d'une méthode de recherche, qui trouve l'`Element` correspondant au nom reçu en paramètre, puis le retourne. Si l'élément est introuvable, une exception est lancée.
+
+Vous avez déjà implémenté la méthode `trouverElementParSymbole`, à l'aide d'un algorithme de recherche séquentielle. La complexité en temps de cet algorithme est $O(n)$.
+
+Dans le cas où le tableau est trié, on peut utiliser un algorithme de recherche plus efficace, soit la [recherche dichotomique](https://fr.wikipedia.org/wiki/Recherche_dichotomique), avec une complexité de $O(\log n)$. Le principe de cet algorithme est de vérifier d'abord si l'item recherché se trouve au milieu du tableau, puis, si ce n'est pas le cas, de vérifier le milieu de la première ou la deuxième moitié du tableau selon que l'item est plus petit ou plus grand que celui qu'on vient d'observer, et ainsi de suite. C'est l'algorithme qu'on applique instinctivement lorsqu'on cherche un mot dans un dictionnaire.
+
+> NOTE: quand on parle d'une complexité de $O(\log n)$, on fait généralement référence à un logarithme en base 2. On trouve cette complexité dans les algorithmes de type **Diviser pour mieux régner**, qui découpent l'entrée en plusieurs parties de manière successive.
+
+L'algorithme de haut niveau de la méthode `trouverElementParNom` sera le suivant:
+
+```
+Si le tableau est trié par nom:
+    Utiliser la recherche dichotomique
+Sinon:
+    Utiliser la recherche séquentielle
+```
+
+Rappelez-vous que la classe `TableauPeriodique` possède un attribut booléen `_estTrieParNom`.
+
+Voici du pseudocode pour la recherche dichotomique (tiré de Wikipédia):
+
+```
+//déclarations
+ début, fin, val, mil, N : Entiers
+ t : Tableau [0..N] d'entiers classé
+ trouvé : Booléen
+
+//initialisation
+ N = taille(t)-1
+ début ← 0
+ fin ← N
+ trouvé ← faux
+ Saisir val
+
+//Boucle de recherche
+ // La condition début inférieur ou égal à fin permet d'éviter de faire
+ // une boucle infinie si 'val' n'existe pas dans le tableau.
+  Tant que trouvé != vrai et début <= fin:
+      mil ← partie entière((début + fin)/2)
+      si t[mil] == val:
+         trouvé ← vrai
+      sinon:
+         si val > t[mil]:
+            début ← mil+1
+         sinon:
+            fin ← mil-1
+```
+
+Utilisez votre méthode pour implémenter l'option 5 du menu. Validez que la recherche fonctionne correctement avant de continuer.
+
 ## Laboratoire 06-C - Algorithme récursif dans une matrice
 
 À venir

@@ -17,7 +17,7 @@ public:
     void trierParNom();
     void trierParNumeroAtomique();
     const Element& trouverElementParSymbole(const std::string& symbole) const;
-    // const Element& trouverElementParNom(const std::string& nom) const;
+    const Element& trouverElementParNom(const std::string& nom) const;
     // const Element& trouverElementParNumeroAtomique(int numeroAtomique) const;
     Molecule creerMolecule(const std::string& formule) const;
 };

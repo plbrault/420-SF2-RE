@@ -84,31 +84,31 @@ const Element& TableauPeriodique::trouverElementParSymbole(const std::string& sy
     throw invalid_argument("Aucun élément trouvé avec le symbole donné.");
 }
 
-// const Element* TableauPeriodique::getElementParNom(const std::string& nom) const {
-//     if (_estTrieParNom) {
-//         // Recherche dichotomique
-//         size_t debut = 0;
-//         size_t fin = _elements.size() - 1;
-//         while (debut <= fin) {
-//             size_t milieu = (debut + fin) / 2;
-//             if (_elements[milieu].getNom() == nom) {
-//                 return &_elements[milieu];
-//             } else if (nom > _elements[milieu].getNom()) {
-//                 debut = milieu + 1;
-//             } else {
-//                 fin = milieu - 1;
-//             }
-//         }
-//     } else {
-//         // Recherche séquentielle
-//         for (const Element& element : _elements) {
-//             if (element.getNom() == nom) {
-//                 return &element;
-//             }
-//         }
-//     }
-//     return nullptr;
-// }
+const Element& TableauPeriodique::trouverElementParNom(const std::string& nom) const {
+    if (_estTrieParNom) {
+        // Recherche dichotomique
+        size_t debut = 0;
+        size_t fin = _elements.size() - 1;
+        while (debut <= fin) {
+            size_t milieu = (debut + fin) / 2;
+            if (_elements[milieu].getNom() == nom) {
+                return _elements[milieu];
+            } else if (nom > _elements[milieu].getNom()) {
+                debut = milieu + 1;
+            } else {
+                fin = milieu - 1;
+            }
+        }
+    } else {
+        // Recherche séquentielle
+        for (const Element& element : _elements) {
+            if (element.getNom() == nom) {
+                return element;
+            }
+        }
+    }
+    throw invalid_argument("Aucun élément trouvé avec le nom donné.");
+}
 
 Molecule TableauPeriodique::creerMolecule(const std::string& formule) const {
     vector<Element> elements;
