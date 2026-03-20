@@ -60,7 +60,7 @@ int CSVParser::getColumnIndex(const string& columnName) const {
             return i;
         }
     }
-    throw invalid_argument("Column name not found.");
+    throw invalid_argument("Column name not found: " + columnName);
 }
 
 const string& CSVParser::getString(size_t row, size_t column) const {

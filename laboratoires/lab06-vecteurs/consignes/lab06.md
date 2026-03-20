@@ -597,6 +597,37 @@ Utilisez votre nouvelle méthode pour implémenter l'option 3 du menu. Validez q
 
 > ℹ️ Le tri à bulles n'est pas un algorithme de tri particulièrement efficace. On dit que sa **complexité en temps** est en moyenne $O(n^2)$, c'est-à-dire que le temps d'exécution est proportionnel au carré du nombre d'éléments en entrée. C'est souvent le cas des algorithmes basés sur deux boucles *for* imbriquées.
 
+### Étape 3 - Tri par insertion
+
+Vous allez maintenant implémenter la méthode `trierParNumeroAtomique`. Cette fois-ci, vous allez utiliser l'algorithme du [Tri par insertion](https://fr.wikipedia.org/wiki/Tri_par_insertion) ([vidéo explicative](https://www.youtube.com/watch?v=bRPHvWgc6YM)).
+
+Voici du pseudocode décrivant le tri par insertion (tiré de Wikipédia):
+
+```
+tri_insertion(Tableau T)
+
+    pour i de 1 à taille(T) - 1
+
+        # mémoriser T[i] dans x
+        x ← T[i]
+
+        # décaler les éléments T[0]..T[i-1] qui sont plus grands que x, en partant de T[i-1]
+        j ← i
+        tant que j > 0 et T[j - 1] > x
+            T[j] ← T[j - 1]
+            j ← j - 1
+
+        # placer x dans le "trou" laissé par le décalage
+        T[j] ← x
+
+```
+
+**N'oubliez pas de remettre `_estTrieParNom` à `false`!**
+
+Utilisez votre méthode pour implémenter l'option 4 du menu. Validez que votre tri fonctionne correctement avant de continuer.
+
+> ℹ️ Le tri par insertion est celui que la plupart des gens appliquent instinctivement pour trier des cartes à jouer qu'ils tiennent dans leurs mains. Comme pour le tri à bulles, sa complexité en temps est  $O(n^2)$ en moyenne, mais peut être  $O(n)$ sur des tableaux de petite taille ou qui sont presque triés. Il existe des algorithmes de tri plus efficaces dans le cas général, tels que le [Tri rapide](https://fr.wikipedia.org/wiki/Tri_rapide) et le [Tri fusion](https://fr.wikipedia.org/wiki/Tri_fusion), mais nous ne les implémenterons pas dans ce laboratoire.
+
 ## Laboratoire 06-C - Algorithme récursif dans une matrice
 
 À venir

@@ -38,6 +38,10 @@ int main() {
             tableauPeriodique.trierParNom();
             std::cout << "Le tableau périodique est maintenant trié par nom." << std::endl;
             break;
+        case 4:
+            tableauPeriodique.trierParNumeroAtomique();
+            std::cout << "Le tableau périodique est maintenant trié par numéro atomique." << std::endl;
+            break;
         }
 
         std::cout << std::endl;

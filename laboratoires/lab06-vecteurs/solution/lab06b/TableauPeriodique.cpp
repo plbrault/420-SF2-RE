@@ -59,20 +59,20 @@ void TableauPeriodique::trierParNom() {
     }
     _estTrieParNom = true;
 }
-//
-// void TableauPeriodique::trierParNumeroAtomique() {
-//     // Tri par insertion
-//     for (size_t i = 1; i < _elements.size(); i++) {
-//         Element element = _elements[i];
-//         size_t j = i;
-//         while (j > 0 && _elements[j - 1].getNombreParticulesChargees() > element.getNombreParticulesChargees()) {
-//             _elements[j] = _elements[j - 1];
-//             j--;
-//         }
-//         _elements[j] = element;
-//     }
-//     _estTrieParNom = false;
-// }
+
+void TableauPeriodique::trierParNumeroAtomique() {
+    // Tri par insertion
+    for (size_t i = 1; i < _elements.size(); i++) {
+        Element element = _elements[i];
+        size_t j = i;
+        while (j > 0 && _elements[j - 1].getNumeroAtomique() > element.getNumeroAtomique()) {
+            _elements[j] = _elements[j - 1];
+            j--;
+        }
+        _elements[j] = element;
+    }
+    _estTrieParNom = false;
+}
 
 const Element& TableauPeriodique::trouverElementParSymbole(const std::string& symbole) const
 {
