@@ -567,17 +567,17 @@ Voici le code de la méthode `afficher` à implémenter dans `TableauPeriodique`
 ```cpp
 void TableauPeriodique::afficher(std::ostream& sortie) {
     for (Element element : this->_elements) {
-        std::cout << "| " << std::left << std::setw(COL_WIDTH) << element.getNom();
-        std::cout << " | " << std::left << std::setw(COL_WIDTH) << element.getNumeroAtomique();
-        std::cout << " | " << std::left << std::setw(COL_WIDTH) << element.getSymbole();
-        std::cout << " | " << std::right << std::setw(COL_WIDTH) << element.getMasseAtomique();
+        sortie << "| " << std::left << std::setw(COL_WIDTH) << element.getNom();
+        sortie << " | " << std::left << std::setw(COL_WIDTH) << element.getNumeroAtomique();
+        sortie << " | " << std::left << std::setw(COL_WIDTH) << element.getSymbole();
+        sortie << " | " << std::right << std::setw(COL_WIDTH) << element.getMasseAtomique();
 
-        std::cout << " | " << std::endl;
+        sortie << " | " << std::endl;
     }
 }
 ```
 
-Implémentez également l'option 5 à l'aide de la méthode `trouverElementParNom` que vous avez implémentée dans la partie A.
+Implémentez également l'option 5 à l'aide de la méthode `trouverElementParSymbole` que vous avez implémentée dans la partie A.
 
 ### Étape 2 - Tri à bulles
 
