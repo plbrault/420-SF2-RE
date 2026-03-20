@@ -83,3 +83,8 @@ int Menu::demanderChoix() {
 bool Menu::estQuitter(int option) {
     return this->_optionQuitter && option == (this->_nombreOptions + 1);
 }
+
+std::ostream& operator<<(std::ostream &sortie, Menu &menu) {
+    sortie << menu.obtenirChaine();
+    return sortie;
+}

@@ -21,5 +21,6 @@ public:
     bool estQuitter(int idOption);
 };
 
+std::ostream& operator<<(std::ostream& sortie, Menu& menu);
 
 #endif //LAB01C_MENU_H

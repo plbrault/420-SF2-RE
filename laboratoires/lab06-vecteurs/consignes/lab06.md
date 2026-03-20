@@ -546,12 +546,16 @@ En utilisant votre classe `Menu` des laboratoires précédents, générez le men
 ```text
 Tableau périodique
 
-1 Charger le tableau périodique
-2 Afficher le tableau périodique
-3 Trier les éléments par nom
-4 Trier les éléments par numéro atomique
-5 Rechercher un élément
-6 Quitter
+MENU
+====================
+1. Charger le tableau périodique
+2. Afficher le tableau périodique
+3. Trier le tableau périodique par nom
+4. Trier le tableau périodique par numéro atomique
+5. Trouver un élément par son symbole
+6. Trouver un élément par son nom
+7. Trouver un élément par son numéro atomique
+8. Quitter
 
 Choisir une option:
 ```
@@ -561,7 +565,16 @@ Faites en sorte que l'option 1 appelle la méthode `charger` du tableau périodi
 Voici le code de la méthode `afficher` à implémenter dans `TableauPeriodique` pour faire fonctionner l'option 2. Vous devez aussi ajouter `#define COL_WIDTH 16` au début du fichier, et inclure `iomanip`.
 
 ```cpp
+void TableauPeriodique::afficher(std::ostream& sortie) {
+    for (Element element : this->_elements) {
+        std::cout << "| " << std::left << std::setw(COL_WIDTH) << element.getNom();
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << element.getNumeroAtomique();
+        std::cout << " | " << std::left << std::setw(COL_WIDTH) << element.getSymbole();
+        std::cout << " | " << std::right << std::setw(COL_WIDTH) << element.getMasseAtomique();
 
+        std::cout << " | " << std::endl;
+    }
+}
 ```
 
 ## Laboratoire 06-C - Algorithme récursif dans une matrice
