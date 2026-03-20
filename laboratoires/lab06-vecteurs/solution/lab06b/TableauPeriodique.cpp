@@ -9,6 +9,7 @@ using namespace std;
 
 TableauPeriodique::TableauPeriodique() {
     _parser.setDelimiter(';');
+    this->_estTrieParNom = false;
 }
 
 void TableauPeriodique::charger(const std::string& nomFichier) {
@@ -47,17 +48,17 @@ void TableauPeriodique::afficher(std::ostream& sortie) {
 //     return sortie;
 // }
 //
-// void TableauPeriodique::trierParNom() {
-//     // Tri à bulles
-//     for (size_t i = _elements.size() - 1; i > 0; i--) {
-//         for (size_t j = 0; j < i; j++) {
-//             if (_elements[j + 1].getNom() < _elements[j].getNom()) {
-//                 swap(_elements[j + 1], _elements[j]);
-//             }
-//         }
-//     }
-//     _estTrieParNom = true;
-// }
+void TableauPeriodique::trierParNom() {
+    // Tri à bulles
+    for (size_t i = _elements.size() - 1; i > 0; i--) {
+        for (size_t j = 0; j < i; j++) {
+            if (_elements[j + 1].getNom() < _elements[j].getNom()) {
+                swap(_elements[j + 1], _elements[j]);
+            }
+        }
+    }
+    _estTrieParNom = true;
+}
 //
 // void TableauPeriodique::trierParNumeroAtomique() {
 //     // Tri par insertion

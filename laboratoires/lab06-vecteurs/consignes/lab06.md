@@ -577,6 +577,26 @@ void TableauPeriodique::afficher(std::ostream& sortie) {
 }
 ```
 
+### Étape 2 - Tri à bulles
+
+Vous allez maintenant implémenter la méthode `trierParNom` de la classe `TableauPeriodique`, qui, comme son nom l'indique, doit ordonner les `Element` du vecteur en ordre alphabétique de nom. Pour ce faire, vous allez utiliser l'algorithme du [Tri à bulles](https://fr.wikipedia.org/wiki/Tri_%C3%A0_bulles) ([vidéo explicative](https://youtu.be/LTN97u8rSY0?si=AUxhj2gTp4Qa1tI4)).
+
+Voici du pseudocode décrivant le tri à bulles (tiré de Wikipédia):
+
+```
+tri_à_bulles(Tableau T)
+   pour i allant de (taille de T)-1 à 1
+       pour j allant de 0 à i-1
+           si T[j+1] < T[j]
+               (T[j+1], T[j]) ← (T[j], T[j+1])
+```
+
+**Vous devez aussi ajouter un attribut `_estTrieParNom` à la classe, que vous initialiserez à `false` dans le constructeur et que vous changerez pour `true` dans la méthode de tri.** Cet attribut sera utilisé lors d'une étape ultérieure.
+
+Utilisez votre nouvelle méthode pour implémenter l'option 3 du menu. Validez que votre tri fonctionne correctement avant de continuer.
+
+> ℹ️ Le tri à bulles n'est pas un algorithme de tri particulièrement efficace. On dit que sa **complexité en temps** est en moyenne $O(n^2)$, c'est-à-dire que le temps d'exécution est proportionnel au carré du nombre d'éléments en entrée. C'est souvent le cas des algorithmes basés sur deux boucles *for* imbriquées.
+
 ## Laboratoire 06-C - Algorithme récursif dans une matrice
 
 À venir

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "Menu.h"
+#include "TableauPeriodique.h"
 
 #define COL_WIDTH 16
 
@@ -14,7 +15,33 @@ int main() {
     menu.ajouterOption("Trouver un élément par son nom");
     menu.ajouterOption("Trouver un élément par son numéro atomique");
 
-    std::cout << menu;
+    TableauPeriodique tableauPeriodique;
+
+    int option;
+    do {
+        std::cout << menu;
+        option = menu.demanderChoix();
+
+        switch (option) {
+        case 1:
+            try {
+                tableauPeriodique.charger("../elements.csv");
+                std::cout << "Tableau périodique chargé avec succès." << std::endl;
+            } catch (const std::exception& e) {
+                std::cerr << "Erreur lors du chargement du tableau périodique: " << e.what() << std::endl;
+            }
+            break;
+        case 2:
+            tableauPeriodique.afficher(std::cout);
+            break;
+        case 3:
+            tableauPeriodique.trierParNom();
+            std::cout << "Le tableau périodique est maintenant trié par nom." << std::endl;
+            break;
+        }
+
+        std::cout << std::endl;
+    } while (!menu.estQuitter(option));
 
     return 0;
 }
