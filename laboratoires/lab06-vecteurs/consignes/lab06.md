@@ -535,7 +535,34 @@ Pour vous assurer que vous comprenez comment utiliser la classe `Molecule` et la
 
 ## Laboratoire 06-B - Algorithmes de tri et de recherche
 
-À venir
+Cette partie se fait dans le même projet que la partie A. **Il est cependant recommandé d'en effectuer une copie pour vous assurer de conserver une version fonctionnelle en vue du laboratoire de chimie.**
+
+Dans cette partie, vous implémenterez différents algorithmes de tri et de recherche sur le tableau périodique.
+
+### Étape 1 - Ajout d'un menu
+
+En utilisant votre classe `Menu` des laboratoires précédents, générez le menu suivant dans le `main`:
+
+```text
+Tableau périodique
+
+1 Charger le tableau périodique
+2 Afficher le tableau périodique
+3 Trier les éléments par nom
+4 Trier les éléments par numéro atomique
+5 Rechercher un élément
+6 Quitter
+
+Choisir une option:
+```
+
+Faites en sorte que l'option 1 appelle la méthode `charger` du tableau périodique.
+
+Voici le code de la méthode `afficher` à implémenter dans `TableauPeriodique` pour faire fonctionner l'option 2. Vous devez aussi ajouter `#define COL_WIDTH 16` au début du fichier, et inclure `iomanip`.
+
+```cpp
+
+```
 
 ## Laboratoire 06-C - Algorithme récursif dans une matrice
 
