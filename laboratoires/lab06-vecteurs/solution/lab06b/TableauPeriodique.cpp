@@ -110,6 +110,32 @@ const Element& TableauPeriodique::trouverElementParNom(const std::string& nom) c
     throw invalid_argument("Aucun élément trouvé avec le nom donné.");
 }
 
+const Element& TableauPeriodique::trouverElementParNumeroAtomique(int numeroAtomique) const {
+    if (!_estTrieParNom) {
+        // Recherche dichotomique
+        size_t debut = 0;
+        size_t fin = _elements.size() - 1;
+        while (debut <= fin) {
+            size_t milieu = (debut + fin) / 2;
+            if (_elements[milieu].getNumeroAtomique() == numeroAtomique) {
+                return _elements[milieu];
+            } else if (numeroAtomique > _elements[milieu].getNumeroAtomique()) {
+                debut = milieu + 1;
+            } else {
+                fin = milieu - 1;
+            }
+        }
+    } else {
+        // Recherche séquentielle
+        for (const Element& element : _elements) {
+            if (element.getNumeroAtomique() == numeroAtomique) {
+                return element;
+            }
+        }
+    }
+    throw invalid_argument("Aucun élément trouvé avec le numéro atomique donné.");
+}
+
 Molecule TableauPeriodique::creerMolecule(const std::string& formule) const {
     vector<Element> elements;
     vector<int> nombreAtomes;

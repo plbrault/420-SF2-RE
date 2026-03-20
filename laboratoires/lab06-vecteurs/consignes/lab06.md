@@ -682,6 +682,23 @@ Voici du pseudocode pour la recherche dichotomique (tiré de Wikipédia):
 
 Utilisez votre méthode pour implémenter l'option 6 du menu. Validez que la recherche fonctionne correctement avant de continuer. **N'oubliez pas de tester avec et sans le tri par nom!**
 
+### Étape 5 - Recherche séquentielle et dichotomique (prise 2)
+
+Avez-vous remarqué que le tableau est trié par numéro atomique par défaut?
+
+Vous pouvez donc facilement implémenter la logique inverse de `trouverElementParNom` dans `trouverElementParNumeroAtomique`:
+
+```
+Si le tableau est trié par nom:
+    Utiliser la recherche séquentielle par numéro atomique
+Sinon:
+    Utiliser la recherche dichotomique par numéro atomique
+```
+
+Allez-y!
+
+**⚠️ Faites valider votre laboratoire 06-A par l'enseignant.**
+
 ## Laboratoire 06-C - Algorithme récursif dans une matrice
 
 À venir

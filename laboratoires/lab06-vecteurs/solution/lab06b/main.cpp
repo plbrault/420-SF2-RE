@@ -63,6 +63,17 @@ int main() {
             } catch (const std::exception& e) {
                 std::cout << "Erreur lors de la recherche de l'élément: " << e.what() << std::endl;
             }
+        case 7:
+            try {
+                int numeroAtomique;
+                std::cout << "Entrez le numéro atomique de l'élément: ";
+                std::cin >> numeroAtomique;
+                const Element& element = tableauPeriodique.trouverElementParNumeroAtomique(numeroAtomique);
+                std::cout << "Élément trouvé: " << element.getNom() << " (" << element.getSymbole() << ", Masse atomique: " << element.getMasseAtomique() << ")" << std::endl;
+            } catch (const std::exception& e) {
+                std::cout << "Erreur lors de la recherche de l'élément: " << e.what() << std::endl;
+            }
+            break;
         }
 
         std::cout << std::endl;
