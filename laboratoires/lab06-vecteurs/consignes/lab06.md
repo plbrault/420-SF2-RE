@@ -594,7 +594,7 @@ Vous allez maintenant implémenter la méthode `trierParNom` de la classe `Table
 
 **Vidéo explicative:**
 
-https://youtu.be/LTN97u8rSY0?si=AUxhj2gTp4Qa1tI4
+[vidéo](https://youtu.be/LTN97u8rSY0?si=AUxhj2gTp4Qa1tI4)
 
 Voici du pseudocode décrivant le tri à bulles (tiré de Wikipédia):
 
@@ -618,7 +618,7 @@ Vous allez maintenant implémenter la méthode `trierParNumeroAtomique`. Cette f
 
 **Vidéo explicative:**
 
-https://www.youtube.com/watch?v=bRPHvWgc6YM
+[vidéo](https://www.youtube.com/watch?v=bRPHvWgc6YM)
 
 Voici du pseudocode décrivant le tri par insertion (tiré de Wikipédia):
 
