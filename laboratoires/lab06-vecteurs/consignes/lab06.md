@@ -482,14 +482,14 @@ Dans le fichier `TableauPeriodique.h`, décommentez la ligne `#include "Molecule
 
 ```cpp
 Molecule TableauPeriodique::creerMolecule(const std::string& formule) const {
-    vector<Element> elements;
-    vector<int> nombreAtomes;
+    std::vector<Element> elements;
+    std::vector<int> nombreAtomes;
 
     size_t i = 0;
     while (i < formule.size())
     {
         if (isalpha(formule[i])) {
-            string symbole(1, formule[i]);
+            std::string symbole(1, formule[i]);
             i++;
             if (i < formule.size() && isalpha(formule[i]) && islower(formule[i])) {
                 symbole += formule[i];
@@ -508,7 +508,7 @@ Molecule TableauPeriodique::creerMolecule(const std::string& formule) const {
             }
             nombreAtomes.push_back(nombre);
         } else {
-            throw invalid_argument("Formule chimique invalide.");
+            throw std::invalid_argument("Formule chimique invalide.");
         }
     }
 
@@ -697,7 +697,7 @@ Sinon:
 
 Allez-y!
 
-**⚠️ Faites valider votre laboratoire 06-A par l'enseignant.**
+**⚠️ Faites valider votre laboratoire 06-B par l'enseignant.**
 
 ## Laboratoire 06-C - Carte topographique
 
@@ -772,7 +772,7 @@ Fonction trouverPlusHautSommet:
 
 Toute fonction récursive doit avoir une condition d'arrêt pour éviter une récursion à l'infini. Si on observe le pseudocode de la fonction `trouverSommet` plus attentivement, on peut voir que la récursion s'arrête lorsqu'une position n'a aucune position adjacente satisfaisant la demande.
 
-Complétez le programme de la partie 2 en implémentant l'algorithme correspondant au pseudocode ci-dessus dans des méthodes d'une classe `Solutionneur`. À vous de déterminer quels devraient être les autres membres de la classe!
+Complétez le programme demandé en implémentant l'algorithme correspondant au pseudocode ci-dessus dans des méthodes d'une classe `Solutionneur`. À vous de déterminer quels devraient être les autres membres de la classe!
 
 Testez votre programme avec toutes les cartes fournies, et vérifiez que vous arrivez aux bons résultats pour les cartes 1 à 5. Validez ensuite votre résultat pour la carte 6 auprès de l'enseignant.
 

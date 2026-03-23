@@ -3,8 +3,6 @@
 #include <vector>
 #include <iomanip>
 
-using namespace std;
-
 #define COL_WIDTH 16
 
 TableauPeriodique::TableauPeriodique() {
@@ -13,9 +11,9 @@ TableauPeriodique::TableauPeriodique() {
 }
 
 void TableauPeriodique::charger(const std::string& nomFichier) {
-    ifstream elementsFile(nomFichier);
+    std::ifstream elementsFile(nomFichier);
     if (!elementsFile.is_open()) {
-        throw invalid_argument("Le fichier n'a pas pu être ouvert.");
+        throw std::invalid_argument("Le fichier n'a pas pu être ouvert.");
     }
     _parser.parse(elementsFile);
     elementsFile.close();
@@ -76,7 +74,7 @@ const Element& TableauPeriodique::trouverElementParSymbole(const std::string& sy
             return element;
         }
     }
-    throw invalid_argument("Aucun élément trouvé avec le symbole donné.");
+    throw std::invalid_argument("Aucun élément trouvé avec le symbole donné.");
 }
 
 const Element& TableauPeriodique::trouverElementParNom(const std::string& nom) const {
@@ -102,7 +100,7 @@ const Element& TableauPeriodique::trouverElementParNom(const std::string& nom) c
             }
         }
     }
-    throw invalid_argument("Aucun élément trouvé avec le nom donné.");
+    throw std::invalid_argument("Aucun élément trouvé avec le nom donné.");
 }
 
 const Element& TableauPeriodique::trouverElementParNumeroAtomique(int numeroAtomique) const {
@@ -128,18 +126,18 @@ const Element& TableauPeriodique::trouverElementParNumeroAtomique(int numeroAtom
             }
         }
     }
-    throw invalid_argument("Aucun élément trouvé avec le numéro atomique donné.");
+    throw std::invalid_argument("Aucun élément trouvé avec le numéro atomique donné.");
 }
 
 Molecule TableauPeriodique::creerMolecule(const std::string& formule) const {
-    vector<Element> elements;
-    vector<int> nombreAtomes;
+    std::vector<Element> elements;
+    std::vector<int> nombreAtomes;
 
     size_t i = 0;
     while (i < formule.size())
     {
         if (isalpha(formule[i])) {
-            string symbole(1, formule[i]);
+            std::string symbole(1, formule[i]);
             i++;
             if (i < formule.size() && isalpha(formule[i]) && islower(formule[i])) {
                 symbole += formule[i];
@@ -158,7 +156,7 @@ Molecule TableauPeriodique::creerMolecule(const std::string& formule) const {
             }
             nombreAtomes.push_back(nombre);
         } else {
-            throw invalid_argument("Formule chimique invalide.");
+            throw std::invalid_argument("Formule chimique invalide.");
         }
     }
 
