@@ -566,6 +566,15 @@ Voici le code de la méthode `afficher` à implémenter dans `TableauPeriodique`
 
 ```cpp
 void TableauPeriodique::afficher(std::ostream& sortie) {
+    sortie << "| " << std::left << std::setw(COL_WIDTH) << "Nom";
+    sortie << " | " << std::left << std::setw(COL_WIDTH) << "Numero atomique";
+    sortie << " | " << std::left << std::setw(COL_WIDTH) << "Symbole";
+    sortie << " | " << std::right << std::setw(COL_WIDTH) << "Masse atomique" << " |" << std::endl;
+    for (int i = 0; i < 4; i++) {
+        sortie << "|" << std::string(COL_WIDTH + 2, '-');
+    }
+    sortie << "|" << std::endl;
+
     for (Element element : this->_elements) {
         sortie << "| " << std::left << std::setw(COL_WIDTH) << element.getNom();
         sortie << " | " << std::left << std::setw(COL_WIDTH) << element.getNumeroAtomique();

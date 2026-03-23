@@ -31,13 +31,22 @@ void TableauPeriodique::charger(const std::string& nomFichier) {
 }
 
 void TableauPeriodique::afficher(std::ostream& sortie) {
-    for (Element element : this->_elements) {
-        std::cout << "| " << std::left << std::setw(COL_WIDTH) << element.getNom();
-        std::cout << " | " << std::left << std::setw(COL_WIDTH) << element.getNumeroAtomique();
-        std::cout << " | " << std::left << std::setw(COL_WIDTH) << element.getSymbole();
-        std::cout << " | " << std::right << std::setw(COL_WIDTH) << element.getMasseAtomique();
+    sortie << "| " << std::left << std::setw(COL_WIDTH) << "Nom";
+    sortie << " | " << std::left << std::setw(COL_WIDTH) << "Numero atomique";
+    sortie << " | " << std::left << std::setw(COL_WIDTH) << "Symbole";
+    sortie << " | " << std::right << std::setw(COL_WIDTH) << "Masse atomique" << " |" << std::endl;
+    for (int i = 0; i < 4; i++) {
+        sortie << "|" << std::string(COL_WIDTH + 2, '-');
+    }
+    sortie << "|" << std::endl;
 
-        std::cout << " | " << std::endl;
+    for (Element element : this->_elements) {
+        sortie << "| " << std::left << std::setw(COL_WIDTH) << element.getNom();
+        sortie << " | " << std::left << std::setw(COL_WIDTH) << element.getNumeroAtomique();
+        sortie << " | " << std::left << std::setw(COL_WIDTH) << element.getSymbole();
+        sortie << " | " << std::right << std::setw(COL_WIDTH) << element.getMasseAtomique();
+
+        sortie << " | " << std::endl;
     }
 }
 
