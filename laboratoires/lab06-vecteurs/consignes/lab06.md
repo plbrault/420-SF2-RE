@@ -590,7 +590,11 @@ Implémentez également l'option 5 à l'aide de la méthode `trouverElementParSy
 
 ### Étape 2 - Tri à bulles
 
-Vous allez maintenant implémenter la méthode `trierParNom` de la classe `TableauPeriodique`, qui, comme son nom l'indique, doit ordonner les `Element` du vecteur en ordre alphabétique de nom. Pour ce faire, vous allez utiliser l'algorithme du [Tri à bulles](https://fr.wikipedia.org/wiki/Tri_%C3%A0_bulles) ([vidéo explicative](https://youtu.be/LTN97u8rSY0?si=AUxhj2gTp4Qa1tI4)).
+Vous allez maintenant implémenter la méthode `trierParNom` de la classe `TableauPeriodique`, qui, comme son nom l'indique, doit ordonner les `Element` du vecteur en ordre alphabétique de nom. Pour ce faire, vous allez utiliser l'algorithme du [Tri à bulles](https://fr.wikipedia.org/wiki/Tri_%C3%A0_bulles).
+
+**Vidéo explicative:**
+
+https://youtu.be/LTN97u8rSY0?si=AUxhj2gTp4Qa1tI4
 
 Voici du pseudocode décrivant le tri à bulles (tiré de Wikipédia):
 
@@ -610,7 +614,11 @@ Utilisez votre nouvelle méthode pour implémenter l'option 3 du menu. Validez q
 
 ### Étape 3 - Tri par insertion
 
-Vous allez maintenant implémenter la méthode `trierParNumeroAtomique`. Cette fois-ci, vous allez utiliser l'algorithme du [Tri par insertion](https://fr.wikipedia.org/wiki/Tri_par_insertion) ([vidéo explicative](https://www.youtube.com/watch?v=bRPHvWgc6YM)).
+Vous allez maintenant implémenter la méthode `trierParNumeroAtomique`. Cette fois-ci, vous allez utiliser l'algorithme du [Tri par insertion](https://fr.wikipedia.org/wiki/Tri_par_insertion).
+
+**Vidéo explicative:**
+
+https://www.youtube.com/watch?v=bRPHvWgc6YM
 
 Voici du pseudocode décrivant le tri par insertion (tiré de Wikipédia):
 
