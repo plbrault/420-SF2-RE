@@ -42,18 +42,13 @@ void TableauPeriodique::afficher(std::ostream& sortie) {
         std::cout << " | " << std::endl;
     }
 }
-//
-// ostream& operator<<(ostream& sortie, TableauPeriodique& tableauPeriodique) {
-//     tableauPeriodique.afficher(sortie);
-//     return sortie;
-// }
-//
+
 void TableauPeriodique::trierParNom() {
     // Tri à bulles
-    for (size_t i = _elements.size() - 1; i > 0; i--) {
-        for (size_t j = 0; j < i; j++) {
+    for (size_t i = _elements.size() - 1; i >= 1; i--) {
+        for (size_t j = 0; j <= i-1; j++) {
             if (_elements[j + 1].getNom() < _elements[j].getNom()) {
-                swap(_elements[j + 1], _elements[j]);
+                std::swap(_elements[j + 1], _elements[j]);
             }
         }
     }
