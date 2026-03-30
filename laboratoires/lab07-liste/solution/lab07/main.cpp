@@ -35,18 +35,17 @@ int main() {
                     std::cout << "Le moment saisi est invalide." << std::endl << std::endl;
                     break;
                 }
-                try {
-                    const TemperatureDatapoint& datapoint = history[moment];
-                    std::cout << "La température au moment " << moment << " était: " << datapoint.getTemperature()
-                              << std::endl << std::endl;
-                } catch (const std::exception& e) {
+                auto datapointIterator = history.findDatapoint(moment);
+                if (datapointIterator == history.end()) {
                     std::cout << "Aucune lecture trouvée pour la date et heure saisies." << std::endl << std::endl;
+                } else {
+                    std::cout << "La température au moment " << moment << " était: " << datapointIterator->getTemperature()
+                              << std::endl << std::endl;
                 }
                 break;
             }
             case 3: {
                 DateTime minMoment, maxMoment;
-                size_t firstIndex, lastIndex;
                 double sum = 0;
 
                 std::cout << "Entrez le moment de début (format AAAA-MM-DDTHH:MM:SS): ";
@@ -59,17 +58,19 @@ int main() {
                     break;
                 }
 
-                firstIndex = history.findDatapoint(minMoment);
-                lastIndex = history.findDatapoint(maxMoment);
-                if (firstIndex >= history.getSize() || lastIndex >= history.getSize()) {
-                    std::cout << "L'une des dates et heures saisies n'est pas présente dans l'historique." << std::endl;
+                auto first = history.findDatapoint(minMoment);
+                auto last = history.findDatapoint(maxMoment);
+                if (first == history.end() || last == history.end()) {
+                    std::cout << "L'une des dates et heures saisies n'est pas présente dans l'historique." << std::endl << std::endl;
                     break;
                 }
 
-                for (size_t i = firstIndex; i <= lastIndex; i++) {
-                    sum += history[i].getTemperature();
+                int count = 0;
+                for (auto it = first; it != last; it++) {
+                    sum += it->getTemperature();
+                    count++;
                 }
-                double average = sum / (lastIndex - firstIndex + 1);
+                double average = sum / count;
                 std::cout << "La température moyenne entre " << minMoment << " et "
                           << maxMoment << " est: " << average << std::endl << std::endl;
                 break;

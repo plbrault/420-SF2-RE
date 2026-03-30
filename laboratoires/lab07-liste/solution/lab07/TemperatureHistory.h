@@ -19,6 +19,11 @@ public:
     std::list<TemperatureDatapoint>::const_iterator findDatapoint(const DateTime& moment) const;
     void readFromFile(const std::string& filename);
 
+    std::list<TemperatureDatapoint>::iterator begin();
+    std::list<TemperatureDatapoint>::iterator end();
+    std::list<TemperatureDatapoint>::const_iterator begin() const;
+    std::list<TemperatureDatapoint>::const_iterator end() const;
+
     TemperatureHistory& operator+=(const TemperatureDatapoint& datapoint);
 };
 

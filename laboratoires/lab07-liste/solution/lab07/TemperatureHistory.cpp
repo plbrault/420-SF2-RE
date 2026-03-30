@@ -72,3 +72,19 @@ void TemperatureHistory::deleteDatapoint(const DateTime &moment) {
         this->_datapoints.erase(it);
     }
 }
+
+std::list<TemperatureDatapoint>::iterator TemperatureHistory::begin() {
+    return this->_datapoints.begin();
+}
+
+std::list<TemperatureDatapoint>::iterator TemperatureHistory::end() {
+    return this->_datapoints.end();
+}
+
+std::list<TemperatureDatapoint>::const_iterator TemperatureHistory::begin() const {
+    return this->_datapoints.begin();
+}
+
+std::list<TemperatureDatapoint>::const_iterator TemperatureHistory::end() const {
+    return this->_datapoints.end();
+}
