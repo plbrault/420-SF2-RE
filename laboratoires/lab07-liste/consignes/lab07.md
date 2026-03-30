@@ -10,6 +10,7 @@
 - Adapter addDatapoint, doit ajouter le datapoint au bon endroit pour respecter l'ordre de date. S'il y a déjà un datapoint avec la même datetime, il faut le remplacer. L'insertion devient donc idempotente. Retourner un itérateur vers le Datapoint qui vient d'être ajouté.
 - Retirer void deleteDatapoint(size_t index) et adapter l'autre version
 - Enlever le clear dans readFromFile, car on veut maintenant pouvoir lire plusieurs fichiers de suite. L'utilisation de la méthode addDatapoint s'assure que les données sont toujours insérées au bon endroit dans la liste.
+- Ajouter une méthode `deleteRange` qui prend un moment de début et un moment de fin
 - Ajouter méthodes begin() et end() en version const et non const (nécessaire pour adaptation du main)
 - Apporter modifications nécessaires dans le `main` pour que le programme marche comme avant. Bien tester avec exemple d'exécution ci-dessous (toujours avec le fichier temperatures.txt du lab 4):
 
@@ -121,4 +122,3 @@ La température moyenne entre 2026-01-01T15:00:00 et 2026-01-31T06:00:00 est: -9
 ```
 
 - Améliorer l'efficacité de readFromFile en évitant de chercher à partir du début à chaque ajout (sachant que données sont probablement en ordre, mais pas toujours). Créer ou modifier d'autres méthodes au besoin.
-- Ajouter une méthode delete qui prend un début et une fin

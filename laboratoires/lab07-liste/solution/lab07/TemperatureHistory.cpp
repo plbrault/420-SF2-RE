@@ -92,6 +92,15 @@ std::list<TemperatureDatapoint>::iterator TemperatureHistory::end() {
     return this->_datapoints.end();
 }
 
+void TemperatureHistory::deleteRange(const DateTime& from, const DateTime& to)
+{
+    auto fromIt = this->findDatapoint(from);
+    auto toIt = this->findDatapoint(to, fromIt);
+    if (fromIt != this->_datapoints.end() && toIt != this->_datapoints.end()) {
+        this->_datapoints.erase(fromIt, toIt);
+    }
+}
+
 std::list<TemperatureDatapoint>::const_iterator TemperatureHistory::begin() const {
     return this->_datapoints.begin();
 }
