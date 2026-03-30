@@ -1,3 +1,17 @@
+# Laboratoire 07
+
+## Objectif
+
+Mettre en pratique l'utilisation d'une liste de la STL.
+
+## Introduction
+
+Ce laboratoire comprend une seule partie. Elle consiste à reprendre votre programme du Laboratoire 05 qui gère une liste de températures, et à le modifier afin de remplacer le tableau dynamique actuel par une liste de la STL. Certaines améliorations au fonctionnement du programme seront également apportées.
+
+La première étape du laboratoire rendra impossible la compilation du programme jusqu'à ce que la plupart des étapes suivantes soient complétées. N'hésitez pas à mettre du code en commentaire afin d'être en mesure de tester vos modifications au fur et à mesure.
+
+--
+
 - Remplacer _pointeur de datapoints par une liste
 - Retirer _size et _capacity
 - Ne pas hésiter à commenter les méthodes et le main pour pouvoir tester au fur et à mesure
