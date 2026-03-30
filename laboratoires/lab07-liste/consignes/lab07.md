@@ -10,15 +10,37 @@ Ce laboratoire comprend une seule partie. Elle consiste à reprendre votre progr
 
 La première étape du laboratoire rendra impossible la compilation du programme jusqu'à ce que la plupart des étapes suivantes soient complétées. N'hésitez pas à mettre du code en commentaire afin d'être en mesure de tester vos modifications au fur et à mesure.
 
+## Étape 1
+
+Dans la classe `TemperatureHistory`, remplacez le pointeur `_datapoints` par une liste. Retirez également les attributs `_size` et `_capacity`, puisqu'ils ne seront plus nécessaires.
+
+## Étape 2
+
+Puisque la classe ne gère plus de pointeur directement, il n'est plus nécessaire d'y implémenter les membres suivants:
+
+- Le constructeur de copie
+- Le destructeur
+- L'opérateur `=`
+
+Retirez donc ces membres.
+
+Par ailleurs, si vous observez l'implémentation du constructeur sans paramètre, vous constaterez que celui-ci ne fait rien d'autre qu'initialiser les attributs en lien avec l'ancien pointeur de `TemperatureDatapoint`. Maintenant que ces attributs ont été remplacés par une liste, il n'y a plus rien à faire dans le constructeur. Vous pouvez donc simplement l'enlever! En effet, puisqu'il n'y a pas d'autre constructeur, le constructeur par défaut n'est pas désactivé, et il n'est donc pas nécessaire de définir le constructeur sans paramètre.
+
+## Étape 3
+
+La présence de surcharges de l'opérateur `[]` était appropriée lorsque le conteneur utilisé était un tableau, mais ne l'est plus avec une liste. Il faut donc retirer toutes les versions de cet opérateur. Pour rappel, cet opérateur a deux versions constantes et deux versions non constantes. **Si vous ne vous souvenez plus pourquoi, retournez voir l'explication à l'étape 9 du Laboratoire 04-A. Cela est important pour la suite!**
+
+## Étape 4
+
+Adaptez les méthodes `getSize` et `clear` à la nouvelle structure de données.
+
+## Étape 5
+
+
+
 --
 
-- Remplacer _pointeur de datapoints par une liste
-- Retirer _size et _capacity
-- Ne pas hésiter à commenter les méthodes et le main pour pouvoir tester au fur et à mesure
-- Retirer constructeurs et destructeurs
-- Retirer opérateur =
-- Retirer opérateur [], et noter qu'il existe en deux versions (const et non-const)
-- Adapter getSize et clear
+
 - Adapter findDatapoint pour retourner un itérateur au lieu d'un size_t, doit être retourné par valeur avec méthode non const. Faire deux versions dont une qui prend en paramètre la position de départ de la recherche. Penser à la réutilisation. Si introuvable, retourner end(). Assumer que les valeurs sont en ordre, mais ne surtout pas faire de recherche dichotomique (il y a quand même une optimisation possible, à vous d'y penser).
 - Faire deux versions const avec exactement le même code, mais le type de retour est const_iterator
 - Adapter addDatapoint, doit ajouter le datapoint au bon endroit pour respecter l'ordre de date. S'il y a déjà un datapoint avec la même datetime, il faut le remplacer. L'insertion devient donc idempotente. Retourner un itérateur vers le Datapoint qui vient d'être ajouté.
