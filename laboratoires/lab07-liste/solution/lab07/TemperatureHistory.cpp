@@ -40,6 +40,9 @@ void TemperatureHistory::addDatapoint(const TemperatureDatapoint &datapoint) {
         if (it->getMoment() > datapoint.getMoment()) {
             this->_datapoints.insert(it, datapoint);
             return;
+        } else if (it->getMoment() == datapoint.getMoment()) {
+            *it = datapoint;
+            return;
         }
     }
     this->_datapoints.push_back(datapoint);
