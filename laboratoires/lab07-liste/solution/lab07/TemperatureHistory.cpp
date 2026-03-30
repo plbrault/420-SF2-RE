@@ -36,11 +36,13 @@ void TemperatureHistory::clear() {
 }
 
 void TemperatureHistory::addDatapoint(const TemperatureDatapoint &datapoint) {
-    if (this->_size == this->_capacity) {
-        increaseCapacity();
+    for (auto it = this->_datapoints.begin(); it != this->_datapoints.end(); it++) {
+        if (it->getMoment() > datapoint.getMoment()) {
+            this->_datapoints.insert(it, datapoint);
+            return;
+        }
     }
-    this->_datapoints[this->_size] = datapoint;
-    this->_size++;
+    this->_datapoints.push_back(datapoint);
 }
 
 TemperatureHistory& TemperatureHistory::operator+=(const TemperatureDatapoint &datapoint) {
@@ -53,7 +55,6 @@ void TemperatureHistory::readFromFile(const std::string &filename) {
     if (!file.is_open()) {
         throw std::runtime_error("Erreur lors de l'ouverture du fichier.");
     }
-    this->clear();
     TemperatureDatapoint datapoint;
     while (!file.eof()) {
         file >> datapoint;
@@ -63,5 +64,8 @@ void TemperatureHistory::readFromFile(const std::string &filename) {
 }
 
 void TemperatureHistory::deleteDatapoint(const DateTime &moment) {
-    deleteDatapoint(findDatapoint(moment));
+    auto it = this->findDatapoint(moment);
+    if (it != this->_datapoints.end()) {
+        this->_datapoints.erase(it);
+    }
 }

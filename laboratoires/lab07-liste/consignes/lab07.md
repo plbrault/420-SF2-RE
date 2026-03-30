@@ -7,4 +7,9 @@
 - Adapter getSize et clear
 - Adapter findDatapoint pour retourner un itérateur au lieu d'un size_t, doit être retourné par valeur avec méthode non const. Faire deux versions dont une qui prend en paramètre la position de départ de la recherche. Penser à la réutilisation. Si introuvable, retourner end(). Assumer que les valeurs sont en ordre, mais ne surtout pas faire de recherche dichotomique (il y a quand même une optimisation possible, à vous d'y penser).
 - Faire deux versions const avec exactement le même code, mais le type de retour est const_iterator
+- Adapter addDatapoint, doit ajouter le datapoint au bon endroit pour respecter l'ordre de date
 - Retirer void deleteDatapoint(size_t index) et adapter l'autre version
+- Enlever le clear dans readFromFile, car on veut maintenant pouvoir lire plusieurs fichiers de suite. L'utilisation de la méthode addDatapoint s'assure que les données sont toujours insérées au bon endroit dans la liste.
+- Apporter modifications nécessaires dans le `main` pour que le programme marche comme avant
+- Modifier main pour pouvoir charger plusieurs fichiers
+- Améliorer l'efficacité de readFromFile (données sont probablement en ordre)
