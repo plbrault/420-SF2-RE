@@ -112,5 +112,13 @@ Au revoir!
 ```
 
 - Modifier main pour remplacer l'option 1 par "Importer les données d'un fichier" puis demander à l'utilisateur le nom du fichier à charger. Tester avec temperatures1.txt et temperatures2.txt fournis sur Moodle.
+
+Test: vous devriez avoir 717 entrées au total
+```text
+Entrez le moment de début (format AAAA-MM-DDTHH:MM:SS): 2026-01-01T15:00:00
+Entrez le moment de fin (format AAAA-MM-DDTHH:MM:SS): 2026-01-31T06:00:00
+La température moyenne entre 2026-01-01T15:00:00 et 2026-01-31T06:00:00 est: -9.42678
+```
+
 - Améliorer l'efficacité de readFromFile (données sont probablement en ordre)
 - Ajouter une méthode delete qui prend un début et une fin
