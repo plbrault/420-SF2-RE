@@ -5,7 +5,7 @@
 int main() {
 
     Menu menu(true);
-    menu.ajouterOption("Charger l'historique");
+    menu.ajouterOption("Importer les données d'un fichier");
     menu.ajouterOption("Afficher la température à un moment précis");
     menu.ajouterOption("Calculer la température moyenne entre deux moments");
     menu.ajouterOption("Supprimer une lecture");
@@ -20,10 +20,13 @@ int main() {
         switch (choix) {
             case 1:
                 try {
-                    history.readFromFile("../temperatures.txt");
-                    std::cout << "Historique chargé avec succès." << std::endl << std::endl;
+                    std::string nomFichier;
+                    std::cout << "Entrez le nom du fichier à importer: ";
+                    std::cin >> nomFichier;
+                    history.readFromFile(nomFichier);
+                    std::cout << "Fichier importé avec succès." << std::endl << std::endl;
                 } catch (const std::exception& e) {
-                    std::cout << "Erreur lors du chargement de l'historique: " << e.what() << std::endl;
+                    std::cout << e.what() << std::endl << std::endl;
                 }
                 break;
             case 2: { // Les accolades créent une portée (scope) pour les variables déclarées localement

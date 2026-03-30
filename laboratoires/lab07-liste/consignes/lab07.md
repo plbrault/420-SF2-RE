@@ -11,7 +11,7 @@
 - Retirer void deleteDatapoint(size_t index) et adapter l'autre version
 - Enlever le clear dans readFromFile, car on veut maintenant pouvoir lire plusieurs fichiers de suite. L'utilisation de la méthode addDatapoint s'assure que les données sont toujours insérées au bon endroit dans la liste.
 - Ajouter méthodes begin() et end() en version const et non const (nécessaire pour adaptation du main)
-- Apporter modifications nécessaires dans le `main` pour que le programme marche comme avant. Bien tester avec exemple d'exécution ci-dessous:
+- Apporter modifications nécessaires dans le `main` pour que le programme marche comme avant. Bien tester avec exemple d'exécution ci-dessous (toujours avec le fichier temperatures.txt du lab 4):
 
 ```text
 MENU
@@ -111,6 +111,6 @@ Entrez un choix entre 1 et 5: 5
 Au revoir!
 ```
 
-- Modifier main pour pouvoir charger plusieurs fichiers
+- Modifier main pour remplacer l'option 1 par "Importer les données d'un fichier" puis demander à l'utilisateur le nom du fichier à charger. Tester avec temperatures1.txt et temperatures2.txt fournis sur Moodle.
 - Améliorer l'efficacité de readFromFile (données sont probablement en ordre)
 - Ajouter une méthode delete qui prend un début et une fin
