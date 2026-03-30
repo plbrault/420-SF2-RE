@@ -1,0 +1,10 @@
+- Remplacer _pointeur de datapoints par une liste
+- Retirer _size et _capacity
+- Ne pas hésiter à commenter les méthodes et le main pour pouvoir tester au fur et à mesure
+- Retirer constructeurs et destructeurs
+- Retirer opérateur =
+- Retirer opérateur [], et noter qu'il existe en deux versions (const et non-const)
+- Adapter getSize et clear
+- Adapter findDatapoint pour retourner un itérateur au lieu d'un size_t, doit être retourné par valeur avec méthode non const. Faire deux versions dont une qui prend en paramètre la position de départ de la recherche. Penser à la réutilisation. Si introuvable, retourner end(). Assumer que les valeurs sont en ordre, mais ne surtout pas faire de recherche dichotomique (il y a quand même une optimisation possible, à vous d'y penser).
+- Faire deux versions const avec exactement le même code, mais le type de retour est const_iterator
+- Retirer void deleteDatapoint(size_t index) et adapter l'autre version
