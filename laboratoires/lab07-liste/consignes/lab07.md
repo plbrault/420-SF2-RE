@@ -7,7 +7,7 @@
 - Adapter getSize et clear
 - Adapter findDatapoint pour retourner un itérateur au lieu d'un size_t, doit être retourné par valeur avec méthode non const. Faire deux versions dont une qui prend en paramètre la position de départ de la recherche. Penser à la réutilisation. Si introuvable, retourner end(). Assumer que les valeurs sont en ordre, mais ne surtout pas faire de recherche dichotomique (il y a quand même une optimisation possible, à vous d'y penser).
 - Faire deux versions const avec exactement le même code, mais le type de retour est const_iterator
-- Adapter addDatapoint, doit ajouter le datapoint au bon endroit pour respecter l'ordre de date. S'il y a déjà un datapoint avec la même datetime, il faut le remplacer. L'insertion devient donc idempotente.
+- Adapter addDatapoint, doit ajouter le datapoint au bon endroit pour respecter l'ordre de date. S'il y a déjà un datapoint avec la même datetime, il faut le remplacer. L'insertion devient donc idempotente. Retourner un itérateur vers le Datapoint qui vient d'être ajouté.
 - Retirer void deleteDatapoint(size_t index) et adapter l'autre version
 - Enlever le clear dans readFromFile, car on veut maintenant pouvoir lire plusieurs fichiers de suite. L'utilisation de la méthode addDatapoint s'assure que les données sont toujours insérées au bon endroit dans la liste.
 - Ajouter méthodes begin() et end() en version const et non const (nécessaire pour adaptation du main)
@@ -120,5 +120,5 @@ Entrez le moment de fin (format AAAA-MM-DDTHH:MM:SS): 2026-01-31T06:00:00
 La température moyenne entre 2026-01-01T15:00:00 et 2026-01-31T06:00:00 est: -9.42678
 ```
 
-- Améliorer l'efficacité de readFromFile (données sont probablement en ordre)
+- Améliorer l'efficacité de readFromFile en évitant de chercher à partir du début à chaque ajout (sachant que données sont probablement en ordre, mais pas toujours). Créer ou modifier d'autres méthodes au besoin.
 - Ajouter une méthode delete qui prend un début et une fin

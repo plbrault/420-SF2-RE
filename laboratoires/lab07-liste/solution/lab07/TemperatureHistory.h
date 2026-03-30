@@ -11,7 +11,8 @@ public:
     size_t getSize() const;
 
     void clear();
-    void addDatapoint(const TemperatureDatapoint& datapoint);
+    std::list<TemperatureDatapoint>::iterator addDatapoint(const TemperatureDatapoint& datapoint, std::list<TemperatureDatapoint>::iterator start);
+    std::list<TemperatureDatapoint>::iterator addDatapoint(const TemperatureDatapoint& datapoint);
     void deleteDatapoint(const DateTime& moment);
     std::list<TemperatureDatapoint>::iterator findDatapoint(const DateTime& moment, std::list<TemperatureDatapoint>::iterator start);
     std::list<TemperatureDatapoint>::iterator findDatapoint(const DateTime& moment);

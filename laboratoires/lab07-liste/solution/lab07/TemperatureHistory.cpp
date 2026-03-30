@@ -35,17 +35,22 @@ void TemperatureHistory::clear() {
     this->_datapoints.clear();
 }
 
-void TemperatureHistory::addDatapoint(const TemperatureDatapoint &datapoint) {
-    for (auto it = this->_datapoints.begin(); it != this->_datapoints.end(); it++) {
+std::list<TemperatureDatapoint>::iterator TemperatureHistory::addDatapoint(const TemperatureDatapoint &datapoint, std::list<TemperatureDatapoint>::iterator start) {
+    for (auto it = start; it != this->_datapoints.end(); it++) {
         if (it->getMoment() > datapoint.getMoment()) {
-            this->_datapoints.insert(it, datapoint);
-            return;
-        } else if (it->getMoment() == datapoint.getMoment()) {
+            return _datapoints.insert(it, datapoint);
+        }
+        if (it->getMoment() == datapoint.getMoment()) {
             *it = datapoint;
-            return;
+            return it;
         }
     }
     this->_datapoints.push_back(datapoint);
+    return --this->_datapoints.end();
+}
+
+std::list<TemperatureDatapoint>::iterator TemperatureHistory::addDatapoint(const TemperatureDatapoint &datapoint) {
+    return this->addDatapoint(datapoint, this->_datapoints.begin());
 }
 
 TemperatureHistory& TemperatureHistory::operator+=(const TemperatureDatapoint &datapoint) {
@@ -59,9 +64,15 @@ void TemperatureHistory::readFromFile(const std::string &filename) {
         throw std::runtime_error("Erreur lors de l'ouverture du fichier.");
     }
     TemperatureDatapoint datapoint;
+    auto lastInsert = this->_datapoints.begin();
     while (!file.eof()) {
         file >> datapoint;
-        this->addDatapoint(datapoint);
+        if (datapoint.getMoment() >= lastInsert->getMoment())
+        {
+            this->addDatapoint(datapoint, lastInsert);
+        } else {
+            this->addDatapoint(datapoint);
+        }
     }
     file.close();
 }
