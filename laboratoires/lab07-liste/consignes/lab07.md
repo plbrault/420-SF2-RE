@@ -36,6 +36,21 @@ Adaptez les méthodes `getSize` et `clear` à la nouvelle structure de données.
 
 ## Étape 5
 
+La méthode `findDatapoint` actuelle retourne la position de l'élément recherché, ce qui n'est pas approprié pour une liste. Nous voulons donc plutôt retourner un itérateur. Si l'élément est trouvé, l'itérateur retourné doit pointé sur cet élément. Sinon, il doit pointer sur la fin de la liste. De plus, il serait intéressant de créer deux versions de cette méthode:
+
+- une qui prend en paramètre un itérateur vers le point de départ de la recherche
+- une qui fait la recherche à partir du début de la liste
+
+Naturellement, une de ces versions pourra appeler l'autre.
+
+![](images/bob_leponge_reutilisation.jpg)
+
+**Bien que les itérateurs soient des objets, il est habituel de toujours les passer ou les retourner par valeur.** Faire autrement risquerait de vous causer des problèmes. Par ailleurs, vos méthodes qui retournent des `iterator` ne pourront pas être `const` (nous y reviendrons à l'étape suivante). Les signatures des deux méthodes `findDatapoint` seront donc les suivantes:
+
+- `std::list<TemperatureDatapoint>::iterator findDatapoint(const DateTime& moment, std::list<TemperatureDatapoint>::iterator start);`
+- `std::list<TemperatureDatapoint>::iterator findDatapoint(const DateTime& moment);`
+
+Finalement, sachez que les données seront toujours stockées dans la liste en ordre croissant de date et heure. À vous de trouver quoi faire avec cette information, mais n'essayez surtout pas d'implémenter la recherche dichotomique, car celle-ci est beaucoup trop inefficace sur une liste chaînée.
 
 
 --

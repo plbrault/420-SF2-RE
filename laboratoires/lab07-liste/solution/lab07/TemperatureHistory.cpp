@@ -5,6 +5,8 @@ std::list<TemperatureDatapoint>::iterator TemperatureHistory::findDatapoint(cons
     for (auto it = start; it != this->_datapoints.end(); it++) {
         if (it->getMoment() == moment) {
             return it;
+        } else if (it->getMoment() > moment) {
+            return this->_datapoints.end();
         }
     }
     return this->_datapoints.end();
