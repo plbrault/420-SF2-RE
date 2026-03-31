@@ -211,5 +211,10 @@ Dans le `main`, modifiez l'option 1 du menu afin qu'elle demande à l'utilisateu
 
 Testez ensuite l'importation des fichiers `t1.txt` et `t2.txt` disponibles sur Moodle, dans cet ordre. Vous devriez avoir 717 entrées au total. Par ailleurs, si vous faites calculer la moyenne entre les moments `2026-01-01T15:00:00` et `2026-01-31T06:00:00`, vous devriez obtenir `-9.42678`.
 
+## Étape 14
 
-- Améliorer l'efficacité de readFromFile en évitant de chercher à partir du début à chaque ajout (sachant que données sont probablement en ordre, mais pas toujours). Créer ou modifier d'autres méthodes au besoin.
+Finalement, améliorez l'efficacité de la méthode `readFromFile` en évitant de chercher la position d'insertion à partir du début de la liste à chaque ajout, sachant que les données d'un même fichier sont probablement en ordre (mais pas toujours). Libre à vous de créer ou modifier d'autres méthodes au besoin.
+
+**⚠️ Faites valider votre laboratoire 07 par l'enseignant.**
+
+🎉 Félicitations, vous avez terminé le laboratoire!
