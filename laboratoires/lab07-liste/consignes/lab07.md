@@ -205,14 +205,11 @@ Au revoir!
 
 ---
 
+## Étape 13
 
-- Modifier main pour remplacer l'option 1 par "Importer les données d'un fichier" puis demander à l'utilisateur le nom du fichier à charger. Tester avec temperatures1.txt et temperatures2.txt fournis sur Moodle.
+Dans le `main`, modifiez l'option 1 du menu afin qu'elle demande à l'utilisateur le nom du fichier à charger. Le nom de l'option sera désormais « Importer les données d'un fichier », et pourra être sélectionnée plusieurs fois de manière successive afin de charger les données de plusieurs fichiers.
 
-Test: vous devriez avoir 717 entrées au total
-```text
-Entrez le moment de début (format AAAA-MM-DDTHH:MM:SS): 2026-01-01T15:00:00
-Entrez le moment de fin (format AAAA-MM-DDTHH:MM:SS): 2026-01-31T06:00:00
-La température moyenne entre 2026-01-01T15:00:00 et 2026-01-31T06:00:00 est: -9.42678
-```
+Testez ensuite l'importation des fichiers `t1.txt` et `t2.txt` disponibles sur Moodle, dans cet ordre. Vous devriez avoir 717 entrées au total. Par ailleurs, si vous faites calculer la moyenne entre les moments `2026-01-01T15:00:00` et `2026-01-31T06:00:00`, vous devriez obtenir `-9.42678`.
+
 
 - Améliorer l'efficacité de readFromFile en évitant de chercher à partir du début à chaque ajout (sachant que données sont probablement en ordre, mais pas toujours). Créer ou modifier d'autres méthodes au besoin.
