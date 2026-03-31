@@ -89,13 +89,21 @@ Je laisse ça ici pour aucune raison particulière:
 
 ![](./images/bob_leponge_reutilisation.jpg)
 
---
+## Étape 9
 
+Retirez l'appel à la méthode `clear` qui est présentement fait dans la méthode `readFromFile`, car on veut désormais pouvoir charger les données de plusieurs fichiers dans le même `TemperatureHistory`. Il n'y a normalement aucune autre modification à apporter à cette méthode.
 
-- Enlever le clear dans readFromFile, car on veut maintenant pouvoir lire plusieurs fichiers de suite. L'utilisation de la méthode addDatapoint s'assure que les données sont toujours insérées au bon endroit dans la liste.
-- Ajouter une méthode `deleteRange` qui prend un moment de début et un moment de fin
-- Ajouter méthodes begin() et end() en version const et non const (nécessaire pour adaptation du main)
-- Apporter modifications nécessaires dans le `main` pour que le programme marche comme avant. Bien tester avec exemple d'exécution ci-dessous (toujours avec le fichier temperatures.txt du lab 4):
+## Étape 10
+
+Ajoutez une méthode `deleteRange` qui prend un moment de début et un moment de fin et supprime toutes les données incluses entre ces deux moments.
+
+## Étape 11
+
+Ajoutez des méthodes `begin()` et `end()` qui retournent les itérateurs correspondant de la liste. Vous devez créer une version constante et une version constante de chaque méthode.
+
+## Étape 12
+
+Apportez maintenant les modifications nécessaires au `main` d'origine pour le rendre fonctionnel comme avant. Testez bien le résultat à l'aide de l'exemple d'exécution ci-dessous (toujours en utilisant le fichier `temperatures.txt` du laboratoire 5):
 
 ```text
 MENU
@@ -194,6 +202,9 @@ Entrez un choix entre 1 et 5: 5
 
 Au revoir!
 ```
+
+---
+
 
 - Modifier main pour remplacer l'option 1 par "Importer les données d'un fichier" puis demander à l'utilisateur le nom du fichier à charger. Tester avec temperatures1.txt et temperatures2.txt fournis sur Moodle.
 
