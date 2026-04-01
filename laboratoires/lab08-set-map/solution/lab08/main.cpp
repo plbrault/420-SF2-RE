@@ -12,14 +12,14 @@ int main() {
     ifstream fluxTexteChiffre;
     ofstream sortie;
 
-    Langue francais("mots.json", "frequences_lettres.json");
+    Langue francais("../mots.json", "../frequences_lettres.json");
     francais.charger();
 
     DechiffreurCesar dechiffreurCesar(&francais);
     DechiffreurFrequence dechiffreurFrequence(&francais);
 
     // Lecture du premier texte à déchiffrer
-    fluxTexteChiffre.open("texte1.txt");
+    fluxTexteChiffre.open("../texte1.txt");
     if (!fluxTexteChiffre) {
         cerr << "Erreur d'ouverture du fichier" << endl;
         return 1;
@@ -28,7 +28,7 @@ int main() {
     fluxTexteChiffre.close();
 
     // Lecture du deuxième texte à déchiffrer
-    fluxTexteChiffre.open("texte2.txt");
+    fluxTexteChiffre.open("../texte2.txt");
     if (!fluxTexteChiffre) {
         cerr << "Erreur d'ouverture du fichier" << endl;
         return 1;
