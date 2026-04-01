@@ -99,7 +99,7 @@ Ajoutez une méthode `deleteRange` qui prend un moment de début et un moment de
 
 ## Étape 11
 
-Ajoutez des méthodes `begin()` et `end()` qui retournent les itérateurs correspondant de la liste. Vous devez créer une version constante et une version constante de chaque méthode.
+Ajoutez des méthodes `begin()` et `end()` qui retournent les itérateurs correspondant de la liste. Vous devez créer une version constante et une version non-constante de chaque méthode.
 
 ## Étape 12
 
