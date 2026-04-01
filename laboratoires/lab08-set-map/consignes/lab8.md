@@ -6,7 +6,14 @@
 * Utiliser le format de données *JSON*.
 * Mobiliser toutes les notions vues depuis le début de la session.
 
-## Format de données JSON
+## Parties
+
+Ce laboratoire comprend deux parties:
+
+* **Partie 08-A** Déchiffrement d'un texte secret en utilisant un ensemble (`std::set`)
+* **Partie 08-B**: Déchiffrement d'un texte secret en utilisant un dictionnaire (`std::map`)
+
+## Notions préalables - Format de données JSON
 
 [JSON](https://fr.wikipedia.org/wiki/JavaScript_Object_Notation), pour *JavaScript Object Notation*, est un format de données textuel permettant de représenter des listes, des dictionnaires et des types scalaires. Voici à quoi ressemble ce format (exemple tiré de Wikipédia):
 
@@ -34,11 +41,15 @@ Quand on y pense, les objets et les dictionnaires sont des structures qui se res
 
 ## *Parser* JSON
 
-Allez-y, codez un *parser* JSON!
+Allez-y, codez un *parser* JSON! 💪
 
 Mais non, c'est une blague!
 
-Vous trouverez un fichier « Parser JSON.zip » sur Moodle. Vous devez le télécharger et placer les fichiers C++ qu'il contient dans votre projet. Les fichiers `JSONParser.h` et `JSONParser.cpp` vous permettent d'utiliser un *parser* JSON qui hérite de la classe *Parser* du laboratoire 6. Si vous ouvrez ces fichiers, vous constaterez qu'ils ne font pas grand-chose. Ils utilisent en fait une bibliothèque (fichier `json.h`) dont la documentation se trouve [ici](https://github.com/nlohmann/json). C'est elle qui fait tout le travail.
+Vous trouverez un fichier « Parser JSON.zip » sur Moodle. Vous devez le télécharger et placer les fichiers C++ qu'il contient dans votre projet. Les fichiers `JSONParser.h` et `JSONParser.cpp` vous permettent d'utiliser un *parser* JSON qui hérite de la classe *Parser* du laboratoire 6. Si vous ouvrez ces fichiers, vous constaterez qu'ils ne font pas grand-chose. Ils utilisent en fait une librairie (fichier `json.h`) dont la documentation se trouve [ici](https://github.com/nlohmann/json). C'est elle qui fait tout le travail.
+
+L'objectif des librairies en programmation est d'éviter de « réinventer la roue » chaque fois qu'on veut faire quelque chose qui a déjà été fait par quelqu'un d'autre. Un *parser* JSON, ça existe déjà! Alors pas la peine de « se casser le bicycle 🚲 », comme on dit.
+
+![](./images/bob_leponge_reutilisation.jpg)
 
 La méthode `getData` de `JSONParser` retourne un objet de type `json`. Cette classe provient de la bibliothèque et n'est donc pas un type natif de C++. Elle permet d'extraire les données « parsées » vers des conteneurs de la STL.
 
@@ -61,6 +72,8 @@ On peut voir que nous sommes en présence d'un tableau ou d'une liste de chaîne
 parser.parse(flux); 
 vector<string> vecteur = parser.getData().template get<vector<string>>();
 ```
+
+Remarquez la syntaxe un peut particulière, qui fait l'usage d'une
 
 Si on voulait, on pourrait aussi extraire les données sous forme de `list<string>` plutôt que de `vector<string>`:
 
