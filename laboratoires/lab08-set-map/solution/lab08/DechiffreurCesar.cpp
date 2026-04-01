@@ -12,7 +12,7 @@ DechiffreurCesar::DechiffreurCesar(const Langue* langue) : Dechiffreur(langue) {
     }
 }
 
-char DechiffreurCesar::_decalerLettre(char lettre, int decalage) const {
+char DechiffreurCesar::decalerLettre(char lettre, int decalage) const {
     if ('a' <= lettre && lettre <= 'z') {
         return _lettresMinuscules[(lettre - 'a' + decalage) % 26];
     }
@@ -22,10 +22,10 @@ char DechiffreurCesar::_decalerLettre(char lettre, int decalage) const {
     return lettre;
 }
 
-bool DechiffreurCesar::_essayerDecalage(const std::string& mot, int decalage) const {
+bool DechiffreurCesar::essayerDecalage(const std::string& mot, int decalage) const {
     std::string essai;
     for (size_t i  = 0; i < mot.size(); i++) {
-        essai += _decalerLettre(mot[i], decalage);
+        essai += decalerLettre(mot[i], decalage);
     }
     return _langue->contientMot(essai);
 }
@@ -39,7 +39,7 @@ void DechiffreurCesar::dechiffrer() {
     for (int i = 0; i < 26; i++) {
         motsValides = 0;
         for (const auto& mot : motsChiffres) {
-            if (_essayerDecalage(mot, i)) {
+            if (essayerDecalage(mot, i)) {
                 motsValides++;
             }
         }
@@ -51,6 +51,6 @@ void DechiffreurCesar::dechiffrer() {
 
     _texteDechiffre.clear();
     for (const char& c : _texteChiffre) {
-        _texteDechiffre += _decalerLettre(c, meilleurDecalage);
+        _texteDechiffre += decalerLettre(c, meilleurDecalage);
     }
 }

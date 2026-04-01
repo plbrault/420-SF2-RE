@@ -3,13 +3,13 @@
 
 using namespace std;
 
-void DechiffreurFrequence::_genererSubstitutions() {
+void DechiffreurFrequence::genererSubstitutions() {
     for (size_t i = 0; i < _analyseur.getLettresTriees().size(); i++) {
         _substitutions[_analyseur.getLettresTriees()[i]] = _langue->getLettresTriees()[i];
     }
 }
 
-void DechiffreurFrequence::_substituer() {
+void DechiffreurFrequence::substituer() {
     stringstream fluxTexteDechiffre;
     for (auto caractere : _texteChiffre) {
         if ('a' <= tolower(caractere) && tolower(caractere) <= 'z') {
@@ -24,8 +24,8 @@ void DechiffreurFrequence::_substituer() {
 
 void DechiffreurFrequence::dechiffrer() {
     _analyseur.analyser(_texteChiffre);
-    _genererSubstitutions();
-    _substituer();
+    genererSubstitutions();
+    substituer();
 }
 
 void DechiffreurFrequence::changerSubstitution(char ancien, char nouveau) {
@@ -43,6 +43,6 @@ void DechiffreurFrequence::changerSubstitution(char ancien, char nouveau) {
             break;
         }
     }
-    _substituer();
+    substituer();
 }
 

@@ -8,7 +8,7 @@ Langue::Langue(const string& nomFichierMots, const string& nomFichierFrequences)
     _estCharge = false;
 }
 
-void Langue::_trierLettres() {
+void Langue::trierLettres() {
     for (auto it = _lettresParFrequence.begin(); it != _lettresParFrequence.end(); it++) {
         for (auto lettre : it->second) {
             _lettresTriees.push_back(lettre);
@@ -40,7 +40,7 @@ void Langue::charger() {
             _lettresParFrequence[frequenceFloat].push_back(lettre[0]);
         }
     }
-    _trierLettres();
+    trierLettres();
 
     _estCharge = true;
 }

@@ -10,10 +10,10 @@ private:
     std::map<char, unsigned int> _occurencesLettres;
     std::vector<char> _lettresTriees;
 
-    void _preparerTexte();
-    void _retirerMotsTropFrequents();
-    void _compterLettres();
-    void _trierLettres();
+    void preparerTexte();
+    void retirerMotsTropFrequents();
+    void compterLettres();
+    void trierLettres();
 public:
     void analyser(const std::string& texte);
     std::vector<char> getLettresTriees();

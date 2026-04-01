@@ -17,7 +17,7 @@ private:
     std::vector<char> _lettresTriees;
     bool _estCharge;
 
-    void _trierLettres();
+    void trierLettres();
 public:
     Langue(const std::string& nomFichierMots, const std::string& nomFichierFrequences);
     void charger();

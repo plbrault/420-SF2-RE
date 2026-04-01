@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void AnalyseurTexte::_compterLettres() {
+void AnalyseurTexte::compterLettres() {
     for (char lettre = 'a'; lettre <= 'z'; lettre++) {
         _occurencesLettres[lettre] = 0;
     }
@@ -17,7 +17,7 @@ void AnalyseurTexte::_compterLettres() {
     }
 }
 
-void AnalyseurTexte::_trierLettres() {
+void AnalyseurTexte::trierLettres() {
     _lettresTriees.clear();
     map<unsigned int, vector<char>> lettresParOccurences;
     for (auto it = _occurencesLettres.begin(); it != _occurencesLettres.end(); it++) {
@@ -30,7 +30,7 @@ void AnalyseurTexte::_trierLettres() {
     }
 }
 
-void AnalyseurTexte::_preparerTexte() {
+void AnalyseurTexte::preparerTexte() {
     set<char> ponctuation = {'.', ',', ';', ':', '!', '?', '-', '_', '(', ')', '[', ']', '{', '}', '\'', '"', '\n', '\r', '\t'};
     for (auto& caractere : _texte) {
         if (ponctuation.contains(caractere)) {
@@ -39,7 +39,7 @@ void AnalyseurTexte::_preparerTexte() {
     }
 }
 
-void AnalyseurTexte::_retirerMotsTropFrequents() {
+void AnalyseurTexte::retirerMotsTropFrequents() {
     string mot;
     map<string, unsigned int> occurencesMots;
     stringstream flux1, flux2;
@@ -61,10 +61,10 @@ void AnalyseurTexte::_retirerMotsTropFrequents() {
 
 void AnalyseurTexte::analyser(const std::string& texte) {
     _texte = texte;
-    _preparerTexte();
-    _retirerMotsTropFrequents();
-    _compterLettres();
-    _trierLettres();
+    preparerTexte();
+    retirerMotsTropFrequents();
+    compterLettres();
+    trierLettres();
 }
 
 vector<char> AnalyseurTexte::getLettresTriees() {
