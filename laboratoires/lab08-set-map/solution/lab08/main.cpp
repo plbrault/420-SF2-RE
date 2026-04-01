@@ -6,11 +6,9 @@
 #include "Langue.h"
 #include "fonctions.h"
 
-using namespace std;
-
 int main() {
-    ifstream fluxTexteChiffre;
-    ofstream sortie;
+    std::ifstream fluxTexteChiffre;
+    std::ofstream sortie;
 
     Langue francais("../mots.json", "../frequences_lettres.json");
     francais.charger();
@@ -21,7 +19,7 @@ int main() {
     // Lecture du premier texte à déchiffrer
     fluxTexteChiffre.open("../texte1.txt");
     if (!fluxTexteChiffre) {
-        cerr << "Erreur d'ouverture du fichier" << endl;
+        std::cerr << "Erreur d'ouverture du fichier" << std::endl;
         return 1;
     }
     dechiffreurCesar.lireTexteChiffre(fluxTexteChiffre);
@@ -30,7 +28,7 @@ int main() {
     // Lecture du deuxième texte à déchiffrer
     fluxTexteChiffre.open("../texte2.txt");
     if (!fluxTexteChiffre) {
-        cerr << "Erreur d'ouverture du fichier" << endl;
+        std::cerr << "Erreur d'ouverture du fichier" << std::endl;
         return 1;
     }
     dechiffreurFrequence.lireTexteChiffre(fluxTexteChiffre);
@@ -38,29 +36,29 @@ int main() {
 
     // Déchiffrement du premier texte
     dechiffreurCesar.dechiffrer();
-    cout << dechiffreurCesar.getTexteDechiffre();
+    std::cout << dechiffreurCesar.getTexteDechiffre();
     sortie.open("sortie-cesar.txt");
     if (!sortie) {
-        cerr << "Erreur d'ouverture du fichier de sortie" << endl;
+        std::cerr << "Erreur d'ouverture du fichier de sortie" << std::endl;
         return 1;
     }
     sortie << dechiffreurCesar.getTexteDechiffre();
     sortie.close();
 
     // Déchiffrement du deuxième texte
-    cout << "-----------------------------------------------" << endl;
+    std::cout << "-----------------------------------------------" << std::endl;
     dechiffreurFrequence.dechiffrer();
 
     // Substitutions manuelles
-    vector<string> lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
+    std::vector<std::string> lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
     char ancien, nouveau;
     for (size_t i = 0; i < lignesTexteDechiffre.size(); i++) {
         while (lignesTexteDechiffre[i] != "" && ancien != '.' && ancien != '!') {
-            cout << lignesTexteDechiffre[i] << endl;
-            cout << ">>> Entrer une nouvelle substitution (ancien nouveau), ou « . » pour passer à la ligne suivante, ou « ! » pour terminer." << endl;
-            cin >> ancien;
+            std::cout << lignesTexteDechiffre[i] << std::endl;
+            std::cout << ">>> Entrer une nouvelle substitution (ancien nouveau), ou « . » pour passer à la ligne suivante, ou « ! » pour terminer." << std::endl;
+            std::cin >> ancien;
             if (ancien != '.' && ancien != '!') {
-                cin >> nouveau;
+                std::cin >> nouveau;
                 dechiffreurFrequence.changerSubstitution(ancien, nouveau);
                 lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
             }
@@ -69,11 +67,11 @@ int main() {
         }
         ancien = '\0';
     }
-    cout << "DEUXIÈME TEXTE DÉCHIFFRÉ:" << endl << dechiffreurFrequence.getTexteDechiffre() << endl;
+    std::cout << "DEUXIÈME TEXTE DÉCHIFFRÉ:" << std::endl << dechiffreurFrequence.getTexteDechiffre() << std::endl;
 
     sortie.open("sortie-frequence.txt");
     if (!sortie) {
-        cerr << "Erreur d'ouverture du fichier de sortie" << endl;
+        std::cerr << "Erreur d'ouverture du fichier de sortie" << std::endl;
         return 1;
     }
     sortie << dechiffreurFrequence.getTexteDechiffre();

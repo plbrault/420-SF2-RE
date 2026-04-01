@@ -73,7 +73,7 @@ parser.parse(flux);
 vector<string> vecteur = parser.getData().template get<vector<string>>();
 ```
 
-Remarquez la syntaxe un peut particulière, qui fait l'usage d'une
+Remarquez la syntaxe un peut particulière: on doit mettre `template` suivi d'un espace avant le nom d'une méthode (`get`) qui est lui-même suivi d'un *template* (`<vector<string>>`). Nous n'allons pas nous préoccuper davantage de cette syntaxe, sachez simplement que c'est ainsi que vous devez appeler les méthodes suivant `parser.getData()`.
 
 Si on voulait, on pourrait aussi extraire les données sous forme de `list<string>` plutôt que de `vector<string>`:
 
@@ -104,7 +104,7 @@ En C++, cette structure de données correspond à un `map<string, string>`. On e
 map<string, string> dictionnaire = parser.getData().template get<map<string, string>>();
 ```
 
-## Le chiffre de César
+## Laboratoire 08-A - Le chiffre de César
 
 Le [chiffre de César](https://fr.wikipedia.org/wiki/Chiffrement_par_d%C3%A9calage) est une méthode de chiffrement primitive qui consiste à décaler d'une même valeur chacune des lettres de l'alphabet. La clé de chiffrement est la valeur du décalage. Par exemple, avec une clé de 3, la lettre `A` devient `D`, la lettre `B` devient `E`, et ainsi de suite. Les lettres `X`, `Y` et `Z`, pour leur part, deviennent respectivement `A`, `B` et `C`.
 
@@ -132,9 +132,9 @@ class Langue {
 }
 
 class Dechiffreur {
-    - const Langue* _langue    
-    - string _texteChiffre
-    - string _texteDechiffre
+    # const Langue* _langue
+    # string _texteChiffre
+    # string _texteDechiffre
     + Dechiffreur(const Langue* langue)
     + void lireTexteChiffre(istream& entree)
     + virtual void dechiffrer() = 0
@@ -143,14 +143,14 @@ class Dechiffreur {
 }
 
 class DechiffreurCesar {
-    - char _decalerLettre(char lettre, int decalage) const
-    - bool _essayerDecalage(const string& mot, int decalage) const
+    - char decalerLettre(char lettre, int decalage) const
+    - bool essayerDecalage(const string& mot, int decalage) const
     + DechiffreurCesar(const Langue* langue)
     + void dechiffrer() override
 }
 
 Dechiffreur <|-- DechiffreurCesar
-Langue --> Dechiffreur
+Langue --o Dechiffreur
 
 @enduml
 ```
@@ -164,15 +164,17 @@ Voici des explications supplémentaires pour quelques-unes des méthodes:
 
 **Classe `DechiffreurCesar`**
 
-* La méthode privée `_decalerLettre` prend en paramètre un caractère et un décalage et retourne la lettre décalée. Si le caractère reçu en paramètre n'est pas une lettre ou est une lettre accentuée, elle le retourne tel quel.
-* La méthode privée `_essayerDecalage` prend en paramètre un mot et un décalage, décale toutes les lettres du mot, puis vérifie si le mot existe dans `_langue`.
+* La méthode privée `decalerLettre` prend en paramètre un caractère et un décalage et retourne la lettre décalée. Si le caractère reçu en paramètre n'est pas une lettre ou est une lettre accentuée, elle le retourne tel quel.
+* La méthode privée `essayerDecalage` prend en paramètre un mot et un décalage, décale toutes les lettres du mot, puis vérifie si le mot existe dans `_langue`.
 * La méthode `dechiffrer` essaie tous les décalages possibles du texte chiffré, puis retient celui qui produit le maximum de mots valides. Elle met à jour `_texteDechiffre` en conséquence.
 
 N'hésitez pas à ajouter d'autres attributs ou méthodes privées si cela vous paraît utile.
 
 Le `main` doit utiliser la classe `DechiffreurCesar` pour déchiffrer `texte1.txt` et afficher son contenu déchiffré à l'écran. Il doit aussi écrire le texte déchiffré dans un fichier `sortie-cesar.txt`.
 
-## Le chiffrement par substitution
+Vous avez maintenant toutes les informations dont vous avez besoin pour compléter cette partie du laboratoire. **Faites valider votre solution par l'enseignant une fois que vous aurez un texte déchiffré!**
+
+## Laboratoire 08-B - Le chiffrement par substitution
 
 Le fichier `texte2.txt` contient un texte en français qui a été chiffré à l'aide d'une méthode légèrement meilleure que le chiffre de César. Chaque lettre de l'alphabet a été substituée par une autre lettre. Contrairement au chiffre de César, le décalage diffère pour chaque lettre. Il y a donc **26!** clés possibles, soit environ **4,03 × 10<sup>26</sup>**. Si on suppose que votre ordinateur peut tester un million de clés par seconde, il vous faudra environ **12,8 trillions d'années** pour déchiffrer ce texte par force brute.
 
@@ -226,7 +228,7 @@ class Langue {
     - map<float, vector<char>> _lettresParFrequence
     - vector<char> _lettresTriees
     - bool _estCharge
-    - void _trierLettres()
+    - void trierLettres()
     + Langue(const string& nomFichierMots, const string& nomFichierFrequences)
     + void charger()
     + bool contientMot(const std::string& mot) const
@@ -240,7 +242,7 @@ Dans la méthode `charger`, ajoutez le code nécessaire pour charger le dictionn
 
 > **NOTE**: La bibliothèque JSON ne permet pas d'extraire un `map<float, vector<char>>` directement. Vous devrez donc extraire un `map<string, vector<string>>`, puis le convertir à l'aide d'une boucle.
 
-La méthode `charger` doit aussi appeler la méthode privée `_trierLettres`, qui copie les lettres vers `_lettresTriees` en ordre de fréquence. Une façon d'effectuer ce tri est d'itérer sur toutes les clés de `_lettresParFrequence` (qui, par nature du `map`, sont triées) et de les ajouter à la fin du vecteur. Les lettres qui partagent la même fréquence peuvent simplement être ajoutées les unes à la suite des autres dans le tableau.
+La méthode `charger` doit aussi appeler la méthode privée `trierLettres`, qui copie les lettres vers `_lettresTriees` en ordre croissant de fréquence. Une façon d'effectuer ce tri est d'itérer sur toutes les clés (fréquences) de `_lettresParFrequence` (qui, par nature du `map`, sont triées) et d'ajouter les lettres correspondantes à la fin du vecteur. Les lettres qui partagent la même fréquence peuvent simplement être ajoutées les unes à la suite des autres dans le tableau.
 
 Testez bien votre classe `Langue` mise à jour avant de continuer.
 
@@ -260,10 +262,10 @@ class AnalyseurTexte {
 @enduml
 ```
 
-Cette classe doit permettre d'obtenir un vecteur des lettres triées par nombre d'occurences dans le texte. N'oubliez pas de respecter la règle énoncée plus haut pour éviter que les statistiques soient biaisées par les mots trop fréquents! N'oubliez pas non plus qu'un mot n'est pas nécessairement entouré d'espaces. Par exemple, dans la phrase « L'été est la plus belle saison. », les mots « été » et « saison » sont adjacents à des symboles de ponctuation. Pour vous aider, voici le code d'une méthode privée pour retirer tous les symboles de ponctuation et les sauts de ligne dans le texte:
+Cette classe doit permettre d'obtenir un vecteur des lettres triées par nombre d'occurences dans le texte. N'oubliez pas de respecter la règle énoncée plus haut pour éviter que les statistiques soient biaisées par les mots trop fréquents! N'oubliez pas non plus qu'un mot n'est pas nécessairement entouré d'espaces. Par exemple, dans la phrase « L'été est la plus belle saison. », les mots « été » et « saison » sont adjacents à des symboles de ponctuation. Pour vous aider, voici le code d'une méthode privée pour retirer tous les symboles de ponctuation et les sauts de ligne dans le texte, et les remplacer par des espaces:
 
 ```cpp
-void AnalyseurTexte::_preparerTexte() {
+void AnalyseurTexte::preparerTexte() {
     set<char> ponctuation = {'.', ',', ';', ':', '!', '?',
                             '-', '_', '(', ')', '[', ']',
                             '{', '}', '\'', '"', '\n',
@@ -293,7 +295,7 @@ class Langue {
     - map<float, vector<char>> _lettresParFrequence
     - vector<char> _lettresTriees
     - bool _estCharge
-    - void _trierLettres()
+    - void trierLettres()
     + Langue(const string& nomFichierMots, const string& nomFichierFrequences)
     + void charger()
     + bool contientMot(const std::string& mot) const
@@ -301,9 +303,9 @@ class Langue {
 }
 
 class Dechiffreur {
-    - const Langue* _langue    
-    - string _texteChiffre
-    - string _texteDechiffre
+    # const Langue* _langue
+    # string _texteChiffre
+    # string _texteDechiffre
     + Dechiffreur(const Langue* langue)
     + void lireTexteChiffre(istream& entree)
     + virtual void dechiffrer() = 0
@@ -327,7 +329,7 @@ class AnalyseurTexte {
 }
 
 Dechiffreur <|-- DechiffreurFrequence
-Dechiffreur *-- Langue
+Dechiffreur o-- Langue
 DechiffreurFrequence *-- AnalyseurTexte
 
 @enduml
@@ -349,15 +351,15 @@ Voici du code à utiliser dans votre `main` pour afficher le texte déchiffré l
 
 ```cpp
 // Substitutions manuelles
-vector<string> lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
+std::vector<std::string> lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
 char ancien, nouveau;
-for (int i = 0; i < lignesTexteDechiffre.size(); i++) {
+for (size_t i = 0; i < lignesTexteDechiffre.size(); i++) {
     while (lignesTexteDechiffre[i] != "" && ancien != '.' && ancien != '!') {
-        cout << lignesTexteDechiffre[i] << endl;
-        cout << ">>> Entrer une nouvelle substitution (ancien nouveau), ou « . » pour passer à la ligne suivante, ou « ! » pour terminer." << endl;
-        cin >> ancien;
+        std::cout << lignesTexteDechiffre[i] << std::endl;
+        std::cout << ">>> Entrer une nouvelle substitution (ancien nouveau), ou « . » pour passer à la ligne suivante, ou « ! » pour terminer." << std::endl;
+        std::cin >> ancien;
         if (ancien != '.' && ancien != '!') {
-            cin >> nouveau;
+            std::cin >> nouveau;
             dechiffreurFrequence.changerSubstitution(ancien, nouveau);
             lignesTexteDechiffre = split(dechiffreurFrequence.getTexteDechiffre(), '\n');
         }
@@ -366,11 +368,13 @@ for (int i = 0; i < lignesTexteDechiffre.size(); i++) {
     }
     ancien = '\0';
 }
-cout << "Texte déchiffré:" << endl << dechiffreurFrequence.getTexteDechiffre() << endl;
+std::cout << "DEUXIÈME TEXTE DÉCHIFFRÉ:" << std::endl << dechiffreurFrequence.getTexteDechiffre() << std::endl;
 ```
 
 Testez le tout. Si vous remarquez des problèmes dans votre implémentation de `changerSubstitutions`, trouvez des solutions et corrigez-les.
 
 À la fin de votre `main`, ajouter le code nécessaire pour écrire le texte déchiffré dans un fichier `sortie-frequence.txt`.
+
+**⚠️ Faites valider votre laboratoire par l'enseignant.**
 
 Félicitations, vous avez terminé le laboratoire! 🎉
