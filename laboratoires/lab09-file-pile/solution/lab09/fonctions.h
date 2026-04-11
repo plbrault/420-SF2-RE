@@ -8,3 +8,4 @@
 #endif //LAB09_FONCTIONS_H
 
 void effacerEcran();
+bool touchePressee();
