@@ -14,6 +14,8 @@ GlissadeEau::GlissadeEau() {
 }
 
 void GlissadeEau::mettreAJour() {
+
+
     _temps += 1;
 }
 

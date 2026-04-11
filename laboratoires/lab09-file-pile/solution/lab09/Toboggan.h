@@ -5,7 +5,7 @@
 #ifndef LAB09_TOBOGGAN_H
 #define LAB09_TOBOGGAN_H
 
-#include <stack>
+#include <queue>
 #include <map>
 #include "Visiteur.h"
 #include "Duration.h"
@@ -13,10 +13,10 @@
 class Toboggan
 {
 private:
-    std::stack<Visiteur*> _glisseurs;
+    std::queue<Visiteur*> _glisseurs;
     std::map<Visiteur*, Duration> _tempsEntree;
 public:
-    //Toboggan();
+    bool accepteGlisseur() const;
     void ajouterGlisseur(Visiteur* visiteur, const Duration& temps);
     Visiteur* verifierSortie(const Duration& temps);
     size_t getNombreGlisseurs() const;
