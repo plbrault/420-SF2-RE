@@ -6,7 +6,7 @@
 #define LAB09_BOUEE_H
 
 
-class Bouee {
+class Tube {
 };
 
 

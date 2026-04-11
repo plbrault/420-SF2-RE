@@ -5,25 +5,32 @@
 #ifndef LAB09_GLISSADEEAU_H
 #define LAB09_GLISSADEEAU_H
 
+#include <iostream>
 #include <queue>
 #include <stack>
 #include <list>
 #include "Visiteur.h"
-#include "Bouee.h"
+#include "Tube.h"
+#include "Toboggan.h"
 
 class GlissadeEau {
 private:
     std::queue<Visiteur*> _fileEntree;
-    std::vector<std::stack<Bouee>> _pilesPriseBouee;
+    std::stack<Tube*> _tubesDisponibles;
     std::queue<Visiteur*> _fileMontee;
-    std::queue<Visiteur*> _toboggan;
+    Toboggan _toboggan;
     std::list<Visiteur*> _zoneArrivee;
-    std::vector<std::stack<Bouee>> _pilesDepotBouee;
+    std::stack<Tube*> _depotTubes;
     std::queue<Visiteur*> _fileSortie;
+
+    Duration _temps;
 public:
     GlissadeEau();
-    
+    void ajouterVisiteur(Visiteur* visiteur);
+    void mettreAJour(const Duration& incrementTemps);
+    void afficher(std::ostream& sortie) const;
 };
 
+std::ostream& operator<<(std::ostream& os, const GlissadeEau& glissade);
 
 #endif //LAB09_GLISSADEEAU_H
