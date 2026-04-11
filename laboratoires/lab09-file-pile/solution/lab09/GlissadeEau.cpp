@@ -13,12 +13,12 @@ GlissadeEau::GlissadeEau() {
     _temps.setTotalSeconds(0);
 }
 
-void GlissadeEau::ajouterVisiteur(Visiteur* visiteur) {
-    _fileEntree.push(visiteur);
+void GlissadeEau::mettreAJour() {
+    _temps += 1;
 }
 
-void GlissadeEau::mettreAJour(const Duration& incrementTemps) {
-    _temps += incrementTemps;
+void GlissadeEau::ajouterVisiteur(Visiteur* visiteur) {
+    _fileEntree.push(visiteur);
 }
 
 void GlissadeEau::afficher(std::ostream& sortie) const {

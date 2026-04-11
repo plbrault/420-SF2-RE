@@ -13,7 +13,7 @@ int main()
         std::cout << glissade;
         std::this_thread::sleep_for(std::chrono::seconds(1));
         effacerEcran();
-        glissade.mettreAJour(Duration(1));
+        glissade.mettreAJour();
     }
 
     return 0;

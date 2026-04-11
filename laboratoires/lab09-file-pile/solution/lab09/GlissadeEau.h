@@ -26,8 +26,11 @@ private:
     Duration _temps;
 public:
     GlissadeEau();
+
+    const Duration& getTemps() const;
+
+    void mettreAJour();
     void ajouterVisiteur(Visiteur* visiteur);
-    void mettreAJour(const Duration& incrementTemps);
     void afficher(std::ostream& sortie) const;
 };
 
