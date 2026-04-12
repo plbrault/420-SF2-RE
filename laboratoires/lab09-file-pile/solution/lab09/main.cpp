@@ -25,9 +25,12 @@ int main()
         glissade.mettreAJour();
         if (rand() % 3 == 0)
         {
-            auto nouveauVisiteur = new Visiteur();
-            visiteurs.insert(nouveauVisiteur);
-            glissade.ajouterVisiteur(nouveauVisiteur);
+            int nombreNouveauxVisiteurs = rand() % 5 + 1;
+            for (int i = 0; i < nombreNouveauxVisiteurs; i++) {
+                Visiteur* nouveauVisiteur = new Visiteur();
+                visiteurs.insert(nouveauVisiteur);
+                glissade.ajouterVisiteur(nouveauVisiteur);
+            }
         }
     }
 

@@ -16,9 +16,9 @@ private:
     std::queue<Visiteur*> _glisseurs;
     std::map<Visiteur*, Duration> _tempsEntree;
 public:
-    bool accepteGlisseur() const;
+    bool accepteGlisseur(const Duration& tempsActuel) const;
     void ajouterGlisseur(Visiteur* visiteur, const Duration& temps);
-    Visiteur* verifierSortie(const Duration& temps);
+    Visiteur* verifierSortie(const Duration& tempsActuel);
     size_t getNombreGlisseurs() const;
 };
 

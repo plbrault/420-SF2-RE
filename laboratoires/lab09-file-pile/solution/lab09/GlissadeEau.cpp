@@ -10,7 +10,7 @@
 #define LARGEUR_LIGNE (LARGEUR_LIBELLE + LARGEUR_VALEUR + 2)
 
 GlissadeEau::GlissadeEau() {
-    _temps.setTotalSeconds(0);
+    _tempsActuel.setTotalSeconds(0);
 
     // Création des tubes
     for (int i = 0; i < 30; i++)
@@ -23,10 +23,10 @@ GlissadeEau::GlissadeEau() {
 void GlissadeEau::mettreAJour() {
     // Si le toboggan accepte un nouveau glisseur et qu'il y a au moins un visiteur dans la file de montée,
     // ajouter le visiteur au toboggan et le retirer de la file de montée.
-    if (_toboggan.accepteGlisseur() && !_fileMontee.empty()) {
+    if (_toboggan.accepteGlisseur(_tempsActuel) && !_fileMontee.empty()) {
         Visiteur* visiteur = _fileMontee.front();
         _fileMontee.pop();
-        _toboggan.ajouterGlisseur(visiteur, _temps);
+        _toboggan.ajouterGlisseur(visiteur, _tempsActuel);
     }
 
     // Si un tube est disponible et que la file d'entrée n'est pas vide, le premier visiteur de la file d'entrée
@@ -43,9 +43,9 @@ void GlissadeEau::mettreAJour() {
 
     // Si un visiteur est sorti du toboggan, le placer dans la zone d'arrivée avec son temps de sortie
     // (soit le temps actuel).
-    Visiteur* visiteurSorti = _toboggan.verifierSortie(_temps);
+    Visiteur* visiteurSorti = _toboggan.verifierSortie(_tempsActuel);
     if (visiteurSorti != nullptr) {
-        _zoneArrivee[visiteurSorti] = _temps;
+        _zoneArrivee[visiteurSorti] = _tempsActuel;
     }
 
     // S'il n'y a plus de tubes disponibles, déplacer deux tubes du dépôt vers la pile des tubes disponibles
@@ -60,7 +60,7 @@ void GlissadeEau::mettreAJour() {
     }
 
     // Faire avancer le temps d'une seconde.
-    _temps += 1;
+    _tempsActuel += 1;
 }
 
 void GlissadeEau::ajouterVisiteur(Visiteur* visiteur) {
@@ -69,7 +69,7 @@ void GlissadeEau::ajouterVisiteur(Visiteur* visiteur) {
 
 void GlissadeEau::afficher(std::ostream& sortie) const {
     sortie << std::string(LARGEUR_LIGNE, '*') << std::endl;
-    sortie << std::setw(LARGEUR_LIBELLE) << std::left << "* Temps: " << std::setw(LARGEUR_VALEUR) << std::right << this->_temps << " *" << std::endl;
+    sortie << std::setw(LARGEUR_LIBELLE) << std::left << "* Temps: " << std::setw(LARGEUR_VALEUR) << std::right << this->_tempsActuel << " *" << std::endl;
     sortie << std::setw(LARGEUR_LIBELLE)
         << std::left << "* Nombre de visiteurs dans la file d'entree: "
         << std::setw(LARGEUR_VALEUR) << std::right << this->_fileEntree.size() << " *" << std::endl;

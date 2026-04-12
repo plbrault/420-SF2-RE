@@ -24,7 +24,7 @@ private:
     std::stack<Tube*> _depotTubes;
     std::queue<Visiteur*> _fileSortie;
 
-    Duration _temps;
+    Duration _tempsActuel;
 public:
     GlissadeEau();
 
