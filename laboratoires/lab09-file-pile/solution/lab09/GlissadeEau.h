@@ -30,10 +30,7 @@ private:
 public:
     GlissadeEau();
 
-    const Time& getHeure() const;
-    size_t getTailleFileEntree() const;
-    size_t getTailleFileMontee() const;
-    size_t getTailleZoneArrivee() const;
+    const Time& getHeureActyelle() const;
 
     void mettreAJour();
     void ajouterVisiteur(Visiteur* visiteur);

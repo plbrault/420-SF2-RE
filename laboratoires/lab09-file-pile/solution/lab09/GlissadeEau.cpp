@@ -14,22 +14,6 @@
 #define AFFICHAGE_LIBELLE_DROITE 16
 #define AFFICHAGE_VALEUR_DROITE 6
 
-const Time& GlissadeEau::getHeure() const {
-    return _heureActuelle;
-}
-
-size_t GlissadeEau::getTailleFileEntree() const {
-    return _fileEntree.size();
-}
-
-size_t GlissadeEau::getTailleFileMontee() const {
-    return _fileMontee.size();
-}
-
-size_t GlissadeEau::getTailleZoneArrivee() const {
-    return _zoneArrivee.size();
-}
-
 GlissadeEau::GlissadeEau() {
     _heureActuelle = Time(9, 0, 0);
 
@@ -44,6 +28,10 @@ GlissadeEau::GlissadeEau() {
         _tubes.emplace_back(); // Crée un tube et l'ajoute à la liste des tubes
         _tubesDisponibles.push(&_tubes.back()); // Ajoute l'adresse du tube dans la pile des tubes disponibles
     }
+}
+
+const Time& GlissadeEau::getHeureActyelle() const {
+    return _heureActuelle;
 }
 
 void GlissadeEau::mettreAJour() {

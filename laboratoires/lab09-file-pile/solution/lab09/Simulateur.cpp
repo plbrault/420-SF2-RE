@@ -47,7 +47,7 @@ void Simulateur::simuler() {
     int facteurVitesse = 1;
     int arriveesCeMinute = 0;
 
-    while (glissade.getHeure().getTotalSeconds() < 17 * 3600) {
+    while (glissade.getHeureActyelle().getTotalSeconds() < 17 * 3600) {
         Touche touche = lireTouche();
         if (touche == Touche::QUITTER) {
             break;
@@ -68,7 +68,7 @@ void Simulateur::simuler() {
 
         glissade.mettreAJour();
 
-        unsigned long secondesEcoulees = glissade.getHeure().getTotalSeconds() - 9 * 3600;
+        unsigned long secondesEcoulees = glissade.getHeureActyelle().getTotalSeconds() - 9 * 3600;
         double lambda = calculerTauxArrivee(secondesEcoulees);
         int nombreNouveauxVisiteurs = 0;
         if (lambda > 0.0) {
