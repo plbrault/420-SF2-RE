@@ -5,8 +5,14 @@
 #ifndef LAB09_VISITEUR_H
 #define LAB09_VISITEUR_H
 
+#include "Tube.h"
 
 class Visiteur {
+private:
+    Tube* _tube;
+public:
+    void prendreTube(Tube* tube);
+    Tube* retournerTube();
 };
 
 

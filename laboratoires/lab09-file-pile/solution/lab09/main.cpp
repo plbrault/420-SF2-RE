@@ -1,5 +1,5 @@
 #include <iostream>
-#include <list>
+#include <set>
 #include <thread>
 #include <chrono>
 #include <cstdlib>
@@ -9,10 +9,10 @@
 
 int main()
 {
-
     srand(time(nullptr));
+
     GlissadeEau glissade;
-    std::list<Visiteur*> visiteurs;
+    std::set<Visiteur*> visiteurs;
 
     while (!touchePressee())
     {
@@ -25,13 +25,13 @@ int main()
         glissade.mettreAJour();
         if (rand() % 3 == 0)
         {
-            visiteurs.push_back(new Visiteur());
-            glissade.ajouterVisiteur(visiteurs.back());
+            auto nouveauVisiteur = new Visiteur();
+            visiteurs.insert(nouveauVisiteur);
+            glissade.ajouterVisiteur(nouveauVisiteur);
         }
     }
 
-    for (Visiteur* visiteur : visiteurs)
-    {
+    for (Visiteur* visiteur : visiteurs) {
         delete visiteur;
     }
 

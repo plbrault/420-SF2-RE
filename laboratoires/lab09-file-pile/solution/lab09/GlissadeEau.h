@@ -15,11 +15,12 @@
 
 class GlissadeEau {
 private:
+    std::list<Tube> _tubes;
     std::queue<Visiteur*> _fileEntree;
     std::stack<Tube*> _tubesDisponibles;
     std::queue<Visiteur*> _fileMontee;
     Toboggan _toboggan;
-    std::list<Visiteur*> _zoneArrivee;
+    std::map<Visiteur*, Duration> _zoneArrivee;
     std::stack<Tube*> _depotTubes;
     std::queue<Visiteur*> _fileSortie;
 

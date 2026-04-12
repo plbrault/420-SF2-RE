@@ -15,11 +15,24 @@ bool Toboggan::accepteGlisseur() const {
 }
 
 void Toboggan::ajouterGlisseur(Visiteur* visiteur, const Duration& temps) {
+    // Ajoute le visiteur dans _glisseurs et enregistre le temps d'entrée du visiteur dans _tempsEntree.
     _glisseurs.push(visiteur);
     _tempsEntree[visiteur] = temps;
 }
 
 Visiteur* Toboggan::verifierSortie(const Duration& temps) {
+    // Si le premier glisseur est entré il y a au moins 30 secondes, le retirer de _glisseurs et retourner son adresse.
+    // Sinon, retourner nullptr.
+    // Ne pas oublier de retirer le glisseur de _tempsEntree lorsque vous le retirez de _glisseurs.
+    if (!_glisseurs.empty()) {
+        Visiteur* premierGlisseur = _glisseurs.front();
+        Duration tempsDepuisEntree = _tempsEntree.at(premierGlisseur);
+        if (tempsDepuisEntree.getTotalSeconds() >= 30) {
+            _glisseurs.pop();
+            _tempsEntree.erase(premierGlisseur);
+            return premierGlisseur;
+        }
+    }
     return nullptr;
 }
 
