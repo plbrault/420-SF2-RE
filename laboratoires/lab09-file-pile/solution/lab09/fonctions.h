@@ -5,7 +5,7 @@
 #ifndef LAB09_FONCTIONS_H
 #define LAB09_FONCTIONS_H
 
-enum class Touche { AUCUNE, DROITE, GAUCHE, QUITTER };
+enum class Touche { AUCUNE, PLUS, MOINS, QUITTER };
 
 void effacerEcran();
 Touche lireTouche();

@@ -24,15 +24,10 @@ Touche lireTouche()
 #ifdef _WIN32
     if (_kbhit()) {
         int ch = _getch();
-        if (ch == 0 || ch == 0xE0) {
-            if (_kbhit()) {
-                int ch2 = _getch();
-                if (ch2 == 77) return Touche::DROITE;
-                if (ch2 == 75) return Touche::GAUCHE;
-            }
-            return Touche::QUITTER;
-        }
-        return Touche::QUITTER;
+        if (ch == '+' || ch == '=') return Touche::PLUS;
+        if (ch == '-' || ch == '_') return Touche::MOINS;
+        if (ch == 'q' || ch == 'Q') return Touche::QUITTER;
+        return Touche::AUCUNE;
     }
     return Touche::AUCUNE;
 #else
@@ -51,28 +46,20 @@ Touche lireTouche()
         return Touche::AUCUNE;
     }
 
-    if (ch == '\x1b') {
-        char seq[2] = {0};
-        ssize_t n1 = read(STDIN_FILENO, &seq[0], 1);
-        if (n1 > 0 && seq[0] == '[') {
-            usleep(1000);
-            ssize_t n2 = read(STDIN_FILENO, &seq[1], 1);
-            if (n2 > 0) {
-                if (seq[1] == 'C') {
-                    tcsetattr(STDIN_FILENO, TCSANOW, &ancienTermios);
-                    return Touche::DROITE;
-                }
-                if (seq[1] == 'D') {
-                    tcsetattr(STDIN_FILENO, TCSANOW, &ancienTermios);
-                    return Touche::GAUCHE;
-                }
-            }
-        }
+    if (ch == '+') {
+        tcsetattr(STDIN_FILENO, TCSANOW, &ancienTermios);
+        return Touche::PLUS;
+    }
+    if (ch == '-') {
+        tcsetattr(STDIN_FILENO, TCSANOW, &ancienTermios);
+        return Touche::MOINS;
+    }
+    if (ch == 'q' || ch == 'Q') {
         tcsetattr(STDIN_FILENO, TCSANOW, &ancienTermios);
         return Touche::QUITTER;
     }
 
     tcsetattr(STDIN_FILENO, TCSANOW, &ancienTermios);
-    return Touche::QUITTER;
+    return Touche::AUCUNE;
 #endif
 }

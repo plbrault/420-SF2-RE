@@ -30,7 +30,7 @@ GlissadeEau::GlissadeEau() {
     }
 }
 
-const Time& GlissadeEau::getHeureActyelle() const {
+const Time& GlissadeEau::getHeure() const {
     return _heureActuelle;
 }
 
@@ -80,11 +80,10 @@ void GlissadeEau::mettreAJour() {
         }
     }
 
-    // S'il n'y a plus de tubes disponibles, déplacer deux tubes du dépôt vers la pile des tubes disponibles
-    // (puisqu'un employé peut transporter deux tubes à la fois). Attention au cas où il y a moins
-    // de deux tubes dans le dépôt.
+    // Si la pile des tubes disponibles est vide, déplacer tous les tubes de la zone de dépôt vers
+    // la pile des tubes disponibles.
     if (_tubesDisponibles.empty()) {
-        for (int i = 0; i < 2 && !_depotTubes.empty(); i++) {
+        while (!_depotTubes.empty()) {
             Tube* tube = _depotTubes.top();
             _depotTubes.pop();
             _tubesDisponibles.push(tube);

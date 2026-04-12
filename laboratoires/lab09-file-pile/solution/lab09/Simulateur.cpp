@@ -47,28 +47,36 @@ void Simulateur::simuler() {
     int facteurVitesse = 1;
     int arriveesCeMinute = 0;
 
-    while (glissade.getHeureActyelle().getTotalSeconds() < 17 * 3600) {
+    while (glissade.getHeure().getTotalSeconds() < 17 * 3600) {
         Touche touche = lireTouche();
         if (touche == Touche::QUITTER) {
             break;
         }
-        if (touche == Touche::DROITE && facteurVitesse < VITESSE_MAX) {
+        if (touche == Touche::PLUS && facteurVitesse < VITESSE_MAX) {
             facteurVitesse *= 10;
         }
-        if (touche == Touche::GAUCHE && facteurVitesse > 1) {
+        if (touche == Touche::MOINS && facteurVitesse > 1) {
             facteurVitesse /= 10;
         }
 
         effacerEcran();
         std::cout << glissade;
-        std::cout << "Vitesse: " << facteurVitesse << "x" << std::endl;
-        std::cout << "Fleche droite: accelerer | Fleche gauche: ralentir | Autre touche: quitter" << std::endl;
+        std::cout << "Vitesse: ";
+        if (facteurVitesse > 1) {
+            std::cout << "[-] ";
+        }
+        std::cout << facteurVitesse << "x";
+        if (facteurVitesse < VITESSE_MAX) {
+            std::cout << " [+]";
+        }
+        std::cout << std::endl;
+        std::cout << "q pour quitter" << std::endl;
 
         std::this_thread::sleep_for(std::chrono::milliseconds(1000 / facteurVitesse));
 
         glissade.mettreAJour();
 
-        unsigned long secondesEcoulees = glissade.getHeureActyelle().getTotalSeconds() - 9 * 3600;
+        unsigned long secondesEcoulees = glissade.getHeure().getTotalSeconds() - 9 * 3600;
         double lambda = calculerTauxArrivee(secondesEcoulees);
         int nombreNouveauxVisiteurs = 0;
         if (lambda > 0.0) {
