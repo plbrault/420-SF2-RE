@@ -20,7 +20,7 @@ private:
     std::stack<Tube*> _tubesDisponibles;
     std::queue<Visiteur*> _fileMontee;
     Toboggan _toboggan;
-    std::map<Visiteur*, Duration> _zoneArrivee;
+    std::queue<Visiteur*> _zoneArrivee;
     std::stack<Tube*> _depotTubes;
     std::queue<Visiteur*> _fileSortie;
 
@@ -32,6 +32,7 @@ public:
 
     void mettreAJour();
     void ajouterVisiteur(Visiteur* visiteur);
+    Visiteur* traiterSortie();
     void afficher(std::ostream& sortie) const;
 };
 

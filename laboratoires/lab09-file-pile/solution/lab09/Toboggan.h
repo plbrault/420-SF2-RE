@@ -18,7 +18,7 @@ private:
 public:
     bool accepteGlisseur(const Duration& tempsActuel) const;
     void ajouterGlisseur(Visiteur* visiteur, const Duration& temps);
-    Visiteur* verifierSortie(const Duration& tempsActuel);
+    Visiteur* traiterSortie(const Duration& tempsActuel);
     size_t getNombreGlisseurs() const;
 };
 

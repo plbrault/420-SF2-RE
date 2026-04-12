@@ -46,11 +46,21 @@ void GlissadeEau::mettreAJour() {
         _fileMontee.push(visiteur);
     }
 
-    // Si un visiteur est sorti du toboggan, le placer dans la zone d'arrivée avec son temps de sortie
-    // (soit le temps actuel).
-    Visiteur* visiteurSorti = _toboggan.verifierSortie(_tempsActuel);
+    // Si la zone d'arrivée est non-vide, Vérifier si le premier visiteur qui s'y trouve a encore son tube.
+    // Si c'est le cas, retirer le tube du visiteur et le placer dans la zone de dépôt.
+    if (!_zoneArrivee.empty())
+    {
+        Visiteur* visiteurArrive = _zoneArrivee.front();
+        if (visiteurArrive->aUnTube()) {
+            Tube* tube = visiteurArrive->retournerTube();
+            _depotTubes.push(tube);
+        }
+    }
+
+    // Si un visiteur est sorti du toboggan, le placer dans la zone d'arrivée.
+    Visiteur* visiteurSorti = _toboggan.traiterSortie(_tempsActuel);
     if (visiteurSorti != nullptr) {
-        _zoneArrivee[visiteurSorti] = _tempsActuel;
+        _zoneArrivee.push(visiteurSorti);
     }
 
     // S'il n'y a plus de tubes disponibles, déplacer deux tubes du dépôt vers la pile des tubes disponibles
@@ -70,6 +80,20 @@ void GlissadeEau::mettreAJour() {
 
 void GlissadeEau::ajouterVisiteur(Visiteur* visiteur) {
     _fileEntree.push(visiteur);
+}
+
+Visiteur* GlissadeEau::traiterSortie() {
+    // Vérifier si le premier visiteur de la zone d'arrivée a remis son tube.
+    // Si c'est le cas, le retirer de la zone d'arrivée et retourner son adresse.
+    // Si la zone d'arrivée est vide ou que le premier visiteur n'a pas remis son tube, retourner nullptr.
+    if (!_zoneArrivee.empty()) {
+        Visiteur* visiteurArrive = _zoneArrivee.front();
+        if (!visiteurArrive->aUnTube()) {
+            _zoneArrivee.pop();
+            return visiteurArrive;
+        }
+    }
+    return nullptr;
 }
 
 void GlissadeEau::afficher(std::ostream& sortie) const {

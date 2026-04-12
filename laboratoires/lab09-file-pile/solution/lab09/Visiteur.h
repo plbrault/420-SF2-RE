@@ -13,6 +13,7 @@ private:
 public:
     void prendreTube(Tube* tube);
     Tube* retournerTube();
+    bool aUnTube() const;
 };
 
 

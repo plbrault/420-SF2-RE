@@ -9,8 +9,11 @@ void Visiteur::prendreTube(Tube* tube) {
 }
 
 Tube* Visiteur::retournerTube() {
-    // Remet _tube à nullptr puis retourne l'adresse qui était auparavant dans _tube.
     Tube* tube = _tube;
     _tube = nullptr;
     return tube;
+}
+
+bool Visiteur::aUnTube() const {
+    return _tube != nullptr;
 }
