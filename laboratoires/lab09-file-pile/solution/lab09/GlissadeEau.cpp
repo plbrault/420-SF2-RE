@@ -4,10 +4,15 @@
 
 #include "GlissadeEau.h"
 #include <iomanip>
+#include <sstream>
 
-#define LARGEUR_LIBELLE 47
-#define LARGEUR_VALEUR 8
-#define LARGEUR_LIGNE (LARGEUR_LIBELLE + LARGEUR_VALEUR + 2)
+#define LARGEUR_INTERNE 50
+#define LARGEUR_GAUCHE 22
+#define LARGEUR_DROITE 27
+#define LABEL_G 14
+#define VAL_G 6
+#define LABEL_D 16
+#define VAL_D 6
 
 GlissadeEau::GlissadeEau() {
     _tempsActuel.setTotalSeconds(0);
@@ -68,18 +73,33 @@ void GlissadeEau::ajouterVisiteur(Visiteur* visiteur) {
 }
 
 void GlissadeEau::afficher(std::ostream& sortie) const {
-    sortie << std::string(LARGEUR_LIGNE, '*') << std::endl;
-    sortie << std::setw(LARGEUR_LIBELLE) << std::left << "* Temps: " << std::setw(LARGEUR_VALEUR) << std::right << this->_tempsActuel << " *" << std::endl;
-    sortie << std::setw(LARGEUR_LIBELLE)
-        << std::left << "* Nombre de visiteurs dans la file d'entree: "
-        << std::setw(LARGEUR_VALEUR) << std::right << this->_fileEntree.size() << " *" << std::endl;
-    sortie << std::setw(LARGEUR_LIBELLE) << std::left << "* Nombre de tubes disponibles: " << std::setw(LARGEUR_VALEUR) << std::right << this->_tubesDisponibles.size() << " *" << std::endl;
-    sortie << std::setw(LARGEUR_LIBELLE) << std::left << "* Nombre de visiteurs dans la file de montee: " << std::setw(LARGEUR_VALEUR) << std::right << this->_fileMontee.size() << " *" << std::endl;
-    sortie << std::setw(LARGEUR_LIBELLE) << std::left << "* Nombre de visiteurs dans le toboggan: " << std::setw(LARGEUR_VALEUR) << std::right << this->_toboggan.getNombreGlisseurs() << " *" << std::endl;
-    sortie << std::setw(LARGEUR_LIBELLE) << std::left << "* Nombre de visiteurs dans la zone d'arrivee: " << std::setw(LARGEUR_VALEUR) << std::right << this->_zoneArrivee.size() << " *" << std::endl;
-    sortie << std::setw(LARGEUR_LIBELLE) << std::left << "* Nombre de tubes dans le depot: " << std::setw(LARGEUR_VALEUR) << std::right << this->_depotTubes.size() << " *" << std::endl;
-    sortie << std::setw(LARGEUR_LIBELLE) << std::left << "* Nombre de visiteurs dans la file de sortie: " << std::setw(LARGEUR_VALEUR) << std::right << this->_fileSortie.size() << " *" << std::endl;
-    sortie << std::string(LARGEUR_LIGNE, '*') << std::endl;
+    sortie << "|" << std::string(LARGEUR_INTERNE, '-') << "|" << std::endl;
+
+    std::ostringstream ligneTemps;
+    ligneTemps << "Temps: " << this->_tempsActuel;
+    sortie << "| " << std::left << std::setw(LARGEUR_INTERNE - 2) << ligneTemps.str() << " |" << std::endl;
+
+    sortie << "|" << std::string(LARGEUR_INTERNE, '-') << "|" << std::endl;
+
+    sortie << "| " << std::left << std::setw(LARGEUR_GAUCHE - 2) << "TUBES" << " |"
+           << "    " << std::left << std::setw(LARGEUR_DROITE - 5) << "VISITEURS" << " |" << std::endl;
+
+    sortie << "| " << std::string(LARGEUR_GAUCHE - 2, '-') << " |"
+           << std::string(LARGEUR_DROITE, '-') << "|" << std::endl;
+
+    sortie << "| " << std::left << std::setw(LABEL_G) << "Disponibles:" << std::right << std::setw(VAL_G) << this->_tubesDisponibles.size() << " |"
+           << "    " << std::left << std::setw(LABEL_D) << "File d'entree:" << std::right << std::setw(VAL_D) << this->_fileEntree.size() << " |" << std::endl;
+
+    sortie << "| " << std::left << std::setw(LABEL_G) << "Zone de depot:" << std::right << std::setw(VAL_G) << this->_depotTubes.size() << " |"
+           << "    " << std::left << std::setw(LABEL_D) << "File de montee:" << std::right << std::setw(VAL_D) << this->_fileMontee.size() << " |" << std::endl;
+
+    sortie << "| " << std::string(LARGEUR_GAUCHE - 2, ' ') << " |"
+           << "    " << std::left << std::setw(LABEL_D) << "Toboggan:" << std::right << std::setw(VAL_D) << this->_toboggan.getNombreGlisseurs() << " |" << std::endl;
+
+    sortie << "| " << std::string(LARGEUR_GAUCHE - 2, ' ') << " |"
+           << "    " << std::left << std::setw(LABEL_D) << "Zone d'arrivee:" << std::right << std::setw(VAL_D) << this->_zoneArrivee.size() << " |" << std::endl;
+
+    sortie << "|" << std::string(LARGEUR_INTERNE, '-') << "|" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& os, const GlissadeEau& glissade) {
