@@ -8,6 +8,7 @@
 #include "GlissadeEau.h"
 
 const unsigned long DUREE_JOURNEE = 28800;
+const int VITESSE_MAX = 1000;
 
 int main() {
     std::random_device rd;
@@ -20,13 +21,26 @@ int main() {
 
     GlissadeEau glissade;
     std::set<Visiteur*> visiteurs;
+    int facteurVitesse = 1;
 
-    while (!touchePressee() && glissade.getTemps().getTotalSeconds() < DUREE_JOURNEE) {
+    while (glissade.getTemps().getTotalSeconds() < DUREE_JOURNEE) {
+        Touche touche = lireTouche();
+        if (touche == Touche::QUITTER) {
+            break;
+        }
+        if (touche == Touche::DROITE && facteurVitesse < VITESSE_MAX) {
+            facteurVitesse *= 10;
+        }
+        if (touche == Touche::GAUCHE && facteurVitesse > 1) {
+            facteurVitesse /= 10;
+        }
+
         effacerEcran();
         std::cout << glissade;
-        std::cout << "Appuyez sur n'importe quelle touche pour quitter." << std::endl;
+        std::cout << "Vitesse: " << facteurVitesse << "x" << std::endl;
+        std::cout << "Fleche droite: accelerer | Fleche gauche: ralentir | Autre touche: quitter" << std::endl;
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000 / facteurVitesse));
 
         glissade.mettreAJour();
 

@@ -5,8 +5,10 @@
 #ifndef LAB09_FONCTIONS_H
 #define LAB09_FONCTIONS_H
 
+enum class Touche { AUCUNE, DROITE, GAUCHE, QUITTER };
+
 void effacerEcran();
-bool touchePressee();
+Touche lireTouche();
 double calculerTauxArrivee(unsigned long temps);
 
 #endif //LAB09_FONCTIONS_H
