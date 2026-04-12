@@ -1,6 +1,7 @@
 #include "fonctions.h"
 #include <cstdlib>
 #include <iostream>
+#include <cmath>
 
 #ifdef _WIN32
 #include <conio.h>
@@ -39,4 +40,18 @@ bool touchePressee()
         tcsetattr(STDIN_FILENO, TCSANOW, &ancienTermios);
         return resultat > 0;
     #endif
+}
+
+const unsigned long TEMPS_PIC_MATIN = 5400;
+const unsigned long TEMPS_PIC_APRES_MIDI = 18000;
+const double SIGMA_MATIN = 2700.0;
+const double SIGMA_APRES_MIDI = 3600.0;
+const double TAUX_PIC_MATIN = 8.0;
+const double TAUX_PIC_APRES_MIDI = 10.0;
+
+double calculerTauxArrivee(unsigned long temps) {
+    double t = static_cast<double>(temps);
+    double tauxMatin = TAUX_PIC_MATIN * std::exp(-(std::pow(t - TEMPS_PIC_MATIN, 2)) / (2 * std::pow(SIGMA_MATIN, 2)));
+    double tauxApresMidi = TAUX_PIC_APRES_MIDI * std::exp(-(std::pow(t - TEMPS_PIC_APRES_MIDI, 2)) / (2 * std::pow(SIGMA_APRES_MIDI, 2)));
+    return tauxMatin + tauxApresMidi;
 }

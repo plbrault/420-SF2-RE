@@ -5,7 +5,8 @@
 #ifndef LAB09_FONCTIONS_H
 #define LAB09_FONCTIONS_H
 
-#endif //LAB09_FONCTIONS_H
-
 void effacerEcran();
 bool touchePressee();
+double calculerTauxArrivee(unsigned long temps);
+
+#endif //LAB09_FONCTIONS_H

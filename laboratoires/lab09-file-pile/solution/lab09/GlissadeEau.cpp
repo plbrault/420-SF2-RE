@@ -14,6 +14,10 @@
 #define AFFICHAGE_LIBELLE_DROITE 16
 #define AFFICHAGE_VALEUR_DROITE 6
 
+const Duration& GlissadeEau::getTemps() const {
+    return _tempsActuel;
+}
+
 GlissadeEau::GlissadeEau() {
     _tempsActuel.setTotalSeconds(0);
 
