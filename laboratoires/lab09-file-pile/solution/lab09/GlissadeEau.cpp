@@ -18,6 +18,18 @@ const Duration& GlissadeEau::getTemps() const {
     return _tempsActuel;
 }
 
+size_t GlissadeEau::getTailleFileEntree() const {
+    return _fileEntree.size();
+}
+
+size_t GlissadeEau::getTailleFileMontee() const {
+    return _fileMontee.size();
+}
+
+size_t GlissadeEau::getTailleZoneArrivee() const {
+    return _zoneArrivee.size();
+}
+
 GlissadeEau::GlissadeEau() {
     _tempsActuel.setTotalSeconds(0);
 
