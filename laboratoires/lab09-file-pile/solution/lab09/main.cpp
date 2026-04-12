@@ -50,6 +50,13 @@ int main() {
             std::poisson_distribution<int> dist(lambda);
             nombreNouveauxVisiteurs = dist(gen);
         }
+        if (glissade.getTemps().getTotalSeconds() < 60) {
+            std::bernoulli_distribution distVague(0.15);
+            if (distVague(gen)) {
+                std::uniform_int_distribution<int> distTaille(1, 3);
+                nombreNouveauxVisiteurs += distTaille(gen);
+            }
+        }
         for (int i = 0; i < nombreNouveauxVisiteurs; i++) {
             Visiteur* nouveauVisiteur = new Visiteur();
             visiteurs.insert(nouveauVisiteur);

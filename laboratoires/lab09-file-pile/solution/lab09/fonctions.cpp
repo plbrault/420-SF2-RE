@@ -78,12 +78,12 @@ Touche lireTouche()
 #endif
 }
 
-const unsigned long TEMPS_PIC_MATIN = 5400;
-const unsigned long TEMPS_PIC_APRES_MIDI = 18000;
+const unsigned long TEMPS_PIC_MATIN = 7200;
+const unsigned long TEMPS_PIC_APRES_MIDI = 21000;
 const double SIGMA_MATIN = 2700.0;
-const double SIGMA_APRES_MIDI = 3600.0;
-const double TAUX_PIC_MATIN = 0.31;
-const double TAUX_PIC_APRES_MIDI = 0.34;
+const double SIGMA_APRES_MIDI = 2700.0;
+const double TAUX_PIC_MATIN = 0.34;
+const double TAUX_PIC_APRES_MIDI = 0.35;
 
 double calculerTauxArrivee(unsigned long temps) {
     double t = static_cast<double>(temps);
