@@ -22,6 +22,7 @@ int main() {
     GlissadeEau glissade;
     std::set<Visiteur*> visiteurs;
     int facteurVitesse = 1;
+    int arriveesCeMinute = 0;
 
     while (glissade.getTemps().getTotalSeconds() < DUREE_JOURNEE) {
         Touche touche = lireTouche();
@@ -57,6 +58,7 @@ int main() {
                 nombreNouveauxVisiteurs += distTaille(gen);
             }
         }
+        arriveesCeMinute += nombreNouveauxVisiteurs;
         for (int i = 0; i < nombreNouveauxVisiteurs; i++) {
             Visiteur* nouveauVisiteur = new Visiteur();
             visiteurs.insert(nouveauVisiteur);
@@ -67,6 +69,18 @@ int main() {
         if (visiteurSorti != nullptr) {
             visiteurs.erase(visiteurSorti);
             delete visiteurSorti;
+        }
+
+        if (glissade.getTemps().getTotalSeconds() % 60 == 0) {
+            if (arriveesCeMinute < 3) {
+                int manquant = 3 - arriveesCeMinute;
+                for (int i = 0; i < manquant; i++) {
+                    Visiteur* nouveauVisiteur = new Visiteur();
+                    visiteurs.insert(nouveauVisiteur);
+                    glissade.ajouterVisiteur(nouveauVisiteur);
+                }
+            }
+            arriveesCeMinute = 0;
         }
     }
 
