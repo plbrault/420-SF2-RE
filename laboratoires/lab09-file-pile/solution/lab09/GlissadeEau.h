@@ -18,6 +18,7 @@
 class GlissadeEau {
 private:
     Time _heureActuelle;
+    int _totalVisiteursJournee;
 
     std::list<Tube> _tubes;
     std::stack<Tube*> _tubesDisponibles;

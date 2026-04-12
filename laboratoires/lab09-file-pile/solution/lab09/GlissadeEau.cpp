@@ -16,6 +16,7 @@
 
 GlissadeEau::GlissadeEau() {
     _heureActuelle = Time(9, 0, 0);
+    _totalVisiteursJournee = 0;
 
     // Création des toboggans
     for (int i = 0; i < 3; i++) {
@@ -32,6 +33,11 @@ GlissadeEau::GlissadeEau() {
 
 const Time& GlissadeEau::getHeure() const {
     return _heureActuelle;
+}
+
+void GlissadeEau::ajouterVisiteur(Visiteur* visiteur) {
+    _fileEntree.push(visiteur);
+    _totalVisiteursJournee++;
 }
 
 void GlissadeEau::mettreAJour() {
@@ -94,10 +100,6 @@ void GlissadeEau::mettreAJour() {
     _heureActuelle += Duration(0, 0, 1);
 }
 
-void GlissadeEau::ajouterVisiteur(Visiteur* visiteur) {
-    _fileEntree.push(visiteur);
-}
-
 Visiteur* GlissadeEau::traiterSortie() {
     // Vérifier si le premier visiteur de la zone d'arrivée a remis son tube.
     // Si c'est le cas, le retirer de la zone d'arrivée et retourner son adresse.
@@ -148,6 +150,12 @@ void GlissadeEau::afficher(std::ostream& sortie) const {
     sortie << "| " << std::string(AFFICHAGE_LARGEUR_GAUCHE - 2, ' ') << " |"
            << "    " << std::left << std::setw(AFFICHAGE_LIBELLE_DROITE) << "Zone d'arrivee:"
            << std::right << std::setw(AFFICHAGE_VALEUR_DROITE) << this->_zoneArrivee.size() << " |" << std::endl;
+
+    sortie << "|" << std::string(AFFICHAGE_LARGEUR_INTERNE, '-') << "|" << std::endl;
+
+    std::ostringstream ligneTotalVisiteurs;
+    ligneTotalVisiteurs << "Total des visiteurs pour la journee: " << this->_totalVisiteursJournee;
+    sortie << "| " << std::left << std::setw(AFFICHAGE_LARGEUR_INTERNE - 2) << ligneTotalVisiteurs.str() << " |" << std::endl;
 
     sortie << "|" << std::string(AFFICHAGE_LARGEUR_INTERNE, '-') << "|" << std::endl;
 }
