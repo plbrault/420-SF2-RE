@@ -6,16 +6,21 @@
 #include <iomanip>
 #include <sstream>
 
-#define LARGEUR_INTERNE 50
-#define LARGEUR_GAUCHE 22
-#define LARGEUR_DROITE 27
-#define LABEL_G 14
-#define VAL_G 6
-#define LABEL_D 16
-#define VAL_D 6
+#define AFFICHAGE_LARGEUR_INTERNE 50
+#define AFFICHAGE_LARGEUR_GAUCHE 22
+#define AFFICHAGE_LARGEUR_DROITE 27
+#define AFFICHAGE_LIBELLE_GAUCHE 14
+#define AFFICHAGE_VALEUR_GAUCHE 6
+#define AFFICHAGE_LIBELLE_DROITE 16
+#define AFFICHAGE_VALEUR_DROITE 6
 
 GlissadeEau::GlissadeEau() {
     _tempsActuel.setTotalSeconds(0);
+
+    // Création des toboggans
+    for (int i = 0; i < 3; i++) {
+        _toboggans.emplace_back();
+    }
 
     // Création des tubes
     for (int i = 0; i < 30; i++)
@@ -26,12 +31,17 @@ GlissadeEau::GlissadeEau() {
 }
 
 void GlissadeEau::mettreAJour() {
-    // Si le toboggan accepte un nouveau glisseur et qu'il y a au moins un visiteur dans la file de montée,
-    // ajouter le visiteur au toboggan et le retirer de la file de montée.
-    if (_toboggan.accepteGlisseur(_tempsActuel) && !_fileMontee.empty()) {
-        Visiteur* visiteur = _fileMontee.front();
-        _fileMontee.pop();
-        _toboggan.ajouterGlisseur(visiteur, _tempsActuel);
+    // Pour chaque toboggan, vérifier si le toboggan accepte un nouveau glisseur.
+    // Si c'est le cas, retirer le premier visiteur de la file de montée et le faire entrer dans le toboggan.
+    // Ne pas oublier de gérer le cas où la file de montée est vide.
+    for (Toboggan& toboggan : _toboggans) {
+        if (toboggan.accepteGlisseur(_tempsActuel)) {
+            if (!_fileMontee.empty()) {
+                Visiteur* visiteur = _fileMontee.front();
+                _fileMontee.pop();
+                toboggan.ajouterGlisseur(visiteur, _tempsActuel);
+            }
+        }
     }
 
     // Si un tube est disponible et que la file d'entrée n'est pas vide, le premier visiteur de la file d'entrée
@@ -57,10 +67,13 @@ void GlissadeEau::mettreAJour() {
         }
     }
 
-    // Si un visiteur est sorti du toboggan, le placer dans la zone d'arrivée.
-    Visiteur* visiteurSorti = _toboggan.traiterSortie(_tempsActuel);
-    if (visiteurSorti != nullptr) {
-        _zoneArrivee.push(visiteurSorti);
+    // Pour chaque toboggan, vérifier si un visiteur vient de sortir du toboggan.
+    // Si c'est le cas, placer le visiteur dans la zone d'arrivée.
+    for (Toboggan& toboggan : _toboggans) {
+        Visiteur* visiteurSorti = toboggan.traiterSortie(_tempsActuel);
+        if (visiteurSorti != nullptr) {
+            _zoneArrivee.push(visiteurSorti);
+        }
     }
 
     // S'il n'y a plus de tubes disponibles, déplacer deux tubes du dépôt vers la pile des tubes disponibles
@@ -97,33 +110,43 @@ Visiteur* GlissadeEau::traiterSortie() {
 }
 
 void GlissadeEau::afficher(std::ostream& sortie) const {
-    sortie << "|" << std::string(LARGEUR_INTERNE, '-') << "|" << std::endl;
+    sortie << "|" << std::string(AFFICHAGE_LARGEUR_INTERNE, '-') << "|" << std::endl;
 
     std::ostringstream ligneTemps;
     ligneTemps << "Temps: " << this->_tempsActuel;
-    sortie << "| " << std::left << std::setw(LARGEUR_INTERNE - 2) << ligneTemps.str() << " |" << std::endl;
+    sortie << "| " << std::left << std::setw(AFFICHAGE_LARGEUR_INTERNE - 2) << ligneTemps.str() << " |" << std::endl;
 
-    sortie << "|" << std::string(LARGEUR_INTERNE, '-') << "|" << std::endl;
+    sortie << "|" << std::string(AFFICHAGE_LARGEUR_INTERNE, '-') << "|" << std::endl;
 
-    sortie << "| " << std::left << std::setw(LARGEUR_GAUCHE - 2) << "TUBES" << " |"
-           << "    " << std::left << std::setw(LARGEUR_DROITE - 5) << "VISITEURS" << " |" << std::endl;
+    sortie << "| " << std::left << std::setw(AFFICHAGE_LARGEUR_GAUCHE - 2) << "TUBES" << " |"
+           << "    " << std::left << std::setw(AFFICHAGE_LARGEUR_DROITE - 5) << "VISITEURS" << " |" << std::endl;
 
-    sortie << "| " << std::string(LARGEUR_GAUCHE - 2, '-') << " |"
-           << std::string(LARGEUR_DROITE, '-') << "|" << std::endl;
+    sortie << "| " << std::string(AFFICHAGE_LARGEUR_GAUCHE - 2, '-') << " |"
+           << std::string(AFFICHAGE_LARGEUR_DROITE, '-') << "|" << std::endl;
 
-    sortie << "| " << std::left << std::setw(LABEL_G) << "Disponibles:" << std::right << std::setw(VAL_G) << this->_tubesDisponibles.size() << " |"
-           << "    " << std::left << std::setw(LABEL_D) << "File d'entree:" << std::right << std::setw(VAL_D) << this->_fileEntree.size() << " |" << std::endl;
+    sortie << "| " << std::left << std::setw(AFFICHAGE_LIBELLE_GAUCHE) << "Disponibles:"
+           << std::right << std::setw(AFFICHAGE_VALEUR_GAUCHE) << this->_tubesDisponibles.size() << " |"
+           << "    " << std::left << std::setw(AFFICHAGE_LIBELLE_DROITE) << "File d'entree:"
+           << std::right << std::setw(AFFICHAGE_VALEUR_DROITE) << this->_fileEntree.size() << " |" << std::endl;
 
-    sortie << "| " << std::left << std::setw(LABEL_G) << "Zone de depot:" << std::right << std::setw(VAL_G) << this->_depotTubes.size() << " |"
-           << "    " << std::left << std::setw(LABEL_D) << "File de montee:" << std::right << std::setw(VAL_D) << this->_fileMontee.size() << " |" << std::endl;
+    sortie << "| " << std::left << std::setw(AFFICHAGE_LIBELLE_GAUCHE) << "Zone de depot:"
+           << std::right << std::setw(AFFICHAGE_VALEUR_GAUCHE) << this->_depotTubes.size() << " |"
+           << "    " << std::left << std::setw(AFFICHAGE_LIBELLE_DROITE) << "File de montee:"
+           << std::right << std::setw(AFFICHAGE_VALEUR_DROITE) << this->_fileMontee.size() << " |" << std::endl;
 
-    sortie << "| " << std::string(LARGEUR_GAUCHE - 2, ' ') << " |"
-           << "    " << std::left << std::setw(LABEL_D) << "Toboggan:" << std::right << std::setw(VAL_D) << this->_toboggan.getNombreGlisseurs() << " |" << std::endl;
+    for (size_t i = 0; i < _toboggans.size(); i++) {
+        std::string libelle = "Toboggan " + std::to_string(i + 1) + ":";
+        sortie << "| " << std::string(AFFICHAGE_LARGEUR_GAUCHE - 2, ' ') << " |"
+               << "    " << std::left << std::setw(AFFICHAGE_LIBELLE_DROITE) << libelle
+               << std::right << std::setw(AFFICHAGE_VALEUR_DROITE) << _toboggans[i].getNombreGlisseurs()
+               << " |" << std::endl;
+    }
 
-    sortie << "| " << std::string(LARGEUR_GAUCHE - 2, ' ') << " |"
-           << "    " << std::left << std::setw(LABEL_D) << "Zone d'arrivee:" << std::right << std::setw(VAL_D) << this->_zoneArrivee.size() << " |" << std::endl;
+    sortie << "| " << std::string(AFFICHAGE_LARGEUR_GAUCHE - 2, ' ') << " |"
+           << "    " << std::left << std::setw(AFFICHAGE_LIBELLE_DROITE) << "Zone d'arrivee:"
+           << std::right << std::setw(AFFICHAGE_VALEUR_DROITE) << this->_zoneArrivee.size() << " |" << std::endl;
 
-    sortie << "|" << std::string(LARGEUR_INTERNE, '-') << "|" << std::endl;
+    sortie << "|" << std::string(AFFICHAGE_LARGEUR_INTERNE, '-') << "|" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& os, const GlissadeEau& glissade) {

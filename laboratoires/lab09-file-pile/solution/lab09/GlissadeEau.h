@@ -9,6 +9,7 @@
 #include <queue>
 #include <stack>
 #include <list>
+#include <vector>
 #include "Visiteur.h"
 #include "Tube.h"
 #include "Toboggan.h"
@@ -19,7 +20,7 @@ private:
     std::queue<Visiteur*> _fileEntree;
     std::stack<Tube*> _tubesDisponibles;
     std::queue<Visiteur*> _fileMontee;
-    Toboggan _toboggan;
+    std::vector<Toboggan> _toboggans;
     std::queue<Visiteur*> _zoneArrivee;
     std::stack<Tube*> _depotTubes;
     std::queue<Visiteur*> _fileSortie;
