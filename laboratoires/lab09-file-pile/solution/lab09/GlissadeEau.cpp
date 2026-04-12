@@ -14,8 +14,8 @@
 #define AFFICHAGE_LIBELLE_DROITE 16
 #define AFFICHAGE_VALEUR_DROITE 6
 
-const Duration& GlissadeEau::getTemps() const {
-    return _tempsActuel;
+const Time& GlissadeEau::getHeure() const {
+    return _heureActuelle;
 }
 
 size_t GlissadeEau::getTailleFileEntree() const {
@@ -31,7 +31,7 @@ size_t GlissadeEau::getTailleZoneArrivee() const {
 }
 
 GlissadeEau::GlissadeEau() {
-    _tempsActuel.setTotalSeconds(0);
+    _heureActuelle = Time(9, 0, 0);
 
     // Création des toboggans
     for (int i = 0; i < 3; i++) {
@@ -51,11 +51,11 @@ void GlissadeEau::mettreAJour() {
     // Si c'est le cas, retirer le premier visiteur de la file de montée et le faire entrer dans le toboggan.
     // Ne pas oublier de gérer le cas où la file de montée est vide.
     for (Toboggan& toboggan : _toboggans) {
-        if (toboggan.accepteGlisseur(_tempsActuel)) {
+        if (toboggan.accepteGlisseur(_heureActuelle)) {
             if (!_fileMontee.empty()) {
                 Visiteur* visiteur = _fileMontee.front();
                 _fileMontee.pop();
-                toboggan.ajouterGlisseur(visiteur, _tempsActuel);
+                toboggan.ajouterGlisseur(visiteur, _heureActuelle);
             }
         }
     }
@@ -86,7 +86,7 @@ void GlissadeEau::mettreAJour() {
     // Pour chaque toboggan, vérifier si un visiteur vient de sortir du toboggan.
     // Si c'est le cas, placer le visiteur dans la zone d'arrivée.
     for (Toboggan& toboggan : _toboggans) {
-        Visiteur* visiteurSorti = toboggan.traiterSortie(_tempsActuel);
+        Visiteur* visiteurSorti = toboggan.traiterSortie(_heureActuelle);
         if (visiteurSorti != nullptr) {
             _zoneArrivee.push(visiteurSorti);
         }
@@ -103,8 +103,8 @@ void GlissadeEau::mettreAJour() {
         }
     }
 
-    // Faire avancer le temps d'une seconde.
-    _tempsActuel += 1;
+    // Faire avancer l'heure d'une seconde.
+    _heureActuelle += Duration(0, 0, 1);
 }
 
 void GlissadeEau::ajouterVisiteur(Visiteur* visiteur) {
@@ -129,7 +129,7 @@ void GlissadeEau::afficher(std::ostream& sortie) const {
     sortie << "|" << std::string(AFFICHAGE_LARGEUR_INTERNE, '-') << "|" << std::endl;
 
     std::ostringstream ligneTemps;
-    ligneTemps << "Temps: " << this->_tempsActuel;
+    ligneTemps << "Heure: " << this->_heureActuelle;
     sortie << "| " << std::left << std::setw(AFFICHAGE_LARGEUR_INTERNE - 2) << ligneTemps.str() << " |" << std::endl;
 
     sortie << "|" << std::string(AFFICHAGE_LARGEUR_INTERNE, '-') << "|" << std::endl;

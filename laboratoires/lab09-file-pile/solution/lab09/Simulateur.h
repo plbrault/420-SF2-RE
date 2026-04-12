@@ -14,7 +14,7 @@ private:
     GlissadeEau _glissade;
     std::set<Visiteur*> _visiteurs;
 
-    double calculerTauxArrivee(unsigned long temps);
+    double calculerTauxArrivee(unsigned long secondesEcoulees);
 public:
     Simulateur();
     ~Simulateur();

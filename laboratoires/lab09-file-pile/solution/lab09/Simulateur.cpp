@@ -11,8 +11,8 @@
 
 const unsigned long DUREE_JOURNEE = 28800;
 const int VITESSE_MAX = 1000;
-const unsigned long TEMPS_PIC_MATIN = 7200;
-const unsigned long TEMPS_PIC_APRES_MIDI = 21000;
+const unsigned long HEURE_PIC_MATIN = 7200;
+const unsigned long HEURE_PIC_APRES_MIDI = 21000;
 const double SIGMA_MATIN = 2700.0;
 const double SIGMA_APRES_MIDI = 2700.0;
 const double TAUX_PIC_MATIN = 0.34;
@@ -27,10 +27,10 @@ Simulateur::~Simulateur() {
     }
 }
 
-double Simulateur::calculerTauxArrivee(unsigned long temps) {
-    double t = static_cast<double>(temps);
-    double tauxMatin = TAUX_PIC_MATIN * std::exp(-(std::pow(t - TEMPS_PIC_MATIN, 2)) / (2 * std::pow(SIGMA_MATIN, 2)));
-    double tauxApresMidi = TAUX_PIC_APRES_MIDI * std::exp(-(std::pow(t - TEMPS_PIC_APRES_MIDI, 2)) / (2 * std::pow(SIGMA_APRES_MIDI, 2)));
+double Simulateur::calculerTauxArrivee(unsigned long secondesEcoulees) {
+    double t = static_cast<double>(secondesEcoulees);
+    double tauxMatin = TAUX_PIC_MATIN * std::exp(-(std::pow(t - HEURE_PIC_MATIN, 2)) / (2 * std::pow(SIGMA_MATIN, 2)));
+    double tauxApresMidi = TAUX_PIC_APRES_MIDI * std::exp(-(std::pow(t - HEURE_PIC_APRES_MIDI, 2)) / (2 * std::pow(SIGMA_APRES_MIDI, 2)));
     return tauxMatin + tauxApresMidi;
 }
 
@@ -47,7 +47,7 @@ void Simulateur::simuler() {
     int facteurVitesse = 1;
     int arriveesCeMinute = 0;
 
-    while (glissade.getTemps().getTotalSeconds() < DUREE_JOURNEE) {
+    while (glissade.getHeure().getTotalSeconds() < 17 * 3600) {
         Touche touche = lireTouche();
         if (touche == Touche::QUITTER) {
             break;
@@ -68,13 +68,14 @@ void Simulateur::simuler() {
 
         glissade.mettreAJour();
 
-        double lambda = calculerTauxArrivee(glissade.getTemps().getTotalSeconds());
+        unsigned long secondesEcoulees = glissade.getHeure().getTotalSeconds() - 9 * 3600;
+        double lambda = calculerTauxArrivee(secondesEcoulees);
         int nombreNouveauxVisiteurs = 0;
         if (lambda > 0.0) {
             std::poisson_distribution<int> dist(lambda);
             nombreNouveauxVisiteurs = dist(gen);
         }
-        if (glissade.getTemps().getTotalSeconds() < 60) {
+        if (secondesEcoulees < 60) {
             std::bernoulli_distribution distVague(0.15);
             if (distVague(gen)) {
                 std::uniform_int_distribution<int> distTaille(1, 3);
@@ -94,7 +95,7 @@ void Simulateur::simuler() {
             delete visiteurSorti;
         }
 
-        if (glissade.getTemps().getTotalSeconds() % 60 == 0) {
+        if (secondesEcoulees % 60 == 0) {
             if (arriveesCeMinute < 3) {
                 int manquant = 3 - arriveesCeMinute;
                 for (int i = 0; i < manquant; i++) {

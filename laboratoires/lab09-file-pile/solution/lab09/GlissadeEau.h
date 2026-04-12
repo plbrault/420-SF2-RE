@@ -13,6 +13,7 @@
 #include "Visiteur.h"
 #include "Tube.h"
 #include "Toboggan.h"
+#include "Time.h"
 
 class GlissadeEau {
 private:
@@ -25,11 +26,11 @@ private:
     std::stack<Tube*> _depotTubes;
     std::queue<Visiteur*> _fileSortie;
 
-    Duration _tempsActuel;
+    Time _heureActuelle;
 public:
     GlissadeEau();
 
-    const Duration& getTemps() const;
+    const Time& getHeure() const;
     size_t getTailleFileEntree() const;
     size_t getTailleFileMontee() const;
     size_t getTailleZoneArrivee() const;

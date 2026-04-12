@@ -8,17 +8,17 @@
 #include <queue>
 #include <map>
 #include "Visiteur.h"
-#include "Duration.h"
+#include "Time.h"
 
 class Toboggan
 {
 private:
     std::queue<Visiteur*> _glisseurs;
-    std::map<Visiteur*, Duration> _tempsEntree;
+    std::map<Visiteur*, Time> _heureEntree;
 public:
-    bool accepteGlisseur(const Duration& tempsActuel) const;
-    void ajouterGlisseur(Visiteur* visiteur, const Duration& temps);
-    Visiteur* traiterSortie(const Duration& tempsActuel);
+    bool accepteGlisseur(const Time& heureActuelle) const;
+    void ajouterGlisseur(Visiteur* visiteur, const Time& heure);
+    Visiteur* traiterSortie(const Time& heureActuelle);
     size_t getNombreGlisseurs() const;
 };
 
