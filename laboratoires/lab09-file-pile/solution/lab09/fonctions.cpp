@@ -1,7 +1,7 @@
 #include "fonctions.h"
 #include <cstdlib>
 #include <iostream>
-#include <cmath>
+#include <cmath>+
 
 #ifdef _WIN32
 #include <conio.h>
