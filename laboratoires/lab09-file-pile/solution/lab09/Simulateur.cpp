@@ -10,7 +10,7 @@
 #include <thread>
 
 const unsigned long DUREE_JOURNEE = 28800;
-const int VITESSE_MAX = 1000;
+const int VITESSE_MAX = 10000;
 const unsigned long HEURE_PIC_MATIN = 7200;
 const unsigned long HEURE_PIC_APRES_MIDI = 21000;
 const double SIGMA_MATIN = 2700.0;
@@ -119,12 +119,12 @@ void Simulateur::simuler() {
             _glissade.mettreAJour();
             simulerArrivees(gen);
         } else {
-            for (int i = 0; i < _facteurVitesse; i++) {
+            for (int i = 0; i < _facteurVitesse / 10; i++) {
                 _glissade.mettreAJour();
                 simulerArrivees(gen);
             }
             afficher();
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
     }
 
