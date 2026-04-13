@@ -32,7 +32,7 @@ private:
 public:
     GlissadeEau();
 
-    const Time& getHeure() const;
+    const Time& getHeureActuelle() const;
 
     void mettreAJour();
     void ajouterVisiteur(Visiteur* visiteur);

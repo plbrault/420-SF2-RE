@@ -31,7 +31,7 @@ GlissadeEau::GlissadeEau() {
     }
 }
 
-const Time& GlissadeEau::getHeure() const {
+const Time& GlissadeEau::getHeureActuelle() const {
     return _heureActuelle;
 }
 
