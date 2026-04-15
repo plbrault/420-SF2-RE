@@ -19,6 +19,7 @@ const double TAUX_PIC_MATIN = 0.34;
 const double TAUX_PIC_APRES_MIDI = 0.35;
 
 Simulateur::Simulateur() {
+    _glissade = GlissadeEau(3);
     _facteurVitesse = 1;
     _arriveesMinuteCourante = 0;
 }

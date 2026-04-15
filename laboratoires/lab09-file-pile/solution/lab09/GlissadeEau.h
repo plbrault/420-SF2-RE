@@ -30,7 +30,8 @@ private:
     std::queue<Visiteur*> _zoneArrivee;
     std::queue<Visiteur*> _fileSortie;
 public:
-    GlissadeEau();
+    GlissadeEau() : GlissadeEau(1) {}
+    GlissadeEau(size_t nombreToboggans);
 
     const Time& getHeureActuelle() const;
 

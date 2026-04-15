@@ -14,12 +14,12 @@
 #define AFFICHAGE_LIBELLE_DROITE 16
 #define AFFICHAGE_VALEUR_DROITE 6
 
-GlissadeEau::GlissadeEau() {
+GlissadeEau::GlissadeEau(size_t nombreToboggans) {
     _heureActuelle = Time(9, 0, 0);
     _totalVisiteursJournee = 0;
 
     // Création des toboggans
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < nombreToboggans; i++) {
         _toboggans.emplace_back();
     }
 
