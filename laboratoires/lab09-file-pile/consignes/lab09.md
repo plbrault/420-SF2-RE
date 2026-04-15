@@ -45,64 +45,15 @@ Voici le diagramme de classes du projet:
 @startuml
 
 interface ISOFormatEntity {
-    + std::string toISOString() const
+    ...
 }
 
 class Duration {
-    # unsigned long int _totalSeconds
-    --
-    + Duration()
-    + Duration(unsigned long int totalSeconds)
-    + Duration(unsigned int hours, unsigned int minutes, unsigned int seconds)
-    + unsigned long int getTotalSeconds() const
-    + unsigned int getHours() const
-    + unsigned int getMinutes() const
-    + unsigned int getSeconds() const
-    + void setTotalSeconds(unsigned long int totalSeconds)
-    + void setHours(unsigned int hours)
-    + void setMinutes(unsigned int minutes)
-    + void setSeconds(unsigned int seconds)
-    + Duration& addHours(unsigned int hours)
-    + Duration& addMinutes(unsigned int minutes)
-    + Duration& addSeconds(unsigned long int seconds)
-    + Duration& subtractHours(unsigned int hours)
-    + Duration& subtractMinutes(unsigned int minutes)
-    + Duration& subtractSeconds(unsigned long int seconds)
-    + std::string toISOString() const
-    + void print(std::ostream& output) const
-    + void read(std::istream& input)
-    + bool operator==(const Duration& other) const
-    + bool operator!=(const Duration& other) const
-    + bool operator<(const Duration& other) const
-    + bool operator<=(const Duration& other) const
-    + bool operator>(const Duration& other) const
-    + bool operator>=(const Duration& other) const
-    + Duration& operator+=(const Duration& other)
-    + Duration operator+(const Duration& other) const
-    + Duration& operator-=(const Duration& other)
-    + Duration operator-(const Duration& other) const
-    + Duration& operator*=(double factor)
-    + Duration operator*(double factor) const
-    + Duration& operator/=(double divisor)
-    + Duration operator/(double divisor) const
-    + double operator/(const Duration& divisor) const
+    ...
 }
 
 class Time {
-    --
-    + Time()
-    + Time(unsigned int hours, unsigned int minutes, unsigned int seconds)
-    + void setTotalSeconds(unsigned long int totalSeconds)
-    + void setHours(unsigned int hours)
-    + Time& addHours(unsigned int hours)
-    + Time& addMinutes(unsigned int minutes)
-    + Time& addSeconds(unsigned long int seconds)
-    + void read(std::istream& input)
-    + Time& operator+=(const Duration& duration)
-    + Time operator+(const Duration& duration) const
-    + Time& operator-=(const Duration& duration)
-    + Time operator-(const Duration& duration) const
-    + Duration operator-(const Time& other) const
+    ...
 }
 
 class Tube {
@@ -148,14 +99,11 @@ class GlissadeEau {
 }
 
 class Parser {
-    + void parse(std::istream& in)
+    ...
 }
 
 class JSONParser {
-    - nlohmann::json _data
-    --
-    + void parse(std::istream& in)
-    + const nlohmann::json& getData() const
+    ...
 }
 
 class Simulateur {
