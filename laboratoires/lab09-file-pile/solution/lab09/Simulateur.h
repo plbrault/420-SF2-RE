@@ -7,6 +7,7 @@
 
 #include <set>
 #include <random>
+#include <iostream>
 #include "GlissadeEau.h"
 
 class Simulateur
@@ -21,7 +22,7 @@ private:
     void simulerArrivees(std::mt19937& gen);
     void afficher() const;
 public:
-    Simulateur();
+    explicit Simulateur(std::istream& fichierConfig);
     ~Simulateur();
     void simuler();
 };

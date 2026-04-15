@@ -3,6 +3,7 @@
 //
 
 #include "Simulateur.h"
+#include "JSONParser.h"
 #include "fonctions.h"
 #include <random>
 #include <functional>
@@ -18,8 +19,11 @@ const double SIGMA_APRES_MIDI = 2700.0;
 const double TAUX_PIC_MATIN = 0.34;
 const double TAUX_PIC_APRES_MIDI = 0.35;
 
-Simulateur::Simulateur() {
-    _glissade = GlissadeEau(3);
+Simulateur::Simulateur(std::istream& fichierConfig) {
+    JSONParser parser;
+    parser.parse(fichierConfig);
+    int nombreToboggans = parser.getData()["nombreToboggans"];
+    _glissade = GlissadeEau(nombreToboggans);
     _facteurVitesse = 1;
     _arriveesMinuteCourante = 0;
 }
