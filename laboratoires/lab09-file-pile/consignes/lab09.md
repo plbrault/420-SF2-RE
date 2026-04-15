@@ -15,7 +15,7 @@ L'été approche, et le Cégep a décidé d'installer des glissades d'eau dans l
 - Une fois un glisseur rendu à la zone d'arrivée, il dépose son tube dans une **pile de dépôt**. On estime qu'il faut en moyenne 15 secondes avant qu'un glisseur arrivé en bas de la colline dépose son tube puis quitte la zone d'arrivée.
 - Chaque fois que la **pile des tubes disponibles** est vide, un employé y transfère tous les tubes se trouvant dans la **pile de dépôt**.
 
-Les responsables du projet de glissades d'eau se demandent cependant combien il faut prévoir de toboggans et de tubes pour que le tout soit fluide. Ils font donc appel à vous pour simuler le tout à l'aide d'un programme C++!
+Les responsables du projet de glissades d'eau se demandent cependant combien il faut prévoir de toboggans et de tubes pour que le tout soit fluide. Ils font donc appel à vous pour simuler le tout à l'aide d'un programme en C++!
 
 ## Démarrage
 
@@ -29,11 +29,11 @@ Dans la fenêtre `Run/Debug Configurations`, cochez `Emulate terminal in the out
 
 ![](images-readme/clion_option_a_cocher.png)
 
-Si vous exécutez ensuite le projet, vous devriez voir ceci dans la console:
+Si vous exécutez ensuite le projet, vous devriez voir quelque chose de semblable à ceci dans la console (ignorez les rectangles verts qui apparaissent dans l'image):
 
 ![](images-readme/apercu_execution.gif)
 
-La touche `+` du clavier vous permet d'augmenter la vitesse de la simulation. Comme vous pouvez le voir, des visiteurs arrivent au fil du temps, mais n'entrent jamais dans la file d'entrée. La simulation s'arrête à 17h00.
+La touche `+` du clavier vous permet d'augmenter la vitesse de la simulation. Comme vous pouvez le constater, des visiteurs arrivent au fil du temps, mais n'entrent présentement jamais dans la file d'entrée. La simulation s'arrête à 17h00.
 
 Le fichier `configuration.json` vous permet de changer le nombre de toboggans, le nombre de tubes, de même que la température. Plus la température est élevée, plus il y a de visiteurs dans la journée.
 
@@ -145,11 +145,13 @@ La classe `GlissadeEau` contient les `Toboggan`, et gère la file d'entrée, la 
 
 La classe `Toboggan` représente bien entendu un toboggan et gère le temps nécessaire à la descente.
 
+La classe `Visiteur` représente bien sûr un visiteur, qui peut ou non avoir un `Tube` en sa possession.
+
 Vous remarquerez la présence de plusieurs classes des laboratoires précédents.
 
 ![](images-readme/bob_leponge_reutilisation.jpg)
 
-Votre mission, si vous l'acceptez (et je vous recommande fortement de l'accepter étant donné l'examen qui s'en vient), est de compléter le programme pour rendre fonctionnelle la simulation. Pour ce faire, vous devez modifier **uniquement** les classes `Toboggan` et `GlissadeEau`. Dans ces classes, complétez les méthodes contenant un commentaire `/***À COMPLÉTER***/`. Faites les ajouts décrits par les commentaires.
+Votre mission, si vous l'acceptez (et je vous recommande fortement de l'accepter étant donné l'examen qui s'en vient), est de compléter le programme pour rendre fonctionnelle la simulation. Pour ce faire, vous devez modifier **uniquement** les classes `Toboggan` et `GlissadeEau`. Dans ces classes, complétez les méthodes contenant un commentaire `/***À COMPLÉTER***/` en faisant les ajouts décrits par les commentaires.
 
 Bonne chance!
 
