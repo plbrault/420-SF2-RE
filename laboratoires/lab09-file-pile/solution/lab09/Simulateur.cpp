@@ -47,7 +47,7 @@ double Simulateur::calculerTauxArrivee(unsigned long secondesEcoulees) {
 void Simulateur::afficher() const {
     effacerEcran();
     std::cout << _glissade;
-    std::cout << "Temperature: " << _temperature << "°C" << std::endl;
+    std::cout << "Temperature: " << _temperature << " degres Celsius" << std::endl;
     std::cout << "Vitesse: ";
     if (_facteurVitesse > 1) {
         std::cout << "[-] ";

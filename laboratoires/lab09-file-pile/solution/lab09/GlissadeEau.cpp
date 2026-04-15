@@ -66,23 +66,13 @@ void GlissadeEau::mettreAJour() {
         _fileMontee.push(visiteur);
     }
 
-    // Si la zone d'arrivée est non-vide, Vérifier si le premier visiteur qui s'y trouve a encore son tube.
-    // Si c'est le cas, retirer le tube du visiteur et le placer dans la zone de dépôt.
-    if (!_zoneArrivee.empty())
-    {
-        Visiteur* visiteurArrive = _zoneArrivee.front();
-        if (visiteurArrive->aUnTube()) {
-            Tube* tube = visiteurArrive->retournerTube();
-            _depotTubes.push(tube);
-        }
-    }
-
     // Pour chaque toboggan, vérifier si un visiteur vient de sortir du toboggan.
-    // Si c'est le cas, placer le visiteur dans la zone d'arrivée.
+    // Si c'est le cas, placer le visiteur dans la zone d'arrivée avec
+    // l'heure actuelle.
     for (Toboggan& toboggan : _toboggans) {
         Visiteur* visiteurSorti = toboggan.traiterSortie(_heureActuelle);
         if (visiteurSorti != nullptr) {
-            _zoneArrivee.push(visiteurSorti);
+            _zoneArrivee[visiteurSorti] = _heureActuelle;
         }
     }
 
@@ -101,17 +91,27 @@ void GlissadeEau::mettreAJour() {
 }
 
 Visiteur* GlissadeEau::traiterSortie() {
-    // Vérifier si le premier visiteur de la zone d'arrivée a remis son tube.
-    // Si c'est le cas, le retirer de la zone d'arrivée et retourner son adresse.
-    // Si la zone d'arrivée est vide ou que le premier visiteur n'a pas remis son tube, retourner nullptr.
-    if (!_zoneArrivee.empty()) {
-        Visiteur* visiteurArrive = _zoneArrivee.front();
-        if (!visiteurArrive->aUnTube()) {
-            _zoneArrivee.pop();
-            return visiteurArrive;
+    // Si la zone d'arrivée est non-vide, trouver le plus ancien
+    // visiteur qui s'y trouve depuis au moins 15 secondes.
+    // Remettre le tube du visiteur dans la zone de dépôt, puis retirer
+    // le visiteur de la zone d'arrivée et retourner son adresse.
+    // Si la zone d'arrivée est vide ou si aucun visiteur n'y est depuis au moins 15 secondes, retourner nullptr.
+    Visiteur* visiteurSorti = nullptr;
+    Time heurePlusAncienVisiteur = Time(23, 59, 59);
+    for (const auto& pair : _zoneArrivee) {
+        Visiteur* visiteur = pair.first;
+        Time heureArrivee = pair.second;
+        Duration dureeDepuisArrivee = _heureActuelle - heureArrivee;
+        if (dureeDepuisArrivee.getTotalSeconds() >= 15 && heureArrivee < heurePlusAncienVisiteur) {
+            visiteurSorti = visiteur;
+            heurePlusAncienVisiteur = heureArrivee;
         }
     }
-    return nullptr;
+    if (visiteurSorti != nullptr) {
+        _depotTubes.push(visiteurSorti->retournerTube());
+        _zoneArrivee.erase(visiteurSorti);
+    }
+    return visiteurSorti;
 }
 
 void GlissadeEau::afficher(std::ostream& sortie) const {

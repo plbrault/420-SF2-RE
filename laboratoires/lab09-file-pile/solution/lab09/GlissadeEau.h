@@ -27,8 +27,7 @@ private:
 
     std::queue<Visiteur*> _fileEntree;
     std::queue<Visiteur*> _fileMontee;
-    std::queue<Visiteur*> _zoneArrivee;
-    std::queue<Visiteur*> _fileSortie;
+    std::map<Visiteur*, Time> _zoneArrivee;
 public:
     GlissadeEau() : GlissadeEau(1, 30) {}
     GlissadeEau(size_t nombreToboggans, size_t nombreTubes);
