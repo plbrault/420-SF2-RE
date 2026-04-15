@@ -14,7 +14,7 @@
 #define AFFICHAGE_LIBELLE_DROITE 16
 #define AFFICHAGE_VALEUR_DROITE 6
 
-GlissadeEau::GlissadeEau(size_t nombreToboggans) {
+GlissadeEau::GlissadeEau(size_t nombreToboggans, size_t nombreTubes) {
     _heureActuelle = Time(9, 0, 0);
     _totalVisiteursJournee = 0;
 
@@ -24,7 +24,7 @@ GlissadeEau::GlissadeEau(size_t nombreToboggans) {
     }
 
     // Création des tubes
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < nombreTubes; i++)
     {
         _tubes.emplace_back(); // Crée un tube et l'ajoute à la liste des tubes
         _tubesDisponibles.push(&_tubes.back()); // Ajoute l'adresse du tube dans la pile des tubes disponibles

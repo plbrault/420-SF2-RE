@@ -23,7 +23,8 @@ Simulateur::Simulateur(std::istream& fichierConfig) {
     JSONParser parser;
     parser.parse(fichierConfig);
     int nombreToboggans = parser.getData()["nombreToboggans"];
-    _glissade = GlissadeEau(nombreToboggans);
+    int nombreTubes = parser.getData()["nombreTubes"];
+    _glissade = GlissadeEau(nombreToboggans, nombreTubes);
     _facteurVitesse = 1;
     _arriveesMinuteCourante = 0;
 }
