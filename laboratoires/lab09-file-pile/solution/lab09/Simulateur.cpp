@@ -27,6 +27,8 @@ Simulateur::Simulateur(std::istream& fichierConfig) {
     _glissade = GlissadeEau(nombreToboggans, nombreTubes);
     _facteurVitesse = 1;
     _arriveesMinuteCourante = 0;
+    _temperature = parser.getData()["temperature"];
+    _facteurTemperature = (13.6 * _temperature * _temperature + 48 * _temperature - 3680) / 10000.0;
 }
 
 Simulateur::~Simulateur() {
@@ -39,12 +41,13 @@ double Simulateur::calculerTauxArrivee(unsigned long secondesEcoulees) {
     double t = static_cast<double>(secondesEcoulees);
     double tauxMatin = TAUX_PIC_MATIN * std::exp(-(std::pow(t - HEURE_PIC_MATIN, 2)) / (2 * std::pow(SIGMA_MATIN, 2)));
     double tauxApresMidi = TAUX_PIC_APRES_MIDI * std::exp(-(std::pow(t - HEURE_PIC_APRES_MIDI, 2)) / (2 * std::pow(SIGMA_APRES_MIDI, 2)));
-    return tauxMatin + tauxApresMidi;
+    return (tauxMatin + tauxApresMidi) * _facteurTemperature;
 }
 
 void Simulateur::afficher() const {
     effacerEcran();
     std::cout << _glissade;
+    std::cout << "Temperature: " << _temperature << "°C" << std::endl;
     std::cout << "Vitesse: ";
     if (_facteurVitesse > 1) {
         std::cout << "[-] ";
@@ -86,8 +89,9 @@ void Simulateur::simulerArrivees(std::mt19937& gen) {
     }
 
     if (secondesEcoulees % 60 == 0) {
-        if (_arriveesMinuteCourante < 3) {
-            int manquant = 3 - _arriveesMinuteCourante;
+        int seuilMin = std::max(0, static_cast<int>(3 * _facteurTemperature));
+        if (_arriveesMinuteCourante < seuilMin) {
+            int manquant = seuilMin - _arriveesMinuteCourante;
             for (int i = 0; i < manquant; i++) {
                 Visiteur* nouveauVisiteur = new Visiteur();
                 _visiteurs.insert(nouveauVisiteur);

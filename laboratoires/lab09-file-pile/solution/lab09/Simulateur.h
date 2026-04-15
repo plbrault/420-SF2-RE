@@ -17,6 +17,8 @@ private:
     std::set<Visiteur*> _visiteurs;
     int _facteurVitesse;
     int _arriveesMinuteCourante;
+    double _temperature;
+    double _facteurTemperature;
 
     double calculerTauxArrivee(unsigned long secondesEcoulees);
     void simulerArrivees(std::mt19937& gen);
