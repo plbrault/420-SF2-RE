@@ -41,7 +41,101 @@ Le fichier `configuration.json` vous permet de changer le nombre de toboggans, l
 
 Voici le diagramme de classes du projet:
 
+```plantuml
+@startuml
 
+class Duration {
+    ...
+}
 
----
-Le map n'a pas d'opérateur [] constant, donc si vous avez une erreur "No viable function" il faut utiliser .at() à la place
+class Time {
+    ...
+}
+
+class Tube {
+}
+
+class Visiteur {
+    - Tube* _tube
+    --
+    + void prendreTube(Tube* tube)
+    + Tube* retournerTube()
+    + bool aUnTube() const
+}
+
+class Toboggan {
+    - std::queue<Visiteur*> _glisseurs
+    - std::map<Visiteur*, Time> _heureEntree
+    --
+    + bool accepteGlisseur(const Time& heureActuelle) const
+    + void ajouterGlisseur(Visiteur* visiteur, const Time& heure)
+    + Visiteur* traiterSortie(const Time& heureActuelle)
+    + size_t getNombreGlisseurs() const
+}
+
+class GlissadeEau {
+    - Time _heureActuelle
+    - int _totalVisiteursJournee
+    - std::list<Tube> _tubes
+    - std::stack<Tube*> _tubesDisponibles
+    - std::stack<Tube*> _depotTubes
+    - std::vector<Toboggan> _toboggans
+    - std::queue<Visiteur*> _fileEntree
+    - std::queue<Visiteur*> _fileMontee
+    - std::map<Visiteur*, Time> _zoneArrivee
+    --
+    + GlissadeEau()
+    + GlissadeEau(size_t nombreToboggans, size_t nombreTubes)
+    + const Time& getHeureActuelle() const
+    + void mettreAJour()
+    + void ajouterVisiteur(Visiteur* visiteur)
+    + Visiteur* traiterSortie()
+    + void afficher(std::ostream& sortie) const
+    + friend std::ostream& operator<<(std::ostream& os, const GlissadeEau& glissade)
+}
+
+class Simulateur {
+    - GlissadeEau _glissade
+    - std::set<Visiteur*> _visiteurs
+    - int _facteurVitesse
+    - int _arriveesMinuteCourante
+    - double _temperature
+    - double _facteurTemperature
+    - double calculerTauxArrivee(unsigned long secondesEcoulees)
+    - void simulerArrivees(std::mt19937& gen)
+    - void afficher() const
+    --
+    + Simulateur(std::istream& fichierConfig)
+    + ~Simulateur()
+    + void simuler()
+}
+
+Duration <|-- Time
+Simulateur *-- GlissadeEau
+Simulateur *-- Visiteur
+GlissadeEau *-- Tube
+GlissadeEau *-- Toboggan
+GlissadeEau *-- Time
+Toboggan ..> Visiteur
+Toboggan ..> Time
+Visiteur ..> Tube
+GlissadeEau ..> Visiteur
+
+@enduml
+```
+
+La classe `Simulateur` est déjà implémentée. C'est elle qui simule l'arrivée des visiteurs au fil du temps et qui adapte celle-ci à la température.
+
+La classe `GlissadeEau` contient les `Toboggan`, et gère la file d'entrée, la file de montée, la zone d'arrivée et les piles de tube.
+
+La classe `Toboggan` représente bien entendu un toboggan et gère le temps nécessaire à la descente.
+
+Vous remarquerez la présence de plusieurs classes des laboratoires précédents.
+
+![](images-readme/bob_leponge_reutilisation.jpg)
+
+Votre mission, si vous l'acceptez (et je vous recommande fortement de l'accepter étant donné l'examen qui s'en vient), est de compléter le programme pour rendre fonctionnelle la simulation. Pour ce faire, vous devez modifier **uniquement** les classes `Toboggan` et `GlissadeEau`. Dans ces classes, complétez les méthodes contenant un commentaire `/***À COMPLÉTER***/`. Faites les ajouts décrits par les commentaires.
+
+Bonne chance!
+
+> **Psssst!** La classe `std::map` n'a pas d'opérateur `[]` constant, donc si jamais vous rencontrez une erreur `"No viable function"` en lien avec ça, il faut utiliser la méthode `at()` à la place.
